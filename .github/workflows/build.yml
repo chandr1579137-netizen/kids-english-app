@@ -15,9 +15,10 @@ jobs:
         run: xcodebuild -version
 
       - name: Download assets bundle (covers, songs, icon)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -sfL -o assets-bundle.zip \
-            "https://github.com/chandr1579137-netizen/kids-english-app/releases/download/assets-v1/assets-bundle.zip"
+          gh release download assets-v1 -p "assets-bundle.zip" -R chandr1579137-netizen/kids-english-app
           unzip -q -o assets-bundle.zip
           ls KidsEnglish/KidsEnglish/Resources/covers | wc -l
 
