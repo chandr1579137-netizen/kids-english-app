@@ -40,7 +40,7 @@ jobs:
       - name: Build (unsigned)
         run: |
           xcodebuild -project KidsEnglish/KidsEnglish.xcodeproj \
-            -target KidsEnglish \
+            -scheme KidsEnglish \
             -sdk iphoneos \
             -configuration Release \
             -derivedDataPath build \
