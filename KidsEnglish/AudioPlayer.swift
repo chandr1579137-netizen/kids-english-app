@@ -44,7 +44,8 @@ class AudioPlayer {
         ) { [weak self] _ in
             self?.stop()
             self?.onTimeUpdate?(999999)  // 通知播放结束
-        }        player?.play()
+        }
+        player?.play()
         isPlaying = true
     }
 
