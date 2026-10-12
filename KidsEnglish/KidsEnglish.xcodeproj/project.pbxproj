@@ -155,7 +155,6 @@
 				6A24552DB64E4E90B793821F,
 			);
 			name = KidsEnglish;
-			path = KidsEnglish;
 			sourceTree = "<group>";
 		};
 		6A24552DB64E4E90B793821F = {
