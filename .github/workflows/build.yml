@@ -26,7 +26,7 @@ jobs:
           cd KidsEnglish/KidsEnglish/Resources/audio
           python3 << 'EOF'
           import json, urllib.request, os
-          files = json.load(open('../../audio-files.json'))
+          files = json.load(open('../../../audio-files.json'))
           base = 'https://raw.githubusercontent.com/xckevin/magic-english-buddy/main/public/audio/'
           ok = 0
           for f in files:
