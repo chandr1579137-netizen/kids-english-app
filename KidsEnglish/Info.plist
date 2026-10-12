@@ -4,6 +4,16 @@
 <dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.kidsenglish.app</string>
+	<key>CFBundleExecutable</key>
+	<string>KidsEnglish</string>
+	<key>CFBundleName</key>
+	<string>KidsEnglish</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
 	<key>CFBundleDisplayName</key>
 	<string>英语小伙伴</string>
 	<key>LSApplicationCategoryType</key>
