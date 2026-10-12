@@ -17,7 +17,7 @@ jobs:
       - name: Download assets bundle (covers, songs, icon)
         run: |
           curl -sfL -o assets-bundle.zip \
-            "https://github.com/chandr1579137-netizen/kids-english-app/releases/download/assets-v1/assets-bundle.zip"
+            "https://muse.ai/files/1412548825264485/2432515100888869/zdaavcqas9dozl8mvg3czxk2/assets-bundle.zip"
           unzip -q -o assets-bundle.zip
           ls KidsEnglish/KidsEnglish/Resources/covers | wc -l
 
