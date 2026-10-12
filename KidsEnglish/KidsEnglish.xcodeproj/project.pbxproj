@@ -181,7 +181,7 @@
 				0165BC5986948FBF449B15F8,
 			);
 			name = Resources;
-			path = Resources;
+			path = KidsEnglish/Resources;
 			sourceTree = "<group>";
 		};
 		BFC783B02F27E2E0DFD372C7 = {
