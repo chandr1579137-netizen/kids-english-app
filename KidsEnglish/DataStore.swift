@@ -89,6 +89,35 @@ class DataStore {
         Bundle.main.resourceURL?.appendingPathComponent("covers/\(lessonId).jpg")
     }
 
+    private var wordIconIndex: [String: URL] = [:]
+    private var didIndexWordIcons = false
+
+    /// 单词图在 word-icons/ 里。键是「去掉扩展名的文件名」小写，
+    /// 和单词文本小写后相同，例如 "the UK" → the uk.jpg，"we'll" → we'll.jpg。
+    func iconURL(forWord word: String) -> URL? {
+        ensureWordIconIndex()
+        return wordIconIndex[word.lowercased()]
+    }
+
+    private func ensureWordIconIndex() {
+        guard !didIndexWordIcons, let root = Bundle.main.resourceURL else { return }
+        didIndexWordIcons = true
+        guard let enumerator = FileManager.default.enumerator(
+            at: root,
+            includingPropertiesForKeys: nil,
+            options: [.skipsHiddenFiles]
+        ) else { return }
+        let exts: Set<String> = ["png", "jpg", "jpeg", "webp"]
+        for case let url as URL in enumerator {
+            let ext = url.pathExtension.lowercased()
+            guard exts.contains(ext), url.path.contains("/word-icons/") else { continue }
+            let base = url.deletingPathExtension().lastPathComponent.lowercased()
+            if wordIconIndex[base] == nil {
+                wordIconIndex[base] = url
+            }
+        }
+    }
+
     func lookupWord(_ raw: String) -> WordEntry? {
         let w = raw.lowercased().trimmingCharacters(in: .punctuationCharacters)
         return wordDict[w]
