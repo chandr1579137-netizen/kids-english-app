@@ -125,3 +125,34 @@ extension View {
             .shadow(color: .black.opacity(0.08), radius: 12, y: 4)
     }
 }
+
+// MARK: - UI 图标加载（Resources/ui-icons/）
+
+/// 从 Resources/ui-icons 加载 AI 生成的图标
+func uiIcon(_ name: String) -> Image {
+    Image("ui-icons/\(name)", bundle: .main)
+}
+
+/// 主题 id 到图标名的映射
+func themeIconName(for themeId: String) -> String {
+    switch themeId {
+    case "fruits": return "theme-apple"
+    case "animals": return "theme-cat"
+    case "vehicles": return "theme-car"
+    case "colors": return "theme-palette"
+    case "numbers": return "theme-abacus"
+    case "body": return "theme-hand"
+    case "foods": return "theme-burger"
+    case "family": return "theme-house"
+    case "stationery": return "theme-stationery"
+    case "toys": return "theme-teddy"
+    case "nature": return "theme-tree"
+    case "home": return "theme-house"
+    case "places": return "theme-pin"
+    case "time": return "theme-clock"
+    case "actions": return "theme-runner"
+    case "adjectives": return "theme-sparkles"
+    case "functions": return "theme-puzzle"
+    default: return "theme-dots"
+    }
+}

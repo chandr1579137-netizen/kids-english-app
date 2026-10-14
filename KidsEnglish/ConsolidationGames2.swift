@@ -45,6 +45,7 @@ struct AudioToWordGame: View {
         }
         .padding()
         .onAppear { start() }
+        .creamBackground()
     }
 
     private var gameOverView: some View {
@@ -142,6 +143,7 @@ struct AudioToMeaningGame: View {
         }
         .padding()
         .onAppear { start() }
+        .creamBackground()
     }
 
     private var gameOverView: some View {
@@ -244,6 +246,7 @@ struct WordToMeaningGame: View {
         }
         .padding()
         .onAppear { start() }
+        .creamBackground()
     }
 
     private var gameOverView: some View {
@@ -355,6 +358,7 @@ struct DictationGame: View {
         }
         .padding()
         .onAppear { start() }
+        .creamBackground()
     }
 
     private var gameOverView: some View {
@@ -409,46 +413,166 @@ struct ConsolidationView: View {
              wordToAudio="看词选音", imageToWord="看图选词", audioToWord="听音选词",
              audioToMeaning="听音选义", wordToMeaning="看词选义", dictation="听写训练"
         var id: String { rawValue }
+
+        var iconName: String {
+            switch self {
+            case .wordToImage: return "game-lookword"
+            case .audioToImage: return "game-listenimage"
+            case .matching: return "game-match"
+            case .wordToAudio: return "game-wordaudio"
+            case .imageToWord: return "game-imageword"
+            case .audioToWord: return "game-audioword"
+            case .audioToMeaning: return "game-audiomeaning"
+            case .wordToMeaning: return "game-wordmeaning"
+            case .dictation: return "game-dictation"
+            }
+        }
+
+        var difficulty: String {
+            switch self {
+            case .wordToImage, .audioToImage, .wordToAudio, .wordToMeaning:
+                return "简单"
+            default:
+                return "中等"
+            }
+        }
+
+        var color: Color {
+            switch self {
+            case .wordToImage: return Color(red: 0.36, green: 0.61, blue: 1.0)   // 蓝
+            case .audioToImage: return Color(red: 0.49, green: 0.83, blue: 0.57) // 绿
+            case .matching: return Color(red: 0.70, green: 0.53, blue: 1.0)      // 紫
+            case .wordToAudio: return Color(red: 1.0, green: 0.72, blue: 0.30)   // 橙
+            case .imageToWord: return Color(red: 0.96, green: 0.56, blue: 0.69)  // 粉
+            case .audioToWord: return Color(red: 0.30, green: 0.82, blue: 0.88)  // 青
+            case .audioToMeaning: return Color(red: 1.0, green: 0.84, blue: 0.31)// 黄
+            case .wordToMeaning: return Color(red: 1.0, green: 0.54, blue: 0.50) // 红
+            case .dictation: return Color(red: 0.24, green: 0.35, blue: 1.0)    // 深蓝
+            }
+        }
     }
-    @State private var mode: Mode = .wordToImage
+    @State private var mode: Mode? = nil
+
+    private let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
-        VStack {
-            if words.isEmpty {
-                Spacer()
-                Text("先去背单词吧 📚")
-                    .font(.largeTitle)
-                Spacer()
+        Group {
+            if let m = mode {
+                gameView(for: m)
             } else {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
+                modeGrid
+            }
+        }
+        .creamBackground()
+        .navigationTitle(mode == nil ? "巩固练习" : mode!.rawValue)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+
+    // MARK: - 九宫格模式选择
+
+    private var modeGrid: some View {
+        ScrollView {
+            VStack(spacing: 18) {
+                if words.isEmpty {
+                    Text("先去背单词吧 📚")
+                        .font(.title.bold())
+                        .foregroundColor(AppTheme.navy)
+                        .padding(40)
+                        .whiteCard()
+                        .padding()
+                } else {
+                    Text("选个玩法吧！🎮")
+                        .font(.system(size: 44, weight: .bold))
+                        .foregroundColor(AppTheme.navy)
+                        .padding(.top, 8)
+                    Text("9种游戏，越玩越熟")
+                        .font(.title3)
+                        .foregroundColor(.gray)
+
+                    LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(Mode.allCases) { m in
-                            Button(m.rawValue) { mode = m }
-                                .font(.title3)
-                                .padding(.horizontal, 18).padding(.vertical, 12)
-                                .background(RoundedRectangle(cornerRadius: 16)
-                                    .fill(mode == m ? Color.blue : Color.gray.opacity(0.2)))
-                                .foregroundStyle(mode == m ? .white : .primary)
+                            Button {
+                                mode = m
+                            } label: {
+                                VStack(spacing: 10) {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color.white)
+                                            .frame(width: 76, height: 76)
+                                            .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
+                                        uiIcon(m.iconName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 44, height: 44)
+                                    }
+                                    Text(m.rawValue)
+                                        .font(.headline.bold())
+                                        .foregroundColor(AppTheme.navy)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.8)
+                                    Text(m.difficulty)
+                                        .font(.subheadline.bold())
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 4)
+                                        .background(m.color)
+                                        .cornerRadius(12)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
+                                .background(m.color.opacity(0.35))
+                                .cornerRadius(20)
+                                .shadow(color: m.color.opacity(0.25), radius: 8, y: 4)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.horizontal)
                 }
-                .padding(.vertical, 8)
-                Group {
-                    switch mode {
-                    case .wordToImage: WordToImageGame(words: words)
-                    case .audioToImage: AudioToImageGame(words: words)
-                    case .matching: MatchingGame(words: words)
-                    case .wordToAudio: WordToAudioGame(words: words)
-                    case .imageToWord: ImageToWordGame(words: words)
-                    case .audioToWord: AudioToWordGame(words: words)
-                    case .audioToMeaning: AudioToMeaningGame(words: words)
-                    case .wordToMeaning: WordToMeaningGame(words: words)
-                    case .dictation: DictationGame(words: words)
-                    }
-                }
-                .id(mode)
             }
+            .padding(.vertical)
+        }
+    }
+
+    // MARK: - 游戏页（带返回）
+
+    @ViewBuilder
+    private func gameView(for m: Mode) -> some View {
+        VStack(spacing: 0) {
+            Button {
+                mode = nil
+            } label: {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 18, weight: .bold))
+                    Text("换游戏")
+                        .font(.headline.bold())
+                }
+                .foregroundColor(.white)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 10)
+                .background(Color.gray.opacity(0.6))
+                .cornerRadius(18)
+            }
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+
+            Group {
+                switch m {
+                case .wordToImage: WordToImageGame(words: words)
+                case .audioToImage: AudioToImageGame(words: words)
+                case .matching: MatchingGame(words: words)
+                case .wordToAudio: WordToAudioGame(words: words)
+                case .imageToWord: ImageToWordGame(words: words)
+                case .audioToWord: AudioToWordGame(words: words)
+                case .audioToMeaning: AudioToMeaningGame(words: words)
+                case .wordToMeaning: WordToMeaningGame(words: words)
+                case .dictation: DictationGame(words: words)
+                }
+            }
+            .id(m)
         }
     }
 }
