@@ -14,17 +14,17 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-      - name: Download assets bundle (covers, songs, icon)
+      - name: Download assets bundle v3 (word icons, lesson illustrations)
         run: |
-          curl -sfL -o assets-bundle.zip \
-            "https://muse.ai/files/1412548825264485/2432515100888869/zdaavcqas9dozl8mvg3czxk2/assets-bundle.zip"
-          unzip -q -o assets-bundle.zip
-          ls KidsEnglish/KidsEnglish/Resources/covers | wc -l
+          curl -sfL -o assets-bundle-v3.zip \
+            "https://muse.ai/files/1412548825264485/28149411608070162/97jiuiu7vahas4vrykc1nghi/assets-bundle-v3.zip"
+          unzip -q -o assets-bundle-v3.zip
+          ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l
 
       - name: Download lesson audio (from upstream open-source repo)
         run: |
           cd KidsEnglish/KidsEnglish/Resources/audio
-          python3 << 'EOF'
+          python3 << 'PYEOF'
           import json, urllib.request, os
           files = json.load(open('../../../audio-files.json'))
           base = 'https://raw.githubusercontent.com/xckevin/magic-english-buddy/main/public/audio/'
@@ -34,7 +34,7 @@ jobs:
                   urllib.request.urlretrieve(base + f, f)
               ok += 1
           print(f'audio ready: {ok}/{len(files)}')
-          EOF
+          PYEOF
           ls *.mp3 | wc -l
 
       - name: Build (unsigned)
