@@ -3,7 +3,7 @@ import SwiftUI
 /// 封面图：异步加载本地文件，避免主线程解码卡顿
 struct CoverImage: View {
     let url: URL?
-    let fallbackText: String
+    var emoji: String = "📖"
 
     var body: some View {
         Group {
@@ -25,9 +25,9 @@ struct CoverImage: View {
     private var fallback: some View {
         RoundedRectangle(cornerRadius: 12)
             .fill(LinearGradient(
-                colors: [.orange.opacity(0.7), .pink.opacity(0.7)],
+                colors: [Color(red: 1, green: 0.97, blue: 0.86), Color(red: 1, green: 0.93, blue: 0.75)],
                 startPoint: .topLeading, endPoint: .bottomTrailing))
-            .overlay(Text(fallbackText).font(.largeTitle))
+            .overlay(Text(emoji).font(.system(size: 64)))
     }
 }
 
@@ -96,7 +96,7 @@ struct LessonCard: View {
             VStack(spacing: 6) {
                 ZStack {
                     CoverImage(url: store.coverURL(forLesson: lesson.id),
-                               fallbackText: String(lesson.titleCn.prefix(1)))
+                               emoji: store.coverEmoji(for: lesson.id))
                     if !store.isUnlocked(lesson) {
                         Color.black.opacity(0.45)
                         Image(systemName: "lock.fill")

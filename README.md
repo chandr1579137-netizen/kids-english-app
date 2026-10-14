@@ -14,5 +14,8 @@
 
 ## 构建
 
-推送到 GitHub 后，Actions 会自动在云端 Mac 编译出未签名的 IPA（Actions 页面下载），
+用 Xcode 打开仓库根目录的 `KidsEnglish.xcodeproj`。
+推送到 GitHub 后，Actions 会用同一个工程在云端 Mac 编译出未签名的 IPA（Actions 页面下载），
 再用 Sideloadly + 自己的 Apple ID 签名安装到 iPhone。
+
+课文封面、单词图标和 mp3 不进 git。Actions 会下载资源包和上游音频；本机编译前需要把这些文件放进 `KidsEnglish/Resources/`。

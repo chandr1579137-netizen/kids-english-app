@@ -56,10 +56,19 @@ struct Lesson: Codable, Identifiable, Hashable {
     let level: Int
     let title: String
     let titleCn: String
+    let coverImage: String?
     let content: [Paragraph]
     let quiz: [QuizItem]
     let rewards: LessonRewards?
     let metadata: LessonMeta?
+}
+
+// MARK: - 主题词书
+
+struct WordTheme: Codable, Identifiable, Hashable {
+    let id: String
+    let nameCn: String
+    let words: [String]
 }
 
 // MARK: - 单词
