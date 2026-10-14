@@ -6,7 +6,7 @@ struct WordsView: View {
     @State private var level = 1
     @State private var selectedWord: WordEntry?
     @State private var showFavoritesOnly = false
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
 
     var filtered: [WordEntry] {
         var list = store.words.filter { ($0.level ?? 1) == level }
@@ -17,7 +17,7 @@ struct WordsView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        Group {
             VStack {
                 // 等级选择
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -67,12 +67,11 @@ struct WordsView: View {
                     .presentationDetents([.medium, .large])
             }
         }
+        .onDisappear { player.stop() }
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.audioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.play(url: store.audioURL(forWord: w.word), spokenFallback: w.word)
     }
 }
 
@@ -80,7 +79,7 @@ struct WordsView: View {
 struct WordDetailView: View {
     @Environment(DataStore.self) private var store
     let entry: WordEntry
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -113,7 +112,7 @@ struct WordDetailView: View {
                 }
                 HStack(spacing: 20) {
                     Button {
-                        if let url = store.audioURL(forWord: entry.word) { player.play(url: url) }
+                        player.play(url: store.audioURL(forWord: entry.word), spokenFallback: entry.word)
                     } label: {
                         Label("🔊 发音", systemImage: "speaker.wave.2.fill")
                     }
@@ -145,6 +144,7 @@ struct WordDetailView: View {
                     Button("关闭") { dismiss() }
                 }
             }
+            .onDisappear { player.stop() }
         }
     }
 }

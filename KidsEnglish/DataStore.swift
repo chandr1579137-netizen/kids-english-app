@@ -7,25 +7,41 @@ class DataStore {
     var lessons: [Lesson] = []
     var words: [WordEntry] = []
     var songs: [Song] = []
-    var audioMap: [String: String] = [:]       // "lessonId#paragraphId" -> mp3 文件名
-    var wordAudioMap: [String: String] = [:]   // "apple" -> mp3 文件名
-    var wordDict: [String: WordEntry] = [:]    // 小写单词 -> 词条
+    var wordThemes: [WordTheme] = []
+    var audioMap: [String: String] = [:]
+    var wordAudioMap: [String: String] = [:]
+    var wordDict: [String: WordEntry] = [:]
 
     // 进度（持久化）
     var completedLessons: Set<String> = []
     var quizBest: [String: Double] = [:]
     var favoriteWords: Set<String> = []
     var collectedCards: Set<String> = []
+    var learnedWords: Set<String> = []
+    var selectedBookId: String? = nil
+    var wordBookGroups: [WordBookGroup] = []
+    var bookCitation: String = ""
+    var memories: [String: WordMemory] = [:]
+    var progressToken: Int = 0
+    var dailyNewWords: Int = 10
+    var gameCorrect: Int = 0
+    var gameAnswered: Int = 0
+    var studyDates: [String] = []
 
     // 家长控制
     var timeLimitMinutes: Int = 20   // 0 = 不限
     var studySecondsToday: Double = 0
+    var bonusSecondsToday: Double = 0
     var timeUp: Bool = false
     var showTranslationDefault = true
 
     private let defaults = UserDefaults.standard
     private var timer: Timer?
     private var todayKey: String = ""
+    private var isForeground = true
+    private var wordIndex: [String: URL] = [:]
+    private var coverIndex: [String: URL] = [:]
+    private var didIndexImages = false
 
     init() {
         loadJSON()
@@ -44,7 +60,7 @@ class DataStore {
         lessons = base
         lessons.sort { ($0.level, $0.id) < ($1.level, $1.id) }
         var allWords: [WordEntry] = []
-        for part in ["a", "b", "c", "d"] {
+        for part in ["a", "b", "c", "d", "e"] {
             allWords.append(contentsOf: load("words-\(part).json", as: [WordEntry].self) ?? [])
         }
         words = allWords
@@ -55,6 +71,11 @@ class DataStore {
         for (k, v) in (load("custom-audio-map.json", as: [String: String].self) ?? [:]) { am[k] = v }
         audioMap = am
         wordAudioMap = load("word-audio-map.json", as: [String: String].self) ?? [:]
+        wordThemes = load("word-themes.json", as: [WordTheme].self) ?? []
+        if let catalog = load("word-books.json", as: WordBookCatalog.self) {
+            wordBookGroups = catalog.groups
+            bookCitation = catalog.citation
+        }
         for w in words { wordDict[w.word.lowercased()] = w }
     }
 
@@ -81,27 +102,45 @@ class DataStore {
         return Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)")
     }
 
+    func bestAudioURL(forWord word: String) -> URL? {
+        audioURL(forWord: word)
+    }
+
+    /// 预生成的慢速文件。没有时界面改用同一条音频的 0.75 倍速。
+    func slowAudioURL(forWord word: String) -> URL? {
+        guard let file = wordAudioMap[word.lowercased()],
+              let root = Bundle.main.resourceURL else { return nil }
+        let url = root.appendingPathComponent("audio-slow/\(file)")
+        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+    }
+
     func songAudioURL(_ songId: String) -> URL? {
-        Bundle.main.resourceURL?.appendingPathComponent("audio/songs/\(songId).mp3")
+        guard let root = Bundle.main.resourceURL else { return nil }
+        let nested = root.appendingPathComponent("audio/songs/\(songId).mp3")
+        if FileManager.default.fileExists(atPath: nested.path) { return nested }
+        let flat = root.appendingPathComponent("audio/\(songId).mp3")
+        if FileManager.default.fileExists(atPath: flat.path) { return flat }
+        return nil
     }
 
     func coverURL(forLesson lessonId: String) -> URL? {
-        Bundle.main.resourceURL?.appendingPathComponent("covers/\(lessonId).jpg")
+        ensureImageIndex()
+        if let lesson = lessons.first(where: { $0.id == lessonId }),
+           let cover = lesson.coverImage {
+            let base = URL(fileURLWithPath: cover).deletingPathExtension().lastPathComponent.lowercased()
+            if let url = coverIndex[base] { return url }
+        }
+        return coverIndex[lessonId.lowercased()]
     }
 
-    private var wordIconIndex: [String: URL] = [:]
-    private var didIndexWordIcons = false
-
-    /// 单词图在 word-icons/ 里。键是「去掉扩展名的文件名」小写，
-    /// 和单词文本小写后相同，例如 "the UK" → the uk.jpg，"we'll" → we'll.jpg。
     func iconURL(forWord word: String) -> URL? {
-        ensureWordIconIndex()
-        return wordIconIndex[word.lowercased()]
+        ensureImageIndex()
+        return wordIndex[word.lowercased()]
     }
 
-    private func ensureWordIconIndex() {
-        guard !didIndexWordIcons, let root = Bundle.main.resourceURL else { return }
-        didIndexWordIcons = true
+    private func ensureImageIndex() {
+        guard !didIndexImages, let root = Bundle.main.resourceURL else { return }
+        didIndexImages = true
         guard let enumerator = FileManager.default.enumerator(
             at: root,
             includingPropertiesForKeys: nil,
@@ -110,10 +149,15 @@ class DataStore {
         let exts: Set<String> = ["png", "jpg", "jpeg", "webp"]
         for case let url as URL in enumerator {
             let ext = url.pathExtension.lowercased()
-            guard exts.contains(ext), url.path.contains("/word-icons/") else { continue }
+            guard exts.contains(ext) else { continue }
             let base = url.deletingPathExtension().lastPathComponent.lowercased()
-            if wordIconIndex[base] == nil {
-                wordIconIndex[base] = url
+            let path = url.path
+            if path.contains("/word-icons/") {
+                wordIndex[base] = url
+            } else if path.contains("/ui-icons/") {
+                continue
+            } else if path.contains("/covers/") || path.contains("/lesson-illustrations/") {
+                if coverIndex[base] == nil { coverIndex[base] = url }
             }
         }
     }
@@ -121,6 +165,222 @@ class DataStore {
     func lookupWord(_ raw: String) -> WordEntry? {
         let w = raw.lowercased().trimmingCharacters(in: .punctuationCharacters)
         return wordDict[w]
+    }
+
+    // MARK: - 主题与今日计划
+
+    func words(forTheme themeId: String) -> [WordEntry] {
+        guard let theme = wordThemes.first(where: { $0.id == themeId }) else { return [] }
+        return theme.words.compactMap { wordDict[$0.lowercased()] }
+    }
+
+    func themeProgress(themeId: String) -> (done: Int, total: Int) {
+        let list = words(forTheme: themeId)
+        let done = list.filter { learnedWords.contains($0.id) }.count
+        return (done, list.count)
+    }
+
+    func wordsForCurrentBook() -> [WordEntry] {
+        guard let id = selectedBookId else { return words }
+        return entries(forBook: id)
+    }
+
+    func entries(forBook id: String) -> [WordEntry] {
+        guard let book = wordBookGroups.flatMap(\.books).first(where: { $0.id == id }) else { return [] }
+        if let themeId = book.themeId {
+            return words(forTheme: themeId)
+        }
+        var seen = Set<String>()
+        var result: [WordEntry] = []
+        for word in book.words ?? [] {
+            let key = word.lowercased()
+            guard seen.insert(key).inserted, let entry = wordDict[key] else { continue }
+            result.append(entry)
+        }
+        return result
+    }
+
+    func currentBookTitle() -> String {
+        guard let id = selectedBookId,
+              let book = wordBookGroups.flatMap(\.books).first(where: { $0.id == id }) else {
+            return "全部单词"
+        }
+        return book.nameCn
+    }
+
+    func selectBook(_ id: String?) {
+        selectedBookId = id
+        saveProgress()
+    }
+
+    /// 全部单词时先学能看图的主题（水果、动物、颜色…），虚词和抽象词靠后。
+    /// 选了某一本词书时，按这本书自己的顺序。
+    static let picturableThemeOrder = [
+        "fruits", "animals", "colors", "numbers", "body", "family", "foods", "vehicles",
+        "home", "nature", "toys", "stationery", "places", "time", "actions", "adjectives",
+        "functions", "others"
+    ]
+
+    private var wordThemeRank: [String: (tier: Int, index: Int)] = [:]
+    private var didRankThemes = false
+
+    private func ensureThemeRank() {
+        guard !didRankThemes else { return }
+        didRankThemes = true
+        for (tier, themeId) in Self.picturableThemeOrder.enumerated() {
+            guard let theme = wordThemes.first(where: { $0.id == themeId }) else { continue }
+            for (index, word) in theme.words.enumerated() {
+                let key = word.lowercased()
+                if wordThemeRank[key] == nil {
+                    wordThemeRank[key] = (tier, index)
+                }
+            }
+        }
+    }
+
+    func planDays() -> [[WordEntry]] {
+        let pool: [WordEntry]
+        if selectedBookId != nil {
+            pool = wordsForCurrentBook().filter { !learnedWords.contains($0.id) }
+        } else {
+            ensureThemeRank()
+            pool = words
+                .filter { !learnedWords.contains($0.id) }
+                .sorted { a, b in
+                    let ra = wordThemeRank[a.id] ?? (tier: 900, index: 0)
+                    let rb = wordThemeRank[b.id] ?? (tier: 900, index: 0)
+                    if ra.tier != rb.tier { return ra.tier < rb.tier }
+                    if ra.index != rb.index { return ra.index < rb.index }
+                    return (a.level ?? 1) < (b.level ?? 1)
+                }
+        }
+        let size = max(1, dailyNewWords)
+        guard !pool.isEmpty else { return [] }
+        var days: [[WordEntry]] = []
+        var index = 0
+        while index < pool.count {
+            let end = min(index + size, pool.count)
+            days.append(Array(pool[index..<end]))
+            index = end
+        }
+        return days
+    }
+
+    /// 课文没有封面文件时，用课里最具体的那个词的 emoji。
+    func coverEmoji(for lessonId: String) -> String {
+        ensureThemeRank()
+        guard let lesson = lessons.first(where: { $0.id == lessonId }) else { return "📖" }
+        var best: (tier: Int, emoji: String)?
+        for para in lesson.content {
+            for timing in para.words {
+                let key = timing.word.lowercased().trimmingCharacters(in: .punctuationCharacters)
+                guard let emoji = wordDict[key]?.emoji, !emoji.isEmpty else { continue }
+                let tier = wordThemeRank[key]?.tier ?? 900
+                guard tier < 14 else { continue }
+                if best == nil || tier < best!.tier {
+                    best = (tier, emoji)
+                }
+            }
+        }
+        return best?.emoji ?? "📖"
+    }
+
+    func markLearned(_ word: String) {
+        let key = word.lowercased()
+        learnedWords.insert(key)
+        var memory = memories[key] ?? WordMemory()
+        memory.wrong = false
+        memory.mastered = true
+        scheduleForward(&memory)
+        memories[key] = memory
+        saveProgress()
+    }
+
+    func markWrong(_ word: String) {
+        let key = word.lowercased()
+        var memory = memories[key] ?? WordMemory()
+        memory.wrong = true
+        memory.mastered = false
+        memory.wrongDay = dayString()
+        memory.lapses += 1
+        memory.interval = 0
+        memory.due = dayString()
+        memory.ease = max(1.3, memory.ease - 0.2)
+        memories[key] = memory
+        saveProgress()
+    }
+
+    func noteAttempt(correct: Bool, word: String? = nil) {
+        gameAnswered += 1
+        if correct {
+            gameCorrect += 1
+            saveProgress()
+        } else if let word, !word.isEmpty {
+            markWrong(word)
+        } else {
+            saveProgress()
+        }
+    }
+
+    func reviewEntries() -> [WordEntry] {
+        let today = dayString()
+        var seen = Set<String>()
+        var result: [WordEntry] = []
+        func add(_ key: String) {
+            guard seen.insert(key).inserted, let entry = wordDict[key] else { return }
+            result.append(entry)
+        }
+        for (key, memory) in memories {
+            let activeWrong = memory.wrong && !memory.mastered
+            let dueLearned = learnedWords.contains(key) && (memory.due.isEmpty || memory.due <= today)
+            if activeWrong || dueLearned { add(key) }
+        }
+        for key in learnedWords where memories[key] == nil { add(key) }
+        return result.sorted { $0.word.localizedCaseInsensitiveCompare($1.word) == .orderedAscending }
+    }
+
+    func wrongBookEntries() -> [WordEntry] {
+        memories.compactMap { key, memory in
+            guard memory.wrong && !memory.mastered else { return nil }
+            return wordDict[key]
+        }
+        .sorted { $0.word.localizedCaseInsensitiveCompare($1.word) == .orderedAscending }
+    }
+
+    func wrongWordsToday() -> [String] {
+        let today = dayString()
+        return memories.compactMap { key, memory in
+            guard memory.wrong && !memory.mastered, memory.wrongDay == today else { return nil }
+            return key
+        }
+        .sorted()
+    }
+
+    var wrongBookCount: Int {
+        memories.values.filter { $0.wrong && !$0.mastered }.count
+    }
+
+    private func scheduleForward(_ memory: inout WordMemory) {
+        if memory.interval <= 0 {
+            memory.interval = 1
+        } else if memory.interval == 1 {
+            memory.interval = 3
+        } else {
+            let next = Int((Double(memory.interval) * memory.ease).rounded())
+            memory.interval = min(60, max(1, next))
+        }
+        memory.ease = min(3.0, memory.ease + 0.1)
+        memory.due = dateByAdding(days: memory.interval)
+    }
+
+    private func dateByAdding(days: Int) -> String {
+        let next = Calendar.current.date(byAdding: .day, value: days, to: Date()) ?? Date()
+        return dayString(next)
+    }
+
+    var gameAccuracy: Int {
+        guard gameAnswered > 0 else { return 0 }
+        return Int((Double(gameCorrect) / Double(gameAnswered) * 100).rounded())
     }
 
     // MARK: - 关卡解锁
@@ -151,56 +411,150 @@ class DataStore {
         if let d = defaults.dictionary(forKey: "quizBest") as? [String: Double] { quizBest = d }
         favoriteWords = Set(defaults.stringArray(forKey: "favoriteWords") ?? [])
         collectedCards = Set(defaults.stringArray(forKey: "collectedCards") ?? [])
+        learnedWords = Set(defaults.stringArray(forKey: "learnedWords") ?? [])
+        let book = defaults.string(forKey: "selectedBookId") ?? ""
+        if book.isEmpty {
+            let theme = defaults.string(forKey: "selectedThemeId") ?? ""
+            selectedBookId = theme.isEmpty ? nil : theme
+        } else {
+            selectedBookId = book
+        }
+        if let data = defaults.data(forKey: "wordMemories"),
+           let decoded = try? JSONDecoder().decode([String: WordMemory].self, from: data) {
+            memories = decoded
+        }
+        dailyNewWords = defaults.object(forKey: "dailyNewWords") as? Int ?? 10
+        gameCorrect = defaults.integer(forKey: "gameCorrect")
+        gameAnswered = defaults.integer(forKey: "gameAnswered")
+        studyDates = defaults.stringArray(forKey: "studyDates") ?? []
         timeLimitMinutes = defaults.object(forKey: "timeLimitMinutes") as? Int ?? 20
         showTranslationDefault = defaults.object(forKey: "showTranslation") as? Bool ?? true
+        todayKey = dayString()
+        studySecondsToday = defaults.double(forKey: "study_\(todayKey)")
+        bonusSecondsToday = defaults.double(forKey: "bonus_\(todayKey)")
+        refreshTimeUp()
     }
 
     func saveProgress() {
+        progressToken += 1
         defaults.set(Array(completedLessons), forKey: "completedLessons")
         defaults.set(quizBest, forKey: "quizBest")
         defaults.set(Array(favoriteWords), forKey: "favoriteWords")
         defaults.set(Array(collectedCards), forKey: "collectedCards")
+        defaults.set(Array(learnedWords), forKey: "learnedWords")
+        defaults.set(selectedBookId ?? "", forKey: "selectedBookId")
+        if let data = try? JSONEncoder().encode(memories) {
+            defaults.set(data, forKey: "wordMemories")
+        }
+        defaults.set(dailyNewWords, forKey: "dailyNewWords")
+        defaults.set(gameCorrect, forKey: "gameCorrect")
+        defaults.set(gameAnswered, forKey: "gameAnswered")
+        defaults.set(studyDates, forKey: "studyDates")
         defaults.set(timeLimitMinutes, forKey: "timeLimitMinutes")
         defaults.set(showTranslationDefault, forKey: "showTranslation")
+        defaults.set(bonusSecondsToday, forKey: "bonus_\(todayKey)")
     }
 
-    // MARK: - 每日时长统计
+    // MARK: - 每日时长（只统计前台）
 
-    private func dayString() -> String {
+    private func dayString(_ date: Date = Date()) -> String {
         let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone.current
         f.dateFormat = "yyyy-MM-dd"
-        return f.string(from: Date())
+        return f.string(from: date)
+    }
+
+    func setForeground(_ active: Bool) {
+        isForeground = active
+        if active { markStudyDay() }
+    }
+
+    private func markStudyDay() {
+        let key = dayString()
+        if !studyDates.contains(key) {
+            studyDates.append(key)
+            defaults.set(studyDates, forKey: "studyDates")
+        }
+    }
+
+    var studyDayCount: Int { studyDates.count }
+
+    var streakDays: Int {
+        let dates = Set(studyDates)
+        let cal = Calendar.current
+        var day = Date()
+        if !dates.contains(dayString(day)) {
+            guard let yesterday = cal.date(byAdding: .day, value: -1, to: day) else { return 0 }
+            day = yesterday
+            if !dates.contains(dayString(day)) { return 0 }
+        }
+        var count = 0
+        while dates.contains(dayString(day)) {
+            count += 1
+            guard let prev = cal.date(byAdding: .day, value: -1, to: day) else { break }
+            day = prev
+        }
+        return count
+    }
+
+    private func allowanceSeconds() -> Double {
+        Double(timeLimitMinutes * 60) + bonusSecondsToday
+    }
+
+    private func refreshTimeUp() {
+        if timeLimitMinutes > 0, studySecondsToday >= allowanceSeconds() {
+            timeUp = true
+        }
     }
 
     private func startDayTracking() {
         todayKey = dayString()
-        studySecondsToday = defaults.double(forKey: "study_\(todayKey)")
+        markStudyDay()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             if self.dayString() != self.todayKey {
                 self.todayKey = self.dayString()
                 self.studySecondsToday = 0
+                self.bonusSecondsToday = 0
                 self.timeUp = false
+                self.markStudyDay()
             }
+            guard self.isForeground, !self.timeUp else { return }
             self.studySecondsToday += 1
             self.defaults.set(self.studySecondsToday, forKey: "study_\(self.todayKey)")
             if self.timeLimitMinutes > 0,
-               self.studySecondsToday >= Double(self.timeLimitMinutes * 60),
-               !self.timeUp {
+               self.studySecondsToday >= self.allowanceSeconds() {
                 self.timeUp = true
             }
         }
     }
 
-    func resetTimeUp() {
+    /// 家长验证通过后，再给一整段限时，而不是马上又被锁上。
+    func grantExtraTime() {
+        let minutes = timeLimitMinutes > 0 ? timeLimitMinutes : 20
+        bonusSecondsToday += Double(minutes * 60)
         timeUp = false
+        defaults.set(bonusSecondsToday, forKey: "bonus_\(todayKey)")
+    }
+
+    func resetTimeUp() {
+        grantExtraTime()
     }
 
     // MARK: - 学习报告
 
     var completedCount: Int { completedLessons.count }
 
-    func wrongWordsToday() -> [String] { [] }  // v1 占位，后续记录错词
-
     func studyMinutesToday() -> Int { Int(studySecondsToday / 60) }
+}
+
+struct WordMemory: Codable, Equatable {
+    var ease: Double = 2.5
+    var interval: Int = 0
+    var due: String = ""
+    var lapses: Int = 0
+    var wrong: Bool = false
+    var wrongDay: String = ""
+    var mastered: Bool = false
 }

@@ -29,7 +29,7 @@ ICON_DIRS = [
     ROOT / "KidsEnglish" / "KidsEnglish" / "Resources" / "word-icons",
     ROOT / "KidsEnglish" / "Resources" / "word-icons",
 ]
-WORD_PARTS = ["a", "b", "c", "d"]
+WORD_PARTS = ["a", "b", "c", "d", "e"]
 EXTS = {".png", ".jpg", ".jpeg", ".webp"}
 
 
@@ -201,11 +201,14 @@ def check_existing(zip_path: Path, repo_index: dict[str, Path], dict_words: list
             print("  changed:", repr(word))
 
     # Pre-existing filename that does not match its dictionary spelling.
-    unmatched = [word for word in dict_words if word.lower() not in original]
-    if unmatched:
-        print("dictionary words with no same-name icon in the original bundle:")
-        for word in unmatched:
-            print(" ", repr(word))
+    unresolved = [
+        word for word in dict_words
+        if word.lower() not in original and word.lower() not in repo_index
+    ]
+    if unresolved:
+        failures.append(f"{len(unresolved)} dictionary words resolve in neither the bundle nor the repo")
+        for word in unresolved[:20]:
+            print("  unresolved dictionary word:", repr(word))
     return failures
 
 

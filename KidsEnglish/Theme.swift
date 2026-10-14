@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 // MARK: - App 主题（按 7 张概念设计图提取）
 
@@ -48,6 +49,7 @@ enum AppTheme {
         case "actions": return Color(red: 1.0, green: 0.7, blue: 0.3)
         case "adjectives": return Color(red: 0.75, green: 0.55, blue: 1.0)
         case "functions": return Color(red: 0.5, green: 0.6, blue: 0.7)
+        case "others": return Color(red: 0.62, green: 0.64, blue: 0.70)
         default: return brightBlue
         }
     }
@@ -85,7 +87,7 @@ struct BigButton: View {
                 .cornerRadius(30)
                 .shadow(color: color.opacity(0.35), radius: 8, y: 4)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressableStyle())
     }
 }
 
@@ -105,7 +107,22 @@ struct PillButton: View {
                 .cornerRadius(25)
                 .shadow(color: color.opacity(0.3), radius: 6, y: 3)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressableStyle())
+    }
+}
+
+// MARK: - 动效
+
+enum Motion {
+    static let spring = Animation.spring(response: 0.45, dampingFraction: 0.78)
+    static let press = Animation.spring(response: 0.28, dampingFraction: 0.55)
+}
+
+struct PressableStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.94 : 1)
+            .animation(Motion.press, value: configuration.isPressed)
     }
 }
 
@@ -128,9 +145,15 @@ extension View {
 
 // MARK: - UI 图标加载（Resources/ui-icons/）
 
-/// 从 Resources/ui-icons 加载 AI 生成的图标
+/// 从 Resources/ui-icons 加载图标。文件夹引用里的 png 不能靠 Image("路径") 找到。
 func uiIcon(_ name: String) -> Image {
-    Image("ui-icons/\(name)", bundle: .main)
+    if let root = Bundle.main.resourceURL {
+        let url = root.appendingPathComponent("ui-icons/\(name).png")
+        if let image = UIImage(contentsOfFile: url.path) {
+            return Image(uiImage: image)
+        }
+    }
+    return Image(systemName: "sparkles")
 }
 
 /// 主题 id 到图标名的映射
