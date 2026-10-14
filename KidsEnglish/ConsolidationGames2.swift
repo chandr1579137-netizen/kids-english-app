@@ -4,7 +4,7 @@ import SwiftUI
 struct AudioToWordGame: View {
     let words: [WordEntry]
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
     @State private var quiz: [WordEntry] = []
     @State private var index = 0
     @State private var options: [WordEntry] = []
@@ -45,6 +45,7 @@ struct AudioToWordGame: View {
         }
         .padding()
         .onAppear { start() }
+        .onDisappear { player.stop() }
         .creamBackground()
     }
 
@@ -75,9 +76,8 @@ struct AudioToWordGame: View {
     }
 
     private func playCurrent() {
-        guard let current = quiz[safe: index],
-              let url = store.bestAudioURL(forWord: current.word) else { return }
-        player.play(url: url)
+        guard let current = quiz[safe: index] else { return }
+        player.play(url: store.bestAudioURL(forWord: current.word), spokenFallback: current.word)
     }
 
     private func optionColor(_ opt: WordEntry) -> Color {
@@ -88,12 +88,16 @@ struct AudioToWordGame: View {
     }
 
     private func answer(_ opt: WordEntry) {
-        guard picked == nil else { return }
+        guard picked == nil, quiz.indices.contains(index) else { return }
         picked = opt.word
-        if opt.word == quiz[index].word { score += 1 }
+        let ok = opt.word == quiz[index].word
+        if ok { score += 1 }
+        store.noteAttempt(correct: ok)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            if index + 1 < quiz.count { index += 1; setupOptions() }
-            else { finished = true }
+            if index + 1 < quiz.count {
+                withAnimation(Motion.spring) { index += 1 }
+                setupOptions()
+            } else { finished = true }
         }
     }
 }
@@ -102,7 +106,7 @@ struct AudioToWordGame: View {
 struct AudioToMeaningGame: View {
     let words: [WordEntry]
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
     @State private var quiz: [WordEntry] = []
     @State private var index = 0
     @State private var options: [WordEntry] = []
@@ -143,6 +147,7 @@ struct AudioToMeaningGame: View {
         }
         .padding()
         .onAppear { start() }
+        .onDisappear { player.stop() }
         .creamBackground()
     }
 
@@ -174,9 +179,8 @@ struct AudioToMeaningGame: View {
     }
 
     private func playCurrent() {
-        guard let current = quiz[safe: index],
-              let url = store.bestAudioURL(forWord: current.word) else { return }
-        player.play(url: url)
+        guard let current = quiz[safe: index] else { return }
+        player.play(url: store.bestAudioURL(forWord: current.word), spokenFallback: current.word)
     }
 
     private func optionColor(_ opt: WordEntry) -> Color {
@@ -187,12 +191,16 @@ struct AudioToMeaningGame: View {
     }
 
     private func answer(_ opt: WordEntry) {
-        guard picked == nil else { return }
+        guard picked == nil, quiz.indices.contains(index) else { return }
         picked = opt.word
-        if opt.word == quiz[index].word { score += 1 }
+        let ok = opt.word == quiz[index].word
+        if ok { score += 1 }
+        store.noteAttempt(correct: ok)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            if index + 1 < quiz.count { index += 1; setupOptions() }
-            else { finished = true }
+            if index + 1 < quiz.count {
+                withAnimation(Motion.spring) { index += 1 }
+                setupOptions()
+            } else { finished = true }
         }
     }
 }
@@ -201,7 +209,7 @@ struct AudioToMeaningGame: View {
 struct WordToMeaningGame: View {
     let words: [WordEntry]
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
     @State private var quiz: [WordEntry] = []
     @State private var index = 0
     @State private var options: [WordEntry] = []
@@ -217,9 +225,7 @@ struct WordToMeaningGame: View {
                 Text(current.word)
                     .font(.system(size: 64, weight: .bold))
                 Button {
-                    if let url = store.bestAudioURL(forWord: current.word) {
-                        player.play(url: url)
-                    }
+                    player.play(url: store.bestAudioURL(forWord: current.word), spokenFallback: current.word)
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
                         .font(.system(size: 36))
@@ -246,6 +252,7 @@ struct WordToMeaningGame: View {
         }
         .padding()
         .onAppear { start() }
+        .onDisappear { player.stop() }
         .creamBackground()
     }
 
@@ -283,12 +290,16 @@ struct WordToMeaningGame: View {
     }
 
     private func answer(_ opt: WordEntry) {
-        guard picked == nil else { return }
+        guard picked == nil, quiz.indices.contains(index) else { return }
         picked = opt.word
-        if opt.word == quiz[index].word { score += 1 }
+        let ok = opt.word == quiz[index].word
+        if ok { score += 1 }
+        store.noteAttempt(correct: ok)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            if index + 1 < quiz.count { index += 1; setupOptions() }
-            else { finished = true }
+            if index + 1 < quiz.count {
+                withAnimation(Motion.spring) { index += 1 }
+                setupOptions()
+            } else { finished = true }
         }
     }
 }
@@ -297,7 +308,7 @@ struct WordToMeaningGame: View {
 struct DictationGame: View {
     let words: [WordEntry]
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
     @State private var quiz: [WordEntry] = []
     @State private var index = 0
     @State private var input = ""
@@ -358,6 +369,7 @@ struct DictationGame: View {
         }
         .padding()
         .onAppear { start() }
+        .onDisappear { player.stop() }
         .creamBackground()
     }
 
@@ -380,9 +392,8 @@ struct DictationGame: View {
     }
 
     private func playCurrent() {
-        guard let current = quiz[safe: index],
-              let url = store.bestAudioURL(forWord: current.word) else { return }
-        player.play(url: url)
+        guard let current = quiz[safe: index] else { return }
+        player.play(url: store.bestAudioURL(forWord: current.word), spokenFallback: current.word)
     }
 
     private func check() {
@@ -391,12 +402,15 @@ struct DictationGame: View {
         if typed == current.word.lowercased() {
             score += 1
             result = .correct
+            store.noteAttempt(correct: true)
         } else {
             result = .wrong
+            store.noteAttempt(correct: false)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + (result == .correct ? 0.8 : 2.2)) {
             if index + 1 < quiz.count {
-                index += 1; input = ""; result = .none
+                withAnimation(Motion.spring) { index += 1 }
+                input = ""; result = .none
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { playCurrent() }
             } else {
                 finished = true
@@ -466,6 +480,8 @@ struct ConsolidationView: View {
         .creamBackground()
         .navigationTitle(mode == nil ? "巩固练习" : mode!.rawValue)
         .navigationBarTitleDisplayMode(.inline)
+        .animation(Motion.spring, value: mode)
+        .onDisappear { AudioPlayer.shared.stop() }
     }
 
     // MARK: - 九宫格模式选择
@@ -524,7 +540,7 @@ struct ConsolidationView: View {
                                 .cornerRadius(20)
                                 .shadow(color: m.color.opacity(0.25), radius: 8, y: 4)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(PressableStyle())
                         }
                     }
                     .padding(.horizontal)

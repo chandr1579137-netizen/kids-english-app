@@ -6,8 +6,9 @@ struct LessonView: View {
     @Environment(DataStore.self) private var store
     let lesson: Lesson
 
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
     @State private var recorder = Recorder()
+    @State private var speechHighlight: Task<Void, Never>?
     @State private var playingParagraph: String?
     @State private var highlightIndex: [String: Int] = [:]  // paragraphId -> word index
     @State private var showTranslation: Bool = true
@@ -91,30 +92,67 @@ struct LessonView: View {
             QuizView(lesson: lesson)
         }
         .onDisappear {
+            speechHighlight?.cancel()
             player.stop()
         }
     }
 
     private func togglePlay(_ para: Paragraph) {
         if playingParagraph == para.paragraphId {
+            speechHighlight?.cancel()
             player.pause()
             playingParagraph = nil
             return
         }
-        guard let url = store.audioURL(forLesson: lesson.id, paragraphId: para.paragraphId) else { return }
+        speechHighlight?.cancel()
         playingParagraph = para.paragraphId
+        highlightIndex[para.paragraphId] = -1
+        let origin = para.audioStart
+        let sliceMs = max(0, para.audioEnd - para.audioStart)
+        let paragraphId = para.paragraphId
         player.onTimeUpdate = { t in
-            if t > 900000 {  // 播放结束
-                playingParagraph = nil
-                highlightIndex[para.paragraphId] = -1
+            if sliceMs > 0, t * 1000 >= sliceMs + 250 {
+                DispatchQueue.main.async {
+                    guard playingParagraph == paragraphId else { return }
+                    speechHighlight?.cancel()
+                    player.stop()
+                    playingParagraph = nil
+                    highlightIndex[paragraphId] = -1
+                }
                 return
             }
-            let ms = t * 1000
+            let ms = t * 1000 + origin
             if let idx = para.words.firstIndex(where: { ms >= $0.start && ms < $0.end }) {
-                highlightIndex[para.paragraphId] = idx
+                highlightIndex[paragraphId] = idx
             }
         }
-        player.play(url: url)
+        player.onFinish = {
+            speechHighlight?.cancel()
+            guard playingParagraph == paragraphId else { return }
+            playingParagraph = nil
+            highlightIndex[paragraphId] = -1
+        }
+        let url = store.audioURL(forLesson: lesson.id, paragraphId: para.paragraphId)
+        let hasFile = url.map { FileManager.default.fileExists(atPath: $0.path) } ?? false
+        player.play(url: url, spokenFallback: para.text)
+        if !hasFile {
+            startSpeechHighlight(para)
+        }
+    }
+
+    /// 没有段落 mp3 时，按词大约匀速点亮，避免整段没有反馈。
+    private func startSpeechHighlight(_ para: Paragraph) {
+        let id = para.paragraphId
+        let count = para.words.count
+        guard count > 0 else { return }
+        speechHighlight = Task { @MainActor in
+            let step = 0.38
+            for i in 0..<count {
+                try? await Task.sleep(nanoseconds: UInt64(step * 1_000_000_000))
+                guard !Task.isCancelled, playingParagraph == id else { return }
+                highlightIndex[id] = i
+            }
+        }
     }
 
     private func toggleRecord(_ para: Paragraph) {

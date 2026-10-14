@@ -1,7 +1,6 @@
 import SwiftUI
 
-/// 单词图标：加载本地/资源包中的 3D 单词图标。
-/// 失败或无图时显示首字母兜底（不用 emoji 猜）。
+/// 单词图标：优先用资源包里的图，没有图时用词条 emoji，再没有才显示首字母。
 struct WordIconView: View {
     @Environment(DataStore.self) private var store
 
@@ -29,14 +28,19 @@ struct WordIconView: View {
         }
     }
 
-    /// 首字母兜底：浅色背景 + 大字
     private var fallbackView: some View {
-        ZStack {
+        let emoji = store.lookupWord(word)?.emoji
+        return ZStack {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.systemGray6))
-            Text(String(word.prefix(1)).uppercased())
-                .font(.system(size: size * 0.45, weight: .bold))
-                .foregroundColor(.accentColor)
+            if let emoji, !emoji.isEmpty {
+                Text(emoji)
+                    .font(.system(size: size * 0.48))
+            } else {
+                Text(String(word.prefix(1)).uppercased())
+                    .font(.system(size: size * 0.45, weight: .bold))
+                    .foregroundColor(.accentColor)
+            }
         }
     }
 }

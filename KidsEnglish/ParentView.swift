@@ -5,7 +5,7 @@ struct ParentGateView: View {
     @State private var unlocked = false
 
     var body: some View {
-        NavigationStack {
+        Group {
             if unlocked {
                 ParentDashboardView()
             } else {
