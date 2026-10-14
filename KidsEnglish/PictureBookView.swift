@@ -24,7 +24,7 @@ struct PictureBookView: View {
                                 PictureBookReaderView(lesson: lesson)
                             } label: {
                                 VStack(spacing: 8) {
-                                    CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: String(lesson.titleCn.prefix(1)))
+                                    CoverImage(url: store.coverURL(forLesson: lesson.id), emoji: store.coverEmoji(for: lesson.id))
                                         .frame(height: 140)
                                         .frame(maxWidth: .infinity)
                                         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
@@ -114,7 +114,7 @@ struct PictureBookReaderView: View {
     private var pageBody: some View {
         if page == 0 {
             VStack(spacing: 16) {
-                CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: String(lesson.titleCn.prefix(1)))
+                CoverImage(url: store.coverURL(forLesson: lesson.id), emoji: store.coverEmoji(for: lesson.id))
                     .frame(height: 240)
                     .frame(maxWidth: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))

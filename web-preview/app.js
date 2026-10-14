@@ -135,12 +135,37 @@
     if (!theme) return [];
     return theme.words.map((w) => wordBy[w.toLowerCase()]).filter(Boolean);
   }
+  const THEME_ORDER = [
+    "fruits", "animals", "colors", "numbers", "body", "family", "foods", "vehicles",
+    "home", "nature", "toys", "stationery", "places", "time", "actions", "adjectives",
+    "functions", "others",
+  ];
+  const themeRank = {};
+  THEME_ORDER.forEach((id, tier) => {
+    const theme = themes.find((t) => t.id === id);
+    if (!theme) return;
+    theme.words.forEach((word, index) => {
+      const key = word.toLowerCase();
+      if (themeRank[key] == null) themeRank[key] = { tier, index };
+    });
+  });
+
   function planDays() {
-    const pool = wordsForBook()
-      .map((w, i) => ({ w, i }))
-      .filter((x) => !state.learned.has(x.w.word.toLowerCase()))
-      .sort((a, b) => (a.w.level - b.w.level) || (a.i - b.i))
-      .map((x) => x.w);
+    let pool;
+    if (state.themeId) {
+      pool = wordsForBook().filter((w) => !state.learned.has(w.word.toLowerCase()));
+    } else {
+      pool = words
+        .filter((w) => !state.learned.has(w.word.toLowerCase()))
+        .slice()
+        .sort((a, b) => {
+          const ra = themeRank[a.word.toLowerCase()] || { tier: 900, index: 0 };
+          const rb = themeRank[b.word.toLowerCase()] || { tier: 900, index: 0 };
+          if (ra.tier !== rb.tier) return ra.tier - rb.tier;
+          if (ra.index !== rb.index) return ra.index - rb.index;
+          return (a.level || 1) - (b.level || 1);
+        });
+    }
     const size = Math.max(1, state.dailyNew);
     const days = [];
     for (let i = 0; i < pool.length; i += size) days.push(pool.slice(i, i + size));
@@ -191,13 +216,25 @@
     clearTimeout(speakTimer);
   }
 
-  function cover(ch, cls) {
-    return `<div class="cover ${cls || ""}">${esc(String(ch || "文").slice(0, 1))}</div>`;
+  function coverEmoji(lesson) {
+    let best = null;
+    (lesson.content || []).forEach((p) => {
+      (p.words || []).forEach((raw) => {
+        const key = String(raw).toLowerCase().replace(/[^a-z'-]/g, "");
+        const rank = themeRank[key];
+        const entry = wordBy[key];
+        if (!entry || !entry.emoji || !rank || rank.tier >= 14) return;
+        if (!best || rank.tier < best.tier) best = { tier: rank.tier, emoji: entry.emoji };
+      });
+    });
+    return best ? best.emoji : "📖";
+  }
+  function cover(lesson, cls) {
+    const emoji = typeof lesson === "string" ? lesson : coverEmoji(lesson);
+    return `<div class="cover ${cls || ""}">${esc(emoji)}</div>`;
   }
   function face(entry) {
-    const pic = entry.emoji
-      ? `<div class="emoji">${esc(entry.emoji)}</div>`
-      : `<div class="letter">${esc(entry.word.slice(0, 1).toUpperCase())}</div>`;
+    const pic = `<div class="emoji">${esc(entry.emoji || "🌟")}</div>`;
     const ph = entry.phonetic ? `<p class="phonetic">${esc(entry.phonetic)}</p>` : "";
     return `<div class="flash ${state.dir >= 0 ? "slide-next" : "slide-prev"}">
       <div class="pic">${pic}</div>
@@ -376,7 +413,7 @@
             ? `<span class="badge play">${I.play}</span>`
             : `<span class="badge lock">${I.lock}</span>`;
         return `<button class="lesson press" data-act="lesson" data-id="${l.id}" ${open ? "" : "disabled"}>
-          ${cover(l.titleCn, "sq")}
+          ${cover(l, "sq")}
           <span class="titles"><b>${esc(l.title)}</b><span>${esc(l.titleCn)}</span></span>
           ${badge}
         </button>`;
@@ -405,7 +442,7 @@
     const toast = state.toast ? `<div class="sheet"><b>${esc(state.toast)}</b>
       <button class="chip" data-act="close-sheet" style="margin-top:8px">知道了</button></div>` : "";
     return `<div class="pane">${nav(lesson.titleCn, `<button class="tool" data-act="lang">${state.showCn ? "中" : "EN"}</button>`)}
-      <div class="scroll reader">${cover(lesson.titleCn, "wide")}
+      <div class="scroll reader">${cover(lesson, "wide")}
         <h2>${esc(lesson.title)}</h2><div class="cn">${esc(lesson.titleCn)}</div>
         ${paras}${quiz}</div>${sheet}${toast}</div>`;
   }
@@ -416,7 +453,7 @@
       <div class="page-sub">${lessons.length} 本图画故事</div>
       <div class="grid-2">${lessons.map((l) =>
         `<button class="shelf-card press" data-act="open-book" data-id="${l.id}">
-          ${cover(l.titleCn)}
+          ${cover(l)}
           <div class="en">${esc(l.title)}</div>
           <div class="cn">${esc(l.titleCn)}</div>
         </button>`).join("")}</div>
@@ -429,7 +466,7 @@
     const pages = lesson.content.length + 1;
     let body;
     if (frame.page === 0) {
-      body = `${cover(lesson.titleCn, "hero")}
+      body = `${cover(lesson, "hero")}
         <div class="en-title">${esc(lesson.title)}</div>
         <h2>${esc(lesson.titleCn)}</h2>
         <div class="hint">向左滑，开始听故事</div>`;
@@ -544,38 +581,96 @@
     const base = learned.length ? learned : (planDays()[0] || words.slice(0, 10));
     return base;
   }
-  function freshGame(mode) {
-    const pool = gamePool().slice();
-    for (let i = pool.length - 1; i > 0; i--) {
+  function shuffle(list) {
+    const arr = list.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    const questions = pool.slice(0, Math.min(10, pool.length));
-    return { mode, questions, index: 0, score: 0, options: [], correct: 0, picked: {}, answered: false, finished: false, shake: 0 };
+    return arr;
+  }
+  function freshGame(mode) {
+    let pool = gamePool().slice();
+    if (!shot) pool = shuffle(pool);
+    const count = mode === "matching" ? Math.min(4, pool.length) : Math.min(10, pool.length);
+    const g = {
+      mode, questions: pool.slice(0, count), index: 0, score: 0,
+      options: [], correct: 0, picked: {}, answered: false, finished: false,
+      shake: 0, input: "", cards: [], selected: [], matched: {}, busy: false,
+    };
+    prepareRound(g);
+    return g;
+  }
+  function choiceRest(target) {
+    const preferred = [];
+    const seen = new Set([target.word]);
+    planDays().slice(0, 8).forEach((day) => day.forEach((w) => {
+      if (!seen.has(w.word)) { seen.add(w.word); preferred.push(w); }
+    }));
+    words.forEach((w) => {
+      if (!seen.has(w.word)) { seen.add(w.word); preferred.push(w); }
+    });
+    return preferred;
+  }
+  function prepareRound(g) {
+    if (g.mode === "matching") { setupMatch(g); return; }
+    deal(g);
+  }
+  function setupMatch(g) {
+    const pairs = g.questions.slice(0, Math.min(4, g.questions.length));
+    let cards = [];
+    pairs.forEach((w, i) => {
+      cards.push({ id: i * 2, word: w.word, emoji: w.emoji || "🌟", isImage: false });
+      cards.push({ id: i * 2 + 1, word: w.word, emoji: w.emoji || "🌟", isImage: true });
+    });
+    if (shot) {
+      const order = [0, 3, 5, 2, 7, 1, 4, 6];
+      const byId = {};
+      cards.forEach((c) => { byId[c.id] = c; });
+      cards = order.map((id) => byId[id]).filter(Boolean);
+    } else {
+      cards = shuffle(cards);
+    }
+    g.cards = cards;
+    g.selected = [];
+    g.matched = {};
+    g.busy = false;
   }
   function deal(g) {
+    if (g.mode === "matching") return;
     const target = g.questions[g.index];
     if (!target) { g.finished = true; return; }
-    const rest = words.filter((w) => w.word !== target.word);
-    const distract = [];
-    if (shot) {
-      distract.push(...rest.slice(0, 3));
-    } else {
-      const used = new Set();
-      while (distract.length < 3 && used.size < rest.length) {
-        const w = rest[Math.floor(Math.random() * rest.length)];
-        if (!used.has(w.word)) { used.add(w.word); distract.push(w); }
-      }
-    }
-    const options = [target, ...distract];
-    for (let i = options.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [options[i], options[j]] = [options[j], options[i]];
-    }
+    const rest = choiceRest(target);
+    let distract;
+    if (shot) distract = rest.slice(0, 3);
+    else distract = shuffle(rest).slice(0, 3);
+    let options = [target, ...distract];
+    if (shot) options = [distract[0], target, distract[1], distract[2]].filter(Boolean);
+    else options = shuffle(options);
     g.options = options;
-    g.correct = options.findIndex((w) => w.word === target.word);
+    g.correct = options.findIndex((w) => w && w.word === target.word);
     g.picked = {};
     g.answered = false;
+    g.input = "";
+  }
+
+  function optionCells(g, kind) {
+    return g.options.map((opt, i) => {
+      const mark = g.picked[i];
+      const cls = mark === "ok" ? "ok" : mark === "bad" ? "bad" : (g.answered && mark !== "ok" ? "dim" : "");
+      if (kind === "image") {
+        return `<button class="opt press ${cls}" data-act="pick" data-i="${i}">${esc(opt.emoji || "🌟")}</button>`;
+      }
+      const tone = g.mode === "audioToWord" ? "tone-purple" : g.mode === "audioToMeaning" ? "tone-gold" : g.mode === "wordToMeaning" ? "tone-teal" : "";
+      if (kind === "word") {
+        return `<button class="choice press ${tone} ${cls}" data-act="pick" data-i="${i}">${esc(opt.word)}</button>`;
+      }
+      if (kind === "meaning") {
+        return `<button class="choice press ${tone} ${cls}" data-act="pick" data-i="${i}">${esc(opt.meaningCn || opt.word)}</button>`;
+      }
+      return `<button class="audio-row press ${cls}" data-act="pick" data-i="${i}">
+        <span class="mini-speaker">${I.speaker}</span><b>发音 ${i + 1}</b></button>`;
+    }).join("");
   }
 
   function gamesHTML(frame) {
@@ -592,27 +687,110 @@
       return `<div class="pane">${nav("巩固练习")}<div class="scroll">${body}</div></div>`;
     }
     const g = frame.game;
-    const meta = GAMES.find((x) => x.id === g.mode);
+    const meta = GAMES.find((x) => x.id === g.mode) || { name: "游戏" };
     if (g.finished) {
+      const total = g.mode === "matching" ? g.cards.filter((c) => !c.isImage).length : g.questions.length;
       return `<div class="pane">${nav(meta.name)}
         <button class="switch-game press" data-act="exit-game">换游戏</button>
         <div class="celebrate"><div class="party">🎉</div><h2>得了 ${g.score} 分！</h2>
+        <p>${g.score} / ${total}</p>
         <button class="big green press" data-act="replay">再来一局</button></div></div>`;
     }
+    if (g.mode === "matching") {
+      const cards = g.cards.map((c) => {
+        const on = g.selected.includes(c.id) ? "on" : "";
+        const bad = g.picked[c.id] === "bad" ? "bad" : "";
+        const gone = g.matched[c.id] ? "gone" : "";
+        const face = c.isImage ? `<span class="big-emoji">${esc(c.emoji)}</span>` : `<b>${esc(c.word)}</b>`;
+        return `<button class="match press ${on} ${bad} ${gone}" data-act="match" data-id="${c.id}">${face}</button>`;
+      }).join("");
+      return `<div class="pane">${nav(meta.name)}
+        <button class="switch-game press" data-act="exit-game">换游戏</button>
+        <div class="scroll" style="padding:0 16px 12px">
+          <div class="q-meta">找到单词和图片的一对 · 得分 ${g.score}</div>
+          <div class="match-grid ${g.shake ? "shake" : ""}">${cards}</div>
+        </div></div>`;
+    }
     const q = g.questions[g.index];
-    const cells = g.options.map((opt, i) => {
-      const mark = g.picked[i];
-      const cls = mark === "ok" ? "ok" : mark === "bad" ? "bad" : (g.answered ? "dim" : "");
-      const glyph = opt.emoji || opt.word.slice(0, 1).toUpperCase();
-      return `<button class="opt press ${cls}" data-act="pick" data-i="${i}">${esc(glyph)}</button>`;
-    }).join("");
+    const head = `<div class="q-meta">第 ${g.index + 1} / ${g.questions.length} 题  ·  得分 ${g.score}</div>`;
+    let body = "";
+    if (g.mode === "wordToImage") {
+      body = `${head}<div class="prompt"><div class="bigword">${esc(q.word)}</div>
+        <button class="speaker press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button></div>
+        <div class="opt-grid ${g.shake ? "shake" : ""}">${optionCells(g, "image")}</div>`;
+    } else if (g.mode === "audioToImage") {
+      body = `${head}<div class="listen-prompt">听一听，选出对应的图片 👂</div>
+        <button class="speaker big press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button>
+        <div class="opt-grid ${g.shake ? "shake" : ""}">${optionCells(g, "image")}</div>`;
+    } else if (g.mode === "imageToWord") {
+      body = `${head}<div class="listen-prompt">这张图是哪个单词？🖼️</div>
+        <div class="hero-emoji">${esc(q.emoji || "🌟")}</div>
+        <div class="choice-list ${g.shake ? "shake" : ""}">${optionCells(g, "word")}</div>`;
+    } else if (g.mode === "audioToWord") {
+      body = `${head}<div class="listen-prompt">听一听，是哪个单词？</div>
+        <button class="speaker big press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button>
+        <div class="choice-list ${g.shake ? "shake" : ""}">${optionCells(g, "word")}</div>`;
+    } else if (g.mode === "wordToAudio") {
+      body = `${head}<div class="prompt"><div class="bigword">${esc(q.word)}</div></div>
+        <div class="listen-prompt">点喇叭听一听，选出正确的发音 🔊</div>
+        <div class="choice-list ${g.shake ? "shake" : ""}">${optionCells(g, "audio")}</div>`;
+    } else if (g.mode === "audioToMeaning") {
+      body = `${head}<div class="listen-prompt">听一听，是什么意思？</div>
+        <button class="speaker big press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button>
+        <div class="choice-list ${g.shake ? "shake" : ""}">${optionCells(g, "meaning")}</div>`;
+    } else if (g.mode === "wordToMeaning") {
+      body = `${head}<div class="prompt"><div class="bigword">${esc(q.word)}</div>
+        <button class="speaker press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button></div>
+        <div class="listen-prompt">是什么意思？</div>
+        <div class="choice-list ${g.shake ? "shake" : ""}">${optionCells(g, "meaning")}</div>`;
+    } else {
+      body = `${head}<div class="listen-prompt">听一听，写出单词</div>
+        <button class="speaker big press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button>
+        <p class="hint">点喇叭可以再听</p>
+        <input id="dict-answer" class="${g.shake ? "shake" : ""}" placeholder="输入英文单词" value="${esc(g.input)}" autocomplete="off" autocapitalize="none">
+        ${g.mark === "ok" ? `<div class="mark ok">对啦！</div>` : ""}
+        ${g.mark === "bad" ? `<div class="mark bad">正确答案是：${esc(q.word)}</div>` : ""}
+        ${g.mark ? "" : `<button class="big green press" data-act="dict-check">检查</button>`}`;
+    }
     return `<div class="pane">${nav(meta.name)}
       <button class="switch-game press" data-act="exit-game">换游戏</button>
-      <div class="scroll" style="padding:0 16px 12px">
-        <div class="q-meta">第 ${g.index + 1} / ${g.questions.length} 题  ·  得分 ${g.score}</div>
-        <div class="prompt"><div class="bigword">${esc(q.word)}</div>
-          <button class="speaker press" data-act="speak" data-word="${esc(q.word)}">${I.speaker}</button></div>
-        <div class="opt-grid ${g.shake ? "shake" : ""}">${cells}</div>
+      <div class="scroll" style="padding:0 16px 16px">${body}</div></div>`;
+  }
+
+  function quizHTML(frame) {
+    const lesson = lessons.find((l) => l.id === frame.lessonId);
+    const quiz = (lesson && lesson.quiz) || [];
+    if (!quiz.length) return `<div class="pane">${nav("练习时间")}<div class="empty">这一课还没有练习</div></div>`;
+    if (frame.done || frame.index >= quiz.length) {
+      const score = Math.round((frame.correct / quiz.length) * 100);
+      const passed = score >= 60;
+      return `<div class="pane">${nav("练习时间")}<div class="celebrate">
+        <div class="party">${passed ? "🎉" : "💪"}</div>
+        <h2>${score} 分</h2>
+        <p>${passed ? "太棒了！下一课已解锁" : "差一点点，再学一次吧！"}</p>
+        <button class="big green press" data-act="quiz-done">${passed ? "继续闯关" : "知道了"}</button>
+      </div></div>`;
+    }
+    const item = quiz[frame.index];
+    const built = frame.built || [];
+    let extra = "";
+    if (item.type === "sentence_order" || item.type === "word_builder") {
+      const pool = frame.left || [];
+      extra = `<div class="built">${built.map((w) => `<span>${esc(w)}</span>`).join("") || "点下面的词"}</div>
+        <div class="chip-row">${pool.map((w, i) => `<button class="chip" data-act="quiz-build" data-i="${i}">${esc(w)}</button>`).join("")}</div>`;
+    } else {
+      extra = `<div class="choice-list">${(item.options || []).map((opt) => {
+        const mark = frame.picked == null ? "" : (opt.value === item.correctAnswer ? "ok" : (frame.picked === opt.value ? "bad" : "dim"));
+        const icon = opt.image ? `<span class="opt-emoji">${esc(opt.image)}</span>` : "";
+        return `<button class="choice press ${mark}" data-act="quiz-pick" data-value="${esc(opt.value)}">${icon}<span>${esc(opt.text || opt.value)}</span></button>`;
+      }).join("")}</div>`;
+    }
+    const note = frame.mark === "ok" ? `<div class="mark ok">答对啦！</div>` : (frame.mark === "bad" ? `<div class="mark bad">再想想，下次加油！</div>` : "");
+    return `<div class="pane">${nav("练习时间")}
+      <div class="scroll" style="padding:8px 16px 20px">
+        <div class="q-meta">第 ${frame.index + 1} / ${quiz.length} 题</div>
+        <h2 class="quiz-q">${esc(item.question)}</h2>
+        ${extra}${note}
       </div></div>`;
   }
 
@@ -620,6 +798,7 @@
     if (state.study) return studyHTML();
     const frame = top();
     if (frame) {
+      if (frame.id === "quiz") return quizHTML(frame);
       if (frame.id === "games") return gamesHTML(frame);
       if (frame.id === "theme") return themeHTML(frame);
       if (frame.id === "lesson") return lessonHTML(frame);
@@ -719,7 +898,6 @@
     if (act === "mode") {
       const frame = top();
       frame.game = freshGame(el.dataset.mode);
-      deal(frame.game);
       render();
       if (!shot) speak(frame.game.questions[0].word, false);
       return;
@@ -728,11 +906,15 @@
     if (act === "replay") {
       const frame = top();
       frame.game = freshGame(frame.game.mode);
-      deal(frame.game);
       render();
       return;
     }
     if (act === "pick") return pickOption(Number(el.dataset.i));
+    if (act === "match") return matchCard(Number(el.dataset.id));
+    if (act === "dict-check") return dictCheck();
+    if (act === "quiz-pick") return quizPick(el.dataset.value);
+    if (act === "quiz-build") return quizBuild(Number(el.dataset.i));
+    if (act === "quiz-done") return quizDone();
     if (act === "theme") {
       state.dir = 1;
       state.stacks.cards.push({ id: "theme", themeId: el.dataset.id, index: 0, success: false });
@@ -753,7 +935,7 @@
     if (act === "lookup") return lookup(el.dataset.word);
     if (act === "close-sheet") { state.sheet = null; state.toast = null; render(); return; }
     if (act === "mic") { state.toast = "网页预览不能录音，真机上可以跟读"; state.sheet = null; render(); return; }
-    if (act === "quiz") { state.toast = "练习题在 App 里作答。这一课有题目，完成后会解锁下一课。"; render(); return; }
+    if (act === "quiz") return openQuiz();
     if (act === "open-book") {
       state.stacks.books.push({ id: "book", lessonId: el.dataset.id, page: 0, turn: false });
       render();
@@ -784,6 +966,10 @@
 
   device.addEventListener("input", (ev) => {
     if (ev.target.id === "parent-answer") state.parent.answer = ev.target.value;
+    if (ev.target.id === "dict-answer") {
+      const g = top() && top().game;
+      if (g) g.input = ev.target.value;
+    }
   });
 
   let dragX = 0;
@@ -971,31 +1157,167 @@
     else { p.wrong = true; p.answer = ""; }
     render();
   }
+  function note(ok) {
+    state.gameAnswered += 1;
+    if (ok) state.gameCorrect += 1;
+    saveStore();
+  }
   function pickOption(i) {
     const g = top().game;
     if (!g || g.answered) return;
+    const opt = g.options[i];
+    if (!opt) return;
+    if (g.mode === "wordToAudio" && !shot) speak(opt.word, false);
     if (i === g.correct) {
       g.picked[i] = "ok";
       g.answered = true;
       g.score += 1;
-      state.gameCorrect += 1;
-      state.gameAnswered += 1;
-      saveStore();
+      note(true);
       render();
       setTimeout(() => {
         g.index += 1;
         if (g.index >= g.questions.length) g.finished = true;
         else deal(g);
         render();
-        if (!g.finished && !shot) speak(g.questions[g.index].word, false);
+        if (!g.finished && !shot && g.mode !== "wordToAudio" && g.mode !== "imageToWord" && g.mode !== "wordToMeaning") {
+          speak(g.questions[g.index].word, false);
+        }
       }, 700);
     } else {
       g.picked[i] = "bad";
       g.shake += 1;
-      state.gameAnswered += 1;
-      saveStore();
+      note(false);
       render();
     }
+  }
+  function matchCard(id) {
+    const g = top().game;
+    if (!g || g.busy || g.matched[id] || g.selected.includes(id)) return;
+    const card = g.cards.find((c) => c.id === id);
+    if (!card) return;
+    if (!shot) speak(card.word, false);
+    if (g.selected.length === 1) {
+      const first = g.cards.find((c) => c.id === g.selected[0]);
+      g.selected.push(id);
+      if (first && first.word === card.word && first.isImage !== card.isImage) {
+        g.busy = true;
+        g.score += 1;
+        note(true);
+        const ids = [first.id, id];
+        render();
+        setTimeout(() => {
+          ids.forEach((n) => { g.matched[n] = true; });
+          g.selected = [];
+          g.busy = false;
+          if (Object.keys(g.matched).length >= g.cards.length) g.finished = true;
+          render();
+        }, 450);
+      } else {
+        g.busy = true;
+        g.picked[first.id] = "bad";
+        g.picked[id] = "bad";
+        g.shake += 1;
+        note(false);
+        render();
+        setTimeout(() => {
+          delete g.picked[first.id];
+          delete g.picked[id];
+          g.selected = [];
+          g.busy = false;
+          render();
+        }, 700);
+      }
+    } else {
+      g.selected = [id];
+      render();
+    }
+  }
+  function dictCheck() {
+    const g = top().game;
+    if (!g || g.answered) return;
+    const field = document.getElementById("dict-answer");
+    if (field) g.input = field.value;
+    const typed = String(g.input || "").trim().toLowerCase();
+    const word = g.questions[g.index].word.toLowerCase();
+    const ok = typed === word;
+    g.mark = ok ? "ok" : "bad";
+    g.answered = true;
+    if (ok) g.score += 1;
+    else g.shake += 1;
+    note(ok);
+    render();
+    setTimeout(() => {
+      g.index += 1;
+      g.mark = null;
+      g.answered = false;
+      if (g.index >= g.questions.length) g.finished = true;
+      else deal(g);
+      render();
+      if (!g.finished && !shot) speak(g.questions[g.index].word, false);
+    }, ok ? 800 : 1600);
+  }
+  function openQuiz() {
+    const frame = top();
+    if (!frame || frame.id !== "lesson") return;
+    const lesson = lessons.find((l) => l.id === frame.lessonId);
+    const quiz = { id: "quiz", lessonId: frame.lessonId, index: 0, correct: 0, picked: null, built: [], left: null, mark: null, done: false };
+    primeQuiz(quiz, lesson);
+    state.stacks.read.push(quiz);
+    render();
+  }
+  function primeQuiz(frame, lesson) {
+    const item = lesson && lesson.quiz && lesson.quiz[frame.index];
+    frame.picked = null;
+    frame.mark = null;
+    frame.built = [];
+    if (!item) { frame.left = []; return; }
+    if (item.type === "word_builder") frame.left = (item.shuffledWords || []).slice();
+    else if (item.type === "sentence_order") frame.left = (item.shuffledWords || item.correctOrder || []).slice();
+    else frame.left = [];
+  }
+  function quizPick(value) {
+    const frame = top();
+    if (!frame || frame.id !== "quiz" || frame.picked) return;
+    const lesson = lessons.find((l) => l.id === frame.lessonId);
+    const item = lesson.quiz[frame.index];
+    frame.picked = value;
+    const ok = value === item.correctAnswer;
+    frame.mark = ok ? "ok" : "bad";
+    if (ok) frame.correct += 1;
+    render();
+    setTimeout(() => advanceQuiz(frame, lesson), 800);
+  }
+  function quizBuild(i) {
+    const frame = top();
+    if (!frame || frame.id !== "quiz" || frame.mark) return;
+    const lesson = lessons.find((l) => l.id === frame.lessonId);
+    const item = lesson.quiz[frame.index];
+    const word = frame.left[i];
+    if (word == null) return;
+    frame.left.splice(i, 1);
+    frame.built.push(word);
+    if (frame.left.length) { render(); return; }
+    let ok = false;
+    if (item.type === "word_builder") ok = frame.built.join("") === String(item.correctAnswer || "");
+    else ok = frame.built.join(" ") === (item.correctOrder || []).join(" ");
+    frame.mark = ok ? "ok" : "bad";
+    if (ok) frame.correct += 1;
+    render();
+    setTimeout(() => advanceQuiz(frame, lesson), 800);
+  }
+  function advanceQuiz(frame, lesson) {
+    frame.index += 1;
+    if (frame.index >= lesson.quiz.length) {
+      frame.done = true;
+      const score = Math.round((frame.correct / lesson.quiz.length) * 100);
+      if (score >= 60) state.completed.add(lesson.id);
+      saveStore();
+    } else primeQuiz(frame, lesson);
+    render();
+  }
+  function quizDone() {
+    state.stacks.read.pop();
+    render();
   }
 
   state.level = 1;
@@ -1006,10 +1328,15 @@
       state.study = { session: todayWords, queue: [], cursor: 0, known: todayWords.map((w) => w.word), finished: true, success: false, locked: false };
     } else if (shot === "games") {
       state.stacks.learn = [{ id: "games", game: null }];
-    } else if (shot === "game") {
-      const frame = { id: "games", game: freshGame("wordToImage") };
-      frame.game.questions = (planDays()[0] || words).slice(0, 4);
-      deal(frame.game);
+    } else if (shot === "game" || (shot && shot.indexOf("game-") === 0)) {
+      const mode = shot === "game" ? "wordToImage" : shot.slice(5);
+      const count = mode === "matching" ? 4 : 4;
+      const frame = { id: "games", game: freshGame(mode) };
+      frame.game.questions = (planDays()[0] || words).slice(0, count);
+      frame.game.index = 0;
+      frame.game.score = 0;
+      frame.game.finished = false;
+      prepareRound(frame.game);
       state.stacks.learn = [frame];
     } else if (shot === "cards") state.tab = "cards";
     else if (shot === "theme") {
@@ -1022,6 +1349,12 @@
     } else if (shot === "lesson") {
       state.tab = "read";
       state.stacks.read = [{ id: "lesson", lessonId: lessons[0].id, playId: null, hi: -1 }];
+    } else if (shot === "quiz") {
+      state.tab = "read";
+      const lesson = lessons[0];
+      const quiz = { id: "quiz", lessonId: lesson.id, index: 0, correct: 0, picked: null, built: [], left: null, mark: null, done: false };
+      primeQuiz(quiz, lesson);
+      state.stacks.read = [quiz];
     } else if (shot === "books") state.tab = "books";
     else if (shot === "bookpage") {
       state.tab = "books";

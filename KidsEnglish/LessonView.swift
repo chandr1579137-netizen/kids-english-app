@@ -23,7 +23,7 @@ struct LessonView: View {
             VStack(spacing: 16) {
                 // 封面
                 CoverImage(url: store.coverURL(forLesson: lesson.id),
-                           fallbackText: String(lesson.titleCn.prefix(1)))
+                           emoji: store.coverEmoji(for: lesson.id))
                     .frame(height: 200)
                     .cornerRadius(20)
                     .clipped()

@@ -33,14 +33,8 @@ struct WordIconView: View {
         return ZStack {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.systemGray6))
-            if let emoji, !emoji.isEmpty {
-                Text(emoji)
-                    .font(.system(size: size * 0.48))
-            } else {
-                Text(String(word.prefix(1)).uppercased())
-                    .font(.system(size: size * 0.45, weight: .bold))
-                    .foregroundColor(.accentColor)
-            }
+            Text((emoji?.isEmpty == false) ? emoji! : "🌟")
+                .font(.system(size: size * 0.48))
         }
     }
 }

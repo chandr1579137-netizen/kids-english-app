@@ -20,18 +20,17 @@ jobs:
           curl -sfL -o assets-bundle-v3.zip \
             "https://muse.ai/files/1412548825264485/28149411608070162/97jiuiu7vahas4vrykc1nghi/assets-bundle-v3.zip"
           unzip -q -o assets-bundle-v3.zip
-          mkdir -p KidsEnglish/Resources/audio \
-                   KidsEnglish/Resources/audio-slow \
-                   KidsEnglish/Resources/covers \
-                   KidsEnglish/Resources/word-icons \
-                   KidsEnglish/Resources/lesson-illustrations \
-                   KidsEnglish/Resources/ui-icons
-          if [ -d KidsEnglish/KidsEnglish/Resources ]; then
-            cp -R KidsEnglish/KidsEnglish/Resources/. KidsEnglish/Resources/
-          fi
-          if [ -d KidsEnglish/Resources/lesson-illustrations ]; then
-            find KidsEnglish/Resources/lesson-illustrations -type f | wc -l
-          fi
+          SRC=KidsEnglish/KidsEnglish/Resources
+          DST=KidsEnglish/Resources
+          for dir in word-icons covers lesson-illustrations audio-slow audio; do
+            if [ -d "$SRC/$dir" ]; then
+              mkdir -p "$DST/$dir"
+              cp -R "$SRC/$dir/." "$DST/$dir/"
+            fi
+          done
+          echo "word-icons $(find "$DST/word-icons" -type f ! -name .gitkeep | wc -l)"
+          echo "covers $(find "$DST/covers" -type f ! -name .gitkeep | wc -l)"
+          echo "illustrations $(find "$DST/lesson-illustrations" -type f ! -name .gitkeep | wc -l)"
 
       - name: Download lesson audio (from upstream open-source repo)
         run: |

@@ -65,7 +65,7 @@ struct ReadView: View {
             LessonView(lesson: lesson)
         } label: {
             HStack(spacing: 12) {
-                CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: String(lesson.titleCn.prefix(1)))
+                CoverImage(url: store.coverURL(forLesson: lesson.id), emoji: store.coverEmoji(for: lesson.id))
                     .frame(width: 72, height: 72)
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 VStack(alignment: .leading, spacing: 4) {

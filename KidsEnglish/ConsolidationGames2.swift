@@ -1,5 +1,20 @@
 import SwiftUI
 
+private struct ShakeEffect: GeometryEffect {
+    var animatableData: CGFloat
+    var amount: CGFloat = 10
+    var shakesPerUnit: CGFloat = 3
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        ProjectionTransform(
+            CGAffineTransform(
+                translationX: amount * sin(animatableData * .pi * shakesPerUnit),
+                y: 0
+            )
+        )
+    }
+}
+
 // MARK: - 听音选词
 struct AudioToWordGame: View {
     let words: [WordEntry]
@@ -11,6 +26,7 @@ struct AudioToWordGame: View {
     @State private var score = 0
     @State private var finished = false
     @State private var picked: String? = nil
+    @State private var shakeCount = 0
 
     var body: some View {
         VStack(spacing: 24) {
@@ -41,6 +57,7 @@ struct AudioToWordGame: View {
                     }
                 }
                 .padding(.horizontal)
+                .modifier(ShakeEffect(animatableData: CGFloat(shakeCount)))
             }
         }
         .padding()
@@ -92,6 +109,7 @@ struct AudioToWordGame: View {
         picked = opt.word
         let ok = opt.word == quiz[index].word
         if ok { score += 1 }
+        else { withAnimation(Motion.spring) { shakeCount += 1 } }
         store.noteAttempt(correct: ok)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             if index + 1 < quiz.count {
@@ -113,6 +131,7 @@ struct AudioToMeaningGame: View {
     @State private var score = 0
     @State private var finished = false
     @State private var picked: String? = nil
+    @State private var shakeCount = 0
 
     var body: some View {
         VStack(spacing: 24) {
@@ -143,6 +162,7 @@ struct AudioToMeaningGame: View {
                     }
                 }
                 .padding(.horizontal)
+                .modifier(ShakeEffect(animatableData: CGFloat(shakeCount)))
             }
         }
         .padding()
@@ -195,6 +215,7 @@ struct AudioToMeaningGame: View {
         picked = opt.word
         let ok = opt.word == quiz[index].word
         if ok { score += 1 }
+        else { withAnimation(Motion.spring) { shakeCount += 1 } }
         store.noteAttempt(correct: ok)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             if index + 1 < quiz.count {
@@ -216,6 +237,7 @@ struct WordToMeaningGame: View {
     @State private var score = 0
     @State private var finished = false
     @State private var picked: String? = nil
+    @State private var shakeCount = 0
 
     var body: some View {
         VStack(spacing: 24) {
@@ -248,6 +270,7 @@ struct WordToMeaningGame: View {
                     }
                 }
                 .padding(.horizontal)
+                .modifier(ShakeEffect(animatableData: CGFloat(shakeCount)))
             }
         }
         .padding()
@@ -294,6 +317,7 @@ struct WordToMeaningGame: View {
         picked = opt.word
         let ok = opt.word == quiz[index].word
         if ok { score += 1 }
+        else { withAnimation(Motion.spring) { shakeCount += 1 } }
         store.noteAttempt(correct: ok)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             if index + 1 < quiz.count {
@@ -315,6 +339,7 @@ struct DictationGame: View {
     @State private var score = 0
     @State private var finished = false
     @State private var result: ResultState = .none
+    @State private var shakeCount = 0
 
     enum ResultState { case none, correct, wrong }
 
@@ -341,6 +366,7 @@ struct DictationGame: View {
                     .font(.headline)
                     .foregroundStyle(.secondary)
                 TextField("输入英文单词", text: $input)
+                    .modifier(ShakeEffect(animatableData: CGFloat(shakeCount)))
                     .textFieldStyle(.roundedBorder)
                     .font(.title)
                     .autocapitalization(.none)
@@ -405,6 +431,7 @@ struct DictationGame: View {
             store.noteAttempt(correct: true)
         } else {
             result = .wrong
+            withAnimation(Motion.spring) { shakeCount += 1 }
             store.noteAttempt(correct: false)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + (result == .correct ? 0.8 : 2.2)) {

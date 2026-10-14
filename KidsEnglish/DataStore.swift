@@ -179,18 +179,47 @@ class DataStore {
         return words
     }
 
-    /// 还没认识的词，按等级从易到难，再按每天词数切成一天一天。
-    func planDays() -> [[WordEntry]] {
-        let pool = wordsForCurrentBook()
-            .enumerated()
-            .filter { !learnedWords.contains($0.element.id) }
-            .sorted { a, b in
-                let la = a.element.level ?? 1
-                let lb = b.element.level ?? 1
-                if la != lb { return la < lb }
-                return a.offset < b.offset
+    /// 全部单词时先学能看图的主题（水果、动物、颜色…），虚词和抽象词靠后。
+    /// 选了某一本词书时，按这本书自己的顺序。
+    static let picturableThemeOrder = [
+        "fruits", "animals", "colors", "numbers", "body", "family", "foods", "vehicles",
+        "home", "nature", "toys", "stationery", "places", "time", "actions", "adjectives",
+        "functions", "others"
+    ]
+
+    private var wordThemeRank: [String: (tier: Int, index: Int)] = [:]
+    private var didRankThemes = false
+
+    private func ensureThemeRank() {
+        guard !didRankThemes else { return }
+        didRankThemes = true
+        for (tier, themeId) in Self.picturableThemeOrder.enumerated() {
+            guard let theme = wordThemes.first(where: { $0.id == themeId }) else { continue }
+            for (index, word) in theme.words.enumerated() {
+                let key = word.lowercased()
+                if wordThemeRank[key] == nil {
+                    wordThemeRank[key] = (tier, index)
+                }
             }
-            .map(\.element)
+        }
+    }
+
+    func planDays() -> [[WordEntry]] {
+        let pool: [WordEntry]
+        if selectedThemeId != nil {
+            pool = wordsForCurrentBook().filter { !learnedWords.contains($0.id) }
+        } else {
+            ensureThemeRank()
+            pool = words
+                .filter { !learnedWords.contains($0.id) }
+                .sorted { a, b in
+                    let ra = wordThemeRank[a.id] ?? (tier: 900, index: 0)
+                    let rb = wordThemeRank[b.id] ?? (tier: 900, index: 0)
+                    if ra.tier != rb.tier { return ra.tier < rb.tier }
+                    if ra.index != rb.index { return ra.index < rb.index }
+                    return (a.level ?? 1) < (b.level ?? 1)
+                }
+        }
         let size = max(1, dailyNewWords)
         guard !pool.isEmpty else { return [] }
         var days: [[WordEntry]] = []
@@ -201,6 +230,25 @@ class DataStore {
             index = end
         }
         return days
+    }
+
+    /// 课文没有封面文件时，用课里最具体的那个词的 emoji。
+    func coverEmoji(for lessonId: String) -> String {
+        ensureThemeRank()
+        guard let lesson = lessons.first(where: { $0.id == lessonId }) else { return "📖" }
+        var best: (tier: Int, emoji: String)?
+        for para in lesson.content {
+            for timing in para.words {
+                let key = timing.word.lowercased().trimmingCharacters(in: .punctuationCharacters)
+                guard let emoji = wordDict[key]?.emoji, !emoji.isEmpty else { continue }
+                let tier = wordThemeRank[key]?.tier ?? 900
+                guard tier < 14 else { continue }
+                if best == nil || tier < best!.tier {
+                    best = (tier, emoji)
+                }
+            }
+        }
+        return best?.emoji ?? "📖"
     }
 
     func markLearned(_ word: String) {
