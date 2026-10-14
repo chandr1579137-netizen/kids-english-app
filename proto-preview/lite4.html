@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>儿童英语启蒙 · 交互原型 v2.0</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#2b2b3a;display:flex;justify-content:center;min-height:100vh;color:#333}
+#phone{width:390px;height:844px;max-height:100vh;background:#FFF7E6;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(0,0,0,.4)}
+#banner{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;text-align:center;font-size:12px;padding:8px;flex-shrink:0;letter-spacing:1px}
+#screen{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;-webkit-overflow-scrolling:touch}
+#screen.whitebg{background:#F7F7F7}
+#tabbar{display:flex;background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -6px 20px rgba(0,0,0,.08);flex-shrink:0;padding:10px 8px 20px;z-index:50}
+.tab{flex:1;text-align:center;font-size:12px;color:#9E9E9E;cursor:pointer;padding:2px 0;transition:color .2s;font-weight:600}
+.tab .ico{font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;width:56px;height:44px;border-radius:16px;transition:all .2s;background:#F0F0F0}
+.tab.active{color:#FF9800;font-weight:800}
+.tab.active .ico{background:#FF9800;box-shadow:0 4px 10px rgba(255,152,0,.4)}
+.view{animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.bigtitle{font-size:52px;font-weight:900;color:#1A237E;margin:24px 20px 4px;letter-spacing:2px}
+.subtitle{font-size:17px;color:#9E9E9E;margin:0 20px 16px;font-weight:500}
+.plan{position:relative;overflow:hidden;background:linear-gradient(135deg,#FF8C00,#FFB300);color:#fff;border-radius:28px;margin:12px;padding:22px 130px 22px 22px;box-shadow:0 8px 20px rgba(255,152,0,.35)}
+.plan .rocket{position:absolute;right:16px;top:50%;transform:translateY(-50%);filter:drop-shadow(0 4px 8px rgba(0,0,0,.15))}
+.plan .day{font-size:15px;font-weight:700;opacity:.95}
+.plan .big{font-size:34px;font-weight:900;margin:6px 0;letter-spacing:1px}
+.plan .sub{font-size:15px;font-weight:600;opacity:.95;margin-top:2px}
+.pbar{height:10px;background:rgba(255,255,255,.35);border-radius:99px;margin-top:12px;overflow:hidden}
+.pbar>div{height:100%;background:#fff;border-radius:99px;transition:width .4s}
+h2.sec{font-size:30px;margin:22px 18px 12px;color:#1A237E;font-weight:900;letter-spacing:1px}
+.bookchips{display:flex;gap:12px;overflow-x:auto;padding:6px 16px 12px;scrollbar-width:none}
+.bookchips::-webkit-scrollbar{display:none}
+.bookchips .bcard{flex-shrink:0;width:104px;height:148px;border-radius:20px;color:#fff;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.bookchips .bcard .bico{line-height:1;display:flex;justify-content:center;align-items:center;margin-bottom:6px}.bico svg{display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+.bookchips .bcard .bname{font-size:15px}
+.bookchips .bcard .bcount{font-size:12px;opacity:.9;font-weight:600}
+.bookchips .bcard.sel{outline:4px solid #1A237E;outline-offset:2px}
+.btn{display:block;width:calc(100% - 32px);margin:12px 16px;padding:19px;border:none;border-radius:999px;font-size:21px;font-weight:900;letter-spacing:2px;cursor:pointer;transition:transform .12s;color:#fff}
+.btn:active{transform:scale(.96)}
+.btn-green{background:linear-gradient(135deg,#34D058,#1EA84A);box-shadow:0 6px 16px rgba(46,213,115,.4)}
+.btn-lblue{background:#6BA8E8;color:#1A237E;box-shadow:0 6px 16px rgba(107,168,232,.35)}
+.btn-gray{background:#EDEDED;color:#888}
+.wctitle{font-size:32px;font-weight:900;color:#1A237E;margin:20px 18px 0;display:flex;align-items:center;justify-content:space-between}
+.wctitle .spk{font-size:30px;color:#2B7FFF;cursor:pointer}
+.wcprog{height:10px;background:#E8E8E8;border-radius:99px;margin:14px 18px 6px;overflow:hidden}
+.wcprog>div{height:100%;background:linear-gradient(90deg,#FF9800,#FFB300);border-radius:99px}
+.wcproglabel{font-size:14px;color:#FF9800;font-weight:700;margin:0 18px 12px}
+.wcard{background:#fff;border-radius:28px;margin:6px 16px;box-shadow:0 8px 24px rgba(0,0,0,.1);overflow:hidden;text-align:center;padding:28px 20px}
+.wcard .wimg{width:180px;height:180px;border-radius:20px;object-fit:cover}
+.word-big{font-size:58px;font-weight:900;color:#2B7FFF;margin:16px 0 4px;letter-spacing:1px}
+.word-ph{font-size:17px;color:#9E9E9E;margin-bottom:10px}
+.word-cn{font-size:44px;font-weight:900;color:#FF9800}
+.sndrow{display:flex;gap:14px;justify-content:center;margin:20px 16px 6px}
+.sndbtn{flex:1;max-width:170px;padding:14px;border:none;border-radius:999px;font-size:18px;font-weight:800;color:#fff;cursor:pointer}
+.sndbtn.normal{background:#2B7FFF;box-shadow:0 4px 12px rgba(43,127,255,.35)}
+.sndbtn.slow{background:#4CAF50;box-shadow:0 4px 12px rgba(76,175,80,.35)}
+.sndbtn:active{transform:scale(.95)}
+.pulse{animation:pulse .4s ease}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+.krow{display:flex;gap:12px;margin:12px 16px}
+.kbtn{flex:1;padding:20px 6px;border:none;border-radius:22px;font-size:19px;font-weight:800;cursor:pointer;transition:transform .12s}
+.kbtn:active{transform:scale(.94)}
+.k-nav{background:#BDBDBD;color:#fff}
+.k-know{background:#4CAF50;color:#fff}
+.k-unknow{background:#E74C3C;color:#fff}
+.themegrid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:4px 16px 16px}
+.themecard{border-radius:18px;padding:16px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.07);transition:transform .15s;position:relative;min-height:96px;display:flex;flex-direction:row;align-items:center;justify-content:space-between}
+.themecard:active{transform:scale(.95)}
+.themecard img{width:52px;height:52px;border-radius:12px;object-fit:cover}
+.themecard .tnm{font-size:16px;font-weight:800;color:#333;margin-top:6px}
+.themecard .tprog{font-size:15px;font-weight:800}
+.games9{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;padding:6px 16px 16px}
+.gamecard{border-radius:22px;padding:20px 8px 16px;text-align:center;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.1);transition:transform .15s}
+.gamecard:active{transform:scale(.93)}
+.gamecard .gico{width:72px;height:72px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:32px;box-shadow:0 3px 8px rgba(0,0,0,.1)}
+.gamecard .gnm{font-size:16px;font-weight:800;margin-bottom:8px}
+.gamecard .gdiff{display:inline-block;font-size:12px;font-weight:700;color:#fff;padding:4px 14px;border-radius:999px}
+.lvlrow{display:flex;gap:12px;overflow-x:auto;padding:6px 16px 12px;scrollbar-width:none}
+.lvlrow::-webkit-scrollbar{display:none}
+.lvlbtn{flex-shrink:0;min-width:68px;height:68px;border-radius:20px;border:none;background:#E8E8E8;color:#9E9E9E;font-size:24px;font-weight:900;cursor:pointer}
+.lvlbtn.sel{background:#FF9800;color:#fff;box-shadow:0 4px 12px rgba(255,152,0,.4)}
+.lessonrow{background:#fff;border-radius:20px;margin:10px 16px;padding:14px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);cursor:pointer}
+.lessonrow img{width:76px;height:76px;border-radius:16px;object-fit:cover;flex-shrink:0}
+.lessonrow .lt{flex:1;min-width:0}
+.lessonrow .lte{font-size:17px;font-weight:800;color:#1A237E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lessonrow .ltc{font-size:14px;color:#9E9E9E;margin-top:4px}
+.lessonrow .st{flex-shrink:0;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff}
+.st-done{background:#4CAF50}
+.st-cur{background:#BDBDBD}
+.st-lock{background:#E0E0E0;color:#9E9E9E;font-size:18px}
+.bookgrid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:6px 16px 16px}
+.bookcard{background:#fff;border-radius:22px;overflow:hidden;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.08);transition:transform .15s}
+.bookcard:active{transform:scale(.95)}
+.bookcard img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.bookcard .be{font-size:13px;color:#9E9E9E;text-align:center;margin:10px 8px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bookcard .bc{font-size:17px;font-weight:800;color:#1A237E;text-align:center;margin:0 8px 14px}
+.pheadcard{background:linear-gradient(135deg,#7B61FF,#B45CF0);border-radius:28px;margin:14px 16px;padding:24px 20px;display:flex;align-items:center;gap:18px;box-shadow:0 8px 20px rgba(123,97,255,.3);color:#fff}
+.pheadcard .avatar{width:92px;height:92px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:52px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.pheadcard .pname{font-size:32px;font-weight:900;margin-bottom:8px}
+.pheadcard .pstat{font-size:15px;font-weight:600;opacity:.95;margin-top:4px}
+.reportcard{background:#fff;border-radius:24px;margin:14px 16px;padding:20px 16px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.reportcard .rt{font-size:22px;font-weight:900;color:#1A237E;margin-bottom:16px}
+.prow3{display:flex}
+.pcard3{flex:1;text-align:center;position:relative}
+.pcard3+.pcard3::before{content:'';position:absolute;left:0;top:15%;height:70%;width:1px;background:#EEE}
+.pcard3 .pic{font-size:34px;margin-bottom:8px}
+.pcard3 .v{font-size:36px;font-weight:900}
+.pcard3 .l{font-size:13px;color:#666;margin-top:6px;font-weight:600}
+.mrow{background:#fff;border-radius:20px;margin:10px 16px;padding:18px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);cursor:pointer}
+.mrow .mi{font-size:26px}
+.mrow .mt{flex:1;font-size:18px;font-weight:700;color:#1A237E}
+.mrow .arw{font-size:22px;color:#CCC;font-weight:300}
+.mrow .lock{font-size:20px;color:#BDBDBD}
+.card{background:#fff;border-radius:24px;margin:12px;box-shadow:0 6px 18px rgba(0,0,0,.08);overflow:hidden}
+.pad{padding:16px}
+.backbtn{display:inline-flex;align-items:center;gap:4px;background:none;border:none;font-size:15px;color:#FF9800;padding:12px 14px 0;cursor:pointer;font-weight:700}
+img.wimg{width:180px;height:180px;border-radius:20px;object-fit:cover}
+img.hero{width:calc(100% - 32px);margin:12px 16px 0;border-radius:20px;aspect-ratio:16/10;object-fit:cover}
+.para{background:#fff;border-radius:18px;margin:10px 16px;padding:16px;box-shadow:0 3px 10px rgba(0,0,0,.05)}
+.para .en{font-size:16px;line-height:1.8;color:#333}
+.para .cn{font-size:14px;color:#999;margin-top:8px;line-height:1.7}
+.qword{font-size:44px;font-weight:900;color:#2B7FFF;text-align:center;margin:18px 0 6px}
+.qhint{text-align:center;color:#999;font-size:14px;margin-bottom:16px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 16px}
+.opt{background:#fff;border-radius:20px;padding:14px;text-align:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.07);transition:all .2s;border:3px solid transparent}
+.opt img{width:100%;aspect-ratio:1/1;border-radius:14px;object-fit:cover}
+.opt .ol{font-size:15px;font-weight:700;margin-top:8px;color:#333}
+.opt.correct{border-color:#4CAF50;background:#E8F5E9;transform:scale(1.04)}
+.opt.wrong{border-color:#E74C3C;background:#FFEBEE;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.score{font-size:72px;margin:16px 0}
+#modal{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100}
+#modal.show{display:flex}
+#modalBox{background:#fff;border-radius:28px;padding:28px;text-align:center;max-width:300px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;padding:12px 22px;border-radius:999px;font-size:15px;font-weight:600;z-index:200;animation:fadeIn .25s;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="phone">
+  <div id="banner">🧪 交互原型 v2.0 · 供走查确认（点击操作）</div>
+  <div id="screen"></div>
+  <div id="tabbar"></div>
+  <div id="toast"></div>
+  <div id="modal"><div class="mbox" id="modalBox"></div></div>
+</div>
+<script>
+const DATA = {"words": [{"w": "apple", "m": "苹果", "p": "/ˈæpl/"}, {"w": "banana", "m": "香蕉", "p": "/bəˈnænə/"}, {"w": "pear", "m": "梨", "p": "/per/"}, {"w": "grape", "m": "葡萄", "p": "/ɡreɪp/"}, {"w": "fruit", "m": "水果", "p": "/fruːt/"}, {"w": "strawberries", "m": "草莓( strawber", "p": "st'rɔ:brɪz"}, {"w": "animal", "m": "动物", "p": "/ˈænɪml/"}, {"w": "cat", "m": "猫", "p": "/kæt/"}, {"w": "dog", "m": "狗", "p": "/dɔːɡ/"}, {"w": "rabbit", "m": "兔子", "p": "/ˈræbɪt/"}, {"w": "bird", "m": "鸟", "p": "/bɜːrd/"}, {"w": "fish", "m": "鱼", "p": "/fɪʃ/"}, {"w": "pig", "m": "猪", "p": "/pɪɡ/"}, {"w": "duck", "m": "鸭子", "p": "/dʌk/"}, {"w": "cow", "m": "牛", "p": "/kaʊ/"}, {"w": "hen", "m": "母鸡", "p": "/hen/"}, {"w": "frog", "m": "青蛙", "p": "/frɒɡ/"}, {"w": "ant", "m": "蚂蚁", "p": "/ænt/"}, {"w": "bee", "m": "蜜蜂", "p": "/biː/"}, {"w": "owl", "m": "猫头鹰", "p": "/aʊl/"}, {"w": "kitten", "m": "小猫", "p": "/ˈkɪtn/"}, {"w": "puppy", "m": "小狗", "p": "/ˈpʌpi/"}, {"w": "mouse", "m": "老鼠", "p": "/maʊs/"}, {"w": "bear", "m": "熊", "p": "/ber/"}, {"w": "monkey", "m": "猴子", "p": "/ˈmʌŋki/"}, {"w": "elephant", "m": "大象", "p": "/ˈelɪfənt/"}, {"w": "lion", "m": "狮子", "p": "/ˈlaɪən/"}, {"w": "tiger", "m": "老虎", "p": "/ˈtaɪɡər/"}, {"w": "snake", "m": "蛇", "p": "/sneɪk/"}, {"w": "butterfly", "m": "蝴蝶", "p": "/ˈbʌtərflaɪ/"}, {"w": "mermaid", "m": "美人鱼", "p": "/ˈmɜːrmeɪd/"}, {"w": "dolphin", "m": "海豚", "p": "/ˈdɒlfɪn/"}, {"w": "creature", "m": "生物", "p": "/ˈkriːtʃər/"}, {"w": "clownfish", "m": "小丑鱼", "p": "/ˈklaʊnfɪʃ/"}, {"w": "turtle", "m": "海龟", "p": "/ˈtɜːrtl/"}, {"w": "oyster", "m": "牡蛎", "p": "/ˈɔɪstər/"}, {"w": "whale", "m": "鲸鱼", "p": "/weɪl/"}, {"w": "shark", "m": "鲨鱼", "p": "/ʃɑːrk/"}, {"w": "starfish", "m": "海星", "p": "/ˈstɑːrfɪʃ/"}, {"w": "octopus", "m": "章鱼", "p": "/ˈɒktəpəs/"}, {"w": "tentacle", "m": "触手", "p": "/ˈtentəkl/"}, {"w": "dragon", "m": "龙", "p": "/ˈdræɡən/"}, {"w": "tortoise", "m": "乌龟", "p": "/ˈtɔːrtəs/"}, {"w": "hare", "m": "野兔", "p": "/her/"}, {"w": "fox", "m": "狐狸", "p": "/fɒks/"}, {"w": "anemone", "m": "银莲花, 海葵", "p": "ә'nemәni"}, {"w": "chirp", "m": "喳喳声, 唧唧声", "p": "tʃә:p"}, {"w": "feathers", "m": "羽状裂缝", "p": "'feðә"}, {"w": "horse", "m": "马, 骑兵, 脚架", "p": "hɒ:s"}, {"w": "horses", "m": "马", "p": "hɒ:s"}, {"w": "jellyfish", "m": "水母, 海蜇, 意志薄弱", "p": "'dʒelifiʃ"}, {"w": "meow", "m": "猫叫声", "p": "mi'au"}, {"w": "scorpion", "m": "蝎子, 心黑的人, 蝎尾", "p": "'skɒ:piәn"}, {"w": "seahorses", "m": "海马( seahorse", "p": "ˈsi:hɔ:siz"}, {"w": "woof", "m": "纬线, 织物, 基本成分", "p": "wu:f"}, {"w": "red", "m": "红色", "p": "/red/"}, {"w": "blue", "m": "蓝色", "p": "/bluː/"}, {"w": "green", "m": "绿色", "p": "/ɡriːn/"}, {"w": "yellow", "m": "黄色", "p": "/ˈjeloʊ/"}, {"w": "white", "m": "白色", "p": "/waɪt/"}], "themes": [{"id": "fruits", "nameCn": "水果", "count": 6, "words": ["apple", "banana", "pear", "grape", "fruit", "strawberries"], "icon": "apple"}, {"id": "animals", "nameCn": "动物", "count": 49, "words": ["animal", "cat", "dog", "rabbit", "bird", "fish", "pig", "duck"], "icon": "animal"}, {"id": "colors", "nameCn": "颜色", "count": 14, "words": ["red", "blue", "green", "yellow", "white", "black", "brown", "pink"], "icon": "red"}, {"id": "numbers", "nameCn": "数字", "count": 22, "words": ["one", "two", "three", "four", "five", "six", "seven", "eight"], "icon": "one"}, {"id": "vehicles", "nameCn": "交通工具", "count": 7, "words": ["car", "ship", "boat", "engine", "transportation", "spaceship", "submarines"], "icon": "car"}, {"id": "foods", "nameCn": "食物", "count": 10, "words": ["milk", "egg", "rice", "bread", "cake", "vegetable", "mooncake", "breakfast"], "icon": "milk"}, {"id": "family", "nameCn": "家庭与称呼", "count": 15, "words": ["person", "man", "child", "mom", "dad", "sister", "brother", "family"], "icon": "person"}, {"id": "body", "nameCn": "身体部位", "count": 16, "words": ["heart", "head", "eye", "ear", "nose", "mouth", "hand", "foot"], "icon": "heart"}, {"id": "stationery", "nameCn": "文具", "count": 7, "words": ["letter", "book", "pen", "pencil", "map", "brush", "chart"], "icon": "letter"}, {"id": "toys", "nameCn": "玩具", "count": 7, "words": ["ball", "toy", "kite", "game", "robots", "slides", "teddy"], "icon": "ball"}, {"id": "nature", "nameCn": "自然", "count": 67, "words": ["ocean", "sea", "earth", "space", "universe", "starlight", "grass", "water"], "icon": "ocean"}, {"id": "home", "nameCn": "家庭物品", "count": 17, "words": ["house", "bag", "desk", "chair", "door", "window", "home", "room"], "icon": "house"}, {"id": "places", "nameCn": "地方", "count": 9, "words": ["city", "school", "bridge", "farm", "lighthouse", "palace", "tower", "laboratory"], "icon": "city"}, {"id": "time", "nameCn": "时间", "count": 17, "words": ["time", "year", "past", "morning", "night", "day", "today", "future"], "icon": "time"}, {"id": "actions", "nameCn": "动作", "count": 233, "words": ["be", "do", "let", "learn", "become", "begin", "understand", "name"], "icon": "be"}, {"id": "adjectives", "nameCn": "形容词", "count": 169, "words": ["young", "ready", "true", "strong", "kind", "magic", "big", "small"], "icon": "young"}, {"id": "functions", "nameCn": "功能词", "count": 179, "words": ["the", "a", "an", "and", "of", "for", "would", "could"], "icon": "the"}, {"id": "others", "nameCn": "其他", "count": 230, "words": ["question", "word", "language", "history", "north", "way", "power", "spirit"], "icon": "question"}], "lessons": [{"id": "l1_001", "title": "The Magic Apple", "titleCn": "魔法苹果", "paras": [{"text": "Once upon a time, there was a red apple.", "translation": "从前，有一个红苹果。"}, {"text": "The apple was very big and shiny.", "translation": "这个苹果非常大，非常闪亮。"}, {"text": "A little rabbit found the apple.", "translation": "一只小兔子发现了这个苹果。"}]}, {"id": "l1_002", "title": "A Little Cat", "titleCn": "小猫咪", "paras": [{"text": "I have a little cat.", "translation": "我有一只小猫。"}, {"text": "The cat is white and soft.", "translation": "小猫是白色的，毛茸茸的。"}, {"text": "It likes to play with a ball.", "translation": "它喜欢玩球。"}]}, {"id": "l1_003", "title": "Colors", "titleCn": "颜色", "paras": [{"text": "Look at the sky. It is blue.", "translation": "看看天空。它是蓝色的。"}, {"text": "Look at the grass. It is green.", "translation": "看看草地。它是绿色的。"}, {"text": "Look at the sun. It is yellow.", "translation": "看看太阳。它是黄色的。"}]}, {"id": "l1_004", "title": "My Family", "titleCn": "我的家人", "paras": [{"text": "This is my family.", "translation": "这是我的家人。"}, {"text": "This is my mom. She is kind.", "translation": "这是我的妈妈。她很善良。"}, {"text": "This is my dad. He is strong.", "translation": "这是我的爸爸。他很强壮。"}]}, {"id": "l1_005", "title": "Good Morning", "titleCn": "早上好", "paras": [{"text": "Good morning! The sun is up.", "translation": "早上好！太阳升起来了。"}, {"text": "I wake up and brush my teeth.", "translation": "我醒来刷牙。"}, {"text": "I eat breakfast. Yummy!", "translation": "我吃早餐。真好吃！"}]}, {"id": "l1_006", "title": "Numbers", "titleCn": "数字", "paras": [{"text": "One apple. Two oranges.", "translation": "一个苹果。两个橙子。"}, {"text": "Three bananas. Four grapes.", "translation": "三个香蕉。四串葡萄。"}, {"text": "Five strawberries.", "translation": "五个草莓。"}]}, {"id": "l1_007", "title": "The Dog", "titleCn": "小狗", "paras": [{"text": "I see a dog.", "translation": "我看见一只狗。"}, {"text": "The dog is brown and big.", "translation": "这只狗是棕色的，很大。"}, {"text": "The dog can run fast.", "translation": "这只狗跑得很快。"}]}, {"id": "l1_008", "title": "The Park", "titleCn": "公园", "paras": [{"text": "I go to the park.", "translation": "我去公园。"}, {"text": "I see flowers. They are pretty.", "translation": "我看到花。它们很漂亮。"}, {"text": "I see trees. They are tall.", "translation": "我看到树。它们很高。"}]}, {"id": "l1_009", "title": "My Toys", "titleCn": "我的玩具", "paras": [{"text": "I have many toys.", "translation": "我有很多玩具。"}, {"text": "I have a red car.", "translation": "我有一辆红色的车。"}, {"text": "I have a teddy bear.", "translation": "我有一只泰迪熊。"}]}, {"id": "l1_010", "title": "Good Night", "titleCn": "晚安", "paras": [{"text": "It is night time.", "translation": "现在是夜晚。"}, {"text": "I see the moon. It is bright.", "translation": "我看到月亮。它很亮。"}, {"text": "I see stars. They twinkle.", "translation": "我看到星星。它们在闪烁。"}]}, {"id": "l1_b01", "title": "Color Quiz", "titleCn": "颜色测验", "paras": [{"text": "Let us play a game! What color do you see?", "translation": "让我们玩个游戏！你看到什么颜色？"}, {"text": "The apple is red. The sky is blue. The grass is green.", "translation": "苹果是红色的。天空是蓝色的。草是绿色的。"}]}, {"id": "l1_b02", "title": "Animal Friends", "titleCn": "动物朋友", "paras": [{"text": "I have many animal friends. Do you know them?", "translation": "我有很多动物朋友。你认识它们吗？"}, {"text": "The cat says meow. The dog says woof. The bird says chirp.", "translation": "猫说喵。狗说汪。鸟说唧唧。"}]}]};
+// ---------- state ----------
+const S = {
+  tab:'learn', stack:[],           // stack: [{view,params}]
+  book:'all', learnIdx:0, learned:20,
+  themeWords:[], themeName:'',
+  level:1, lessonIdx:0, bookPage:0,
+  game:{qs:[],qi:0,score:0,lock:false},
+};
+const WORDS = DATA.words, THEMES = DATA.themes, LESSONS = DATA.lessons;
+const IMG={};
+const wimg = w => IMG['w_'+w+'.jpg']||'';
+const limg = id => IMG['l_'+id+'.jpg']||'';
+const winfo = w => WORDS.find(x=>x.w===w) || {w:w,m:'',p:''};
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const screen = $('#screen');
+let toastT=null;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),1600);}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function backBtn(){return `<button class="backbtn" onclick="goBack()">‹ 返回</button>`;}
+// ---------- tab bar ----------
+const THEME_ICONS={'fruits':`<svg viewBox="0 0 48 48" width="52" height="52"><circle cx="24" cy="28" r="14" fill="#ff5a5a" stroke="#1a237e" stroke-width="2.5"/><path d="M24 14 C24 10, 26 8, 28 6" stroke="#2e7d32" stroke-width="3" stroke-linecap="round" fill="none"/><ellipse cx="30" cy="10" rx="6" ry="3.5" fill="#4caf50" stroke="#1a237e" stroke-width="2" transform="rotate(-20 30 10)"/><circle cx="19" cy="26" r="2" fill="#fff"/><circle cx="29" cy="26" r="2" fill="#fff"/><path d="M21 32 C23 34, 25 34, 27 32" stroke="#1a237e" stroke-width="2" stroke-linecap="round" fill="none"/></svg>`,'animals':`<svg viewBox="0 0 48 48" width="52" height="52"><circle cx="24" cy="26" r="13" fill="#ffb74d" stroke="#1a237e" stroke-width="2.5"/><path d="M14 18 L12 8 L20 14 Z" fill="#ffb74d" stroke="#1a237e" stroke-width="2.5" stroke-linejoin="round"/><path d="M34 18 L36 8 L28 14 Z" fill="#ffb74d" stroke="#1a237e" stroke-width="2.5" stroke-linejoin="round"/><circle cx="19" cy="24" r="2.5" fill="#1a237e"/><circle cx="29" cy="24" r="2.5" fill="#1a237e"/><path d="M22 30 C23 31, 25 31, 26 30" stroke="#1a237e" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="15" cy="29" r="2.5" fill="#ff9e9e" opacity="0.7"/><circle cx="33" cy="29" r="2.5" fill="#ff9e9e" opacity="0.7"/></svg>`,'vehicles':`<svg viewBox="0 0 48 48" width="52" height="52"><rect x="6" y="18" width="36" height="14" rx="6" fill="#5c9dff" stroke="#1a237e" stroke-width="2.5"/><rect x="11" y="21" width="10" height="7" rx="2" fill="#b3e5fc" stroke="#1a237e" stroke-width="1.5"/><rect x="25" y="21" width="10" height="7" rx="2" fill="#b3e5fc" stroke="#1a237e" stroke-width="1.5"/><circle cx="14" cy="34" r="5" fill="#333" stroke="#1a237e" stroke-width="2"/><circle cx="34" cy="34" r="5" fill="#333" stroke="#1a237e" stroke-width="2"/><circle cx="14" cy="34" r="1.8" fill="#fff"/><circle cx="34" cy="34" r="1.8" fill="#fff"/></svg>`,'colors':`<svg viewBox="0 0 48 48" width="52" height="52"><ellipse cx="24" cy="26" rx="16" ry="13" fill="#ffcc80" stroke="#1a237e" stroke-width="2.5"/><circle cx="16" cy="22" r="4" fill="#ff5a5a"/><circle cx="26" cy="19" r="4" fill="#4caf50"/><circle cx="34" cy="24" r="4" fill="#5c9dff"/><circle cx="20" cy="31" r="4" fill="#ffdd44"/></svg>`,'numbers':`<svg viewBox="0 0 48 48" width="52" height="52"><rect x="10" y="8" width="28" height="32" rx="4" fill="#b388ff" stroke="#1a237e" stroke-width="2.5"/><circle cx="18" cy="16" r="2.5" fill="#ffdd44"/><circle cx="30" cy="16" r="2.5" fill="#ffdd44"/><circle cx="18" cy="26" r="2.5" fill="#ffdd44"/><circle cx="24" cy="26" r="2.5" fill="#ffdd44"/><circle cx="30" cy="26" r="2.5" fill="#ffdd44"/><circle cx="18" cy="34" r="2.5" fill="#fff"/><circle cx="24" cy="34" r="2.5" fill="#fff"/></svg>`,'body':`<svg viewBox="0 0 48 48" width="52" height="52"><path d="M18 24 L18 12 C18 10, 20 9, 21 9 C22 9, 24 10, 24 12 L24 22 M24 22 L24 10 C24 8, 26 7, 27 7 C28 7, 30 8, 30 10 L30 22 M30 22 L30 12 C30 10, 32 9, 33 9 C34 9, 36 10, 36 12 L36 24 C36 32, 32 40, 27 40 C22 40, 18 32, 18 26 Z" fill="#ffcc80" stroke="#1a237e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`,'foods':`<svg viewBox="0 0 48 48" width="52" height="52"><ellipse cx="24" cy="18" rx="14" ry="8" fill="#ffcc80" stroke="#1a237e" stroke-width="2.5"/><rect x="12" y="20" width="24" height="5" rx="2.5" fill="#4caf50" stroke="#1a237e" stroke-width="1.5"/><rect x="12" y="25" width="24" height="5" rx="2.5" fill="#ff5a5a" stroke="#1a237e" stroke-width="1.5"/><ellipse cx="24" cy="34" rx="14" ry="6" fill="#ffcc80" stroke="#1a237e" stroke-width="2.5"/></svg>`,'family':`<svg viewBox="0 0 48 48" width="52" height="52"><path d="M8 24 L24 10 L40 24" fill="none" stroke="#1a237e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="14" y="24" width="20" height="14" fill="#ff9eb5" stroke="#1a237e" stroke-width="2.5"/><circle cx="20" cy="18" r="4" fill="#ffcc80" stroke="#1a237e" stroke-width="2"/><circle cx="28" cy="18" r="4" fill="#ffcc80" stroke="#1a237e" stroke-width="2"/></svg>`};
+const TABS=[['learn',`<svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7 C9 5, 14 5, 16 7 C18 5, 23 5, 28 7 L28 24 C23 22, 18 22, 16 24 C14 22, 9 22, 4 24 Z"/><path d="M16 7 L16 24"/></svg>`,'背单词'],['cards',`<svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="16" height="20" rx="2" transform="rotate(-6 14 16)"/><rect x="10" y="6" width="16" height="20" rx="2" transform="rotate(6 18 16)"/></svg>`,'单词卡'],['read',`<svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H20 L26 10 V28 H8 Z"/><path d="M20 4 V10 H26"/><path d="M12 16 H22 M12 20 H22 M12 24 H18"/></svg>`,'读短文'],['books',`<svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6 C9 4, 14 4, 16 6 C18 4, 23 4, 28 6 L28 26 C23 24, 18 24, 16 26 C14 24, 9 24, 4 26 Z"/><circle cx="11" cy="14" r="3"/><path d="M7 20 L15 20 M8 23 L14 23"/></svg>`,'绘本'],['profile',`<svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="11" r="5"/><path d="M6 28 C6 21, 10 18, 16 18 C22 18, 26 21, 26 28"/></svg>`,'我的']];
+function renderTabs(){$('#tabbar').innerHTML=TABS.map(t=>`<div class="tab ${S.tab===t[0]?'active':''}" onclick="switchTab('${t[0]}')"><span class="ico">${t[1]}</span>${t[2]}</div>`).join('');}
+function switchTab(tab){S.tab=tab;S.stack=[{view:tab+'_root'}];renderTabs();render();screen.scrollTop=0;}
+function push(view,params){S.stack.push({view,params:params||{}});render();}
+function goBack(){if(S.stack.length>1){S.stack.pop();render();}}
+function cur(){return S.stack[S.stack.length-1];}
+// ---------- LEARN tab ----------
+function learnRoot(){
+  const bookColors={'all':['#2B7FFF',`<svg viewBox="0 0 64 64" width="48" height="48"><path d="M8 14 C18 10, 28 10, 32 14 C36 10, 46 10, 56 14 L56 48 C46 44, 36 44, 32 48 C28 44, 18 44, 8 48 Z" fill="#fff" stroke="#1a237e" stroke-width="3" stroke-linejoin="round"/><path d="M32 14 L32 48" stroke="#1a237e" stroke-width="3"/><path d="M14 20 C20 18, 26 18, 29 20 M14 26 C20 24, 26 24, 29 26 M14 32 C20 30, 26 30, 29 32 M35 20 C38 18, 44 18, 50 20 M35 26 C38 24, 44 24, 50 26 M35 32 C38 30, 44 30, 50 32" stroke="#5c9dff" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>`],'fruits':['#FF9EB5',`<svg viewBox="0 0 64 64" width="48" height="48"><path d="M32 16 C20 16, 12 24, 12 34 C12 46, 22 56, 32 56 C42 56, 52 46, 52 34 C52 24, 44 16, 32 16 Z" fill="#ff5a5a" stroke="#1a237e" stroke-width="3"/><ellipse cx="32" cy="12" rx="10" ry="5" fill="#4caf50" stroke="#1a237e" stroke-width="2.5"/><circle cx="24" cy="30" r="2.5" fill="#ffdd44"/><circle cx="32" cy="36" r="2.5" fill="#ffdd44"/><circle cx="40" cy="30" r="2.5" fill="#ffdd44"/><circle cx="28" cy="44" r="2.5" fill="#ffdd44"/><circle cx="36" cy="44" r="2.5" fill="#ffdd44"/></svg>`],'animals':['#4CAF50',`<svg viewBox="0 0 64 64" width="48" height="48"><circle cx="18" cy="16" r="9" fill="#333" stroke="#1a237e" stroke-width="2.5"/><circle cx="46" cy="16" r="9" fill="#333" stroke="#1a237e" stroke-width="2.5"/><ellipse cx="32" cy="36" rx="22" ry="20" fill="#fff" stroke="#1a237e" stroke-width="3"/><ellipse cx="22" cy="32" rx="6" ry="8" fill="#333" transform="rotate(-15 22 32)"/><ellipse cx="42" cy="32" rx="6" ry="8" fill="#333" transform="rotate(15 42 32)"/><circle cx="22" cy="32" r="2.5" fill="#fff"/><circle cx="42" cy="32" r="2.5" fill="#fff"/><ellipse cx="32" cy="42" rx="4" ry="3" fill="#333"/><circle cx="16" cy="42" r="4" fill="#ffb6c1" opacity="0.6"/><circle cx="48" cy="42" r="4" fill="#ffb6c1" opacity="0.6"/></svg>`],'colors':['#9B59B6',`<svg viewBox="0 0 64 64" width="48" height="48"><ellipse cx="32" cy="34" rx="22" ry="18" fill="#ffcc80" stroke="#1a237e" stroke-width="3"/><circle cx="22" cy="28" r="5" fill="#ff5a5a"/><circle cx="34" cy="24" r="5" fill="#4caf50"/><circle cx="44" cy="32" r="5" fill="#5c9dff"/><circle cx="28" cy="40" r="5" fill="#ffdd44"/><path d="M48 36 C52 32, 54 28, 52 24" stroke="#1a237e" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`],'numbers':['#FF9800',`<svg viewBox="0 0 64 64" width="48" height="48"><rect x="10" y="14" width="44" height="36" rx="8" fill="#fff" stroke="#1a237e" stroke-width="3"/><text x="32" y="42" text-anchor="middle" font-size="28" font-weight="bold" fill="#ff9800" font-family="sans-serif">123</text></svg>`],'vehicles':['#5B9BD5',`<svg viewBox="0 0 64 64" width="48" height="48"><rect x="8" y="20" width="48" height="20" rx="8" fill="#ff5a5a" stroke="#1a237e" stroke-width="3"/><rect x="14" y="24" width="12" height="8" rx="2" fill="#87ceeb" stroke="#1a237e" stroke-width="2"/><rect x="30" y="24" width="12" height="8" rx="2" fill="#87ceeb" stroke="#1a237e" stroke-width="2"/><circle cx="20" cy="44" r="6" fill="#333" stroke="#1a237e" stroke-width="2.5"/><circle cx="44" cy="44" r="6" fill="#333" stroke="#1a237e" stroke-width="2.5"/><circle cx="20" cy="44" r="2" fill="#fff"/><circle cx="44" cy="44" r="2" fill="#fff"/></svg>`],'foods':['#FFB300',`<svg viewBox="0 0 64 64" width="48" height="48"><ellipse cx="32" cy="24" rx="20" ry="10" fill="#ffcc80" stroke="#1a237e" stroke-width="3"/><rect x="14" y="28" width="36" height="6" rx="3" fill="#4caf50" stroke="#1a237e" stroke-width="2"/><rect x="14" y="34" width="36" height="6" rx="3" fill="#ff5a5a" stroke="#1a237e" stroke-width="2"/><ellipse cx="32" cy="44" rx="20" ry="8" fill="#ffcc80" stroke="#1a237e" stroke-width="3"/><circle cx="24" cy="20" r="2" fill="#fff"/><circle cx="32" cy="18" r="2" fill="#fff"/><circle cx="40" cy="20" r="2" fill="#fff"/></svg>`],'family':['#E74C3C',`<svg viewBox="0 0 64 64" width="48" height="48"><circle cx="22" cy="20" r="8" fill="#ffcc80" stroke="#1a237e" stroke-width="2.5"/><circle cx="42" cy="20" r="8" fill="#ffcc80" stroke="#1a237e" stroke-width="2.5"/><path d="M14 52 C14 40, 18 36, 22 36 C26 36, 30 40, 30 52 Z" fill="#5c9dff" stroke="#1a237e" stroke-width="2.5"/><path d="M34 52 C34 40, 38 36, 42 36 C46 36, 50 40, 50 52 Z" fill="#ff9eb5" stroke="#1a237e" stroke-width="2.5"/></svg>`],'body':['#4CAF50',`<svg viewBox="0 0 64 64" width="48" height="48"><path d="M20 32 L20 16 C20 13, 22 12, 24 12 C26 12, 28 13, 28 16 L28 30 M28 30 L28 14 C28 11, 30 10, 32 10 C34 10, 36 11, 36 14 L36 30 M36 30 L36 16 C36 13, 38 12, 40 12 C42 12, 44 13, 44 16 L44 32 C44 42, 40 52, 32 52 C24 52, 20 44, 20 36 Z" fill="#ffcc80" stroke="#1a237e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>`]};
+  const books=[{id:'all',n:'全部单词',c:'1074 词'},...THEMES.slice(0,8).map(t=>({id:t.id,n:t.nameCn+'篇',c:t.count+' 词'}))];
+  return `<div class="view">
+    <div class="plan"><div class="rocket"><svg viewBox="0 0 80 80" width="76" height="76"><ellipse cx="40" cy="38" rx="16" ry="24" fill="#ff8c42" stroke="#1a237e" stroke-width="3"/><circle cx="40" cy="30" r="8" fill="#87ceeb" stroke="#1a237e" stroke-width="3"/><circle cx="37" cy="28" r="2.5" fill="#fff"/><path d="M24 48 L16 62 L28 56 Z" fill="#ff5a5a" stroke="#1a237e" stroke-width="2.5" stroke-linejoin="round"/><path d="M56 48 L64 62 L52 56 Z" fill="#ff5a5a" stroke="#1a237e" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 58 C32 66, 36 70, 40 72 C44 70, 48 66, 48 58 Z" fill="#ffdd44" stroke="#1a237e" stroke-width="2.5"/><circle cx="18" cy="22" r="3" fill="#ffdd44"/><circle cx="62" cy="18" r="2.5" fill="#ffdd44"/><circle cx="60" cy="52" r="3" fill="#fff" opacity="0.8"/></svg></div><div class="day">今日计划</div><div class="big">Day 3</div>
+    <div class="sub">新学 10 个词</div><div class="sub">已学 ${S.learned} / 1074</div>
+    </div>
+    <h2 class="sec">选词书</h2>
+    <div class="bookchips">${books.map(b=>{const cc=bookColors[b.id]||['#9B59B6','📚'];return `<div class="bcard ${S.book===b.id?'sel':''}" style="background:${cc[0]}" onclick="S.book='${b.id}';S.learnIdx=0;render()"><div class="bico">${cc[1]}</div><div class="bname">${b.n}</div><div class="bcount">${b.c}</div></div>`;}).join('')}</div>
+    <button class="btn btn-green" onclick="startLearn()">开始学习 ▶</button>
+    <button class="btn btn-lblue" onclick="push('games')">巩固练习 · 9 种玩法 🎮</button>
+    <div style="height:10px"></div></div>`;
+}
+function learnPool(){
+  if(S.book==='all') return WORDS;
+  const t=THEMES.find(t=>t.id===S.book);
+  return t? t.words.map(winfo).filter(x=>x.w) : WORDS;
+}
+function startLearn(){S.learnIdx=0;push('wordcard');}
+function wordCard(){
+  const pool=learnPool(), i=((S.learnIdx%pool.length)+pool.length)%pool.length, wd=pool[i];
+  const total=Math.min(10,pool.length);
+  return `<div class="view">${backBtn()}
+  <div class="wctitle"><span>背单词 · 第 ${i+1} 个</span><span class="spk" onclick="sndAnim(this)">🔊</span></div>
+  <div class="wcprog"><div style="width:${Math.min(100,(i+1)/total*100).toFixed(0)}%"></div></div>
+  <div class="wcproglabel">学习进度 ${i+1}/${total}</div>
+  <div class="wcard">
+    <div><img class="wimg" src="${wimg(wd.w)}" alt=""></div>
+    <div class="word-big">${wd.w}</div><div class="word-ph">/${wd.p}/</div><div class="word-cn">${wd.m}</div>
+    <div class="sndrow">
+      <button class="sndbtn normal" onclick="sndAnim(this)">🔊 正常</button>
+      <button class="sndbtn slow" onclick="sndAnim(this)">🐢 慢速</button>
+    </div></div>
+  <div class="krow"><button class="kbtn k-nav" onclick="S.learnIdx--;render()">← 上一个</button><button class="kbtn k-know" onclick="S.learned++;S.learnIdx++;toast('已学会 +1 🎉');render()">认识 ✓</button><button class="kbtn k-unknow" onclick="S.learnIdx++;render()">不认识 ✕</button><button class="kbtn k-nav" onclick="S.learnIdx++;render()">下一个 →</button></div></div>`;
+}
+function sndAnim(el){el.classList.remove('pulse');void el.offsetWidth;el.classList.add('pulse');}
+function gamesGrid(){
+  const gs=[
+    ['#5B9BFF',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#3B7BEF"><text x="8" y="20" font-size="12" font-weight="bold" font-family="sans-serif">ABC</text><rect x="8" y="26" width="16" height="12" rx="2" fill="none" stroke="#3B7BEF" stroke-width="2"/><circle cx="13" cy="31" r="2"/><path d="M8 36 L14 30 L18 34 L22 31 L24 36 Z"/></g></svg>`,'看词选图','简单','#3B7BEF','lookword'],
+    ['#7ED492',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#4CAF50"><path d="M10 18 L18 18 L26 10 L26 38 L18 30 L10 30 Z"/><rect x="28" y="20" width="12" height="10" rx="2" fill="none" stroke="#4CAF50" stroke-width="2"/></g></svg>`,'听音选图','简单','#4CAF50',''],
+    ['#B388FF',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#7C4DFF"><rect x="10" y="12" width="14" height="20" rx="2" fill="none" stroke="#7C4DFF" stroke-width="2.5" transform="rotate(-8 17 22)"/><rect x="24" y="14" width="14" height="20" rx="2" fill="none" stroke="#7C4DFF" stroke-width="2.5" transform="rotate(8 31 24)"/></g></svg>`,'配对消除','中等','#7C4DFF',''],
+    ['#FFB74D',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#FF9800"><text x="8" y="20" font-size="12" font-weight="bold" font-family="sans-serif">ABC</text><path d="M10 28 L16 28 L22 22 L22 36 L16 30 L10 30 Z"/></g></svg>`,'看词选音','简单','#FF9800',''],
+    ['#F48FB1',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#EC407A"><rect x="8" y="12" width="16" height="12" rx="2" fill="none" stroke="#EC407A" stroke-width="2"/><text x="8" y="36" font-size="12" font-weight="bold" font-family="sans-serif">ABC</text></g></svg>`,'看图选词','中等','#EC407A',''],
+    ['#4DD0E1',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#00ACC1"><path d="M12 18 L20 18 L30 8 L30 40 L20 30 L12 30 Z"/><path d="M34 18 C36 21, 36 27, 34 30" fill="none" stroke="#00ACC1" stroke-width="2.5" stroke-linecap="round"/></g></svg>`,'听音选词','中等','#00ACC1',''],
+    ['#FFD54F',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#FFC107"><path d="M8 18 L14 18 L20 12 L20 32 L14 26 L8 26 Z"/><circle cx="32" cy="18" r="6"/><path d="M30 24 L30 28 L34 28 L34 24" fill="none" stroke="#FFC107" stroke-width="2"/></g></svg>`,'听音选义','中等','#FFC107',''],
+    ['#FF8A80',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#F44336"><text x="6" y="20" font-size="11" font-weight="bold" font-family="sans-serif">ABC</text><circle cx="32" cy="28" r="7"/><path d="M29 34 L29 38 L35 38 L35 34" fill="none" stroke="#F44336" stroke-width="2"/></g></svg>`,'看词选义','简单','#F44336',''],
+    ['#3D5AFE',`<svg viewBox="0 0 48 48" width="44" height="44"><circle cx="24" cy="24" r="22" fill="#fff"/><g fill="#2C3EAA"><rect x="10" y="10" width="20" height="28" rx="2" fill="none" stroke="#2C3EAA" stroke-width="2.5"/><path d="M14 18 H26 M14 22 H26 M14 26 H22" stroke="#2C3EAA" stroke-width="2" stroke-linecap="round"/><path d="M28 36 L36 28 L40 32 L32 40 Z"/></g></svg>`,'听写训练','中等','#2C3EAA','']];
+  return `<div class="view">${backBtn()}<div class="bigtitle" style="font-size:44px">选个玩法吧！🎮</div><div class="subtitle">9 种游戏，越玩越熟</div>
+  <div class="games9">${gs.map(g=>`<div class="gamecard" style="background:${g[0]}" onclick="openGame('${g[5]}','${g[2]}')"><div class="gico">${g[1]}</div><div class="gnm" style="color:${g[4]}">${g[2]}</div><div class="gdiff" style="background:${g[4]}">${g[3]}</div></div>`).join('')}</div></div>`;
+}
+function openGame(id,name){ if(id==='lookword'){startLookWord();} else toast('原型演示：「'+name+'」暂未开放'); }
+function startLookWord(){
+  const pool=shuffle(WORDS).slice(0,5);
+  S.game.qs=pool.map(w=>({w:w.w,opts:shuffle([w.w,...shuffle(WORDS.filter(x=>x.w!==w.w)).slice(0,3).map(x=>x.w)])}));
+  S.game.qi=0;S.game.score=0;S.game.lock=false;push('lookword');
+}
+function lookWord(){
+  const g=S.game,q=g.qs[g.qi];
+  return `<div class="view">${backBtn()}
+  <h2 class="sec">🔤 看词选图（${g.qi+1}/5）</h2>
+  <div class="qword">${q.w}</div><div class="qhint">点击正确的图片</div>
+  <div class="opts">${q.opts.map(o=>`<div class="opt" id="opt_${o}" onclick="answer('${o}')"><img src="${wimg(o)}"><div class="ol">${winfo(o).m}</div></div>`).join('')}</div></div>`;
+}
+function answer(o){
+  const g=S.game;if(g.lock)return;const q=g.qs[g.qi],el=document.getElementById('opt_'+o);
+  if(o===q.w){g.lock=true;g.score++;el.classList.add('correct');
+    setTimeout(()=>{g.qi++;g.lock=false;if(g.qi>=g.qs.length){push('gresult');}else render();},650);
+  }else{el.classList.add('wrong');setTimeout(()=>el.classList.remove('wrong'),450);}
+}
+function gResult(){
+  const s=S.game.score,emo=s===5?'🏆':s>=3?'🎉':'💪';
+  return `<div class="view" style="text-align:center;padding-top:40px">
+  <div style="font-size:20px;font-weight:800">本轮完成！</div><div class="score">${emo}</div>
+  <div style="font-size:26px;font-weight:800;color:#FF6B6B">${s} / 5</div>
+  <div style="color:#999;margin:8px 0 20px">${s===5?'全部答对，太棒了！':s>=3?'继续加油！':'多练几次会更好～'}</div>
+  <button class="btn btn-green" onclick="startLookWord()">🔄 再来一局</button>
+  <button class="btn btn-gray" onclick="goBack();goBack()">返回玩法列表</button></div>`;
+}
+// ---------- CARDS tab ----------
+function cardsRoot(){
+  const tColors={'fruits':'#FFD6E0','animals':'#FFE0B2','colors':'#BBDEFB','numbers':'#E1BEE7','vehicles':'#BBDEFB','foods':'#FFF9C4','family':'#FFCDD2','body':'#C8E6C9','stationery':'#E1BEE7','toys':'#FFCDD2','nature':'#C8E6C9','home':'#FFE0B2','places':'#D7CCC8','time':'#B2EBF2','actions':'#BBDEFB','adjectives':'#E1BEE7','functions':'#CFD8DC','others':'#F5F5F5'};
+  const tProg={'fruits':'#E91E63','animals':'#FF9800','colors':'#2196F3','numbers':'#9C27B0','vehicles':'#2196F3','foods':'#FFC107','family':'#F44336','body':'#4CAF50','stationery':'#9C27B0','toys':'#F44336','nature':'#4CAF50','home':'#FF9800','places':'#795548','time':'#00BCD4','actions':'#2196F3','adjectives':'#9C27B0','functions':'#607D8B','others':'#9E9E9E'};
+  return `<div class="view"><div class="bigtitle">单词卡</div><div class="subtitle">按主题找单词</div>
+  <div class="themegrid2">${THEMES.map(t=>{const bg=tColors[t.id]||'#F5F5F5',pc=tProg[t.id]||'#9E9E9E';return `<div class="themecard" style="background:${bg}" onclick="openTheme('${t.id}')">
+    <div style="display:flex;flex-direction:column;align-items:flex-start">${THEME_ICONS[t.id]||`<img src="${wimg(t.icon)}">`}<div class="tnm">${t.nameCn}</div></div><div class="tprog" style="color:${pc}">${t.count}/${t.count} ✓</div></div>`;}).join('')}</div>
+  <div style="height:10px"></div></div>`;
+}
+function openTheme(id){const t=THEMES.find(t=>t.id===id);S.themeWords=t.words;S.themeName=t.nameCn;push('themewords');}
+function themeWords(){
+  return `<div class="view">${backBtn()}<h2 class="sec">${S.themeName}（${S.themeWords.length}词）</h2>
+  ${S.themeWords.map(w=>{const i=winfo(w);return `<div class="lrow wordrow" onclick="wordModal('${w}')">
+    <img src="${wimg(w)}"><div><div class="tt">${i.w}</div><div class="tc">${i.m}</div></div>
+    <div class="st st-todo">👁</div></div>`;}).join('')}
+  <div style="height:10px"></div></div>`;
+}
+function wordModal(w){
+  const i=winfo(w);
+  $('#modalBox').innerHTML=`<img class="wimg" src="${wimg(w)}" style="width:120px;height:120px">
+  <div class="word-big" style="font-size:26px">${i.w}</div><div class="word-ph">${i.p}</div><div class="word-cn">${i.m}</div>
+  <div class="sndrow"><button class="sndbtn" onclick="sndAnim(this)">🔊 播放</button></div>
+  <button class="btn btn-gray" style="margin:6px 0 0" onclick="$('#modal').classList.remove('show')">关闭</button>`;
+  $('#modal').classList.add('show');
+}
+// ---------- READ tab ----------
+function readRoot(){
+  const lv=[1,2,3,4,5,6,7];
+  let body='';
+  if(S.level===1){
+    body=LESSONS.map((l,idx)=>{const st=idx<3?['st-done','✓']:idx===3?['st-cur','▶']:['st-lock','🔒'];return `<div class="lessonrow" onclick="S.lessonIdx=${idx};push('lessonread')">
+      <img src="${limg(l.id)}"><div class="lt"><div class="lte">${l.title}</div><div class="ltc">${l.titleCn}</div></div>
+      <div class="st ${st[0]}">${st[1]}</div></div>`;}).join('');
+  }else{body=`<div class="card pad" style="text-align:center;color:#999;padding:40px 16px">L${S.level} 课文<br>原型演示暂未收录 📚</div>`;}
+  return `<div class="view"><div class="bigtitle" style="color:#2B7FFF">读短文</div><div class="subtitle">90 篇分级小故事</div>
+  <div class="lvlrow">${lv.map(n=>`<button class="lvlbtn ${S.level===n?'sel':''}" onclick="S.level=${n};render()">L${n}</button>`).join('')}</div>
+  ${body}<div style="height:10px"></div></div>`;
+}
+function lessonRead(){
+  const l=LESSONS[S.lessonIdx];
+  return `<div class="view">${backBtn()}
+  <img class="hero" src="${limg(l.id)}">
+  <div class="pad" style="padding-bottom:0"><div style="font-size:20px;font-weight:800">${l.title}</div>
+  <div style="color:#999;font-size:14px;margin-top:4px">${l.titleCn}</div>
+  <button class="sndbtn" style="margin-top:10px" onclick="sndAnim(this)">🔊 朗读全文</button></div>
+  ${l.paras.map(p=>`<div class="para"><div class="en">${p.text}</div><div class="cn">${p.translation}</div></div>`).join('')}
+  <div style="height:20px"></div></div>`;
+}
+// ---------- BOOKS tab ----------
+function booksRoot(){
+  return `<div class="view"><div class="bigtitle">绘本</div><div class="subtitle">90 本图画故事书</div>
+  <div class="bookgrid2">${LESSONS.map((l,idx)=>`<div class="bookcard" onclick="S.lessonIdx=${idx};S.bookPage=0;push('bookread')">
+    <img src="${limg(l.id)}"><div class="be">${l.title}</div><div class="bc">${l.titleCn}</div></div>`).join('')}</div>
+  <div style="height:10px"></div></div>`;
+}
+function bookRead(){
+  const l=LESSONS[S.lessonIdx],p=l.paras[S.bookPage%l.paras.length];
+  return `<div class="view">${backBtn()}
+  <div class="card" style="margin-top:8px"><img class="hero" src="${limg(l.id)}" style="aspect-ratio:4/3">
+  <div class="pad"><div class="en" style="font-size:17px;line-height:1.8">${p.text}</div>
+  <div class="cn" style="color:#999;margin-top:8px">${p.translation}</div>
+  <div style="text-align:center;color:#BBB;font-size:12px;margin-top:12px">${(S.bookPage%l.paras.length)+1} / ${l.paras.length}</div></div></div>
+  <div class="krow"><button class="kbtn k-nav" onclick="S.bookPage--;render()">‹ 上一页</button>
+  <button class="kbtn k-nav" onclick="S.bookPage++;render()">下一页 ›</button></div></div>`;
+}
+// ---------- PROFILE tab ----------
+function profileRoot(){
+  return `<div class="view">
+  <div class="pheadcard"><div class="avatar">🧒</div><div>
+    <div class="pname">小宝贝</div>
+    <div class="pstat">📅 已学习 12 天</div>
+    <div class="pstat">🔥 连续打卡 5 天</div>
+  </div></div>
+  <div class="reportcard"><div class="rt">📊 学习报告</div>
+  <div class="prow3"><div class="pcard3"><div class="pic">📘</div><div class="v" style="color:#2B7FFF">${S.learned}</div><div class="l">已学单词</div></div>
+  <div class="pcard3"><div class="pic">📖</div><div class="v" style="color:#4CAF50">18</div><div class="l">已读短文</div></div>
+  <div class="pcard3"><div class="pic">🎯</div><div class="v" style="color:#FF9800">92%</div><div class="l">游戏正确率</div></div></div></div>
+  <div class="mrow" onclick="toast('原型演示：儿歌模块')"><div class="mi">🎵</div><div class="mt">英文儿歌</div><div class="arw">›</div></div>
+  <div class="mrow" onclick="toast('原型演示：家长验证')"><div class="mi">🔒</div><div class="mt">家长模式</div><div class="lock">🔒</div></div>
+  <div class="mrow" onclick="toast('原型演示：每日限时 20 分钟')"><div class="mi">⏰</div><div class="mt">每日限时 20 分钟</div><div class="arw">›</div></div>
+  <div class="mrow" onclick="toast('原型演示：设置')"><div class="mi">⚙️</div><div class="mt">设置</div><div class="arw">›</div></div>
+  <div style="height:10px"></div></div>`;
+}
+// ---------- render ----------
+const VIEWS={learn_root:learnRoot,wordcard:wordCard,games:gamesGrid,lookword:lookWord,gresult:gResult,
+cards_root:cardsRoot,themewords:themeWords,read_root:readRoot,lessonread:lessonRead,
+books_root:booksRoot,bookread:bookRead,profile_root:profileRoot};
+function render(){const v=cur().view;screen.innerHTML=`<div class="view">${(VIEWS[v]||learnRoot)()}</div>`;screen.scrollTop=0;}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')e.target.classList.remove('show');});
+renderTabs();render();
+</script>
+</body>
+</html>
