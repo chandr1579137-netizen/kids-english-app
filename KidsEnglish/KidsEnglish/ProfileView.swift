@@ -186,7 +186,7 @@ struct ProfileSettingsView: View {
                 Stepper("\(store.dailyNewWords) 个", value: Binding(
                     get: { store.dailyNewWords },
                     set: { store.dailyNewWords = $0; store.saveProgress() }
-                ), in: 5...20, step: 5)
+                ), in: 3...8, step: 1)
             }
             Section("课文") {
                 Toggle("默认显示中文翻译", isOn: Binding(

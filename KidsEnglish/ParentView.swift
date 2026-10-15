@@ -1,5 +1,61 @@
 import SwiftUI
 
+/// 家长页：数学题通过后才能看到词书、绘本、短文和其余游戏。
+struct ParentRootView: View {
+    @State private var unlocked = false
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if unlocked {
+                    parentHub
+                } else {
+                    ParentUnlockView(onUnlock: { unlocked = true })
+                }
+            }
+            .navigationTitle(unlocked ? "家长" : "家长验证")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+
+    private var parentHub: some View {
+        List {
+            Section("这些内容留给家长打开") {
+                NavigationLink("全部词书和九个游戏") {
+                    LearnWordsView(parentLibrary: true)
+                }
+                NavigationLink("单词卡") {
+                    WordCardsView(embedded: true)
+                }
+                NavigationLink("全部绘本") {
+                    PictureBookView(embedded: true)
+                }
+                NavigationLink("读短文") {
+                    ReadView(embedded: true)
+                }
+                NavigationLink("错词本") {
+                    WrongWordBookView()
+                }
+                NavigationLink("全部儿歌") {
+                    SongsView()
+                }
+                NavigationLink("学习地图") {
+                    MapView()
+                }
+                NavigationLink("单词乐园") {
+                    WordsView()
+                }
+                NavigationLink("设置") {
+                    ProfileSettingsView()
+                }
+                NavigationLink("学习报告和限时") {
+                    ParentDashboardView()
+                }
+            }
+        }
+    }
+}
+
 /// 家长区入口：数学题解锁
 struct ParentGateView: View {
     @State private var unlocked = false

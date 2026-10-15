@@ -73,6 +73,7 @@ struct WordAudioButtons: View {
 
 /// 背单词：今日计划 → 选词书 → 开始学习 / 巩固练习
 struct LearnWordsView: View {
+    var parentLibrary: Bool = false
     @Environment(DataStore.self) private var store
     private let player = AudioPlayer.shared
 
@@ -95,57 +96,36 @@ struct LearnWordsView: View {
     private enum SessionKind { case learn, review, wrong }
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    bookCard
-                        .padding(.horizontal)
-                    HStack(spacing: 12) {
-                        homeButton("开始学习", color: AppTheme.green) { startSession(.learn) }
-                        homeButton("复习", color: Color(red: 1, green: 0.62, blue: 0.2)) { startSession(.review) }
-                    }
-                    .padding(.horizontal)
-                    Button { showWrongBook = true } label: {
-                        HStack {
-                            Image(systemName: "book.closed.fill")
-                            Text("错词本")
-                            Spacer()
-                            Text("\(store.wrongBookCount) 个")
-                            Image(systemName: "chevron.right")
-                        }
-                        .font(.headline.bold())
-                        .foregroundStyle(AppTheme.navy)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 14)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-                    }
-                    .buttonStyle(PressableStyle())
-                    .padding(.horizontal)
-                    homeGameGrid
-                    HStack(spacing: 12) {
-                        NavigationLink { MapView() } label: {
-                            entryChip("🗺️", "学习地图")
-                        }
-                        .buttonStyle(PressableStyle())
-                        NavigationLink { WordsView() } label: {
-                            entryChip("📚", "单词乐园")
-                        }
-                        .buttonStyle(PressableStyle())
-                    }
-                    .padding(.horizontal)
-                }
-                .padding(.top, 12)
-                .padding(.bottom, 8)
+        Group {
+            if parentLibrary {
+                homeRoot
+            } else {
+                NavigationStack { homeRoot }
             }
+        }
+    }
+
+    private var homeRoot: some View {
+        ScrollView {
+            if parentLibrary {
+                libraryHome
+            } else {
+                age4Home
+            }
+        }
             .creamBackground()
-            .toolbar(.hidden, for: .navigationBar)
+            .navigationTitle(parentLibrary ? "全部词书" : "")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(parentLibrary ? .automatic : .hidden, for: .navigationBar)
             .onAppear { refreshSessionPreview() }
             .onChange(of: store.selectedBookId) { _, _ in refreshSessionPreview() }
             .onChange(of: store.dailyNewWords) { _, _ in refreshSessionPreview() }
             .fullScreenCover(isPresented: $showStudy) {
                 studyScreen
-                    .onDisappear { player.stop() }
+                    .onDisappear {
+                        player.stop()
+                        refreshSessionPreview()
+                    }
             }
             .sheet(isPresented: $showBooks) {
                 BookPickerSheet()
@@ -154,9 +134,157 @@ struct LearnWordsView: View {
                 WrongWordBookView()
             }
             .navigationDestination(item: $gameMode) { mode in
-                ConsolidationView(words: gameWords, startMode: mode)
+                ConsolidationView(
+                    words: parentLibrary ? gameWords : childGameWords,
+                    startMode: mode,
+                    choicePool: parentLibrary ? nil : store.age4UnlockedWords()
+                )
+            }
+    }
+
+    private var libraryHome: some View {
+        VStack(spacing: 16) {
+            bookCard
+                .padding(.horizontal)
+            HStack(spacing: 12) {
+                homeButton("开始学习", color: AppTheme.green) { startSession(.learn) }
+                homeButton("复习", color: Color(red: 1, green: 0.62, blue: 0.2)) { startSession(.review) }
+            }
+            .padding(.horizontal)
+            Button { showWrongBook = true } label: {
+                HStack {
+                    Image(systemName: "book.closed.fill")
+                    Text("错词本")
+                    Spacer()
+                    Text("\(store.wrongBookCount) 个")
+                    Image(systemName: "chevron.right")
+                }
+                .font(.headline.bold())
+                .foregroundStyle(AppTheme.navy)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            }
+            .buttonStyle(PressableStyle())
+            .padding(.horizontal)
+            homeGameGrid
+            HStack(spacing: 12) {
+                NavigationLink { MapView() } label: {
+                    entryChip("🗺️", "学习地图")
+                }
+                .buttonStyle(PressableStyle())
+                NavigationLink { WordsView() } label: {
+                    entryChip("📚", "单词乐园")
+                }
+                .buttonStyle(PressableStyle())
+            }
+            .padding(.horizontal)
+        }
+        .padding(.top, 12)
+        .padding(.bottom, 8)
+    }
+
+    private var age4Home: some View {
+        let today = store.age4Today()
+        return VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("今天听 \(today.count) 个")
+                    .font(.system(size: 28, weight: .heavy))
+                    .foregroundStyle(.white)
+                if today.isEmpty {
+                    Text("今天的新单词学完啦")
+                        .font(.title3.bold())
+                        .foregroundStyle(.white)
+                } else {
+                    HStack(spacing: 10) {
+                        ForEach(today) { entry in
+                            VStack(spacing: 6) {
+                                WordIconView(word: entry.word, size: 86)
+                                Text(entry.word)
+                                    .font(.headline.bold())
+                                    .foregroundStyle(AppTheme.navy)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.6)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                        }
+                    }
+                }
+            }
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.orange)
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .padding(.horizontal)
+
+            homeButton("听一听，说一说", color: AppTheme.green) { startSession(.learn) }
+                .padding(.horizontal)
+            homeButton("再看昨天的", color: Color(red: 1, green: 0.62, blue: 0.2)) { startSession(.review) }
+                .padding(.horizontal)
+
+            Button { gameMode = .audioToImage } label: {
+                HStack(spacing: 12) {
+                    Image(systemName: "ear.fill")
+                        .font(.title2.bold())
+                        .foregroundStyle(.white)
+                        .frame(width: 44, height: 44)
+                        .background(Circle().fill(Color(red: 0.49, green: 0.83, blue: 0.57)))
+                    Text("听音选图")
+                        .font(.title3.bold())
+                        .foregroundStyle(AppTheme.navy)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.gray)
+                }
+                .padding(14)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            }
+            .buttonStyle(PressableStyle())
+            .padding(.horizontal)
+
+            if let song = store.age4Song() {
+                NavigationLink {
+                    SongsView(childMode: true, focusSongId: song.id)
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "music.note")
+                            .font(.title2.bold())
+                            .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                            .background(Circle().fill(Color.purple))
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("今天的儿歌")
+                                .font(.caption.bold())
+                                .foregroundStyle(.gray)
+                            Text(song.titleCn)
+                                .font(.title3.bold())
+                                .foregroundStyle(AppTheme.navy)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundStyle(.gray)
+                    }
+                    .padding(14)
+                    .background(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                }
+                .buttonStyle(PressableStyle())
+                .padding(.horizontal)
             }
         }
+        .padding(.top, 12)
+        .padding(.bottom, 8)
+    }
+
+    private var childGameWords: [WordEntry] {
+        let today = store.age4Today()
+        if !today.isEmpty { return today }
+        return Array(store.age4UnlockedWords().prefix(max(1, store.dailyNewWords)))
     }
 
     private var gameWords: [WordEntry] {
@@ -314,6 +442,13 @@ struct LearnWordsView: View {
                                 .transition(.scale.combined(with: .opacity))
                         }
                     }
+                if !parentLibrary {
+                    Text(store.age4Sentence(for: entry))
+                        .font(.title2.bold())
+                        .foregroundStyle(AppTheme.navy)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 18)
+                }
                 WordAudioButtons(player: player, entry: entry)
                     .padding(.horizontal, 20)
                 actionRow
@@ -431,11 +566,18 @@ struct LearnWordsView: View {
 
     private func refreshSessionPreview() {
         if !showStudy {
-            session = store.planDays().first ?? []
+            session = parentLibrary ? (store.planDays().first ?? []) : store.age4Today()
         }
     }
 
     private var sessionTitle: String {
+        if !parentLibrary {
+            switch sessionKind {
+            case .learn: return "听一听"
+            case .review: return "再看昨天的"
+            case .wrong: return "错词本"
+            }
+        }
         switch sessionKind {
         case .learn: return "背单词"
         case .review: return "复习"
@@ -445,7 +587,10 @@ struct LearnWordsView: View {
 
     private var emptyMessage: String {
         switch sessionKind {
-        case .learn: return "今天没有新单词啦，换一本词书或明天再来吧"
+        case .learn:
+            return parentLibrary
+                ? "今天没有新单词啦，换一本词书或明天再来吧"
+                : "今天的新单词学完啦，明天再来听三个"
         case .review: return "今天没有要复习的单词"
         case .wrong: return "错词本是空的，去学习或玩游戏后再来吧"
         }
@@ -456,9 +601,9 @@ struct LearnWordsView: View {
         let today: [WordEntry]
         switch kind {
         case .learn:
-            today = store.planDays().first ?? []
+            today = parentLibrary ? (store.planDays().first ?? []) : store.age4Today()
         case .review:
-            today = store.reviewEntries()
+            today = parentLibrary ? store.reviewEntries() : store.age4Review()
         case .wrong:
             today = store.wrongBookEntries()
         }

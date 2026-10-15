@@ -91,6 +91,24 @@ struct WordBook: Codable, Identifiable, Hashable {
     let words: [String]?
 }
 
+// MARK: - 4 岁启蒙路径
+
+struct Age4Catalog: Codable {
+    let dailyNew: Int
+    let childLessonIds: [String]
+    let childSongIds: [String]
+    let packs: [Age4Pack]
+}
+
+struct Age4Pack: Codable, Identifiable, Hashable {
+    let id: String
+    let nameCn: String
+    let pattern: String
+    let songId: String
+    let locked: Bool
+    let words: [String]
+}
+
 // MARK: - 单词
 
 struct WordEntry: Codable, Identifiable, Hashable {

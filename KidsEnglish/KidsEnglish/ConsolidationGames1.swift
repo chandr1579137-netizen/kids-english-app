@@ -219,6 +219,7 @@ struct WordToImageGame: View {
 
 struct AudioToImageGame: View {
     let words: [WordEntry]
+    var choicePool: [WordEntry]? = nil
 
     @Environment(DataStore.self) private var store
     private let player = AudioPlayer.shared
@@ -328,12 +329,13 @@ struct AudioToImageGame: View {
     private func setupQuestion() {
         guard index < questions.count else { return }
         let target = questions[index]
-        let distractors = store.words
-            .filter { $0.word != target.word }
+        let pool = choicePool ?? store.words
+        let distractors = pool
+            .filter { $0.id != target.id }
             .shuffled()
             .prefix(3)
         options = ([target] + Array(distractors)).shuffled()
-        correctIndex = options.firstIndex(where: { $0.word == target.word })
+        correctIndex = options.firstIndex(where: { $0.id == target.id })
         pickedState = [:]
         answered = false
         // 出现自动播放一次

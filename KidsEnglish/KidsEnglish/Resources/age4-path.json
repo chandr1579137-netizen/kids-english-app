@@ -1,0 +1,200 @@
+{
+ "dailyNew": 3,
+ "childLessonIds": [
+  "l1_002",
+  "l1_003",
+  "l1_004",
+  "l1_006",
+  "l1_007",
+  "l1_008",
+  "l1_009",
+  "l1_010"
+ ],
+ "childSongIds": [
+  "song_001",
+  "song_002",
+  "song_003",
+  "song_004",
+  "song_007",
+  "song_010"
+ ],
+ "packs": [
+  {
+   "id": "greet",
+   "nameCn": "打招呼",
+   "pattern": "Hello!",
+   "songId": "song_001",
+   "locked": false,
+   "words": [
+    "hello",
+    "hi",
+    "bye",
+    "yes",
+    "no",
+    "I",
+    "you",
+    "OK"
+   ]
+  },
+  {
+   "id": "family",
+   "nameCn": "家人",
+   "pattern": "This is Mom.",
+   "songId": "song_001",
+   "locked": false,
+   "words": [
+    "mom",
+    "dad",
+    "grandma",
+    "grandpa",
+    "baby",
+    "boy",
+    "girl",
+    "family"
+   ]
+  },
+  {
+   "id": "animals",
+   "nameCn": "小动物",
+   "pattern": "It's a cat.",
+   "songId": "song_002",
+   "locked": false,
+   "words": [
+    "cat",
+    "dog",
+    "bird",
+    "fish",
+    "duck",
+    "rabbit",
+    "pig",
+    "cow",
+    "horse",
+    "bear"
+   ]
+  },
+  {
+   "id": "colors",
+   "nameCn": "颜色",
+   "pattern": "It's red.",
+   "songId": "song_003",
+   "locked": false,
+   "words": [
+    "red",
+    "blue",
+    "yellow",
+    "green",
+    "black",
+    "white",
+    "pink",
+    "orange"
+   ]
+  },
+  {
+   "id": "numbers",
+   "nameCn": "数字",
+   "pattern": "One, two, three.",
+   "songId": "song_004",
+   "locked": false,
+   "words": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five"
+   ]
+  },
+  {
+   "id": "food",
+   "nameCn": "吃的",
+   "pattern": "I see an apple.",
+   "songId": "song_001",
+   "locked": false,
+   "words": [
+    "apple",
+    "banana",
+    "milk",
+    "water",
+    "egg",
+    "bread",
+    "rice",
+    "cake"
+   ]
+  },
+  {
+   "id": "body",
+   "nameCn": "身体",
+   "pattern": "Touch your nose.",
+   "songId": "song_007",
+   "locked": false,
+   "words": [
+    "eye",
+    "ear",
+    "nose",
+    "mouth",
+    "hand",
+    "foot",
+    "head",
+    "hair"
+   ]
+  },
+  {
+   "id": "actions",
+   "nameCn": "我会做",
+   "pattern": "I can run.",
+   "songId": "song_010",
+   "locked": false,
+   "words": [
+    "run",
+    "jump",
+    "eat",
+    "drink",
+    "sleep",
+    "look",
+    "clap",
+    "wash"
+   ]
+  },
+  {
+   "id": "numbers-2",
+   "nameCn": "数字 6–10",
+   "pattern": "Six, seven, eight.",
+   "songId": "song_004",
+   "locked": true,
+   "words": [
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten"
+   ]
+  },
+  {
+   "id": "clothes",
+   "nameCn": "衣服",
+   "pattern": "It's a hat.",
+   "songId": "song_010",
+   "locked": true,
+   "words": [
+    "hat",
+    "shoes",
+    "shirt",
+    "dress",
+    "sock"
+   ]
+  },
+  {
+   "id": "weather",
+   "nameCn": "天气",
+   "pattern": "I see rain.",
+   "songId": "song_006",
+   "locked": true,
+   "words": [
+    "rain",
+    "cloud",
+    "sun",
+    "hot",
+    "cold"
+   ]
+  }
+ ]
+}

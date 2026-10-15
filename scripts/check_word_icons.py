@@ -162,12 +162,20 @@ def check_existing(zip_path: Path, repo_index: dict[str, Path], dict_words: list
                 failures.append(f"duplicate original key {key}")
             original[key] = (name, digest)
 
+    # These bundle files are letters or numerals. The repo copies are the no-text pictures.
+    allowed_replacements = {
+        "hello", "hi", "bye", "yes", "no", "i", "you",
+        "one", "two", "three", "four", "five",
+    }
     print(f"original bundle icons: {len(original)}")
     overlap = sorted(set(original) & set(repo_index))
-    if overlap:
-        failures.append(f"{len(overlap)} new files reuse an existing icon name")
-        for key in overlap[:20]:
+    unexpected_overlap = [key for key in overlap if key not in allowed_replacements]
+    if unexpected_overlap:
+        failures.append(f"{len(unexpected_overlap)} new files reuse an existing icon name")
+        for key in unexpected_overlap[:20]:
             print("  overlap:", original[key][0])
+    if overlap:
+        print(f"intentional no-text replacements: {sorted(set(overlap) & allowed_replacements)}")
 
     lost = []
     changed = []
@@ -193,11 +201,14 @@ def check_existing(zip_path: Path, repo_index: dict[str, Path], dict_words: list
             continue
         still += 1
     before = sum(1 for word in dict_words if word.lower() in original)
+    allowed_changed = [word for word in changed if word.lower() in allowed_replacements]
+    unexpected_changed = [word for word in changed if word.lower() not in allowed_replacements]
     print(f"dictionary words that already resolved: {before}")
     print(f"still resolve to the original file: {still}/{before}")
-    if still != before or changed:
+    print(f"no-text replacements: {len(allowed_changed)}")
+    if unexpected_changed or still + len(changed) != before:
         failures.append("an existing word lost or changed its image")
-        for word in changed[:20]:
+        for word in unexpected_changed[:20]:
             print("  changed:", repr(word))
 
     # Pre-existing filename that does not match its dictionary spelling.

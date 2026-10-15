@@ -10697,5 +10697,31 @@
   "emoji": "📍",
   "level": 3,
   "frequency": 60
+ },
+ {
+  "word": "baby",
+  "phonetic": "/ˈbeɪbi/",
+  "meaningCn": "宝宝",
+  "meaningEn": "a very young child",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a baby."
+  ],
+  "emoji": "👶",
+  "level": 1,
+  "frequency": 80
+ },
+ {
+  "word": "clap",
+  "phonetic": "/klæp/",
+  "meaningCn": "拍手",
+  "meaningEn": "to hit your hands together",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can clap."
+  ],
+  "emoji": "👏",
+  "level": 1,
+  "frequency": 70
  }
 ]

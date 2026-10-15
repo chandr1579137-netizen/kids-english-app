@@ -2,12 +2,27 @@ import SwiftUI
 
 /// 绘本：封面网格，点进去一页一句，可以翻页。
 struct PictureBookView: View {
+    var embedded: Bool = false
     @Environment(DataStore.self) private var store
     private let columns = [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)]
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
+        Group {
+            if embedded {
+                booksContent
+                    .navigationTitle("绘本")
+                    .navigationBarTitleDisplayMode(.inline)
+            } else {
+                NavigationStack {
+                    booksContent
+                        .toolbar(.hidden, for: .navigationBar)
+                }
+            }
+        }
+    }
+
+    private var booksContent: some View {
+        ScrollView {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("绘本")
                         .font(.system(size: 48, weight: .heavy))
@@ -50,8 +65,6 @@ struct PictureBookView: View {
                 }
             }
             .creamBackground()
-            .toolbar(.hidden, for: .navigationBar)
-        }
     }
 }
 

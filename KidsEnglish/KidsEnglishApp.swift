@@ -13,26 +13,24 @@ struct KidsEnglishApp: App {
 }
 
 enum AppTab: String, CaseIterable, Identifiable {
-    case learn, cards, read, books, profile
+    case today, pictures, songs, parent
     var id: String { rawValue }
 
     var title: String {
         switch self {
-        case .learn: return "背单词"
-        case .cards: return "单词卡"
-        case .read: return "读短文"
-        case .books: return "绘本"
-        case .profile: return "我的"
+        case .today: return "今天"
+        case .pictures: return "图画"
+        case .songs: return "儿歌"
+        case .parent: return "家长"
         }
     }
 
     var icon: String {
         switch self {
-        case .learn: return "book.fill"
-        case .cards: return "rectangle.on.rectangle.angled"
-        case .read: return "text.book.closed.fill"
-        case .books: return "books.vertical.fill"
-        case .profile: return "person.fill"
+        case .today: return "sun.max.fill"
+        case .pictures: return "photo.on.rectangle.angled"
+        case .songs: return "music.note"
+        case .parent: return "lock.fill"
         }
     }
 }
@@ -40,31 +38,29 @@ enum AppTab: String, CaseIterable, Identifiable {
 struct ContentView: View {
     @Environment(DataStore.self) private var store
     @Environment(\.scenePhase) private var scenePhase
-    @State private var tab: AppTab = .learn
+    @State private var tab: AppTab = .today
 
     var body: some View {
         ZStack {
             ZStack {
                 LearnWordsView()
-                    .opacity(tab == .learn ? 1 : 0)
-                    .allowsHitTesting(tab == .learn)
-                    .accessibilityHidden(tab != .learn)
-                WordCardsView()
-                    .opacity(tab == .cards ? 1 : 0)
-                    .allowsHitTesting(tab == .cards)
-                    .accessibilityHidden(tab != .cards)
-                ReadView()
-                    .opacity(tab == .read ? 1 : 0)
-                    .allowsHitTesting(tab == .read)
-                    .accessibilityHidden(tab != .read)
-                PictureBookView()
-                    .opacity(tab == .books ? 1 : 0)
-                    .allowsHitTesting(tab == .books)
-                    .accessibilityHidden(tab != .books)
-                ProfileView()
-                    .opacity(tab == .profile ? 1 : 0)
-                    .allowsHitTesting(tab == .profile)
-                    .accessibilityHidden(tab != .profile)
+                    .opacity(tab == .today ? 1 : 0)
+                    .allowsHitTesting(tab == .today)
+                    .accessibilityHidden(tab != .today)
+                Age4PicturesView()
+                    .opacity(tab == .pictures ? 1 : 0)
+                    .allowsHitTesting(tab == .pictures)
+                    .accessibilityHidden(tab != .pictures)
+                NavigationStack {
+                    SongsView(childMode: true)
+                }
+                .opacity(tab == .songs ? 1 : 0)
+                .allowsHitTesting(tab == .songs)
+                .accessibilityHidden(tab != .songs)
+                ParentRootView()
+                    .opacity(tab == .parent ? 1 : 0)
+                    .allowsHitTesting(tab == .parent)
+                    .accessibilityHidden(tab != .parent)
             }
             .animation(Motion.spring, value: tab)
 

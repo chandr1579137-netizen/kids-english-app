@@ -320,6 +320,7 @@
    "grandfather",
    "grandma",
    "grandpa",
+   "baby",
    "grandparent",
    "mother",
    "parents",
@@ -674,6 +675,7 @@
   "id": "actions",
   "nameCn": "动作",
   "words": [
+   "clap",
    "be",
    "do",
    "let",

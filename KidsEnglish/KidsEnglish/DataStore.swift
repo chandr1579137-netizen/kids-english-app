@@ -23,7 +23,8 @@ class DataStore {
     var bookCitation: String = ""
     var memories: [String: WordMemory] = [:]
     var progressToken: Int = 0
-    var dailyNewWords: Int = 10
+    var dailyNewWords: Int = 3
+    var age4: Age4Catalog?
     var gameCorrect: Int = 0
     var gameAnswered: Int = 0
     var studyDates: [String] = []
@@ -76,6 +77,7 @@ class DataStore {
             wordBookGroups = catalog.groups
             bookCitation = catalog.citation
         }
+        age4 = load("age4-path.json", as: Age4Catalog.self)
         for w in words { wordDict[w.word.lowercased()] = w }
     }
 
@@ -360,6 +362,117 @@ class DataStore {
         memories.values.filter { $0.wrong && !$0.mastered }.count
     }
 
+    // MARK: - 4 岁启蒙
+
+    func age4UnlockedPacks() -> [Age4Pack] {
+        (age4?.packs ?? []).filter { !$0.locked }
+    }
+
+    func age4LockedPacks() -> [Age4Pack] {
+        (age4?.packs ?? []).filter(\.locked)
+    }
+
+    func age4UnlockedWords() -> [WordEntry] {
+        var seen = Set<String>()
+        var result: [WordEntry] = []
+        for pack in age4UnlockedPacks() {
+            for word in pack.words {
+                let key = word.lowercased()
+                guard seen.insert(key).inserted, let entry = wordDict[key] else { continue }
+                result.append(entry)
+            }
+        }
+        return result
+    }
+
+    func age4Today() -> [WordEntry] {
+        let size = max(1, dailyNewWords)
+        return Array(age4UnlockedWords().filter { !learnedWords.contains($0.id) }.prefix(size))
+    }
+
+    func age4Review() -> [WordEntry] {
+        let allowed = Set(age4UnlockedWords().map(\.id))
+        return reviewEntries().filter { allowed.contains($0.id) }
+    }
+
+    func age4Pack(for entry: WordEntry) -> Age4Pack? {
+        let key = entry.id
+        return (age4?.packs ?? []).first { pack in
+            pack.words.contains { $0.lowercased() == key }
+        }
+    }
+
+    func age4Sentence(for entry: WordEntry) -> String {
+        guard let pack = age4Pack(for: entry) else { return entry.word }
+        let shown = entry.word
+        let lower = shown.lowercased()
+        switch pack.id {
+        case "greet":
+            return "\(capitalized(shown))!"
+        case "family":
+            return "This is \(capitalized(shown))."
+        case "animals", "clothes":
+            return "It's \(article(lower)) \(lower)."
+        case "colors":
+            return "It's \(lower)."
+        case "numbers":
+            return "One, two, three."
+        case "numbers-2":
+            return "Six, seven, eight."
+        case "food":
+            if ["milk", "water", "rice", "bread"].contains(lower) {
+                return "I see \(lower)."
+            }
+            return "I see \(article(lower)) \(lower)."
+        case "body":
+            return "Touch your \(lower)."
+        case "actions":
+            return "I can \(lower)."
+        case "weather":
+            return "I see \(lower)."
+        default:
+            return pack.pattern
+        }
+    }
+
+    func age4PackWords(_ pack: Age4Pack) -> [WordEntry] {
+        pack.words.compactMap { wordDict[$0.lowercased()] }
+    }
+
+    func childLessons() -> [Lesson] {
+        let ids = age4?.childLessonIds ?? []
+        return ids.compactMap { id in lessons.first { $0.id == id } }
+    }
+
+    func childSongs() -> [Song] {
+        let ids = age4?.childSongIds ?? []
+        return ids.compactMap { id in songs.first { $0.id == id } }
+    }
+
+    func laterSongs() -> [Song] {
+        let open = Set(age4?.childSongIds ?? [])
+        return songs.filter { !open.contains($0.id) }
+    }
+
+    func age4Song() -> Song? {
+        let seed = age4Today().first ?? age4UnlockedWords().first
+        if let seed, let pack = age4Pack(for: seed),
+           let song = songs.first(where: { $0.id == pack.songId }) {
+            return song
+        }
+        return childSongs().first
+    }
+
+    private func article(_ word: String) -> String {
+        guard let first = word.lowercased().first else { return "a" }
+        return "aeiou".contains(first) ? "an" : "a"
+    }
+
+    private func capitalized(_ word: String) -> String {
+        guard let first = word.first else { return word }
+        return String(first).uppercased() + word.dropFirst()
+    }
+
     private func scheduleForward(_ memory: inout WordMemory) {
         if memory.interval <= 0 {
             memory.interval = 1
@@ -423,7 +536,11 @@ class DataStore {
            let decoded = try? JSONDecoder().decode([String: WordMemory].self, from: data) {
             memories = decoded
         }
-        dailyNewWords = defaults.object(forKey: "dailyNewWords") as? Int ?? 10
+        if let stored = defaults.object(forKey: "dailyNewWords") as? Int, (3...8).contains(stored) {
+            dailyNewWords = stored
+        } else {
+            dailyNewWords = age4?.dailyNew ?? 3
+        }
         gameCorrect = defaults.integer(forKey: "gameCorrect")
         gameAnswered = defaults.integer(forKey: "gameAnswered")
         studyDates = defaults.stringArray(forKey: "studyDates") ?? []

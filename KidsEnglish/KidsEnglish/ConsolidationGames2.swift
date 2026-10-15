@@ -496,6 +496,7 @@ struct ConsolidationView: View {
         }
     }
     var startMode: Mode? = nil
+    var choicePool: [WordEntry]? = nil
     @State private var mode: Mode? = nil
     @Environment(\.dismiss) private var dismiss
 
@@ -619,7 +620,7 @@ struct ConsolidationView: View {
             Group {
                 switch m {
                 case .wordToImage: WordToImageGame(words: words)
-                case .audioToImage: AudioToImageGame(words: words)
+                case .audioToImage: AudioToImageGame(words: words, choicePool: choicePool)
                 case .matching: MatchingGame(words: words)
                 case .wordToAudio: WordToAudioGame(words: words)
                 case .imageToWord: ImageToWordGame(words: words)

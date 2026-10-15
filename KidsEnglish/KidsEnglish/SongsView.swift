@@ -2,6 +2,8 @@ import SwiftUI
 
 /// 儿歌：有 mp3 就播文件并按进度点亮歌词；没有就逐句朗读。
 struct SongsView: View {
+    var childMode: Bool = false
+    var focusSongId: String? = nil
     @Environment(DataStore.self) private var store
     private let player = AudioPlayer.shared
     @State private var playingSong: String?
@@ -10,8 +12,63 @@ struct SongsView: View {
     @State private var paused = false
 
     var body: some View {
-        List(store.songs) { song in
-            VStack(alignment: .leading, spacing: 8) {
+        List {
+            if childMode {
+                Section {
+                    ForEach(store.childSongs()) { song in
+                        songBlock(song, locked: false)
+                    }
+                }
+                Section {
+                    ForEach(store.laterSongs()) { song in
+                        songBlock(song, locked: true)
+                    }
+                }
+            } else {
+                ForEach(store.songs) { song in
+                    songBlock(song, locked: false)
+                }
+            }
+        }
+        .listStyle(.plain)
+        .navigationTitle(childMode ? "儿歌" : "英文儿歌")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            if expandedSong == nil, let focusSongId {
+                expandedSong = focusSongId
+            }
+        }
+        .onDisappear {
+            player.stop()
+            playingSong = nil
+            activeLine = nil
+            paused = false
+        }
+    }
+
+    @ViewBuilder
+    private func songBlock(_ song: Song, locked: Bool) -> some View {
+        if locked {
+            HStack {
+                Image(systemName: "lock.fill")
+                    .foregroundStyle(.gray)
+                VStack(alignment: .leading) {
+                    Text(song.title).font(.headline).foregroundStyle(.gray)
+                    Text(song.titleCn).font(.subheadline).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Text("以后再唱")
+                    .font(.caption.bold())
+                    .foregroundStyle(.gray)
+            }
+            .padding(.vertical, 4)
+        } else {
+            songRow(song)
+        }
+    }
+
+    private func songRow(_ song: Song) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Text("🎵").font(.title)
                     VStack(alignment: .leading) {
@@ -65,15 +122,6 @@ struct SongsView: View {
             }
             .padding(.vertical, 4)
         }
-        .listStyle(.plain)
-        .navigationTitle("英文儿歌")
-        .navigationBarTitleDisplayMode(.inline)
-        .onDisappear {
-            player.stop()
-            playingSong = nil
-            activeLine = nil
-            paused = false
-        }
     }
 
     private func togglePlay(_ song: Song) {
@@ -115,4 +163,4 @@ struct SongsView: View {
             })
         }
     }
-}
+

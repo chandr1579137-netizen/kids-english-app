@@ -2,14 +2,29 @@ import SwiftUI
 
 /// 读短文：L1–L7 横滑，完成 / 当前 / 锁定
 struct ReadView: View {
+    var embedded: Bool = false
     @Environment(DataStore.self) private var store
     @State private var level = 1
 
     private let levels = [1, 2, 3, 4, 5, 6, 7]
 
     var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 8) {
+        Group {
+            if embedded {
+                readContent
+                    .navigationTitle("读短文")
+                    .navigationBarTitleDisplayMode(.inline)
+            } else {
+                NavigationStack {
+                    readContent
+                        .toolbar(.hidden, for: .navigationBar)
+                }
+            }
+        }
+    }
+
+    private var readContent: some View {
+        VStack(alignment: .leading, spacing: 8) {
                 Text("读短文")
                     .font(.system(size: 48, weight: .heavy))
                     .foregroundStyle(AppTheme.brightBlue)
@@ -54,7 +69,6 @@ struct ReadView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .creamBackground()
-            .toolbar(.hidden, for: .navigationBar)
         }
     }
 
@@ -113,4 +127,4 @@ struct ReadView: View {
             }
         }
     }
-}
+
