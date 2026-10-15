@@ -1,21 +1,16 @@
 import SwiftUI
 
-/// 封面图：异步加载本地文件，避免主线程解码卡顿
+/// 封面图：直接读包内文件。AsyncImage 对 file URL 会失败，画面就只剩 emoji。
 struct CoverImage: View {
     let url: URL?
     var emoji: String = "📖"
 
     var body: some View {
         Group {
-            if let url {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let img):
-                        img.resizable().aspectRatio(contentMode: .fill)
-                    default:
-                        fallback
-                    }
-                }
+            if let url, let uiImage = UIImage(contentsOfFile: url.path) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
             } else {
                 fallback
             }

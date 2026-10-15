@@ -316,6 +316,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -333,6 +334,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -344,7 +346,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "KidsEnglish/Preview Content";
+				DEVELOPMENT_ASSET_PATHS = "\"KidsEnglish/KidsEnglish/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "KidsEnglish/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -353,6 +355,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kidsenglish.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -368,7 +371,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "KidsEnglish/Preview Content";
+				DEVELOPMENT_ASSET_PATHS = "\"KidsEnglish/KidsEnglish/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "KidsEnglish/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -377,6 +380,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kidsenglish.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1";
 			};

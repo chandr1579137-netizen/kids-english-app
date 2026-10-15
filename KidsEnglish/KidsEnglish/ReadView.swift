@@ -69,7 +69,6 @@ struct ReadView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .creamBackground()
-        }
     }
 
     private func lessonRow(_ lesson: Lesson) -> some View {
@@ -127,4 +126,5 @@ struct ReadView: View {
             }
         }
     }
+}
 

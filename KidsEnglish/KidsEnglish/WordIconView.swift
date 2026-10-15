@@ -8,24 +8,18 @@ struct WordIconView: View {
     var size: CGFloat = 120
 
     var body: some View {
-        if let url = store.iconURL(forWord: word) {
-            AsyncImage(url: url) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                default:
-                    fallbackView
-                }
+        Group {
+            if let url = store.iconURL(forWord: word),
+               let uiImage = UIImage(contentsOfFile: url.path) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                fallbackView
             }
-            .frame(width: size, height: size)
-            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        } else {
-            fallbackView
-                .frame(width: size, height: size)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
+        .frame(width: size, height: size)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
     private var fallbackView: some View {

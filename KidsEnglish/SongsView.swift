@@ -121,7 +121,6 @@ struct SongsView: View {
                 }
             }
             .padding(.vertical, 4)
-        }
     }
 
     private func togglePlay(_ song: Song) {
@@ -163,4 +162,5 @@ struct SongsView: View {
             })
         }
     }
+}
 
