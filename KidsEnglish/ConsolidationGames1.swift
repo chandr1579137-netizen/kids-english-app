@@ -57,7 +57,7 @@ struct WordToImageGame: View {
     let words: [WordEntry]
 
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
 
     @State private var questions: [WordEntry] = []
     @State private var index: Int = 0
@@ -84,6 +84,7 @@ struct WordToImageGame: View {
         .padding()
         .navigationTitle("看词选图")
         .onAppear { startNewGame() }
+        .onDisappear { player.stop() }
         .sensoryFeedback(.success, trigger: successTrigger)
         .sensoryFeedback(.error, trigger: errorTrigger)
     }
@@ -183,11 +184,13 @@ struct WordToImageGame: View {
             answered = true
             score += 1
             successTrigger += 1
+            store.noteAttempt(correct: true)
             advance()
         } else {
             pickedState[i] = .wrong
             errorTrigger += 1
-            withAnimation(.default) { shakeCount += 1 }
+            store.noteAttempt(correct: false, word: questions[index].word)
+            withAnimation(Motion.spring) { shakeCount += 1 }
         }
     }
 
@@ -198,7 +201,7 @@ struct WordToImageGame: View {
             await MainActor.run {
                 guard index == current, !finished else { return }
                 if index + 1 < questions.count {
-                    index += 1
+                    withAnimation(Motion.spring) { index += 1 }
                     setupQuestion()
                 } else {
                     finished = true
@@ -208,9 +211,7 @@ struct WordToImageGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.play(url: store.bestAudioURL(forWord: w.word), spokenFallback: w.word)
     }
 }
 
@@ -218,9 +219,10 @@ struct WordToImageGame: View {
 
 struct AudioToImageGame: View {
     let words: [WordEntry]
+    var choicePool: [WordEntry]? = nil
 
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
 
     @State private var questions: [WordEntry] = []
     @State private var index: Int = 0
@@ -247,6 +249,7 @@ struct AudioToImageGame: View {
         .padding()
         .navigationTitle("听音选图")
         .onAppear { startNewGame() }
+        .onDisappear { player.stop() }
         .sensoryFeedback(.success, trigger: successTrigger)
         .sensoryFeedback(.error, trigger: errorTrigger)
     }
@@ -326,12 +329,13 @@ struct AudioToImageGame: View {
     private func setupQuestion() {
         guard index < questions.count else { return }
         let target = questions[index]
-        let distractors = store.words
-            .filter { $0.word != target.word }
+        let pool = choicePool ?? store.words
+        let distractors = pool
+            .filter { $0.id != target.id }
             .shuffled()
             .prefix(3)
         options = ([target] + Array(distractors)).shuffled()
-        correctIndex = options.firstIndex(where: { $0.word == target.word })
+        correctIndex = options.firstIndex(where: { $0.id == target.id })
         pickedState = [:]
         answered = false
         // 出现自动播放一次
@@ -348,11 +352,13 @@ struct AudioToImageGame: View {
             answered = true
             score += 1
             successTrigger += 1
+            store.noteAttempt(correct: true)
             advance()
         } else {
             pickedState[i] = .wrong
             errorTrigger += 1
-            withAnimation(.default) { shakeCount += 1 }
+            store.noteAttempt(correct: false, word: questions[index].word)
+            withAnimation(Motion.spring) { shakeCount += 1 }
         }
     }
 
@@ -363,7 +369,7 @@ struct AudioToImageGame: View {
             await MainActor.run {
                 guard index == current, !finished else { return }
                 if index + 1 < questions.count {
-                    index += 1
+                    withAnimation(Motion.spring) { index += 1 }
                     setupQuestion()
                 } else {
                     finished = true
@@ -373,9 +379,7 @@ struct AudioToImageGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.play(url: store.bestAudioURL(forWord: w.word), spokenFallback: w.word)
     }
 }
 
@@ -385,7 +389,7 @@ struct MatchingGame: View {
     let words: [WordEntry]
 
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
 
     private struct Card: Identifiable {
         let id: Int
@@ -416,6 +420,7 @@ struct MatchingGame: View {
         .padding()
         .navigationTitle("配对消除")
         .onAppear { startNewGame() }
+        .onDisappear { player.stop() }
         .sensoryFeedback(.success, trigger: successTrigger)
         .sensoryFeedback(.error, trigger: errorTrigger)
     }
@@ -528,12 +533,13 @@ struct MatchingGame: View {
                 busy = true
                 score += 1
                 successTrigger += 1
+                store.noteAttempt(correct: true)
                 playWord(card.word)
                 let ids = [first.id, card.id]
                 Task {
                     try? await Task.sleep(nanoseconds: 450_000_000)
                     await MainActor.run {
-                        withAnimation { matchedIds.formUnion(ids) }
+                        withAnimation(Motion.spring) { matchedIds.formUnion(ids) }
                         selectedIds = []
                         busy = false
                         if matchedIds.count == cards.count {
@@ -547,6 +553,7 @@ struct MatchingGame: View {
                 busy = true
                 wrongIds = [first.id, card.id]
                 errorTrigger += 1
+                store.noteAttempt(correct: false, word: card.word)
                 Task {
                     try? await Task.sleep(nanoseconds: 800_000_000)
                     await MainActor.run {
@@ -563,9 +570,7 @@ struct MatchingGame: View {
     }
 
     private func playWord(_ word: String) {
-        if let url = store.bestAudioURL(forWord: word) {
-            player.play(url: url)
-        }
+        player.play(url: store.bestAudioURL(forWord: word), spokenFallback: word)
     }
 }
 
@@ -575,7 +580,7 @@ struct WordToAudioGame: View {
     let words: [WordEntry]
 
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
 
     @State private var questions: [WordEntry] = []
     @State private var index: Int = 0
@@ -601,6 +606,7 @@ struct WordToAudioGame: View {
         .padding()
         .navigationTitle("看词选音")
         .onAppear { startNewGame() }
+        .onDisappear { player.stop() }
         .sensoryFeedback(.success, trigger: successTrigger)
         .sensoryFeedback(.error, trigger: errorTrigger)
     }
@@ -714,10 +720,12 @@ struct WordToAudioGame: View {
             answered = true
             score += 1
             successTrigger += 1
+            store.noteAttempt(correct: true)
             advance()
         } else {
             pickedState[i] = .wrong
             errorTrigger += 1
+            store.noteAttempt(correct: false, word: questions[index].word)
         }
     }
 
@@ -728,7 +736,7 @@ struct WordToAudioGame: View {
             await MainActor.run {
                 guard index == current, !finished else { return }
                 if index + 1 < questions.count {
-                    index += 1
+                    withAnimation(Motion.spring) { index += 1 }
                     setupQuestion()
                 } else {
                     finished = true
@@ -738,9 +746,7 @@ struct WordToAudioGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.play(url: store.bestAudioURL(forWord: w.word), spokenFallback: w.word)
     }
 }
 
@@ -750,7 +756,7 @@ struct ImageToWordGame: View {
     let words: [WordEntry]
 
     @Environment(DataStore.self) private var store
-    @State private var player = AudioPlayer()
+    private let player = AudioPlayer.shared
 
     @State private var questions: [WordEntry] = []
     @State private var index: Int = 0
@@ -777,6 +783,7 @@ struct ImageToWordGame: View {
         .padding()
         .navigationTitle("看图选词")
         .onAppear { startNewGame() }
+        .onDisappear { player.stop() }
         .sensoryFeedback(.success, trigger: successTrigger)
         .sensoryFeedback(.error, trigger: errorTrigger)
     }
@@ -889,13 +896,15 @@ struct ImageToWordGame: View {
             answered = true
             score += 1
             successTrigger += 1
+            store.noteAttempt(correct: true)
             // 读出正确单词，加深记忆
             playWord(questions[index])
             advance()
         } else {
             pickedState[i] = .wrong
             errorTrigger += 1
-            withAnimation(.default) { shakeCount += 1 }
+            store.noteAttempt(correct: false, word: questions[index].word)
+            withAnimation(Motion.spring) { shakeCount += 1 }
         }
     }
 
@@ -906,7 +915,7 @@ struct ImageToWordGame: View {
             await MainActor.run {
                 guard index == current, !finished else { return }
                 if index + 1 < questions.count {
-                    index += 1
+                    withAnimation(Motion.spring) { index += 1 }
                     setupQuestion()
                 } else {
                     finished = true
@@ -916,8 +925,6 @@ struct ImageToWordGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.play(url: store.bestAudioURL(forWord: w.word), spokenFallback: w.word)
     }
 }

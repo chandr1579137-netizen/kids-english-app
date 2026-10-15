@@ -50,6 +50,9 @@
 		686BEA4E5CE64DE20884227D = {isa = PBXBuildFile; fileRef = 0165BC5986948FBF449B15F8; };
 		311E08C45361757CC5EBA427 = {isa = PBXBuildFile; fileRef = DEB8EED4E893E335D32F937D; };
 		E96FD2123F6A40C08873612D = {isa = PBXBuildFile; fileRef = 9F2793DCE21A47EEB380CF88; };
+		E5A1000100000000000000E2 = {isa = PBXBuildFile; fileRef = E5A1000100000000000000E1; };
+		E5A1000100000000000000B2 = {isa = PBXBuildFile; fileRef = E5A1000100000000000000B1; };
+		E5A1000100000000000000A2 = {isa = PBXBuildFile; fileRef = E5A1000100000000000000A1; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +101,9 @@
 		DEB8EED4E893E335D32F937D = {isa = PBXFileReference; lastKnownFileType = text.json; path = word-themes.json; sourceTree = "<group>"; };
 		205BEB5AA5AEAD82FAB38C09 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F2793DCE21A47EEB380CF88 = {isa = PBXFileReference; lastKnownFileType = folder; path = ui-icons; sourceTree = "<group>"; };
+		E5A1000100000000000000E1 = {isa = PBXFileReference; lastKnownFileType = text.json; path = words-e.json; sourceTree = "<group>"; };
+		E5A1000100000000000000B1 = {isa = PBXFileReference; lastKnownFileType = text.json; path = word-books.json; sourceTree = "<group>"; };
+		E5A1000100000000000000A1 = {isa = PBXFileReference; lastKnownFileType = text.json; path = age4-path.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,9 @@
 				1F1CF14BA7FDC8C4A61108EE,
 				686BEA4E5CE64DE20884227D,
 				311E08C45361757CC5EBA427,
+				E5A1000100000000000000E2,
+				E5A1000100000000000000B2,
+				E5A1000100000000000000A2,
 				E96FD2123F6A40C08873612D,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +240,9 @@
 				C579E36B953709A0DC2C6A55,
 				0165BC5986948FBF449B15F8,
 				DEB8EED4E893E335D32F937D,
+				E5A1000100000000000000E1,
+				E5A1000100000000000000B1,
+				E5A1000100000000000000A1,
 				9F2793DCE21A47EEB380CF88,
 			);
 			name = Resources;
@@ -304,6 +316,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -321,6 +334,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -340,6 +354,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kidsenglish.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -363,6 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kidsenglish.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1";
 			};

@@ -18,7 +18,7 @@ jobs:
         run: |
           curl -sfL -o assets-bundle-v3.zip \
             "https://muse.ai/files/1412548825264485/28149411608070162/97jiuiu7vahas4vrykc1nghi/assets-bundle-v3.zip"
-          unzip -q -o assets-bundle-v3.zip
+          unzip -q -n assets-bundle-v3.zip
           ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l
 
       - name: Download lesson audio (from upstream open-source repo)

@@ -1,0 +1,10727 @@
+[
+ {
+  "word": "10th",
+  "phonetic": "/tenθ/",
+  "meaningCn": "第十",
+  "meaningEn": "tenth",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a 10th."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "12th",
+  "phonetic": "/twelfθ/",
+  "meaningCn": "第十二",
+  "meaningEn": "twelfth",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a 12th."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "15th",
+  "phonetic": "/ˌfɪfˈtinθ/",
+  "meaningCn": "第十五",
+  "meaningEn": "fifteenth",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a 15th."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "25th",
+  "phonetic": "/ˌtwenti ˈfɪfθ/",
+  "meaningCn": "第二十五",
+  "meaningEn": "twenty-fifth",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a 25th."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "5th",
+  "phonetic": "/fɪfθ/",
+  "meaningCn": "第五",
+  "meaningEn": "fifth",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a 5th."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "Africa",
+  "phonetic": "/ˈæfɝkə/",
+  "meaningCn": "非洲",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Africa."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Alaska",
+  "phonetic": "/əˈlæskə/",
+  "meaningCn": "阿拉斯加州",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Alaska."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "American",
+  "phonetic": "/əˈmɛrəkən/",
+  "meaningCn": "美国的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is American."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "April",
+  "phonetic": "/ˈeɪprəl/",
+  "meaningCn": "四月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an April."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Asia",
+  "phonetic": "/ˈeɪʒə/",
+  "meaningCn": "亚洲",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Asia."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "August",
+  "phonetic": "/ˈɑɡəst/",
+  "meaningCn": "八月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an August."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Australia",
+  "phonetic": "/ɔˈstreɪljə/",
+  "meaningCn": "澳大利亚",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Australia."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Be careful!",
+  "phonetic": "/ˈbi ˈkɛrfəl/",
+  "meaningCn": "当心！",
+  "meaningEn": "Be careful!",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Be careful!"
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Big Ben",
+  "phonetic": "/ˈbɪɡ ˈbɛn/",
+  "meaningCn": "大本钟",
+  "meaningEn": "Big Ben",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Big Ben."
+  ],
+  "emoji": "🏠",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Canada",
+  "phonetic": "/ˈkænədə/",
+  "meaningCn": "加拿大",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Canada."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Canadian",
+  "phonetic": "/kəˈneɪdiən/",
+  "meaningCn": "加拿大的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is Canadian."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Canberra",
+  "phonetic": "/ˌkænˈbɛrə/",
+  "meaningCn": "堪培拉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Canberra."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Children's Day",
+  "phonetic": "/ˈtʃɪldrənz ˈdeɪ/",
+  "meaningCn": "儿童节",
+  "meaningEn": "Children's Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Children's Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "China",
+  "phonetic": "/ˈtʃaɪnə/",
+  "meaningCn": "中国",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a China."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Chinese book",
+  "phonetic": "/tʃaɪˈniz ˈbʊk/",
+  "meaningCn": "语文书",
+  "meaningEn": "Chinese book",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Chinese book."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Christmas",
+  "phonetic": "/ˈkrɪsməs/",
+  "meaningCn": "圣诞节",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Christmas."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Christmas Day",
+  "phonetic": "/ˈkrɪsməs ˈdeɪ/",
+  "meaningCn": "圣诞节",
+  "meaningEn": "Christmas Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Christmas Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "Christmas tree",
+  "phonetic": "/ˈkrɪsməs ˈtri/",
+  "meaningCn": "圣诞树",
+  "meaningEn": "Christmas tree",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Christmas tree."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Danish",
+  "phonetic": "/ˈdeɪnɪʃ/",
+  "meaningCn": "丹麦人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Danish."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Dear",
+  "phonetic": "/ˈdɪr/",
+  "meaningCn": "亲爱的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is Dear."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "December",
+  "phonetic": "/dɪˈsɛmbɝ/",
+  "meaningCn": "十二月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a December."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Disneyland",
+  "phonetic": "/ˈdɪzniˌlænd/",
+  "meaningCn": "迪士尼乐园",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Disneyland."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Easter",
+  "phonetic": "/ˈistɝ/",
+  "meaningCn": "复活节",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Easter."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "English",
+  "phonetic": "/ˈɪŋɡlɪʃ/",
+  "meaningCn": "英语",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an English."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "English book",
+  "phonetic": "/ˈɪŋɡlɪʃ ˈbʊk/",
+  "meaningCn": "英语书",
+  "meaningEn": "English book",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "English book."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "English class",
+  "phonetic": "/ˈɪŋɡlɪʃ ˈklæs/",
+  "meaningCn": "英语课",
+  "meaningEn": "English class",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "English class."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "English-Chinese dictionary",
+  "phonetic": "/ˈɪŋɡlɪʃ tʃaɪˈniz ˈdɪkʃəˌnɛri/",
+  "meaningCn": "英汉词典",
+  "meaningEn": "English-Chinese dictionary",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "English-Chinese dictionary."
+  ],
+  "emoji": "✏️",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Excuse me",
+  "phonetic": "/ɪkˈskjus ˈmi/",
+  "meaningCn": "对不起",
+  "meaningEn": "Excuse me",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Excuse me."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Father Christmas",
+  "phonetic": "/ˈfɑðɝ ˈkrɪsməs/",
+  "meaningCn": "圣诞老人",
+  "meaningEn": "Father Christmas",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Father Christmas."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Father's Day",
+  "phonetic": "/ˈfɑðɝz ˈdeɪ/",
+  "meaningCn": "父亲节",
+  "meaningEn": "Father's Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Father's Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "February",
+  "phonetic": "/ˈfɛbjəˌwɛri/",
+  "meaningCn": "二月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a February."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "French",
+  "phonetic": "/ˈfrɛntʃ/",
+  "meaningCn": "法语",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a French."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "French fries",
+  "phonetic": "/ˈfrɛntʃ ˈfraɪz/",
+  "meaningCn": "法式炸薯条",
+  "meaningEn": "French fries",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "French fries."
+  ],
+  "emoji": "🍽️",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "Friday",
+  "phonetic": "/ˈfraɪˌdeɪ/",
+  "meaningCn": "星期五",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Friday."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "GPS",
+  "phonetic": "/ˌdʒiː ˌpiː ˈes/",
+  "meaningCn": "全球定位系统",
+  "meaningEn": "the word GPS",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a GPS."
+  ],
+  "emoji": "🧸",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Germany",
+  "phonetic": "/ˈdʒɝməni/",
+  "meaningCn": "德国",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Germany."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Information Centre",
+  "phonetic": "/ˌɪnfɝˈmeɪʃən ˈsɛntɝ/",
+  "meaningCn": "咨询中心",
+  "meaningEn": "Information Centre",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Information Centre."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Internet",
+  "phonetic": "/ˈɪntɝˌnɛt/",
+  "meaningCn": "互联网",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Internet."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Italian",
+  "phonetic": "/ˌɪˈtæljən/",
+  "meaningCn": "意大利语",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an Italian."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "January",
+  "phonetic": "/ˈdʒænjuˌɛri/",
+  "meaningCn": "一月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a January."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "July",
+  "phonetic": "/ˌdʒuˈlaɪ/",
+  "meaningCn": "七月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a July."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "June",
+  "phonetic": "/ˈdʒun/",
+  "meaningCn": "六月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a June."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Labour Day",
+  "phonetic": "/ˈleɪbɝ ˈdeɪ/",
+  "meaningCn": "劳动节",
+  "meaningEn": "Labour Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Labour Day."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Lake Ontario",
+  "phonetic": "/ˈleɪk ɑnˈtɛrioʊ/",
+  "meaningCn": "安大略湖",
+  "meaningEn": "Lake Ontario",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Lake Ontario."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "London",
+  "phonetic": "/ˈləndən/",
+  "meaningCn": "伦敦",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a London."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "March",
+  "phonetic": "/ˈmɑrtʃ/",
+  "meaningCn": "三月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a March."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Mid-Autumn Festival",
+  "phonetic": "/ˈmɪd ˈɔtəm ˈfɛstəvəl/",
+  "meaningCn": "中秋节",
+  "meaningEn": "Mid-Autumn Festival",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Mid-Autumn Festival."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Monday",
+  "phonetic": "/ˈmənˌdeɪ/",
+  "meaningCn": "星期一",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Monday."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Moscow",
+  "phonetic": "/ˈmɑˌskoʊ/",
+  "meaningCn": "莫斯科",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Moscow."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "Mother's Day",
+  "phonetic": "/ˈməðɝz ˈdeɪ/",
+  "meaningCn": "母亲节",
+  "meaningEn": "Mother's Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Mother's Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "Mrs",
+  "phonetic": "/ˈmɪsɪz/",
+  "meaningCn": "太太",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Mrs."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "Ms",
+  "phonetic": "/ˈmɪz/",
+  "meaningCn": "女士",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Ms."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "Munich",
+  "phonetic": "/ˈmjunɪk/",
+  "meaningCn": "慕尼黑",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Munich."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "National Day",
+  "phonetic": "/ˈnæʃənəl ˈdeɪ/",
+  "meaningCn": "国庆日",
+  "meaningEn": "National Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "National Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "New Year",
+  "phonetic": "/ˈnju ˈjɪr/",
+  "meaningCn": "新年",
+  "meaningEn": "New Year",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "New Year."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "New Year's Day",
+  "phonetic": "/ˈnju ˈjɪrz ˈdeɪ/",
+  "meaningCn": "元旦",
+  "meaningEn": "the first day of a calendar year; the first day of\\n January.",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "New Year's Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "New York",
+  "phonetic": "/ˈnju ˈjɔrk/",
+  "meaningCn": "纽约",
+  "meaningEn": "New York",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "New York."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "November",
+  "phonetic": "/noʊˈvɛmbɝ/",
+  "meaningCn": "十一月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a November."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "OK",
+  "phonetic": "/ˌoʊˈkeɪ/",
+  "meaningCn": "好的",
+  "meaningEn": "the word OK",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is OK."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "October",
+  "phonetic": "/ɑkˈtoʊbɝ/",
+  "meaningCn": "十月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an October."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "PE",
+  "phonetic": "/ˌpiː ˈiː/",
+  "meaningCn": "体育",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a PE."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "PE class",
+  "phonetic": "/ˌpiː ˈiː ˈklæs/",
+  "meaningCn": "体育课",
+  "meaningEn": "PE class",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "PE class."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Papa Westray",
+  "phonetic": "/ˈpɑˌpə ˈwestreɪ/",
+  "meaningCn": "帕帕韦斯特雷岛",
+  "meaningEn": "a small island in Scotland",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Papa Westray."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Queen's Park",
+  "phonetic": "/ˈkwinz ˈpɑrk/",
+  "meaningCn": "女王公园",
+  "meaningEn": "Queen's Park",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Queen's Park."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "RSVP",
+  "phonetic": "/ˌɑːr ˌes ˌviː ˈpiː/",
+  "meaningCn": "请回复",
+  "meaningEn": "the word RSVP",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a RSVP."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Saturday",
+  "phonetic": "/ˈsæˌtɪˌdeɪ/",
+  "meaningCn": "星期六",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Saturday."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Scotland",
+  "phonetic": "/ˈskɑtlənd/",
+  "meaningCn": "苏格兰",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Scotland."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "September",
+  "phonetic": "/sɛpˈtɛmbɝ/",
+  "meaningCn": "九月",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a September."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Singapore",
+  "phonetic": "/ˈsɪŋəˌpɔr/",
+  "meaningCn": "新加坡",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Singapore."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Spain",
+  "phonetic": "/ˈspeɪn/",
+  "meaningCn": "西班牙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Spain."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Spanish",
+  "phonetic": "/ˈspænɪʃ/",
+  "meaningCn": "西班牙语",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Spanish."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "Sunday",
+  "phonetic": "/ˈsənˌdeɪ/",
+  "meaningCn": "星期日",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Sunday."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Sydney",
+  "phonetic": "/ˈsɪdni/",
+  "meaningCn": "悉尼",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Sydney."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "T-shirt",
+  "phonetic": "/ˈtiˌsɝt/",
+  "meaningCn": "T恤",
+  "meaningEn": "the word T-shirt",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a T-shirt."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "TV",
+  "phonetic": "/ˌtiː ˈviː/",
+  "meaningCn": "电视",
+  "meaningEn": "the word TV",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a TV."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Teachers' Day",
+  "phonetic": "/ˈtitʃɝz ˈdeɪ/",
+  "meaningCn": "教师节",
+  "meaningEn": "Teachers' Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Teachers' Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "Thanksgiving",
+  "phonetic": "/ˌθæŋksˈɡɪvɪŋ/",
+  "meaningCn": "感恩节",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can Thanksgiving."
+  ],
+  "emoji": "⏰",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Thursday",
+  "phonetic": "/ˈθɝzˌdeɪ/",
+  "meaningCn": "星期四",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Thursday."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Toronto",
+  "phonetic": "/tɝˈɑntoʊ/",
+  "meaningCn": "多伦多",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Toronto."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Tower Bridge",
+  "phonetic": "/ˈtaʊɝ ˈbrɪdʒ/",
+  "meaningCn": "伦敦塔桥",
+  "meaningEn": "Tower Bridge",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Tower Bridge."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Tree Planting Day",
+  "phonetic": "/ˈtri ˈplæntɪŋ ˈdeɪ/",
+  "meaningCn": "植树节",
+  "meaningEn": "Tree Planting Day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Tree Planting Day."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "Tuesday",
+  "phonetic": "/ˈtjuzˌdeɪ/",
+  "meaningCn": "星期二",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Tuesday."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "Turpan",
+  "phonetic": "/ˈtʊrpæn/",
+  "meaningCn": "吐鲁番",
+  "meaningEn": "the word Turpan",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Turpan."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "UK",
+  "phonetic": "/ˌjuː ˈkeɪ/",
+  "meaningCn": "英国",
+  "meaningEn": "the word UK",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an UK."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "USA",
+  "phonetic": "/ˌjuː ˌes ˈeɪ/",
+  "meaningCn": "美国",
+  "meaningEn": "the word USA",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an USA."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "Washington D.C.",
+  "phonetic": "/ˈwɑʃɪŋtən ˌdiː ˈsiː/",
+  "meaningCn": "华盛顿",
+  "meaningEn": "Washington D.C.",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Washington D.C."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "Wednesday",
+  "phonetic": "/ˈwɛnzˌdeɪ/",
+  "meaningCn": "星期三",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a Wednesday."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "West Lake",
+  "phonetic": "/ˈwɛst ˈleɪk/",
+  "meaningCn": "西湖",
+  "meaningEn": "West Lake",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "West Lake."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "What about ...?",
+  "phonetic": "/wʌt əˈbaʊt/",
+  "meaningCn": "……怎么样",
+  "meaningEn": "used to ask for someone's idea",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "What about ...?"
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "a box of crayons",
+  "phonetic": "/ə ˈbɑks əv ˈkreɪˌɑnz/",
+  "meaningCn": "一盒蜡笔",
+  "meaningEn": "a box of crayons",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "A box of crayons."
+  ],
+  "emoji": "✏️",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "a few",
+  "phonetic": "/ə ˈfju/",
+  "meaningCn": "几个",
+  "meaningEn": "a few",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "A few."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "a lot",
+  "phonetic": "/ə ˈlɑt/",
+  "meaningCn": "很多",
+  "meaningEn": "a lot",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "A lot."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "a lot of",
+  "phonetic": "/ə ˈlɑt əv/",
+  "meaningCn": "很多",
+  "meaningEn": "a lot of",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "A lot of."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "a pair of scissors",
+  "phonetic": "/ə ˈpɛr əv ˈsɪzɝz/",
+  "meaningCn": "一把剪刀",
+  "meaningEn": "a pair of scissors",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "A pair of scissors."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "a.m.",
+  "phonetic": "/ˌeɪ ˈem/",
+  "meaningCn": "上午",
+  "meaningEn": "s before noon\\nr before noon",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an a.m.."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "across from",
+  "phonetic": "/əˈkrɔs ˈfrəm/",
+  "meaningCn": "对面",
+  "meaningEn": "across from",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Across from."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "active",
+  "phonetic": "/ˈæktɪv/",
+  "meaningCn": "积极的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is active."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "advice",
+  "phonetic": "/ædˈvaɪs/",
+  "meaningCn": "建议",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an advice."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "after school",
+  "phonetic": "/ˈæftɝ ˈskul/",
+  "meaningCn": "放学后",
+  "meaningEn": "after school",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "After school."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "afternoon",
+  "phonetic": "/ˌæftɝˈnun/",
+  "meaningCn": "下午",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an afternoon."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "age",
+  "phonetic": "/ˈeɪdʒ/",
+  "meaningCn": "年龄",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an age."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "airport",
+  "phonetic": "/ˈɛrˌpɔrt/",
+  "meaningCn": "机场",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an airport."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "all over",
+  "phonetic": "/ˈɔl ˈoʊvɝ/",
+  "meaningCn": "到处",
+  "meaningEn": "all over",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "All over."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "angry",
+  "phonetic": "/ˈæŋɡri/",
+  "meaningCn": "生气的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is angry."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "anything",
+  "phonetic": "/ˈɛniˌθɪŋ/",
+  "meaningCn": "任何事",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can anything."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "are not",
+  "phonetic": "/ˈɑr ˈnɑt/",
+  "meaningCn": "不是",
+  "meaningEn": "are not",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Are not."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "aren't",
+  "phonetic": "/ˈɑrənt/",
+  "meaningCn": "不是",
+  "meaningEn": "the word aren't",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an aren't."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "art",
+  "phonetic": "/ˈɑrt/",
+  "meaningCn": "美术",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an art."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "art gallery",
+  "phonetic": "/ˈɑrt ˈɡælɝi/",
+  "meaningCn": "画廊",
+  "meaningEn": "art gallery",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Art gallery."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "art room",
+  "phonetic": "/ˈɑrt ˈrum/",
+  "meaningCn": "美术教室",
+  "meaningEn": "art room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Art room."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "artist",
+  "phonetic": "/ˈɑrtəst/",
+  "meaningCn": "画家",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an artist."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "at least",
+  "phonetic": "/ˈæt ˈlist/",
+  "meaningCn": "至少",
+  "meaningEn": "at least",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "At least."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "ate",
+  "phonetic": "/ˈeɪt/",
+  "meaningCn": "吃了",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an ate."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "ate ice-cream",
+  "phonetic": "/ˈeɪt ˈaɪs ˈkrim/",
+  "meaningCn": "吃冰激凌",
+  "meaningEn": "ate ice-cream",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Ate ice-cream."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "attention",
+  "phonetic": "/əˈtɛnʃən/",
+  "meaningCn": "注意",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an attention."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "aunt",
+  "phonetic": "/ˈænt/",
+  "meaningCn": "姑母",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an aunt."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "baby brother",
+  "phonetic": "/ˈbeɪbi ˈbrəðɝ/",
+  "meaningCn": "弟弟",
+  "meaningEn": "baby brother",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Baby brother."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "badminton",
+  "phonetic": "/ˈbædˌmɪntən/",
+  "meaningCn": "羽毛球运动",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a badminton."
+  ],
+  "emoji": "🧸",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "bamboo",
+  "phonetic": "/bæmˈbu/",
+  "meaningCn": "竹子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bamboo."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bank",
+  "phonetic": "/ˈbæŋk/",
+  "meaningCn": "银行",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bank."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "bark",
+  "phonetic": "/ˈbɑrk/",
+  "meaningCn": "狗叫",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bark."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "basket",
+  "phonetic": "/ˈbæskət/",
+  "meaningCn": "篮子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a basket."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "basketball",
+  "phonetic": "/ˈbæskətˌbɔl/",
+  "meaningCn": "篮球",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a basketball."
+  ],
+  "emoji": "🧸",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "bathroom",
+  "phonetic": "/ˈbæˌθrum/",
+  "meaningCn": "浴室",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bathroom."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "be afraid of",
+  "phonetic": "/ˈbi əˈfreɪd əv/",
+  "meaningCn": "害怕",
+  "meaningEn": "be afraid of",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Be afraid of."
+  ],
+  "emoji": "🏃",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "be back",
+  "phonetic": "/ˈbi ˈbæk/",
+  "meaningCn": "回来",
+  "meaningEn": "be back",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Be back."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "be careful",
+  "phonetic": "/ˈbi ˈkɛrfəl/",
+  "meaningCn": "当心",
+  "meaningEn": "be careful",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Be careful."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "be good at",
+  "phonetic": "/ˈbi ˈɡʊd ˈæt/",
+  "meaningCn": "擅长",
+  "meaningEn": "be good at",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Be good at."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "beaver",
+  "phonetic": "/ˈbivɝ/",
+  "meaningCn": "海狸",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a beaver."
+  ],
+  "emoji": "🌳",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "bed",
+  "phonetic": "/ˈbɛd/",
+  "meaningCn": "床",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can bed."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bedroom",
+  "phonetic": "/ˈbɛˌdrum/",
+  "meaningCn": "卧室",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bedroom."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "beef",
+  "phonetic": "/ˈbif/",
+  "meaningCn": "牛肉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a beef."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "beside",
+  "phonetic": "/ˌbiˈsaɪd/",
+  "meaningCn": "在旁边",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a beside."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "best",
+  "phonetic": "/ˈbɛst/",
+  "meaningCn": "最好的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is best."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bigger",
+  "phonetic": "/ˈbɪɡɝ/",
+  "meaningCn": "更大的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is bigger."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bike",
+  "phonetic": "/ˈbaɪk/",
+  "meaningCn": "自行车",
+  "meaningEn": "the word bike",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bike."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bite",
+  "phonetic": "/ˈbaɪt/",
+  "meaningCn": "咬",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bite."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "blackboard",
+  "phonetic": "/ˈblækˌbɔrd/",
+  "meaningCn": "黑板",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a blackboard."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "blind",
+  "phonetic": "/ˈblaɪnd/",
+  "meaningCn": "失明的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is blind."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "boating",
+  "phonetic": "/ˈboʊtɪŋ/",
+  "meaningCn": "划船",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can boating."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "body",
+  "phonetic": "/ˈbɑdi/",
+  "meaningCn": "身体",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a body."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "bookshop",
+  "phonetic": "/ˈbʊkˌʃɑp/",
+  "meaningCn": "书店",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bookshop."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "bookstore",
+  "phonetic": "/ˈbʊkˌstɔr/",
+  "meaningCn": "书店",
+  "meaningEn": "the word bookstore",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bookstore."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bottle",
+  "phonetic": "/ˈbɑtəl/",
+  "meaningCn": "瓶子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bottle."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bought",
+  "phonetic": "/ˈbɑt/",
+  "meaningCn": "买来的",
+  "meaningEn": "v obtain by purchase; acquire by means of a financial transaction\\nv make illegal payments",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is bought."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bought some gifts",
+  "phonetic": "/ˈbɑt ˈsəm ˈɡɪfs/",
+  "meaningCn": "买礼物",
+  "meaningEn": "bought some gifts",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Bought some gifts."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "bowl",
+  "phonetic": "/ˈboʊl/",
+  "meaningCn": "碗",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bowl."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "box",
+  "phonetic": "/ˈbɑks/",
+  "meaningCn": "盒",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a box."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "boy",
+  "phonetic": "/ˈbɔɪ/",
+  "meaningCn": "男孩",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a boy."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "breath",
+  "phonetic": "/ˈbrɛθ/",
+  "meaningCn": "呼吸",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a breath."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "broken",
+  "phonetic": "/ˈbroʊkən/",
+  "meaningCn": "破损的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is broken."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "building",
+  "phonetic": "/ˈbɪldɪŋ/",
+  "meaningCn": "建筑物",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can building."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bunny",
+  "phonetic": "/ˈbəni/",
+  "meaningCn": "兔子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bunny."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "bus",
+  "phonetic": "/ˈbəs/",
+  "meaningCn": "公共汽车",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a bus."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "bus driver",
+  "phonetic": "/ˈbəs ˈdraɪvɝ/",
+  "meaningCn": "公交司机",
+  "meaningEn": "bus driver",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Bus driver."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "businessman",
+  "phonetic": "/ˈbɪznəsˌmæn/",
+  "meaningCn": "商人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a businessman."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "busy",
+  "phonetic": "/ˈbɪzi/",
+  "meaningCn": "忙的",
+  "meaningEn": "v.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is busy."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "buy",
+  "phonetic": "/ˈbaɪ/",
+  "meaningCn": "买",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a buy."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "buy toys",
+  "phonetic": "/ˈbaɪ ˈtɔɪz/",
+  "meaningCn": "买玩具",
+  "meaningEn": "buy toys",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Buy toys."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by bike",
+  "phonetic": "/ˈbaɪ ˈbaɪk/",
+  "meaningCn": "骑自行车",
+  "meaningEn": "by bike",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By bike."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by boat",
+  "phonetic": "/ˈbaɪ ˈboʊt/",
+  "meaningCn": "乘小船",
+  "meaningEn": "by boat",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By boat."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by bus",
+  "phonetic": "/ˈbaɪ ˈbəs/",
+  "meaningCn": "乘公交车",
+  "meaningEn": "by bus",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By bus."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by car",
+  "phonetic": "/ˈbaɪ ˈkɑr/",
+  "meaningCn": "乘小汽车",
+  "meaningEn": "by car",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By car."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by plane",
+  "phonetic": "/ˈbaɪ ˈpleɪn/",
+  "meaningCn": "乘飞机",
+  "meaningEn": "by plane",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By plane."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by school bus",
+  "phonetic": "/ˈbaɪ ˈskul ˈbəs/",
+  "meaningCn": "乘校车",
+  "meaningEn": "by school bus",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By school bus."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by ship",
+  "phonetic": "/ˈbaɪ ˈʃɪp/",
+  "meaningCn": "乘轮船",
+  "meaningEn": "by ship",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By ship."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by subway",
+  "phonetic": "/ˈbaɪ ˈsəbˌweɪ/",
+  "meaningCn": "乘地铁",
+  "meaningEn": "by subway",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By subway."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by taxi",
+  "phonetic": "/ˈbaɪ ˈtæksi/",
+  "meaningCn": "乘出租车",
+  "meaningEn": "by taxi",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By taxi."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "by train",
+  "phonetic": "/ˈbaɪ ˈtreɪn/",
+  "meaningCn": "乘火车",
+  "meaningEn": "by train",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "By train."
+  ],
+  "emoji": "🚌",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "call",
+  "phonetic": "/ˈkɔl/",
+  "meaningCn": "打电话给……",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a call."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "camp",
+  "phonetic": "/ˈkæmp/",
+  "meaningCn": "露营",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a camp."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "campfire",
+  "phonetic": "/ˈkæmpˌfaɪɝ/",
+  "meaningCn": "篝火",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a campfire."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "can't",
+  "phonetic": "/ˈkænt/",
+  "meaningCn": "不能",
+  "meaningEn": "A colloquial contraction for can not.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a can't."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "candy",
+  "phonetic": "/ˈkændi/",
+  "meaningCn": "糖果",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a candy."
+  ],
+  "emoji": "🍽️",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "cap",
+  "phonetic": "/ˈkæp/",
+  "meaningCn": "帽子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cap."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "card",
+  "phonetic": "/ˈkɑrd/",
+  "meaningCn": "贺卡",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a card."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "careless",
+  "phonetic": "/ˈkɛrləs/",
+  "meaningCn": "粗心的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is careless."
+  ],
+  "emoji": "🚌",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "carrot",
+  "phonetic": "/ˈkærət/",
+  "meaningCn": "胡萝卜",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a carrot."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cartoon",
+  "phonetic": "/kɑrˈtun/",
+  "meaningCn": "漫画",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cartoon."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cartoons",
+  "phonetic": "/kɑrˈtunz/",
+  "meaningCn": "动画片",
+  "meaningEn": "the word cartoons",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cartoons."
+  ],
+  "emoji": "🚌",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "central",
+  "phonetic": "/ˈsɛntrəl/",
+  "meaningCn": "中心的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is central."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "cheap",
+  "phonetic": "/ˈtʃip/",
+  "meaningCn": "便宜的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is cheap."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cheetah",
+  "phonetic": "/ˈtʃitə/",
+  "meaningCn": "猎豹",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cheetah."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "chicken",
+  "phonetic": "/ˈtʃɪkən/",
+  "meaningCn": "鸡肉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a chicken."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "children",
+  "phonetic": "/ˈtʃɪldrən/",
+  "meaningCn": "儿童",
+  "meaningEn": "the word children",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a children."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "chocolate",
+  "phonetic": "/ˈtʃɔklət/",
+  "meaningCn": "巧克力",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a chocolate."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "chopsticks",
+  "phonetic": "/ˈtʃɑpˌstɪks/",
+  "meaningCn": "筷子",
+  "meaningEn": "the word chopsticks",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a chopsticks."
+  ],
+  "emoji": "🏠",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "chore",
+  "phonetic": "/ˈtʃɔr/",
+  "meaningCn": "家务",
+  "meaningEn": "the word chore",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a chore."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "cinema",
+  "phonetic": "/ˈsɪnəmə/",
+  "meaningCn": "电影院",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cinema."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "class",
+  "phonetic": "/ˈklæs/",
+  "meaningCn": "班",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a class."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "classmate",
+  "phonetic": "/ˈklæsˌmeɪt/",
+  "meaningCn": "同班同学",
+  "meaningEn": "the word classmate",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a classmate."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "classroom",
+  "phonetic": "/ˈklæsˌrum/",
+  "meaningCn": "教室",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a classroom."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "clean my room",
+  "phonetic": "/ˈklin ˈmaɪ ˈrum/",
+  "meaningCn": "打扫我的房间",
+  "meaningEn": "clean my room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Clean my room."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "clean the room",
+  "phonetic": "/ˈklin ðə ˈrum/",
+  "meaningCn": "打扫房间",
+  "meaningEn": "clean the room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Clean the room."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "cleaned",
+  "phonetic": "/ˈklind/",
+  "meaningCn": "打扫了",
+  "meaningEn": "v make clean by removing dirt, filth, or unwanted substances from\\nv remove unwanted subst",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can cleaned."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cleaned the window",
+  "phonetic": "/ˈklind ðə ˈwɪndoʊ/",
+  "meaningCn": "擦窗子",
+  "meaningEn": "cleaned the window",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Cleaned the window."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "cleaning the room",
+  "phonetic": "/ˈklinɪŋ ðə ˈrum/",
+  "meaningCn": "正在打扫房间",
+  "meaningEn": "cleaning the room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Cleaning the room."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "climb a hill",
+  "phonetic": "/ˈklaɪm ə ˈhɪl/",
+  "meaningCn": "爬山",
+  "meaningEn": "climb a hill",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Climb a hill."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "climb on the window ledge",
+  "phonetic": "/ˈklaɪm ˈɑn ðə ˈwɪndoʊ ˈlɛdʒ/",
+  "meaningCn": "爬上窗台",
+  "meaningEn": "climb on the window ledge",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Climb on the window ledge."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "climbed a hill",
+  "phonetic": "/ˈklaɪmd ə ˈhɪl/",
+  "meaningCn": "爬山",
+  "meaningEn": "climbed a hill",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Climbed a hill."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "climbing",
+  "phonetic": "/ˈklaɪmɪŋ/",
+  "meaningCn": "爬",
+  "meaningEn": "to climbing",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can climbing."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "clothes",
+  "phonetic": "/ˈkloʊðz/",
+  "meaningCn": "衣服",
+  "meaningEn": "the word clothes",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a clothes."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cloudy",
+  "phonetic": "/ˈklaʊdi/",
+  "meaningCn": "阴天的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is cloudy."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "club",
+  "phonetic": "/ˈkləb/",
+  "meaningCn": "俱乐部",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a club."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "coach",
+  "phonetic": "/ˈkoʊtʃ/",
+  "meaningCn": "教练",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a coach."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "coat",
+  "phonetic": "/ˈkoʊt/",
+  "meaningCn": "外衣",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a coat."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cola",
+  "phonetic": "/ˈkoʊlə/",
+  "meaningCn": "可乐",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cola."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "collecting erasers",
+  "phonetic": "/kəˈlɛktɪŋ iˈreɪsɝz/",
+  "meaningCn": "收集橡皮",
+  "meaningEn": "collecting erasers",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Collecting erasers."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "colour",
+  "phonetic": "/ˈkəlɝ/",
+  "meaningCn": "颜色",
+  "meaningEn": "the word colour",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a colour."
+  ],
+  "emoji": "🎨",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "come on",
+  "phonetic": "/ˈkəm ˈɑn/",
+  "meaningCn": "偶遇",
+  "meaningEn": "come on",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Come on."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "comic",
+  "phonetic": "/ˈkɑmɪk/",
+  "meaningCn": "漫画",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a comic."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "comic book",
+  "phonetic": "/ˈkɑmɪk ˈbʊk/",
+  "meaningCn": "连环漫画册",
+  "meaningEn": "comic book",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Comic book."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "competition",
+  "phonetic": "/ˌkɑmpəˈtɪʃən/",
+  "meaningCn": "竞赛",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a competition."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "computer",
+  "phonetic": "/kəmˈpjutɝ/",
+  "meaningCn": "电脑",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a computer."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "computer class",
+  "phonetic": "/kəmˈpjutɝ ˈklæs/",
+  "meaningCn": "电脑课",
+  "meaningEn": "computer class",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Computer class."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "computer room",
+  "phonetic": "/kəmˈpjutɝ ˈrum/",
+  "meaningCn": "电脑教室",
+  "meaningEn": "computer room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Computer room."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "contest",
+  "phonetic": "/ˈkɑntɛst/",
+  "meaningCn": "比赛",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a contest."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cooking",
+  "phonetic": "/ˈkʊkɪŋ/",
+  "meaningCn": "烹饪",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can cooking."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "cooking dinner",
+  "phonetic": "/ˈkʊkɪŋ ˈdɪnɝ/",
+  "meaningCn": "正在做饭",
+  "meaningEn": "cooking dinner",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Cooking dinner."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "count to ten",
+  "phonetic": "/ˈkaʊnt tə ˈtɛn/",
+  "meaningCn": "数到十",
+  "meaningEn": "count to ten",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Count to ten."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "country",
+  "phonetic": "/ˈkəntri/",
+  "meaningCn": "国家",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a country."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "countryside",
+  "phonetic": "/ˈkəntriˌsaɪd/",
+  "meaningCn": "乡村",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a countryside."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "cousin",
+  "phonetic": "/ˈkəzən/",
+  "meaningCn": "同辈表亲",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a cousin."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "crayon",
+  "phonetic": "/ˈkreɪˌɑn/",
+  "meaningCn": "蜡笔",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a crayon."
+  ],
+  "emoji": "✏️",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "crossing",
+  "phonetic": "/ˈkrɔsɪŋ/",
+  "meaningCn": "十字路口",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can crossing."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "crossroads",
+  "phonetic": "/ˈkrɔsˌroʊdz/",
+  "meaningCn": "十字路口",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a crossroads."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "curly",
+  "phonetic": "/ˈkɝli/",
+  "meaningCn": "卷曲的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is curly."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "cute",
+  "phonetic": "/ˈkjut/",
+  "meaningCn": "可爱的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is cute."
+  ],
+  "emoji": "✨",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "cycling",
+  "phonetic": "/ˈsaɪkəlɪŋ/",
+  "meaningCn": "骑自行车",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can cycling."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "danced",
+  "phonetic": "/ˈdænst/",
+  "meaningCn": "跳舞了",
+  "meaningEn": "imp.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can danced."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "dancing",
+  "phonetic": "/ˈdænsɪŋ/",
+  "meaningCn": "跳舞",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can dancing."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "deaf",
+  "phonetic": "/ˈdɛf/",
+  "meaningCn": "聋的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is deaf."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "degree",
+  "phonetic": "/dɪˈɡri/",
+  "meaningCn": "度数",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a degree."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "diary",
+  "phonetic": "/ˈdaɪɝi/",
+  "meaningCn": "日记",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a diary."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dictionary",
+  "phonetic": "/ˈdɪkʃəˌnɛri/",
+  "meaningCn": "词典",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a dictionary."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dining hall",
+  "phonetic": "/ˈdaɪnɪŋ ˈhɔl/",
+  "meaningCn": "食堂",
+  "meaningEn": "dining hall",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Dining hall."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dining room",
+  "phonetic": "/ˈdaɪnɪŋ ˈrum/",
+  "meaningCn": "餐厅",
+  "meaningEn": "dining room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Dining room."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dinner",
+  "phonetic": "/ˈdɪnɝ/",
+  "meaningCn": "晚餐",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a dinner."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dinosaur",
+  "phonetic": "/ˈdaɪnəˌsɔr/",
+  "meaningCn": "恐龙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a dinosaur."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "do homework",
+  "phonetic": "/ˈdu ˈhoʊmˌwɝk/",
+  "meaningCn": "做家庭作业",
+  "meaningEn": "do homework",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Do homework."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "do kung fu",
+  "phonetic": "/ˈdu ˈkəŋ ˈfu/",
+  "meaningCn": "练功夫",
+  "meaningEn": "do kung fu",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Do kung fu."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "do morning exercises",
+  "phonetic": "/ˈdu ˈmɔrnɪŋ ˈɛksɝˌsaɪzəz/",
+  "meaningCn": "做早操",
+  "meaningEn": "to do morning exercises",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Do morning exercises."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "do the housework",
+  "phonetic": "/ˈdu ðə ˈhaʊˌswɝk/",
+  "meaningCn": "做家务",
+  "meaningEn": "do the housework",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Do the housework."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "doctor",
+  "phonetic": "/ˈdɑktɝ/",
+  "meaningCn": "医生",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a doctor."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "does",
+  "phonetic": "/ˈdəz/",
+  "meaningCn": "单词",
+  "meaningEn": "the word does",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a does."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "doing jigsaw puzzles",
+  "phonetic": "/ˈduɪŋ ˈdʒɪɡˌsɔ ˈpəzəlz/",
+  "meaningCn": "拼拼图",
+  "meaningEn": "doing jigsaw puzzles",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Doing jigsaw puzzles."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "doing morning exercises",
+  "phonetic": "/ˈduɪŋ ˈmɔrnɪŋ ˈɛksɝˌsaɪzəz/",
+  "meaningCn": "正在做早操",
+  "meaningEn": "doing morning exercises",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Doing morning exercises."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "doll",
+  "phonetic": "/ˈdɑl/",
+  "meaningCn": "洋娃娃",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a doll."
+  ],
+  "emoji": "🧸",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dollar",
+  "phonetic": "/ˈdɑlɝ/",
+  "meaningCn": "美元",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a dollar."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "downtown",
+  "phonetic": "/ˈdaʊnˈtaʊn/",
+  "meaningCn": "闹市区",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a downtown."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "drank",
+  "phonetic": "/ˈdræŋk/",
+  "meaningCn": "的过去式",
+  "meaningEn": "v take in liquids\\nv consume alcohol\\nv propose a toast to\\nv be fascinated or spell-bound",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a drank."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "drank cold drinks",
+  "phonetic": "/ˈdræŋk ˈkoʊld ˈdrɪŋks/",
+  "meaningCn": "喝冷饮",
+  "meaningEn": "drank cold drinks",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Drank cold drinks."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "draw cartoons",
+  "phonetic": "/ˈdrɔ kɑrˈtunz/",
+  "meaningCn": "画漫画",
+  "meaningEn": "draw cartoons",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Draw cartoons."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "draw pictures",
+  "phonetic": "/ˈdrɔ ˈpɪktʃɝz/",
+  "meaningCn": "画画",
+  "meaningEn": "draw pictures",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Draw pictures."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dress",
+  "phonetic": "/ˈdrɛs/",
+  "meaningCn": "连衣裙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a dress."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "drinking",
+  "phonetic": "/ˈdrɪŋkɪŋ/",
+  "meaningCn": "喝",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can drinking."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "driver",
+  "phonetic": "/ˈdraɪvɝ/",
+  "meaningCn": "司机",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a driver."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "dumpling",
+  "phonetic": "/ˈdəmplɪŋ/",
+  "meaningCn": "饺子",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can dumpling."
+  ],
+  "emoji": "🏃",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "each other",
+  "phonetic": "/ˈitʃ ˈəðɝ/",
+  "meaningCn": "彼此",
+  "meaningEn": "each other",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Each other."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "early",
+  "phonetic": "/ˈɝli/",
+  "meaningCn": "早到的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is early."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "east",
+  "phonetic": "/ˈist/",
+  "meaningCn": "东",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an east."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "eat breakfast",
+  "phonetic": "/ˈit ˈbrɛkfəst/",
+  "meaningCn": "吃早饭",
+  "meaningEn": "eat breakfast",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Eat breakfast."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "eat dinner",
+  "phonetic": "/ˈit ˈdɪnɝ/",
+  "meaningCn": "吃晚饭",
+  "meaningEn": "eat dinner",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Eat dinner."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "eat lunch",
+  "phonetic": "/ˈit ˈləntʃ/",
+  "meaningCn": "吃午饭",
+  "meaningEn": "eat lunch",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Eat lunch."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "eat seafood",
+  "phonetic": "/ˈit ˈsiˌfud/",
+  "meaningCn": "吃海鲜",
+  "meaningEn": "eat seafood",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Eat seafood."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "eating",
+  "phonetic": "/ˈitɪŋ/",
+  "meaningCn": "吃",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can eating."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "eating lunch",
+  "phonetic": "/ˈitɪŋ ˈləntʃ/",
+  "meaningCn": "正在吃午饭",
+  "meaningEn": "eating lunch",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Eating lunch."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "eighteen",
+  "phonetic": "/ˈeɪˈtin/",
+  "meaningCn": "十八",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an eighteen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "eighty",
+  "phonetic": "/ˈeɪti/",
+  "meaningCn": "八十",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an eighty."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "eleven",
+  "phonetic": "/ˈilɛvən/",
+  "meaningCn": "十一",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an eleven."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "else",
+  "phonetic": "/ˈɛls/",
+  "meaningCn": "其他的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is else."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "email",
+  "phonetic": "/iˈmeɪl/",
+  "meaningCn": "电子信函",
+  "meaningEn": "the word email",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an email."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "enjoy",
+  "phonetic": "/ˌɛnˈdʒɔɪ/",
+  "meaningCn": "享受……乐趣",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an enjoy."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "eraser",
+  "phonetic": "/iˈreɪsɝ/",
+  "meaningCn": "橡皮",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an eraser."
+  ],
+  "emoji": "✏️",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "evening",
+  "phonetic": "/ˈivnɪŋ/",
+  "meaningCn": "晚上",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can evening."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "every day",
+  "phonetic": "/ˈɛvɝi ˈdeɪ/",
+  "meaningCn": "每天",
+  "meaningEn": "every day",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Every day."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "exercise",
+  "phonetic": "/ˈɛksɝˌsaɪz/",
+  "meaningCn": "活动",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an exercise."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "exercise book",
+  "phonetic": "/ˈɛksɝˌsaɪz ˈbʊk/",
+  "meaningCn": "练习册",
+  "meaningEn": "exercise book",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Exercise book."
+  ],
+  "emoji": "✏️",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "exhibition",
+  "phonetic": "/ˌɛksəˈbɪʃən/",
+  "meaningCn": "表现",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an exhibition."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "expensive",
+  "phonetic": "/ɪkˈspɛnsɪv/",
+  "meaningCn": "贵的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is expensive."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "factory",
+  "phonetic": "/ˈfæktɝi/",
+  "meaningCn": "工厂",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a factory."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "fan",
+  "phonetic": "/ˈfæn/",
+  "meaningCn": "风扇",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fan."
+  ],
+  "emoji": "🌳",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "fantastic",
+  "phonetic": "/fænˈtæstɪk/",
+  "meaningCn": "极好的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is fantastic."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "faster",
+  "phonetic": "/ˈfæstɝ/",
+  "meaningCn": "更快的",
+  "meaningEn": "a acting or moving or capable of acting or moving quickly\\na (used of timepieces) indicati",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is faster."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "fat",
+  "phonetic": "/ˈfæt/",
+  "meaningCn": "胖的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is fat."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "father",
+  "phonetic": "/ˈfɑðɝ/",
+  "meaningCn": "父亲",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a father."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "favourite",
+  "phonetic": "/ˈfeɪvɝɪt/",
+  "meaningCn": "特别喜爱的",
+  "meaningEn": "the word favourite",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is favourite."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "feature",
+  "phonetic": "/ˈfitʃɝ/",
+  "meaningCn": "特点",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a feature."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "feeding the fish",
+  "phonetic": "/ˈfidɪŋ ðə ˈfɪʃ/",
+  "meaningCn": "正在喂鱼",
+  "meaningEn": "feeding the fish",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Feeding the fish."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "feet",
+  "phonetic": "/ˈfit/",
+  "meaningCn": "脚",
+  "meaningEn": "the word feet",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a feet."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "fell",
+  "phonetic": "/ˈfɛl/",
+  "meaningCn": "击倒",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fell."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "felt",
+  "phonetic": "/ˈfɛlt/",
+  "meaningCn": "毛毯",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a felt."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "felt happy",
+  "phonetic": "/ˈfɛlt ˈhæpi/",
+  "meaningCn": "觉得高兴",
+  "meaningEn": "felt happy",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Felt happy."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "ferry",
+  "phonetic": "/ˈfɛri/",
+  "meaningCn": "渡船",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a ferry."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "fifteen",
+  "phonetic": "/ˈfɪfˈtin/",
+  "meaningCn": "十五",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fifteen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "fifth",
+  "phonetic": "/ˈfɪfθ/",
+  "meaningCn": "第五的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is fifth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "film",
+  "phonetic": "/ˈfɪlm/",
+  "meaningCn": "电影",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a film."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "first floor",
+  "phonetic": "/ˈfɝst ˈflɔr/",
+  "meaningCn": "第一层",
+  "meaningEn": "first floor",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "First floor."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "fisherman",
+  "phonetic": "/ˈfɪʃɝˌmæn/",
+  "meaningCn": "渔夫",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fisherman."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "flower show",
+  "phonetic": "/ˈflaʊɝ ˈʃoʊ/",
+  "meaningCn": "花展",
+  "meaningEn": "flower show",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Flower show."
+  ],
+  "emoji": "🌳",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "fly a kite",
+  "phonetic": "/ˈflaɪ ə ˈkaɪt/",
+  "meaningCn": "放风筝",
+  "meaningEn": "fly a kite",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Fly a kite."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "foggy",
+  "phonetic": "/ˈfɑɡi/",
+  "meaningCn": "有雾的",
+  "meaningEn": "s stunned or confused and slow to react (as from blows or drunkenness or exhaustion)\\ns in",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is foggy."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "fool",
+  "phonetic": "/ˈful/",
+  "meaningCn": "愚人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fool."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "football player",
+  "phonetic": "/ˈfʊtˌbɔl ˈpleɪɝ/",
+  "meaningCn": "足球运动员",
+  "meaningEn": "football player",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Football player."
+  ],
+  "emoji": "🧸",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "for rent",
+  "phonetic": "/fər ˈrɛnt/",
+  "meaningCn": "供出租",
+  "meaningEn": "for rent",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "For rent."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "fork",
+  "phonetic": "/ˈfɔrk/",
+  "meaningCn": "叉子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fork."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "forty",
+  "phonetic": "/ˈfɔrti/",
+  "meaningCn": "四十",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a forty."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "fourteen",
+  "phonetic": "/ˈfɔrˈtin/",
+  "meaningCn": "十四",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fourteen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "fourth",
+  "phonetic": "/ˈfɔrθ/",
+  "meaningCn": "第四",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fourth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "free",
+  "phonetic": "/ˈfri/",
+  "meaningCn": "空闲的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is free."
+  ],
+  "emoji": "✨",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "fresh",
+  "phonetic": "/ˈfrɛʃ/",
+  "meaningCn": "新鲜的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is fresh."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "fridge",
+  "phonetic": "/ˈfrɪdʒ/",
+  "meaningCn": "电冰箱",
+  "meaningEn": "the word fridge",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fridge."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "front",
+  "phonetic": "/ˈfrənt/",
+  "meaningCn": "前面",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a front."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "fur",
+  "phonetic": "/ˈfɝ/",
+  "meaningCn": "毛皮",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a fur."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "gave",
+  "phonetic": "/ˈɡeɪv/",
+  "meaningCn": "的过去式",
+  "meaningEn": "v cause to have, in the abstract sense or physical sense\\nv be the cause or source of\\nv t",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a gave."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "get",
+  "phonetic": "/ˈɡɛt/",
+  "meaningCn": "到达",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a get."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "get to",
+  "phonetic": "/ˈɡɛt tə/",
+  "meaningCn": "到达",
+  "meaningEn": "get to",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Get to."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "get together",
+  "phonetic": "/ˈɡɛt təˈɡɛðɝ/",
+  "meaningCn": "聚集",
+  "meaningEn": "get together",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Get together."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "get up",
+  "phonetic": "/ˈɡɛt ˈəp/",
+  "meaningCn": "起床",
+  "meaningEn": "get up",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Get up."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "giraffe",
+  "phonetic": "/dʒɝˈæf/",
+  "meaningCn": "长颈鹿",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a giraffe."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "glasses",
+  "phonetic": "/ˈɡlæsəz/",
+  "meaningCn": "眼镜",
+  "meaningEn": "the word glasses",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a glasses."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "glove",
+  "phonetic": "/ˈɡləv/",
+  "meaningCn": "手套",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a glove."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "gloves",
+  "phonetic": "/ˈɡləvz/",
+  "meaningCn": "手套",
+  "meaningEn": "the word gloves",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a gloves."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "glue stick",
+  "phonetic": "/ˈɡlu ˈstɪk/",
+  "meaningCn": "胶棒",
+  "meaningEn": "glue stick",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Glue stick."
+  ],
+  "emoji": "✏️",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go boating",
+  "phonetic": "/ˈɡoʊ ˈboʊtɪŋ/",
+  "meaningCn": "去划船",
+  "meaningEn": "go boating",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go boating."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go camping",
+  "phonetic": "/ˈɡoʊ ˈkæmpɪŋ/",
+  "meaningCn": "去野营",
+  "meaningEn": "go camping",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go camping."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go cycling",
+  "phonetic": "/ˈɡoʊ ˈsaɪkəlɪŋ/",
+  "meaningCn": "去骑自行车",
+  "meaningEn": "go cycling",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go cycling."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go fishing",
+  "phonetic": "/ˈɡoʊ ˈfɪʃɪŋ/",
+  "meaningCn": "去钓鱼",
+  "meaningEn": "go fishing",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go fishing."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go for a picnic",
+  "phonetic": "/ˈɡoʊ fər ə ˈpɪkˌnɪk/",
+  "meaningCn": "去野餐",
+  "meaningEn": "go for a picnic",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go for a picnic."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go for a walk",
+  "phonetic": "/ˈɡoʊ fər ə ˈwɑk/",
+  "meaningCn": "散步",
+  "meaningEn": "go for a walk",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go for a walk."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go home",
+  "phonetic": "/ˈɡoʊ ˈhoʊm/",
+  "meaningCn": "回家",
+  "meaningEn": "go home",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go home."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go on a picnic",
+  "phonetic": "/ˈɡoʊ ˈɑn ə ˈpɪkˌnɪk/",
+  "meaningCn": "去野餐",
+  "meaningEn": "go on a picnic",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go on a picnic."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go shopping",
+  "phonetic": "/ˈɡoʊ ˈʃɑpɪŋ/",
+  "meaningCn": "去买东西",
+  "meaningEn": "go shopping",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go shopping."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go skating",
+  "phonetic": "/ˈɡoʊ ˈskeɪtɪŋ/",
+  "meaningCn": "去滑冰",
+  "meaningEn": "go skating",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go skating."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go straight",
+  "phonetic": "/ˈɡoʊ ˈstreɪt/",
+  "meaningCn": "直行",
+  "meaningEn": "go straight",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go straight."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go swimming",
+  "phonetic": "/ˈɡoʊ ˈswɪmɪŋ/",
+  "meaningCn": "去游泳",
+  "meaningEn": "go swimming",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go swimming."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go to a drawing club",
+  "phonetic": "/ˈɡoʊ tə ə ˈdrɔɪŋ ˈkləb/",
+  "meaningCn": "去绘画俱乐部",
+  "meaningEn": "go to a drawing club",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go to a drawing club."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "go to bed",
+  "phonetic": "/ˈɡoʊ tə ˈbɛd/",
+  "meaningCn": "上床睡觉",
+  "meaningEn": "go to bed",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go to bed."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "go to school",
+  "phonetic": "/ˈɡoʊ tə ˈskul/",
+  "meaningCn": "去上学",
+  "meaningEn": "go to school",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go to school."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "go to the cinema",
+  "phonetic": "/ˈɡoʊ tə ðə ˈsɪnəmə/",
+  "meaningCn": "看电影",
+  "meaningEn": "go to the cinema",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Go to the cinema."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "goal",
+  "phonetic": "/ˈɡoʊl/",
+  "meaningCn": "目标",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a goal."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "goat",
+  "phonetic": "/ˈɡoʊt/",
+  "meaningCn": "山羊",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a goat."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "good job",
+  "phonetic": "/ˈɡʊd ˈdʒɑb/",
+  "meaningCn": "做得好",
+  "meaningEn": "good job",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Good job."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "grade",
+  "phonetic": "/ˈɡreɪd/",
+  "meaningCn": "年级",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a grade."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "grandfather",
+  "phonetic": "/ˈɡrænˌfɑðɝ/",
+  "meaningCn": "祖父",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a grandfather."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "grandma",
+  "phonetic": "/ˈɡrændmɑ/",
+  "meaningCn": "奶奶",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a grandma."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "grandpa",
+  "phonetic": "/ˈɡrændˌpɑ/",
+  "meaningCn": "爷爷",
+  "meaningEn": "the word grandpa",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a grandpa."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "grandparent",
+  "phonetic": "/ˈɡrændˌpɛrənt/",
+  "meaningCn": "祖父母",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a grandparent."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "green beans",
+  "phonetic": "/ˈɡrin ˈbinz/",
+  "meaningCn": "四季豆",
+  "meaningEn": "long green beans eaten as a vegetable",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Green beans."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "grocery",
+  "phonetic": "/ˈɡroʊsɝi/",
+  "meaningCn": "食品杂货店",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a grocery."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "guess",
+  "phonetic": "/ˈɡɛs/",
+  "meaningCn": "猜",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a guess."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "gym",
+  "phonetic": "/ˈdʒɪm/",
+  "meaningCn": "+体育馆",
+  "meaningEn": "the word gym",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a gym."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "habit",
+  "phonetic": "/ˈhæbət/",
+  "meaningCn": "习惯",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a habit."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "had",
+  "phonetic": "/ˈhæd/",
+  "meaningCn": "的过去式和过去分词",
+  "meaningEn": "v have or possess, either in a concrete or an abstract sense\\nv have as a feature\\nv go th",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a had."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "had a cold",
+  "phonetic": "/ˈhæd ə ˈkoʊld/",
+  "meaningCn": "感冒了",
+  "meaningEn": "had a cold",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Had a cold."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "half",
+  "phonetic": "/ˈhæf/",
+  "meaningCn": "一半",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a half."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hall",
+  "phonetic": "/ˈhɔl/",
+  "meaningCn": "门厅",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hall."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hamburger",
+  "phonetic": "/ˈhæmbɝɡɝ/",
+  "meaningCn": "汉堡包",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hamburger."
+  ],
+  "emoji": "🍽️",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "handsome",
+  "phonetic": "/ˈhænsəm/",
+  "meaningCn": "英俊的",
+  "meaningEn": "s pleasing in appearance especially by reason of conformity to ideals of form and proporti",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is handsome."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hard-working",
+  "phonetic": "/ˌhɑrdhˈwɝkɪŋ/",
+  "meaningCn": "努力工作",
+  "meaningEn": "-ing form of hard-work",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can hard-working."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hat",
+  "phonetic": "/ˈhæt/",
+  "meaningCn": "帽子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hat."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "have ... class",
+  "phonetic": "/hæv klæs/",
+  "meaningCn": "上……课",
+  "meaningEn": "to have a class in a subject",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Have ... class."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "have a look",
+  "phonetic": "/ˈhæv ə ˈlʊk/",
+  "meaningCn": "看一看",
+  "meaningEn": "have a look",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Have a look."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "have a picnic",
+  "phonetic": "/ˈhæv ə ˈpɪkˌnɪk/",
+  "meaningCn": "野餐",
+  "meaningEn": "have a picnic",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Have a picnic."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "having ... class",
+  "phonetic": "/ˈhævɪŋ klæs/",
+  "meaningCn": "正在上……课",
+  "meaningEn": "having ... class",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Having ... class."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "head teacher",
+  "phonetic": "/ˈhɛd ˈtitʃɝ/",
+  "meaningCn": "校长",
+  "meaningEn": "head teacher",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Head teacher."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "headache",
+  "phonetic": "/ˈhɛˌdeɪk/",
+  "meaningCn": "头疼",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a headache."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "healthy",
+  "phonetic": "/ˈhɛlθi/",
+  "meaningCn": "健康的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is healthy."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "heavier",
+  "phonetic": "/ˈhɛviɝ/",
+  "meaningCn": "巨大的",
+  "meaningEn": "a of comparatively great physical weight or density\\na unusually great in degree or quanti",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is heavier."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "helmet",
+  "phonetic": "/ˈhɛlmət/",
+  "meaningCn": "头盔",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a helmet."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "help yourself",
+  "phonetic": "/ˈhɛlp ˈjɔrsɛlf/",
+  "meaningCn": "请自己动手用餐吧",
+  "meaningEn": "help yourself",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Help yourself."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "helpful",
+  "phonetic": "/ˈhɛlpfəl/",
+  "meaningCn": "有用的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is helpful."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "her",
+  "phonetic": "/ˈhɝ/",
+  "meaningCn": "她的",
+  "meaningEn": "pron.",
+  "partOfSpeech": "pron.",
+  "examples": [
+   "I know the word her."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hers",
+  "phonetic": "/ˈhɝz/",
+  "meaningCn": "她的",
+  "meaningEn": "pron.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is hers."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hiking",
+  "phonetic": "/ˈhaɪkɪŋ/",
+  "meaningCn": "远足",
+  "meaningEn": "to hiking",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can hiking."
+  ],
+  "emoji": "🏃",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "his",
+  "phonetic": "/ˈhɪz/",
+  "meaningCn": "他的",
+  "meaningEn": "pron.",
+  "partOfSpeech": "pron.",
+  "examples": [
+   "I know the word his."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hobby",
+  "phonetic": "/ˈhɑbi/",
+  "meaningCn": "业余爱好",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hobby."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "hockey",
+  "phonetic": "/ˈhɑki/",
+  "meaningCn": "曲棍球",
+  "meaningEn": "the word hockey",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hockey."
+  ],
+  "emoji": "🧸",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "holiday",
+  "phonetic": "/ˈhɑləˌdeɪ/",
+  "meaningCn": "假日",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a holiday."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "homework",
+  "phonetic": "/ˈhoʊmˌwɝk/",
+  "meaningCn": "家庭作业",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a homework."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hospital",
+  "phonetic": "/ˈhɑˌspɪtəl/",
+  "meaningCn": "医院",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hospital."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "hot pot",
+  "phonetic": "/ˈhɑt ˈpɑt/",
+  "meaningCn": "火锅",
+  "meaningEn": "hot pot",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Hot pot."
+  ],
+  "emoji": "🍽️",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "hotel",
+  "phonetic": "/hoʊˈtɛl/",
+  "meaningCn": "旅馆",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hotel."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "how about",
+  "phonetic": "/ˈhaʊ əˈbaʊt/",
+  "meaningCn": "…怎么样",
+  "meaningEn": "how about",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "How about."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "how much",
+  "phonetic": "/ˈhaʊ ˈmətʃ/",
+  "meaningCn": "多少钱",
+  "meaningEn": "how much",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "How much."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "how old",
+  "phonetic": "/ˈhaʊ ˈoʊld/",
+  "meaningCn": "多大年龄",
+  "meaningEn": "how old",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "How old."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hurry up",
+  "phonetic": "/ˈhɝi ˈəp/",
+  "meaningCn": "赶快",
+  "meaningEn": "hurry up",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Hurry up."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "hurt",
+  "phonetic": "/ˈhɝt/",
+  "meaningCn": "受伤",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a hurt."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "ice cream",
+  "phonetic": "/ˈaɪs ˈkrim/",
+  "meaningCn": "冰淇淋",
+  "meaningEn": "ice cream",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Ice cream."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "ice lantern",
+  "phonetic": "/ˈaɪs ˈlæntɝn/",
+  "meaningCn": "冰灯",
+  "meaningEn": "ice lantern",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Ice lantern."
+  ],
+  "emoji": "🏠",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "ice-cream",
+  "phonetic": "/ˈaɪsˌkrim/",
+  "meaningCn": "冰淇淋",
+  "meaningEn": "the word ice-cream",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an ice-cream."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "ice-skate",
+  "phonetic": "/ˈaɪs ˈskeɪt/",
+  "meaningCn": "滑冰",
+  "meaningEn": "the word ice-skate",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an ice-skate."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "idea",
+  "phonetic": "/aɪˈdiə/",
+  "meaningCn": "想法",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an idea."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "ill",
+  "phonetic": "/ˈɪl/",
+  "meaningCn": "有病",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an ill."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "in front of",
+  "phonetic": "/ˈɪn ˈfrənt əv/",
+  "meaningCn": "在...前面",
+  "meaningEn": "in front of",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "In front of."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "in one hour",
+  "phonetic": "/ˈɪn ˈwən ˈaʊɝ/",
+  "meaningCn": "一小时之后",
+  "meaningEn": "in one hour",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "In one hour."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "in the future",
+  "phonetic": "/ˈɪn ðə ˈfjutʃɝ/",
+  "meaningCn": "将来",
+  "meaningEn": "in the future",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "In the future."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "insect",
+  "phonetic": "/ˈɪnˌsɛkt/",
+  "meaningCn": "昆虫",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an insect."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "invention",
+  "phonetic": "/ˌɪnˈvɛnʃən/",
+  "meaningCn": "发明",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an invention."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "its",
+  "phonetic": "/ˈɪts/",
+  "meaningCn": "它的",
+  "meaningEn": "belonging to it",
+  "partOfSpeech": "pron.",
+  "examples": [
+   "I know the word its."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "jacket",
+  "phonetic": "/ˈdʒækət/",
+  "meaningCn": "夹克衫",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a jacket."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "jasmine",
+  "phonetic": "/ˈdʒæzmən/",
+  "meaningCn": "茉莉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a jasmine."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "job",
+  "phonetic": "/ˈdʒɑb/",
+  "meaningCn": "工作",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a job."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "join",
+  "phonetic": "/ˈdʒɔɪn/",
+  "meaningCn": "加入",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a join."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "juice",
+  "phonetic": "/ˈdʒus/",
+  "meaningCn": "果汁",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a juice."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "jumped rope",
+  "phonetic": "/ˈdʒəmpt ˈroʊp/",
+  "meaningCn": "跳绳",
+  "meaningEn": "jumped rope",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Jumped rope."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "jumping",
+  "phonetic": "/ˈdʒəmpɪŋ/",
+  "meaningCn": "跳跃的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is jumping."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "jumping rope",
+  "phonetic": "/ˈdʒəmpɪŋ ˈroʊp/",
+  "meaningCn": "跳绳",
+  "meaningEn": "jumping rope",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Jumping rope."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "just a minute",
+  "phonetic": "/ˈdʒəst ə ˈmɪnət/",
+  "meaningCn": "请等一会儿",
+  "meaningEn": "just a minute",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Just a minute."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "kangaroo",
+  "phonetic": "/ˌkæŋɡɝˈu/",
+  "meaningCn": "袋鼠",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a kangaroo."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "keep",
+  "phonetic": "/ˈkip/",
+  "meaningCn": "生计",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a keep."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "keep to the right",
+  "phonetic": "/ˈkip tə ðə ˈraɪt/",
+  "meaningCn": "靠右行",
+  "meaningEn": "keep to the right",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Keep to the right."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "keep your desk clean",
+  "phonetic": "/ˈkip ˈjɔr ˈdɛsk ˈklin/",
+  "meaningCn": "保持课桌干净",
+  "meaningEn": "keep your desk clean",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Keep your desk clean."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "key",
+  "phonetic": "/ˈki/",
+  "meaningCn": "钥匙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a key."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "kick",
+  "phonetic": "/ˈkɪk/",
+  "meaningCn": "踢",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a kick."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "kid",
+  "phonetic": "/ˈkɪd/",
+  "meaningCn": "小山羊",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a kid."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "kilogram",
+  "phonetic": "/ˈkɪləˌɡræm/",
+  "meaningCn": "千克",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a kilogram."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "kitchen",
+  "phonetic": "/ˈkɪtʃən/",
+  "meaningCn": "厨房",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a kitchen."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "knife",
+  "phonetic": "/ˈnaɪf/",
+  "meaningCn": "刀",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a knife."
+  ],
+  "emoji": "🏠",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "koala",
+  "phonetic": "/koʊˈɑlə/",
+  "meaningCn": "考拉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a koala."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "kung fu",
+  "phonetic": "/ˈkəŋ ˈfu/",
+  "meaningCn": "功夫",
+  "meaningEn": "kung fu",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Kung fu."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "lamp",
+  "phonetic": "/ˈlæmp/",
+  "meaningCn": "灯",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a lamp."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "late",
+  "phonetic": "/ˈleɪt/",
+  "meaningCn": "晚",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a late."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "laughed",
+  "phonetic": "/ˈlæft/",
+  "meaningCn": "笑了",
+  "meaningEn": "imp.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can laughed."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "learned to ride a bike",
+  "phonetic": "/ˈlɝnd tə ˈraɪd ə ˈbaɪk/",
+  "meaningCn": "学骑自行车",
+  "meaningEn": "learned to ride a bike",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Learned to ride a bike."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "learned to swim",
+  "phonetic": "/ˈlɝnd tə ˈswɪm/",
+  "meaningCn": "学游泳",
+  "meaningEn": "learned to swim",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Learned to swim."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "learned to walk",
+  "phonetic": "/ˈlɝnd tə ˈwɑk/",
+  "meaningCn": "学走路",
+  "meaningEn": "learned to walk",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Learned to walk."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "left",
+  "phonetic": "/ˈlɛft/",
+  "meaningCn": "左",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a left."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "less",
+  "phonetic": "/ˈlɛs/",
+  "meaningCn": "更少",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a less."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "lesson",
+  "phonetic": "/ˈlɛsən/",
+  "meaningCn": "课",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a lesson."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "let's",
+  "phonetic": "/ˈlɛts/",
+  "meaningCn": "让我们……",
+  "meaningEn": "the word let's",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a let's."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "library",
+  "phonetic": "/ˈlaɪbrɛˌri/",
+  "meaningCn": "图书馆",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a library."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "licked",
+  "phonetic": "/ˈlɪkt/",
+  "meaningCn": "舔",
+  "meaningEn": "imp.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can licked."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "listened to music",
+  "phonetic": "/ˈlɪsənd tə ˈmjuzɪk/",
+  "meaningCn": "听音乐",
+  "meaningEn": "listened to music",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Listened to music."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "listening to music",
+  "phonetic": "/ˈlɪsənɪŋ tə ˈmjuzɪk/",
+  "meaningCn": "听音乐",
+  "meaningEn": "listening to music",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Listening to music."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "living room",
+  "phonetic": "/ˈlɪvɪŋ ˈrum/",
+  "meaningCn": "客厅",
+  "meaningEn": "living room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Living room."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "longer",
+  "phonetic": "/ˈlɔŋɡɝ/",
+  "meaningCn": "比较久",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a longer."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "look for",
+  "phonetic": "/ˈlʊk fər/",
+  "meaningCn": "寻找",
+  "meaningEn": "look for",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Look for."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "look forward to",
+  "phonetic": "/ˈlʊk ˈfɔrwɝd tə/",
+  "meaningCn": "盼望",
+  "meaningEn": "look forward to",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Look forward to."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "look up",
+  "phonetic": "/ˈlʊk ˈəp/",
+  "meaningCn": "查阅",
+  "meaningEn": "look up",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Look up."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "lot",
+  "phonetic": "/ˈlɑt/",
+  "meaningCn": "运气",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a lot."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "lots of",
+  "phonetic": "/ˈlɑts əv/",
+  "meaningCn": "许多的...",
+  "meaningEn": "lots of",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Lots of."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "lovely",
+  "phonetic": "/ˈləvli/",
+  "meaningCn": "可爱的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is lovely."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "lower",
+  "phonetic": "/ˈloʊɝ/",
+  "meaningCn": "低的",
+  "meaningEn": "v.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is lower."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "lunch",
+  "phonetic": "/ˈləntʃ/",
+  "meaningCn": "午餐",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a lunch."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "magazine",
+  "phonetic": "/ˈmæɡəˌzin/",
+  "meaningCn": "杂志",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a magazine."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "mail a present",
+  "phonetic": "/ˈmeɪl ə ˈprɛzənt/",
+  "meaningCn": "邮寄礼物",
+  "meaningEn": "mail a present",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Mail a present."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "make a card",
+  "phonetic": "/ˈmeɪk ə ˈkɑrd/",
+  "meaningCn": "制作卡片",
+  "meaningEn": "make a card",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make a card."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "make a model plane",
+  "phonetic": "/ˈmeɪk ə ˈmɑdəl ˈpleɪn/",
+  "meaningCn": "做飞机模型",
+  "meaningEn": "make a model plane",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make a model plane."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "make a phone call",
+  "phonetic": "/ˈmeɪk ə ˈfoʊn ˈkɔl/",
+  "meaningCn": "打电话",
+  "meaningEn": "make a phone call",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make a phone call."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "make a poster",
+  "phonetic": "/ˈmeɪk ə ˈpoʊstɝ/",
+  "meaningCn": "制作海报",
+  "meaningEn": "make a poster",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make a poster."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "make a snowman",
+  "phonetic": "/ˈmeɪk ə ˈsnoʊˌmæn/",
+  "meaningCn": "堆雪人",
+  "meaningEn": "make a snowman",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make a snowman."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "make a video call",
+  "phonetic": "/ˈmeɪk ə ˈvɪdioʊ ˈkɔl/",
+  "meaningCn": "打视频电话",
+  "meaningEn": "make a video call",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make a video call."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "make the bed",
+  "phonetic": "/ˈmeɪk ðə ˈbɛd/",
+  "meaningCn": "整理床铺",
+  "meaningEn": "make the bed",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Make the bed."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "making models",
+  "phonetic": "/ˈmeɪkɪŋ ˈmɑdəlz/",
+  "meaningCn": "制作模型",
+  "meaningEn": "making models",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Making models."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "mammal",
+  "phonetic": "/ˈmæməl/",
+  "meaningCn": "哺乳动物",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mammal."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "maple leaves",
+  "phonetic": "/ˈmeɪpəl ˈlivz/",
+  "meaningCn": "枫叶",
+  "meaningEn": "maple leaves",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Maple leaves."
+  ],
+  "emoji": "🌳",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "mark",
+  "phonetic": "/ˈmɑrk/",
+  "meaningCn": "分数",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mark."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "maths",
+  "phonetic": "/mæθs/",
+  "meaningCn": "数学",
+  "meaningEn": "the word maths",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a maths."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "maths book",
+  "phonetic": "/mæθs ˈbʊk/",
+  "meaningCn": "数学书",
+  "meaningEn": "maths book",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Maths book."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "meat",
+  "phonetic": "/ˈmit/",
+  "meaningCn": "肉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a meat."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "meeting place",
+  "phonetic": "/ˈmitɪŋ ˈpleɪs/",
+  "meaningCn": "集合地点",
+  "meaningEn": "meeting place",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Meeting place."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "merry",
+  "phonetic": "/ˈmɛri/",
+  "meaningCn": "高兴的",
+  "meaningEn": "s full of or showing high-spirited merriment\\ns offering fun and gaiety\\ns quick and energ",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is merry."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "meter",
+  "phonetic": "/ˈmitɝ/",
+  "meaningCn": "米",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a meter."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "metre",
+  "phonetic": "/ˈmitɝ/",
+  "meaningCn": "米",
+  "meaningEn": "the word metre",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a metre."
+  ],
+  "emoji": "🍽️",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "mice",
+  "phonetic": "/ˈmaɪs/",
+  "meaningCn": "老鼠",
+  "meaningEn": "the word mice",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mice."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "mine",
+  "phonetic": "/ˈmaɪn/",
+  "meaningCn": "矿",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mine."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "money",
+  "phonetic": "/ˈməni/",
+  "meaningCn": "钱",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a money."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "moose",
+  "phonetic": "/ˈmus/",
+  "meaningCn": "北美麋",
+  "meaningEn": "the word moose",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a moose."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "morning tea",
+  "phonetic": "/ˈmɔrnɪŋ ˈti/",
+  "meaningCn": "早茶",
+  "meaningEn": "morning tea",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Morning tea."
+  ],
+  "emoji": "🍽️",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "mother",
+  "phonetic": "/ˈməðɝ/",
+  "meaningCn": "母亲",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mother."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "mud",
+  "phonetic": "/ˈməd/",
+  "meaningCn": "泥",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mud."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "mule",
+  "phonetic": "/ˈmjul/",
+  "meaningCn": "骡",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mule."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "mum",
+  "phonetic": "/ˈməm/",
+  "meaningCn": "菊花",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a mum."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "museum",
+  "phonetic": "/ˈmjuziəm/",
+  "meaningCn": "博物馆",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a museum."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "music class",
+  "phonetic": "/ˈmjuzɪk ˈklæs/",
+  "meaningCn": "音乐课",
+  "meaningEn": "music class",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Music class."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "music room",
+  "phonetic": "/ˈmjuzɪk ˈrum/",
+  "meaningCn": "音乐教室",
+  "meaningEn": "music room",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Music room."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "myself",
+  "phonetic": "/ˌmaɪˈsɛlf/",
+  "meaningCn": "我自己",
+  "meaningEn": "pron.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a myself."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "national",
+  "phonetic": "/ˈnæʃənəl/",
+  "meaningCn": "国家的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is national."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "nature shows",
+  "phonetic": "/ˈneɪtʃɝ ˈʃoʊz/",
+  "meaningCn": "自然节目",
+  "meaningEn": "nature shows",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Nature shows."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "neighbourhood",
+  "phonetic": "/ˈneɪbɝˌhʊd/",
+  "meaningCn": "街坊",
+  "meaningEn": "the word neighbourhood",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a neighbourhood."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "news shows",
+  "phonetic": "/ˈnjuz ˈʃoʊz/",
+  "meaningCn": "新闻节目",
+  "meaningEn": "news shows",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "News shows."
+  ],
+  "emoji": "⏰",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "next to",
+  "phonetic": "/ˈnɛks tə/",
+  "meaningCn": "紧邻",
+  "meaningEn": "next to",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Next to."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "next week",
+  "phonetic": "/ˈnɛks ˈwik/",
+  "meaningCn": "下星期",
+  "meaningEn": "next week",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Next week."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "nineteen",
+  "phonetic": "/ˈnaɪnˈtin/",
+  "meaningCn": "十九",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a nineteen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "no problem",
+  "phonetic": "/ˈnoʊ ˈprɑbləm/",
+  "meaningCn": "不麻烦",
+  "meaningEn": "no problem",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "No problem."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "noodles",
+  "phonetic": "/ˈnudəlz/",
+  "meaningCn": "面条",
+  "meaningEn": "the word noodles",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a noodles."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "notebook",
+  "phonetic": "/ˈnoʊtˌbʊk/",
+  "meaningCn": "笔记本",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a notebook."
+  ],
+  "emoji": "✏️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "nurse",
+  "phonetic": "/ˈnɝs/",
+  "meaningCn": "护士",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a nurse."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "o'clock",
+  "phonetic": "/əˈklɑk/",
+  "meaningCn": "...点钟",
+  "meaningEn": "r.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an o'clock."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "of course",
+  "phonetic": "/əv ˈkɔrs/",
+  "meaningCn": "当然",
+  "meaningEn": "of course",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Of course."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "off",
+  "phonetic": "/ˈɔf/",
+  "meaningCn": "关掉",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an off."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "office",
+  "phonetic": "/ˈɔfɪs/",
+  "meaningCn": "办公室",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an office."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "older",
+  "phonetic": "/ˈoʊldɝ/",
+  "meaningCn": "年长的",
+  "meaningEn": "s advanced in years; (`aged' is pronounced as two syllables)\\ns used of the older of two p",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is older."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "on foot",
+  "phonetic": "/ˈɑn ˈfʊt/",
+  "meaningCn": "步行",
+  "meaningEn": "on foot",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "On foot."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "on the weekend",
+  "phonetic": "/ˈɑn ðə ˈwiˌkɛnd/",
+  "meaningCn": "在周末",
+  "meaningEn": "on the weekend",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "On the weekend."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "once a week",
+  "phonetic": "/ˈwəns ə ˈwik/",
+  "meaningCn": "一周一次",
+  "meaningEn": "once a week",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Once a week."
+  ],
+  "emoji": "⏰",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "onion",
+  "phonetic": "/ˈənjən/",
+  "meaningCn": "洋葱",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an onion."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "ours",
+  "phonetic": "/ˈaʊɝz/",
+  "meaningCn": "我们的",
+  "meaningEn": "pl.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is ours."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "out of",
+  "phonetic": "/ˈaʊt əv/",
+  "meaningCn": "离开",
+  "meaningEn": "out of",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Out of."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "p.m.",
+  "phonetic": "/ˌpiː ˈem/",
+  "meaningCn": "下午",
+  "meaningEn": "s after noon\\nr between noon and midnight",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a p.m.."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "pack",
+  "phonetic": "/ˈpæk/",
+  "meaningCn": "一包",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pack."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "panda",
+  "phonetic": "/ˈpændə/",
+  "meaningCn": "大熊猫",
+  "meaningEn": "the word panda",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a panda."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "pants",
+  "phonetic": "/ˈpænts/",
+  "meaningCn": "裤子",
+  "meaningEn": "the word pants",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pants."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "paper",
+  "phonetic": "/ˈpeɪpɝ/",
+  "meaningCn": "纸",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a paper."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "parents",
+  "phonetic": "/ˈpɛrənts/",
+  "meaningCn": "父母",
+  "meaningEn": "the word parents",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a parents."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "pay attention to",
+  "phonetic": "/ˈpeɪ əˈtɛnʃən tə/",
+  "meaningCn": "注意",
+  "meaningEn": "pay attention to",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Pay attention to."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "peanut",
+  "phonetic": "/ˈpiˌnət/",
+  "meaningCn": "花生",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a peanut."
+  ],
+  "emoji": "🌳",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "pen pal",
+  "phonetic": "/ˈpɛn ˈpæl/",
+  "meaningCn": "笔友",
+  "meaningEn": "pen pal",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Pen pal."
+  ],
+  "emoji": "✏️",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "pencil box",
+  "phonetic": "/ˈpɛnsəl ˈbɑks/",
+  "meaningCn": "铅笔盒",
+  "meaningEn": "pencil box",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Pencil box."
+  ],
+  "emoji": "✏️",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "pencil sharpener",
+  "phonetic": "/ˈpɛnsəl ˈʃɑrpənər/",
+  "meaningCn": "铅笔刀",
+  "meaningEn": "pencil sharpener",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Pencil sharpener."
+  ],
+  "emoji": "✏️",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "penguin",
+  "phonetic": "/ˈpɛŋɡwən/",
+  "meaningCn": "企鹅",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a penguin."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "people",
+  "phonetic": "/ˈpipəl/",
+  "meaningCn": "人们",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a people."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "pet",
+  "phonetic": "/ˈpɛt/",
+  "meaningCn": "宠物",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pet."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "phone",
+  "phonetic": "/ˈfoʊn/",
+  "meaningCn": "电话",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a phone."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "photo",
+  "phonetic": "/ˈfoʊˌtoʊ/",
+  "meaningCn": "相片",
+  "meaningEn": "the word photo",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a photo."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "pick apples",
+  "phonetic": "/ˈpɪk ˈæpəlz/",
+  "meaningCn": "摘苹果",
+  "meaningEn": "pick apples",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Pick apples."
+  ],
+  "emoji": "🍎",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "pick fruit",
+  "phonetic": "/ˈpɪk ˈfrut/",
+  "meaningCn": "采摘水果",
+  "meaningEn": "pick fruit",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Pick fruit."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "picnic",
+  "phonetic": "/ˈpɪkˌnɪk/",
+  "meaningCn": "野餐",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a picnic."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "pilot",
+  "phonetic": "/ˈpaɪlət/",
+  "meaningCn": "飞行员",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pilot."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "ping-pong",
+  "phonetic": "/ˈpɪŋˌpɔŋ/",
+  "meaningCn": "乒乓球",
+  "meaningEn": "the word ping-pong",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a ping-pong."
+  ],
+  "emoji": "🧸",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "pity",
+  "phonetic": "/ˈpɪti/",
+  "meaningCn": "遗憾",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pity."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "pizza",
+  "phonetic": "/ˈpitsə/",
+  "meaningCn": "比萨饼",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pizza."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "plane",
+  "phonetic": "/ˈpleɪn/",
+  "meaningCn": "飞机",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a plane."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "plate",
+  "phonetic": "/ˈpleɪt/",
+  "meaningCn": "碟",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a plate."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play basketball",
+  "phonetic": "/ˈpleɪ ˈbæskətˌbɔl/",
+  "meaningCn": "打篮球",
+  "meaningEn": "play basketball",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play basketball."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play chess",
+  "phonetic": "/ˈpleɪ ˈtʃɛs/",
+  "meaningCn": "下棋",
+  "meaningEn": "play chess",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play chess."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play computer games",
+  "phonetic": "/ˈpleɪ kəmˈpjutɝ ˈɡeɪmz/",
+  "meaningCn": "玩电脑游戏",
+  "meaningEn": "play computer games",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play computer games."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "play football",
+  "phonetic": "/ˈpleɪ ˈfʊtˌbɔl/",
+  "meaningCn": "踢足球",
+  "meaningEn": "play football",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play football."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play ping-pong",
+  "phonetic": "/ˈpleɪ ˈpɪŋ ˈpɔŋ/",
+  "meaningCn": "打乒乓球",
+  "meaningEn": "play ping-pong",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play ping-pong."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play sports",
+  "phonetic": "/ˈpleɪ ˈspɔrts/",
+  "meaningCn": "做体育运动",
+  "meaningEn": "play sports",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play sports."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play the pipa",
+  "phonetic": "/ˈpleɪ ðə ˈpiːpɑː/",
+  "meaningCn": "弹琵琶",
+  "meaningEn": "to play a Chinese lute",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play the pipa."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play the violin",
+  "phonetic": "/ˈpleɪ ðə vaɪəˈlɪn/",
+  "meaningCn": "拉小提琴",
+  "meaningEn": "play the violin",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play the violin."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "play with",
+  "phonetic": "/ˈpleɪ ˈwɪð/",
+  "meaningCn": "与……玩耍",
+  "meaningEn": "play with",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play with."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "play with fire",
+  "phonetic": "/ˈpleɪ ˈwɪð ˈfaɪɝ/",
+  "meaningCn": "玩火",
+  "meaningEn": "play with fire",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Play with fire."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "played chess",
+  "phonetic": "/ˈpleɪd ˈtʃɛs/",
+  "meaningCn": "下棋",
+  "meaningEn": "played chess",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Played chess."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "played computer games",
+  "phonetic": "/ˈpleɪd kəmˈpjutɝ ˈɡeɪmz/",
+  "meaningCn": "玩电子游戏",
+  "meaningEn": "played computer games",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Played computer games."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "played the piano",
+  "phonetic": "/ˈpleɪd ðə piˈænə/",
+  "meaningCn": "弹钢琴",
+  "meaningEn": "played the piano",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Played the piano."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "playground",
+  "phonetic": "/ˈpleɪˌɡraʊn/",
+  "meaningCn": "操场",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a playground."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "playing",
+  "phonetic": "/ˈpleɪɪŋ/",
+  "meaningCn": "游戏",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can playing."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "playtime",
+  "phonetic": "/ˈpleɪtaɪm/",
+  "meaningCn": "游戏时间",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a playtime."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "poem",
+  "phonetic": "/ˈpoʊəm/",
+  "meaningCn": "诗",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a poem."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "poet",
+  "phonetic": "/ˈpoʊət/",
+  "meaningCn": "诗人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a poet."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "police officer",
+  "phonetic": "/pəˈlis ˈɔfəsɝ/",
+  "meaningCn": "警察",
+  "meaningEn": "police officer",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Police officer."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "polite",
+  "phonetic": "/pəˈlaɪt/",
+  "meaningCn": "有礼貌的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is polite."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "poor",
+  "phonetic": "/ˈpur/",
+  "meaningCn": "可怜的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is poor."
+  ],
+  "emoji": "✨",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "popular",
+  "phonetic": "/ˈpɑpjəlɝ/",
+  "meaningCn": "受欢迎的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is popular."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "post office",
+  "phonetic": "/ˈpoʊst ˈɔfɪs/",
+  "meaningCn": "邮局",
+  "meaningEn": "n.",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Post office."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "postcard",
+  "phonetic": "/ˈpoʊˌskɑrd/",
+  "meaningCn": "明信片",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a postcard."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "postman",
+  "phonetic": "/ˈpoʊsmən/",
+  "meaningCn": "邮递员",
+  "meaningEn": "the word postman",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a postman."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "potato",
+  "phonetic": "/pəˈteɪˌtoʊ/",
+  "meaningCn": "马铃薯",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a potato."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "president",
+  "phonetic": "/ˈprɛzəˌdɛnt/",
+  "meaningCn": "总统",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a president."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "price",
+  "phonetic": "/ˈpraɪs/",
+  "meaningCn": "价格",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a price."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "prize",
+  "phonetic": "/ˈpraɪz/",
+  "meaningCn": "奖赏",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a prize."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "public library",
+  "phonetic": "/ˈpəblɪk ˈlaɪbrɛˌri/",
+  "meaningCn": "公共图书馆",
+  "meaningEn": "public library",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Public library."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "pupil",
+  "phonetic": "/ˈpjupəl/",
+  "meaningCn": "学生",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a pupil."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "puzzle",
+  "phonetic": "/ˈpəzəl/",
+  "meaningCn": "难题",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a puzzle."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "quite",
+  "phonetic": "/ˈkwaɪt/",
+  "meaningCn": "有点",
+  "meaningEn": "r.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a quite."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "raccoon",
+  "phonetic": "/ræˈkun/",
+  "meaningCn": "浣熊",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a raccoon."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "rainy",
+  "phonetic": "/ˈreɪni/",
+  "meaningCn": "下雨的",
+  "meaningEn": "s (of weather) wet by periods of rain",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is rainy."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "read books",
+  "phonetic": "/ˈrɛd ˈbʊks/",
+  "meaningCn": "看书",
+  "meaningEn": "read books",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Read books."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "reading",
+  "phonetic": "/ˈrɛdɪŋ/",
+  "meaningCn": "读书",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can reading."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "reading a book",
+  "phonetic": "/ˈrɛdɪŋ ə ˈbʊk/",
+  "meaningCn": "正在看书",
+  "meaningEn": "reading a book",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Reading a book."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "reporter",
+  "phonetic": "/rɪˈpɔrtɝ/",
+  "meaningCn": "记者",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a reporter."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "reptile",
+  "phonetic": "/ˈrɛptaɪl/",
+  "meaningCn": "爬行动物",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a reptile."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "restaurant",
+  "phonetic": "/ˈrɛsˌtrɑnt/",
+  "meaningCn": "餐馆",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a restaurant."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "ride a bike",
+  "phonetic": "/ˈraɪd ə ˈbaɪk/",
+  "meaningCn": "骑自行车",
+  "meaningEn": "ride a bike",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Ride a bike."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "roast turkey",
+  "phonetic": "/ˈroʊst ˈtɝki/",
+  "meaningCn": "烤火鸡",
+  "meaningEn": "roast turkey",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Roast turkey."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "robot",
+  "phonetic": "/ˈroʊˌbɑt/",
+  "meaningCn": "机器人",
+  "meaningEn": "the word robot",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a robot."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "rode",
+  "phonetic": "/ˈroʊd/",
+  "meaningCn": "的过去式",
+  "meaningEn": "v sit and travel on the back of animal, usually while controlling its motions\\nv be carrie",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a rode."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "roll",
+  "phonetic": "/ˈroʊl/",
+  "meaningCn": "卷",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a roll."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "roller skating",
+  "phonetic": "/ˈroʊlɝ ˈskeɪtɪŋ/",
+  "meaningCn": "滑旱冰",
+  "meaningEn": "roller skating",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Roller skating."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "row a boat",
+  "phonetic": "/ˈroʊ ə ˈboʊt/",
+  "meaningCn": "划船",
+  "meaningEn": "row a boat",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Row a boat."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "rowed a boat",
+  "phonetic": "/ˈroʊd ə ˈboʊt/",
+  "meaningCn": "划船",
+  "meaningEn": "rowed a boat",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Rowed a boat."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "ruler",
+  "phonetic": "/ˈrulɝ/",
+  "meaningCn": "尺子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a ruler."
+  ],
+  "emoji": "✏️",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "run down the stairs",
+  "phonetic": "/ˈrən ˈdaʊn ðə ˈstɛrz/",
+  "meaningCn": "跑下楼梯",
+  "meaningEn": "run down the stairs",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Run down the stairs."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "running",
+  "phonetic": "/ˈrənɪŋ/",
+  "meaningCn": "跑步",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can running."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "safety rule",
+  "phonetic": "/ˈseɪfti ˈrul/",
+  "meaningCn": "安全规则",
+  "meaningEn": "safety rule",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Safety rule."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "salad",
+  "phonetic": "/ˈsæləd/",
+  "meaningCn": "色拉",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a salad."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sale",
+  "phonetic": "/ˈseɪl/",
+  "meaningCn": "出售",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sale."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "saleswoman",
+  "phonetic": "/ˈseɪlzˌwʊmən/",
+  "meaningCn": "女售货员",
+  "meaningEn": "the word saleswoman",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a saleswoman."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "sandwich",
+  "phonetic": "/ˈsæmwɪtʃ/",
+  "meaningCn": "三明治",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sandwich."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "saw",
+  "phonetic": "/ˈsɔ/",
+  "meaningCn": "锯子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a saw."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "saw flowers",
+  "phonetic": "/ˈsɔ ˈflaʊɝz/",
+  "meaningCn": "赏花",
+  "meaningEn": "saw flowers",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Saw flowers."
+  ],
+  "emoji": "🌳",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "scared",
+  "phonetic": "/ˈskɛrd/",
+  "meaningCn": "害怕的",
+  "meaningEn": "v cause fear in\\nv cause to lose courage\\nv mark with a scar\\ns made afraid",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is scared."
+  ],
+  "emoji": "🚌",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "scarf",
+  "phonetic": "/ˈskɑrf/",
+  "meaningCn": "围巾",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a scarf."
+  ],
+  "emoji": "🚌",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "schedule",
+  "phonetic": "/ˈskɛdʒul/",
+  "meaningCn": "时间表",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a schedule."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "schoolbag",
+  "phonetic": "/ˈskuːlbæg/",
+  "meaningCn": "书包",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a schoolbag."
+  ],
+  "emoji": "✏️",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "science",
+  "phonetic": "/ˈsaɪəns/",
+  "meaningCn": "科学",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a science."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "scientist",
+  "phonetic": "/ˈsaɪəntɪst/",
+  "meaningCn": "科学家",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a scientist."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "scissors",
+  "phonetic": "/ˈsɪzɝz/",
+  "meaningCn": "剪刀",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a scissors."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "season",
+  "phonetic": "/ˈsizən/",
+  "meaningCn": "季节",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a season."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "second",
+  "phonetic": "/ˈsɛkənd/",
+  "meaningCn": "第二的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is second."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "second floor",
+  "phonetic": "/ˈsɛkənd ˈflɔr/",
+  "meaningCn": "三楼",
+  "meaningEn": "second floor",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Second floor."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "secretary",
+  "phonetic": "/ˈsɛkrəˌtɛri/",
+  "meaningCn": "秘书",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a secretary."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "see a doctor",
+  "phonetic": "/ˈsi ə ˈdɑktɝ/",
+  "meaningCn": "看医生",
+  "meaningEn": "see a doctor",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "See a doctor."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "see a film",
+  "phonetic": "/ˈsi ə ˈfɪlm/",
+  "meaningCn": "看电影",
+  "meaningEn": "see a film",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "See a film."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "send",
+  "phonetic": "/ˈsɛnd/",
+  "meaningCn": "邮寄",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a send."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "send a short message",
+  "phonetic": "/ˈsɛnd ə ˈʃɔrt ˈmɛsədʒ/",
+  "meaningCn": "发送短消息",
+  "meaningEn": "send a short message",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Send a short message."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "send an email",
+  "phonetic": "/ˈsɛnd ən iˈmeɪl/",
+  "meaningCn": "发送电子邮件",
+  "meaningEn": "send an email",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Send an email."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "seventeen",
+  "phonetic": "/ˈsɛvənˈtin/",
+  "meaningCn": "十七",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a seventeen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "shadow",
+  "phonetic": "/ˈʃæˌdoʊ/",
+  "meaningCn": "影子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shadow."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shall",
+  "phonetic": "/ˈʃæl/",
+  "meaningCn": "将",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shall."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sheep",
+  "phonetic": "/ˈʃip/",
+  "meaningCn": "羊",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sheep."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "shirt",
+  "phonetic": "/ˈʃɝt/",
+  "meaningCn": "衬衫",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shirt."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shoe",
+  "phonetic": "/ˈʃu/",
+  "meaningCn": "鞋",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shoe."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shoes",
+  "phonetic": "/ˈʃuz/",
+  "meaningCn": "鞋子",
+  "meaningEn": "the word shoes",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shoes."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shop",
+  "phonetic": "/ˈʃɑp/",
+  "meaningCn": "商店",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shop."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "shopping centre",
+  "phonetic": "/ˈʃɑpɪŋ ˈsɛntɝ/",
+  "meaningCn": "购物中心",
+  "meaningEn": "shopping centre",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Shopping centre."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "shopping list",
+  "phonetic": "/ˈʃɑpɪŋ ˈlɪst/",
+  "meaningCn": "购物单",
+  "meaningEn": "shopping list",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Shopping list."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shopping mall",
+  "phonetic": "/ˈʃɑpɪŋ ˈmɔl/",
+  "meaningCn": "购物中心",
+  "meaningEn": "shopping mall",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Shopping mall."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "shorter",
+  "phonetic": "/ˈʃɔrtɝ/",
+  "meaningCn": "较短的",
+  "meaningEn": "a primarily temporal sense; indicating or being or seeming to be limited in duration\\na (p",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is shorter."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shorts",
+  "phonetic": "/ˈʃɔrts/",
+  "meaningCn": "短裤",
+  "meaningEn": "the word shorts",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shorts."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "show ... around",
+  "phonetic": "/ʃoʊ əˈraʊnd/",
+  "meaningCn": "带……参观",
+  "meaningEn": "to guide someone around a place",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Show ... around."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "shy",
+  "phonetic": "/ˈʃaɪ/",
+  "meaningCn": "惊跳",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a shy."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sick",
+  "phonetic": "/ˈsɪk/",
+  "meaningCn": "有病的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is sick."
+  ],
+  "emoji": "✨",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "sidewalk",
+  "phonetic": "/ˈsaɪdˌwɔk/",
+  "meaningCn": "人行道",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sidewalk."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "silk",
+  "phonetic": "/ˈsɪlk/",
+  "meaningCn": "丝绸",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a silk."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "sing English songs",
+  "phonetic": "/ˈsɪŋ ˈɪŋɡlɪʃ ˈsɔŋz/",
+  "meaningCn": "唱英文歌",
+  "meaningEn": "sing English songs",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Sing English songs."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sing songs",
+  "phonetic": "/ˈsɪŋ ˈsɔŋz/",
+  "meaningCn": "唱歌",
+  "meaningEn": "sing songs",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Sing songs."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "singing",
+  "phonetic": "/ˈsɪŋɪŋ/",
+  "meaningCn": "唱歌",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can singing."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "sixteen",
+  "phonetic": "/ˈsɪkˈstin/",
+  "meaningCn": "十六",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sixteen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "size",
+  "phonetic": "/ˈsaɪz/",
+  "meaningCn": "大小",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a size."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "skateboarding",
+  "phonetic": "/ˈskeɪtˌbɔrdɪŋ/",
+  "meaningCn": "玩滑板",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can skateboarding."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "ski",
+  "phonetic": "/ˈski/",
+  "meaningCn": "滑雪",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a ski."
+  ],
+  "emoji": "🌳",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "skirt",
+  "phonetic": "/ˈskɝt/",
+  "meaningCn": "女裙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a skirt."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sled",
+  "phonetic": "/ˈslɛd/",
+  "meaningCn": "雪橇",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can sled."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sleeping",
+  "phonetic": "/ˈslipɪŋ/",
+  "meaningCn": "睡眠",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can sleeping."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "slept",
+  "phonetic": "/ˈslɛpt/",
+  "meaningCn": "睡觉",
+  "meaningEn": "v be asleep\\nv be able to accommodate for sleeping",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a slept."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "slim",
+  "phonetic": "/ˈslɪm/",
+  "meaningCn": "苗条的",
+  "meaningEn": "v take off weight\\ns being of delicate or slender build\\ns small in quantity",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is slim."
+  ],
+  "emoji": "✨",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "slow down",
+  "phonetic": "/ˈsloʊ ˈdaʊn/",
+  "meaningCn": "慢下来",
+  "meaningEn": "slow down",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Slow down."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "smaller",
+  "phonetic": "/ˈsmɔlɝ/",
+  "meaningCn": "较小",
+  "meaningEn": "s.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a smaller."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "smarter",
+  "phonetic": "/ˈsmɑrtɝ/",
+  "meaningCn": "聪明的",
+  "meaningEn": "a showing mental alertness and calculation and resourcefulness\\ns elegant and stylish\\ns c",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is smarter."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "snowman",
+  "phonetic": "/ˈsnoʊˌmæn/",
+  "meaningCn": "雪人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a snowman."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "snowy",
+  "phonetic": "/ˈsnoʊi/",
+  "meaningCn": "下雪的",
+  "meaningEn": "s marked by the presence of snow\\ns covered with snow\\ns of the white color of snow",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is snowy."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "so much",
+  "phonetic": "/ˈsoʊ ˈmətʃ/",
+  "meaningCn": "那么多",
+  "meaningEn": "so much",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "So much."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sock",
+  "phonetic": "/ˈsɑk/",
+  "meaningCn": "短袜",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sock."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "socks",
+  "phonetic": "/ˈsɑks/",
+  "meaningCn": "短袜",
+  "meaningEn": "the word socks",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a socks."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sofa",
+  "phonetic": "/ˈsoʊfə/",
+  "meaningCn": "长沙发",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sofa."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "soon",
+  "phonetic": "/ˈsun/",
+  "meaningCn": "不久",
+  "meaningEn": "r.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a soon."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "soup",
+  "phonetic": "/ˈsup/",
+  "meaningCn": "汤",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a soup."
+  ],
+  "emoji": "🍽️",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "south",
+  "phonetic": "/ˈsaʊθ/",
+  "meaningCn": "南",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a south."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "speak English",
+  "phonetic": "/ˈspik ˈɪŋɡlɪʃ/",
+  "meaningCn": "说英语",
+  "meaningEn": "speak English",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Speak English."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "spend",
+  "phonetic": "/ˈspɛnd/",
+  "meaningCn": "花费",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a spend."
+  ],
+  "emoji": "🌳",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "spicy",
+  "phonetic": "/ˈspaɪsi/",
+  "meaningCn": "辣的",
+  "meaningEn": "s having an agreeably pungent taste\\ns producing a burning sensation on the taste nerves\\n",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is spicy."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "spoon",
+  "phonetic": "/ˈspun/",
+  "meaningCn": "匙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a spoon."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sport",
+  "phonetic": "/ˈspɔrt/",
+  "meaningCn": "运动",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sport."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sports centre",
+  "phonetic": "/ˈspɔrts ˈsɛntɝ/",
+  "meaningCn": "体育中心",
+  "meaningEn": "sports centre",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Sports centre."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "sports meet",
+  "phonetic": "/ˈspɔrts ˈmit/",
+  "meaningCn": "体育运动会",
+  "meaningEn": "sports meet",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Sports meet."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "square",
+  "phonetic": "/ˈskwɛr/",
+  "meaningCn": "广场",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a square."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "squirrel",
+  "phonetic": "/ˈskwɝəl/",
+  "meaningCn": "松鼠",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a squirrel."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "stadium",
+  "phonetic": "/ˈsteɪdiəm/",
+  "meaningCn": "体育场",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a stadium."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "stamp",
+  "phonetic": "/ˈstæmp/",
+  "meaningCn": "邮票",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a stamp."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "started to buy things",
+  "phonetic": "/ˈstɑrtɪd tə ˈbaɪ ˈθɪŋz/",
+  "meaningCn": "开始学买东西",
+  "meaningEn": "started to buy things",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Started to buy things."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "started to speak",
+  "phonetic": "/ˈstɑrtɪd tə ˈspik/",
+  "meaningCn": "开始说话",
+  "meaningEn": "started to speak",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Started to speak."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "started to study English",
+  "phonetic": "/ˈstɑrtɪd tə ˈstədi ˈɪŋɡlɪʃ/",
+  "meaningCn": "开始学英语",
+  "meaningEn": "started to study English",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Started to study English."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "started to use a computer",
+  "phonetic": "/ˈstɑrtɪd tə ˈjus ə kəmˈpjutɝ/",
+  "meaningCn": "开始使用电脑",
+  "meaningEn": "started to use a computer",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Started to use a computer."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "station",
+  "phonetic": "/ˈsteɪʃən/",
+  "meaningCn": "站",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a station."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "stay",
+  "phonetic": "/ˈsteɪ/",
+  "meaningCn": "保持",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a stay."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "stayed",
+  "phonetic": "/ˈsteɪd/",
+  "meaningCn": "停留",
+  "meaningEn": "v stay the same; remain in a certain state\\nv stay put (in a certain place); we are not mo",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can stayed."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "stayed at home",
+  "phonetic": "/ˈsteɪd ˈæt ˈhoʊm/",
+  "meaningCn": "呆在家里",
+  "meaningEn": "stayed at home",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Stayed at home."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "stomachache",
+  "phonetic": "/ˈstʌməkeɪk/",
+  "meaningCn": "胃疼",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a stomachache."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "stone",
+  "phonetic": "/ˈstoʊn/",
+  "meaningCn": "石头",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a stone."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "storybook",
+  "phonetic": "/ˈstɔriˌbʊk/",
+  "meaningCn": "故事书",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a storybook."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "strawberry",
+  "phonetic": "/ˈstrɔˌbɛri/",
+  "meaningCn": "草莓",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a strawberry."
+  ],
+  "emoji": "🍎",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "street",
+  "phonetic": "/ˈstrit/",
+  "meaningCn": "大街",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a street."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "strict",
+  "phonetic": "/ˈstrɪkt/",
+  "meaningCn": "严厉的",
+  "meaningEn": "s rigidly accurate; allowing no deviation from a standard\\ns (of rules) stringently enforc",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is strict."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "stronger",
+  "phonetic": "/ˈstrɔŋɝ/",
+  "meaningCn": "强劲的",
+  "meaningEn": "a having strength or power greater than average or expected\\ns not faint or feeble\\ns havi",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is stronger."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "stuck",
+  "phonetic": "/ˈstək/",
+  "meaningCn": "的过去式和过去分词",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a stuck."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "student",
+  "phonetic": "/ˈstudənt/",
+  "meaningCn": "学生",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a student."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "studies",
+  "phonetic": "/ˈstədiz/",
+  "meaningCn": "研究",
+  "meaningEn": "the word studies",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a studies."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "study",
+  "phonetic": "/ˈstədi/",
+  "meaningCn": "书房",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a study."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "subject",
+  "phonetic": "/ˈsəbdʒɪkt/",
+  "meaningCn": "科目",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a subject."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "subway",
+  "phonetic": "/ˈsəbˌweɪ/",
+  "meaningCn": "地铁",
+  "meaningEn": "the word subway",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a subway."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "summary",
+  "phonetic": "/ˈsəmɝi/",
+  "meaningCn": "总结",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a summary."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "summer vacation",
+  "phonetic": "/ˈsəmɝ veɪˈkeɪʃən/",
+  "meaningCn": "暑假",
+  "meaningEn": "summer vacation",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Summer vacation."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "sunglasses",
+  "phonetic": "/ˈsənˌɡlæsɪz/",
+  "meaningCn": "太阳镜",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sunglasses."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sunny",
+  "phonetic": "/ˈsəni/",
+  "meaningCn": "阳光充足的",
+  "meaningEn": "s bright and pleasant; promoting a feeling of cheer",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is sunny."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "supermarket",
+  "phonetic": "/ˈsupɝˌmɑrkɪt/",
+  "meaningCn": "超市",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a supermarket."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "sure",
+  "phonetic": "/ˈʃʊr/",
+  "meaningCn": "当然",
+  "meaningEn": "s.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sure."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sushi",
+  "phonetic": "/ˈsuʃi/",
+  "meaningCn": "寿司",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sushi."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "swam",
+  "phonetic": "/ˈswæm/",
+  "meaningCn": "游泳",
+  "meaningEn": "v travel through water\\nv be afloat either on or below a liquid surface and not sink to th",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a swam."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "swan",
+  "phonetic": "/ˈswɑn/",
+  "meaningCn": "天鹅",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a swan."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "sweater",
+  "phonetic": "/ˈswɛtɝ/",
+  "meaningCn": "毛衣",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a sweater."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "sweep the floor",
+  "phonetic": "/ˈswip ðə ˈflɔr/",
+  "meaningCn": "扫地",
+  "meaningEn": "sweep the floor",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Sweep the floor."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "table",
+  "phonetic": "/ˈteɪbəl/",
+  "meaningCn": "桌子",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a table."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "tail",
+  "phonetic": "/ˈteɪl/",
+  "meaningCn": "尾巴",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a tail."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "take a dancing class",
+  "phonetic": "/ˈteɪk ə ˈdænsɪŋ ˈklæs/",
+  "meaningCn": "上舞蹈课",
+  "meaningEn": "take a dancing class",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Take a dancing class."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "take a deep breath",
+  "phonetic": "/ˈteɪk ə ˈdip ˈbrɛθ/",
+  "meaningCn": "深呼吸",
+  "meaningEn": "take a deep breath",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Take a deep breath."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "take a trip",
+  "phonetic": "/ˈteɪk ə ˈtrɪp/",
+  "meaningCn": "作旅行",
+  "meaningEn": "take a trip",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Take a trip."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "take out the rubbish",
+  "phonetic": "/ˈteɪk ˈaʊt ðə ˈrəbɪʃ/",
+  "meaningCn": "倒垃圾",
+  "meaningEn": "take out the rubbish",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Take out the rubbish."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "take photos",
+  "phonetic": "/ˈteɪk ˈfoʊˌtoʊz/",
+  "meaningCn": "照相",
+  "meaningEn": "take photos",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Take photos."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "take turns",
+  "phonetic": "/ˈteɪk ˈtɝnz/",
+  "meaningCn": "轮流",
+  "meaningEn": "take turns",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Take turns."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "talk",
+  "phonetic": "/ˈtɔk/",
+  "meaningCn": "说话",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a talk."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "talk about",
+  "phonetic": "/ˈtɔk əˈbaʊt/",
+  "meaningCn": "谈论……",
+  "meaningEn": "talk about",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Talk about."
+  ],
+  "emoji": "🏃",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "talk quietly",
+  "phonetic": "/ˈtɔk ˈkwaɪətli/",
+  "meaningCn": "小声讲话",
+  "meaningEn": "talk quietly",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Talk quietly."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "taller",
+  "phonetic": "/ˈtɔlɝ/",
+  "meaningCn": "高的",
+  "meaningEn": "a.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is taller."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "taste",
+  "phonetic": "/ˈteɪst/",
+  "meaningCn": "品尝",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a taste."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "taxi",
+  "phonetic": "/ˈtæksi/",
+  "meaningCn": "出租车",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a taxi."
+  ],
+  "emoji": "🚌",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "taxi driver",
+  "phonetic": "/ˈtæksi ˈdraɪvɝ/",
+  "meaningCn": "出租司机",
+  "meaningEn": "taxi driver",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Taxi driver."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "tea",
+  "phonetic": "/ˈti/",
+  "meaningCn": "茶",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a tea."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "teacher",
+  "phonetic": "/ˈtitʃɝ/",
+  "meaningCn": "教师",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a teacher."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "teacher's desk",
+  "phonetic": "/ˈtitʃɝz ˈdɛsk/",
+  "meaningCn": "讲台",
+  "meaningEn": "the desk at the front of a classroom",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Teacher's desk."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "teacher's office",
+  "phonetic": "/ˈtitʃɝz ˈɔfɪs/",
+  "meaningCn": "教师办公室",
+  "meaningEn": "teacher's office",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Teacher's office."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "temple",
+  "phonetic": "/ˈtɛmpəl/",
+  "meaningCn": "寺",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a temple."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "tenth",
+  "phonetic": "/ˈtɛnθ/",
+  "meaningCn": "第十",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a tenth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "thanks",
+  "phonetic": "/ˈθæŋks/",
+  "meaningCn": "感谢",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a thanks."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "the British Museum",
+  "phonetic": "/ðə ˈbrɪtɪʃ ˈmjuziəm/",
+  "meaningCn": "大英博物馆",
+  "meaningEn": "the British Museum",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The British Museum."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the CN Tower",
+  "phonetic": "/ðə ˌsiː ˈen ˈtaʊɝ/",
+  "meaningCn": "加拿大国家电视塔",
+  "meaningEn": "the CN Tower",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The CN Tower."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the Great Wall",
+  "phonetic": "/ðə ˈɡreɪt ˈwɔl/",
+  "meaningCn": "长城",
+  "meaningEn": "the Great Wall",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Great Wall."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "the London Eye",
+  "phonetic": "/ðə ˈləndən ˈaɪ/",
+  "meaningCn": "伦敦眼",
+  "meaningEn": "the London Eye",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The London Eye."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "the Opera House",
+  "phonetic": "/ðə ˈɑprə ˈhaʊs/",
+  "meaningCn": "歌剧院",
+  "meaningEn": "the Opera House",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Opera House."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the Potala Palace",
+  "phonetic": "/ðə ˌpoʊˈtɑlə ˈpæləs/",
+  "meaningCn": "布达拉宫",
+  "meaningEn": "the Potala Palace",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Potala Palace."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the Stone Forest",
+  "phonetic": "/ðə ˈstoʊn ˈfɔrəst/",
+  "meaningCn": "石林",
+  "meaningEn": "the Stone Forest",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Stone Forest."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "the Summer Palace",
+  "phonetic": "/ðə ˈsəmɝ ˈpæləs/",
+  "meaningCn": "颐和园",
+  "meaningEn": "the Summer Palace",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Summer Palace."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the Terracotta Army",
+  "phonetic": "/ðə ˌterəˈkɑːtə ˈɑrmi/",
+  "meaningCn": "兵马俑",
+  "meaningEn": "the Terracotta Army",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Terracotta Army."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "the UK",
+  "phonetic": "/ðə ˌjuˈkeɪ/",
+  "meaningCn": "英国",
+  "meaningEn": "the UK",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The UK."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "the USA",
+  "phonetic": "/ðə ˌjuˌɛˈseɪ/",
+  "meaningCn": "美国",
+  "meaningEn": "the USA",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The USA."
+  ],
+  "emoji": "📍",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "the White House",
+  "phonetic": "/ðə ˈhwaɪt ˈhaʊs/",
+  "meaningCn": "白宫",
+  "meaningEn": "the White House",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The White House."
+  ],
+  "emoji": "📍",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the Yangtze River",
+  "phonetic": "/ðə ˈjæŋktˈsi ˈrɪvɝ/",
+  "meaningCn": "长江",
+  "meaningEn": "the Yangtze River",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The Yangtze River."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "the matter",
+  "phonetic": "/ðə ˈmætɝ/",
+  "meaningCn": "麻烦事",
+  "meaningEn": "the matter",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "The matter."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "theatre",
+  "phonetic": "/ˈθiətɝ/",
+  "meaningCn": "剧场",
+  "meaningEn": "the word theatre",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a theatre."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "theirs",
+  "phonetic": "/ˈðɛrz/",
+  "meaningCn": "他们的",
+  "meaningEn": "the word theirs",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is theirs."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "thin",
+  "phonetic": "/ˈθɪn/",
+  "meaningCn": "瘦的",
+  "meaningEn": "v.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is thin."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "thing",
+  "phonetic": "/ˈθɪŋ/",
+  "meaningCn": "事情",
+  "meaningEn": "n.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can thing."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "thinner",
+  "phonetic": "/ˈθɪnɝ/",
+  "meaningCn": "稀释剂",
+  "meaningEn": "the word thinner",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a thinner."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "thirteen",
+  "phonetic": "/ˈθɝˈtin/",
+  "meaningCn": "十三",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a thirteen."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "thirtieth",
+  "phonetic": "/ˈθɝtiəθ/",
+  "meaningCn": "第三十",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a thirtieth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "thirty",
+  "phonetic": "/ˈθɝˌdi/",
+  "meaningCn": "三十",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a thirty."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "thought",
+  "phonetic": "/ˈθɔt/",
+  "meaningCn": "想法",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a thought."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "three times a week",
+  "phonetic": "/ˈθri ˈtaɪmz ə ˈwik/",
+  "meaningCn": "一周三次",
+  "meaningEn": "three times a week",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Three times a week."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "tidy the desk",
+  "phonetic": "/ˈtaɪdi ðə ˈdɛsk/",
+  "meaningCn": "清理书桌",
+  "meaningEn": "tidy the desk",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Tidy the desk."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "till",
+  "phonetic": "/ˈtɪl/",
+  "meaningCn": "直到",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a till."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "toilet",
+  "phonetic": "/ˈtɔɪlət/",
+  "meaningCn": "厕所",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a toilet."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "tomato",
+  "phonetic": "/təˈmɑˌtoʊ/",
+  "meaningCn": "西红柿",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a tomato."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "tongue",
+  "phonetic": "/ˈtəŋ/",
+  "meaningCn": "舌头",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a tongue."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "too",
+  "phonetic": "/ˈtu/",
+  "meaningCn": "太",
+  "meaningEn": "r to a degree exceeding normal or proper limits\\nr in addition",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a too."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "too much",
+  "phonetic": "/ˈtu ˈmətʃ/",
+  "meaningCn": "太多",
+  "meaningEn": "too much",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Too much."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "took",
+  "phonetic": "/ˈtʊk/",
+  "meaningCn": "的过去式",
+  "meaningEn": "v carry out\\nv require (time or space)\\nv take somebody somewhere\\nv get into one's hands,",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a took."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "took photos",
+  "phonetic": "/ˈtʊk ˈfoʊˌtoʊz/",
+  "meaningCn": "拍照片",
+  "meaningEn": "took photos",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Took photos."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "took pictures",
+  "phonetic": "/ˈtʊk ˈpɪktʃɝz/",
+  "meaningCn": "拍照了",
+  "meaningEn": "took pictures",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Took pictures."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "toothache",
+  "phonetic": "/ˈtuːθeɪk/",
+  "meaningCn": "牙疼",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a toothache."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "top",
+  "phonetic": "/ˈtɑp/",
+  "meaningCn": "上边",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a top."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "traffic",
+  "phonetic": "/ˈtræfɪk/",
+  "meaningCn": "交通",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a traffic."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "traffic lights",
+  "phonetic": "/ˈtræfɪk ˈlaɪts/",
+  "meaningCn": "红绿灯",
+  "meaningEn": "traffic lights",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Traffic lights."
+  ],
+  "emoji": "🏠",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "trip",
+  "phonetic": "/ˈtrɪp/",
+  "meaningCn": "旅行",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a trip."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "trousers",
+  "phonetic": "/ˈtraʊzɝz/",
+  "meaningCn": "裤子",
+  "meaningEn": "the word trousers",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a trousers."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "trunk",
+  "phonetic": "/ˈtrəŋk/",
+  "meaningCn": "象鼻",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a trunk."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "try on",
+  "phonetic": "/ˈtraɪ ˈɑn/",
+  "meaningCn": "试穿",
+  "meaningEn": "try on",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Try on."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "turn left",
+  "phonetic": "/ˈtɝn ˈlɛft/",
+  "meaningCn": "左转",
+  "meaningEn": "turn left",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Turn left."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "turn right",
+  "phonetic": "/ˈtɝn ˈraɪt/",
+  "meaningCn": "右转",
+  "meaningEn": "turn right",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Turn right."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "tusk",
+  "phonetic": "/ˈtəsk/",
+  "meaningCn": "长牙",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a tusk."
+  ],
+  "emoji": "✋",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twelfth",
+  "phonetic": "/ˈtwɛlfθ/",
+  "meaningCn": "第十二的",
+  "meaningEn": "n.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is twelfth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twelve",
+  "phonetic": "/ˈtwɛlv/",
+  "meaningCn": "十二",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a twelve."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twentieth",
+  "phonetic": "/ˈtwɛniəθ/",
+  "meaningCn": "第二十",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a twentieth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twenty-fifth",
+  "phonetic": "/ˈtwɛni ˈfɪfθ/",
+  "meaningCn": "第二十五",
+  "meaningEn": "s coming next after the twenty-fourth in position",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a twenty-fifth."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twenty-first",
+  "phonetic": "/ˈtwɛntiˌfɝst/",
+  "meaningCn": "第二十一",
+  "meaningEn": "s coming next after the twentieth in position",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a twenty-first."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twenty-third",
+  "phonetic": "/ˈtwɛni ˈθɝd/",
+  "meaningCn": "第二十三",
+  "meaningEn": "s coming next after the twenty-second in position",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a twenty-third."
+  ],
+  "emoji": "🔢",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "twice a week",
+  "phonetic": "/ˈtwaɪs ə ˈwik/",
+  "meaningCn": "一周两次",
+  "meaningEn": "twice a week",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Twice a week."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "type",
+  "phonetic": "/ˈtaɪp/",
+  "meaningCn": "打字",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a type."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "umbrella",
+  "phonetic": "/ˈəmˌbrɛlə/",
+  "meaningCn": "伞",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an umbrella."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "uncle",
+  "phonetic": "/ˈəŋkəl/",
+  "meaningCn": "舅父",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an uncle."
+  ],
+  "emoji": "👨‍👩‍👧",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "university",
+  "phonetic": "/ˌjunəˈvɝsəti/",
+  "meaningCn": "大学",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is an university."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "vacation",
+  "phonetic": "/veɪˈkeɪʃən/",
+  "meaningCn": "假期",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a vacation."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "vegetables",
+  "phonetic": "/ˈvɛdʒtəbəlz/",
+  "meaningCn": "蔬菜",
+  "meaningEn": "the word vegetables",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a vegetables."
+  ],
+  "emoji": "🍽️",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "visit one's grandparents",
+  "phonetic": "/ˈvɪzɪt ˈwənz ˈɡrændˌpɛrənts/",
+  "meaningCn": "看望祖父母",
+  "meaningEn": "visit one's grandparents",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Visit one's grandparents."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "visit the Mogao Caves",
+  "phonetic": "/ˈvɪzɪt ðə ˈmoʊɡaʊ ˈkeɪvz/",
+  "meaningCn": "参观莫高窟",
+  "meaningEn": "visit the Mogao Caves",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Visit the Mogao Caves."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "visited grandparents",
+  "phonetic": "/ˈvɪzɪtɪd ˈɡrændˌpɛrənts/",
+  "meaningCn": "看望祖父母",
+  "meaningEn": "visited grandparents",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Visited grandparents."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "volunteer",
+  "phonetic": "/ˌvɑlənˈtɪr/",
+  "meaningCn": "志愿者",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a volunteer."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "wait for",
+  "phonetic": "/ˈweɪt fər/",
+  "meaningCn": "等待",
+  "meaningEn": "wait for",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Wait for."
+  ],
+  "emoji": "🏃",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "wake up",
+  "phonetic": "/ˈweɪk ˈəp/",
+  "meaningCn": "叫醒",
+  "meaningEn": "wake up",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Wake up."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "walking the dog",
+  "phonetic": "/ˈwɔkɪŋ ðə ˈdɔɡ/",
+  "meaningCn": "正在遛狗",
+  "meaningEn": "walking the dog",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Walking the dog."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "wardrobe",
+  "phonetic": "/ˈwɔrˌdroʊb/",
+  "meaningCn": "衣柜",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a wardrobe."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "was born",
+  "phonetic": "/ˈwɑz ˈbɔrn/",
+  "meaningCn": "出生",
+  "meaningEn": "was born",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Was born."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "wash",
+  "phonetic": "/ˈwɑʃ/",
+  "meaningCn": "洗",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a wash."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "wash clothes",
+  "phonetic": "/ˈwɑʃ ˈkloʊðz/",
+  "meaningCn": "洗衣服",
+  "meaningEn": "wash clothes",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Wash clothes."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "wash my clothes",
+  "phonetic": "/ˈwɑʃ ˈmaɪ ˈkloʊðz/",
+  "meaningCn": "洗我的衣服",
+  "meaningEn": "wash my clothes",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Wash my clothes."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "washed",
+  "phonetic": "/ˈwɑʃt/",
+  "meaningCn": "洗过的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is washed."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "washed clothes",
+  "phonetic": "/ˈwɑʃt ˈkloʊðz/",
+  "meaningCn": "洗衣服",
+  "meaningEn": "washed clothes",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Washed clothes."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "watch TV",
+  "phonetic": "/ˈwɑtʃ ˈtiˈvi/",
+  "meaningCn": "看电视",
+  "meaningEn": "watch TV",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Watch TV."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "watched",
+  "phonetic": "/ˈwɑtʃt/",
+  "meaningCn": "注视",
+  "meaningEn": "imp.",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can watched."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "watched TV",
+  "phonetic": "/ˈwɑtʃt ˈtiˈvi/",
+  "meaningCn": "看电视",
+  "meaningEn": "watched TV",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Watched TV."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "watching TV",
+  "phonetic": "/ˈwɑtʃɪŋ ˈtiˈvi/",
+  "meaningCn": "正在看电视",
+  "meaningEn": "watching TV",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Watching TV."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "water bottle",
+  "phonetic": "/ˈwɔtɝ ˈbɑtəl/",
+  "meaningCn": "水瓶",
+  "meaningEn": "water bottle",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Water bottle."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "watering the plants",
+  "phonetic": "/ˈwɔtɝɪŋ ðə ˈplænts/",
+  "meaningCn": "正在给植物浇水",
+  "meaningEn": "watering the plants",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Watering the plants."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "watermelon",
+  "phonetic": "/ˈwɔtɝˌmɛlən/",
+  "meaningCn": "西瓜",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a watermelon."
+  ],
+  "emoji": "🍎",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "we will",
+  "phonetic": "/ˈwi ˈwɪl/",
+  "meaningCn": "我们将要",
+  "meaningEn": "we will",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "We will."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "we'll",
+  "phonetic": "/ˈwil/",
+  "meaningCn": "( 或   的常用口语",
+  "meaningEn": "Contraction for we will or we shall.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a we'll."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "wear",
+  "phonetic": "/ˈwɛr/",
+  "meaningCn": "戴",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a wear."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "wear glasses",
+  "phonetic": "/ˈwɛr ˈɡlæsəz/",
+  "meaningCn": "戴眼镜",
+  "meaningEn": "wear glasses",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Wear glasses."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "weather",
+  "phonetic": "/ˈwɛðɝ/",
+  "meaningCn": "天气",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a weather."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "weekend",
+  "phonetic": "/ˈwiˌkɛnd/",
+  "meaningCn": "周末",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a weekend."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "went",
+  "phonetic": "/ˈwɛnt/",
+  "meaningCn": "的过去式",
+  "meaningEn": "v change location; move, travel, or proceed, also metaphorically\\nv follow a procedure or ",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a went."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "went camping",
+  "phonetic": "/ˈwɛnt ˈkæmpɪŋ/",
+  "meaningCn": "去露营了",
+  "meaningEn": "went camping",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Went camping."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "went fishing",
+  "phonetic": "/ˈwɛnt ˈfɪʃɪŋ/",
+  "meaningCn": "去钓鱼了",
+  "meaningEn": "went fishing",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Went fishing."
+  ],
+  "emoji": "🏃",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "went to kindergarten",
+  "phonetic": "/ˈwɛnt tə ˈkɪndɝˌɡɑrtən/",
+  "meaningCn": "上幼儿园",
+  "meaningEn": "went to kindergarten",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Went to kindergarten."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "went to school",
+  "phonetic": "/ˈwɛnt tə ˈskul/",
+  "meaningCn": "上学",
+  "meaningEn": "went to school",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Went to school."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "went to the beach",
+  "phonetic": "/ˈwɛnt tə ðə ˈbitʃ/",
+  "meaningCn": "去海边",
+  "meaningEn": "went to the beach",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Went to the beach."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "were",
+  "phonetic": "/ˈwɝ/",
+  "meaningCn": "是",
+  "meaningEn": "v have the quality of being; (copula, used with an adjective or a predicate noun)\\nv be id",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a were."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "west",
+  "phonetic": "/ˈwɛst/",
+  "meaningCn": "西",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a west."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "whose",
+  "phonetic": "/ˈhuz/",
+  "meaningCn": "谁的",
+  "meaningEn": "pron.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is whose."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "wild goose",
+  "phonetic": "/ˈwaɪld ˈɡus/",
+  "meaningCn": "大雁",
+  "meaningEn": "wild goose",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Wild goose."
+  ],
+  "emoji": "🐾",
+  "level": 1,
+  "frequency": 60
+ },
+ {
+  "word": "windy",
+  "phonetic": "/ˈwaɪndi/",
+  "meaningCn": "多风的",
+  "meaningEn": "s.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is windy."
+  ],
+  "emoji": "🌳",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "woke",
+  "phonetic": "/ˈwoʊk/",
+  "meaningCn": "的过去式和过去分词",
+  "meaningEn": "v be awake, be alert, be there\\nv stop sleeping\\nv arouse or excite feelings and passions\\",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a woke."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "woman",
+  "phonetic": "/ˈwʊmən/",
+  "meaningCn": "女人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a woman."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "won",
+  "phonetic": "/ˈwɑn/",
+  "meaningCn": "赢",
+  "meaningEn": "a.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a won."
+  ],
+  "emoji": "📘",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "word book",
+  "phonetic": "/ˈwɝd ˈbʊk/",
+  "meaningCn": "单词本",
+  "meaningEn": "a notebook for new words",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Word book."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "worker",
+  "phonetic": "/ˈwɝkɝ/",
+  "meaningCn": "工人",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a worker."
+  ],
+  "emoji": "📘",
+  "level": 4,
+  "frequency": 60
+ },
+ {
+  "word": "worried",
+  "phonetic": "/ˈwɝid/",
+  "meaningCn": "担心的",
+  "meaningEn": "v be worried, concerned, anxious, troubled, or uneasy\\nv be concerned with\\nv disturb the ",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is worried."
+  ],
+  "emoji": "✨",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "worry",
+  "phonetic": "/ˈwɝi/",
+  "meaningCn": "担心",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a worry."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "wow",
+  "phonetic": "/ˈwaʊ/",
+  "meaningCn": "哇",
+  "meaningEn": "v.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a wow."
+  ],
+  "emoji": "📘",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "write a letter",
+  "phonetic": "/ˈraɪt ə ˈlɛtɝ/",
+  "meaningCn": "写信",
+  "meaningEn": "write a letter",
+  "partOfSpeech": "phr.",
+  "examples": [
+   "Write a letter."
+  ],
+  "emoji": "🏃",
+  "level": 5,
+  "frequency": 60
+ },
+ {
+  "word": "writer",
+  "phonetic": "/ˈraɪtɝ/",
+  "meaningCn": "作家",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a writer."
+  ],
+  "emoji": "📘",
+  "level": 6,
+  "frequency": 60
+ },
+ {
+  "word": "yesterday",
+  "phonetic": "/ˈjɛstɝˌdeɪ/",
+  "meaningCn": "昨天",
+  "meaningEn": "n.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a yesterday."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "younger",
+  "phonetic": "/ˈjəŋɡɝ/",
+  "meaningCn": "年纪较小者",
+  "meaningEn": "s.",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a younger."
+  ],
+  "emoji": "⏰",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "yours",
+  "phonetic": "/ˈjɔrz/",
+  "meaningCn": "你的",
+  "meaningEn": "pron.",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is yours."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "yum",
+  "phonetic": "/ˈjəm/",
+  "meaningCn": "极好的",
+  "meaningEn": "the word yum",
+  "partOfSpeech": "adj.",
+  "examples": [
+   "It is yum."
+  ],
+  "emoji": "✨",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "zoo",
+  "phonetic": "/ˈzu/",
+  "meaningCn": "动物园",
+  "meaningEn": "the word zoo",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a zoo."
+  ],
+  "emoji": "📍",
+  "level": 3,
+  "frequency": 60
+ },
+ {
+  "word": "baby",
+  "phonetic": "/ˈbeɪbi/",
+  "meaningCn": "宝宝",
+  "meaningEn": "a very young child",
+  "partOfSpeech": "n.",
+  "examples": [
+   "This is a baby."
+  ],
+  "emoji": "👶",
+  "level": 1,
+  "frequency": 80
+ },
+ {
+  "word": "clap",
+  "phonetic": "/klæp/",
+  "meaningCn": "拍手",
+  "meaningEn": "to hit your hands together",
+  "partOfSpeech": "v.",
+  "examples": [
+   "I can clap."
+  ],
+  "emoji": "👏",
+  "level": 1,
+  "frequency": 70
+ }
+]
