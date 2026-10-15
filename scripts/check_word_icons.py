@@ -162,10 +162,13 @@ def check_existing(zip_path: Path, repo_index: dict[str, Path], dict_words: list
                 failures.append(f"duplicate original key {key}")
             original[key] = (name, digest)
 
-    # These bundle files are letters or numerals. The repo copies are the no-text pictures.
+    # Bundle files the repo is allowed to replace: letter/numeral icons, and the
+    # owner-supplied pictures that remove faces from objects and body parts.
     allowed_replacements = {
         "hello", "hi", "bye", "yes", "no", "i", "you",
         "one", "two", "three", "four", "five",
+        "black", "banana", "milk", "water", "bread", "rice",
+        "nose", "hand", "foot", "hair", "head",
     }
     print(f"original bundle icons: {len(original)}")
     overlap = sorted(set(original) & set(repo_index))
