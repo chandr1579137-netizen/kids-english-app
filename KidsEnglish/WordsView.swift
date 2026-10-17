@@ -86,7 +86,9 @@ struct WordDetailView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
-                Text(entry.emoji ?? "📝").font(.system(size: 80))
+                // 用真实词图代替 emoji：emoji 语料里有 356 条是 📘 占位，
+                // 80pt 的蓝皮书顶在弹窗最上面比没有图更糟。
+                WordIconView(word: entry.word, size: 120)
                 Text(entry.word).font(.system(size: 44, weight: .bold))
                 if let p = entry.phonetic {
                     Text(p).font(.title3).foregroundColor(.secondary)

@@ -86,10 +86,10 @@ struct LessonView: View {
             WordDetailView(entry: entry)
                 .presentationDetents([.medium])
         }
-        .alert("查不到这个词", isPresented: $showUnknownWordAlert) {
-            Button("知道了") { }
+        .alert("这个词还没学到", isPresented: $showUnknownWordAlert) {
+            Button("知道啦") { }
         } message: {
-            Text("「\(tappedRawWord)」暂时没有收录")
+            Text("「\(tappedRawWord)」还没收进来，可以问问爸爸妈妈")
         }
         .navigationDestination(isPresented: $showQuiz) {
             QuizView(lesson: lesson)

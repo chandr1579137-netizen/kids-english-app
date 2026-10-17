@@ -22,6 +22,9 @@ from pathlib import Path
 
 from PIL import Image
 
+# 所有 ui-icon 统一输出成这个边长，卡片才能按正方形缩放
+SIDE = 256
+
 # 判定为「背景白」的阈值：三个通道都足够亮，且足够接近纯白
 WHITE_MIN = 238
 CHANNEL_SPREAD = 12
@@ -87,6 +90,13 @@ def clear_background(path):
             )
             if min(neighbours) == 0:
                 px[x, y] = (r, g, b, 90)
+
+    # 统一成正方形：资源包里有 4 个图标是 256x171，卡片按正方形缩放会把它们
+    # 画得又扁又小。这里补透明边到 256x256，内容严格居中、不拉伸。
+    if img.size != (SIDE, SIDE):
+        square = Image.new("RGBA", (SIDE, SIDE), (0, 0, 0, 0))
+        square.paste(img, ((SIDE - w) // 2, (SIDE - h) // 2), img)
+        img = square
 
     img.save(path, "PNG", optimize=True)
     return cleared
