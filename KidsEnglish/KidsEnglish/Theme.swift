@@ -28,6 +28,12 @@ import UIKit
 enum Palette {
     /// 页面底：暖白（dopamine 档位允许暖白，儿童 App 温暖感有内容理由）
     static let canvas = Color(red: 1.00, green: 0.97, blue: 0.94)
+    /// 首页 / 学习页 / 读短文 / 我的 共用暖米色背景（参考图 #FEF6F2 / #FCF7E9 / #FCF3FF / #FCF5EA）
+    static let canvasWarm = Color(red: 0.996, green: 0.965, blue: 0.949)
+    /// 单词卡页背景（参考图浅灰 #F3F5F7）
+    static let canvasCool = Color(red: 0.953, green: 0.961, blue: 0.969)
+    /// 巩固练习页背景（参考图浅蓝 #EAF4FE）
+    static let canvasBlue = Color(red: 0.918, green: 0.957, blue: 0.996)
     /// 卡片表面
     static let surface = Color.white
     /// 主文字：深蓝（比纯黑柔和，与分类色同屏不刺眼）
@@ -382,9 +388,19 @@ extension View {
         shadow(color: .black.opacity(0.10), radius: 14, y: 6)
     }
 
-    /// 暖米色页面背景
+    /// 暖米色页面背景（首页/学习页/读短文/我的）
     func creamBackground() -> some View {
-        background(Palette.canvas.ignoresSafeArea())
+        background(Palette.canvasWarm.ignoresSafeArea())
+    }
+
+    /// 单词卡页背景（浅灰）
+    func coolBackground() -> some View {
+        background(Palette.canvasCool.ignoresSafeArea())
+    }
+
+    /// 巩固练习页背景（浅蓝）
+    func blueBackground() -> some View {
+        background(Palette.canvasBlue.ignoresSafeArea())
     }
 
     /// 固定高度的图片容器。

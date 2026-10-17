@@ -45,7 +45,7 @@ struct AudioToWordGame: View {
         }
         .padding()
         .onAppear { start() }
-        .creamBackground()
+        .blueBackground()
     }
 
     private var gameOverView: some View {
@@ -143,7 +143,7 @@ struct AudioToMeaningGame: View {
         }
         .padding()
         .onAppear { start() }
-        .creamBackground()
+        .blueBackground()
     }
 
     private var gameOverView: some View {
@@ -246,7 +246,7 @@ struct WordToMeaningGame: View {
         }
         .padding()
         .onAppear { start() }
-        .creamBackground()
+        .blueBackground()
     }
 
     private var gameOverView: some View {
@@ -358,7 +358,7 @@ struct DictationGame: View {
         }
         .padding()
         .onAppear { start() }
-        .creamBackground()
+        .blueBackground()
     }
 
     private var gameOverView: some View {
@@ -506,7 +506,7 @@ struct ConsolidationView: View {
                 modeGrid
             }
         }
-        .creamBackground()
+        .blueBackground()
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
     }

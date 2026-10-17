@@ -62,42 +62,39 @@ struct LearnWordsView: View {
                 // 选词书
                 VStack(alignment: .leading, spacing: 14) {
                     Text("选词书")
-                        .font(.system(size: 26, weight: .heavy))
+                        .font(.system(size: 28, weight: .heavy))
                         .foregroundStyle(Palette.ink)
                         .padding(.horizontal)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            // 四张等宽竖条卡，全部单词也是彩色卡（参考图不是白卡）
-                            allWordsCard
-                            bookCard(fill: AppTheme.bookPink, themeId: "fruits", title: "水果篇",
-                                     subtitle: "\(store.words(forTheme: "fruits").count) 词",
-                                     iconName: "strawberry")
-                            bookCard(fill: AppTheme.bookGreen, themeId: "animals", title: "动物篇",
-                                     subtitle: "\(store.words(forTheme: "animals").count) 词",
-                                     iconName: "panda")
-                            bookCard(fill: AppTheme.bookPurple, themeId: "vehicles", title: "交通工具",
-                                     subtitle: "\(store.words(forTheme: "vehicles").count) 词",
-                                     iconName: "bus")
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 3)
+                    // 参考图：4 张卡一行排开，无横向滚动
+                    HStack(spacing: 10) {
+                        allWordsCard
+                        bookCard(fill: AppTheme.bookPink, themeId: "fruits", title: "水果篇",
+                                 subtitle: "\(store.words(forTheme: "fruits").count) 词",
+                                 iconName: "strawberry")
+                        bookCard(fill: AppTheme.bookGreen, themeId: "animals", title: "动物篇",
+                                 subtitle: "\(store.words(forTheme: "animals").count) 词",
+                                 iconName: "panda")
+                        bookCard(fill: AppTheme.bookPurple, themeId: "vehicles", title: "交通工具",
+                                 subtitle: "\(store.words(forTheme: "vehicles").count) 词",
+                                 iconName: "bus")
                     }
+                    .padding(.horizontal)
                 }
 
-                // 主 CTA —— 参考图是 64pt 高、白字超粗、带播放三角
+                // 主 CTA —— 参考图：开始学习高 80pt / 巩固练习高 72pt
                 VStack(spacing: 12) {
                     Button {
                         startStudy()
                     } label: {
                         HStack(spacing: 10) {
                             Text("开始学习")
-                                .font(.system(size: 33, weight: .heavy))
+                                .font(.system(size: 36, weight: .heavy))
                             Image(systemName: "play.fill")
-                                .font(.system(size: 25, weight: .black))
+                                .font(.system(size: 28, weight: .black))
                         }
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 70)
+                        .frame(height: 80)
                         .background(Func.ctaGreen, in: Capsule())
                     }
                     .buttonStyle(PressableStyle())
@@ -107,13 +104,13 @@ struct LearnWordsView: View {
                     } label: {
                         HStack(spacing: 8) {
                             Text("巩固练习 · 9 种玩法")
-                                .font(.system(size: 24, weight: .heavy))
+                                .font(.system(size: 26, weight: .heavy))
                             Image(systemName: "gamecontroller.fill")
-                                .font(.system(size: 21, weight: .bold))
+                                .font(.system(size: 23, weight: .bold))
                         }
                         .foregroundStyle(Func.infoDeep)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 56)
+                        .frame(height: 72)
                         .background(Func.info.opacity(0.42), in: Capsule())
                     }
                     .buttonStyle(PressableStyle())
@@ -154,8 +151,8 @@ struct LearnWordsView: View {
                 .frame(width: 142, height: 142)
         }
         .padding(.horizontal, 22)
-        .padding(.vertical, 16)
-        .frame(maxWidth: .infinity, minHeight: 210)
+        .padding(.vertical, 18)
+        .frame(maxWidth: .infinity, minHeight: 235)
         .background(AppTheme.planGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationRaised()
     }
@@ -201,19 +198,19 @@ struct LearnWordsView: View {
             uiIcon(iconName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 58, height: 58)
+                .frame(width: 54, height: 54)
             Spacer(minLength: 0)
             Text(title)
-                .font(.system(size: 17, weight: .bold))
+                .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(.white)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
             Text(subtitle)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: 14, weight: .semibold))
                 .foregroundStyle(.white.opacity(0.92))
         }
         .padding(.vertical, 12)
-        .frame(width: 104, height: 144)
+        .frame(width: 82, height: 148)
         .background(fill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .elevationGround()
         // 选中态用白描边，在满饱和底上比换色更清楚

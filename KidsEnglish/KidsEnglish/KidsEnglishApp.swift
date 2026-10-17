@@ -112,7 +112,7 @@ struct ContentView: View {
     }
 }
 
-// MARK: - 自定义底栏（原生 TabView 无法改选中态底色，故自建）
+// MARK: - 自定义底栏（复刻参考图：圆角方块图标底 + 下方文字）
 
 struct KidTabBar: View {
     @Binding var selection: AppTab
@@ -125,21 +125,22 @@ struct KidTabBar: View {
                     guard selection != item else { return }
                     selection = item
                 } label: {
-                    VStack(spacing: 4) {
-                        Image(systemName: isSelected ? item.selectedIcon : item.icon)
-                            .font(.system(size: 21, weight: .semibold))
-                            .frame(height: 24)
+                    VStack(spacing: 5) {
+                        // 参考图：图标放在一个圆角方块里，选中橙底、未选中灰底
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .fill(isSelected ? Func.accent : Color(red: 0.88, green: 0.88, blue: 0.89))
+                                .frame(width: 46, height: 46)
+                            Image(systemName: isSelected ? item.selectedIcon : item.icon)
+                                .font(.system(size: 22, weight: .semibold))
+                                .foregroundStyle(.white)
+                        }
                         Text(item.title)
                             .font(.system(size: 11, weight: .semibold))
+                            .foregroundStyle(isSelected ? Func.accent : Palette.inkMuted)
                     }
-                    // 选中态：持久、结构性（浅色底 + 强调色），与按下态（压缩）走不同通道
-                    .foregroundStyle(isSelected ? Func.accent : Palette.inkSubtle)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 54)
-                    .background(
-                        RoundedRectangle(cornerRadius: Radius.thumb)
-                            .fill(isSelected ? Func.accent.opacity(0.14) : Color.clear)
-                    )
+                    .frame(height: 76)
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(PressableStyle())
@@ -147,15 +148,17 @@ struct KidTabBar: View {
                 .accessibilityAddTraits(isSelected ? [.isSelected] : [])
             }
         }
-        .padding(.horizontal, 6)
+        .padding(.horizontal, 8)
         .padding(.top, 6)
-        .padding(.bottom, 4)
-        .background(Palette.surface)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(Palette.hairline)
-                .frame(height: 0.5)
-        }
+        .padding(.bottom, 6)
+        .background(
+            Palette.surface
+                .overlay(alignment: .top) {
+                    Rectangle()
+                        .fill(Palette.hairline)
+                        .frame(height: 0.5)
+                }
+        )
     }
 }
 

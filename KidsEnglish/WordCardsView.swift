@@ -33,7 +33,7 @@ struct WordCardsView: View {
                 }
                 .padding(.bottom, 12)
             }
-            .creamBackground()
+            .coolBackground()
             .toolbar(.hidden, for: .navigationBar)
         }
     }
@@ -95,7 +95,7 @@ struct ThemeWordsView: View {
             }
             .padding()
         }
-        .creamBackground()
+        .coolBackground()
         .navigationTitle(theme.nameCn)
         .navigationBarTitleDisplayMode(.inline)
     }
