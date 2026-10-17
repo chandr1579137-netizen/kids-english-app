@@ -59,7 +59,8 @@ class DataStore {
         for part in ["a", "b", "c", "d"] {
             allWords.append(contentsOf: load("words-\(part).json", as: [WordEntry].self) ?? [])
         }
-        words = allWords
+        // 全量词典：课文里点任意词都能查到（不受低龄白名单影响）
+        for w in allWords { wordDict[w.word.lowercased()] = w }
         var baseSongs = load("songs.json", as: [Song].self) ?? []
         baseSongs.append(contentsOf: load("custom-songs.json", as: [Song].self) ?? [])
         songs = baseSongs
@@ -68,7 +69,14 @@ class DataStore {
         audioMap = am
         wordAudioMap = load("word-audio-map.json", as: [String: String].self) ?? [:]
         wordThemes = load("word-themes.json", as: [WordTheme].self) ?? []
-        for w in words { wordDict[w.word.lowercased()] = w }
+
+        // 低龄白名单：words-*.json 是全龄语料（夹杂 is / genesis / 1000 这类词），
+        // 可学词表只保留 word-themes.json 里策展过的词。主题空了就说明资源没打包好，
+        // 这时回退到全量，宁可多学也不要空屏。
+        let curated = Set(wordThemes.flatMap { $0.words.map { $0.lowercased() } })
+        words = curated.isEmpty
+            ? allWords
+            : allWords.filter { curated.contains($0.word.lowercased()) }
     }
 
     private func load<T: Decodable>(_ name: String, as type: T.Type) -> T? {

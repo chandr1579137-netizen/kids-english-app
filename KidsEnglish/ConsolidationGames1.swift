@@ -428,7 +428,7 @@ struct MatchingGame: View {
                 .multilineTextAlignment(.center)
 
             LazyVGrid(
-                columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 4),
+                columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 3),
                 spacing: 12
             ) {
                 ForEach(cards) { card in
@@ -441,16 +441,16 @@ struct MatchingGame: View {
                     } label: {
                         ZStack {
                             if card.isImage {
-                                WordIconView(word: card.word, size: 64)
+                                WordIconView(word: card.word, size: 72)
                             } else {
                                 Text(card.word)
-                                    .font(.system(size: 22, weight: .bold))
+                                    .font(.system(size: 24, weight: .bold))
                                     .minimumScaleFactor(0.5)
                                     .lineLimit(1)
                             }
                         }
                         .frame(maxWidth: .infinity)
-                        .frame(height: 110)
+                        .frame(height: 118)
                         .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.white)
@@ -500,7 +500,8 @@ struct MatchingGame: View {
     }
 
     private func startNewGame() {
-        let pairs = Array(words.shuffled().prefix(min(4, words.count)))
+        // 6 对 = 12 张卡，3 列 × 4 行铺满屏幕；4 对只占两行，下半屏全空
+        let pairs = Array(words.shuffled().prefix(min(6, words.count)))
         var list: [Card] = []
         for (i, w) in pairs.enumerated() {
             list.append(Card(id: i * 2, word: w.word, isImage: false))

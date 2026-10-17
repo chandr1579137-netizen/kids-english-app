@@ -308,51 +308,71 @@ struct DictationGame: View {
     enum ResultState { case none, correct, wrong }
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 18) {
             if finished {
                 gameOverView
             } else if let current = quiz[safe: index] {
                 Text("听一听，写出单词")
-                    .font(.largeTitle)
+                    .font(.system(size: 28, weight: .heavy))
+                    .foregroundStyle(Palette.ink)
+
                 Button {
                     playCurrent()
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
-                        .font(.system(size: 60))
+                        .font(.system(size: 52, weight: .bold))
                         .foregroundStyle(.white)
-                        .frame(width: 130, height: 130)
-                        .background(Circle().fill(Color.blue))
+                        .frame(width: 120, height: 120)
+                        .background(Circle().fill(Func.infoDeep))
                 }
-                Text("点喇叭可以再听")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-                Text("\(index + 1) / \(quiz.count)")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
+                .buttonStyle(PressableStyle())
+
+                Text("点喇叭可以再听 · \(index + 1)/\(quiz.count)")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Palette.inkMuted)
+
                 TextField("输入英文单词", text: $input)
-                    .textFieldStyle(.roundedBorder)
-                    .font(.title)
+                    .font(.system(size: 28, weight: .bold))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(Palette.ink)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
-                    .padding(.horizontal, 40)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 64)
+                    .background(Palette.surface,
+                                in: RoundedRectangle(cornerRadius: Radius.thumb, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: Radius.thumb, style: .continuous)
+                            .strokeBorder(Palette.hairline, lineWidth: 1.5)
+                    }
+                    .padding(.horizontal, 20)
+
                 switch result {
                 case .none:
-                    Button("检查") { check() }
-                        .font(.title)
-                        .padding(.horizontal, 50).padding(.vertical, 14)
-                        .background(RoundedRectangle(cornerRadius: 18).fill(Color.green))
-                        .foregroundStyle(.white)
+                    Button {
+                        check()
+                    } label: {
+                        Text("检查")
+                            .font(.system(size: 22, weight: .heavy))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 56)
+                            .background(Func.positiveDeep,
+                                        in: RoundedRectangle(cornerRadius: Radius.pill, style: .continuous))
+                    }
+                    .buttonStyle(PressableStyle())
+                    .padding(.horizontal, 20)
                 case .correct:
                     Text("✅ 对啦！")
-                        .font(.largeTitle)
-                        .foregroundStyle(.green)
+                        .font(.system(size: 28, weight: .heavy))
+                        .foregroundStyle(Func.positiveDeep)
                 case .wrong:
                     Text("正确答案是：\(current.word)")
-                        .font(.title)
-                        .foregroundStyle(.red)
+                        .font(.system(size: 22, weight: .bold))
+                        .foregroundStyle(Func.negativeDeep)
                     Text("再听听、记住它 💪")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Palette.inkMuted)
                 }
             }
         }

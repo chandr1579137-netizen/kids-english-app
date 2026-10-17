@@ -248,11 +248,35 @@ struct SettingsDetailView: View {
                 .padding(16)
                 .whiteCard()
                 .padding(.horizontal)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("关于")
+                        .font(.system(size: 18, weight: .heavy))
+                        .foregroundStyle(Palette.ink)
+                    Text("英语小伙伴 KidsEnglish · \(appVersion)")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Palette.ink)
+                    Text("课文与音频来自开源项目 magic-english-buddy（CC BY-NC-SA 4.0），仅限家庭内部学习使用。")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Palette.inkMuted)
+                        .lineSpacing(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(16)
+                .whiteCard()
+                .padding(.horizontal)
             }
             .padding(.top, 4)
             .padding(.bottom, 12)
         }
         .creamBackground()
         .toolbar(.hidden, for: .navigationBar)
+    }
+
+    private var appVersion: String {
+        let short = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "v\(short) (\(build))"
     }
 }
