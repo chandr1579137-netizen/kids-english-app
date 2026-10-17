@@ -46,8 +46,10 @@ jobs:
       # 从边缘泛洪抠掉外圈背景，内部白色（熊猫脸等）保留。
       - name: Make ui-icons transparent
         run: |
-          python3 -m pip install --quiet pillow
-          python3 scripts/make_icons_transparent.py KidsEnglish/KidsEnglish/Resources/ui-icons
+          # macOS runner 的 python3 是 externally-managed，直接 pip 会被 PEP 668 拒绝
+          python3 -m venv .venv-icons
+          .venv-icons/bin/pip install --quiet pillow
+          .venv-icons/bin/python scripts/make_icons_transparent.py KidsEnglish/KidsEnglish/Resources/ui-icons
 
       - name: Download lesson audio (from upstream open-source repo)
         run: |
