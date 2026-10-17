@@ -54,38 +54,28 @@ struct LearnWordsView: View {
 
     private var homeContent: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // 统一页面骨架：大标题 + 副标题（其余 4 个 tab 同构）
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("背单词").pageTitleStyle()
-                    Text("每天一点点，越学越顺")
-                        .pageSubtitleStyle()
-                }
-                .padding(.horizontal)
-                .padding(.top, 4)
-
-                // 今日计划（橙色渐变，唯一允许渐变的分类外卡片之一）
+            // 参考图首页没有大标题 —— 计划卡直接贴顶部，整屏留给出词书和主 CTA
+            VStack(alignment: .leading, spacing: 26) {
                 planCard
                     .padding(.horizontal)
 
                 // 选词书
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: 14) {
                     Text("选词书")
-                        .font(.system(size: 22, weight: .heavy))
+                        .font(.system(size: 26, weight: .heavy))
                         .foregroundStyle(Palette.ink)
                         .padding(.horizontal)
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 14) {
-                            // 「全部单词」是聚合项，不是分类 —— 用中性底区分层级
+                        HStack(spacing: 10) {
+                            // 四张等宽竖条卡，全部单词也是彩色卡（参考图不是白卡）
                             allWordsCard
-                            // 词数一律读真实数据，不再写死（原来 6/49/7 与数据 9/80/36 不符）
-                            bookCard(themeId: "fruits", title: "水果篇",
+                            bookCard(fill: AppTheme.bookPink, themeId: "fruits", title: "水果篇",
                                      subtitle: "\(store.words(forTheme: "fruits").count) 词",
                                      iconName: "strawberry")
-                            bookCard(themeId: "animals", title: "动物篇",
+                            bookCard(fill: AppTheme.bookGreen, themeId: "animals", title: "动物篇",
                                      subtitle: "\(store.words(forTheme: "animals").count) 词",
                                      iconName: "panda")
-                            bookCard(themeId: "vehicles", title: "交通工具",
+                            bookCard(fill: AppTheme.bookPurple, themeId: "vehicles", title: "交通工具",
                                      subtitle: "\(store.words(forTheme: "vehicles").count) 词",
                                      iconName: "bus")
                         }
@@ -94,19 +84,44 @@ struct LearnWordsView: View {
                     }
                 }
 
-                // 主 CTA —— 必须落在首屏。上面任何卡片都不许把它挤下去
+                // 主 CTA —— 参考图是 64pt 高、白字超粗、带播放三角
                 VStack(spacing: 12) {
-                    AppButton(title: "开始学习", icon: "play.fill", tier: .primary) {
+                    Button {
                         startStudy()
+                    } label: {
+                        HStack(spacing: 10) {
+                            Text("开始学习")
+                                .font(.system(size: 29, weight: .heavy))
+                            Image(systemName: "play.fill")
+                                .font(.system(size: 22, weight: .black))
+                        }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 64)
+                        .background(Func.positiveDeep, in: Capsule())
                     }
-                    AppButton(title: "巩固练习", icon: "square.grid.2x2.fill", tier: .secondary) {
+                    .buttonStyle(PressableStyle())
+
+                    Button {
                         goConsolidate = true
+                    } label: {
+                        HStack(spacing: 8) {
+                            Text("巩固练习 · 9 种玩法")
+                                .font(.system(size: 21, weight: .heavy))
+                            Image(systemName: "gamecontroller.fill")
+                                .font(.system(size: 19, weight: .bold))
+                        }
+                        .foregroundStyle(Func.infoDeep)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 48)
+                        .background(Func.info.opacity(0.26), in: Capsule())
                     }
+                    .buttonStyle(PressableStyle())
                 }
                 .padding(.horizontal)
                 .padding(.top, 2)
 
-                // 每天新学 —— 放在主 CTA 之后：它是设置项，不该把主操作挤出首屏
+                // 每天新学 —— 参考图没有这块，保留但压到首屏之后
                 HStack {
                     Text("每天新学")
                         .font(.system(size: 18, weight: .bold))
@@ -130,35 +145,39 @@ struct LearnWordsView: View {
                 planPreviewCard
                     .padding(.horizontal)
             }
-            .padding(.vertical, 12)
+            .padding(.top, 12)
+            .padding(.bottom, 12)
         }
     }
 
     // MARK: - 今日计划卡
 
     private var planCard: some View {
-        // 橙色是童趣的一部分，不动色值；只把文字色交给 onFill 自动判定
-        let fg = onFill(AppTheme.planBase)   // 亮橙 → 深墨字，8.1:1
-        return HStack {
-            VStack(alignment: .leading, spacing: 8) {
+        // 参考图：满饱和橙渐变 + 白字 + 右侧火箭插图（无底板）
+        HStack(alignment: .center, spacing: 4) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text("今日计划")
                     .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(fg.opacity(0.82))
+                    .foregroundStyle(.white.opacity(0.95))
                 Text("Day \(dayNumber)")
-                    .font(.system(size: 38, weight: .heavy))
-                    .foregroundStyle(fg)
+                    .font(.system(size: 40, weight: .heavy))
+                    .foregroundStyle(.white)
                 Text("新学 \(todayWords.count) 个词")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(fg)
+                    .font(.system(size: 19, weight: .bold))
+                    .foregroundStyle(.white)
                 Text("已学 \(store.learnedWords.count) / \(store.words.count)")
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(fg.opacity(0.78))
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(.white)
             }
-            Spacer()
-            IconPlate(name: "rocket", iconSize: 66, plateSize: 86, corner: 24)
+            Spacer(minLength: 0)
+            uiIcon("rocket")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 118, height: 118)
         }
-        .padding(20)
-        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 18)
+        .frame(maxWidth: .infinity, minHeight: 196)
         .background(AppTheme.planGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationRaised()
     }
@@ -170,60 +189,60 @@ struct LearnWordsView: View {
 
     // MARK: - 选词书卡片
 
-    /// 聚合项：中性底，靠层级而非颜色区分
+    /// 四张等宽竖条卡：图标在上、名称、词数，满饱和底 + 白字（与参考图一致）
     private var allWordsCard: some View {
         let isSelected = store.selectedThemeId == nil
         return Button {
             store.selectedThemeId = nil
             store.saveProgress()
         } label: {
-            VStack(spacing: 8) {
-                IconPlate(name: "book", iconSize: 44, plateSize: 60, corner: 18)
-                Text("全部单词")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(Palette.ink)
-                Text("\(store.words.count) 词")
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(Palette.inkMuted)
-            }
-            .frame(width: 130, height: 150)
-            .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card))
-            .overlay(
-                RoundedRectangle(cornerRadius: Radius.card)
-                    .strokeBorder(Palette.hairline, lineWidth: 1.5)
-            )
-            .elevationGround()
-            .selectionRing(isSelected, radius: Radius.card)
-            .scaleEffect(isSelected ? 1.03 : 1.0)
+            bookCardBody(fill: AppTheme.bookBlue, title: "全部单词",
+                         subtitle: "\(store.words.count) 词", iconName: "book",
+                         isSelected: isSelected)
         }
         .buttonStyle(PressableStyle())
     }
 
-    /// 分类卡：满饱和底 + 自动对比文字（保住截图的颜色，修掉白字不可读）
-    private func bookCard(themeId: String, title: String, subtitle: String, iconName: String) -> some View {
-        let fill = AppTheme.colorForTheme(themeId)
-        let fg = onFill(fill)
+    private func bookCard(fill: Color, themeId: String, title: String,
+                          subtitle: String, iconName: String) -> some View {
         let isSelected = store.selectedThemeId == themeId
         return Button {
             store.selectedThemeId = themeId
             store.saveProgress()
         } label: {
-            VStack(spacing: 8) {
-                IconPlate(name: iconName, iconSize: 44, plateSize: 60, corner: 18)
-                Text(title)
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(fg)
-                Text(subtitle)
-                    .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(fg.opacity(0.85))
-            }
-            .frame(width: 130, height: 150)
-            .background(fill, in: RoundedRectangle(cornerRadius: Radius.card))
-            .elevationGround()
-            .selectionRing(isSelected, radius: Radius.card)
-            .scaleEffect(isSelected ? 1.03 : 1.0)
+            bookCardBody(fill: fill, title: title, subtitle: subtitle,
+                         iconName: iconName, isSelected: isSelected)
         }
         .buttonStyle(PressableStyle())
+    }
+
+    private func bookCardBody(fill: Color, title: String, subtitle: String,
+                              iconName: String, isSelected: Bool) -> some View {
+        VStack(spacing: 6) {
+            Spacer(minLength: 0)
+            uiIcon(iconName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 52, height: 52)
+            Spacer(minLength: 0)
+            Text(title)
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+            Text(subtitle)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.white.opacity(0.92))
+        }
+        .padding(.vertical, 12)
+        .frame(width: 88, height: 124)
+        .background(fill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .elevationGround()
+        // 选中态用白描边，在满饱和底上比换色更清楚
+        .overlay {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .strokeBorder(.white, lineWidth: isSelected ? 3 : 0)
+        }
     }
 
     // MARK: - 学习安排预览
@@ -300,57 +319,58 @@ struct LearnWordsView: View {
             .padding()
     }
 
-    /// 头部：标题只说页面身份，「第几个」交给下面的进度条表达，不重复
+    /// 头部：参考图是「背单词 · 第 3 个」+ 右侧喇叭，序号直接进标题
     private var studyHeader: some View {
-        HStack {
+        HStack(spacing: 6) {
             Button {
                 showStudy = false
             } label: {
                 Image(systemName: "chevron.left")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundStyle(Palette.ink)
-                    .frame(width: 44, height: 44)
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundStyle(Palette.inkMuted)
+                    .frame(width: 28, height: 44)
             }
             .buttonStyle(PressableStyle())
             .accessibilityLabel("返回")
 
-            Text("背单词")
-                .font(.system(size: 30, weight: .heavy))
+            Text("背单词 · 第 \(cardIndex + 1) 个")
+                .font(.system(size: 27, weight: .heavy))
                 .foregroundStyle(Palette.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
 
-            Spacer()
+            Spacer(minLength: 0)
 
             Button {
                 playBest()
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
-                    .font(.system(size: 22, weight: .semibold))
+                    .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(Func.infoDeep)
                     .frame(width: 44, height: 44)
             }
             .buttonStyle(PressableStyle())
             .accessibilityLabel("再听一遍")
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 16)
     }
 
     /// 进度：几何与终态一致，不闪跳
     private var studyProgress: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
-                    // 轨道要看得见：hairline 与页面底只差 1.1:1，等于没有
-                    Capsule().fill(Color(red: 0.82, green: 0.78, blue: 0.71))
+                    Capsule().fill(Color(red: 0.85, green: 0.85, blue: 0.86))
                     Capsule()
                         .fill(Func.accent)
                         .frame(width: geo.size.width * progressFraction)
                 }
             }
-            .frame(height: 10)
+            .frame(height: 9)
 
             Text("学习进度 \(cardIndex + 1)/\(todayWords.count)")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(Func.accentDeep)   // 小字必须 ≥4.5:1
+                .font(.system(size: 15, weight: .bold))
+                .foregroundStyle(Func.accentVivid)
         }
         .padding(.horizontal, 20)
     }
@@ -361,59 +381,114 @@ struct LearnWordsView: View {
     }
 
     private func wordCard(_ entry: WordEntry) -> some View {
-        VStack(spacing: 14) {
-            WordIconView(word: entry.word, size: 180)
+        VStack(spacing: 10) {
+            // 参考图：插图后面有一团柔和的暖黄光晕
+            ZStack {
+                RadialGradient(
+                    colors: [Color(red: 1.0, green: 0.93, blue: 0.72), .clear],
+                    center: .center, startRadius: 10, endRadius: 118
+                )
+                .frame(width: 240, height: 210)
+                WordIconView(word: entry.word, size: 176)
+            }
 
             Text(entry.word)
-                .font(.system(size: 56, weight: .heavy))
+                .font(.system(size: 54, weight: .heavy))
                 .foregroundStyle(Func.infoDeep)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
             Text(entry.phonetic ?? "")
-                .font(.system(size: 20, weight: .medium))
+                .font(.system(size: 21, weight: .medium))
                 .foregroundStyle(Palette.inkMuted)
             Text(entry.meaningCn ?? "")
-                .font(.system(size: 34, weight: .heavy))
-                .foregroundStyle(Func.accentVivid)   // 大字 ≥3:1，且不发褐
+                .font(.system(size: 42, weight: .heavy))
+                .foregroundStyle(Func.accentVivid)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
 
-            // 发音：两个并列的次要操作，同层级
-            // 「慢速」始终显示 —— 无预生成慢速文件时走同一音频 0.7 倍速
-            HStack(spacing: 14) {
-                AppButton(title: "正常", icon: "speaker.wave.2.fill", tier: .secondary) {
+            // 发音：参考图是蓝底白字 / 绿底白字两枚胶囊
+            HStack(spacing: 12) {
+                pillButton(title: "正常", icon: "speaker.wave.2.fill",
+                           fill: Func.infoDeep, fg: .white) {
                     playBest(for: entry)
                 }
-                AppButton(title: "慢速", icon: "tortoise.fill", tier: .secondary) {
+                pillButton(title: "慢速", icon: "tortoise.fill",
+                           fill: Func.positiveDeep, fg: .white) {
                     playSlow(for: entry)
                 }
             }
-            .padding(.top, 4)
+            .padding(.top, 6)
 
-            // 判定：与导航分开 —— 判错和翻页是两件完全不同的事
-            HStack(spacing: 12) {
-                AppButton(title: "认识", icon: "checkmark", tier: .judgePositive) {
-                    markKnown(entry)
-                }
-                AppButton(title: "不认识", icon: "xmark", tier: .judgeNegative) {
-                    nextCard()
-                }
-            }
-            .padding(.top, 4)
-
-            // 导航：降为幽灵按钮，不与判定争夺注意力
-            HStack(spacing: 12) {
-                AppButton(title: "上一个", icon: "chevron.left", tier: .ghost) {
+            // 判定与导航同排四键（参考图布局）：两侧导航浅灰配深字，中间判定饱和色配白字
+            HStack(spacing: 8) {
+                judgeKey(title: "上一个", icon: "arrow.left",
+                         fill: Color(red: 0.78, green: 0.78, blue: 0.79),
+                         fg: Palette.ink) {
                     if cardIndex > 0 {
                         cardIndex -= 1
                         playBest()
                     }
                 }
-                AppButton(title: "下一个", icon: "chevron.right", tier: .ghost) {
+                judgeKey(title: "认识", icon: "checkmark",
+                         fill: Func.positiveDeep, fg: .white) {
+                    markKnown(entry)
+                }
+                judgeKey(title: "不认识", icon: "xmark",
+                         fill: Func.negativeDeep, fg: .white) {
+                    nextCard()
+                }
+                judgeKey(title: "下一个", icon: "arrow.right",
+                         fill: Color(red: 0.78, green: 0.78, blue: 0.79),
+                         fg: Palette.ink) {
                     nextCard()
                 }
             }
+            .padding(.top, 4)
         }
-        .padding(22)
+        .padding(.horizontal, 18)
+        .padding(.top, 18)
+        .padding(.bottom, 20)
         .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationGround()
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
+    }
+
+    private func pillButton(title: String, icon: String,
+                            fill: Color, fg: Color,
+                            action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 7) {
+                Image(systemName: icon)
+                    .font(.system(size: 17, weight: .bold))
+                Text(title)
+                    .font(.system(size: 20, weight: .heavy))
+            }
+            .foregroundStyle(fg)
+            .padding(.horizontal, 22)
+            .frame(height: 47)
+            .background(fill, in: Capsule())
+        }
+        .buttonStyle(PressableStyle())
+    }
+
+    private func judgeKey(title: String, icon: String,
+                          fill: Color, fg: Color,
+                          action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 3) {
+                HStack(spacing: 3) {
+                    Text(title)
+                        .font(.system(size: 17, weight: .heavy))
+                    Image(systemName: icon)
+                        .font(.system(size: 13, weight: .bold))
+                }
+                .foregroundStyle(fg)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 72)
+            .background(fill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .buttonStyle(PressableStyle())
     }
 
     // MARK: - 庆祝页

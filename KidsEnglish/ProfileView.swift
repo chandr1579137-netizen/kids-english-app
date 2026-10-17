@@ -113,25 +113,21 @@ struct ProfileView: View {
             .frame(width: 1, height: 44)
     }
 
-    // MARK: - 设置组（4 行合并为一组，靠分隔线而非 4 张卡）
+    // MARK: - 设置项：参考图是 4 张独立卡片，不是合并成一组
 
     private var settingsGroup: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 10) {
             NavigationLink {
                 SongsView()
             } label: {
                 settingRow(icon: "music.note", title: "英文儿歌")
             }
 
-            rowDivider
-
             NavigationLink {
                 ParentGateView()
             } label: {
                 settingRow(icon: "lock.fill", title: "家长模式", trailingIcon: "lock.fill")
             }
-
-            rowDivider
 
             NavigationLink {
                 SettingsDetailView()
@@ -140,23 +136,12 @@ struct ProfileView: View {
                            value: store.timeLimitMinutes == 0 ? "不限" : "\(store.timeLimitMinutes) 分钟")
             }
 
-            rowDivider
-
             NavigationLink {
                 SettingsDetailView()
             } label: {
                 settingRow(icon: "gearshape.fill", title: "设置")
             }
         }
-        .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card))
-        .elevationGround()
-    }
-
-    private var rowDivider: some View {
-        Rectangle()
-            .fill(Palette.hairline)
-            .frame(height: 1)
-            .padding(.leading, 52)
     }
 
     private func settingRow(icon: String, title: String,
@@ -164,34 +149,36 @@ struct ProfileView: View {
                             trailingIcon: String? = nil) -> some View {
         HStack(spacing: 14) {
             Image(systemName: icon)
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(Func.accentDeep)
+                .font(.system(size: 19, weight: .semibold))
+                .foregroundStyle(Palette.ink)
                 .frame(width: 24)
 
             Text(title)
-                .font(.system(size: 17, weight: .semibold))
+                .font(.system(size: 19, weight: .bold))
                 .foregroundStyle(Palette.ink)
 
             Spacer(minLength: 8)
 
             if let value {
                 Text(value)
-                    .font(.system(size: 15, weight: .medium))
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(Palette.inkMuted)
             }
 
             if let trailingIcon {
                 Image(systemName: trailingIcon)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.system(size: 17, weight: .semibold))
                     .foregroundStyle(Palette.inkSubtle)
             } else {
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .bold))
+                    .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(Palette.inkSubtle)
             }
         }
-        .padding(.horizontal, 16)
-        .frame(height: 56)
+        .padding(.horizontal, 18)
+        .frame(height: 58)
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .elevationGround()
         .contentShape(Rectangle())
     }
 }

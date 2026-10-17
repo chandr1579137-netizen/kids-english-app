@@ -18,7 +18,9 @@ struct ReadView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("读短文").pageTitleStyle()
+                    Text("读短文")
+                        .font(.system(size: 60, weight: .heavy))
+                        .foregroundStyle(AppTheme.readTitleBlue)
                         .padding(.horizontal)
                         .padding(.top, 4)
                     Text("\(store.lessons.count) 篇分级小故事")
@@ -74,14 +76,14 @@ struct ReadView: View {
                         selectedLevel = level
                     } label: {
                         Text("L\(level)")
-                            .font(.system(size: 17, weight: .heavy))
-                            // 选中 = 强调色底 + 自动对比文字；未选中 = 浅底 + 弱化文字
-                            .foregroundStyle(isSelected ? onFill(Func.accent)
+                            .font(.system(size: 19, weight: .heavy))
+                            // 选中 = 橙底白字；未选中 = 浅灰底深灰字（与参考图一致）
+                            .foregroundStyle(isSelected ? .white
                                              : (hasLessons ? Palette.inkMuted : Palette.inkSubtle))
-                            .frame(width: 52, height: 44)
+                            .frame(width: 52, height: 42)
                             .background(
-                                isSelected ? Func.accent : Palette.hairline,
-                                in: RoundedRectangle(cornerRadius: Radius.chip)
+                                isSelected ? Func.accentPill : Color(red: 0.90, green: 0.90, blue: 0.91),
+                                in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                             )
                     }
                     .buttonStyle(PressableStyle())
@@ -98,33 +100,39 @@ struct ReadView: View {
 
     private func lessonRow(_ lesson: Lesson) -> some View {
         let isRead = store.completedLessons.contains(lesson.id)
-        return HStack(spacing: 14) {
+        return HStack(spacing: 12) {
             CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: lesson.titleCn)
-                .frame(width: 60, height: 60)
-                .clipShape(RoundedRectangle(cornerRadius: Radius.thumb))
+                .frame(width: 72, height: 72)
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .clipped()
 
             // 英文标题是主信息（用户读的是英文），中文做副信息
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(lesson.title)
-                    .font(.system(size: 17, weight: .bold))
+                    .font(.system(size: 20, weight: .bold))
                     .foregroundStyle(Palette.ink)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.8)
                 Text(lesson.titleCn)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: 15, weight: .medium))
                     .foregroundStyle(Palette.inkMuted)
                     .lineLimit(1)
             }
 
-            Spacer(minLength: 8)
+            Spacer(minLength: 6)
 
-            // 状态用形状区分（勾 / 播放），不只靠颜色
-            Image(systemName: isRead ? "checkmark.circle.fill" : "play.circle.fill")
-                .font(.system(size: 28, weight: .semibold))
-                .foregroundStyle(isRead ? Func.positiveDeep : Palette.inkSubtle)
-                .accessibilityLabel(isRead ? "已读" : "未读")
+            // 三种状态：已读=绿色勾 / 可读=灰色播放 / 锁定=灰色锁
+            ZStack {
+                Circle()
+                    .fill(isRead ? Func.positiveDeep : Color(red: 0.86, green: 0.86, blue: 0.87))
+                    .frame(width: 34, height: 34)
+                Image(systemName: isRead ? "checkmark" : "play.fill")
+                    .font(.system(size: 15, weight: .black))
+                    .foregroundStyle(isRead ? .white : .white.opacity(0.95))
+            }
+            .accessibilityLabel(isRead ? "已读" : "未读")
         }
-        .padding(10)
+        .padding(12)
         .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card))
         .elevationGround()
     }

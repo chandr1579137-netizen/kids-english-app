@@ -472,6 +472,12 @@ struct ConsolidationView: View {
             }
         }
 
+        /// 卡片渐变底（参考图是渐变，不是单色）
+        var gradient: LinearGradient {
+            LinearGradient(colors: [color.opacity(0.88), color.opacity(0.42)],
+                           startPoint: .topLeading, endPoint: .bottomTrailing)
+        }
+
         /// 技能名称（用于分组标题与无障碍标签）
         var skillName: String {
             switch skill {
@@ -545,10 +551,14 @@ struct ConsolidationView: View {
                         .whiteCard()
                         .padding()
                 } else {
-                    Text("选个玩法吧")
-                        .font(.system(size: 40, weight: .heavy))
-                        .foregroundStyle(Palette.ink)
-                        .padding(.top, 8)
+                    // 参考图：标题带 🎮，副标题灰色
+                    HStack(spacing: 8) {
+                        Text("选个玩法吧！")
+                            .font(.system(size: 40, weight: .heavy))
+                            .foregroundStyle(Palette.ink)
+                        Text("🎮").font(.system(size: 34))
+                    }
+                    .padding(.top, 8)
                     Text("9 种游戏，越玩越熟")
                         .pageSubtitleStyle()
 
@@ -570,31 +580,39 @@ struct ConsolidationView: View {
         }
     }
 
-    /// 玩法卡：颜色按技能类型分族，难度用点数表达 —— 两个维度各有通道
+    /// 玩法卡：参考图是竖长条 + 白圆托底图标 + 难度胶囊标签
     private func gameModeCard(_ m: Mode) -> some View {
         let fg = onFill(m.color)
-        return VStack(spacing: 8) {
+        return VStack(spacing: 10) {
             ZStack {
                 Circle()
                     .fill(Palette.surface)
-                    .frame(width: 60, height: 60)
+                    .frame(width: 56, height: 56)
                 uiIcon(m.iconName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 38, height: 38)
+                    .frame(width: 36, height: 36)
             }
+            .padding(.top, 6)
+
             Text(m.rawValue)
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 17, weight: .bold))
                 .foregroundStyle(fg)
                 .lineLimit(1)
-                .minimumScaleFactor(0.75)
-            Text("\(m.difficultyDots) \(m.difficulty)")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(fg.opacity(0.78))
+                .minimumScaleFactor(0.7)
+
+            // 难度用胶囊标签，不用「●●○」这类符号串
+            Text(m.difficulty)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundStyle(fg.opacity(0.85))
+                .padding(.horizontal, 10)
+                .frame(height: 19)
+                .background(.white.opacity(0.85), in: Capsule())
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(m.color, in: RoundedRectangle(cornerRadius: Radius.card))
+        .frame(height: 137)
+        .background(m.gradient,
+                    in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .elevationGround()
     }
 

@@ -40,41 +40,41 @@ struct WordCardsView: View {
 
     private func themeCard(_ theme: WordTheme) -> some View {
         let progress = store.themeProgress(themeId: theme.id)
-        let fill = AppTheme.colorForTheme(theme.id)
         let isComplete = progress.total > 0 && progress.done >= progress.total
 
-        // 三段式：图标左上 / 进度右上 / 名称底部 —— 名称独占整行，不再被进度挤断
-        return VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .top, spacing: 6) {
-                IconPlate(name: themeIconName(for: theme.id),
-                          iconSize: 30, plateSize: 42, corner: 12)
-                Spacer(minLength: 0)
-                // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
-                HStack(spacing: 3) {
-                    Text("\(progress.done)/\(progress.total)")
-                        .font(.system(size: 13, weight: .bold))
-                    if isComplete {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 12, weight: .bold))
-                    }
-                }
-                .foregroundStyle(isComplete ? Func.positiveDeep : Palette.inkMuted)
-                .padding(.top, 2)
-            }
+        // 参考图是横向长条：图标在左、名称居中偏左、进度靠右，底色为柔和渐变
+        return HStack(spacing: 8) {
+            uiIcon(themeIconName(for: theme.id))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 38, height: 38)
 
             Text(theme.nameCn)
                 .font(.system(size: 17, weight: .bold))
                 .foregroundStyle(Palette.ink)
-                .lineLimit(2)
-                .minimumScaleFactor(0.85)
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+
+            Spacer(minLength: 2)
+
+            // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
+            HStack(spacing: 3) {
+                Text("\(progress.done)/\(progress.total)")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundStyle(isComplete ? Func.positiveDeep : Func.accentVivid)
+                if isComplete {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 13, weight: .black))
+                        .foregroundStyle(Func.positiveDeep)
+                }
+            }
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
-        .frame(maxWidth: .infinity, minHeight: 96, alignment: .leading)
-        // 分类色只作底，永不作文字色 —— 浅底保证深字 9–14:1
-        .background(fill.opacity(0.35), in: RoundedRectangle(cornerRadius: Radius.card))
+        .padding(.horizontal, 12)
+        .frame(maxWidth: .infinity)
+        .frame(height: 62)
+        // 渐变底，文字压在最浅处仍保持 9:1 以上
+        .background(AppTheme.gradientForTheme(theme.id),
+                    in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .elevationGround()
     }
 }

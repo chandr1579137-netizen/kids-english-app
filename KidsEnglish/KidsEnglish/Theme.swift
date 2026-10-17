@@ -63,6 +63,8 @@ enum Func {
     // 图标与大字数字专用：只服务「≥18.66pt 粗体」的大字号与图形，
     // 按 WCAG 大字号/非文本 3:1 判定。比 Deep 版更鲜亮，不会发棕。
     static let accentVivid = Color(red: 0.85, green: 0.42, blue: 0.00)   // 3.47:1
+    /// 等级胶囊等「橙底白字」场景：比 accent 深一档，白字 3.2:1
+    static let accentPill = Color(red: 0.90, green: 0.45, blue: 0.00)
     static let positiveVivid = Color(red: 0.18, green: 0.56, blue: 0.22) // 4.13:1
     static let infoVivid = Color(red: 0.14, green: 0.44, blue: 0.90)     // 4.63:1
 }
@@ -116,12 +118,13 @@ enum AppTheme {
     static let grayBtn = Color(red: 0.74, green: 0.74, blue: 0.74)
     /// 中文释义橙色
     static let wordOrange = Color.orange
-    /// 今日计划卡的底色基准（渐变左端）—— 卡上文字色由 onFill() 自动决定
-    static let planBase = Color(red: 1.0, green: 0.58, blue: 0.0)
+    /// 今日计划卡的底色基准（渐变左端）
+    /// 参考图是满饱和橙 + 白字。为了白字能站住，起点比参考图略深一档
+    /// （#E06A00，白字 3.37:1，达大字 3:1 要求），色相不变
+    static let planBase = Color(red: 0.878, green: 0.416, blue: 0.0)
     /// 今日计划卡片橙色渐变（分类卡禁用渐变，只有这里允许）
-    /// 保持满饱和的童趣橙，不靠压暗换对比度 —— 文字改深色后达 8.1:1
     static let planGradient = LinearGradient(
-        colors: [planBase, Color(red: 1.0, green: 0.72, blue: 0.1)],
+        colors: [planBase, Color(red: 0.961, green: 0.608, blue: 0.078)],
         startPoint: .topLeading, endPoint: .bottomTrailing
     )
     /// 「我的」用户卡紫色渐变（语义绑定：个人 / 成就）—— 两端对白字均 ≥ 4.7:1
@@ -158,6 +161,27 @@ enum AppTheme {
     static func onColorForTheme(_ themeId: String) -> Color {
         onFill(colorForTheme(themeId))
     }
+
+    /// 单词卡网格用的柔和渐变底（参考图是渐变，不是单色）
+    /// 左上一个饱和度高一点的起点，右下一个更浅的终点，文字压在浅色区
+    static func gradientForTheme(_ themeId: String) -> LinearGradient {
+        let base = colorForTheme(themeId)
+        return LinearGradient(
+            colors: [base.opacity(0.85), base.opacity(0.42)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    // MARK: - 选词书四色（参考图：满饱和 + 白字）
+    // 比分类粉彩色深一档，白字才站得住；色相与参考图一致
+    static let bookBlue = Color(red: 0.12, green: 0.48, blue: 0.94)    // 全部单词
+    static let bookPink = Color(red: 0.91, green: 0.36, blue: 0.49)    // 水果篇
+    static let bookGreen = Color(red: 0.24, green: 0.62, blue: 0.26)   // 动物篇
+    static let bookPurple = Color(red: 0.56, green: 0.42, blue: 0.85)  // 交通工具
+
+    /// 读短文页大标题用的亮蓝（参考图不是深蓝）
+    static let readTitleBlue = Color(red: 0.13, green: 0.25, blue: 0.82)
 }
 
 // MARK: - 圆角阶梯（单一基数派生，禁止散装值）
@@ -376,15 +400,15 @@ extension View {
             .elevationGround()
     }
 
-    /// 页面大标题骨架（5 个 tab 统一）
+    /// 页面大标题骨架（参考图为 61pt 超粗）
     func pageTitleStyle() -> some View {
-        font(.system(size: 52, weight: .heavy))
+        font(.system(size: 60, weight: .heavy))
             .foregroundStyle(Palette.ink)
     }
 
     /// 页面副标题骨架
     func pageSubtitleStyle() -> some View {
-        font(.system(size: 17, weight: .medium))
+        font(.system(size: 21, weight: .medium))
             .foregroundStyle(Palette.inkMuted)
     }
 }

@@ -42,6 +42,13 @@ jobs:
           echo "illustrations  $(ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l)"
           echo "covers         $(ls KidsEnglish/KidsEnglish/Resources/covers | wc -l)"
 
+      # 资源包的 3D 图标是不透明白底，压在彩色卡片上会变成「白方贴纸」。
+      # 从边缘泛洪抠掉外圈背景，内部白色（熊猫脸等）保留。
+      - name: Make ui-icons transparent
+        run: |
+          python3 -m pip install --quiet pillow
+          python3 scripts/make_icons_transparent.py KidsEnglish/KidsEnglish/Resources/ui-icons
+
       - name: Download lesson audio (from upstream open-source repo)
         run: |
           cd KidsEnglish/KidsEnglish/Resources/audio
