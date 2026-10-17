@@ -83,21 +83,38 @@ struct WordCardsView: View {
 
 struct ThemeWordsView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
     @State private var player = AudioPlayer()
     let theme: WordTheme
 
+    private var words: [WordEntry] { store.words(forTheme: theme.id) }
+
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
-                ForEach(store.words(forTheme: theme.id)) { entry in
-                    wordRow(entry)
+            VStack(alignment: .leading, spacing: 12) {
+                SubPageHeader(onBack: { dismiss() })
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(theme.nameCn)
+                        .subPageTitleStyle()
+                    Text("\(words.count) 个单词 · 点右侧喇叭听发音")
+                        .subPageSubtitleStyle()
                 }
+                .padding(.horizontal)
+
+                LazyVStack(spacing: 12) {
+                    ForEach(words) { entry in
+                        wordRow(entry)
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 2)
             }
-            .padding()
+            .padding(.top, 4)
+            .padding(.bottom, 12)
         }
         .coolBackground()
-        .navigationTitle(theme.nameCn)
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     private func wordRow(_ entry: WordEntry) -> some View {

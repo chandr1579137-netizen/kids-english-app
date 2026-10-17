@@ -432,6 +432,18 @@ extension View {
         font(.system(size: 21, weight: .medium))
             .foregroundStyle(Palette.inkMuted)
     }
+
+    /// 二级页大标题：比 tab 页的 60pt 小一档，返回键、标题、内容能同屏
+    func subPageTitleStyle() -> some View {
+        font(.system(size: 32, weight: .heavy))
+            .foregroundStyle(Palette.ink)
+    }
+
+    /// 二级页副标题
+    func subPageSubtitleStyle() -> some View {
+        font(.system(size: 16, weight: .medium))
+            .foregroundStyle(Palette.inkMuted)
+    }
 }
 
 // MARK: - UI 图标加载（Resources/ui-icons/）
@@ -449,6 +461,31 @@ func uiIcon(_ name: String) -> Image {
         return Image(uiImage: ui)
     }
     return Image(systemName: "questionmark.square.dashed")
+}
+
+/// 二级页统一顶栏：自绘「‹ 返回」。
+/// 系统导航栏在中文 App 里会露出英文 "Back"，所以主流程一律自绘。
+struct SubPageHeader: View {
+    var backTitle: String = "返回"
+    let onBack: () -> Void
+
+    var body: some View {
+        HStack {
+            Button(action: onBack) {
+                HStack(spacing: 4) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 17, weight: .bold))
+                    Text(backTitle)
+                        .font(.system(size: 17, weight: .semibold))
+                }
+                .foregroundStyle(Func.infoDeep)
+                .frame(height: 40)
+            }
+            .buttonStyle(PressableStyle())
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal)
+    }
 }
 
 /// 3D 风格 PNG 图标自带不透明白底。

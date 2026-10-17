@@ -188,10 +188,21 @@ struct ProfileView: View {
 
 struct SettingsDetailView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 14) {
+            VStack(alignment: .leading, spacing: 12) {
+                SubPageHeader(onBack: { dismiss() })
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("设置")
+                        .subPageTitleStyle()
+                    Text("每日限时与每天新学词数")
+                        .subPageSubtitleStyle()
+                }
+                .padding(.horizontal)
+
                 VStack(alignment: .leading, spacing: 14) {
                     Text("每日限时")
                         .font(.system(size: 18, weight: .heavy))
@@ -220,6 +231,7 @@ struct SettingsDetailView: View {
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .whiteCard()
+                .padding(.horizontal)
 
                 HStack {
                     Text("每天新学词数")
@@ -235,12 +247,12 @@ struct SettingsDetailView: View {
                 }
                 .padding(16)
                 .whiteCard()
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
             .padding(.top, 4)
+            .padding(.bottom, 12)
         }
         .creamBackground()
-        .navigationTitle("设置")
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .navigationBar)
     }
 }

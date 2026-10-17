@@ -782,24 +782,24 @@ struct ImageToWordGame: View {
     }
 
     private var gameView: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 16) {
             Text("第 \(index + 1) / \(questions.count) 题  ·  得分 \(score)")
                 .font(.headline)
                 .foregroundColor(.secondary)
 
-            VStack(spacing: 12) {
+            VStack(spacing: 8) {
                 Text("这张图是哪个单词？🖼️")
-                    .font(.system(size: 26, weight: .semibold))
-                WordIconView(word: questions[index].word, size: 180)
-                    .padding(16)
+                    .font(.system(size: 24, weight: .semibold))
+                WordIconView(word: questions[index].word, size: 130)
+                    .padding(10)
                     .background(
-                        RoundedRectangle(cornerRadius: 24)
+                        RoundedRectangle(cornerRadius: 20)
                             .fill(Color.white)
                             .shadow(radius: 4)
                     )
             }
 
-            VStack(spacing: 14) {
+            VStack(spacing: 10) {
                 ForEach(options.indices, id: \.self) { i in
                     let state = pickedState[i] ?? .none
                     Button {
@@ -807,27 +807,27 @@ struct ImageToWordGame: View {
                     } label: {
                         HStack {
                             Text(options[i].word)
-                                .font(.system(size: 32, weight: .bold))
+                                .font(.system(size: 26, weight: .bold))
                             Spacer()
                             if state == .correct {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 32))
+                                    .font(.system(size: 26))
                                     .foregroundColor(.green)
                             } else if state == .wrong {
                                 Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 32))
+                                    .font(.system(size: 26))
                                     .foregroundColor(.red)
                             }
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 16)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 11)
                         .background(
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: 18)
                                 .fill(Color.white)
                                 .shadow(radius: 3)
                         )
                         .overlay(
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: 18)
                                 .stroke(borderColor(for: state), lineWidth: state == .none ? 2 : 6)
                         )
                     }
@@ -837,7 +837,7 @@ struct ImageToWordGame: View {
                     .opacity(answered && state == .none ? 0.6 : 1.0)
                 }
             }
-            Spacer()
+            Spacer(minLength: 0)
         }
     }
 
