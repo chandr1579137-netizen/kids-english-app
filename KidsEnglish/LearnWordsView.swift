@@ -356,22 +356,22 @@ struct LearnWordsView: View {
     }
 
     private func wordCard(_ entry: WordEntry) -> some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 8) {
             // 参考图：插图后面有一团柔和的暖黄光晕
             ZStack {
                 RadialGradient(
                     colors: [Color(red: 1.0, green: 0.93, blue: 0.72), .clear],
                     center: .center, startRadius: 10, endRadius: 130
                 )
-                .frame(width: 280, height: 240)
+                .frame(width: 250, height: 200)
                 // 词图是带灰底的实拍图，用径向遮罩把边缘化开，
                 // 避免出现一块灰色方片（参考图是透明 3D 插图）
-                WordIconView(word: entry.word, size: 186)
+                WordIconView(word: entry.word, size: 158)
                     .mask(
                         RadialGradient(
                             colors: [.black, .black, .clear],
                             center: .center,
-                            startRadius: 62, endRadius: 94
+                            startRadius: 53, endRadius: 80
                         )
                     )
             }

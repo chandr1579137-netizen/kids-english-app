@@ -598,7 +598,9 @@ struct ConsolidationView: View {
             // 难度用胶囊标签，不用「●●○」这类符号串
             Text(m.difficulty)
                 .font(.system(size: 12, weight: .bold))
-                .foregroundStyle(fg.opacity(0.85))
+                // 胶囊是白底，文字必须用深色。深色卡（听写训练）的 fg 是白色，
+                // 沿用 fg 就成了白底白字，难度标签直接消失。
+                .foregroundStyle(Palette.ink)
                 .padding(.horizontal, 11)
                 .frame(height: 21)
                 .background(.white.opacity(0.88), in: Capsule())

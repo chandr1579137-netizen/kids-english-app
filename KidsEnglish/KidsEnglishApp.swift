@@ -89,10 +89,16 @@ struct ContentView: View {
         ZStack {
             Palette.canvas.ignoresSafeArea()
 
-            content
-                .safeAreaInset(edge: .bottom, spacing: 0) {
-                    KidTabBar(selection: $tab)
-                }
+            // 底栏是真正的布局兄弟，不是 safeAreaInset 覆盖层。
+            // 用 safeAreaInset 时它只把子视图的 safeArea 标成「有底栏」，
+            // 但 ScrollView 的视口并不会因此缩短：内容一路画到底栏底下，
+            // 绘本末排被压、学习页判定键被切都是这么来的（实测内容到了
+            // 840–874pt 的 home indicator 区）。改成 VStack 后可用高度被
+            // 真正切走，视口底边 = 底栏顶边。
+            VStack(spacing: 0) {
+                content
+                KidTabBar(selection: $tab)
+            }
 
             if store.timeUp {
                 TimeUpOverlay()
@@ -151,14 +157,17 @@ struct KidTabBar: View {
         .padding(.horizontal, 8)
         .padding(.top, 6)
         .padding(.bottom, 6)
-        .background(
+        .background {
+            // 白底要铺进底部安全区：否则 home indicator 那 34pt 会露出
+            // 底栏下方滚过去的页面内容，看起来像「底栏后面还有一截」。
             Palette.surface
                 .overlay(alignment: .top) {
                     Rectangle()
                         .fill(Palette.hairline)
                         .frame(height: 0.5)
                 }
-        )
+                .ignoresSafeArea(edges: .bottom)
+        }
     }
 }
 

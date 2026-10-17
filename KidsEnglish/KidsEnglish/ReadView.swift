@@ -8,14 +8,15 @@ struct ReadView: View {
     private let levels = [1, 2, 3, 4, 5, 6, 7]
     @State private var selectedLevel = 1
     /// `-uiLesson` 截图用：自动推入第一课（DataStore 靠环境注入，只能在 onAppear 里取）
-    @State private var showAutoLesson = false
+    /// 用显式 path 而不是 isPresented：isPresented 版本实测不推入（CI 截图与列表页逐像素相同）
+    @State private var autoPath: [Lesson] = []
 
     private var currentLessons: [Lesson] {
         store.lessons(for: selectedLevel)
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $autoPath) {
             ScrollView {
                 VStack(spacing: 2) {
                     Text("读短文")
@@ -33,9 +34,7 @@ struct ReadView: View {
 
                     LazyVStack(spacing: 10) {
                         ForEach(currentLessons) { lesson in
-                            NavigationLink {
-                                LessonView(lesson: lesson)
-                            } label: {
+                            NavigationLink(value: lesson) {
                                 lessonRow(lesson)
                             }
                             .buttonStyle(PressableStyle())
@@ -47,17 +46,15 @@ struct ReadView: View {
             }
             .creamBackground()
             .toolbar(.hidden, for: .navigationBar)
-            .navigationDestination(isPresented: $showAutoLesson) {
-                if let lesson = store.lessons(for: 1).first {
-                    LessonView(lesson: lesson)
-                }
+            .navigationDestination(for: Lesson.self) { lesson in
+                LessonView(lesson: lesson)
             }
             .onAppear {
-                if LaunchOptions.forceLesson, !showAutoLesson {
-                    // 首帧就推入在部分系统版本上不生效，延一帧更稳
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        showAutoLesson = true
-                    }
+                // 截图用：-uiLesson 直接推入 L1 第一课。
+                guard LaunchOptions.forceLesson, autoPath.isEmpty,
+                      let first = store.lessons(for: 1).first else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    if autoPath.isEmpty { autoPath = [first] }
                 }
             }
         }
