@@ -148,6 +148,25 @@ jobs:
           # 新增：这两页原本不在覆盖内，里面的旧系统色因此长期没被发现
           shoot 07-games    -uiTab 0 -uiConsolidate
           shoot 08-lesson   -uiTab 2 -uiLesson
+
+          # 9 个玩法内页：此前全部是盲区（只有网格页被拍过）。
+          # 顺序同 ConsolidationView.Mode 的声明顺序。
+          shoot 09-game-word2image    -uiTab 0 -uiConsolidate -uiGame 0
+          shoot 10-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 1
+          shoot 11-game-matching      -uiTab 0 -uiConsolidate -uiGame 2
+          shoot 12-game-word2audio    -uiTab 0 -uiConsolidate -uiGame 3
+          shoot 13-game-image2word    -uiTab 0 -uiConsolidate -uiGame 4
+          shoot 14-game-audio2word    -uiTab 0 -uiConsolidate -uiGame 5
+          shoot 15-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 6
+          shoot 16-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 7
+          shoot 17-game-dictation     -uiTab 0 -uiConsolidate -uiGame 8
+
+          # 二级页：主题词表 / 绘本阅读器 / 儿歌 / 家长验证 / 设置
+          shoot 18-theme-words  -uiTab 1 -uiTheme fruits
+          shoot 19-book-reader  -uiTab 3 -uiReader
+          shoot 20-songs        -uiTab 4 -uiProfile songs
+          shoot 21-parent-gate  -uiTab 4 -uiProfile parent
+          shoot 22-settings     -uiTab 4 -uiProfile settings
           ls -lh shots
 
       - name: Upload screenshots

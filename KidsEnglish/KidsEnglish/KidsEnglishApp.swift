@@ -77,6 +77,24 @@ enum LaunchOptions {
 
     /// `-uiLesson` 直接打开读短文的第一课
     static var forceLesson: Bool { args.contains("-uiLesson") }
+
+    // MARK: 截图覆盖补充（每个页面一个参数，都是「直接渲染」而不是 push）
+
+    /// `-uiTheme <id>` 单词卡直接打开某个主题的词表（如 fruits / animals）
+    static var themeId: String? { value(for: "-uiTheme") }
+
+    /// `-uiReader` 绘本直接打开第一本的阅读器
+    static var forceReader: Bool { args.contains("-uiReader") }
+
+    /// `-uiProfile <songs|parent|settings>` 我的页直接打开二级页
+    static var profilePage: String? { value(for: "-uiProfile") }
+
+    /// `-uiGame <0..8>` 巩固练习直接进入某个玩法（顺序同 ConsolidationView.Mode）
+    static var startingGameMode: ConsolidationView.Mode? {
+        guard let raw = value(for: "-uiGame"), let index = Int(raw) else { return nil }
+        let all = ConsolidationView.Mode.allCases
+        return all.indices.contains(index) ? all[index] : nil
+    }
 }
 
 // MARK: - 根视图
@@ -109,11 +127,40 @@ struct ContentView: View {
     @ViewBuilder
     private var content: some View {
         switch tab {
-        case .learn: LearnWordsView()
-        case .cards: WordCardsView()
-        case .read: ReadView()
-        case .picture: PictureBookView()
-        case .profile: ProfileView()
+        case .learn:
+            LearnWordsView()
+        case .cards:
+            // 截图覆盖：主题词表原本只能点进去，CI 拍不到
+            if let id = LaunchOptions.themeId,
+               let theme = store.wordThemes.first(where: { $0.id == id }) {
+                NavigationStack { ThemeWordsView(theme: theme) }
+            } else {
+                WordCardsView()
+            }
+        case .read:
+            ReadView()
+        case .picture:
+            // 截图覆盖：绘本阅读器
+            if LaunchOptions.forceReader, let lesson = store.lessons.first {
+                NavigationStack { PictureBookReaderView(lesson: lesson) }
+            } else {
+                PictureBookView()
+            }
+        case .profile:
+            // 截图覆盖：儿歌 / 家长验证 / 设置。三个页面各自的容器不同：
+            // SongsView、ParentGateView 自带 NavigationStack，设置详情页没有。
+            if let page = LaunchOptions.profilePage {
+                switch page {
+                case "songs":
+                    SongsView()
+                case "parent":
+                    ParentGateView()
+                default:
+                    NavigationStack { SettingsDetailView() }
+                }
+            } else {
+                ProfileView()
+            }
         }
     }
 }

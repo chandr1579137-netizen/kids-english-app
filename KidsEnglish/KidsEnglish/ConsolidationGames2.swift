@@ -494,7 +494,8 @@ struct ConsolidationView: View {
             }
         }
     }
-    @State private var mode: Mode? = nil
+    /// `-uiGame <n>` 截图用：跳过网格直接进某个玩法
+    @State private var mode: Mode? = LaunchOptions.startingGameMode
 
     private let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
 
