@@ -403,11 +403,14 @@ struct LearnWordsView: View {
             }
             .padding(.top, 6)
 
-            // 判定与导航同排四键（参考图布局）：两侧导航浅灰配深字，中间判定饱和色配白字
+            // 判定与导航同排四键（参考图布局）：中间判定饱和色配白字。
+            // 两侧导航不做成同一种灰：灰＝不可用，会让「下一个」看起来点不动，
+            // 所以「上一个」在第一张卡真正置灰禁用，「下一个」用次级蓝表示可点。
             HStack(spacing: 8) {
                 judgeKey(title: "上一个", icon: "arrow.left", leadingIcon: true,
                          fill: Color(red: 0.78, green: 0.78, blue: 0.79),
-                         fg: Palette.ink) {
+                         fg: Palette.ink,
+                         enabled: cardIndex > 0) {
                     if cardIndex > 0 {
                         cardIndex -= 1
                         playBest()
@@ -422,8 +425,8 @@ struct LearnWordsView: View {
                     nextCard()
                 }
                 judgeKey(title: "下一个", icon: "arrow.right",
-                         fill: Color(red: 0.78, green: 0.78, blue: 0.79),
-                         fg: Palette.ink) {
+                         fill: Func.info.opacity(0.42),
+                         fg: Func.infoDeep) {
                     nextCard()
                 }
             }
@@ -458,6 +461,7 @@ struct LearnWordsView: View {
     private func judgeKey(title: String, icon: String,
                           leadingIcon: Bool = false,
                           fill: Color, fg: Color,
+                          enabled: Bool = true,
                           action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(spacing: 3) {
@@ -474,13 +478,16 @@ struct LearnWordsView: View {
                             .font(.system(size: 13, weight: .bold))
                     }
                 }
-                .foregroundStyle(fg)
+                .foregroundStyle(enabled ? fg : fg.opacity(0.4))
             }
             .frame(maxWidth: .infinity)
             .frame(height: 72)
-            .background(fill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .background(enabled ? fill : Palette.hairline,
+                        in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
         .buttonStyle(PressableStyle())
+        .disabled(!enabled)
+        .accessibilityLabel(title)
     }
 
     // MARK: - 庆祝页
