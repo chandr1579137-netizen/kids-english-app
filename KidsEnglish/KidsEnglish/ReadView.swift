@@ -102,6 +102,7 @@ struct ReadView: View {
             CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: lesson.titleCn)
                 .frame(width: 60, height: 60)
                 .clipShape(RoundedRectangle(cornerRadius: Radius.thumb))
+                .clipped()
 
             // 英文标题是主信息（用户读的是英文），中文做副信息
             VStack(alignment: .leading, spacing: 3) {

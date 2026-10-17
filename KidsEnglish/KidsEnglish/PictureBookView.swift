@@ -26,8 +26,7 @@ struct PictureBookView: View {
                                 VStack(spacing: 6) {
                                     CoverImage(url: store.coverURL(forLesson: lesson.id),
                                                fallbackText: lesson.titleCn)
-                                        .frame(height: 110)
-                                        .clipShape(RoundedRectangle(cornerRadius: Radius.thumb))
+                                        .imageFrame(height: 110, corner: Radius.thumb)
                                     Text(lesson.titleCn)
                                         .font(.system(size: 14, weight: .semibold))
                                         .foregroundStyle(Palette.ink)
@@ -57,8 +56,7 @@ struct PictureBookReaderView: View {
         ScrollView {
             VStack(spacing: 20) {
                 CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: lesson.titleCn)
-                    .frame(height: 240)
-                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .imageFrame(height: 240, corner: Radius.sheet)
                     .padding(.horizontal)
 
                 Text(lesson.titleCn)

@@ -358,6 +358,18 @@ extension View {
         background(Palette.canvas.ignoresSafeArea())
     }
 
+    /// 固定高度的图片容器。
+    /// 直接给图片 `.frame(height:)` 只约束高度，宽度会由图片自己决定，
+    /// 放在 ScrollView 里就会撑破父级、被居中裁掉 —— 页边距等于没加。
+    /// 这里用 Rectangle 当宽度权威：宽度严格等于父级提案，图片画在上层再裁切。
+    func imageFrame(height: CGFloat, corner: CGFloat) -> some View {
+        Rectangle()
+            .fill(Color.clear)
+            .frame(height: height)
+            .overlay { self }
+            .clipShape(RoundedRectangle(cornerRadius: corner, style: .continuous))
+    }
+
     /// 标准白卡：贴地阴影 + 统一圆角
     func whiteCard() -> some View {
         background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.sheet))

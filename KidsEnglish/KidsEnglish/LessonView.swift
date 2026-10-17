@@ -24,8 +24,7 @@ struct LessonView: View {
                 // 封面：与其他页统一内边距 + Radius.sheet
                 CoverImage(url: store.coverURL(forLesson: lesson.id),
                            fallbackText: String(lesson.titleCn.prefix(1)))
-                    .frame(height: 200)
-                    .clipShape(RoundedRectangle(cornerRadius: Radius.sheet))
+                    .imageFrame(height: 200, corner: Radius.sheet)
                     .padding(.horizontal)
                     .padding(.top, 4)
 
