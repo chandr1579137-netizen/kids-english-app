@@ -10,6 +10,7 @@ class DataStore {
     var audioMap: [String: String] = [:]       // "lessonId#paragraphId" -> mp3 文件名
     var wordAudioMap: [String: String] = [:]   // "apple" -> mp3 文件名
     var wordDict: [String: WordEntry] = [:]    // 小写单词 -> 词条
+    var wordThemes: [WordTheme] = []           // 主题词包
 
     // 进度（持久化）
     var completedLessons: Set<String> = []
@@ -56,6 +57,7 @@ class DataStore {
         audioMap = am
         wordAudioMap = load("word-audio-map.json", as: [String: String].self) ?? [:]
         for w in words { wordDict[w.word.lowercased()] = w }
+        wordThemes = load("word-themes.json", as: [WordTheme].self) ?? []
     }
 
     private func load<T: Decodable>(_ name: String, as type: T.Type) -> T? {
@@ -174,4 +176,17 @@ class DataStore {
     func wrongWordsToday() -> [String] { [] }  // v1 占位，后续记录错词
 
     func studyMinutesToday() -> Int { Int(studySecondsToday / 60) }
+
+    // MARK: - 主题词包
+
+    func words(forTheme themeId: String) -> [WordEntry] {
+        guard let theme = wordThemes.first(where: { $0.id == themeId }) else { return [] }
+        return theme.words.compactMap { wordDict[$0.lowercased()] }
+    }
+
+    func themeProgress(themeId: String) -> (done: Int, total: Int) {
+        let list = words(forTheme: themeId)
+        let done = list.filter { collectedCards.contains($0.id) }.count
+        return (done, list.count)
+    }
 }

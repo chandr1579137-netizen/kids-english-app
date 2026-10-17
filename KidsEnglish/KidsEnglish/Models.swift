@@ -111,3 +111,11 @@ struct LevelInfo {
         LevelInfo(level: 7, name: "创世之核", icon: "💎", color: "pink"),
     ]
 }
+
+// MARK: - 主题词包
+
+struct WordTheme: Codable, Identifiable, Hashable {
+    let id: String
+    let nameCn: String
+    let words: [String]
+}
