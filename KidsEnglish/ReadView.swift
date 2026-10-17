@@ -7,57 +7,59 @@ struct ReadView: View {
     /// 数据里 L1–L7 全部存在（共 90 课），不跳过任何一级
     private let levels = [1, 2, 3, 4, 5, 6, 7]
     @State private var selectedLevel = 1
-    /// `-uiLesson` 截图用：自动推入第一课（DataStore 靠环境注入，只能在 onAppear 里取）
-    /// 用显式 path 而不是 isPresented：isPresented 版本实测不推入（CI 截图与列表页逐像素相同）
-    @State private var autoPath: [Lesson] = []
+    /// `-uiLesson` 截图用：直接把课文页当根视图渲染。
+    /// 不走 push：path 式推入实测会落到 SwiftUI 的「无 destination」占位页
+    /// （空白 + 黄色警告三角），而这里要的只是「把课文页拍进截图」。
+    /// 用户真实点击仍走 NavigationLink 的 destination 闭包，行为不变。
 
     private var currentLessons: [Lesson] {
         store.lessons(for: selectedLevel)
     }
 
     var body: some View {
-        NavigationStack(path: $autoPath) {
-            ScrollView {
-                VStack(spacing: 2) {
-                    Text("读短文")
-                        .font(.system(size: 60, weight: .heavy))
-                        .foregroundStyle(AppTheme.readTitleBlue)
-                    Text("\(store.lessons.count) 篇分级小故事")
-                        .pageSubtitleStyle()
+        NavigationStack {
+            Group {
+                if LaunchOptions.forceLesson, let first = store.lessons(for: 1).first {
+                    LessonView(lesson: first)
+                } else {
+                    lessonList
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.top, 4)
-                .padding(.bottom, 14)
-
-                    levelPicker
-                        .padding(.bottom, 14)
-
-                    LazyVStack(spacing: 10) {
-                        ForEach(currentLessons) { lesson in
-                            NavigationLink(value: lesson) {
-                                lessonRow(lesson)
-                            }
-                            .buttonStyle(PressableStyle())
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-                .padding(.bottom, 12)
             }
             .creamBackground()
             .toolbar(.hidden, for: .navigationBar)
-            .navigationDestination(for: Lesson.self) { lesson in
-                LessonView(lesson: lesson)
+        }
+    }
+
+    private var lessonList: some View {
+        ScrollView {
+            VStack(spacing: 2) {
+                Text("读短文")
+                    .font(.system(size: 60, weight: .heavy))
+                    .foregroundStyle(AppTheme.readTitleBlue)
+                Text("\(store.lessons.count) 篇分级小故事")
+                    .pageSubtitleStyle()
             }
-            .onAppear {
-                // 截图用：-uiLesson 直接推入 L1 第一课。
-                guard LaunchOptions.forceLesson, autoPath.isEmpty,
-                      let first = store.lessons(for: 1).first else { return }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if autoPath.isEmpty { autoPath = [first] }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 4)
+            .padding(.bottom, 14)
+
+            levelPicker
+                .padding(.bottom, 14)
+
+            LazyVStack(spacing: 10) {
+                ForEach(currentLessons) { lesson in
+                    NavigationLink {
+                        LessonView(lesson: lesson)
+                    } label: {
+                        lessonRow(lesson)
+                    }
+                    .buttonStyle(PressableStyle())
                 }
             }
+            .padding(.horizontal)
+            .padding(.bottom, 12)
         }
+    }
 
     // MARK: - 分级筛选
 
