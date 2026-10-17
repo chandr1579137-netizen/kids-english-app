@@ -279,10 +279,10 @@ struct LearnWordsView: View {
             Text(entry.word)
                 .font(.system(size: 56, weight: .bold))
                 .foregroundColor(AppTheme.brightBlue)
-            Text(entry.phonetic)
+            Text(entry.phonetic ?? "")
                 .font(.title2)
                 .foregroundColor(.gray)
-            Text(entry.meaningCn)
+            Text(entry.meaningCn ?? "")
                 .font(.system(size: 34, weight: .bold))
                 .foregroundColor(AppTheme.wordOrange)
 
