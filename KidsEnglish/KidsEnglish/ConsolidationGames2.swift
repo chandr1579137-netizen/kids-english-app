@@ -407,6 +407,7 @@ struct DictationGame: View {
 
 // MARK: - 壳
 struct ConsolidationView: View {
+    @Environment(\.dismiss) private var dismiss
     let words: [WordEntry]
     enum Mode: String, CaseIterable, Identifiable {
         case wordToImage="看词选图", audioToImage="听音选图", matching="配对消除",
@@ -494,8 +495,41 @@ struct ConsolidationView: View {
             }
         }
         .creamBackground()
-        .navigationTitle(mode == nil ? "巩固练习" : mode!.rawValue)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
+        .safeAreaInset(edge: .top, spacing: 0) { header }
+    }
+
+    /// 系统返回键在英文环境下显示 “Back”，中文 App 里很突兀 —— 自绘
+    private var header: some View {
+        HStack(spacing: 12) {
+            Button {
+                if mode == nil { dismiss() } else { mode = nil }
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 17, weight: .bold))
+                    Text(mode == nil ? "返回" : "换游戏")
+                        .font(.system(size: 17, weight: .semibold))
+                }
+                .foregroundStyle(Func.infoDeep)
+                .frame(height: 44)
+            }
+            .buttonStyle(PressableStyle())
+
+            Spacer()
+
+            Text(mode == nil ? "巩固练习" : mode!.rawValue)
+                .font(.system(size: 17, weight: .bold))
+                .foregroundStyle(Palette.ink)
+
+            Spacer()
+
+            // 与左侧「返回」等宽的占位，保证标题真正居中
+            Color.clear.frame(width: 62, height: 1)
+        }
+        .padding(.horizontal)
+        .background(Palette.canvas)
     }
 
     // MARK: - 九宫格模式选择
@@ -504,14 +538,14 @@ struct ConsolidationView: View {
         ScrollView {
             VStack(spacing: 18) {
                 if words.isEmpty {
-                    Text("先去背单词吧 📚")
-                        .font(.title.bold())
-                        .foregroundColor(AppTheme.navy)
+                    Text("先去背单词吧")
+                        .font(.system(size: 22, weight: .heavy))
+                        .foregroundStyle(Palette.ink)
                         .padding(40)
                         .whiteCard()
                         .padding()
                 } else {
-                    Text("选个玩法吧！🎮")
+                    Text("选个玩法吧")
                         .font(.system(size: 40, weight: .heavy))
                         .foregroundStyle(Palette.ink)
                         .padding(.top, 8)
@@ -569,26 +603,7 @@ struct ConsolidationView: View {
     @ViewBuilder
     private func gameView(for m: Mode) -> some View {
         VStack(spacing: 0) {
-            Button {
-                mode = nil
-            } label: {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 18, weight: .bold))
-                    Text("换游戏")
-                        .font(.headline.bold())
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 18)
-                .padding(.vertical, 10)
-                .background(Color.gray.opacity(0.6))
-                .cornerRadius(18)
-            }
-            .buttonStyle(.plain)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal)
-            .padding(.vertical, 8)
-
+            // 「换游戏」已收进顶部 header，这里不再重复一个灰色胶囊按钮
             Group {
                 switch m {
                 case .wordToImage: WordToImageGame(words: words)

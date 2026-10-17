@@ -102,6 +102,15 @@ jobs:
           test -n "$DEVICE"
           xcrun simctl boot "$DEVICE" 2>/dev/null || true
           xcrun simctl bootstatus "$DEVICE" -b
+
+          # 模拟器默认英文，系统返回键会显示 "Back" —— 这个 App 全中文，
+          # 截图必须反映真实用户看到的样子，所以先把设备语言设成简体中文
+          xcrun simctl spawn "$DEVICE" defaults write .GlobalPreferences AppleLanguages -array zh-Hans
+          xcrun simctl spawn "$DEVICE" defaults write .GlobalPreferences AppleLocale -string zh_CN
+          xcrun simctl shutdown "$DEVICE" 2>/dev/null || true
+          xcrun simctl boot "$DEVICE" 2>/dev/null || true
+          xcrun simctl bootstatus "$DEVICE" -b
+
           xcrun simctl status_bar "$DEVICE" override \
             --time "9:41" --batteryState charged --batteryLevel 100 \
             --wifiBars 3 --cellularBars 4 2>/dev/null || true

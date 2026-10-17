@@ -4,6 +4,7 @@ import UIKit
 /// 课文阅读页：逐段朗读 + 逐词高亮 + 点词查词典 + 跟读录音
 struct LessonView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
     let lesson: Lesson
 
     @State private var player = AudioPlayer()
@@ -20,14 +21,25 @@ struct LessonView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // 封面
+                // 封面：与其他页统一内边距 + Radius.sheet
                 CoverImage(url: store.coverURL(forLesson: lesson.id),
                            fallbackText: String(lesson.titleCn.prefix(1)))
                     .frame(height: 200)
-                    .cornerRadius(20)
-                    .clipped()
-                Text(lesson.title).font(.title.bold())
-                Text(lesson.titleCn).font(.title3).foregroundColor(.secondary)
+                    .clipShape(RoundedRectangle(cornerRadius: Radius.sheet))
+                    .padding(.horizontal)
+                    .padding(.top, 4)
+
+                // 英文是主信息（孩子读的是英文），中文做副信息
+                VStack(spacing: 4) {
+                    Text(lesson.title)
+                        .font(.system(size: 28, weight: .heavy))
+                        .foregroundStyle(Palette.ink)
+                        .multilineTextAlignment(.center)
+                    Text(lesson.titleCn)
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Palette.inkMuted)
+                }
+                .padding(.horizontal)
 
                 // 段落
                 ForEach(lesson.content, id: \.paragraphId) { para in
@@ -51,38 +63,31 @@ struct LessonView: View {
                         },
                         onRecord: { toggleRecord(para) }
                     )
+                    .padding(.horizontal)
                 }
 
                 // 开始练习
                 if !lesson.quiz.isEmpty {
-                    Button {
+                    AppButton(title: "开始练习 · \(lesson.quiz.count) 道题",
+                              icon: "pencil.and.list.clipboard",
+                              tier: .primary) {
                         showQuiz = true
-                    } label: {
-                        Text("✏️ 开始练习 (\(lesson.quiz.count) 道题)")
-                            .font(.title3.bold())
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.orange)
-                            .foregroundColor(.white)
-                            .cornerRadius(16)
                     }
+                    .padding(.horizontal)
                     .padding(.top, 8)
                 }
             }
-            .padding()
+            .padding(.vertical, 12)
         }
-        .navigationTitle(lesson.titleCn)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(showTranslation ? "中" : "EN") { showTranslation.toggle() }
-            }
-        }
+        .creamBackground()
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
+        .safeAreaInset(edge: .top, spacing: 0) { lessonHeader }
         .sheet(item: $tappedWord) { entry in
             WordDetailView(entry: entry)
                 .presentationDetents([.medium])
         }
-        .alert("查不到这个词 😅", isPresented: $showUnknownWordAlert) {
+        .alert("查不到这个词", isPresented: $showUnknownWordAlert) {
             Button("知道了") { }
         } message: {
             Text("「\(tappedRawWord)」暂时没有收录")
@@ -93,6 +98,54 @@ struct LessonView: View {
         .onDisappear {
             player.stop()
         }
+    }
+
+    /// 自定义顶栏：系统返回键在英文环境下会显示 “Back”，中文 App 里很突兀
+    private var lessonHeader: some View {
+        HStack(spacing: 12) {
+            Button {
+                dismiss()
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 17, weight: .bold))
+                    Text("返回")
+                        .font(.system(size: 17, weight: .semibold))
+                }
+                .foregroundStyle(Func.infoDeep)
+                .frame(height: 44)
+            }
+            .buttonStyle(PressableStyle())
+
+            Spacer()
+
+            Text(lesson.titleCn)
+                .font(.system(size: 17, weight: .bold))
+                .foregroundStyle(Palette.ink)
+                .lineLimit(1)
+
+            Spacer()
+
+            // 译文开关：一个开关只表达一件事
+            Button {
+                showTranslation.toggle()
+            } label: {
+                Text(showTranslation ? "译文开" : "译文关")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundStyle(showTranslation ? onFill(Func.accent) : Palette.inkMuted)
+                    .padding(.horizontal, 12)
+                    .frame(height: 32)
+                    .background(
+                        showTranslation ? Func.accent : Palette.hairline,
+                        in: Capsule()
+                    )
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("中文译文")
+            .accessibilityValue(showTranslation ? "已开启" : "已关闭")
+        }
+        .padding(.horizontal)
+        .background(Palette.canvas)
     }
 
     private func togglePlay(_ para: Paragraph) {
@@ -146,7 +199,7 @@ struct ParagraphCard: View {
     let onRecord: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             WordTextView(
                 words: para.words.map { $0.word },
                 highlightIndex: highlightIndex,
@@ -156,38 +209,60 @@ struct ParagraphCard: View {
 
             if showTranslation {
                 Text(para.translation)
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(Palette.inkMuted)
             }
 
-            HStack(spacing: 16) {
-                Button(action: onPlay) {
-                    Label(isPlaying ? "暂停" : "🔊 朗读",
-                          systemImage: isPlaying ? "pause.fill" : "play.fill")
-                }
-                .buttonStyle(.bordered)
-
-                Button(action: onRecord) {
-                    Label(isRecording ? "停止录音" : "🎤 跟读",
-                          systemImage: isRecording ? "stop.fill" : "mic.fill")
-                }
-                .buttonStyle(.bordered)
-                .tint(isRecording ? .red : .blue)
-
+            HStack(spacing: 10) {
+                compactButton(
+                    title: isPlaying ? "暂停" : "朗读",
+                    icon: isPlaying ? "pause.fill" : "play.fill",
+                    fill: Func.positiveDeep,
+                    fg: .white,
+                    action: onPlay
+                )
+                compactButton(
+                    title: isRecording ? "停止" : "跟读",
+                    icon: isRecording ? "stop.fill" : "mic.fill",
+                    fill: isRecording ? Func.negativeDeep : Func.info.opacity(0.28),
+                    fg: isRecording ? .white : Palette.ink,
+                    action: onRecord
+                )
                 if recorder.hasRecording && !isRecording {
-                    Button(action: { recorder.playBack() }) {
-                        Label("回放", systemImage: "speaker.wave.2.fill")
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(.green)
+                    compactButton(
+                        title: "回放",
+                        icon: "speaker.wave.2.fill",
+                        fill: Palette.hairline,
+                        fg: Palette.ink,
+                        action: { recorder.playBack() }
+                    )
                 }
                 Spacer()
             }
-            .font(.subheadline)
         }
-        .padding()
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(16)
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card))
+        .elevationGround()
+    }
+
+    /// 段落内的小操作：比全局按钮矮一档，避免和主 CTA 抢
+    private func compactButton(title: String, icon: String,
+                               fill: Color, fg: Color,
+                               action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.system(size: 13, weight: .bold))
+                Text(title)
+                    .font(.system(size: 15, weight: .bold))
+            }
+            .foregroundStyle(fg)
+            .padding(.horizontal, 14)
+            .frame(height: 38)
+            .background(fill, in: Capsule())
+        }
+        .buttonStyle(PressableStyle())
     }
 }
 
@@ -220,13 +295,16 @@ struct WordTextView: UIViewRepresentable {
             coord.lastHighlight = highlightIndex
             let attr = NSMutableAttributedString()
             let font = UIFont.systemFont(ofSize: 22, weight: .medium)
+            // 与全站文字色一致：深蓝而非系统黑，且高亮仍保持深字浅底
+            let ink = UIColor(Palette.ink)
+            let highlightBg = UIColor(Func.accent).withAlphaComponent(0.38)
             for (i, w) in words.enumerated() {
                 var attrs: [NSAttributedString.Key: Any] = [.font: font]
                 if i == highlightIndex {
-                    attrs[.backgroundColor] = UIColor.systemYellow
-                    attrs[.foregroundColor] = UIColor.black
+                    attrs[.backgroundColor] = highlightBg
+                    attrs[.foregroundColor] = ink
                 } else {
-                    attrs[.foregroundColor] = UIColor.label
+                    attrs[.foregroundColor] = ink
                 }
                 attr.append(NSAttributedString(string: w, attributes: attrs))
                 if i < words.count - 1 {
