@@ -169,8 +169,7 @@ jobs:
           shoot 01-learn    -uiTab 0
           shoot 02-cards    -uiTab 1
           shoot 03-read     -uiTab 2
-          shoot 04-picture  -uiTab 3
-          shoot 05-profile  -uiTab 4
+          shoot 05-profile  -uiTab 3
           shoot 06-study    -uiTab 0 -uiStudy
           # 新增：这两页原本不在覆盖内，里面的旧系统色因此长期没被发现
           shoot 07-games    -uiTab 0 -uiConsolidate
@@ -190,10 +189,9 @@ jobs:
 
           # 二级页：主题词表 / 绘本阅读器 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
-          shoot 19-book-reader  -uiTab 3 -uiReader
-          shoot 20-songs        -uiTab 4 -uiProfile songs
-          shoot 21-parent-gate  -uiTab 4 -uiProfile parent
-          shoot 22-settings     -uiTab 4 -uiProfile settings
+          shoot 20-songs        -uiTab 3 -uiProfile songs
+          shoot 21-parent-gate  -uiTab 3 -uiProfile parent
+          shoot 22-settings     -uiTab 3 -uiProfile settings
           ls -lh shots
 
       - name: Upload screenshots

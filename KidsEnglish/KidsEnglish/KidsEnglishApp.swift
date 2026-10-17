@@ -15,7 +15,7 @@ struct KidsEnglishApp: App {
 // MARK: - 5 Tab 定义（复刻截图结构：背单词 / 单词卡 / 读短文 / 绘本 / 我的）
 
 enum AppTab: Int, CaseIterable, Identifiable {
-    case learn, cards, read, picture, profile
+    case learn, cards, read, profile
 
     var id: Int { rawValue }
 
@@ -24,7 +24,6 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .learn: return "背单词"
         case .cards: return "单词卡"
         case .read: return "读短文"
-        case .picture: return "绘本"
         case .profile: return "我的"
         }
     }
@@ -34,7 +33,6 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .learn: return "book"
         case .cards: return "rectangle.on.rectangle"
         case .read: return "doc.text"
-        case .picture: return "book.closed"
         case .profile: return "person"
         }
     }
@@ -44,7 +42,6 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .learn: return "book.fill"
         case .cards: return "rectangle.on.rectangle.fill"
         case .read: return "doc.text.fill"
-        case .picture: return "book.closed.fill"
         case .profile: return "person.fill"
         }
     }
@@ -82,9 +79,6 @@ enum LaunchOptions {
 
     /// `-uiTheme <id>` 单词卡直接打开某个主题的词表（如 fruits / animals）
     static var themeId: String? { value(for: "-uiTheme") }
-
-    /// `-uiReader` 绘本直接打开第一本的阅读器
-    static var forceReader: Bool { args.contains("-uiReader") }
 
     /// `-uiProfile <songs|parent|settings>` 我的页直接打开二级页
     static var profilePage: String? { value(for: "-uiProfile") }
@@ -139,13 +133,6 @@ struct ContentView: View {
             }
         case .read:
             ReadView()
-        case .picture:
-            // 截图覆盖：绘本阅读器
-            if LaunchOptions.forceReader, let lesson = store.lessons.first {
-                NavigationStack { PictureBookReaderView(lesson: lesson) }
-            } else {
-                PictureBookView()
-            }
         case .profile:
             // 截图覆盖：儿歌 / 家长验证 / 设置。三个页面各自的容器不同：
             // SongsView、ParentGateView 自带 NavigationStack，设置详情页没有。

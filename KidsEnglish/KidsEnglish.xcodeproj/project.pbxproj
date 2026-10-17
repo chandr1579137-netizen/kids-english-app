@@ -23,7 +23,6 @@
 		9E0C0982B526176C6B9C32E8 = {isa = PBXBuildFile; fileRef = 0A2A5D94999FB076E1DFC57A; };
 		4B7A8AF1E85ED63B3861C06C = {isa = PBXBuildFile; fileRef = 8E8403B2FEAC67CA596B3CF9; };
 		B0C0EBB7D3D58B3DBFF55853 = {isa = PBXBuildFile; fileRef = D59B3075C4C050DF24C9714D; };
-		E4016839B914DDD1BFBFB271 = {isa = PBXBuildFile; fileRef = BF4DE41E689475BD10C83CE8; };
 		2BA2E781B1DD863B23665DC3 = {isa = PBXBuildFile; fileRef = BE87BC4EF31FE5F9536F7399; };
 		3D29CCBCC29B74C97A68D3B8 = {isa = PBXBuildFile; fileRef = 06DDC59A3EAF81A85BF8D133; };
 		254B61FB9AB2F1F428DAD477 = {isa = PBXBuildFile; fileRef = 4CE3262B4DC14E135606997D; };
@@ -69,7 +68,6 @@
 		0A2A5D94999FB076E1DFC57A = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolidationGames2.swift; sourceTree = "<group>"; };
 		8E8403B2FEAC67CA596B3CF9 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardsView.swift; sourceTree = "<group>"; };
 		D59B3075C4C050DF24C9714D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadView.swift; sourceTree = "<group>"; };
-		BF4DE41E689475BD10C83CE8 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureBookView.swift; sourceTree = "<group>"; };
 		BE87BC4EF31FE5F9536F7399 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		06DDC59A3EAF81A85BF8D133 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4CE3262B4DC14E135606997D = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 				9E0C0982B526176C6B9C32E8,
 				4B7A8AF1E85ED63B3861C06C,
 				B0C0EBB7D3D58B3DBFF55853,
-				E4016839B914DDD1BFBFB271,
 				2BA2E781B1DD863B23665DC3,
 				3D29CCBCC29B74C97A68D3B8,
 			);
@@ -195,7 +192,6 @@
 				0A2A5D94999FB076E1DFC57A,
 				8E8403B2FEAC67CA596B3CF9,
 				D59B3075C4C050DF24C9714D,
-				BF4DE41E689475BD10C83CE8,
 				BE87BC4EF31FE5F9536F7399,
 				06DDC59A3EAF81A85BF8D133,
 				4CE3262B4DC14E135606997D,
