@@ -70,6 +70,13 @@ enum LaunchOptions {
 
     /// `-uiStudy` 直接进入背单词的学习页
     static var forceStudy: Bool { args.contains("-uiStudy") }
+
+    /// `-uiConsolidate` 直接进入巩固练习 —— 游戏页原本不在截图覆盖内，
+    /// 里面的旧系统色（Color.green / .blue / .red）因此长期没人看见
+    static var forceConsolidate: Bool { args.contains("-uiConsolidate") }
+
+    /// `-uiLesson` 直接打开读短文的第一课
+    static var forceLesson: Bool { args.contains("-uiLesson") }
 }
 
 // MARK: - 根视图

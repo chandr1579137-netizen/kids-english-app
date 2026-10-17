@@ -7,6 +7,8 @@ struct ReadView: View {
     /// 数据里 L1–L7 全部存在（共 90 课），不跳过任何一级
     private let levels = [1, 2, 3, 4, 5, 6, 7]
     @State private var selectedLevel = 1
+    /// `-uiLesson` 截图用：自动推入第一课（DataStore 靠环境注入，只能在 onAppear 里取）
+    @State private var showAutoLesson = false
 
     private var currentLessons: [Lesson] {
         store.lessons(for: selectedLevel)
@@ -43,6 +45,19 @@ struct ReadView: View {
             }
             .creamBackground()
             .toolbar(.hidden, for: .navigationBar)
+            .navigationDestination(isPresented: $showAutoLesson) {
+                if let lesson = store.lessons(for: 1).first {
+                    LessonView(lesson: lesson)
+                }
+            }
+            .onAppear {
+                if LaunchOptions.forceLesson, !showAutoLesson {
+                    // 首帧就推入在部分系统版本上不生效，延一帧更稳
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        showAutoLesson = true
+                    }
+                }
+            }
         }
     }
 

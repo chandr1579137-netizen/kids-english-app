@@ -15,7 +15,7 @@ struct LearnWordsView: View {
     @State private var learnedToday: [WordEntry] = []
     /// 是否处于学习页（tab 内切换，不是全屏覆盖，这样底栏保留）
     @State private var showStudy = LaunchOptions.forceStudy
-    /// 是否跳转巩固练习
+    /// 是否跳转巩固练习（截图用 -uiConsolidate 自动进入）
     @State private var goConsolidate = false
 
     var body: some View {
@@ -32,6 +32,11 @@ struct LearnWordsView: View {
             .toolbar(.hidden, for: .navigationBar)
             .onAppear {
                 refreshToday()
+                if LaunchOptions.forceConsolidate, !goConsolidate {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        goConsolidate = true
+                    }
+                }
             }
             .onChange(of: store.selectedThemeId) { _, _ in
                 refreshToday()

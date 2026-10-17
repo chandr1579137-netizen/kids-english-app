@@ -127,6 +127,9 @@ jobs:
           shoot 04-picture  -uiTab 3
           shoot 05-profile  -uiTab 4
           shoot 06-study    -uiTab 0 -uiStudy
+          # 新增：这两页原本不在覆盖内，里面的旧系统色因此长期没被发现
+          shoot 07-games    -uiTab 0 -uiConsolidate
+          shoot 08-lesson   -uiTab 2 -uiLesson
           ls -lh shots
 
       - name: Upload screenshots
