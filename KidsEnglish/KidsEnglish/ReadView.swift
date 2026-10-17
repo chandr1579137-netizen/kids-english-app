@@ -16,6 +16,13 @@ struct ReadView: View {
         store.lessons(for: selectedLevel)
     }
 
+    /// 已读的课 + 该级第一篇未读的课可进入，其余保持锁定
+    private func isUnlocked(_ lesson: Lesson) -> Bool {
+        if store.completedLessons.contains(lesson.id) { return true }
+        let firstUnread = currentLessons.first { !store.completedLessons.contains($0.id) }
+        return firstUnread?.id == lesson.id
+    }
+
     var body: some View {
         NavigationStack {
             Group {
@@ -50,12 +57,16 @@ struct ReadView: View {
 
             LazyVStack(spacing: 10) {
                 ForEach(currentLessons) { lesson in
+                    let unlocked = isUnlocked(lesson)
                     NavigationLink {
                         LessonView(lesson: lesson)
                     } label: {
                         lessonRow(lesson)
                     }
                     .buttonStyle(PressableStyle())
+                    // 锁不能只是画上去的：未解锁的课点开就等于没锁
+                    .disabled(!unlocked)
+                    .opacity(unlocked ? 1 : 0.65)
                 }
             }
             .padding(.horizontal)

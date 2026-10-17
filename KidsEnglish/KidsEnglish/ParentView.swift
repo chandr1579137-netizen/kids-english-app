@@ -135,12 +135,13 @@ struct ParentDashboardView: View {
                             get: { store.timeLimitMinutes },
                             set: { store.timeLimitMinutes = $0; store.saveProgress() }
                         )) {
+                            // 取值与「设置 → 每日限时」保持一致：0 / 10 / 20 / 30。
+                            // 之前这里还有 15/45/60，设置页只有 0/10/20/30，
+                            // 家长选了 45 之后设置页一个都不高亮。
                             Text("不限").tag(0)
-                            Text("15 分钟").tag(15)
+                            Text("10 分钟").tag(10)
                             Text("20 分钟").tag(20)
                             Text("30 分钟").tag(30)
-                            Text("45 分钟").tag(45)
-                            Text("60 分钟").tag(60)
                         }
                         .pickerStyle(.menu)
                         .tint(Func.infoDeep)

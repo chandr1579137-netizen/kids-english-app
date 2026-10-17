@@ -139,7 +139,9 @@ struct ChoiceOptions: View {
                     onAnswer(opt.value == item.correctAnswer)
                 } label: {
                     HStack {
-                        if let img = opt.image {
+                        // image 字段本意是 emoji；历史数据里混进过 "/assets/quiz/x.webp"
+                        // 这类路径，直接 Text 会把整串路径画在选项上，这里只接受 emoji。
+                        if let img = opt.image, !img.isEmpty, !img.hasPrefix("/") {
                             Text(img).font(.largeTitle)
                         }
                         Text(opt.text ?? opt.value ?? "")

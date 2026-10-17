@@ -1,0 +1,293 @@
+[
+ {
+  "id": "fruits",
+  "nameCn": "水果",
+  "words": [
+   "apple",
+   "banana",
+   "pear",
+   "grape",
+   "fruit"
+  ]
+ },
+ {
+  "id": "animals",
+  "nameCn": "动物",
+  "words": [
+   "cat",
+   "dog",
+   "rabbit",
+   "bird",
+   "fish",
+   "pig",
+   "duck",
+   "cow",
+   "hen",
+   "frog",
+   "ant",
+   "bee",
+   "owl",
+   "mouse",
+   "monkey",
+   "elephant",
+   "lion",
+   "tiger",
+   "snake",
+   "butterfly",
+   "dolphin",
+   "turtle",
+   "whale",
+   "shark",
+   "octopus",
+   "fox",
+   "horse",
+   "puppy",
+   "kitten",
+   "starfish"
+  ]
+ },
+ {
+  "id": "colors",
+  "nameCn": "颜色",
+  "words": [
+   "red",
+   "blue",
+   "green",
+   "yellow",
+   "white",
+   "black",
+   "brown",
+   "pink",
+   "orange",
+   "purple",
+   "rainbow"
+  ]
+ },
+ {
+  "id": "numbers",
+  "nameCn": "数字",
+  "words": [
+   "one",
+   "two",
+   "three",
+   "four",
+   "five",
+   "six",
+   "seven",
+   "eight",
+   "nine",
+   "ten"
+  ]
+ },
+ {
+  "id": "body",
+  "nameCn": "身体部位",
+  "words": [
+   "head",
+   "eye",
+   "ear",
+   "nose",
+   "mouth",
+   "hand",
+   "foot",
+   "leg",
+   "arm",
+   "face",
+   "hair",
+   "teeth"
+  ]
+ },
+ {
+  "id": "foods",
+  "nameCn": "食物",
+  "words": [
+   "milk",
+   "egg",
+   "rice",
+   "bread",
+   "cake",
+   "vegetable",
+   "mooncake",
+   "food"
+  ]
+ },
+ {
+  "id": "family",
+  "nameCn": "家人",
+  "words": [
+   "mom",
+   "dad",
+   "sister",
+   "brother",
+   "family",
+   "friend",
+   "girl",
+   "grandmother"
+  ]
+ },
+ {
+  "id": "home",
+  "nameCn": "家居用品",
+  "words": [
+   "house",
+   "door",
+   "window",
+   "chair",
+   "desk",
+   "clock",
+   "mirror",
+   "wall",
+   "gate",
+   "floor",
+   "room"
+  ]
+ },
+ {
+  "id": "vehicles",
+  "nameCn": "交通工具",
+  "words": [
+   "car",
+   "ship",
+   "boat",
+   "spaceship"
+  ]
+ },
+ {
+  "id": "nature",
+  "nameCn": "自然",
+  "words": [
+   "sun",
+   "moon",
+   "star",
+   "sky",
+   "cloud",
+   "rain",
+   "snow",
+   "wind",
+   "tree",
+   "flower",
+   "leaf",
+   "grass",
+   "mountain",
+   "river",
+   "lake",
+   "sea",
+   "ocean",
+   "forest",
+   "island",
+   "beach"
+  ]
+ },
+ {
+  "id": "stationery",
+  "nameCn": "文具",
+  "words": [
+   "book",
+   "pen",
+   "pencil",
+   "map",
+   "picture",
+   "brush",
+   "letter"
+  ]
+ },
+ {
+  "id": "toys",
+  "nameCn": "玩具",
+  "words": [
+   "ball",
+   "toy",
+   "kite",
+   "game",
+   "teddy"
+  ]
+ },
+ {
+  "id": "places",
+  "nameCn": "地方",
+  "words": [
+   "city",
+   "school",
+   "park",
+   "bridge",
+   "garden",
+   "farm",
+   "palace",
+   "tower",
+   "village",
+   "kingdom"
+  ]
+ },
+ {
+  "id": "actions",
+  "nameCn": "动作",
+  "words": [
+   "run",
+   "jump",
+   "swim",
+   "fly",
+   "eat",
+   "drink",
+   "sleep",
+   "sit",
+   "stand",
+   "open",
+   "close",
+   "play",
+   "sing",
+   "dance",
+   "read",
+   "write",
+   "draw",
+   "walk",
+   "look",
+   "listen",
+   "touch",
+   "climb",
+   "push",
+   "pull",
+   "catch",
+   "throw",
+   "clean",
+   "cook",
+   "smile",
+   "laugh"
+  ]
+ },
+ {
+  "id": "adjectives",
+  "nameCn": "形容词",
+  "words": [
+   "big",
+   "small",
+   "little",
+   "happy",
+   "sad",
+   "good",
+   "bad",
+   "new",
+   "old",
+   "hot",
+   "cold",
+   "pretty",
+   "tall",
+   "short",
+   "fast",
+   "slow",
+   "soft",
+   "long",
+   "warm",
+   "cool",
+   "sleepy",
+   "hungry",
+   "thirsty",
+   "tired",
+   "dirty",
+   "wet",
+   "dry",
+   "nice",
+   "funny",
+   "strong"
+  ]
+ }
+]

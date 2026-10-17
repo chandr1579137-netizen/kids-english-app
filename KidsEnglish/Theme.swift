@@ -508,7 +508,9 @@ struct IconPlate: View {
     }
 }
 
-/// 主题 id 到图标名的映射
+/// 主题 id 到图标名的映射。
+/// time / functions 两个主题已从低龄词表移除，对应分支一并删掉，
+/// 避免留下永远走不到的死映射。
 func themeIconName(for themeId: String) -> String {
     switch themeId {
     case "fruits": return "theme-apple"
@@ -518,16 +520,14 @@ func themeIconName(for themeId: String) -> String {
     case "numbers": return "theme-abacus"
     case "body": return "theme-hand"
     case "foods": return "theme-burger"
-    case "family": return "theme-house"
+    case "family": return "theme-family"
     case "stationery": return "theme-stationery"
     case "toys": return "theme-teddy"
     case "nature": return "theme-tree"
     case "home": return "theme-house"
     case "places": return "theme-pin"
-    case "time": return "theme-clock"
     case "actions": return "theme-runner"
     case "adjectives": return "theme-sparkles"
-    case "functions": return "theme-puzzle"
     default: return "theme-dots"
     }
 }

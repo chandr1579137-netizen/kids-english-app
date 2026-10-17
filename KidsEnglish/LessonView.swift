@@ -129,7 +129,7 @@ struct LessonView: View {
             Button {
                 showTranslation.toggle()
             } label: {
-                Text(showTranslation ? "译文开" : "译文关")
+                Text(showTranslation ? "中文开" : "中文关")
                     .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(showTranslation ? onFill(Func.accent) : Palette.inkMuted)
                     .padding(.horizontal, 12)

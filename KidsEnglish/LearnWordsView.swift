@@ -61,7 +61,7 @@ struct LearnWordsView: View {
 
                 // 选词书
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("选词书")
+                    Text("选单词本")
                         .font(.system(size: 28, weight: .heavy))
                         .foregroundStyle(Palette.ink)
                         .padding(.horizontal)
@@ -70,13 +70,13 @@ struct LearnWordsView: View {
                         allWordsCard
                         bookCard(fill: AppTheme.bookPink, themeId: "fruits", title: "水果篇",
                                  subtitle: "\(store.words(forTheme: "fruits").count) 词",
-                                 iconName: "strawberry")
+                                 iconName: "theme-apple")
                         bookCard(fill: AppTheme.bookGreen, themeId: "animals", title: "动物篇",
                                  subtitle: "\(store.words(forTheme: "animals").count) 词",
-                                 iconName: "panda")
-                        bookCard(fill: AppTheme.bookPurple, themeId: "vehicles", title: "交通工具",
+                                 iconName: "theme-cat")
+                        bookCard(fill: AppTheme.bookPurple, themeId: "vehicles", title: "交通篇",
                                  subtitle: "\(store.words(forTheme: "vehicles").count) 词",
-                                 iconName: "bus")
+                                 iconName: "theme-car")
                     }
                     .padding(.horizontal)
                 }

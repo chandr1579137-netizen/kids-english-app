@@ -127,7 +127,7 @@ struct ProfileView: View {
             NavigationLink {
                 ParentGateView()
             } label: {
-                settingRow(icon: "lock.fill", title: "家长模式", trailingIcon: "lock.fill")
+                settingRow(icon: "lock.fill", title: "家长中心", trailingIcon: "lock.fill")
             }
 
             NavigationLink {

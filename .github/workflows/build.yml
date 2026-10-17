@@ -51,6 +51,33 @@ jobs:
           .venv-icons/bin/pip install --quiet pillow
           .venv-icons/bin/python scripts/make_icons_transparent.py KidsEnglish/KidsEnglish/Resources/ui-icons
 
+      # 图标曾经被误存成 Base64 文本（文件名是 .png，内容是 iVBORw0K...），
+      # UIImage 加载失败后全部静默回退成问号，而上面的透明化脚本逐文件吞异常，
+      # CI 一直绿的。这里加硬断言：文件名、PNG 签名、可解码、正方形，一个不合格就失败。
+      - name: Verify ui-icons are real PNGs
+        run: |
+          .venv-icons/bin/python - <<'PYEOF'
+          import pathlib, sys
+          from PIL import Image
+          root = pathlib.Path("KidsEnglish/KidsEnglish/Resources/ui-icons")
+          files = sorted(root.glob("*.png"))
+          bad = []
+          for f in files:
+              head = f.read_bytes()[:8]
+              if head != b"\x89PNG\r\n\x1a\n":
+                  bad.append(f"{f.name}: 不是 PNG 签名（可能是 Base64 文本）")
+                  continue
+              with Image.open(f) as im:
+                  if im.size != (256, 256):
+                      bad.append(f"{f.name}: 尺寸 {im.size}，应为 256x256")
+                  if im.mode != "RGBA":
+                      bad.append(f"{f.name}: 模式 {im.mode}，应为 RGBA")
+          print(f"ui-icons: {len(files)} 个文件检查完毕")
+          if bad:
+              print("\n".join(bad))
+              sys.exit(1)
+          PYEOF
+
       - name: Download lesson audio (from upstream open-source repo)
         run: |
           cd KidsEnglish/KidsEnglish/Resources/audio
