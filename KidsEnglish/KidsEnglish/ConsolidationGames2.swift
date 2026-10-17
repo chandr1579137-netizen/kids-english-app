@@ -645,20 +645,25 @@ struct ConsolidationView: View {
             .padding(.horizontal)
             .padding(.bottom, 4)
 
-            Group {
-                switch m {
-                case .wordToImage: WordToImageGame(words: words)
-                case .audioToImage: AudioToImageGame(words: words)
-                case .matching: MatchingGame(words: words)
-                case .wordToAudio: WordToAudioGame(words: words)
-                case .imageToWord: ImageToWordGame(words: words)
-                case .audioToWord: AudioToWordGame(words: words)
-                case .audioToMeaning: AudioToMeaningGame(words: words)
-                case .wordToMeaning: WordToMeaningGame(words: words)
-                case .dictation: DictationGame(words: words)
+            // 玩法内容放进滚动容器：这些题目（图片 + 4 个选项）常常比可用高度还高，
+            // 之前 VStack 溢出后被垂直居中，头部被顶到状态栏后面、底部选项贴住底栏。
+            // 头部留在滚动区之外，切题时位置不会跳。
+            ScrollView {
+                Group {
+                    switch m {
+                    case .wordToImage: WordToImageGame(words: words)
+                    case .audioToImage: AudioToImageGame(words: words)
+                    case .matching: MatchingGame(words: words)
+                    case .wordToAudio: WordToAudioGame(words: words)
+                    case .imageToWord: ImageToWordGame(words: words)
+                    case .audioToWord: AudioToWordGame(words: words)
+                    case .audioToMeaning: AudioToMeaningGame(words: words)
+                    case .wordToMeaning: WordToMeaningGame(words: words)
+                    case .dictation: DictationGame(words: words)
+                    }
                 }
+                .id(m)
             }
-            .id(m)
         }
     }
 }
