@@ -9,26 +9,40 @@ struct PictureBookView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 16) {
-                    ForEach(store.lessons) { lesson in
-                        NavigationLink {
-                            PictureBookReaderView(lesson: lesson)
-                        } label: {
-                            VStack(spacing: 8) {
-                                CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: lesson.titleCn)
-                                    .frame(height: 120)
-                                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                                Text(lesson.titleCn)
-                                    .font(.headline)
-                                    .lineLimit(1)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("绘本").pageTitleStyle()
+                        .padding(.horizontal)
+                        .padding(.top, 4)
+                    Text("\(store.lessons.count) 本可翻的图画书")
+                        .pageSubtitleStyle()
+                        .padding(.horizontal)
+                        .padding(.bottom, 14)
+
+                    LazyVGrid(columns: columns, spacing: 14) {
+                        ForEach(store.lessons) { lesson in
+                            NavigationLink {
+                                PictureBookReaderView(lesson: lesson)
+                            } label: {
+                                VStack(spacing: 6) {
+                                    CoverImage(url: store.coverURL(forLesson: lesson.id),
+                                               fallbackText: lesson.titleCn)
+                                        .frame(height: 110)
+                                        .clipShape(RoundedRectangle(cornerRadius: Radius.thumb))
+                                    Text(lesson.titleCn)
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(Palette.ink)
+                                        .lineLimit(1)
+                                }
                             }
+                            .buttonStyle(PressableStyle())
                         }
-                        .buttonStyle(.plain)
                     }
+                    .padding(.horizontal)
                 }
-                .padding()
+                .padding(.bottom, 12)
             }
-            .navigationTitle("绘本")
+            .creamBackground()
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 }

@@ -428,26 +428,56 @@ struct ConsolidationView: View {
             }
         }
 
-        var difficulty: String {
+        /// 难度：1 = 简单，2 = 中等
+        var difficultyLevel: Int {
             switch self {
             case .wordToImage, .audioToImage, .wordToAudio, .wordToMeaning:
-                return "简单"
+                return 1
             default:
-                return "中等"
+                return 2
+            }
+        }
+
+        var difficulty: String {
+            difficultyLevel == 1 ? "简单" : "中等"
+        }
+
+        /// 难度用点数表达（●●○）—— 颜色留给技能类型，两个维度各有通道，不互相抢
+        var difficultyDots: String {
+            String(repeating: "●", count: difficultyLevel)
+                + String(repeating: "○", count: 3 - difficultyLevel)
+        }
+
+        /// 技能类型：颜色编码「练什么」，不是随机分配
+        enum Skill {
+            case look, listen, match, write
+        }
+
+        var skill: Skill {
+            switch self {
+            case .wordToImage, .wordToAudio, .imageToWord, .wordToMeaning: return .look
+            case .audioToImage, .audioToWord, .audioToMeaning: return .listen
+            case .matching: return .match
+            case .dictation: return .write
             }
         }
 
         var color: Color {
-            switch self {
-            case .wordToImage: return Color(red: 0.36, green: 0.61, blue: 1.0)   // 蓝
-            case .audioToImage: return Color(red: 0.49, green: 0.83, blue: 0.57) // 绿
-            case .matching: return Color(red: 0.70, green: 0.53, blue: 1.0)      // 紫
-            case .wordToAudio: return Color(red: 1.0, green: 0.72, blue: 0.30)   // 橙
-            case .imageToWord: return Color(red: 0.96, green: 0.56, blue: 0.69)  // 粉
-            case .audioToWord: return Color(red: 0.30, green: 0.82, blue: 0.88)  // 青
-            case .audioToMeaning: return Color(red: 1.0, green: 0.84, blue: 0.31)// 黄
-            case .wordToMeaning: return Color(red: 1.0, green: 0.54, blue: 0.50) // 红
-            case .dictation: return Color(red: 0.24, green: 0.35, blue: 1.0)    // 深蓝
+            switch skill {
+            case .look: return AppTheme.brightBlue   // 看
+            case .listen: return AppTheme.green      // 听
+            case .match: return AppTheme.purple      // 配对
+            case .write: return Color(red: 1.0, green: 0.5, blue: 0.0)  // 写
+            }
+        }
+
+        /// 技能名称（用于分组标题与无障碍标签）
+        var skillName: String {
+            switch skill {
+            case .look: return "看图看词"
+            case .listen: return "听音"
+            case .match: return "配对"
+            case .write: return "书写"
             }
         }
     }
@@ -482,49 +512,21 @@ struct ConsolidationView: View {
                         .padding()
                 } else {
                     Text("选个玩法吧！🎮")
-                        .font(.system(size: 44, weight: .bold))
-                        .foregroundColor(AppTheme.navy)
+                        .font(.system(size: 40, weight: .heavy))
+                        .foregroundStyle(Palette.ink)
                         .padding(.top, 8)
-                    Text("9种游戏，越玩越熟")
-                        .font(.title3)
-                        .foregroundColor(.gray)
+                    Text("9 种游戏，越玩越熟")
+                        .pageSubtitleStyle()
 
-                    LazyVGrid(columns: columns, spacing: 16) {
+                    LazyVGrid(columns: columns, spacing: 12) {
                         ForEach(Mode.allCases) { m in
                             Button {
                                 mode = m
                             } label: {
-                                VStack(spacing: 10) {
-                                    ZStack {
-                                        Circle()
-                                            .fill(Color.white)
-                                            .frame(width: 76, height: 76)
-                                            .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
-                                        uiIcon(m.iconName)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 44, height: 44)
-                                    }
-                                    Text(m.rawValue)
-                                        .font(.headline.bold())
-                                        .foregroundColor(AppTheme.navy)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.8)
-                                    Text(m.difficulty)
-                                        .font(.subheadline.bold())
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 4)
-                                        .background(m.color)
-                                        .cornerRadius(12)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .background(m.color.opacity(0.35))
-                                .cornerRadius(20)
-                                .shadow(color: m.color.opacity(0.25), radius: 8, y: 4)
+                                gameModeCard(m)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(PressableStyle())
+                            .accessibilityLabel("\(m.rawValue)，\(m.skillName)，\(m.difficulty)")
                         }
                     }
                     .padding(.horizontal)
@@ -532,6 +534,34 @@ struct ConsolidationView: View {
             }
             .padding(.vertical)
         }
+    }
+
+    /// 玩法卡：颜色按技能类型分族，难度用点数表达 —— 两个维度各有通道
+    private func gameModeCard(_ m: Mode) -> some View {
+        let fg = onFill(m.color)
+        return VStack(spacing: 8) {
+            ZStack {
+                Circle()
+                    .fill(Palette.surface)
+                    .frame(width: 60, height: 60)
+                uiIcon(m.iconName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 38, height: 38)
+            }
+            Text(m.rawValue)
+                .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(fg)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+            Text("\(m.difficultyDots) \(m.difficulty)")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(fg.opacity(0.78))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 14)
+        .background(m.color, in: RoundedRectangle(cornerRadius: Radius.card))
+        .elevationGround()
     }
 
     // MARK: - 游戏页（带返回）

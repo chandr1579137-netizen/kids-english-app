@@ -1,69 +1,82 @@
 import SwiftUI
 
-// MARK: - 单词卡 Tab：18 主题彩色网格 → 点进主题看单词列表
+// MARK: - 单词卡 Tab：主题彩色网格 → 点进主题看单词列表
 struct WordCardsView: View {
     @Environment(DataStore.self) private var store
 
-    private let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    private let columns = [GridItem(.flexible(), spacing: 12),
+                           GridItem(.flexible(), spacing: 12)]
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("单词卡")
-                        .font(.system(size: 52, weight: .bold))
-                        .foregroundColor(AppTheme.navy)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("单词卡").pageTitleStyle()
                         .padding(.horizontal)
-                        .padding(.top, 8)
+                        .padding(.top, 4)
                     Text("按主题找单词")
-                        .font(.title3)
-                        .foregroundColor(.gray)
+                        .pageSubtitleStyle()
                         .padding(.horizontal)
-                        .padding(.bottom, 12)
-                    LazyVGrid(columns: columns, spacing: 16) {
+                        .padding(.bottom, 14)
+
+                    LazyVGrid(columns: columns, spacing: 12) {
                         ForEach(store.wordThemes) { theme in
                             NavigationLink {
                                 ThemeWordsView(theme: theme)
                             } label: {
                                 themeCard(theme)
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(PressableStyle())
                         }
                     }
                     .padding(.horizontal)
                 }
+                .padding(.bottom, 12)
             }
             .creamBackground()
+            .toolbar(.hidden, for: .navigationBar)
         }
     }
 
     private func themeCard(_ theme: WordTheme) -> some View {
         let progress = store.themeProgress(themeId: theme.id)
-        let color = AppTheme.colorForTheme(theme.id)
-        return HStack {
+        let fill = AppTheme.colorForTheme(theme.id)
+        let isComplete = progress.total > 0 && progress.done >= progress.total
+
+        return HStack(alignment: .center, spacing: 10) {
             VStack(alignment: .leading, spacing: 6) {
                 uiIcon(themeIconName(for: theme.id))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 52, height: 52)
+                    .frame(width: 44, height: 44)
                 Text(theme.nameCn)
-                    .font(.headline.bold())
-                    .foregroundColor(.black.opacity(0.8))
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundStyle(Palette.ink)
+                    .lineLimit(1)
             }
-            Spacer()
-            Text("\(progress.done)/\(progress.total) ✓")
-                .font(.subheadline.bold())
-                .foregroundColor(color)
+            Spacer(minLength: 4)
+            // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
+            HStack(spacing: 3) {
+                Text("\(progress.done)/\(progress.total)")
+                    .font(.system(size: 14, weight: .bold))
+                if isComplete {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 13, weight: .bold))
+                }
+            }
+            .foregroundStyle(isComplete ? Func.positiveDeep : Palette.inkMuted)
         }
-        .padding(16)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(color.opacity(0.35))
-        .cornerRadius(18)
-        .shadow(color: .black.opacity(0.06), radius: 6, y: 3)
+        // 分类色只作底，永不作文字色 —— 浅底保证深字 9–14:1
+        .background(fill.opacity(0.35), in: RoundedRectangle(cornerRadius: Radius.card))
+        .elevationGround()
     }
 }
 
 // MARK: - 主题内单词列表
+
 struct ThemeWordsView: View {
     @Environment(DataStore.self) private var store
     @State private var player = AudioPlayer()
@@ -86,15 +99,15 @@ struct ThemeWordsView: View {
     private func wordRow(_ entry: WordEntry) -> some View {
         HStack(spacing: 14) {
             WordIconView(word: entry.word, size: 64)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 14))
+                .background(Palette.surface)
+                .clipShape(RoundedRectangle(cornerRadius: Radius.thumb))
             VStack(alignment: .leading, spacing: 4) {
                 Text(entry.word)
-                    .font(.title2.bold())
-                    .foregroundColor(AppTheme.brightBlue)
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundStyle(Func.infoDeep)
                 Text(entry.meaningCn ?? "")
-                    .font(.headline)
-                    .foregroundColor(AppTheme.wordOrange)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(Func.accent)
             }
             Spacer()
             Button {
@@ -103,14 +116,13 @@ struct ThemeWordsView: View {
                 }
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
-                    .font(.system(size: 26))
-                    .foregroundColor(.white)
-                    .frame(width: 56, height: 56)
-                    .background(Color.orange)
-                    .clipShape(Circle())
-                    .shadow(color: .orange.opacity(0.3), radius: 6, y: 3)
+                    .font(.system(size: 24, weight: .semibold))
+                    .foregroundStyle(Palette.inkOnColor)
+                    .frame(width: 54, height: 54)
+                    .background(Func.accent, in: Circle())
+                    .candyEdge(27)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(PressableStyle())
         }
         .padding(12)
         .whiteCard()

@@ -1,14 +1,102 @@
 import SwiftUI
+import UIKit
 
-// MARK: - App 主题（按 7 张概念设计图提取）
+// MARK: - 风格契约 · Playful Dopamine / 儿童糖果
+//
+// 档位：StyleKit expressive · dopamine-design + kawaii-minimal
+// 在这个档位下「多彩」是要求，不是缺陷；缺陷是「多彩但没有规则」。
+//
+// REQUIRED（不做到就不算复刻成功）
+//   · 大圆角：卡片 20–24，按钮 20–28，缩略图 16
+//   · 超粗标题：中文标题 48–52pt / .heavy
+//   · 满饱和分类色作卡片底
+//   · 按钮糖果厚度：顶部亮边 + 底部暗边（candyEdge）
+//   · 5 tab 常驻底栏
+//
+// FORBIDDEN（做到即判偏离）
+//   · 分类色用作文字色、按钮色、描边色 —— 只允许作卡片底
+//   · 渐变用于分类卡 —— 只有首页计划卡、「我的」用户卡允许
+//   · 阴影用于普通列表行
+//   · 小圆角（<16）出现在卡片或按钮上
+//
+// 可读性硬约束：任何「色底 + 文字」组合必须 ≥ 4.5:1。
+// 由 onFill(_:) 自动在白字/深字间选更优者保证，见 contrastRatio()。
+// 实测：17 个分类色中 16 个用深字（6.09–11.51:1），紫色用白字（4.66:1）。
 
-/// 全局配色
+// MARK: - 中性阶梯 6 阶
+
+enum Palette {
+    /// 页面底：暖白（dopamine 档位允许暖白，儿童 App 温暖感有内容理由）
+    static let canvas = Color(red: 1.00, green: 0.97, blue: 0.94)
+    /// 卡片表面
+    static let surface = Color.white
+    /// 主文字：深蓝（比纯黑柔和，与分类色同屏不刺眼）
+    static let ink = Color(red: 0.10, green: 0.14, blue: 0.47)
+    /// 色底上的文字：近黑（压在饱和色上比 navy 更清晰）
+    static let inkOnColor = Color(red: 0.10, green: 0.10, blue: 0.14)
+    /// 副标题、标签 —— 5.2:1（原来的 .gray 只有 3.5:1）
+    static let inkMuted = Color(red: 0.42, green: 0.42, blue: 0.45)
+    /// 仅禁用态 / 大字号
+    static let inkSubtle = Color(red: 0.60, green: 0.60, blue: 0.63)
+    /// 描边、分隔线
+    static let hairline = Color(red: 0.91, green: 0.87, blue: 0.80)
+}
+
+// MARK: - 功能色（职责唯一，不抢分类色）
+
+enum Func {
+    /// 品牌 / tab 选中 / 当前分级 / 关键数据 —— 小面积，配深字
+    static let accent = Color(red: 1.00, green: 0.58, blue: 0.00)
+    /// 正向语义：主 CTA / 认识 / 完成 —— 小面积配深字
+    static let positive = Color(red: 0.30, green: 0.66, blue: 0.33)
+    /// 负向语义：不认识 / 错误 / 锁定
+    static let negative = Color(red: 0.87, green: 0.32, blue: 0.28)
+    /// 信息 / 英文内容 / 链接
+    static let info = Color(red: 0.17, green: 0.47, blue: 0.93)
+
+    // 实底按钮专用深版：全部满足白字 ≥ 4.6:1（亮版只有 2.5–3.8:1，不可用于白字）
+    static let positiveDeep = Color(red: 0.08, green: 0.54, blue: 0.09)  // 白字 4.60:1
+    static let negativeDeep = Color(red: 0.87, green: 0.20, blue: 0.13)  // 白字 4.60:1
+    static let infoDeep = Color(red: 0.14, green: 0.44, blue: 0.90)      // 白字 4.60:1
+    static let accentDeep = Color(red: 0.72, green: 0.36, blue: 0.05)    // 白底上 4.61:1
+}
+
+// MARK: - 对比度计算（让可读性成为可校验的规则，而不是靠眼看）
+
+/// WCAG 相对亮度
+private func relativeLuminance(_ color: Color) -> Double {
+    let ui = UIColor(color)
+    var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+    ui.getRed(&r, green: &g, blue: &b, alpha: &a)
+    func lin(_ c: CGFloat) -> Double {
+        let v = Double(c)
+        return v <= 0.03928 ? v / 12.92 : pow((v + 0.055) / 1.055, 2.4)
+    }
+    return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b)
+}
+
+/// WCAG 对比度比值
+func contrastRatio(_ a: Color, _ b: Color) -> Double {
+    let la = relativeLuminance(a), lb = relativeLuminance(b)
+    let hi = max(la, lb), lo = min(la, lb)
+    return (hi + 0.05) / (lo + 0.05)
+}
+
+/// 给定底色，自动选出更可读的文字色（白 or 近黑）
+func onFill(_ background: Color) -> Color {
+    let onWhite = contrastRatio(background, .white)
+    let onInk = contrastRatio(background, Palette.inkOnColor)
+    return onWhite > onInk ? .white : Palette.inkOnColor
+}
+
+// MARK: - App 主题（17 个分类色，保留概念设计图原始色值）
+
 enum AppTheme {
     /// 暖米色背景（整 App 统一）
-    static let bgCream = Color(red: 1.0, green: 0.97, blue: 0.90)
+    static let bgCream = Palette.canvas
     /// 标题深蓝
-    static let navy = Color(red: 0.10, green: 0.14, blue: 0.49)
-    /// 亮蓝（英文单词 / 正常按钮 / 全部单词卡）
+    static let navy = Palette.ink
+    /// 亮蓝（英文单词 / 全部单词卡）
     static let brightBlue = Color(red: 0.17, green: 0.5, blue: 1.0)
     /// 粉红（水果篇）
     static let pink = Color(red: 1.0, green: 0.71, blue: 0.76)
@@ -22,13 +110,18 @@ enum AppTheme {
     static let grayBtn = Color(red: 0.74, green: 0.74, blue: 0.74)
     /// 中文释义橙色
     static let wordOrange = Color.orange
-    /// 今日计划卡片橙色渐变
+    /// 今日计划卡片橙色渐变（分类卡禁用渐变，只有这里允许）
     static let planGradient = LinearGradient(
         colors: [Color.orange, Color(red: 1.0, green: 0.72, blue: 0.1)],
         startPoint: .topLeading, endPoint: .bottomTrailing
     )
+    /// 「我的」用户卡紫色渐变（语义绑定：个人 / 成就）—— 两端对白字均 ≥ 4.7:1
+    static let profileGradient = LinearGradient(
+        colors: [Color(red: 0.55, green: 0.33, blue: 0.85), Color(red: 0.38, green: 0.28, blue: 0.75)],
+        startPoint: .topLeading, endPoint: .bottomTrailing
+    )
 
-    /// 主题卡片配色（按主题 id 轮换）
+    /// 主题卡片配色（按主题 id）—— 色值不动，这是复刻基准
     static func colorForTheme(_ themeId: String) -> Color {
         switch themeId {
         case "fruits": return pink
@@ -51,11 +144,149 @@ enum AppTheme {
         default: return brightBlue
         }
     }
+
+    /// 主题卡上的文字色 —— 自动选白/深字，保证 ≥ 4.5:1
+    static func onColorForTheme(_ themeId: String) -> Color {
+        onFill(colorForTheme(themeId))
+    }
 }
 
-// MARK: - 通用组件
+// MARK: - 圆角阶梯（单一基数派生，禁止散装值）
 
-/// 白色圆角卡片
+enum Radius {
+    static let thumb: CGFloat = 16      // 缩略图
+    static let card: CGFloat = 20       // 分类卡 / 判定按钮
+    static let sheet: CGFloat = 24      // 内容卡 / 计划卡
+    static let pill: CGFloat = 26       // 次按钮
+    static let pillLarge: CGFloat = 28  // 主按钮
+    static let chip: CGFloat = 22       // 幽灵按钮 / 分级 chip
+}
+
+// MARK: - 糖果厚度（用描边模拟，不用阴影）
+
+extension View {
+    /// 顶部亮边 + 底部暗边 —— 让按钮读起来「可按」，但不引入阴影
+    func candyEdge(_ radius: CGFloat, light: Double = 0.35, dark: Double = 0.12) -> some View {
+        overlay(
+            RoundedRectangle(cornerRadius: radius)
+                .strokeBorder(
+                    LinearGradient(
+                        colors: [Color.white.opacity(light), Color.black.opacity(dark)],
+                        startPoint: .top, endPoint: .bottom
+                    ),
+                    lineWidth: 1.5
+                )
+        )
+    }
+}
+
+// MARK: - 按钮阶梯（4 个层级，共享几何，主次分明）
+
+enum AppButtonTier {
+    case primary        // 主 CTA：开始学习
+    case secondary      // 次操作：巩固练习
+    case ghost          // 导航：上一个 / 下一个
+    case judgePositive  // 判定：认识
+    case judgeNegative  // 判定：不认识
+
+    var height: CGFloat {
+        switch self {
+        case .primary: return 56
+        case .secondary: return 52
+        case .ghost: return 44
+        case .judgePositive, .judgeNegative: return 64
+        }
+    }
+
+    var radius: CGFloat {
+        switch self {
+        case .primary: return Radius.pillLarge
+        case .secondary: return Radius.pill
+        case .ghost: return Radius.chip
+        case .judgePositive, .judgeNegative: return Radius.card
+        }
+    }
+
+    var background: Color {
+        switch self {
+        case .primary: return Func.positiveDeep
+        case .secondary: return Func.info.opacity(0.28)
+        case .ghost: return .clear
+        case .judgePositive: return Func.positiveDeep
+        case .judgeNegative: return Func.negativeDeep
+        }
+    }
+
+    var foreground: Color {
+        switch self {
+        case .primary, .judgePositive, .judgeNegative: return .white
+        case .secondary: return Palette.ink
+        case .ghost: return Palette.inkMuted
+        }
+    }
+
+    var needsCandyEdge: Bool {
+        switch self {
+        case .primary, .judgePositive, .judgeNegative: return true
+        case .secondary, .ghost: return false
+        }
+    }
+
+    var fontSize: CGFloat {
+        switch self {
+        case .judgePositive, .judgeNegative: return 22
+        default: return 20
+        }
+    }
+}
+
+struct AppButton: View {
+    let title: String
+    var icon: String? = nil
+    var tier: AppButtonTier = .primary
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                if let icon {
+                    Text(icon).font(.system(size: 22, weight: .bold))
+                }
+                Text(title)
+                    .font(.system(size: tier.fontSize, weight: .heavy))
+            }
+            .foregroundStyle(tier.foreground)
+            .frame(maxWidth: .infinity)
+            .frame(height: tier.height)
+            .background(tier.background, in: RoundedRectangle(cornerRadius: tier.radius))
+            .overlay {
+                RoundedRectangle(cornerRadius: tier.radius)
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [Color.white.opacity(0.35), Color.black.opacity(0.12)],
+                            startPoint: .top, endPoint: .bottom
+                        ),
+                        lineWidth: tier.needsCandyEdge ? 1.5 : 0
+                    )
+            }
+        }
+        .buttonStyle(PressableStyle())
+    }
+}
+
+/// 按下 = 压缩感（X-03），不是放大；同时轻微变暗，不用位移
+struct PressableStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .brightness(configuration.isPressed ? -0.06 : 0)
+            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+    }
+}
+
+// MARK: - 兼容层（旧组件名保留，内部改走新令牌，避免其余文件一次性全改）
+
+/// 白色圆角卡片 —— 阴影收敛为 elevationGround
 struct CardView<Content: View>: View {
     let content: Content
     init(@ViewBuilder content: () -> Content) {
@@ -63,66 +294,65 @@ struct CardView<Content: View>: View {
     }
     var body: some View {
         content
-            .background(Color.white)
-            .cornerRadius(24)
-            .shadow(color: .black.opacity(0.08), radius: 12, y: 4)
+            .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.sheet))
+            .elevationGround()
     }
 }
 
-/// 大胶囊按钮
+/// 大胶囊按钮（旧名，走 primary）
 struct BigButton: View {
     let title: String
     let color: Color
     let action: () -> Void
     var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.title.bold())
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 18)
-                .background(color)
-                .cornerRadius(30)
-                .shadow(color: color.opacity(0.35), radius: 8, y: 4)
-        }
-        .buttonStyle(.plain)
+        AppButton(title: title, tier: .primary, action: action)
     }
 }
 
-/// 胶囊小按钮（如发音按钮）
+/// 胶囊小按钮（旧名，走 secondary）
 struct PillButton: View {
     let title: String
     let color: Color
     let action: () -> Void
     var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.title2.bold())
-                .foregroundColor(.white)
-                .padding(.horizontal, 28)
-                .padding(.vertical, 14)
-                .background(color)
-                .cornerRadius(25)
-                .shadow(color: color.opacity(0.3), radius: 6, y: 3)
-        }
-        .buttonStyle(.plain)
+        AppButton(title: title, tier: .secondary, action: action)
     }
 }
 
-// MARK: - View 扩展
+// MARK: - 阴影两族（深度只解释层级，不做装饰）
 
 extension View {
-    /// 暖米色页面背景（整 App 统一用）
-    func creamBackground() -> some View {
-        self.background(AppTheme.bgCream.ignoresSafeArea())
+    /// 贴地阴影：列表卡、分类卡
+    func elevationGround() -> some View {
+        shadow(color: .black.opacity(0.05), radius: 4, y: 2)
     }
 
-    /// 标准白卡样式
+    /// 抬升阴影：只给首页计划卡、「我的」用户卡、弹层
+    func elevationRaised() -> some View {
+        shadow(color: .black.opacity(0.10), radius: 14, y: 6)
+    }
+
+    /// 暖米色页面背景
+    func creamBackground() -> some View {
+        background(Palette.canvas.ignoresSafeArea())
+    }
+
+    /// 标准白卡：贴地阴影 + 统一圆角
     func whiteCard() -> some View {
-        self
-            .background(Color.white)
-            .cornerRadius(24)
-            .shadow(color: .black.opacity(0.08), radius: 12, y: 4)
+        background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.sheet))
+            .elevationGround()
+    }
+
+    /// 页面大标题骨架（5 个 tab 统一）
+    func pageTitleStyle() -> some View {
+        font(.system(size: 52, weight: .heavy))
+            .foregroundStyle(Palette.ink)
+    }
+
+    /// 页面副标题骨架
+    func pageSubtitleStyle() -> some View {
+        font(.system(size: 17, weight: .medium))
+            .foregroundStyle(Palette.inkMuted)
     }
 }
 
