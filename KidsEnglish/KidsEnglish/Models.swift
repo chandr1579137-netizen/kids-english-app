@@ -56,6 +56,7 @@ struct Lesson: Codable, Identifiable, Hashable {
     let level: Int
     let title: String
     let titleCn: String
+    let coverImage: String?
     let content: [Paragraph]
     let quiz: [QuizItem]
     let rewards: LessonRewards?
