@@ -46,10 +46,8 @@ struct WordCardsView: View {
         // 三段式：图标左上 / 进度右上 / 名称底部 —— 名称独占整行，不再被进度挤断
         return VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top, spacing: 6) {
-                uiIcon(themeIconName(for: theme.id))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 34, height: 34)
+                IconPlate(name: themeIconName(for: theme.id),
+                          iconSize: 30, plateSize: 42, corner: 12)
                 Spacer(minLength: 0)
                 // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
                 HStack(spacing: 3) {

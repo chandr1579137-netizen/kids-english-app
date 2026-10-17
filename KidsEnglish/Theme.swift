@@ -394,6 +394,26 @@ func uiIcon(_ name: String) -> Image {
     return Image(systemName: "questionmark.square.dashed")
 }
 
+/// 3D 风格 PNG 图标自带不透明白底。
+/// 直接放在分类色卡上会出现一块「白方块」，看起来像贴图没抠干净。
+/// 统一加白色圆角托底后，白底就变成设计的一部分（贴纸感），而不是缺陷。
+struct IconPlate: View {
+    let name: String
+    var iconSize: CGFloat = 44
+    /// 托底边长；默认比图标大 12
+    var plateSize: CGFloat = 56
+    var corner: CGFloat = 16
+
+    var body: some View {
+        uiIcon(name)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: iconSize, height: iconSize)
+            .frame(width: plateSize, height: plateSize)
+            .background(Color.white, in: RoundedRectangle(cornerRadius: corner, style: .continuous))
+    }
+}
+
 /// 主题 id 到图标名的映射
 func themeIconName(for themeId: String) -> String {
     switch themeId {

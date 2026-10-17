@@ -150,10 +150,7 @@ struct LearnWordsView: View {
                     .foregroundStyle(fg.opacity(0.78))
             }
             Spacer()
-            uiIcon("rocket")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 76, height: 76)
+            IconPlate(name: "rocket", iconSize: 66, plateSize: 86, corner: 24)
         }
         .padding(20)
         .frame(maxWidth: .infinity)
@@ -176,10 +173,7 @@ struct LearnWordsView: View {
             store.saveProgress()
         } label: {
             VStack(spacing: 8) {
-                uiIcon("book")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 48, height: 48)
+                IconPlate(name: "book", iconSize: 44, plateSize: 60, corner: 18)
                 Text("全部单词")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(Palette.ink)
@@ -210,10 +204,7 @@ struct LearnWordsView: View {
             store.saveProgress()
         } label: {
             VStack(spacing: 8) {
-                uiIcon(iconName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 48, height: 48)
+                IconPlate(name: iconName, iconSize: 44, plateSize: 60, corner: 18)
                 Text(title)
                     .font(.system(size: 18, weight: .bold))
                     .foregroundStyle(fg)
