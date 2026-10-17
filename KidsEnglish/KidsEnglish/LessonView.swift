@@ -278,10 +278,25 @@ struct WordTextView: UIViewRepresentable {
         tv.backgroundColor = .clear
         tv.textContainerInset = .zero
         tv.textContainer.lineFragmentPadding = 0
+        // 允许被压缩：否则它会把「整行文字的理想宽度」报给 SwiftUI
+        tv.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        tv.setContentHuggingPriority(.defaultLow, for: .horizontal)
         let tap = UITapGestureRecognizer(target: context.coordinator,
                                          action: #selector(Coordinator.handleTap(_:)))
         tv.addGestureRecognizer(tap)
         return tv
+    }
+
+    /// 关键：把宽度锁到父级提案。
+    /// 不实现这个方法时，UITextView 会把整段文字排成一行的宽度当成理想尺寸上报，
+    /// 于是整列 VStack 被撑到比视口还宽，随后居中裁切 —— 表现为「页边距全部失效」，
+    /// 封面看起来贴边、段落卡看起来通栏。这个 bug 在代码里完全看不出来。
+    func sizeThatFits(_ proposal: ProposedViewSize,
+                      uiView: UITextView,
+                      context: Context) -> CGSize? {
+        guard let width = proposal.width, width > 0, width.isFinite else { return nil }
+        let fitted = uiView.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude))
+        return CGSize(width: width, height: max(fitted.height, 60))
     }
 
     func updateUIView(_ tv: UITextView, context: Context) {
