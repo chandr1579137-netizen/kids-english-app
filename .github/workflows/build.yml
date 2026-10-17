@@ -70,15 +70,17 @@ jobs:
             -sdk iphonesimulator \
             -configuration Debug \
             -derivedDataPath build-sim \
-            -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO
 
       - name: Boot simulator and capture screenshots
         run: |
           set -e
+          echo "--- 可用设备 ---"
+          xcrun simctl list devices available | grep -i iphone | head -5
           DEVICE=$(xcrun simctl list devices available \
-            | grep -m1 -oE '[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}')
+            | grep -i iphone | head -1 | grep -oE '[0-9A-F-]{36}')
           echo "device=$DEVICE"
+          test -n "$DEVICE"
           xcrun simctl boot "$DEVICE" 2>/dev/null || true
           xcrun simctl bootstatus "$DEVICE" -b
           xcrun simctl status_bar "$DEVICE" override \
@@ -87,6 +89,7 @@ jobs:
 
           APP=$(find build-sim/Build/Products/Debug-iphonesimulator -maxdepth 1 -name "*.app" | head -1)
           echo "app=$APP"
+          test -n "$APP"
           xcrun simctl install "$DEVICE" "$APP"
 
           mkdir -p shots
@@ -94,7 +97,7 @@ jobs:
             name="$1"; shift
             xcrun simctl terminate "$DEVICE" com.kidsenglish.app 2>/dev/null || true
             sleep 1
-            xcrun simctl launch "$DEVICE" com.kidsenglish.app "$@" >/dev/null
+            xcrun simctl launch "$DEVICE" com.kidsenglish.app "$@" || echo "launch failed: $name"
             sleep 3
             xcrun simctl io "$DEVICE" screenshot "shots/$name.png"
           }
