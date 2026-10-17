@@ -65,6 +65,11 @@ enum Func {
     static let accentVivid = Color(red: 0.85, green: 0.42, blue: 0.00)   // 3.47:1
     /// 等级胶囊等「橙底白字」场景：比 accent 深一档，白字 3.2:1
     static let accentPill = Color(red: 0.90, green: 0.45, blue: 0.00)
+    /// 大字号中文释义专用：比 accentVivid 更亮，42pt heavy 属大字号，3:1 达标
+    static let accentBright = Color(red: 0.95, green: 0.45, blue: 0.00)
+    /// 主 CTA 专用亮绿：只服务 32pt 大字号白字（3.5:1）
+    /// 17pt 的「认识」按钮仍用 positiveDeep，不能换这个
+    static let ctaGreen = Color(red: 0.10, green: 0.62, blue: 0.18)
     static let positiveVivid = Color(red: 0.18, green: 0.56, blue: 0.22) // 4.13:1
     static let infoVivid = Color(red: 0.14, green: 0.44, blue: 0.90)     // 4.63:1
 }
@@ -167,7 +172,7 @@ enum AppTheme {
     static func gradientForTheme(_ themeId: String) -> LinearGradient {
         let base = colorForTheme(themeId)
         return LinearGradient(
-            colors: [base.opacity(0.85), base.opacity(0.42)],
+            colors: [base.opacity(0.95), base.opacity(0.55)],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )

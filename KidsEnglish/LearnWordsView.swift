@@ -91,14 +91,14 @@ struct LearnWordsView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Text("开始学习")
-                                .font(.system(size: 29, weight: .heavy))
+                                .font(.system(size: 33, weight: .heavy))
                             Image(systemName: "play.fill")
-                                .font(.system(size: 22, weight: .black))
+                                .font(.system(size: 25, weight: .black))
                         }
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 64)
-                        .background(Func.positiveDeep, in: Capsule())
+                        .frame(height: 70)
+                        .background(Func.ctaGreen, in: Capsule())
                     }
                     .buttonStyle(PressableStyle())
 
@@ -107,43 +107,21 @@ struct LearnWordsView: View {
                     } label: {
                         HStack(spacing: 8) {
                             Text("巩固练习 · 9 种玩法")
-                                .font(.system(size: 21, weight: .heavy))
+                                .font(.system(size: 24, weight: .heavy))
                             Image(systemName: "gamecontroller.fill")
-                                .font(.system(size: 19, weight: .bold))
+                                .font(.system(size: 21, weight: .bold))
                         }
                         .foregroundStyle(Func.infoDeep)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 48)
-                        .background(Func.info.opacity(0.26), in: Capsule())
+                        .frame(height: 56)
+                        .background(Func.info.opacity(0.42), in: Capsule())
                     }
                     .buttonStyle(PressableStyle())
                 }
                 .padding(.horizontal)
                 .padding(.top, 2)
 
-                // 每天新学 —— 参考图没有这块，保留但压到首屏之后
-                HStack {
-                    Text("每天新学")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(Palette.ink)
-                    Spacer()
-                    Stepper("\(store.dailyNewWords) 个", value: .init(
-                        get: { store.dailyNewWords },
-                        set: { newValue in
-                            store.dailyNewWords = newValue
-                            store.saveProgress()
-                        }
-                    ), in: 5...20, step: 5)
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(Palette.inkMuted)
-                }
-                .padding()
-                .whiteCard()
-                .padding(.horizontal)
-
-                // 学习安排预览
-                planPreviewCard
-                    .padding(.horizontal)
+                // 参考图首页到「巩固练习」为止；每天新学 / 学习安排已移入「我的 → 设置」
             }
             .padding(.top, 12)
             .padding(.bottom, 12)
@@ -154,30 +132,30 @@ struct LearnWordsView: View {
 
     private var planCard: some View {
         // 参考图：满饱和橙渐变 + 白字 + 右侧火箭插图（无底板）
-        HStack(alignment: .center, spacing: 4) {
-            VStack(alignment: .leading, spacing: 6) {
+        HStack(alignment: .center, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text("今日计划")
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.95))
+                    .font(.system(size: 21, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.96))
                 Text("Day \(dayNumber)")
-                    .font(.system(size: 40, weight: .heavy))
+                    .font(.system(size: 48, weight: .heavy))
                     .foregroundStyle(.white)
                 Text("新学 \(todayWords.count) 个词")
-                    .font(.system(size: 19, weight: .bold))
+                    .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(.white)
                 Text("已学 \(store.learnedWords.count) / \(store.words.count)")
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(.white)
             }
             Spacer(minLength: 0)
             uiIcon("rocket")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 118, height: 118)
+                .frame(width: 142, height: 142)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity, minHeight: 196)
+        .padding(.horizontal, 22)
+        .padding(.vertical, 16)
+        .frame(maxWidth: .infinity, minHeight: 210)
         .background(AppTheme.planGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationRaised()
     }
@@ -223,19 +201,19 @@ struct LearnWordsView: View {
             uiIcon(iconName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 52, height: 52)
+                .frame(width: 58, height: 58)
             Spacer(minLength: 0)
             Text(title)
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 17, weight: .bold))
                 .foregroundStyle(.white)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
             Text(subtitle)
-                .font(.system(size: 14, weight: .semibold))
+                .font(.system(size: 15, weight: .semibold))
                 .foregroundStyle(.white.opacity(0.92))
         }
         .padding(.vertical, 12)
-        .frame(width: 88, height: 124)
+        .frame(width: 104, height: 144)
         .background(fill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .elevationGround()
         // 选中态用白描边，在满饱和底上比换色更清楚
@@ -386,10 +364,19 @@ struct LearnWordsView: View {
             ZStack {
                 RadialGradient(
                     colors: [Color(red: 1.0, green: 0.93, blue: 0.72), .clear],
-                    center: .center, startRadius: 10, endRadius: 118
+                    center: .center, startRadius: 10, endRadius: 130
                 )
-                .frame(width: 240, height: 210)
-                WordIconView(word: entry.word, size: 176)
+                .frame(width: 280, height: 240)
+                // 词图是带灰底的实拍图，用径向遮罩把边缘化开，
+                // 避免出现一块灰色方片（参考图是透明 3D 插图）
+                WordIconView(word: entry.word, size: 186)
+                    .mask(
+                        RadialGradient(
+                            colors: [.black, .black, .clear],
+                            center: .center,
+                            startRadius: 62, endRadius: 94
+                        )
+                    )
             }
 
             Text(entry.word)
@@ -402,7 +389,7 @@ struct LearnWordsView: View {
                 .foregroundStyle(Palette.inkMuted)
             Text(entry.meaningCn ?? "")
                 .font(.system(size: 42, weight: .heavy))
-                .foregroundStyle(Func.accentVivid)
+                .foregroundStyle(Func.accentBright)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
 
@@ -421,7 +408,7 @@ struct LearnWordsView: View {
 
             // 判定与导航同排四键（参考图布局）：两侧导航浅灰配深字，中间判定饱和色配白字
             HStack(spacing: 8) {
-                judgeKey(title: "上一个", icon: "arrow.left",
+                judgeKey(title: "上一个", icon: "arrow.left", leadingIcon: true,
                          fill: Color(red: 0.78, green: 0.78, blue: 0.79),
                          fg: Palette.ink) {
                     if cardIndex > 0 {
@@ -472,15 +459,23 @@ struct LearnWordsView: View {
     }
 
     private func judgeKey(title: String, icon: String,
+                          leadingIcon: Bool = false,
                           fill: Color, fg: Color,
                           action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(spacing: 3) {
                 HStack(spacing: 3) {
+                    // 参考图：「← 上一个」箭头在前，「下一个 →」箭头在后
+                    if leadingIcon {
+                        Image(systemName: icon)
+                            .font(.system(size: 13, weight: .bold))
+                    }
                     Text(title)
                         .font(.system(size: 17, weight: .heavy))
-                    Image(systemName: icon)
-                        .font(.system(size: 13, weight: .bold))
+                    if !leadingIcon {
+                        Image(systemName: icon)
+                            .font(.system(size: 13, weight: .bold))
+                    }
                 }
                 .foregroundStyle(fg)
             }

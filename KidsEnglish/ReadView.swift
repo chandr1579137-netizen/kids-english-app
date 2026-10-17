@@ -17,16 +17,16 @@ struct ReadView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(spacing: 2) {
                     Text("读短文")
                         .font(.system(size: 60, weight: .heavy))
                         .foregroundStyle(AppTheme.readTitleBlue)
-                        .padding(.horizontal)
-                        .padding(.top, 4)
                     Text("\(store.lessons.count) 篇分级小故事")
                         .pageSubtitleStyle()
-                        .padding(.horizontal)
-                        .padding(.bottom, 14)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.top, 4)
+                .padding(.bottom, 14)
 
                     levelPicker
                         .padding(.bottom, 14)
@@ -100,10 +100,14 @@ struct ReadView: View {
 
     private func lessonRow(_ lesson: Lesson) -> some View {
         let isRead = store.completedLessons.contains(lesson.id)
+        // 该级里第一篇未读的课 = 可以点开的那篇；它之后的显示锁
+        let isNext = !isRead && currentLessons.first(where: {
+            !store.completedLessons.contains($0.id)
+        })?.id == lesson.id
         return HStack(spacing: 12) {
             CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: lesson.titleCn)
-                .frame(width: 72, height: 72)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .frame(width: 64, height: 64)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 .clipped()
 
             // 英文标题是主信息（用户读的是英文），中文做副信息
@@ -121,18 +125,18 @@ struct ReadView: View {
 
             Spacer(minLength: 6)
 
-            // 三种状态：已读=绿色勾 / 可读=灰色播放 / 锁定=灰色锁
+            // 三种状态：已读=绿色勾 / 下一课=灰色播放 / 之后=灰色锁
             ZStack {
                 Circle()
                     .fill(isRead ? Func.positiveDeep : Color(red: 0.86, green: 0.86, blue: 0.87))
-                    .frame(width: 34, height: 34)
-                Image(systemName: isRead ? "checkmark" : "play.fill")
-                    .font(.system(size: 15, weight: .black))
+                    .frame(width: 32, height: 32)
+                Image(systemName: isRead ? "checkmark" : (isNext ? "play.fill" : "lock.fill"))
+                    .font(.system(size: isNext || isRead ? 15 : 13, weight: .black))
                     .foregroundStyle(isRead ? .white : .white.opacity(0.95))
             }
-            .accessibilityLabel(isRead ? "已读" : "未读")
+            .accessibilityLabel(isRead ? "已读" : (isNext ? "可读" : "未解锁"))
         }
-        .padding(12)
+        .padding(10)
         .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card))
         .elevationGround()
     }

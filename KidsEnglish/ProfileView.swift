@@ -24,38 +24,39 @@ struct ProfileView: View {
     // MARK: - 用户卡（紫色渐变，白字 ≥ 4.7:1）
 
     private var userCard: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 16) {
             ZStack {
                 Circle()
                     .fill(Palette.surface)
-                    .frame(width: 68, height: 68)
-                Text("🧒").font(.system(size: 38))
+                    .frame(width: 88, height: 88)
+                Text("🧒").font(.system(size: 52))
             }
+            .overlay(Circle().strokeBorder(.white.opacity(0.85), lineWidth: 3))
 
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 7) {
                 Text("小宝贝")
-                    .font(.system(size: 26, weight: .heavy))
+                    .font(.system(size: 30, weight: .heavy))
                     .foregroundStyle(.white)
 
-                HStack(spacing: 5) {
+                HStack(spacing: 6) {
                     Image(systemName: "calendar")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.system(size: 15, weight: .semibold))
                     Text("已学习 \(store.studyDayCount) 天")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: 16, weight: .semibold))
                 }
-                .foregroundStyle(.white.opacity(0.95))
+                .foregroundStyle(.white.opacity(0.96))
 
-                HStack(spacing: 5) {
-                    Text("🔥").font(.system(size: 13))
+                HStack(spacing: 6) {
+                    Text("🔥").font(.system(size: 15))
                     Text("连续打卡 \(store.streakDays) 天")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: 16, weight: .semibold))
                 }
-                .foregroundStyle(.white.opacity(0.95))
+                .foregroundStyle(.white.opacity(0.96))
             }
 
             Spacer(minLength: 0)
         }
-        .padding(18)
+        .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.profileGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationRaised()
@@ -70,7 +71,7 @@ struct ProfileView: View {
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(Func.accentDeep)
                 Text("学习报告")
-                    .font(.system(size: 18, weight: .heavy))
+                    .font(.system(size: 22, weight: .heavy))
                     .foregroundStyle(Palette.ink)
             }
 
@@ -93,15 +94,15 @@ struct ProfileView: View {
     private func metric(icon: String, color: Color, value: String, label: String) -> some View {
         VStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 20, weight: .bold))
+                .font(.system(size: 23, weight: .bold))
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 28, weight: .heavy))
+                .font(.system(size: 38, weight: .heavy))
                 .foregroundStyle(color)
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.6)
             Text(label)
-                .font(.system(size: 13, weight: .medium))
+                .font(.system(size: 14, weight: .medium))
                 .foregroundStyle(Palette.inkMuted)
         }
         .frame(maxWidth: .infinity)

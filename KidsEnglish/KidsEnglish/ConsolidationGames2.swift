@@ -463,12 +463,18 @@ struct ConsolidationView: View {
             }
         }
 
+        /// 参考图 9 种玩法是 9 个不同色相，不是按技能归成 4 色
         var color: Color {
-            switch skill {
-            case .look: return AppTheme.brightBlue   // 看
-            case .listen: return AppTheme.green      // 听
-            case .match: return AppTheme.purple      // 配对
-            case .write: return Color(red: 1.0, green: 0.5, blue: 0.0)  // 写
+            switch self {
+            case .wordToImage:   return Color(red: 0.36, green: 0.55, blue: 0.94)  // 蓝
+            case .audioToImage:  return Color(red: 0.48, green: 0.78, blue: 0.49)  // 绿
+            case .matching:      return Color(red: 0.64, green: 0.48, blue: 0.91)  // 紫
+            case .wordToAudio:   return Color(red: 1.00, green: 0.62, blue: 0.26)  // 橙
+            case .imageToWord:   return Color(red: 1.00, green: 0.56, blue: 0.66)  // 粉
+            case .audioToWord:   return Color(red: 0.36, green: 0.78, blue: 0.78)  // 青
+            case .audioToMeaning: return Color(red: 1.00, green: 0.82, blue: 0.30) // 黄
+            case .wordToMeaning: return Color(red: 1.00, green: 0.36, blue: 0.36)  // 红
+            case .dictation:     return Color(red: 0.18, green: 0.36, blue: 0.82)  // 深蓝
             }
         }
 
@@ -503,39 +509,22 @@ struct ConsolidationView: View {
         .creamBackground()
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
-        .safeAreaInset(edge: .top, spacing: 0) { header }
     }
 
-    /// 系统返回键在英文环境下显示 “Back”，中文 App 里很突兀 —— 自绘
-    private var header: some View {
-        HStack(spacing: 12) {
-            Button {
-                if mode == nil { dismiss() } else { mode = nil }
-            } label: {
-                HStack(spacing: 4) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 17, weight: .bold))
-                    Text(mode == nil ? "返回" : "换游戏")
-                        .font(.system(size: 17, weight: .semibold))
-                }
-                .foregroundStyle(Func.infoDeep)
-                .frame(height: 44)
-            }
-            .buttonStyle(PressableStyle())
-
-            Spacer()
-
-            Text(mode == nil ? "巩固练习" : mode!.rawValue)
+    /// 系统返回键在英文环境下会显示 “Back”，中文 App 里很突兀 —— 自绘。
+    /// 网格页不用整条顶栏（参考图标题是页面第一行），改成左上角浮一个圆形返回。
+    private var floatingBack: some View {
+        Button {
+            dismiss()
+        } label: {
+            Image(systemName: "chevron.left")
                 .font(.system(size: 17, weight: .bold))
                 .foregroundStyle(Palette.ink)
-
-            Spacer()
-
-            // 与左侧「返回」等宽的占位，保证标题真正居中
-            Color.clear.frame(width: 62, height: 1)
+                .frame(width: 38, height: 38)
+                .background(Palette.surface.opacity(0.92), in: Circle())
         }
-        .padding(.horizontal)
-        .background(Palette.canvas)
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel("返回")
     }
 
     // MARK: - 九宫格模式选择
@@ -578,6 +567,11 @@ struct ConsolidationView: View {
             }
             .padding(.vertical)
         }
+        .overlay(alignment: .topLeading) {
+            floatingBack
+                .padding(.leading, 14)
+                .padding(.top, 4)
+        }
     }
 
     /// 玩法卡：参考图是竖长条 + 白圆托底图标 + 难度胶囊标签
@@ -587,30 +581,30 @@ struct ConsolidationView: View {
             ZStack {
                 Circle()
                     .fill(Palette.surface)
-                    .frame(width: 56, height: 56)
+                    .frame(width: 66, height: 66)
                 uiIcon(m.iconName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 36, height: 36)
+                    .frame(width: 42, height: 42)
             }
-            .padding(.top, 6)
+            .padding(.top, 8)
 
             Text(m.rawValue)
-                .font(.system(size: 17, weight: .bold))
+                .font(.system(size: 18, weight: .bold))
                 .foregroundStyle(fg)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
 
             // 难度用胶囊标签，不用「●●○」这类符号串
             Text(m.difficulty)
-                .font(.system(size: 11, weight: .bold))
+                .font(.system(size: 12, weight: .bold))
                 .foregroundStyle(fg.opacity(0.85))
-                .padding(.horizontal, 10)
-                .frame(height: 19)
-                .background(.white.opacity(0.85), in: Capsule())
+                .padding(.horizontal, 11)
+                .frame(height: 21)
+                .background(.white.opacity(0.88), in: Capsule())
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 137)
+        .frame(height: 168)
         .background(m.gradient,
                     in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .elevationGround()
@@ -621,7 +615,33 @@ struct ConsolidationView: View {
     @ViewBuilder
     private func gameView(for m: Mode) -> some View {
         VStack(spacing: 0) {
-            // 「换游戏」已收进顶部 header，这里不再重复一个灰色胶囊按钮
+            // 游戏内需要一条返回入口（网格页的顶栏已去掉，改为浮层）
+            HStack {
+                Button {
+                    mode = nil
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .bold))
+                        Text("换游戏")
+                            .font(.system(size: 17, weight: .semibold))
+                    }
+                    .foregroundStyle(Func.infoDeep)
+                    .frame(height: 40)
+                }
+                .buttonStyle(PressableStyle())
+
+                Spacer()
+
+                Text(m.rawValue)
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundStyle(Palette.ink)
+                Spacer()
+                Color.clear.frame(width: 70, height: 1)
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 4)
+
             Group {
                 switch m {
                 case .wordToImage: WordToImageGame(words: words)
