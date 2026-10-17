@@ -26,15 +26,33 @@ jobs:
       - name: Run OpenCode
         uses: anomalyco/opencode/github@latest
         env:
-          # OpenCode Console service account key.
-          # Create one at https://opencode.ai/console -> API -> Service accounts.
+          # Only the key for the model chosen below needs to be set in
+          # Settings -> Secrets and variables -> Actions. Unset ones expand to
+          # an empty string and are ignored.
+          #
+          # OpenCode inference (credits or Go subscription), model opencode/... or opencode-go/...
+          #   key: https://opencode.ai/console -> API -> Service accounts
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          # Google AI Studio free tier, model google/gemini-3.7-flash
+          #   key: https://aistudio.google.com/apikey
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # OpenRouter free models, model openrouter/<vendor>/<model>:free
+          #   key: https://openrouter.ai/keys
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # DeepSeek platform (paid, cheapest DeepSeek access), model deepseek/deepseek-flash
+          #   key: https://platform.deepseek.com/api_keys
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # DeepSeek served by OpenCode.
-          #   pay-as-you-go (Console credits): opencode/deepseek-v4.1-flash
-          #   Go subscription ($10/mo):        opencode-go/deepseek-v4.1-flash
-          # stronger but pricier:              .../deepseek-v4-pro
+          # Pick one. Free-tier options (no payment):
+          #   google/gemini-3.7-flash              needs GEMINI_API_KEY
+          #   openrouter/cohere/north-mini-code:free    needs OPENROUTER_API_KEY
+          #   openrouter/nvidia/nemotron-3.5-lightning:free
+          # Paid, OpenCode-served DeepSeek:
+          #   opencode/deepseek-v4.1-flash         needs OPENCODE_API_KEY (credits)
+          #   opencode-go/deepseek-v4.1-flash      needs OPENCODE_API_KEY (Go, $10/mo)
+          # Direct DeepSeek:
+          #   deepseek/deepseek-flash              needs DEEPSEEK_API_KEY
           model: opencode/deepseek-v4.1-flash
           # Use the built-in GITHUB_TOKEN instead of the OpenCode GitHub App.
           use_github_token: true
