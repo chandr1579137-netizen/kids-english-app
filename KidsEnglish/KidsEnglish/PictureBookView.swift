@@ -49,36 +49,38 @@ struct PictureBookView: View {
 // MARK: - 绘本阅读器：大封面 + 标题 + 段落大字（英文+中文）+ 每段播放按钮
 struct PictureBookReaderView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
     @State private var player = AudioPlayer()
     let lesson: Lesson
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(alignment: .leading, spacing: 16) {
+                SubPageHeader(onBack: { dismiss() })
+
                 CoverImage(url: store.coverURL(forLesson: lesson.id), fallbackText: lesson.titleCn)
-                    .imageFrame(height: 240, corner: Radius.sheet)
+                    .imageFrame(height: 220, corner: Radius.sheet)
                     .padding(.horizontal)
 
-                Text(lesson.titleCn)
-                    .font(.largeTitle).bold()
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                Text(lesson.title)
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(lesson.titleCn)
+                        .font(.system(size: 30, weight: .heavy))
+                        .foregroundStyle(Palette.ink)
+                    Text(lesson.title)
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(Palette.inkMuted)
+                }
+                .padding(.horizontal)
 
                 ForEach(lesson.content, id: \.paragraphId) { paragraph in
                     paragraphCard(paragraph)
                 }
-
-                Spacer(minLength: 30)
             }
-            .padding(.top)
+            .padding(.top, 4)
+            .padding(.bottom, 16)
         }
-        .navigationTitle(lesson.titleCn)
-        .navigationBarTitleDisplayMode(.inline)
+        .creamBackground()
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     private func paragraphCard(_ paragraph: Paragraph) -> some View {
@@ -104,15 +106,14 @@ struct PictureBookReaderView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .frame(minHeight: 64)
-                .background(Color.blue)
+                .background(Func.infoDeep)
                 .clipShape(RoundedRectangle(cornerRadius: 18))
             }
             .buttonStyle(.plain)
         }
         .padding(20)
-        .background(Color(.systemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 22))
-        .shadow(radius: 4)
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.sheet))
+        .elevationGround()
         .padding(.horizontal)
     }
 }
