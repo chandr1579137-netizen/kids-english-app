@@ -17,9 +17,11 @@ jobs:
       - name: Download assets bundle v3 (word icons, lesson illustrations)
         run: |
           curl -sfL -o assets-bundle-v3.zip \
-            "https://muse.ai/files/1412548825264485/28149411608070162/97jiuiu7vahas4vrykc1nghi/assets-bundle-v3.zip"
+            "https://github.com/chandr1579137-netizen/kids-english-app/releases/download/assets-v3/assets-bundle-v3.zip"
           unzip -q -o assets-bundle-v3.zip
-          ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l
+          echo "word-icons     $(ls KidsEnglish/KidsEnglish/Resources/word-icons | wc -l)"
+          echo "illustrations  $(ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l)"
+          echo "covers         $(ls KidsEnglish/KidsEnglish/Resources/covers | wc -l)"
 
       - name: Download lesson audio (from upstream open-source repo)
         run: |
