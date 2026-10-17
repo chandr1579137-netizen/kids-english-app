@@ -14,7 +14,7 @@ struct LearnWordsView: View {
     /// 今天新学的词（用于巩固练习入口）
     @State private var learnedToday: [WordEntry] = []
     /// 是否处于学习页（tab 内切换，不是全屏覆盖，这样底栏保留）
-    @State private var showStudy = false
+    @State private var showStudy = LaunchOptions.forceStudy
     /// 是否跳转巩固练习
     @State private var goConsolidate = false
 
@@ -269,77 +269,87 @@ struct LearnWordsView: View {
     // MARK: - 学习页（tab 内切换，保留底栏）
 
     private var studyContent: some View {
-        VStack(spacing: 16) {
-            if finished {
-                celebrationView
-            } else if todayWords.isEmpty {
-                Text("今天没有新单词啦，换一本词书或明天再来吧！😊")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(Palette.inkMuted)
-                    .multilineTextAlignment(.center)
-                    .padding()
-                    .whiteCard()
-                    .padding()
-            } else {
-                // 头部：标题只说页面身份，「第几个」交给下面的进度条表达，不重复
-                HStack {
-                    Button {
-                        showStudy = false
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundStyle(Palette.ink)
-                            .frame(width: 44, height: 44)
+        ScrollView {
+            VStack(spacing: 14) {
+                if finished {
+                    celebrationView
+                } else if todayWords.isEmpty {
+                    emptyStudyCard
+                } else {
+                    studyHeader
+                    studyProgress
+                    if todayWords.indices.contains(cardIndex) {
+                        wordCard(todayWords[cardIndex])
                     }
-                    .buttonStyle(PressableStyle())
-
-                    Text("背单词")
-                        .font(.system(size: 30, weight: .heavy))
-                        .foregroundStyle(Palette.ink)
-
-                    Spacer()
-
-                    Button {
-                        playBest()
-                    } label: {
-                        Image(systemName: "speaker.wave.2.fill")
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundStyle(Func.infoDeep)
-                            .frame(width: 44, height: 44)
-                    }
-                    .buttonStyle(PressableStyle())
                 }
-                .padding(.horizontal, 12)
-
-                // 进度：几何与终态一致
-                VStack(alignment: .leading, spacing: 6) {
-                    GeometryReader { geo in
-                        ZStack(alignment: .leading) {
-                            Capsule().fill(Palette.hairline)
-                            Capsule()
-                                .fill(Func.accent)
-                                .frame(width: geo.size.width * progressFraction)
-                        }
-                    }
-                    .frame(height: 10)
-
-                    Text("学习进度 \(cardIndex + 1)/\(todayWords.count)")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Func.accent)
-                }
-                .padding(.horizontal, 20)
-
-                Spacer(minLength: 0)
-
-                if todayWords.indices.contains(cardIndex) {
-                    wordCard(todayWords[cardIndex])
-                }
-
-                Spacer(minLength: 0)
             }
+            .padding(.top, 6)
+            .padding(.bottom, 12)
         }
-        .padding(.top, 8)
-        .padding(.bottom, 8)
+    }
+
+    private var emptyStudyCard: some View {
+        Text("今天没有新单词啦，换一本词书或明天再来吧！😊")
+            .font(.system(size: 18, weight: .medium))
+            .foregroundStyle(Palette.inkMuted)
+            .multilineTextAlignment(.center)
+            .padding()
+            .whiteCard()
+            .padding()
+    }
+
+    /// 头部：标题只说页面身份，「第几个」交给下面的进度条表达，不重复
+    private var studyHeader: some View {
+        HStack {
+            Button {
+                showStudy = false
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundStyle(Palette.ink)
+                    .frame(width: 44, height: 44)
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("返回")
+
+            Text("背单词")
+                .font(.system(size: 30, weight: .heavy))
+                .foregroundStyle(Palette.ink)
+
+            Spacer()
+
+            Button {
+                playBest()
+            } label: {
+                Image(systemName: "speaker.wave.2.fill")
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundStyle(Func.infoDeep)
+                    .frame(width: 44, height: 44)
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("再听一遍")
+        }
+        .padding(.horizontal, 12)
+    }
+
+    /// 进度：几何与终态一致，不闪跳
+    private var studyProgress: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Palette.hairline)
+                    Capsule()
+                        .fill(Func.accent)
+                        .frame(width: geo.size.width * progressFraction)
+                }
+            }
+            .frame(height: 10)
+
+            Text("学习进度 \(cardIndex + 1)/\(todayWords.count)")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(Func.accent)
+        }
+        .padding(.horizontal, 20)
     }
 
     private var progressFraction: Double {

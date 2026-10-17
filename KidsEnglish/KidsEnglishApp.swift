@@ -50,11 +50,33 @@ enum AppTab: Int, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - 启动参数（供 CI 截图定位页面；正常运行无影响）
+
+enum LaunchOptions {
+    private static var args: [String] { ProcessInfo.processInfo.arguments }
+
+    static func value(for key: String) -> String? {
+        guard let i = args.firstIndex(of: key), args.indices.contains(i + 1) else { return nil }
+        return args[i + 1]
+    }
+
+    /// `-uiTab 0..4` 指定首屏 tab
+    static var initialTab: AppTab {
+        if let raw = value(for: "-uiTab"), let i = Int(raw), let t = AppTab(rawValue: i) {
+            return t
+        }
+        return .learn
+    }
+
+    /// `-uiStudy` 直接进入背单词的学习页
+    static var forceStudy: Bool { args.contains("-uiStudy") }
+}
+
 // MARK: - 根视图
 
 struct ContentView: View {
     @Environment(DataStore.self) private var store
-    @State private var tab: AppTab = .learn
+    @State private var tab: AppTab = LaunchOptions.initialTab
 
     var body: some View {
         ZStack {

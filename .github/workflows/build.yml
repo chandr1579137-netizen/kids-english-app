@@ -60,3 +60,56 @@ jobs:
         with:
           name: KidsEnglish-unsigned-ipa
           path: KidsEnglish-unsigned.ipa
+
+      # ---- 以下是视觉评审用的模拟器截图：真实 SwiftUI 渲染，不是 HTML 仿制 ----
+
+      - name: Build for simulator
+        run: |
+          xcodebuild -project KidsEnglish/KidsEnglish.xcodeproj \
+            -scheme KidsEnglish \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -derivedDataPath build-sim \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Boot simulator and capture screenshots
+        run: |
+          set -e
+          DEVICE=$(xcrun simctl list devices available \
+            | grep -m1 -oE '[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}')
+          echo "device=$DEVICE"
+          xcrun simctl boot "$DEVICE" 2>/dev/null || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl status_bar "$DEVICE" override \
+            --time "9:41" --batteryState charged --batteryLevel 100 \
+            --wifiBars 3 --cellularBars 4 2>/dev/null || true
+
+          APP=$(find build-sim/Build/Products/Debug-iphonesimulator -maxdepth 1 -name "*.app" | head -1)
+          echo "app=$APP"
+          xcrun simctl install "$DEVICE" "$APP"
+
+          mkdir -p shots
+          shoot() {
+            name="$1"; shift
+            xcrun simctl terminate "$DEVICE" com.kidsenglish.app 2>/dev/null || true
+            sleep 1
+            xcrun simctl launch "$DEVICE" com.kidsenglish.app "$@" >/dev/null
+            sleep 3
+            xcrun simctl io "$DEVICE" screenshot "shots/$name.png"
+          }
+
+          shoot 01-learn    -uiTab 0
+          shoot 02-cards    -uiTab 1
+          shoot 03-read     -uiTab 2
+          shoot 04-picture  -uiTab 3
+          shoot 05-profile  -uiTab 4
+          shoot 06-study    -uiTab 0 -uiStudy
+          ls -lh shots
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: KidsEnglish-screenshots
+          path: shots/

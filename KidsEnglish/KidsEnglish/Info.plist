@@ -22,10 +22,8 @@
 	<string>跟读练习需要使用麦克风录音，录音只保存在本机</string>
 	<key>UILaunchScreen</key>
 	<dict/>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
