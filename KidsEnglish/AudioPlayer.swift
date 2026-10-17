@@ -18,7 +18,7 @@ class AudioPlayer {
         try? AVAudioSession.sharedInstance().setActive(true)
     }
 
-    func play(url: URL) {
+    func play(url: URL, rate: Float = 1.0) {
         stop()
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
@@ -46,6 +46,8 @@ class AudioPlayer {
             self?.onTimeUpdate?(999999)  // 通知播放结束
         }
         player?.play()
+        // 慢速复用同一条音频：AVPlayer 支持变速，不需要预生成文件
+        player?.rate = rate
         isPlaying = true
     }
 

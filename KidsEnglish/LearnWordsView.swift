@@ -73,11 +73,15 @@ struct LearnWordsView: View {
                         HStack(spacing: 14) {
                             // 「全部单词」是聚合项，不是分类 —— 用中性底区分层级
                             allWordsCard
-                            bookCard(themeId: "fruits", title: "水果篇", subtitle: "6 词",
+                            // 词数一律读真实数据，不再写死（原来 6/49/7 与数据 9/80/36 不符）
+                            bookCard(themeId: "fruits", title: "水果篇",
+                                     subtitle: "\(store.words(forTheme: "fruits").count) 词",
                                      iconName: "strawberry")
-                            bookCard(themeId: "animals", title: "动物篇", subtitle: "49 词",
+                            bookCard(themeId: "animals", title: "动物篇",
+                                     subtitle: "\(store.words(forTheme: "animals").count) 词",
                                      iconName: "panda")
-                            bookCard(themeId: "vehicles", title: "交通工具", subtitle: "7 词",
+                            bookCard(themeId: "vehicles", title: "交通工具",
+                                     subtitle: "\(store.words(forTheme: "vehicles").count) 词",
                                      iconName: "bus")
                         }
                         .padding(.horizontal)
@@ -85,7 +89,19 @@ struct LearnWordsView: View {
                     }
                 }
 
-                // 每天新学
+                // 主 CTA —— 必须落在首屏。上面任何卡片都不许把它挤下去
+                VStack(spacing: 12) {
+                    AppButton(title: "开始学习", icon: "play.fill", tier: .primary) {
+                        startStudy()
+                    }
+                    AppButton(title: "巩固练习", icon: "square.grid.2x2.fill", tier: .secondary) {
+                        goConsolidate = true
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 2)
+
+                // 每天新学 —— 放在主 CTA 之后：它是设置项，不该把主操作挤出首屏
                 HStack {
                     Text("每天新学")
                         .font(.system(size: 18, weight: .bold))
@@ -108,18 +124,6 @@ struct LearnWordsView: View {
                 // 学习安排预览
                 planPreviewCard
                     .padding(.horizontal)
-
-                // 主 CTA
-                AppButton(title: "开始学习", icon: "▶", tier: .primary) {
-                    startStudy()
-                }
-                .padding(.horizontal)
-
-                // 次操作：按钮只说动作，不夹带说明
-                AppButton(title: "巩固练习", icon: "🎮", tier: .secondary) {
-                    goConsolidate = true
-                }
-                .padding(.horizontal)
             }
             .padding(.vertical, 12)
         }
@@ -128,20 +132,22 @@ struct LearnWordsView: View {
     // MARK: - 今日计划卡
 
     private var planCard: some View {
-        HStack {
+        // 橙色是童趣的一部分，不动色值；只把文字色交给 onFill 自动判定
+        let fg = onFill(AppTheme.planBase)   // 亮橙 → 深墨字，8.1:1
+        return HStack {
             VStack(alignment: .leading, spacing: 8) {
                 Text("今日计划")
                     .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.92))
+                    .foregroundStyle(fg.opacity(0.82))
                 Text("Day \(dayNumber)")
                     .font(.system(size: 38, weight: .heavy))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(fg)
                 Text("新学 \(todayWords.count) 个词")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(fg)
                 Text("已学 \(store.learnedWords.count) / \(store.words.count)")
                     .font(.system(size: 15, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.88))
+                    .foregroundStyle(fg.opacity(0.78))
             }
             Spacer()
             uiIcon("rocket")
@@ -284,7 +290,7 @@ struct LearnWordsView: View {
                 }
             }
             .padding(.top, 6)
-            .padding(.bottom, 12)
+            .padding(.bottom, 24)   // 学习页底部有 tab bar，12 太贴
         }
     }
 
@@ -337,7 +343,8 @@ struct LearnWordsView: View {
         VStack(alignment: .leading, spacing: 6) {
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
-                    Capsule().fill(Palette.hairline)
+                    // 轨道要看得见：hairline 与页面底只差 1.1:1，等于没有
+                    Capsule().fill(Color(red: 0.82, green: 0.78, blue: 0.71))
                     Capsule()
                         .fill(Func.accent)
                         .frame(width: geo.size.width * progressFraction)
@@ -347,7 +354,7 @@ struct LearnWordsView: View {
 
             Text("学习进度 \(cardIndex + 1)/\(todayWords.count)")
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(Func.accent)
+                .foregroundStyle(Func.accentDeep)   // 小字必须 ≥4.5:1
         }
         .padding(.horizontal, 20)
     }
@@ -369,27 +376,26 @@ struct LearnWordsView: View {
                 .foregroundStyle(Palette.inkMuted)
             Text(entry.meaningCn ?? "")
                 .font(.system(size: 34, weight: .heavy))
-                .foregroundStyle(Func.accent)
+                .foregroundStyle(Func.accentVivid)   // 大字 ≥3:1，且不发褐
 
             // 发音：两个并列的次要操作，同层级
+            // 「慢速」始终显示 —— 无预生成慢速文件时走同一音频 0.7 倍速
             HStack(spacing: 14) {
-                AppButton(title: "正常", icon: "🔊", tier: .secondary) {
+                AppButton(title: "正常", icon: "speaker.wave.2.fill", tier: .secondary) {
                     playBest(for: entry)
                 }
-                if store.slowAudioURL(forWord: entry.word) != nil {
-                    AppButton(title: "慢速", icon: "🐢", tier: .secondary) {
-                        playSlow(for: entry)
-                    }
+                AppButton(title: "慢速", icon: "tortoise.fill", tier: .secondary) {
+                    playSlow(for: entry)
                 }
             }
             .padding(.top, 4)
 
             // 判定：与导航分开 —— 判错和翻页是两件完全不同的事
             HStack(spacing: 12) {
-                AppButton(title: "认识", icon: "✓", tier: .judgePositive) {
+                AppButton(title: "认识", icon: "checkmark", tier: .judgePositive) {
                     markKnown(entry)
                 }
-                AppButton(title: "不认识", icon: "✕", tier: .judgeNegative) {
+                AppButton(title: "不认识", icon: "xmark", tier: .judgeNegative) {
                     nextCard()
                 }
             }
@@ -397,13 +403,13 @@ struct LearnWordsView: View {
 
             // 导航：降为幽灵按钮，不与判定争夺注意力
             HStack(spacing: 12) {
-                AppButton(title: "上一个", icon: "←", tier: .ghost) {
+                AppButton(title: "上一个", icon: "chevron.left", tier: .ghost) {
                     if cardIndex > 0 {
                         cardIndex -= 1
                         playBest()
                     }
                 }
-                AppButton(title: "下一个", icon: "→", tier: .ghost) {
+                AppButton(title: "下一个", icon: "chevron.right", tier: .ghost) {
                     nextCard()
                 }
             }
@@ -427,11 +433,11 @@ struct LearnWordsView: View {
                 .font(.system(size: 17, weight: .medium))
                 .foregroundStyle(Palette.inkMuted)
             VStack(spacing: 12) {
-                AppButton(title: "去巩固", icon: "🎮", tier: .primary) {
+                AppButton(title: "去巩固", icon: "gamecontroller.fill", tier: .primary) {
                     showStudy = false
                     goConsolidate = true
                 }
-                AppButton(title: "再看一遍", icon: "📖", tier: .secondary) {
+                AppButton(title: "再看一遍", icon: "arrow.counterclockwise", tier: .secondary) {
                     startStudy()
                 }
             }
@@ -494,8 +500,11 @@ struct LearnWordsView: View {
     }
 
     private func playSlow(for entry: WordEntry) {
+        // 优先用预生成的慢速文件；没有就把同一条音频放慢到 0.7 倍
         if let url = store.slowAudioURL(forWord: entry.word) {
             player.play(url: url)
+        } else if let url = store.bestAudioURL(forWord: entry.word) {
+            player.play(url: url, rate: 0.7)
         }
     }
 }

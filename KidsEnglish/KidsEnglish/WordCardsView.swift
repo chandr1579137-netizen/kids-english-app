@@ -43,32 +43,38 @@ struct WordCardsView: View {
         let fill = AppTheme.colorForTheme(theme.id)
         let isComplete = progress.total > 0 && progress.done >= progress.total
 
-        return HStack(alignment: .center, spacing: 10) {
-            VStack(alignment: .leading, spacing: 6) {
+        // 三段式：图标左上 / 进度右上 / 名称底部 —— 名称独占整行，不再被进度挤断
+        return VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 6) {
                 uiIcon(themeIconName(for: theme.id))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 44, height: 44)
-                Text(theme.nameCn)
-                    .font(.system(size: 17, weight: .bold))
-                    .foregroundStyle(Palette.ink)
-                    .lineLimit(1)
-            }
-            Spacer(minLength: 4)
-            // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
-            HStack(spacing: 3) {
-                Text("\(progress.done)/\(progress.total)")
-                    .font(.system(size: 14, weight: .bold))
-                if isComplete {
-                    Image(systemName: "checkmark.circle.fill")
+                    .frame(width: 34, height: 34)
+                Spacer(minLength: 0)
+                // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
+                HStack(spacing: 3) {
+                    Text("\(progress.done)/\(progress.total)")
                         .font(.system(size: 13, weight: .bold))
+                    if isComplete {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 12, weight: .bold))
+                    }
                 }
+                .foregroundStyle(isComplete ? Func.positiveDeep : Palette.inkMuted)
+                .padding(.top, 2)
             }
-            .foregroundStyle(isComplete ? Func.positiveDeep : Palette.inkMuted)
+
+            Text(theme.nameCn)
+                .font(.system(size: 17, weight: .bold))
+                .foregroundStyle(Palette.ink)
+                .lineLimit(2)
+                .minimumScaleFactor(0.85)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: 96, alignment: .leading)
         // 分类色只作底，永不作文字色 —— 浅底保证深字 9–14:1
         .background(fill.opacity(0.35), in: RoundedRectangle(cornerRadius: Radius.card))
         .elevationGround()
@@ -107,7 +113,7 @@ struct ThemeWordsView: View {
                     .foregroundStyle(Func.infoDeep)
                 Text(entry.meaningCn ?? "")
                     .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(Func.accent)
+                    .foregroundStyle(Func.accentDeep)   // 16pt 属小字，需 ≥4.5:1
             }
             Spacer()
             Button {

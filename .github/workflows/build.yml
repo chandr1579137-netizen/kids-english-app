@@ -11,6 +11,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 仓库里有两份 .swift（KidsEnglish/ 与 KidsEnglish/KidsEnglish/），
+      # Xcode 实际编译的是后者。历史上因此出现过「改了外层、CI 编译内层」的静默漂移，
+      # 导致截图与源码对不上。这里直接失败，不让旧代码混过去。
+      - name: Verify duplicated sources are in sync
+        run: |
+          fail=0
+          for f in KidsEnglish/*.swift; do
+            b="KidsEnglish/KidsEnglish/$(basename "$f")"
+            if [ -f "$b" ] && ! diff -q "$f" "$b" >/dev/null; then
+              echo "::error file=$f::与 $b 不一致（Xcode 编译的是后者）"
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "源码双目录已漂移，请先同步再构建"
+            exit 1
+          fi
+          echo "源码一致 ✓"
+
       - name: Show Xcode version
         run: xcodebuild -version
 

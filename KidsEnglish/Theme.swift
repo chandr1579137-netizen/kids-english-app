@@ -59,6 +59,12 @@ enum Func {
     static let negativeDeep = Color(red: 0.87, green: 0.20, blue: 0.13)  // 白字 4.60:1
     static let infoDeep = Color(red: 0.14, green: 0.44, blue: 0.90)      // 白字 4.60:1
     static let accentDeep = Color(red: 0.72, green: 0.36, blue: 0.05)    // 白底上 4.61:1
+
+    // 图标与大字数字专用：只服务「≥18.66pt 粗体」的大字号与图形，
+    // 按 WCAG 大字号/非文本 3:1 判定。比 Deep 版更鲜亮，不会发棕。
+    static let accentVivid = Color(red: 0.85, green: 0.42, blue: 0.00)   // 3.47:1
+    static let positiveVivid = Color(red: 0.18, green: 0.56, blue: 0.22) // 4.13:1
+    static let infoVivid = Color(red: 0.14, green: 0.44, blue: 0.90)     // 4.63:1
 }
 
 // MARK: - 对比度计算（让可读性成为可校验的规则，而不是靠眼看）
@@ -110,9 +116,12 @@ enum AppTheme {
     static let grayBtn = Color(red: 0.74, green: 0.74, blue: 0.74)
     /// 中文释义橙色
     static let wordOrange = Color.orange
+    /// 今日计划卡的底色基准（渐变左端）—— 卡上文字色由 onFill() 自动决定
+    static let planBase = Color(red: 1.0, green: 0.58, blue: 0.0)
     /// 今日计划卡片橙色渐变（分类卡禁用渐变，只有这里允许）
+    /// 保持满饱和的童趣橙，不靠压暗换对比度 —— 文字改深色后达 8.1:1
     static let planGradient = LinearGradient(
-        colors: [Color.orange, Color(red: 1.0, green: 0.72, blue: 0.1)],
+        colors: [planBase, Color(red: 1.0, green: 0.72, blue: 0.1)],
         startPoint: .topLeading, endPoint: .bottomTrailing
     )
     /// 「我的」用户卡紫色渐变（语义绑定：个人 / 成就）—— 两端对白字均 ≥ 4.7:1
@@ -238,10 +247,20 @@ enum AppButtonTier {
         default: return 20
         }
     }
+
+    /// 图标比文字略小，视觉重心才不会被图标抢走
+    var iconSize: CGFloat {
+        switch self {
+        case .judgePositive, .judgeNegative: return 22
+        case .ghost: return 15
+        default: return 18
+        }
+    }
 }
 
 struct AppButton: View {
     let title: String
+    /// 只接受 SF Symbol 名 —— 不要传 emoji：模拟器里部分 emoji 会渲染成黑块
     var icon: String? = nil
     var tier: AppButtonTier = .primary
     let action: () -> Void
@@ -250,7 +269,9 @@ struct AppButton: View {
         Button(action: action) {
             HStack(spacing: 8) {
                 if let icon {
-                    Text(icon).font(.system(size: 22, weight: .bold))
+                    Image(systemName: icon)
+                        .font(.system(size: tier.iconSize, weight: .bold))
+                        .symbolRenderingMode(.monochrome)
                 }
                 Text(title)
                     .font(.system(size: tier.fontSize, weight: .heavy))
@@ -358,9 +379,19 @@ extension View {
 
 // MARK: - UI 图标加载（Resources/ui-icons/）
 
-/// 从 Resources/ui-icons 加载 AI 生成的图标
+/// 从 Resources/ui-icons 加载图标。
+/// 该目录是「文件夹引用」（blue folder），文件落在 <bundle>/ui-icons/<name>.png，
+/// 用 Image("ui-icons/x") 解析不到 —— 必须按路径读。
+/// 三级兜底 + 可见占位：失败时显示问号方块，避免静默空白（这次就是靠截图才发现的）。
 func uiIcon(_ name: String) -> Image {
-    Image("ui-icons/\(name)", bundle: .main)
+    if let path = Bundle.main.path(forResource: name, ofType: "png", inDirectory: "ui-icons"),
+       let ui = UIImage(contentsOfFile: path) {
+        return Image(uiImage: ui)
+    }
+    if let ui = UIImage(named: "ui-icons/\(name)") ?? UIImage(named: name) {
+        return Image(uiImage: ui)
+    }
+    return Image(systemName: "questionmark.square.dashed")
 }
 
 /// 主题 id 到图标名的映射
