@@ -33,6 +33,11 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
+      # DataStore 用 try? 解码 JSON，字段缺失只会静默变空数组（课文/单词凭空少一批），
+      # 界面照常渲染。这里按 Swift 模型的必填字段做结构校验，把静默变成构建失败。
+      - name: Validate resource JSON
+        run: python3 scripts/validate_resources.py KidsEnglish/KidsEnglish/Resources
+
       - name: Download assets bundle v3 (word icons, lesson illustrations)
         run: |
           curl -sfL -o assets-bundle-v3.zip \
