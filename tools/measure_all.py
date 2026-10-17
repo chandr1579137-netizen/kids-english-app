@@ -60,14 +60,16 @@ def xspan(im, pred, y0, y1):
     return minx, maxx
 
 
-def bg_color(im, top=120):
-    """取顶部非白区域的背景主色"""
+def bg_color(im):
+    """取顶部(避开状态栏)非白/非黑区域的背景主色"""
     c = Counter()
     px = im.load()
-    for y in range(20, top):
-        for x in range(im.size[0]):
+    W, H = im.size
+    for y in range(100, 220):
+        for x in range(W):
             r, g, b = px[x, y][:3]
-            if max(r, g, b) - min(r, g, b) < 20 and not (r > 240 and g > 240 and b > 240):
+            # 排除纯白、纯黑、近黑(状态栏文字/刘海)
+            if max(r, g, b) - min(r, g, b) < 22 and not (r > 245 and g > 245 and b > 245) and not (r < 35 and g < 35 and b < 35):
                 c[(r, g, b)] += 1
     return c.most_common(1)[0][0] if c else None
 
@@ -80,26 +82,25 @@ def measure(path, name):
     col = bg_color(im)
     print(f"  背景主色 (近顶部): {col} #{col[0]:02X}{col[1]:02X}{col[2]:02X}" if col else "  背景主色未识别")
 
-    # 水平边距：找最左侧出现大量非背景像素的列
+    # 水平边距：找最左侧出现大量非背景像素的列（避开状态栏）
     if col:
         tol = 18
         bg = lambda r, g, b: abs(r - col[0]) < tol and abs(g - col[1]) < tol and abs(b - col[2]) < tol
     else:
         bg = lambda r, g, b: r > 245 and g > 245 and b > 245
 
-    # 用顶部 300px 内非背景像素的累计来找左边界
     px = im.load()
     counts = []
     for x in range(W):
-        c = sum(1 for y in range(60, 300) if not bg(*px[x, y][:3]))
+        c = sum(1 for y in range(140, 350) if not bg(*px[x, y][:3]))
         counts.append(c)
     left = next((x for x, c in enumerate(counts) if c > 15), 0)
     right = next((x for x in range(W - 1, -1, -1) if counts[x] > 15), W - 1)
     print(f"  水平内容边距: L={left*PT:.1f}pt  R={(W-right-1)*PT:.1f}pt  内容宽={(right-left+1)*PT:.1f}pt")
 
-    # 页面标题（深色大字）
+    # 页面标题（深色大字，避开状态栏）
     dark = lambda r, g, b: r < 70 and g < 70 and b < 90
-    tbands = band_rows(im, dark, 20, (0, 80, W, 400))
+    tbands = band_rows(im, dark, 20, (0, 140, W, 420))
     if tbands:
         ty0, ty1 = tbands[0]
         tx0, tx1 = xspan(im, dark, ty0, ty1)
