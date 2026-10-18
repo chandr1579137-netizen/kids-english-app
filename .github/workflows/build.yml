@@ -38,6 +38,11 @@ jobs:
       - name: Validate resource JSON
         run: python3 scripts/validate_resources.py KidsEnglish/KidsEnglish/Resources
 
+      # 模型层单测：SwiftPM 只编 Models.swift（纯 Foundation），不用模拟器也不用 test target。
+      # 拦的是「JSON 改了但 Swift 解不出来」——DataStore 用 try? 解码，这类问题会静默丢数据。
+      - name: Run model unit tests
+        run: swift test --package-path .
+
       # 仓库里 Resources 存了两份（外层与 KidsEnglish/KidsEnglish/ 下），Xcode 用内层。
       # 历史上两份漂移过；JSON 不像 .swift 有现成的 diff 守卫，这里补上。
       - name: Verify duplicated resources are in sync

@@ -459,4 +459,72 @@ class DataStore {
         }
         saveProgress()
     }
+
+    // MARK: - 备份与恢复
+
+    /// 进度快照。换机或重装时靠一段 JSON 带走，不需要登录或云同步。
+    private struct ProgressSnapshot: Codable {
+        var version: Int
+        var exportedAt: String
+        var completedLessons: [String]
+        var learnedWords: [String]
+        var favoriteWords: [String]
+        var collectedCards: [String]
+        var quizBest: [String: Double]
+        var selectedThemeId: String?
+        var dailyNewWords: Int
+        var timeLimitMinutes: Int
+        var showTranslationDefault: Bool
+        var gameAnswered: Int
+        var gameCorrect: Int
+        var studyDates: [String]
+    }
+
+    func exportSnapshotJSON() -> String {
+        let snapshot = ProgressSnapshot(
+            version: 1,
+            exportedAt: ISO8601DateFormatter().string(from: Date()),
+            completedLessons: completedLessons.sorted(),
+            learnedWords: learnedWords.sorted(),
+            favoriteWords: favoriteWords.sorted(),
+            collectedCards: collectedCards.sorted(),
+            quizBest: quizBest,
+            selectedThemeId: selectedThemeId,
+            dailyNewWords: dailyNewWords,
+            timeLimitMinutes: timeLimitMinutes,
+            showTranslationDefault: showTranslationDefault,
+            gameAnswered: gameAnswered,
+            gameCorrect: gameCorrect,
+            studyDates: studyDates
+        )
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        guard let data = try? encoder.encode(snapshot),
+              let text = String(data: data, encoding: .utf8) else { return "{}" }
+        return text
+    }
+
+    /// 返回给界面显示的结果文案；解析失败时不做任何修改。
+    @discardableResult
+    func importSnapshotJSON(_ text: String) -> String {
+        guard let data = text.data(using: .utf8),
+              let snapshot = try? JSONDecoder().decode(ProgressSnapshot.self, from: data) else {
+            return "这段文字不是有效的进度备份"
+        }
+        completedLessons = Set(snapshot.completedLessons)
+        learnedWords = Set(snapshot.learnedWords)
+        favoriteWords = Set(snapshot.favoriteWords)
+        collectedCards = Set(snapshot.collectedCards)
+        quizBest = snapshot.quizBest
+        selectedThemeId = snapshot.selectedThemeId
+        dailyNewWords = snapshot.dailyNewWords
+        timeLimitMinutes = snapshot.timeLimitMinutes
+        showTranslationDefault = snapshot.showTranslationDefault
+        gameAnswered = snapshot.gameAnswered
+        gameCorrect = snapshot.gameCorrect
+        studyDates = snapshot.studyDates
+        saveProgress()
+        refreshTimeUp()
+        return "已恢复：\(snapshot.completedLessons.count) 篇课文、\(snapshot.learnedWords.count) 个单词"
+    }
 }

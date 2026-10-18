@@ -105,6 +105,9 @@ struct ParentDashboardView: View {
     @Environment(DataStore.self) private var store
     @Environment(\.dismiss) private var dismiss
     @State private var showResetConfirm = false
+    @State private var showImport = false
+    @State private var importText = ""
+    @State private var importMessage: String?
 
     var body: some View {
         ScrollView {
@@ -181,23 +184,37 @@ struct ParentDashboardView: View {
                 }
 
                 card("数据") {
+                    ShareLink(item: store.exportSnapshotJSON()) {
+                        dataRowLabel(icon: "square.and.arrow.up",
+                                     title: "导出学习进度",
+                                     tint: Func.infoDeep,
+                                     background: Func.info.opacity(0.12))
+                    }
+                    .buttonStyle(PressableStyle())
+
+                    Button {
+                        importText = ""
+                        importMessage = nil
+                        showImport = true
+                    } label: {
+                        dataRowLabel(icon: "square.and.arrow.down",
+                                     title: "从文本恢复进度",
+                                     tint: Func.positiveDeep,
+                                     background: Func.positive.opacity(0.12))
+                    }
+                    .buttonStyle(PressableStyle())
+
                     Button {
                         showResetConfirm = true
                     } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: "trash")
-                                .font(.system(size: 15, weight: .bold))
-                            Text("清除全部学习进度")
-                                .font(.system(size: 16, weight: .bold))
-                        }
-                        .foregroundStyle(Func.negativeDeep)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 44)
-                        .background(Func.negative.opacity(0.12),
-                                    in: RoundedRectangle(cornerRadius: Radius.chip, style: .continuous))
+                        dataRowLabel(icon: "trash",
+                                     title: "清除全部学习进度",
+                                     tint: Func.negativeDeep,
+                                     background: Func.negative.opacity(0.12))
                     }
                     .buttonStyle(PressableStyle())
-                    Text("清空已学单词、已读课文、收藏与游戏成绩，每日限时设置保留。")
+
+                    Text("换机或重装前先导出这段文本；恢复会覆盖当前进度。")
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(2)
@@ -222,6 +239,71 @@ struct ParentDashboardView: View {
         } message: {
             Text("已学单词、已读课文、收藏和游戏成绩都会清空，且不能撤销。")
         }
+        .sheet(isPresented: $showImport) {
+            importSheet
+        }
+    }
+
+    private var importSheet: some View {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("把之前「导出学习进度」得到的文本粘贴到这里")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Palette.inkMuted)
+                TextEditor(text: $importText)
+                    .font(.system(size: 12, design: .monospaced))
+                    .scrollContentBackground(.hidden)
+                    .padding(8)
+                    .frame(maxHeight: .infinity)
+                    .background(Palette.surface,
+                                in: RoundedRectangle(cornerRadius: Radius.thumb, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: Radius.thumb, style: .continuous)
+                            .strokeBorder(Palette.hairline, lineWidth: 1)
+                    }
+                if let importMessage {
+                    Text(importMessage)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(importMessage.hasPrefix("已恢复")
+                                         ? Func.positiveDeep : Func.negativeDeep)
+                }
+            }
+            .padding()
+            .creamBackground()
+            .navigationTitle("恢复学习进度")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { showImport = false }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("恢复") {
+                        let result = store.importSnapshotJSON(importText)
+                        importMessage = result
+                        if result.hasPrefix("已恢复") {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                showImport = false
+                            }
+                        }
+                    }
+                    .disabled(importText.isEmpty)
+                }
+            }
+        }
+    }
+
+    private func dataRowLabel(icon: String, title: String,
+                              tint: Color, background: Color) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: icon)
+                .font(.system(size: 15, weight: .bold))
+            Text(title)
+                .font(.system(size: 16, weight: .bold))
+        }
+        .foregroundStyle(tint)
+        .frame(maxWidth: .infinity)
+        .frame(height: 44)
+        .background(background, in: RoundedRectangle(cornerRadius: Radius.chip, style: .continuous))
     }
 
     // MARK: - 组件
@@ -230,8 +312,7 @@ struct ParentDashboardView: View {
                                      @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.system(size: 18, weight: .heavy))
-                .foregroundStyle(Palette.ink)
+                .font(.system(size: 18, weight: .heavy))                .foregroundStyle(Palette.ink)
             content()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
