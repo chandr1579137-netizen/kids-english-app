@@ -58,7 +58,13 @@
    "penguin",
    "sheep",
    "spider",
-   "zebra"
+   "zebra",
+   "clownfish",
+   "dragon",
+   "jellyfish",
+   "tortoise",
+   "hare",
+   "scorpion"
   ]
  },
  {
@@ -92,7 +98,9 @@
    "seven",
    "eight",
    "nine",
-   "ten"
+   "ten",
+   "twenty",
+   "fifty"
   ]
  },
  {
@@ -112,7 +120,8 @@
    "hair",
    "teeth",
    "finger",
-   "knee"
+   "knee",
+   "heart"
   ]
  },
  {
@@ -132,7 +141,9 @@
    "cookie",
    "juice",
    "noodles",
-   "soup"
+   "soup",
+   "breakfast",
+   "yummy"
   ]
  },
  {
@@ -150,7 +161,12 @@
    "aunt",
    "baby",
    "grandfather",
-   "uncle"
+   "uncle",
+   "child",
+   "king",
+   "queen",
+   "prince",
+   "princess"
   ]
  },
  {
@@ -172,7 +188,9 @@
    "cup",
    "lamp",
    "sofa",
-   "table"
+   "table",
+   "bag",
+   "bulb"
   ]
  },
  {
@@ -190,7 +208,8 @@
    "plane",
    "rocket",
    "taxi",
-   "truck"
+   "truck",
+   "engine"
   ]
  },
  {
@@ -216,7 +235,15 @@
    "ocean",
    "forest",
    "island",
-   "beach"
+   "beach",
+   "air",
+   "cave",
+   "hill",
+   "plant",
+   "shell",
+   "valley",
+   "water",
+   "wave"
   ]
  },
  {
@@ -266,7 +293,9 @@
    "village",
    "kingdom",
    "hospital",
-   "zoo"
+   "zoo",
+   "lighthouse",
+   "maze"
   ]
  },
  {
@@ -302,7 +331,42 @@
    "clean",
    "cook",
    "smile",
-   "laugh"
+   "laugh",
+   "ask",
+   "break",
+   "bring",
+   "build",
+   "carry",
+   "change",
+   "choose",
+   "collect",
+   "come",
+   "cover",
+   "dream",
+   "fall",
+   "find",
+   "give",
+   "go",
+   "grow",
+   "hear",
+   "help",
+   "hide",
+   "know",
+   "learn",
+   "love",
+   "make",
+   "pick",
+   "put",
+   "say",
+   "see",
+   "share",
+   "stop",
+   "take",
+   "turn",
+   "wait",
+   "wake",
+   "want",
+   "watch"
   ]
  },
  {
@@ -338,7 +402,45 @@
    "dry",
    "nice",
    "funny",
-   "strong"
+   "strong",
+   "afraid",
+   "beautiful",
+   "brave",
+   "bright",
+   "careful",
+   "clever",
+   "dark",
+   "deep",
+   "delicious",
+   "easy",
+   "empty",
+   "exciting",
+   "far",
+   "friendly",
+   "full",
+   "gentle",
+   "golden",
+   "hard",
+   "high",
+   "huge",
+   "interesting",
+   "kind",
+   "loud",
+   "low",
+   "narrow",
+   "peaceful",
+   "quiet",
+   "ready",
+   "right",
+   "rough",
+   "safe",
+   "secret",
+   "shallow",
+   "shiny",
+   "silver",
+   "smart",
+   "smooth",
+   "young"
   ]
  }
 ]

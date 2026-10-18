@@ -54,7 +54,7 @@ final class ModelDecodingTests: XCTestCase {
                               "\(word) 出现在多个主题里")
             }
         }
-        XCTAssertEqual(seen.count, 252, "低龄白名单应恰好 201 词")
+        XCTAssertEqual(seen.count, 354, "低龄白名单应恰好 201 词")
     }
 
     // MARK: - 课文
