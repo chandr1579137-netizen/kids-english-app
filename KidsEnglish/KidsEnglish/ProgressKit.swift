@@ -101,3 +101,57 @@ enum ResetPlan {
         }
     }
 }
+
+
+// MARK: - 游戏题池难度
+
+enum GamePool {
+    /// 简单档只取 level 1–2 的词；命中太少时回退全量，
+    /// 避免题池只剩个位数导致同一道题反复出现。
+    static func filtered(_ words: [WordEntry], simple: Bool, minimum: Int = 20) -> [WordEntry] {
+        guard simple else { return words }
+        let easy = words.filter { ($0.level ?? 1) <= 2 }
+        return easy.count >= minimum ? easy : words
+    }
+}
+
+// MARK: - 每日时长
+
+enum StudyTime {
+    /// 今日可用时长 = 设置的上限 + 家长解锁追加的部分
+    static func allowance(limitMinutes: Int, bonusSeconds: Double) -> Double {
+        Double(limitMinutes * 60) + bonusSeconds
+    }
+
+    /// 是否已到今天的上限（limitMinutes 为 0 表示不限）
+    static func isTimeUp(studiedSeconds: Double, limitMinutes: Int, bonusSeconds: Double) -> Bool {
+        guard limitMinutes > 0 else { return false }
+        return studiedSeconds >= allowance(limitMinutes: limitMinutes, bonusSeconds: bonusSeconds)
+    }
+}
+
+// MARK: - 连续学习天数
+
+enum Streak {
+    /// 从今天（今天还没学就从昨天）往前数连续有记录的天数。
+    /// 昨天也缺就直接 0 —— 一天没学就断，和界面上的「连续 N 天」一致。
+    static func count(studyDates: [String],
+                      today: Date,
+                      timeZone: TimeZone = .current,
+                      calendar: Calendar = .current) -> Int {
+        let dates = Set(studyDates)
+        var cursor = today
+        if !dates.contains(DayKey.key(for: cursor, timeZone: timeZone)) {
+            guard let yesterday = calendar.date(byAdding: .day, value: -1, to: cursor) else { return 0 }
+            cursor = yesterday
+            guard dates.contains(DayKey.key(for: cursor, timeZone: timeZone)) else { return 0 }
+        }
+        var count = 0
+        while dates.contains(DayKey.key(for: cursor, timeZone: timeZone)) {
+            count += 1
+            guard let prev = calendar.date(byAdding: .day, value: -1, to: cursor) else { break }
+            cursor = prev
+        }
+        return count
+    }
+}

@@ -247,6 +247,9 @@ jobs:
           shoot 40-large-alert-unknown -uiTab 2 -uiLesson -uiAlert unknown -uiLargeText
           shoot 41-large-alert-mic     -uiTab 2 -uiLesson -uiAlert mic -uiLargeText
           shoot 42-large-alert-clear   -uiTab 3 -uiProfile parent-dash -uiAlert clear -uiLargeText
+          # 首次启动的家长说明卡
+          shoot 43-guide         -uiTab 0 -uiGuide
+          shoot 44-large-guide   -uiTab 0 -uiGuide -uiLargeText
           ls -lh shots
 
       - name: Capture iPad screenshots

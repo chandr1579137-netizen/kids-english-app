@@ -258,6 +258,38 @@ struct SettingsDetailView: View {
                 .whiteCard()
                 .padding(.horizontal)
 
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("巩固练习难度")
+                        .kidFont(18, .heavy)
+                        .foregroundStyle(Palette.ink)
+                    Text("简单档只出初学词（level 1–2）；标准档用当天学过的全部词。")
+                        .kidFont(13, .medium)
+                        .foregroundStyle(Palette.inkMuted)
+                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(spacing: 8) {
+                        ForEach([true, false], id: \.self) { simple in
+                            let isSelected = store.gameIsSimple == simple
+                            Button {
+                                store.gameIsSimple = simple
+                                store.saveProgress()
+                            } label: {
+                                Text(simple ? "简单" : "标准")
+                                    .kidFont(15, .bold)
+                                    .foregroundStyle(isSelected ? onFill(Func.accent) : Palette.inkMuted)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 44)
+                                    .background(isSelected ? Func.accent : Palette.hairline,
+                                                in: RoundedRectangle(cornerRadius: Radius.chip))
+                            }
+                            .buttonStyle(PressableStyle())
+                        }
+                    }
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .whiteCard()
+                .padding(.horizontal)
+
                 VStack(alignment: .leading, spacing: 8) {
                     Text("关于")
                         .kidFont(18, .heavy)

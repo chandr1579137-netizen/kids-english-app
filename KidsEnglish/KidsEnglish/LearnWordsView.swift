@@ -45,7 +45,9 @@ struct LearnWordsView: View {
                 refreshToday()
             }
             .navigationDestination(isPresented: $goConsolidate) {
-                ConsolidationView(words: learnedToday.isEmpty ? todayWords : learnedToday)
+                ConsolidationView(words: GamePool.filtered(
+                    learnedToday.isEmpty ? todayWords : learnedToday,
+                    simple: store.gameIsSimple))
             }
         }
     }

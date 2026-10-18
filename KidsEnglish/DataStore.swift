@@ -20,6 +20,10 @@ class DataStore {
     var learnedWords: Set<String> = []
     var selectedThemeId: String? = nil
     var dailyNewWords: Int = 10
+    /// 首次启动的家长说明卡是否看过
+    var hasSeenGuide: Bool = false
+    /// 巩固练习是否只出简单档（level 1–2）的词
+    var gameIsSimple: Bool = true
     var gameCorrect: Int = 0
     var gameAnswered: Int = 0
     var studyDates: [String] = []
@@ -302,6 +306,8 @@ class DataStore {
         let theme = defaults.string(forKey: "selectedThemeId") ?? ""
         selectedThemeId = theme.isEmpty ? nil : theme
         dailyNewWords = defaults.object(forKey: "dailyNewWords") as? Int ?? 10
+        hasSeenGuide = defaults.bool(forKey: "hasSeenGuide")
+        gameIsSimple = defaults.object(forKey: "gameIsSimple") as? Bool ?? true
         gameCorrect = defaults.integer(forKey: "gameCorrect")
         gameAnswered = defaults.integer(forKey: "gameAnswered")
         studyDates = defaults.stringArray(forKey: "studyDates") ?? []
@@ -321,6 +327,8 @@ class DataStore {
         defaults.set(Array(learnedWords), forKey: "learnedWords")
         defaults.set(selectedThemeId ?? "", forKey: "selectedThemeId")
         defaults.set(dailyNewWords, forKey: "dailyNewWords")
+        defaults.set(hasSeenGuide, forKey: "hasSeenGuide")
+        defaults.set(gameIsSimple, forKey: "gameIsSimple")
         defaults.set(gameCorrect, forKey: "gameCorrect")
         defaults.set(gameAnswered, forKey: "gameAnswered")
         defaults.set(studyDates, forKey: "studyDates")
@@ -350,30 +358,17 @@ class DataStore {
 
     var studyDayCount: Int { studyDates.count }
 
-    var streakDays: Int {
-        let dates = Set(studyDates)
-        let cal = Calendar.current
-        var day = Date()
-        if !dates.contains(dayString(day)) {
-            guard let yesterday = cal.date(byAdding: .day, value: -1, to: day) else { return 0 }
-            day = yesterday
-            if !dates.contains(dayString(day)) { return 0 }
-        }
-        var count = 0
-        while dates.contains(dayString(day)) {
-            count += 1
-            guard let prev = cal.date(byAdding: .day, value: -1, to: day) else { break }
-            day = prev
-        }
-        return count
-    }
+    /// 连续学习天数；规则与单测见 ProgressKit.swift 的 Streak。
+    var streakDays: Int { Streak.count(studyDates: studyDates, today: Date()) }
 
     private func allowanceSeconds() -> Double {
-        Double(timeLimitMinutes * 60) + bonusSecondsToday
+        StudyTime.allowance(limitMinutes: timeLimitMinutes, bonusSeconds: bonusSecondsToday)
     }
 
     private func refreshTimeUp() {
-        if timeLimitMinutes > 0, studySecondsToday >= allowanceSeconds() {
+        if StudyTime.isTimeUp(studiedSeconds: studySecondsToday,
+                              limitMinutes: timeLimitMinutes,
+                              bonusSeconds: bonusSecondsToday) {
             timeUp = true
         }
     }
@@ -452,6 +447,12 @@ class DataStore {
             defaults.removeObject(forKey: key)
         }
         saveProgress()
+    }
+
+    /// 记下「家长说明卡已看过」，之后不再自动弹出。
+    func markGuideSeen() {
+        hasSeenGuide = true
+        defaults.set(true, forKey: "hasSeenGuide")
     }
 
     // MARK: - 备份与恢复

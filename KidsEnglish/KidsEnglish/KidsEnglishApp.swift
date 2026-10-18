@@ -92,6 +92,14 @@ enum LaunchOptions {
     /// `-uiLargeText` 用最大档文字截图，验证 Dynamic Type 下布局不塌
     static var largeText: Bool { args.contains("-uiLargeText") }
 
+    /// `-uiGuide` 强制展示首次启动的家长说明卡（截图覆盖用）
+    static var forceGuide: Bool { args.contains("-uiGuide") }
+
+    /// 是否处于「按参数直达某页」的截图模式。
+    /// 截图每次都是全新安装，hasSeenGuide 为 false；如果不区分，
+    /// 引导卡会盖住所有页面截图。
+    static var isUIScreenshotRun: Bool { args.contains { $0.hasPrefix("-ui") } }
+
     /// `-uiAlert <unknown|mic>` 直接弹出课文页的提示卡片（截图覆盖用）
     static var alertDemo: String? { value(for: "-uiAlert") }
 
@@ -137,6 +145,13 @@ struct ContentView: View {
 
             if store.timeUp {
                 TimeUpOverlay()
+            }
+
+            // 首次启动：给家长一页说明。截图模式（任意 -ui* 参数）下不自动弹，
+            // 否则全新安装的引导卡会盖住所有页面截图。
+            if LaunchOptions.forceGuide
+                || (!store.hasSeenGuide && !LaunchOptions.isUIScreenshotRun) {
+                FirstRunGuide()
             }
         }
         // 回到前台时核对日期：App 挂着跨过零点不会自动换天，
@@ -265,6 +280,74 @@ struct TimeUpOverlay: View {
         }
         .sheet(isPresented: $showParentUnlock) {
             ParentUnlockView(onUnlock: { store.resetTimeUp() })
+        }
+    }
+}
+
+
+// MARK: - 首次启动：家长说明卡
+//
+// 第一次打开时的家长需要知道四件事：计划怎么走、家长中心在哪、
+// 每日限时默认开着、进度能导出。点一次就记进 UserDefaults，不再出现。
+struct FirstRunGuide: View {
+    @Environment(DataStore.self) private var store
+
+    private struct Item: Identifiable {
+        let id = UUID()
+        let emoji: String
+        let title: String
+        let detail: String
+    }
+
+    private let items: [Item] = [
+        Item(emoji: "📚", title: "每天 10 个新词",
+             detail: "首页「开始学习」按每日计划走；词由 15 个主题交错排，每天都有新主题"),
+        Item(emoji: "👨‍👩‍👧", title: "家长中心在「我的」页底部",
+             detail: "进入前要答一道数学题，可改每日限时、新词数、游戏难度"),
+        Item(emoji: "⏰", title: "每日限时默认 20 分钟",
+             detail: "到时间会锁屏，需要家长在家长中心解锁或调整"),
+        Item(emoji: "💾", title: "进度可以导出备份",
+             detail: "换手机前在家长中心导出文本；恢复会覆盖当前进度"),
+    ]
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.5).ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 16) {
+                Text("👋 欢迎使用英语小伙伴")
+                    .kidFont(22, .heavy)
+                    .foregroundStyle(Palette.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                VStack(alignment: .leading, spacing: 14) {
+                    ForEach(items) { item in
+                        HStack(alignment: .top, spacing: 10) {
+                            Text(item.emoji).kidFont(22, maxScale: 1.1)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(item.title)
+                                    .kidFont(17, .bold)
+                                    .foregroundStyle(Palette.ink)
+                                Text(item.detail)
+                                    .kidFont(14, .medium)
+                                    .foregroundStyle(Palette.inkMuted)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                    }
+                }
+
+                AppButton(title: "知道啦", icon: "checkmark") {
+                    store.markGuideSeen()
+                }
+                .padding(.top, 4)
+            }
+            .padding(22)
+            .frame(maxWidth: 360)
+            .background(Palette.surface,
+                        in: RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
+            .elevationRaised()
+            .padding(24)
         }
     }
 }
