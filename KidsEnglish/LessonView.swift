@@ -113,7 +113,10 @@ struct LessonView: View {
         }
         .onAppear {
             // 截图用：直接展示提示卡片
-            if LaunchOptions.alertDemo == "unknown" { showUnknownWordAlert = true }
+            if LaunchOptions.alertDemo == "unknown" {
+                tappedRawWord = "flamingo"   // 截图用：一个确实没收进词库的词
+                showUnknownWordAlert = true
+            }
             if LaunchOptions.alertDemo == "mic" { showMicDeniedAlert = true }
         }
         .navigationDestination(isPresented: $showQuiz) {
