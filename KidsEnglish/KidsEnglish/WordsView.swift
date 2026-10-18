@@ -10,9 +10,14 @@ struct WordDetailView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 16) {
-                // 用真实词图代替 emoji：emoji 语料里有 356 条是 📘 占位，
-                // 80pt 的蓝皮书顶在弹窗最上面比没有图更糟。
-                WordIconView(word: entry.word, size: 120)
+                // 有词图就用词图；没有（her/his/its 这类功能词）退回 emoji，
+                // 首字母灰块对孩子没有任何信息量。
+                if store.iconURL(forWord: entry.word) == nil,
+                   let emoji = entry.emoji, !emoji.isEmpty {
+                    Text(emoji).font(.system(size: 96))
+                } else {
+                    WordIconView(word: entry.word, size: 120)
+                }
                 Text(entry.word).font(.system(size: 44, weight: .bold))
                 if let p = entry.phonetic {
                     Text(p).font(.title3).foregroundColor(.secondary)

@@ -11,7 +11,7 @@ let package = Package(
         .target(
             name: "KidsEnglishCore",
             path: "KidsEnglish/KidsEnglish",
-            sources: ["Models.swift"]
+            sources: ["Models.swift", "WordStemmer.swift"]
         ),
         .testTarget(
             name: "KidsEnglishCoreTests",

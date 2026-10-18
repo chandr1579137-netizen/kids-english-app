@@ -164,7 +164,12 @@ class DataStore {
 
     func lookupWord(_ raw: String) -> WordEntry? {
         let w = raw.lowercased().trimmingCharacters(in: .punctuationCharacters)
-        return wordDict[w]
+        if let entry = wordDict[w] { return entry }
+        // 课文里点到的多是变形（stars / had / deeper），查原形
+        for candidate in WordStemmer.candidates(for: raw) {
+            if let entry = wordDict[candidate] { return entry }
+        }
+        return nil
     }
 
     // MARK: - 主题与今日计划
