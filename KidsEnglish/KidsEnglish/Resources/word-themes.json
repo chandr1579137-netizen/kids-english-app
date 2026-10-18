@@ -7,7 +7,14 @@
    "banana",
    "pear",
    "grape",
-   "fruit"
+   "fruit",
+   "strawberry",
+   "cherry",
+   "lemon",
+   "mango",
+   "peach",
+   "pineapple",
+   "watermelon"
   ]
  },
  {
@@ -43,7 +50,15 @@
    "horse",
    "puppy",
    "kitten",
-   "starfish"
+   "starfish",
+   "giraffe",
+   "goat",
+   "kangaroo",
+   "panda",
+   "penguin",
+   "sheep",
+   "spider",
+   "zebra"
   ]
  },
  {
@@ -60,7 +75,8 @@
    "pink",
    "orange",
    "purple",
-   "rainbow"
+   "rainbow",
+   "grey"
   ]
  },
  {
@@ -94,7 +110,9 @@
    "arm",
    "face",
    "hair",
-   "teeth"
+   "teeth",
+   "finger",
+   "knee"
   ]
  },
  {
@@ -108,7 +126,13 @@
    "cake",
    "vegetable",
    "mooncake",
-   "food"
+   "food",
+   "candy",
+   "cheese",
+   "cookie",
+   "juice",
+   "noodles",
+   "soup"
   ]
  },
  {
@@ -122,7 +146,11 @@
    "family",
    "friend",
    "girl",
-   "grandmother"
+   "grandmother",
+   "aunt",
+   "baby",
+   "grandfather",
+   "uncle"
   ]
  },
  {
@@ -139,7 +167,12 @@
    "wall",
    "gate",
    "floor",
-   "room"
+   "room",
+   "bed",
+   "cup",
+   "lamp",
+   "sofa",
+   "table"
   ]
  },
  {
@@ -149,7 +182,15 @@
    "car",
    "ship",
    "boat",
-   "spaceship"
+   "spaceship",
+   "bike",
+   "bus",
+   "helicopter",
+   "motorcycle",
+   "plane",
+   "rocket",
+   "taxi",
+   "truck"
   ]
  },
  {
@@ -188,7 +229,10 @@
    "map",
    "picture",
    "brush",
-   "letter"
+   "letter",
+   "crayon",
+   "eraser",
+   "ruler"
   ]
  },
  {
@@ -199,7 +243,12 @@
    "toy",
    "kite",
    "game",
-   "teddy"
+   "teddy",
+   "balloon",
+   "blocks",
+   "doll",
+   "puzzle",
+   "robot"
   ]
  },
  {
@@ -215,7 +264,9 @@
    "palace",
    "tower",
    "village",
-   "kingdom"
+   "kingdom",
+   "hospital",
+   "zoo"
   ]
  },
  {
