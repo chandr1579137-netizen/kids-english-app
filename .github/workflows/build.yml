@@ -210,10 +210,10 @@ jobs:
           shoot 16-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 7
           shoot 17-game-dictation     -uiTab 0 -uiConsolidate -uiGame 8
 
-          # 二级页：主题词表 / 绘本阅读器 / 儿歌 / 家长验证 / 设置
+          # 二级页：主题词表 / 收藏 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
           shoot 19-favorites    -uiTab 3 -uiProfile favorites
-shoot 20-songs        -uiTab 3 -uiProfile songs
+          shoot 20-songs        -uiTab 3 -uiProfile songs
           shoot 21-parent-gate  -uiTab 3 -uiProfile parent
           shoot 22-settings     -uiTab 3 -uiProfile settings
           ls -lh shots
