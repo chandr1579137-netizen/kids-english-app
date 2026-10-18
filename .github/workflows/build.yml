@@ -253,6 +253,11 @@ jobs:
           echo "app=$APP"
           xcrun simctl install "$DEVICE" "$APP"
 
+          # 首次冷启动要好几秒才渲染完，直接截图会拍到白屏窗口，先预热一次
+          xcrun simctl launch "$DEVICE" com.kidsenglish.app -uiTab 0 >/dev/null 2>&1 || true
+          sleep 8
+          xcrun simctl terminate "$DEVICE" com.kidsenglish.app 2>/dev/null || true
+
           mkdir -p shoot-ipad
           shoot() {
             name="$1"; shift

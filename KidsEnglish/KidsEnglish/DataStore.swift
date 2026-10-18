@@ -72,11 +72,12 @@ class DataStore {
 
         // 低龄白名单：words-*.json 是全龄语料（夹杂 is / genesis / 1000 这类词），
         // 可学词表只保留 word-themes.json 里策展过的词。主题空了就说明资源没打包好，
-        // 这时回退到全量，宁可多学也不要空屏。
-        let curated = Set(wordThemes.flatMap { $0.words.map { $0.lowercased() } })
-        words = curated.isEmpty
-            ? allWords
-            : allWords.filter { curated.contains($0.word.lowercased()) }
+        // 这时回退到全量，宁可多学也不要空屏。规则与测试见 ProgressKit.swift。
+        let allowed = ThemeWhitelist.allowedWords(
+            dictionary: allWords.map { $0.word },
+            themes: wordThemes.flatMap { $0.words }
+        )
+        words = allWords.filter { allowed.contains($0.word.lowercased()) }
     }
 
     private func load<T: Decodable>(_ name: String, as type: T.Type) -> T? {
@@ -343,11 +344,7 @@ class DataStore {
     // MARK: - 每日时长（只统计前台）
 
     private func dayString(_ date: Date = Date()) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "en_US_POSIX")
-        f.timeZone = TimeZone.current
-        f.dateFormat = "yyyy-MM-dd"
-        return f.string(from: date)
+        return DayKey.key(for: date, timeZone: .current)
     }
 
     func setForeground(_ active: Bool) {
@@ -440,8 +437,9 @@ class DataStore {
     /// App 长时间挂在前台跨过零点时，今日计数必须换到新的一天，
     /// 否则「每日限时」会把昨天的用量算到今天，一睁眼就被锁。
     func rolloverDayIfNeeded() {
-        let today = dayString()
-        guard today != todayKey else { return }
+        let now = Date()
+        guard DayKey.isNewDay(stored: todayKey, now: now, timeZone: .current) else { return }
+        let today = DayKey.key(for: now, timeZone: .current)
         todayKey = today
         studySecondsToday = defaults.double(forKey: "study_\(today)")
         bonusSecondsToday = defaults.double(forKey: "bonus_\(today)")
@@ -461,8 +459,8 @@ class DataStore {
         bonusSecondsToday = 0
         timeUp = false
 
-        for key in defaults.dictionaryRepresentation().keys
-        where key.hasPrefix("study_") || key.hasPrefix("bonus_") {
+        let staleKeys = ResetPlan.keysToPurge(from: Array(defaults.dictionaryRepresentation().keys))
+        for key in staleKeys {
             defaults.removeObject(forKey: key)
         }
         saveProgress()
@@ -470,24 +468,7 @@ class DataStore {
 
     // MARK: - 备份与恢复
 
-    /// 进度快照。换机或重装时靠一段 JSON 带走，不需要登录或云同步。
-    private struct ProgressSnapshot: Codable {
-        var version: Int
-        var exportedAt: String
-        var completedLessons: [String]
-        var learnedWords: [String]
-        var favoriteWords: [String]
-        var collectedCards: [String]
-        var quizBest: [String: Double]
-        var selectedThemeId: String?
-        var dailyNewWords: Int
-        var timeLimitMinutes: Int
-        var showTranslationDefault: Bool
-        var gameAnswered: Int
-        var gameCorrect: Int
-        var studyDates: [String]
-    }
-
+    /// 进度快照的数据结构见 ProgressKit.swift 的 ProgressSnapshot。
     func exportSnapshotJSON() -> String {
         let snapshot = ProgressSnapshot(
             version: 1,
@@ -505,18 +486,13 @@ class DataStore {
             gameCorrect: gameCorrect,
             studyDates: studyDates
         )
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        guard let data = try? encoder.encode(snapshot),
-              let text = String(data: data, encoding: .utf8) else { return "{}" }
-        return text
+        return ProgressCodec.encode(snapshot)
     }
 
     /// 返回给界面显示的结果文案；解析失败时不做任何修改。
     @discardableResult
     func importSnapshotJSON(_ text: String) -> String {
-        guard let data = text.data(using: .utf8),
-              let snapshot = try? JSONDecoder().decode(ProgressSnapshot.self, from: data) else {
+        guard let snapshot = ProgressCodec.decode(text) else {
             return "这段文字不是有效的进度备份"
         }
         completedLessons = Set(snapshot.completedLessons)
@@ -533,6 +509,6 @@ class DataStore {
         studyDates = snapshot.studyDates
         saveProgress()
         refreshTimeUp()
-        return "已恢复：\(snapshot.completedLessons.count) 篇课文、\(snapshot.learnedWords.count) 个单词"
+        return ProgressCodec.summary(snapshot)
     }
 }
