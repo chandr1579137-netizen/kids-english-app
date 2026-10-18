@@ -35,6 +35,6 @@ struct CoverImage: View {
             .fill(LinearGradient(
                 colors: [.orange.opacity(0.7), .pink.opacity(0.7)],
                 startPoint: .topLeading, endPoint: .bottomTrailing))
-            .overlay(Text(fallbackText).font(.largeTitle))
+            .overlay(Text(fallbackText).kidFont(34))
     }
 }

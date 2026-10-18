@@ -50,7 +50,7 @@ struct WordCardsView: View {
                 .frame(width: 38, height: 38)
 
             Text(theme.nameCn)
-                .font(.system(size: 17, weight: .bold))
+                .kidFont(17, .bold)
                 .foregroundStyle(Palette.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
@@ -60,11 +60,11 @@ struct WordCardsView: View {
             // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
             HStack(spacing: 3) {
                 Text("\(progress.done)/\(progress.total)")
-                    .font(.system(size: 15, weight: .bold))
+                    .kidFont(15, .bold)
                     .foregroundStyle(isComplete ? Func.positiveDeep : Func.accentVivid)
                 if isComplete {
                     Image(systemName: "checkmark")
-                        .font(.system(size: 13, weight: .black))
+                        .kidFont(13, .black)
                         .foregroundStyle(Func.positiveDeep)
                 }
             }
@@ -124,10 +124,10 @@ struct ThemeWordsView: View {
                 .clipShape(RoundedRectangle(cornerRadius: Radius.thumb))
             VStack(alignment: .leading, spacing: 4) {
                 Text(entry.word)
-                    .font(.system(size: 22, weight: .bold))
+                    .kidFont(22, .bold)
                     .foregroundStyle(Func.infoDeep)
                 Text(entry.meaningCn ?? "")
-                    .font(.system(size: 16, weight: .semibold))
+                    .kidFont(16, .semibold)
                     .foregroundStyle(Func.accentDeep)   // 16pt 属小字，需 ≥4.5:1
             }
             Spacer()
@@ -137,7 +137,7 @@ struct ThemeWordsView: View {
                 }
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
-                    .font(.system(size: 24, weight: .semibold))
+                    .kidFont(24, .semibold)
                     .foregroundStyle(Palette.inkOnColor)
                     .frame(width: 54, height: 54)
                     .background(Func.accent, in: Circle())

@@ -304,11 +304,11 @@ struct AppButton: View {
             HStack(spacing: 8) {
                 if let icon {
                     Image(systemName: icon)
-                        .font(.system(size: tier.iconSize, weight: .bold))
+                        .kidFont(tier.iconSize, .bold)
                         .symbolRenderingMode(.monochrome)
                 }
                 Text(title)
-                    .font(.system(size: tier.fontSize, weight: .heavy))
+                    .kidFont(tier.fontSize, .heavy)
             }
             .foregroundStyle(tier.foreground)
             .frame(maxWidth: .infinity)
@@ -473,9 +473,9 @@ struct SubPageHeader: View {
             Button(action: onBack) {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.left")
-                        .font(.system(size: 17, weight: .bold))
+                        .kidFont(17, .bold)
                     Text(backTitle)
-                        .font(.system(size: 17, weight: .semibold))
+                        .kidFont(17, .semibold)
                 }
                 .foregroundStyle(Func.infoDeep)
                 .frame(height: 40)
@@ -509,4 +509,62 @@ func themeIconName(for themeId: String) -> String {
     case "adjectives": return "theme-sparkles"
     default: return "theme-dots"
     }
+}
+
+
+// MARK: - 字号：跟随「设置 · 显示与亮度 · 文字大小」，但有上限
+//
+// 全站原本是 .font(.system(size:)) 硬编码字号，系统放大字号完全不生效。
+// 现在统一走 kidFont(...)：基础字号不变，按 Dynamic Type 档位等比例放大，
+// 最多 1.35 倍 —— 再大，糖果卡片的圆角、两列网格、底栏高度都会挤坏。
+// 目标用户是 4–6 岁，宁可放大有限，也不能让按钮错位。
+
+enum KidTextScale {
+    /// 上限：约等于系统「辅助功能 · 大」档位的放大率
+    static let maximum: CGFloat = 1.35
+
+    static func factor(for size: DynamicTypeSize) -> CGFloat {
+        let raw: CGFloat
+        switch size {
+        case .xSmall: raw = 0.88
+        case .small: raw = 0.94
+        case .medium: raw = 0.97
+        case .large: raw = 1.00
+        case .xLarge: raw = 1.06
+        case .xxLarge: raw = 1.12
+        case .xxxLarge: raw = 1.20
+        case .accessibility1: raw = 1.28
+        default: raw = maximum
+        }
+        return min(maximum, raw)
+    }
+}
+
+private struct KidFontModifier: ViewModifier {
+    let size: CGFloat
+    let weight: Font.Weight
+    let design: Font.Design
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    func body(content: Content) -> some View {
+        let scaled = size * KidTextScale.factor(for: dynamicTypeSize)
+        return content.font(.system(size: scaled, weight: weight, design: design))
+    }
+}
+
+extension View {
+    /// 替代 `.font(.system(size:weight:design:))`：基础字号不变，但跟随系统文字大小。
+    func kidFont(_ size: CGFloat,
+                 _ weight: Font.Weight = .regular,
+                 design: Font.Design = .default) -> some View {
+        modifier(KidFontModifier(size: size, weight: weight, design: design))
+    }
+}
+
+// MARK: - 版心宽度（iPad）
+
+enum KidLayout {
+    /// iPad 上内容列的最大宽度。iPhone（≈390pt）不会触发。
+    /// 直接全屏铺开时两列卡片会长到 500pt、课文行长超过 120 字符，反而更难读。
+    static let readableWidth: CGFloat = 720
 }

@@ -32,7 +32,7 @@ struct QuizView: View {
                     ProgressView(value: Double(index), total: Double(lesson.quiz.count))
                         .padding()
                     Text("第 \(index + 1) / \(lesson.quiz.count) 题")
-                        .font(.headline)
+                        .kidFont(17, .semibold)
                         .foregroundColor(.secondary)
                     QuizItemView(
                         item: lesson.quiz[index],
@@ -48,7 +48,7 @@ struct QuizView: View {
                     )
                     if let c = currentCorrect {
                         Text(c ? "🎉 答对啦！" : "💪 再想想，下次加油！")
-                            .font(.title2.bold())
+                            .kidFont(22, .bold)
                             .foregroundColor(c ? .green : .orange)
                             .padding()
                     }
@@ -73,15 +73,15 @@ struct QuizResultView: View {
 
     var body: some View {
         VStack(spacing: 24) {
-            Text(passed ? "🎉" : "💪").font(.system(size: 100))
-            Text("\(score) 分").font(.system(size: 64).bold())
+            Text(passed ? "🎉" : "💪").kidFont(100)
+            Text("\(score) 分").kidFont(64, .bold)
             Text(passed ? "太棒了！下一课已解锁" : "差一点点，再学一次吧！")
-                .font(.title3)
+                .kidFont(20)
                 .foregroundColor(.secondary)
             Button(passed ? "继续闯关" : "知道了", action: onDone)
                 .buttonStyle(.borderedProminent)
                 .tint(.orange)
-                .font(.title3)
+                .kidFont(20)
         }
         .padding()
     }
@@ -98,7 +98,7 @@ struct QuizItemView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text(item.question)
-                .font(.title2.bold())
+                .kidFont(22, .bold)
                 .multilineTextAlignment(.center)
                 .padding()
 
@@ -142,10 +142,10 @@ struct ChoiceOptions: View {
                         // image 字段本意是 emoji；历史数据里混进过 "/assets/quiz/x.webp"
                         // 这类路径，直接 Text 会把整串路径画在选项上，这里只接受 emoji。
                         if let img = opt.image, !img.isEmpty, !img.hasPrefix("/") {
-                            Text(img).font(.largeTitle)
+                            Text(img).kidFont(34)
                         }
                         Text(opt.text ?? opt.value ?? "")
-                            .font(.title3)
+                            .kidFont(20)
                         Spacer()
                         if answered && opt.value == item.correctAnswer {
                             Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
@@ -184,7 +184,7 @@ struct OrderQuestion: View {
             // 已选
             HStack {
                 ForEach(Array(selected.enumerated()), id: \.offset) { _, w in
-                    Text(w).font(.title3.bold()).padding(8)
+                    Text(w).kidFont(20, .bold).padding(8)
                         .background(Color.blue.opacity(0.2)).cornerRadius(8)
                 }
             }
@@ -206,7 +206,7 @@ struct OrderQuestion: View {
 
             if answered, let correct = item.correctOrder {
                 Text("正确答案：" + correct.joined(separator: " "))
-                    .font(.body).foregroundColor(.secondary)
+                    .kidFont(17).foregroundColor(.secondary)
             }
 
             Button("↩️ 重来") {
@@ -237,7 +237,7 @@ struct BuilderQuestion: View {
     var body: some View {
         VStack(spacing: 16) {
             Text(selected.joined())
-                .font(.system(size: 40, weight: .bold))
+                .kidFont(40, .bold)
                 .frame(minHeight: 60)
                 .frame(maxWidth: .infinity)
                 .background(Color(.secondarySystemBackground))
@@ -255,7 +255,7 @@ struct BuilderQuestion: View {
 
             if answered {
                 Text("正确答案：\(item.correctAnswer ?? "")")
-                    .font(.body).foregroundColor(.secondary)
+                    .kidFont(17).foregroundColor(.secondary)
             }
 
             Button("↩️ 重来") {
@@ -284,7 +284,7 @@ struct FlowWords: View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 64))], spacing: 10) {
             ForEach(Array(words.enumerated()), id: \.offset) { _, w in
                 Button(w) { onTap(w) }
-                    .font(.title3.bold())
+                    .kidFont(20, .bold)
                     .padding(.vertical, 10)
                     .frame(minWidth: 64)
                     .background(Color.orange.opacity(0.2))

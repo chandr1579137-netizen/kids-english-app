@@ -87,7 +87,7 @@ struct ReadView: View {
                         selectedLevel = level
                     } label: {
                         Text("L\(level)")
-                            .font(.system(size: 19, weight: .heavy))
+                            .kidFont(19, .heavy)
                             // 选中 = 橙底白字；未选中 = 浅灰底深灰字（与参考图一致）
                             .foregroundStyle(isSelected ? .white
                                              : (hasLessons ? Palette.inkMuted : Palette.inkSubtle))
@@ -124,12 +124,12 @@ struct ReadView: View {
             // 英文标题是主信息（用户读的是英文），中文做副信息
             VStack(alignment: .leading, spacing: 2) {
                 Text(lesson.title)
-                    .font(.system(size: 20, weight: .bold))
+                    .kidFont(20, .bold)
                     .foregroundStyle(Palette.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                 Text(lesson.titleCn)
-                    .font(.system(size: 15, weight: .medium))
+                    .kidFont(15, .medium)
                     .foregroundStyle(Palette.inkMuted)
                     .lineLimit(1)
             }
@@ -142,7 +142,7 @@ struct ReadView: View {
                     .fill(isRead ? Func.positiveDeep : Color(red: 0.86, green: 0.86, blue: 0.87))
                     .frame(width: 32, height: 32)
                 Image(systemName: isRead ? "checkmark" : (isNext ? "play.fill" : "lock.fill"))
-                    .font(.system(size: isNext || isRead ? 15 : 13, weight: .black))
+                    .kidFont(isNext || isRead ? 15 : 13, .black)
                     .foregroundStyle(isRead ? .white : .white.opacity(0.95))
             }
             .accessibilityLabel(isRead ? "已读" : (isNext ? "可读" : "未解锁"))

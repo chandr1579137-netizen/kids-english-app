@@ -8,6 +8,20 @@ struct KidsEnglishApp: App {
         WindowGroup {
             ContentView()
                 .environment(store)
+                .modifier(UITextSizeOverride())
+        }
+    }
+}
+
+/// 只在截图时覆盖字号；正常运行必须跟随系统设置，
+/// 否则会把用户在「设置 · 文字大小」里调的值改回固定档。
+private struct UITextSizeOverride: ViewModifier {
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if LaunchOptions.largeText {
+            content.dynamicTypeSize(.accessibility2)
+        } else {
+            content
         }
     }
 }
@@ -75,6 +89,9 @@ enum LaunchOptions {
     /// `-uiLesson` 直接打开读短文的第一课
     static var forceLesson: Bool { args.contains("-uiLesson") }
 
+    /// `-uiLargeText` 用最大档文字截图，验证 Dynamic Type 下布局不塌
+    static var largeText: Bool { args.contains("-uiLargeText") }
+
     // MARK: 截图覆盖补充（每个页面一个参数，都是「直接渲染」而不是 push）
 
     /// `-uiTheme <id>` 单词卡直接打开某个主题的词表（如 fruits / animals）
@@ -109,7 +126,9 @@ struct ContentView: View {
             // 840–874pt 的 home indicator 区）。改成 VStack 后可用高度被
             // 真正切走，视口底边 = 底栏顶边。
             VStack(spacing: 0) {
+                // iPad：内容列限宽居中；iPhone 上 maxWidth(720) 大于屏宽，不生效。
                 content
+                    .frame(maxWidth: KidLayout.readableWidth)
                 KidTabBar(selection: $tab)
             }
 
@@ -183,11 +202,11 @@ struct KidTabBar: View {
                                 .fill(isSelected ? Func.accent : Color(red: 0.88, green: 0.88, blue: 0.89))
                                 .frame(width: 46, height: 46)
                             Image(systemName: isSelected ? item.selectedIcon : item.icon)
-                                .font(.system(size: 22, weight: .semibold))
+                                .kidFont(22, .semibold)
                                 .foregroundStyle(.white)
                         }
                         Text(item.title)
-                            .font(.system(size: 11, weight: .semibold))
+                            .kidFont(11, .semibold)
                             .foregroundStyle(isSelected ? Func.accent : Palette.inkMuted)
                     }
                     .frame(maxWidth: .infinity)
@@ -226,9 +245,9 @@ struct TimeUpOverlay: View {
         ZStack {
             Color.black.opacity(0.6).ignoresSafeArea()
             VStack(spacing: 20) {
-                Text("🌙").font(.system(size: 80))
+                Text("🌙").kidFont(80)
                 Text("今天学得够多啦！")
-                    .font(.title.bold())
+                    .kidFont(28, .bold)
                     .foregroundStyle(Palette.ink)
                 Text("休息一下，保护眼睛，明天再来玩吧")
                     .foregroundStyle(Palette.inkMuted)

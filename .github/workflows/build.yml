@@ -222,11 +222,59 @@ jobs:
           shoot 21-parent-gate  -uiTab 3 -uiProfile parent
           shoot 22-settings     -uiTab 3 -uiProfile settings
           shoot 23-parent-dash -uiTab 3 -uiProfile parent-dash
+
+          # 大字号：验证 Dynamic Type 下没有文字被裁/错位（-uiLargeText → accessibility2）
+          shoot 24-large-learn   -uiTab 0 -uiLargeText
+          shoot 25-large-cards   -uiTab 1 -uiLargeText
+          shoot 26-large-lesson  -uiTab 2 -uiLesson -uiLargeText
           ls -lh shots
+
+      - name: Capture iPad screenshots
+        run: |
+          set -e
+          echo "--- 可用 iPad 设备 ---"
+          xcrun simctl list devices available | grep -i ipad | head -5
+          DEVICE=$(xcrun simctl list devices available \
+            | grep -i ipad | head -1 | grep -oE '[0-9A-F-]{36}')
+          echo "device=$DEVICE"
+          test -n "$DEVICE"
+          xcrun simctl boot "$DEVICE" 2>/dev/null || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl spawn "$DEVICE" defaults write .GlobalPreferences AppleLanguages -array zh-Hans
+          xcrun simctl spawn "$DEVICE" defaults write .GlobalPreferences AppleLocale -string zh_CN
+          xcrun simctl shutdown "$DEVICE" 2>/dev/null || true
+          xcrun simctl boot "$DEVICE" 2>/dev/null || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl status_bar "$DEVICE" override \
+            --time "9:41" --batteryState charged --batteryLevel 100 \
+            --wifiBars 3 --cellularBars 4 2>/dev/null || true
+
+          APP=$(find build-sim/Build/Products/Debug-iphonesimulator -maxdepth 1 -name "*.app" | head -1)
+          echo "app=$APP"
+          xcrun simctl install "$DEVICE" "$APP"
+
+          mkdir -p shoot-ipad
+          shoot() {
+            name="$1"; shift
+            xcrun simctl terminate "$DEVICE" com.kidsenglish.app 2>/dev/null || true
+            sleep 1
+            xcrun simctl launch "$DEVICE" com.kidsenglish.app "$@" || echo "launch failed: $name"
+            sleep 3
+            xcrun simctl io "$DEVICE" screenshot "shoot-ipad/$name.png"
+          }
+          shoot ipad-01-learn   -uiTab 0
+          shoot ipad-02-cards   -uiTab 1
+          shoot ipad-03-read    -uiTab 2
+          shoot ipad-08-lesson  -uiTab 2 -uiLesson
+          shoot ipad-05-profile -uiTab 3
+          ls -lh shoot-ipad
 
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: KidsEnglish-screenshots
-          path: shots/
+          path: |
+            shots/
+            shoot-ipad/
+          if-no-files-found: warn

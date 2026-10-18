@@ -26,7 +26,7 @@ private struct SpeakerButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "speaker.wave.2.fill")
-                .font(.system(size: size * 0.45))
+                .kidFont(size * 0.45)
                 .foregroundColor(.white)
                 .frame(width: size, height: size)
                 .background(Circle().fill(Color.orange))
@@ -91,12 +91,12 @@ struct WordToImageGame: View {
     private var gameView: some View {
         VStack(spacing: 24) {
             Text("第 \(index + 1) / \(questions.count) 题  ·  得分 \(score)")
-                .font(.headline)
+                .kidFont(17, .semibold)
                 .foregroundColor(.secondary)
 
             HStack(spacing: 16) {
                 Text(questions[index].word)
-                    .font(.system(size: 64, weight: .bold))
+                    .kidFont(64, .bold)
                     .foregroundColor(.primary)
                 SpeakerButton(size: 76) { playWord(questions[index]) }
             }
@@ -137,13 +137,13 @@ struct WordToImageGame: View {
         VStack(spacing: 24) {
             Spacer()
             Text("🎉")
-                .font(.system(size: 90))
+                .kidFont(90)
             Text("得了 \(score) 分！")
-                .font(.system(size: 40, weight: .bold))
+                .kidFont(40, .bold)
             Button("再来一局") {
                 startNewGame()
             }
-            .font(.system(size: 28, weight: .bold))
+            .kidFont(28, .bold)
             .foregroundColor(.white)
             .padding(.horizontal, 48)
             .padding(.vertical, 18)
@@ -254,12 +254,12 @@ struct AudioToImageGame: View {
     private var gameView: some View {
         VStack(spacing: 24) {
             Text("第 \(index + 1) / \(questions.count) 题  ·  得分 \(score)")
-                .font(.headline)
+                .kidFont(17, .semibold)
                 .foregroundColor(.secondary)
 
             VStack(spacing: 12) {
                 Text("听一听，选出对应的图片 👂")
-                    .font(.system(size: 26, weight: .semibold))
+                    .kidFont(26, .semibold)
                 SpeakerButton(size: 110) { playWord(questions[index]) }
             }
 
@@ -299,13 +299,13 @@ struct AudioToImageGame: View {
         VStack(spacing: 24) {
             Spacer()
             Text("🎉")
-                .font(.system(size: 90))
+                .kidFont(90)
             Text("得了 \(score) 分！")
-                .font(.system(size: 40, weight: .bold))
+                .kidFont(40, .bold)
             Button("再来一局") {
                 startNewGame()
             }
-            .font(.system(size: 28, weight: .bold))
+            .kidFont(28, .bold)
             .foregroundColor(.white)
             .padding(.horizontal, 48)
             .padding(.vertical, 18)
@@ -423,7 +423,7 @@ struct MatchingGame: View {
     private var gameView: some View {
         VStack(spacing: 16) {
             Text("找到单词和图片的一对，消灭它们！ · 得分 \(score)")
-                .font(.headline)
+                .kidFont(17, .semibold)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
 
@@ -444,7 +444,7 @@ struct MatchingGame: View {
                                 WordIconView(word: card.word, size: 72)
                             } else {
                                 Text(card.word)
-                                    .font(.system(size: 24, weight: .bold))
+                                    .kidFont(24, .bold)
                                     .minimumScaleFactor(0.5)
                                     .lineLimit(1)
                             }
@@ -481,16 +481,16 @@ struct MatchingGame: View {
         VStack(spacing: 24) {
             Spacer()
             Text("🎉🎉🎉")
-                .font(.system(size: 90))
+                .kidFont(90)
             Text("全部消灭啦！")
-                .font(.system(size: 36, weight: .bold))
+                .kidFont(36, .bold)
             Text("得了 \(score) 分！")
-                .font(.system(size: 30))
+                .kidFont(30)
                 .foregroundColor(.secondary)
             Button("再来一局") {
                 startNewGame()
             }
-            .font(.system(size: 28, weight: .bold))
+            .kidFont(28, .bold)
             .foregroundColor(.white)
             .padding(.horizontal, 48)
             .padding(.vertical, 18)
@@ -609,14 +609,14 @@ struct WordToAudioGame: View {
     private var gameView: some View {
         VStack(spacing: 24) {
             Text("第 \(index + 1) / \(questions.count) 题  ·  得分 \(score)")
-                .font(.headline)
+                .kidFont(17, .semibold)
                 .foregroundColor(.secondary)
 
             VStack(spacing: 8) {
                 Text(questions[index].word)
-                    .font(.system(size: 64, weight: .bold))
+                    .kidFont(64, .bold)
                 Text("点喇叭听一听，选出正确的发音 🔊")
-                    .font(.system(size: 22))
+                    .kidFont(22)
                     .foregroundColor(.secondary)
             }
 
@@ -628,20 +628,20 @@ struct WordToAudioGame: View {
                     } label: {
                         HStack(spacing: 16) {
                             Image(systemName: "speaker.wave.2.fill")
-                                .font(.system(size: 34))
+                                .kidFont(34)
                                 .foregroundColor(.white)
                                 .frame(width: 64, height: 64)
                                 .background(Circle().fill(state == .correct ? Color.green : Color.orange))
                             Text("发音 \(i + 1)")
-                                .font(.system(size: 26, weight: .semibold))
+                                .kidFont(26, .semibold)
                             Spacer()
                             if state == .correct {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 34))
+                                    .kidFont(34)
                                     .foregroundColor(.green)
                             } else if state == .wrong {
                                 Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 34))
+                                    .kidFont(34)
                                     .foregroundColor(.red)
                             }
                         }
@@ -669,13 +669,13 @@ struct WordToAudioGame: View {
         VStack(spacing: 24) {
             Spacer()
             Text("🎉")
-                .font(.system(size: 90))
+                .kidFont(90)
             Text("得了 \(score) 分！")
-                .font(.system(size: 40, weight: .bold))
+                .kidFont(40, .bold)
             Button("再来一局") {
                 startNewGame()
             }
-            .font(.system(size: 28, weight: .bold))
+            .kidFont(28, .bold)
             .foregroundColor(.white)
             .padding(.horizontal, 48)
             .padding(.vertical, 18)
@@ -785,12 +785,12 @@ struct ImageToWordGame: View {
     private var gameView: some View {
         VStack(spacing: 16) {
             Text("第 \(index + 1) / \(questions.count) 题  ·  得分 \(score)")
-                .font(.headline)
+                .kidFont(17, .semibold)
                 .foregroundColor(.secondary)
 
             VStack(spacing: 8) {
                 Text("这张图是哪个单词？🖼️")
-                    .font(.system(size: 24, weight: .semibold))
+                    .kidFont(24, .semibold)
                 WordIconView(word: questions[index].word, size: 130)
                     .padding(10)
                     .background(
@@ -808,15 +808,15 @@ struct ImageToWordGame: View {
                     } label: {
                         HStack {
                             Text(options[i].word)
-                                .font(.system(size: 26, weight: .bold))
+                                .kidFont(26, .bold)
                             Spacer()
                             if state == .correct {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 26))
+                                    .kidFont(26)
                                     .foregroundColor(.green)
                             } else if state == .wrong {
                                 Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 26))
+                                    .kidFont(26)
                                     .foregroundColor(.red)
                             }
                         }
@@ -846,13 +846,13 @@ struct ImageToWordGame: View {
         VStack(spacing: 24) {
             Spacer()
             Text("🎉")
-                .font(.system(size: 90))
+                .kidFont(90)
             Text("得了 \(score) 分！")
-                .font(.system(size: 40, weight: .bold))
+                .kidFont(40, .bold)
             Button("再来一局") {
                 startNewGame()
             }
-            .font(.system(size: 28, weight: .bold))
+            .kidFont(28, .bold)
             .foregroundColor(.white)
             .padding(.horizontal, 48)
             .padding(.vertical, 18)

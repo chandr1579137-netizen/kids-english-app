@@ -29,27 +29,27 @@ struct ProfileView: View {
                 Circle()
                     .fill(Palette.surface)
                     .frame(width: 88, height: 88)
-                Text("🧒").font(.system(size: 52))
+                Text("🧒").kidFont(52)
             }
             .overlay(Circle().strokeBorder(.white.opacity(0.85), lineWidth: 3))
 
             VStack(alignment: .leading, spacing: 7) {
                 Text("小宝贝")
-                    .font(.system(size: 30, weight: .heavy))
+                    .kidFont(30, .heavy)
                     .foregroundStyle(.white)
 
                 HStack(spacing: 6) {
                     Image(systemName: "calendar")
-                        .font(.system(size: 15, weight: .semibold))
+                        .kidFont(15, .semibold)
                     Text("已学习 \(store.studyDayCount) 天")
-                        .font(.system(size: 16, weight: .semibold))
+                        .kidFont(16, .semibold)
                 }
                 .foregroundStyle(.white.opacity(0.96))
 
                 HStack(spacing: 6) {
-                    Text("🔥").font(.system(size: 15))
+                    Text("🔥").kidFont(15)
                     Text("连续打卡 \(store.streakDays) 天")
-                        .font(.system(size: 16, weight: .semibold))
+                        .kidFont(16, .semibold)
                 }
                 .foregroundStyle(.white.opacity(0.96))
             }
@@ -68,10 +68,10 @@ struct ProfileView: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 6) {
                 Image(systemName: "chart.bar.fill")
-                    .font(.system(size: 16, weight: .bold))
+                    .kidFont(16, .bold)
                     .foregroundStyle(Func.accentDeep)
                 Text("学习报告")
-                    .font(.system(size: 22, weight: .heavy))
+                    .kidFont(22, .heavy)
                     .foregroundStyle(Palette.ink)
             }
 
@@ -94,15 +94,15 @@ struct ProfileView: View {
     private func metric(icon: String, color: Color, value: String, label: String) -> some View {
         VStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 23, weight: .bold))
+                .kidFont(23, .bold)
                 .foregroundStyle(color)
             Text(value)
-                .font(.system(size: 38, weight: .heavy))
+                .kidFont(38, .heavy)
                 .foregroundStyle(color)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
             Text(label)
-                .font(.system(size: 14, weight: .medium))
+                .kidFont(14, .medium)
                 .foregroundStyle(Palette.inkMuted)
         }
         .frame(maxWidth: .infinity)
@@ -159,29 +159,29 @@ struct ProfileView: View {
                             trailingIcon: String? = nil) -> some View {
         HStack(spacing: 14) {
             Image(systemName: icon)
-                .font(.system(size: 19, weight: .semibold))
+                .kidFont(19, .semibold)
                 .foregroundStyle(Palette.ink)
                 .frame(width: 24)
 
             Text(title)
-                .font(.system(size: 19, weight: .bold))
+                .kidFont(19, .bold)
                 .foregroundStyle(Palette.ink)
 
             Spacer(minLength: 8)
 
             if let value {
                 Text(value)
-                    .font(.system(size: 16, weight: .medium))
+                    .kidFont(16, .medium)
                     .foregroundStyle(Palette.inkMuted)
             }
 
             if let trailingIcon {
                 Image(systemName: trailingIcon)
-                    .font(.system(size: 17, weight: .semibold))
+                    .kidFont(17, .semibold)
                     .foregroundStyle(Palette.inkSubtle)
             } else {
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 16, weight: .bold))
+                    .kidFont(16, .bold)
                     .foregroundStyle(Palette.inkSubtle)
             }
         }
@@ -214,7 +214,7 @@ struct SettingsDetailView: View {
 
                 VStack(alignment: .leading, spacing: 14) {
                     Text("每日限时")
-                        .font(.system(size: 18, weight: .heavy))
+                        .kidFont(18, .heavy)
                         .foregroundStyle(Palette.ink)
                     HStack(spacing: 8) {
                         ForEach([0, 10, 20, 30], id: \.self) { minutes in
@@ -224,7 +224,7 @@ struct SettingsDetailView: View {
                                 store.saveProgress()
                             } label: {
                                 Text(minutes == 0 ? "不限" : "\(minutes) 分")
-                                    .font(.system(size: 15, weight: .bold))
+                                    .kidFont(15, .bold)
                                     .foregroundStyle(isSelected ? onFill(Func.accent) : Palette.inkMuted)
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 44)
@@ -244,14 +244,14 @@ struct SettingsDetailView: View {
 
                 HStack {
                     Text("每天新学词数")
-                        .font(.system(size: 17, weight: .semibold))
+                        .kidFont(17, .semibold)
                         .foregroundStyle(Palette.ink)
                     Spacer()
                     Stepper("\(store.dailyNewWords) 个", value: Binding(
                         get: { store.dailyNewWords },
                         set: { store.dailyNewWords = $0; store.saveProgress() }
                     ), in: 5...30, step: 5)
-                    .font(.system(size: 16, weight: .semibold))
+                    .kidFont(16, .semibold)
                     .foregroundStyle(Palette.inkMuted)
                 }
                 .padding(16)
@@ -260,13 +260,13 @@ struct SettingsDetailView: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("关于")
-                        .font(.system(size: 18, weight: .heavy))
+                        .kidFont(18, .heavy)
                         .foregroundStyle(Palette.ink)
                     Text("英语小伙伴 KidsEnglish · \(appVersion)")
-                        .font(.system(size: 14, weight: .semibold))
+                        .kidFont(14, .semibold)
                         .foregroundStyle(Palette.ink)
                     Text("课文与音频来自开源项目 magic-english-buddy（CC BY-NC-SA 4.0），仅限家庭内部学习使用。")
-                        .font(.system(size: 13, weight: .medium))
+                        .kidFont(13, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(3)
                         .fixedSize(horizontal: false, vertical: true)
@@ -320,7 +320,7 @@ struct FavoritesView: View {
 
                 if words.isEmpty && cards.isEmpty {
                     Text("还没有收藏。在课文里点一个单词，再点「收藏」，它就会出现在这里。")
-                        .font(.system(size: 15, weight: .medium))
+                        .kidFont(15, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(3)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -332,7 +332,7 @@ struct FavoritesView: View {
                 if !words.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("收藏的单词")
-                            .font(.system(size: 18, weight: .heavy))
+                            .kidFont(18, .heavy)
                             .foregroundStyle(Palette.ink)
                             .padding(.horizontal)
                         LazyVStack(spacing: 10) {
@@ -347,7 +347,7 @@ struct FavoritesView: View {
                 if !cards.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("收集到的卡片")
-                            .font(.system(size: 18, weight: .heavy))
+                            .kidFont(18, .heavy)
                             .foregroundStyle(Palette.ink)
                             .padding(.horizontal)
                         LazyVGrid(
@@ -356,7 +356,7 @@ struct FavoritesView: View {
                         ) {
                             ForEach(cards, id: \.self) { card in
                                 Text(card)
-                                    .font(.system(size: 15, weight: .bold))
+                                    .kidFont(15, .bold)
                                     .foregroundStyle(Palette.ink)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.7)
@@ -385,10 +385,10 @@ struct FavoritesView: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(entry.word)
-                    .font(.system(size: 20, weight: .bold))
+                    .kidFont(20, .bold)
                     .foregroundStyle(Palette.ink)
                 Text(entry.meaningCn ?? "")
-                    .font(.system(size: 15, weight: .medium))
+                    .kidFont(15, .medium)
                     .foregroundStyle(Palette.inkMuted)
             }
 
@@ -400,7 +400,7 @@ struct FavoritesView: View {
                 }
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
-                    .font(.system(size: 18, weight: .semibold))
+                    .kidFont(18, .semibold)
                     .foregroundStyle(Palette.inkOnColor)
                     .frame(width: 44, height: 44)
                     .background(Func.accent, in: Circle())

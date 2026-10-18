@@ -42,27 +42,27 @@ struct ParentUnlockView: View {
                         Circle()
                             .fill(Func.accent.opacity(0.16))
                             .frame(width: 96, height: 96)
-                        Text("🔒").font(.system(size: 44))
+                        Text("🔒").kidFont(44)
                     }
 
                     Text("家长验证")
-                        .font(.system(size: 28, weight: .heavy))
+                        .kidFont(28, .heavy)
                         .foregroundStyle(Palette.ink)
 
                     Text("请回答下面的数学题进入家长区\n（防止小朋友误入）")
-                        .font(.system(size: 15, weight: .medium))
+                        .kidFont(15, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .multilineTextAlignment(.center)
                         .lineSpacing(3)
 
                     Text("\(a) + \(b) = ?")
-                        .font(.system(size: 44, weight: .heavy))
+                        .kidFont(44, .heavy)
                         .foregroundStyle(Palette.ink)
                         .padding(.top, 2)
 
                     TextField("答案", text: $answer)
                         .keyboardType(.numberPad)
-                        .font(.system(size: 28, weight: .bold))
+                        .kidFont(28, .bold)
                         .multilineTextAlignment(.center)
                         .foregroundStyle(Palette.ink)
                         .frame(width: 170, height: 56)
@@ -75,7 +75,7 @@ struct ParentUnlockView: View {
 
                     if wrong {
                         Text("不对哦，再算算")
-                            .font(.system(size: 15, weight: .semibold))
+                            .kidFont(15, .semibold)
                             .foregroundStyle(Func.negativeDeep)
                     }
 
@@ -132,7 +132,7 @@ struct ParentDashboardView: View {
                 card("每日限时") {
                     HStack {
                         Text("每天最多学")
-                            .font(.system(size: 17, weight: .semibold))
+                            .kidFont(17, .semibold)
                             .foregroundStyle(Palette.ink)
                         Spacer()
                         Picker("每天最多学", selection: Binding(
@@ -157,9 +157,9 @@ struct ParentDashboardView: View {
                         } label: {
                             HStack(spacing: 6) {
                                 Image(systemName: "lock.open.fill")
-                                    .font(.system(size: 15, weight: .bold))
+                                    .kidFont(15, .bold)
                                 Text("解除今日锁定")
-                                    .font(.system(size: 16, weight: .bold))
+                                    .kidFont(16, .bold)
                             }
                             .foregroundStyle(Func.infoDeep)
                             .frame(maxWidth: .infinity)
@@ -177,7 +177,7 @@ struct ParentDashboardView: View {
                         set: { store.showTranslationDefault = $0; store.saveProgress() }
                     )) {
                         Text("课文默认显示中文翻译")
-                            .font(.system(size: 17, weight: .semibold))
+                            .kidFont(17, .semibold)
                             .foregroundStyle(Palette.ink)
                     }
                     .tint(Func.accent)
@@ -215,14 +215,14 @@ struct ParentDashboardView: View {
                     .buttonStyle(PressableStyle())
 
                     Text("换机或重装前先导出这段文本；恢复会覆盖当前进度。")
-                        .font(.system(size: 13, weight: .medium))
+                        .kidFont(13, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(2)
                 }
 
                 card("关于") {
                     Text("内容来源：magic-english-buddy（GitHub 开源，CC BY-NC-SA 4.0）\n仅限家庭内部学习使用")
-                        .font(.system(size: 13, weight: .medium))
+                        .kidFont(13, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(3)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -248,10 +248,10 @@ struct ParentDashboardView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 12) {
                 Text("把之前「导出学习进度」得到的文本粘贴到这里")
-                    .font(.system(size: 14, weight: .medium))
+                    .kidFont(14, .medium)
                     .foregroundStyle(Palette.inkMuted)
                 TextEditor(text: $importText)
-                    .font(.system(size: 12, design: .monospaced))
+                    .kidFont(12, design: .monospaced)
                     .scrollContentBackground(.hidden)
                     .padding(8)
                     .frame(maxHeight: .infinity)
@@ -263,7 +263,7 @@ struct ParentDashboardView: View {
                     }
                 if let importMessage {
                     Text(importMessage)
-                        .font(.system(size: 14, weight: .semibold))
+                        .kidFont(14, .semibold)
                         .foregroundStyle(importMessage.hasPrefix("已恢复")
                                          ? Func.positiveDeep : Func.negativeDeep)
                 }
@@ -296,9 +296,9 @@ struct ParentDashboardView: View {
                               tint: Color, background: Color) -> some View {
         HStack(spacing: 6) {
             Image(systemName: icon)
-                .font(.system(size: 15, weight: .bold))
+                .kidFont(15, .bold)
             Text(title)
-                .font(.system(size: 16, weight: .bold))
+                .kidFont(16, .bold)
         }
         .foregroundStyle(tint)
         .frame(maxWidth: .infinity)
@@ -312,7 +312,7 @@ struct ParentDashboardView: View {
                                      @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.system(size: 18, weight: .heavy))                .foregroundStyle(Palette.ink)
+                .kidFont(18, .heavy)                .foregroundStyle(Palette.ink)
             content()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -324,11 +324,11 @@ struct ParentDashboardView: View {
     private func statRow(_ title: String, _ value: String) -> some View {
         HStack {
             Text(title)
-                .font(.system(size: 16, weight: .medium))
+                .kidFont(16, .medium)
                 .foregroundStyle(Palette.ink)
             Spacer()
             Text(value)
-                .font(.system(size: 16, weight: .bold))
+                .kidFont(16, .bold)
                 .foregroundStyle(Func.infoDeep)
         }
     }

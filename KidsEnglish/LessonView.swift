@@ -32,11 +32,11 @@ struct LessonView: View {
                 // 英文是主信息（孩子读的是英文），中文做副信息
                 VStack(spacing: 4) {
                     Text(lesson.title)
-                        .font(.system(size: 28, weight: .heavy))
+                        .kidFont(28, .heavy)
                         .foregroundStyle(Palette.ink)
                         .multilineTextAlignment(.center)
                     Text(lesson.titleCn)
-                        .font(.system(size: 17, weight: .medium))
+                        .kidFont(17, .medium)
                         .foregroundStyle(Palette.inkMuted)
                 }
                 .padding(.horizontal)
@@ -114,9 +114,9 @@ struct LessonView: View {
             } label: {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.left")
-                        .font(.system(size: 17, weight: .bold))
+                        .kidFont(17, .bold)
                     Text("返回")
-                        .font(.system(size: 17, weight: .semibold))
+                        .kidFont(17, .semibold)
                 }
                 .foregroundStyle(Func.infoDeep)
                 .frame(height: 44)
@@ -126,7 +126,7 @@ struct LessonView: View {
             Spacer()
 
             Text(lesson.titleCn)
-                .font(.system(size: 17, weight: .bold))
+                .kidFont(17, .bold)
                 .foregroundStyle(Palette.ink)
                 .lineLimit(1)
 
@@ -137,7 +137,7 @@ struct LessonView: View {
                 showTranslation.toggle()
             } label: {
                 Text(showTranslation ? "中文开" : "中文关")
-                    .font(.system(size: 14, weight: .bold))
+                    .kidFont(14, .bold)
                     .foregroundStyle(showTranslation ? onFill(Func.accent) : Palette.inkMuted)
                     .padding(.horizontal, 12)
                     .frame(height: 32)
@@ -226,7 +226,7 @@ struct ParagraphCard: View {
 
             if showTranslation {
                 Text(para.translation)
-                    .font(.system(size: 16, weight: .medium))
+                    .kidFont(16, .medium)
                     .foregroundStyle(Palette.inkMuted)
             }
 
@@ -270,9 +270,9 @@ struct ParagraphCard: View {
         Button(action: action) {
             HStack(spacing: 6) {
                 Image(systemName: icon)
-                    .font(.system(size: 13, weight: .bold))
+                    .kidFont(13, .bold)
                 Text(title)
-                    .font(.system(size: 15, weight: .bold))
+                    .kidFont(15, .bold)
             }
             .foregroundStyle(fg)
             .padding(.horizontal, 14)

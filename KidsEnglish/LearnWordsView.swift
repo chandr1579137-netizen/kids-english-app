@@ -62,7 +62,7 @@ struct LearnWordsView: View {
                 // 选词书
                 VStack(alignment: .leading, spacing: 14) {
                     Text("选单词本")
-                        .font(.system(size: 28, weight: .heavy))
+                        .kidFont(28, .heavy)
                         .foregroundStyle(Palette.ink)
                         .padding(.horizontal)
                     // 参考图：4 张卡一行排开，无横向滚动
@@ -88,9 +88,9 @@ struct LearnWordsView: View {
                     } label: {
                         HStack(spacing: 10) {
                             Text("开始学习")
-                                .font(.system(size: 36, weight: .heavy))
+                                .kidFont(36, .heavy)
                             Image(systemName: "play.fill")
-                                .font(.system(size: 28, weight: .black))
+                                .kidFont(28, .black)
                         }
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
@@ -104,9 +104,9 @@ struct LearnWordsView: View {
                     } label: {
                         HStack(spacing: 8) {
                             Text("巩固练习 · 9 种玩法")
-                                .font(.system(size: 26, weight: .heavy))
+                                .kidFont(26, .heavy)
                             Image(systemName: "gamecontroller.fill")
-                                .font(.system(size: 23, weight: .bold))
+                                .kidFont(23, .bold)
                         }
                         .foregroundStyle(Func.infoDeep)
                         .frame(maxWidth: .infinity)
@@ -132,16 +132,16 @@ struct LearnWordsView: View {
         HStack(alignment: .center, spacing: 2) {
             VStack(alignment: .leading, spacing: 4) {
                 Text("今日计划")
-                    .font(.system(size: 21, weight: .semibold))
+                    .kidFont(21, .semibold)
                     .foregroundStyle(.white.opacity(0.96))
                 Text("Day \(dayNumber)")
-                    .font(.system(size: 48, weight: .heavy))
+                    .kidFont(48, .heavy)
                     .foregroundStyle(.white)
                 Text("新学 \(todayWords.count) 个词")
-                    .font(.system(size: 24, weight: .bold))
+                    .kidFont(24, .bold)
                     .foregroundStyle(.white)
                 Text("已学 \(store.learnedWords.count) / \(store.words.count)")
-                    .font(.system(size: 18, weight: .semibold))
+                    .kidFont(18, .semibold)
                     .foregroundStyle(.white)
             }
             Spacer(minLength: 0)
@@ -201,12 +201,12 @@ struct LearnWordsView: View {
                 .frame(width: 54, height: 54)
             Spacer(minLength: 0)
             Text(title)
-                .font(.system(size: 16, weight: .bold))
+                .kidFont(16, .bold)
                 .foregroundStyle(.white)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
             Text(subtitle)
-                .font(.system(size: 14, weight: .semibold))
+                .kidFont(14, .semibold)
                 .foregroundStyle(.white.opacity(0.92))
         }
         .padding(.vertical, 12)
@@ -225,27 +225,27 @@ struct LearnWordsView: View {
     private var planPreviewCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("学习安排")
-                .font(.system(size: 20, weight: .heavy))
+                .kidFont(20, .heavy)
                 .foregroundStyle(Palette.ink)
             let days = Array(store.planDays().prefix(3))
             if days.isEmpty {
                 Text("全部学完啦，太棒了！🎉")
-                    .font(.system(size: 17, weight: .medium))
+                    .kidFont(17, .medium)
                     .foregroundStyle(Palette.inkMuted)
             } else {
                 ForEach(days.indices, id: \.self) { i in
                     HStack {
                         Text("Day\(i + 1)")
-                            .font(.system(size: 17, weight: .bold))
+                            .kidFont(17, .bold)
                             .foregroundStyle(i == 0 ? Func.accent : Palette.ink)
                             .frame(width: 70, alignment: .leading)
                         Text(days[i].prefix(3).map { $0.word }.joined(separator: " · "))
-                            .font(.system(size: 15, weight: .medium))
+                            .kidFont(15, .medium)
                             .foregroundStyle(Palette.inkMuted)
                             .lineLimit(1)
                         Spacer()
                         Text("\(days[i].count)词")
-                            .font(.system(size: 13, weight: .bold))
+                            .kidFont(13, .bold)
                             .foregroundStyle(i == 0 ? Palette.inkOnColor : Palette.inkMuted)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
@@ -286,7 +286,7 @@ struct LearnWordsView: View {
 
     private var emptyStudyCard: some View {
         Text("今天没有新单词啦，换一本词书或明天再来吧！😊")
-            .font(.system(size: 18, weight: .medium))
+            .kidFont(18, .medium)
             .foregroundStyle(Palette.inkMuted)
             .multilineTextAlignment(.center)
             .padding()
@@ -301,7 +301,7 @@ struct LearnWordsView: View {
                 showStudy = false
             } label: {
                 Image(systemName: "chevron.left")
-                    .font(.system(size: 17, weight: .bold))
+                    .kidFont(17, .bold)
                     .foregroundStyle(Palette.inkMuted)
                     .frame(width: 28, height: 44)
             }
@@ -309,7 +309,7 @@ struct LearnWordsView: View {
             .accessibilityLabel("返回")
 
             Text("背单词 · 第 \(cardIndex + 1) 个")
-                .font(.system(size: 27, weight: .heavy))
+                .kidFont(27, .heavy)
                 .foregroundStyle(Palette.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
@@ -320,7 +320,7 @@ struct LearnWordsView: View {
                 playBest()
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
-                    .font(.system(size: 24, weight: .semibold))
+                    .kidFont(24, .semibold)
                     .foregroundStyle(Func.infoDeep)
                     .frame(width: 44, height: 44)
             }
@@ -344,7 +344,7 @@ struct LearnWordsView: View {
             .frame(height: 9)
 
             Text("学习进度 \(cardIndex + 1)/\(todayWords.count)")
-                .font(.system(size: 15, weight: .bold))
+                .kidFont(15, .bold)
                 .foregroundStyle(Func.accentVivid)
         }
         .padding(.horizontal, 20)
@@ -377,15 +377,15 @@ struct LearnWordsView: View {
             }
 
             Text(entry.word)
-                .font(.system(size: 54, weight: .heavy))
+                .kidFont(54, .heavy)
                 .foregroundStyle(Func.infoDeep)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
             Text(entry.phonetic ?? "")
-                .font(.system(size: 21, weight: .medium))
+                .kidFont(21, .medium)
                 .foregroundStyle(Palette.inkMuted)
             Text(entry.meaningCn ?? "")
-                .font(.system(size: 42, weight: .heavy))
+                .kidFont(42, .heavy)
                 .foregroundStyle(Func.accentBright)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
@@ -446,9 +446,9 @@ struct LearnWordsView: View {
         Button(action: action) {
             HStack(spacing: 7) {
                 Image(systemName: icon)
-                    .font(.system(size: 17, weight: .bold))
+                    .kidFont(17, .bold)
                 Text(title)
-                    .font(.system(size: 20, weight: .heavy))
+                    .kidFont(20, .heavy)
             }
             .foregroundStyle(fg)
             .padding(.horizontal, 22)
@@ -469,13 +469,13 @@ struct LearnWordsView: View {
                     // 参考图：「← 上一个」箭头在前，「下一个 →」箭头在后
                     if leadingIcon {
                         Image(systemName: icon)
-                            .font(.system(size: 13, weight: .bold))
+                            .kidFont(13, .bold)
                     }
                     Text(title)
-                        .font(.system(size: 17, weight: .heavy))
+                        .kidFont(17, .heavy)
                     if !leadingIcon {
                         Image(systemName: icon)
-                            .font(.system(size: 13, weight: .bold))
+                            .kidFont(13, .bold)
                     }
                 }
                 .foregroundStyle(enabled ? fg : fg.opacity(0.4))
@@ -495,12 +495,12 @@ struct LearnWordsView: View {
     private var celebrationView: some View {
         VStack(spacing: 22) {
             Text("🎉")
-                .font(.system(size: 90))
+                .kidFont(90)
             Text("今天学完啦！")
-                .font(.system(size: 30, weight: .heavy))
+                .kidFont(30, .heavy)
                 .foregroundStyle(Palette.ink)
             Text("你学会了 \(learnedToday.count) 个新单词")
-                .font(.system(size: 17, weight: .medium))
+                .kidFont(17, .medium)
                 .foregroundStyle(Palette.inkMuted)
             VStack(spacing: 12) {
                 AppButton(title: "去巩固", icon: "gamecontroller.fill", tier: .primary) {

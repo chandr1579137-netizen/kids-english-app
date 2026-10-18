@@ -35,7 +35,7 @@ struct WordIconView: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(Color(.systemGray6))
             Text(String(word.prefix(1)).uppercased())
-                .font(.system(size: size * 0.45, weight: .bold))
+                .kidFont(size * 0.45, .bold)
                 .foregroundColor(.accentColor)
         }
     }

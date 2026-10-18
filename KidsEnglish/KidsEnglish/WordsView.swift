@@ -14,27 +14,27 @@ struct WordDetailView: View {
                 // 首字母灰块对孩子没有任何信息量。
                 if store.iconURL(forWord: entry.word) == nil,
                    let emoji = entry.emoji, !emoji.isEmpty {
-                    Text(emoji).font(.system(size: 96))
+                    Text(emoji).kidFont(96)
                 } else {
                     WordIconView(word: entry.word, size: 120)
                 }
-                Text(entry.word).font(.system(size: 44, weight: .bold))
+                Text(entry.word).kidFont(44, .bold)
                 if let p = entry.phonetic {
-                    Text(p).font(.title3).foregroundColor(.secondary)
+                    Text(p).kidFont(20).foregroundColor(.secondary)
                 }
                 HStack {
                     if let pos = entry.partOfSpeech {
                         Text(pos).padding(6).background(Color.blue.opacity(0.15)).cornerRadius(8)
                     }
                     if let cn = entry.meaningCn {
-                        Text(cn).font(.title3.bold())
+                        Text(cn).kidFont(20, .bold)
                     }
                 }
                 if let exs = entry.examples, !exs.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("例句").font(.headline)
+                        Text("例句").kidFont(17, .semibold)
                         ForEach(Array(exs.enumerated()), id: \.offset) { _, ex in
-                            Text("• \(ex)").font(.body).foregroundColor(.secondary)
+                            Text("• \(ex)").kidFont(17).foregroundColor(.secondary)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)

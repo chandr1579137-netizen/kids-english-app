@@ -50,18 +50,18 @@ struct SongsView: View {
                         .fill(Func.accent.opacity(0.18))
                         .frame(width: 48, height: 48)
                     Image(systemName: "music.note")
-                        .font(.system(size: 20, weight: .bold))
+                        .kidFont(20, .bold)
                         .foregroundStyle(Func.accentDeep)
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(song.title)
-                        .font(.system(size: 18, weight: .bold))
+                        .kidFont(18, .bold)
                         .foregroundStyle(Palette.ink)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                     Text(song.titleCn)
-                        .font(.system(size: 14, weight: .medium))
+                        .kidFont(14, .medium)
                         .foregroundStyle(Palette.inkMuted)
                 }
 
@@ -71,7 +71,7 @@ struct SongsView: View {
                     togglePlay(song)
                 } label: {
                     Image(systemName: playingSong == song.id ? "pause.fill" : "play.fill")
-                        .font(.system(size: 17, weight: .black))
+                        .kidFont(17, .black)
                         .foregroundStyle(.white)
                         .frame(width: 44, height: 44)
                         .background(Func.accent, in: Circle())
@@ -91,10 +91,10 @@ struct SongsView: View {
                     ForEach(Array(song.lines.enumerated()), id: \.offset) { _, line in
                         VStack(alignment: .leading, spacing: 2) {
                             Text(line.en)
-                                .font(.system(size: 17, weight: .semibold))
+                                .kidFont(17, .semibold)
                                 .foregroundStyle(Palette.ink)
                             Text(line.cn)
-                                .font(.system(size: 14, weight: .medium))
+                                .kidFont(14, .medium)
                                 .foregroundStyle(Palette.inkMuted)
                         }
                     }
