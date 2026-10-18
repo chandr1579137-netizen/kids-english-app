@@ -18,23 +18,23 @@ struct AudioToWordGame: View {
                 gameOverView
             } else if let current = quiz[safe: index] {
                 Text("听一听，是哪个单词？")
-                    .kidFont(34)
+                    .kidFont(34, maxScale: 1.15)
                 Button {
                     playCurrent()
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
-                        .kidFont(60)
+                        .kidFont(60, maxScale: 1.15)
                         .foregroundStyle(.white)
                         .frame(width: 130, height: 130)
                         .background(Circle().fill(Color.blue))
                 }
                 Text("\(index + 1) / \(quiz.count)")
-                    .kidFont(17, .semibold)
+                    .kidFont(17, .semibold, maxScale: 1.15)
                     .foregroundStyle(.secondary)
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(options, id: \.word) { opt in
                         Button(opt.word) { answer(opt) }
-                            .kidFont(28)
+                            .kidFont(28, maxScale: 1.15)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, minHeight: 70)
                             .background(RoundedRectangle(cornerRadius: 18).fill(optionColor(opt)))
@@ -51,9 +51,9 @@ struct AudioToWordGame: View {
     private var gameOverView: some View {
         VStack(spacing: 20) {
             Text("🎉 得分：\(score) / \(quiz.count)")
-                .kidFont(34)
+                .kidFont(34, maxScale: 1.15)
             Button("再来一局") { start() }
-                .kidFont(28)
+                .kidFont(28, maxScale: 1.15)
                 .padding(.horizontal, 40).padding(.vertical, 16)
                 .background(RoundedRectangle(cornerRadius: 20).fill(Color.blue))
                 .foregroundStyle(.white)
@@ -116,23 +116,23 @@ struct AudioToMeaningGame: View {
                 gameOverView
             } else if let current = quiz[safe: index] {
                 Text("听一听，是什么意思？")
-                    .kidFont(34)
+                    .kidFont(34, maxScale: 1.15)
                 Button {
                     playCurrent()
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
-                        .kidFont(60)
+                        .kidFont(60, maxScale: 1.15)
                         .foregroundStyle(.white)
                         .frame(width: 130, height: 130)
                         .background(Circle().fill(Color.blue))
                 }
                 Text("\(index + 1) / \(quiz.count)")
-                    .kidFont(17, .semibold)
+                    .kidFont(17, .semibold, maxScale: 1.15)
                     .foregroundStyle(.secondary)
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(options, id: \.word) { opt in
                         Button(opt.meaningCn ?? "") { answer(opt) }
-                            .kidFont(22)
+                            .kidFont(22, maxScale: 1.15)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, minHeight: 70)
                             .background(RoundedRectangle(cornerRadius: 18).fill(optionColor(opt)))
@@ -149,9 +149,9 @@ struct AudioToMeaningGame: View {
     private var gameOverView: some View {
         VStack(spacing: 20) {
             Text("🎉 得分：\(score) / \(quiz.count)")
-                .kidFont(34)
+                .kidFont(34, maxScale: 1.15)
             Button("再来一局") { start() }
-                .kidFont(28)
+                .kidFont(28, maxScale: 1.15)
                 .padding(.horizontal, 40).padding(.vertical, 16)
                 .background(RoundedRectangle(cornerRadius: 20).fill(Color.blue))
                 .foregroundStyle(.white)
@@ -215,27 +215,27 @@ struct WordToMeaningGame: View {
                 gameOverView
             } else if let current = quiz[safe: index] {
                 Text(current.word)
-                    .kidFont(64, .bold)
+                    .kidFont(64, .bold, maxScale: 1.15)
                 Button {
                     if let url = store.bestAudioURL(forWord: current.word) {
                         player.play(url: url)
                     }
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
-                        .kidFont(36)
+                        .kidFont(36, maxScale: 1.15)
                         .foregroundStyle(.white)
                         .frame(width: 80, height: 80)
                         .background(Circle().fill(Color.blue))
                 }
                 Text("是什么意思？")
-                    .kidFont(28)
+                    .kidFont(28, maxScale: 1.15)
                 Text("\(index + 1) / \(quiz.count)")
-                    .kidFont(17, .semibold)
+                    .kidFont(17, .semibold, maxScale: 1.15)
                     .foregroundStyle(.secondary)
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(options, id: \.word) { opt in
                         Button(opt.meaningCn ?? "") { answer(opt) }
-                            .kidFont(22)
+                            .kidFont(22, maxScale: 1.15)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, minHeight: 70)
                             .background(RoundedRectangle(cornerRadius: 18).fill(optionColor(opt)))
@@ -252,9 +252,9 @@ struct WordToMeaningGame: View {
     private var gameOverView: some View {
         VStack(spacing: 20) {
             Text("🎉 得分：\(score) / \(quiz.count)")
-                .kidFont(34)
+                .kidFont(34, maxScale: 1.15)
             Button("再来一局") { start() }
-                .kidFont(28)
+                .kidFont(28, maxScale: 1.15)
                 .padding(.horizontal, 40).padding(.vertical, 16)
                 .background(RoundedRectangle(cornerRadius: 20).fill(Color.blue))
                 .foregroundStyle(.white)
@@ -313,14 +313,14 @@ struct DictationGame: View {
                 gameOverView
             } else if let current = quiz[safe: index] {
                 Text("听一听，写出单词")
-                    .kidFont(28, .heavy)
+                    .kidFont(28, .heavy, maxScale: 1.15)
                     .foregroundStyle(Palette.ink)
 
                 Button {
                     playCurrent()
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
-                        .kidFont(52, .bold)
+                        .kidFont(52, .bold, maxScale: 1.15)
                         .foregroundStyle(.white)
                         .frame(width: 120, height: 120)
                         .background(Circle().fill(Func.infoDeep))
@@ -328,11 +328,11 @@ struct DictationGame: View {
                 .buttonStyle(PressableStyle())
 
                 Text("点喇叭可以再听 · \(index + 1)/\(quiz.count)")
-                    .kidFont(15, .medium)
+                    .kidFont(15, .medium, maxScale: 1.15)
                     .foregroundStyle(Palette.inkMuted)
 
                 TextField("输入英文单词", text: $input)
-                    .kidFont(28, .bold)
+                    .kidFont(28, .bold, maxScale: 1.15)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Palette.ink)
                     .autocapitalization(.none)
@@ -355,7 +355,7 @@ struct DictationGame: View {
                         check()
                     } label: {
                         Text("检查")
-                            .kidFont(22, .heavy)
+                            .kidFont(22, .heavy, maxScale: 1.15)
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
@@ -366,14 +366,14 @@ struct DictationGame: View {
                     .padding(.horizontal, 20)
                 case .correct:
                     Text("✅ 对啦！")
-                        .kidFont(28, .heavy)
+                        .kidFont(28, .heavy, maxScale: 1.15)
                         .foregroundStyle(Func.positiveDeep)
                 case .wrong:
                     Text("正确答案是：\(current.word)")
-                        .kidFont(22, .bold)
+                        .kidFont(22, .bold, maxScale: 1.15)
                         .foregroundStyle(Func.negativeDeep)
                     Text("再听听、记住它 💪")
-                        .kidFont(15, .medium)
+                        .kidFont(15, .medium, maxScale: 1.15)
                         .foregroundStyle(Palette.inkMuted)
                 }
             }
@@ -386,9 +386,9 @@ struct DictationGame: View {
     private var gameOverView: some View {
         VStack(spacing: 20) {
             Text("🎉 得分：\(score) / \(quiz.count)")
-                .kidFont(34)
+                .kidFont(34, maxScale: 1.15)
             Button("再来一局") { start() }
-                .kidFont(28)
+                .kidFont(28, maxScale: 1.15)
                 .padding(.horizontal, 40).padding(.vertical, 16)
                 .background(RoundedRectangle(cornerRadius: 20).fill(Color.blue))
                 .foregroundStyle(.white)
@@ -541,7 +541,7 @@ struct ConsolidationView: View {
             dismiss()
         } label: {
             Image(systemName: "chevron.left")
-                .kidFont(17, .bold)
+                .kidFont(17, .bold, maxScale: 1.15)
                 .foregroundStyle(Palette.ink)
                 .frame(width: 38, height: 38)
                 .background(Palette.surface.opacity(0.92), in: Circle())
@@ -557,7 +557,7 @@ struct ConsolidationView: View {
             VStack(spacing: 18) {
                 if words.isEmpty {
                     Text("先去背单词吧")
-                        .kidFont(22, .heavy)
+                        .kidFont(22, .heavy, maxScale: 1.15)
                         .foregroundStyle(Palette.ink)
                         .padding(40)
                         .whiteCard()
@@ -566,9 +566,9 @@ struct ConsolidationView: View {
                     // 参考图：标题带 🎮，副标题灰色
                     HStack(spacing: 8) {
                         Text("选个玩法吧！")
-                            .kidFont(40, .heavy)
+                            .kidFont(40, .heavy, maxScale: 1.15)
                             .foregroundStyle(Palette.ink)
-                        Text("🎮").kidFont(34)
+                        Text("🎮").kidFont(34, maxScale: 1.15)
                     }
                     .padding(.top, 8)
                     Text("9 种游戏，越玩越熟")
@@ -613,14 +613,14 @@ struct ConsolidationView: View {
             .padding(.top, 8)
 
             Text(m.rawValue)
-                .kidFont(18, .bold)
+                .kidFont(18, .bold, maxScale: 1.15)
                 .foregroundStyle(fg)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
 
             // 难度用胶囊标签，不用「●●○」这类符号串
             Text(m.difficulty)
-                .kidFont(12, .bold)
+                .kidFont(12, .bold, maxScale: 1.15)
                 // 胶囊是白底，文字必须用深色。深色卡（听写训练）的 fg 是白色，
                 // 沿用 fg 就成了白底白字，难度标签直接消失。
                 .foregroundStyle(Palette.ink)
@@ -647,9 +647,9 @@ struct ConsolidationView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "chevron.left")
-                            .kidFont(16, .bold)
+                            .kidFont(16, .bold, maxScale: 1.15)
                         Text("换游戏")
-                            .kidFont(17, .semibold)
+                            .kidFont(17, .semibold, maxScale: 1.15)
                     }
                     .foregroundStyle(Func.infoDeep)
                     .frame(height: 40)
@@ -659,7 +659,7 @@ struct ConsolidationView: View {
                 Spacer()
 
                 Text(m.rawValue)
-                    .kidFont(17, .bold)
+                    .kidFont(17, .bold, maxScale: 1.15)
                     .foregroundStyle(Palette.ink)
                 Spacer()
                 Color.clear.frame(width: 70, height: 1)

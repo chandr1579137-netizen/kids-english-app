@@ -92,6 +92,9 @@ enum LaunchOptions {
     /// `-uiLargeText` 用最大档文字截图，验证 Dynamic Type 下布局不塌
     static var largeText: Bool { args.contains("-uiLargeText") }
 
+    /// `-uiAlert <unknown|mic>` 直接弹出课文页的提示卡片（截图覆盖用）
+    static var alertDemo: String? { value(for: "-uiAlert") }
+
     // MARK: 截图覆盖补充（每个页面一个参数，都是「直接渲染」而不是 push）
 
     /// `-uiTheme <id>` 单词卡直接打开某个主题的词表（如 fruits / animals）

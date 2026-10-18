@@ -572,3 +572,55 @@ enum KidLayout {
     /// 直接全屏铺开时两列卡片会长到 500pt、课文行长超过 120 字符，反而更难读。
     static let readableWidth: CGFloat = 720
 }
+
+
+// MARK: - 面向孩子的提示卡片
+//
+// 系统 Alert 的按钮、字号、圆角完全由系统控制，和 App 的糖果风格不搭；
+// 而且全站字号封顶 1.35 后，系统弹窗在超大字号下会突然比全站大一圈。
+// 孩子看得到的提示统一用这个卡片；家长侧（清空进度确认）保留系统弹窗。
+struct KidAlert: View {
+    let emoji: String
+    let title: String
+    let message: String
+    let primaryTitle: String
+    let primaryAction: () -> Void
+    var secondaryTitle: String? = nil
+    var secondaryAction: (() -> Void)? = nil
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.45).ignoresSafeArea()
+                .onTapGesture { }
+
+            VStack(spacing: 14) {
+                Text(emoji).kidFont(52, maxScale: 1.1)
+
+                Text(title)
+                    .kidFont(24, .heavy)
+                    .foregroundStyle(Palette.ink)
+                    .multilineTextAlignment(.center)
+
+                Text(message)
+                    .kidFont(17, .medium)
+                    .foregroundStyle(Palette.inkMuted)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                VStack(spacing: 10) {
+                    AppButton(title: primaryTitle, tier: .primary, action: primaryAction)
+                    if let secondaryTitle, let secondaryAction {
+                        AppButton(title: secondaryTitle, tier: .secondary, action: secondaryAction)
+                    }
+                }
+                .padding(.top, 4)
+            }
+            .padding(24)
+            .frame(maxWidth: 320)
+            .background(Palette.surface,
+                        in: RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
+            .elevationRaised()
+            .padding(24)
+        }
+    }
+}

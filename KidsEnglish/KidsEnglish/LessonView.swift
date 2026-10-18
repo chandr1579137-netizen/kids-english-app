@@ -87,16 +87,34 @@ struct LessonView: View {
             WordDetailView(entry: entry)
                 .presentationDetents([.medium])
         }
-        .alert("这个词还没学到", isPresented: $showUnknownWordAlert) {
-            Button("知道啦") { }
-        } message: {
-            Text("「\(tappedRawWord)」还没收进来，可以问问爸爸妈妈")
+        // 孩子看得到的提示用 App 内卡片（系统 Alert 在超大字号下会脱离全站节奏）
+        .overlay {
+            ZStack {
+                if showUnknownWordAlert {
+                    KidAlert(emoji: "🤔",
+                             title: "这个词还没学到",
+                             message: "「\(tappedRawWord)」还没收进来，可以问问爸爸妈妈",
+                             primaryTitle: "知道啦",
+                             primaryAction: { showUnknownWordAlert = false })
+                }
+                if showMicDeniedAlert {
+                    KidAlert(emoji: "🎤",
+                             title: "需要麦克风权限",
+                             message: "跟读要用到麦克风，去「设置」里允许一下就好啦",
+                             primaryTitle: "去设置",
+                             primaryAction: {
+                                 showMicDeniedAlert = false
+                                 openSystemSettings()
+                             },
+                             secondaryTitle: "先不用",
+                             secondaryAction: { showMicDeniedAlert = false })
+                }
+            }
         }
-        .alert("需要麦克风权限", isPresented: $showMicDeniedAlert) {
-            Button("去设置") { openSystemSettings() }
-            Button("先不用", role: .cancel) { }
-        } message: {
-            Text("跟读要用到麦克风，去「设置」里允许一下就好啦")
+        .onAppear {
+            // 截图用：直接展示提示卡片
+            if LaunchOptions.alertDemo == "unknown" { showUnknownWordAlert = true }
+            if LaunchOptions.alertDemo == "mic" { showMicDeniedAlert = true }
         }
         .navigationDestination(isPresented: $showQuiz) {
             QuizView(lesson: lesson)

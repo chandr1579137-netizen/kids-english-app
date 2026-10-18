@@ -243,6 +243,9 @@ jobs:
           shoot 37-large-theme-words   -uiTab 1 -uiTheme fruits -uiLargeText
           shoot 38-large-settings      -uiTab 3 -uiProfile settings -uiLargeText
           shoot 39-large-favorites     -uiTab 3 -uiProfile favorites -uiLargeText
+          # 孩子看得到的提示卡片（系统 Alert 已替换成 App 内样式）
+          shoot 40-large-alert-unknown -uiTab 2 -uiLesson -uiAlert unknown -uiLargeText
+          shoot 41-large-alert-mic     -uiTab 2 -uiLesson -uiAlert mic -uiLargeText
           ls -lh shots
 
       - name: Capture iPad screenshots
@@ -290,6 +293,10 @@ jobs:
           shoot ipad-01-learn   -uiTab 0
           shoot ipad-02-cards   -uiTab 1
           shoot ipad-08-lesson  -uiTab 2 -uiLesson
+          # iPad × 大字号交叉：内容列 720pt + 1.35 倍字号
+          shoot ipad-large-01-learn  -uiTab 0 -uiLargeText
+          shoot ipad-large-02-cards  -uiTab 1 -uiLargeText
+          shoot ipad-large-08-lesson -uiTab 2 -uiLesson -uiLargeText
           ls -lh shoot-ipad
 
       - name: Upload screenshots
