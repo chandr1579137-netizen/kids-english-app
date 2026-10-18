@@ -150,6 +150,9 @@ struct ContentView: View {
                     ParentGateView()
                 case "favorites":
                     NavigationStack { FavoritesView() }
+                case "parent-dash":
+                    // 截图用：跳过数学题直接进家长仪表盘
+                    NavigationStack { ParentDashboardView() }
                 default:
                     NavigationStack { SettingsDetailView() }
                 }

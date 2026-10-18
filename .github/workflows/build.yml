@@ -221,6 +221,7 @@ jobs:
           shoot 20-songs        -uiTab 3 -uiProfile songs
           shoot 21-parent-gate  -uiTab 3 -uiProfile parent
           shoot 22-settings     -uiTab 3 -uiProfile settings
+          shoot 23-parent-dash -uiTab 3 -uiProfile parent-dash
           ls -lh shots
 
       - name: Upload screenshots
