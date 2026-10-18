@@ -228,6 +228,21 @@ jobs:
           shoot 24-large-learn   -uiTab 0 -uiLargeText
           shoot 25-large-cards   -uiTab 1 -uiLargeText
           shoot 26-large-lesson  -uiTab 2 -uiLesson -uiLargeText
+
+          # 大字号 × 元素最密的页面：游戏内页、学习判定、主题词表、设置
+          shoot 27-large-study        -uiTab 0 -uiStudy -uiLargeText
+          shoot 28-large-game-word2image    -uiTab 0 -uiConsolidate -uiGame 0 -uiLargeText
+          shoot 29-large-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 1 -uiLargeText
+          shoot 30-large-game-matching      -uiTab 0 -uiConsolidate -uiGame 2 -uiLargeText
+          shoot 31-large-game-word2audio    -uiTab 0 -uiConsolidate -uiGame 3 -uiLargeText
+          shoot 32-large-game-image2word    -uiTab 0 -uiConsolidate -uiGame 4 -uiLargeText
+          shoot 33-large-game-audio2word    -uiTab 0 -uiConsolidate -uiGame 5 -uiLargeText
+          shoot 34-large-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 6 -uiLargeText
+          shoot 35-large-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 7 -uiLargeText
+          shoot 36-large-game-dictation     -uiTab 0 -uiConsolidate -uiGame 8 -uiLargeText
+          shoot 37-large-theme-words   -uiTab 1 -uiTheme fruits -uiLargeText
+          shoot 38-large-settings      -uiTab 3 -uiProfile settings -uiLargeText
+          shoot 39-large-favorites     -uiTab 3 -uiProfile favorites -uiLargeText
           ls -lh shots
 
       - name: Capture iPad screenshots
