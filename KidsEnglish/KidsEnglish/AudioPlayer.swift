@@ -56,15 +56,6 @@ class AudioPlayer {
         }
     }
 
-    deinit {
-        if let interruptionObserver {
-            NotificationCenter.default.removeObserver(interruptionObserver)
-        }
-        if let routeObserver {
-            NotificationCenter.default.removeObserver(routeObserver)
-        }
-    }
-
     func play(url: URL, rate: Float = 1.0) {
         stop()
         let item = AVPlayerItem(url: url)
@@ -125,6 +116,12 @@ class AudioPlayer {
 
     deinit {
         if let o = timeObserver { player?.removeTimeObserver(o) }
+        if let interruptionObserver {
+            NotificationCenter.default.removeObserver(interruptionObserver)
+        }
+        if let routeObserver {
+            NotificationCenter.default.removeObserver(routeObserver)
+        }
     }
 }
 
