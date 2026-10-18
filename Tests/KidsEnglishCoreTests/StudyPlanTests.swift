@@ -48,9 +48,10 @@ final class StudyPlanTests: XCTestCase {
         XCTAssertEqual(days.count, 8)   // 75 个词 / 每天 10 个
         let firstDayThemes = Set(days[0].map(\.tier))
         XCTAssertEqual(firstDayThemes.count, 10, "第一天应该覆盖 10 个不同主题")
-        // 第二天补齐剩下的 5 个主题
+        // 第二天：补完第 0 波剩下的 5 个主题，再开始第 1 波的前 5 个主题
         let secondDayThemes = Set(days[1].map(\.tier))
-        XCTAssertTrue(secondDayThemes.isSubset(of: Set(5..<15)))
+        XCTAssertTrue(Set(10..<15).isSubset(of: secondDayThemes), "第二天应补完第 0 波")
+        XCTAssertEqual(secondDayThemes.count, 10)
     }
 
     func testChunkedSplitsEvenly() {
