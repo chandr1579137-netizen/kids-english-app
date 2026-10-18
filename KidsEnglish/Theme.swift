@@ -544,10 +544,13 @@ private struct KidFontModifier: ViewModifier {
     let size: CGFloat
     let weight: Font.Weight
     let design: Font.Design
+    /// 该处的放大上限：窄卡片里的标签不能跟到全局 1.35，否则 4 个字会被截成「身…」
+    let maxScale: CGFloat
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     func body(content: Content) -> some View {
-        let scaled = size * KidTextScale.factor(for: dynamicTypeSize)
+        let factor = min(maxScale, KidTextScale.factor(for: dynamicTypeSize))
+        let scaled = size * factor
         return content.font(.system(size: scaled, weight: weight, design: design))
     }
 }
@@ -556,8 +559,9 @@ extension View {
     /// 替代 `.font(.system(size:weight:design:))`：基础字号不变，但跟随系统文字大小。
     func kidFont(_ size: CGFloat,
                  _ weight: Font.Weight = .regular,
+                 maxScale: CGFloat = KidTextScale.maximum,
                  design: Font.Design = .default) -> some View {
-        modifier(KidFontModifier(size: size, weight: weight, design: design))
+        modifier(KidFontModifier(size: size, weight: weight, design: design, maxScale: maxScale))
     }
 }
 

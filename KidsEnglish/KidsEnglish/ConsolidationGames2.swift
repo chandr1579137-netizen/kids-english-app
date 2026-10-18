@@ -338,7 +338,9 @@ struct DictationGame: View {
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 64)
+                    // 用 minHeight 而不是 height：28pt 字号在大字号下会撑到 ~38pt，
+                    // 固定 64 会把「输入英文单词」的占位文字上下一齐切掉。
+                    .frame(minHeight: 64)
                     .background(Palette.surface,
                                 in: RoundedRectangle(cornerRadius: Radius.thumb, style: .continuous))
                     .overlay {

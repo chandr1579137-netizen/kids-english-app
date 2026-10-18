@@ -38,6 +38,17 @@ struct WordCardsView: View {
         }
     }
 
+    /// 卡片只有 ~170pt 宽，四个字的名字在大字号下会被截成「身…」。
+    /// 详情页仍用完整名字，只有网格卡用短名。
+    private func shortThemeName(_ name: String) -> String {
+        switch name {
+        case "身体部位": return "身体"
+        case "家居用品": return "家居"
+        case "交通工具": return "交通"
+        default: return name
+        }
+    }
+
     private func themeCard(_ theme: WordTheme) -> some View {
         let progress = store.themeProgress(themeId: theme.id)
         let isComplete = progress.total > 0 && progress.done >= progress.total
@@ -49,18 +60,19 @@ struct WordCardsView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 38, height: 38)
 
-            Text(theme.nameCn)
-                .kidFont(17, .bold)
+            Text(shortThemeName(theme.nameCn))
+                .kidFont(17, .bold, maxScale: 1.1)
                 .foregroundStyle(Palette.ink)
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.75)
+                .layoutPriority(1)
 
             Spacer(minLength: 2)
 
             // 勾只在「真的学完」时出现 —— 原来 6/6 和 12/67 都打勾，语义失效
             HStack(spacing: 3) {
                 Text("\(progress.done)/\(progress.total)")
-                    .kidFont(15, .bold)
+                    .kidFont(15, .bold, maxScale: 1.1)
                     .foregroundStyle(isComplete ? Func.positiveDeep : Func.accentVivid)
                 if isComplete {
                     Image(systemName: "checkmark")
