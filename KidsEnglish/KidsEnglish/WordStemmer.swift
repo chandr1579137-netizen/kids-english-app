@@ -84,6 +84,7 @@ enum WordStemmer {
             add(base)
             add(base + "e")
             add(base + "y")
+            if base.hasSuffix("i") { add(String(base.dropLast()) + "y") }
             if base.count > 2 {
                 let chars = Array(base)
                 if chars[chars.count - 1] == chars[chars.count - 2] {

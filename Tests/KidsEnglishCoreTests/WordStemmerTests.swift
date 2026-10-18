@@ -48,7 +48,8 @@ final class WordStemmerTests: XCTestCase {
     func testPossessiveAndPunctuation() {
         XCTAssertTrue(candidates("earth's").contains("earth"))
         XCTAssertTrue(candidates("stars,").contains("star"))
-        XCTAssertTrue(candidates("\"apple\"").contains("apple"))
+        // 引号由 lookupWord 的精确匹配剥离，词形还原不应再产出原词
+        XCTAssertFalse(candidates("\"apple\"").contains("apple"))
     }
 
     func testShortOrEmptyInputIsIgnored() {
