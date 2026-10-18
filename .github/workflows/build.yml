@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: macos-15
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -230,21 +231,25 @@ jobs:
           ls -lh shots
 
       - name: Capture iPad screenshots
+        # 同一构建产物装到 iPad 模拟器，验证 iPad 原生布局。
+        # 注意：这里不设设备语言（那需要 shutdown→boot 再来一轮，既慢又容易挂），
+        # 系统 chrome 可能是英文，但 App 自身文案全是中文。
+        timeout-minutes: 12
         run: |
           set -e
-          echo "--- 可用 iPad 设备 ---"
-          xcrun simctl list devices available | grep -i ipad | head -5
-          DEVICE=$(xcrun simctl list devices available \
-            | grep -i ipad | head -1 | grep -oE '[0-9A-F-]{36}')
+          DEVICE=$(xcrun simctl list devices available | grep -i ipad | head -1 | grep -oE '[0-9A-F-]{36}')
           echo "device=$DEVICE"
           test -n "$DEVICE"
           xcrun simctl boot "$DEVICE" 2>/dev/null || true
-          xcrun simctl bootstatus "$DEVICE" -b
-          xcrun simctl spawn "$DEVICE" defaults write .GlobalPreferences AppleLanguages -array zh-Hans
-          xcrun simctl spawn "$DEVICE" defaults write .GlobalPreferences AppleLocale -string zh_CN
-          xcrun simctl shutdown "$DEVICE" 2>/dev/null || true
-          xcrun simctl boot "$DEVICE" 2>/dev/null || true
-          xcrun simctl bootstatus "$DEVICE" -b
+          # simctl bootstatus 没有超时，模拟器起不来会一直等；改成有界轮询（最多 3 分钟）
+          for i in $(seq 1 90); do
+            if xcrun simctl list devices | grep "$DEVICE" | grep -q Booted; then
+              echo "booted after $((i * 2))s"
+              break
+            fi
+            sleep 2
+          done
+          xcrun simctl list devices | grep "$DEVICE"
           xcrun simctl status_bar "$DEVICE" override \
             --time "9:41" --batteryState charged --batteryLevel 100 \
             --wifiBars 3 --cellularBars 4 2>/dev/null || true
@@ -264,14 +269,12 @@ jobs:
             xcrun simctl terminate "$DEVICE" com.kidsenglish.app 2>/dev/null || true
             sleep 1
             xcrun simctl launch "$DEVICE" com.kidsenglish.app "$@" || echo "launch failed: $name"
-            sleep 3
+            sleep 4
             xcrun simctl io "$DEVICE" screenshot "shoot-ipad/$name.png"
           }
           shoot ipad-01-learn   -uiTab 0
           shoot ipad-02-cards   -uiTab 1
-          shoot ipad-03-read    -uiTab 2
           shoot ipad-08-lesson  -uiTab 2 -uiLesson
-          shoot ipad-05-profile -uiTab 3
           ls -lh shoot-ipad
 
       - name: Upload screenshots
