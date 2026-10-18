@@ -624,3 +624,68 @@ struct KidAlert: View {
         }
     }
 }
+
+
+// MARK: - 家长侧确认卡片
+//
+// 系统 confirmationDialog 的按钮/字号/圆角全由系统决定，超大字号下会脱离
+// 全站节奏，也和「清空进度」这种危险操作的视觉分量不匹配。
+// 孩子看得到的提示用 KidAlert；家长侧的确认用这个更克制的卡片。
+struct ConfirmCard: View {
+    let emoji: String
+    let title: String
+    let message: String
+    let confirmTitle: String
+    var destructive: Bool = false
+    let onConfirm: () -> Void
+    let onCancel: () -> Void
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.45).ignoresSafeArea()
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 10) {
+                    Text(emoji).kidFont(30, maxScale: 1.1)
+                    Text(title)
+                        .kidFont(20, .heavy)
+                        .foregroundStyle(Palette.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
+                Text(message)
+                    .kidFont(15, .medium)
+                    .foregroundStyle(Palette.inkMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                HStack(spacing: 10) {
+                    Button(action: onCancel) {
+                        Text("取消")
+                            .kidFont(17, .bold)
+                            .foregroundStyle(Palette.ink)
+                            .frame(maxWidth: .infinity)
+                            .frame(minHeight: 46)
+                            .background(Palette.canvas,
+                                        in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    }
+                    Button(action: onConfirm) {
+                        Text(confirmTitle)
+                            .kidFont(17, .bold)
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(minHeight: 46)
+                            .background(destructive ? Func.negativeDeep : Func.positiveDeep,
+                                        in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    }
+                }
+                .padding(.top, 6)
+            }
+            .padding(20)
+            .frame(maxWidth: 340)
+            .background(Palette.surface,
+                        in: RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
+            .elevationRaised()
+            .padding(24)
+        }
+    }
+}

@@ -226,26 +226,14 @@ class DataStore {
             pool = wordsForCurrentBook().filter { !learnedWords.contains($0.id) }
         } else {
             ensureThemeRank()
-            pool = words
-                .filter { !learnedWords.contains($0.id) }
-                .sorted { a, b in
-                    let ra = wordThemeRank[a.id] ?? (tier: 900, index: 0)
-                    let rb = wordThemeRank[b.id] ?? (tier: 900, index: 0)
-                    if ra.tier != rb.tier { return ra.tier < rb.tier }
-                    if ra.index != rb.index { return ra.index < rb.index }
-                    return (a.level ?? 1) < (b.level ?? 1)
-                }
+            let unlearned = words.filter { !learnedWords.contains($0.id) }
+            // 跨主题交错：第 0 波是每个主题的第一个词，避免大主题独占前 30 天
+            pool = StudyPlan.interleavedOrder(unlearned) { entry in
+                let r = wordThemeRank[entry.id] ?? (tier: 900, index: 0)
+                return StudyPlan.Rank(tier: r.tier, index: r.index)
+            } level: { $0.level ?? 1 }
         }
-        let size = max(1, dailyNewWords)
-        guard !pool.isEmpty else { return [] }
-        var days: [[WordEntry]] = []
-        var index = 0
-        while index < pool.count {
-            let end = min(index + size, pool.count)
-            days.append(Array(pool[index..<end]))
-            index = end
-        }
-        return days
+        return StudyPlan.chunked(pool, size: dailyNewWords)
     }
 
     /// 课文没有封面文件时，用课里最具体的那个词的 emoji。

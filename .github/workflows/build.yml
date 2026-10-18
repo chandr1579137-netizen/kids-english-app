@@ -246,6 +246,7 @@ jobs:
           # 孩子看得到的提示卡片（系统 Alert 已替换成 App 内样式）
           shoot 40-large-alert-unknown -uiTab 2 -uiLesson -uiAlert unknown -uiLargeText
           shoot 41-large-alert-mic     -uiTab 2 -uiLesson -uiAlert mic -uiLargeText
+          shoot 42-large-alert-clear   -uiTab 3 -uiProfile parent-dash -uiAlert clear -uiLargeText
           ls -lh shots
 
       - name: Capture iPad screenshots

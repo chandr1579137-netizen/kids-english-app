@@ -231,13 +231,23 @@ struct ParentDashboardView: View {
             .padding(.top, 4)
             .padding(.bottom, 12)
         }
-        .confirmationDialog("确定清除全部学习进度？",
-                            isPresented: $showResetConfirm,
-                            titleVisibility: .visible) {
-            Button("清除", role: .destructive) { store.resetAllProgress() }
-            Button("取消", role: .cancel) { }
-        } message: {
-            Text("已学单词、已读课文、收藏和游戏成绩都会清空，且不能撤销。")
+        .overlay {
+            if showResetConfirm {
+                ConfirmCard(emoji: "🗑️",
+                            title: "确定清除全部学习进度？",
+                            message: "已学单词、已读课文、收藏和游戏成绩都会清空，且不能撤销。",
+                            confirmTitle: "清除",
+                            destructive: true,
+                            onConfirm: {
+                                showResetConfirm = false
+                                store.resetAllProgress()
+                            },
+                            onCancel: { showResetConfirm = false })
+            }
+        }
+        .onAppear {
+            // 截图用：直接展示确认卡片
+            if LaunchOptions.alertDemo == "clear" { showResetConfirm = true }
         }
         .sheet(isPresented: $showImport) {
             importSheet

@@ -20,6 +20,7 @@
 		7F20D4997A75974D5C3D2791 = {isa = PBXBuildFile; fileRef = D8BAF9D88BB2B17DCC70E59B; };
 		A1B2C3D4E5F6071829304153 = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6071829304152; };
 		A1B2C3D4E5F6071829304155 = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6071829304154; };
+		A1B2C3D4E5F6071829304157 = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6071829304156; };
 		070AFAA7D7E57513E70815E3 = {isa = PBXBuildFile; fileRef = 6C3DB684E2DEBC104E8D0D1F; };
 		633DB7CD04294F428E6687E0 = {isa = PBXBuildFile; fileRef = F37AA6F242B16D8C286576EE; };
 		9E0C0982B526176C6B9C32E8 = {isa = PBXBuildFile; fileRef = 0A2A5D94999FB076E1DFC57A; };
@@ -67,6 +68,7 @@
 		D8BAF9D88BB2B17DCC70E59B = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordIconView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6071829304152 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordStemmer.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F6071829304154 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressKit.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6071829304156 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlan.swift; sourceTree = "<group>"; };
 		6C3DB684E2DEBC104E8D0D1F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnWordsView.swift; sourceTree = "<group>"; };
 		F37AA6F242B16D8C286576EE = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolidationGames1.swift; sourceTree = "<group>"; };
 		0A2A5D94999FB076E1DFC57A = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsolidationGames2.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				7F20D4997A75974D5C3D2791,
 				A1B2C3D4E5F6071829304153,
 				A1B2C3D4E5F6071829304155,
+				A1B2C3D4E5F6071829304157,
 				070AFAA7D7E57513E70815E3,
 				633DB7CD04294F428E6687E0,
 				9E0C0982B526176C6B9C32E8,
@@ -195,6 +198,7 @@
 				D8BAF9D88BB2B17DCC70E59B,
 				A1B2C3D4E5F6071829304152,
 				A1B2C3D4E5F6071829304154,
+				A1B2C3D4E5F6071829304156,
 				6C3DB684E2DEBC104E8D0D1F,
 				F37AA6F242B16D8C286576EE,
 				0A2A5D94999FB076E1DFC57A,
