@@ -18,7 +18,12 @@
    "kiwi",
    "coconut",
    "plum",
-   "blueberry"
+   "blueberry",
+   "cantaloupe",
+   "pomelo",
+   "lychee",
+   "avocado",
+   "tomato"
   ]
  },
  {
@@ -123,7 +128,14 @@
    "fifty",
    "eleven",
    "twelve",
-   "hundred"
+   "hundred",
+   "thirteen",
+   "fourteen",
+   "fifteen",
+   "sixteen",
+   "seventeen",
+   "eighteen",
+   "nineteen"
   ]
  },
  {
@@ -270,7 +282,12 @@
    "train",
    "tractor",
    "subway",
-   "ambulance"
+   "ambulance",
+   "fire engine",
+   "police car",
+   "van",
+   "scooter",
+   "sailboat"
   ]
  },
  {
@@ -330,7 +347,10 @@
    "glue",
    "scissors",
    "notebook",
-   "marker"
+   "marker",
+   "pencil case",
+   "paintbrush",
+   "stapler"
   ]
  },
  {
@@ -348,7 +368,13 @@
    "puzzle",
    "robot",
    "drum",
-   "bubbles"
+   "bubbles",
+   "yoyo",
+   "skateboard",
+   "tricycle",
+   "spinning top",
+   "marbles",
+   "whistle"
   ]
  },
  {
@@ -374,7 +400,12 @@
    "playground",
    "supermarket",
    "restaurant",
-   "museum"
+   "museum",
+   "market",
+   "station",
+   "airport",
+   "cinema",
+   "pool"
   ]
  },
  {

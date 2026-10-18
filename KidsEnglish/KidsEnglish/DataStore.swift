@@ -135,7 +135,10 @@ class DataStore {
 
     func iconURL(forWord word: String) -> URL? {
         ensureImageIndex()
-        return wordIndex[word.lowercased()]
+        let key = word.lowercased()
+        if let hit = wordIndex[key] { return hit }
+        // 多词词条（fire engine / pencil case）的文件名用下划线，避免空格
+        return wordIndex[key.replacingOccurrences(of: " ", with: "_")]
     }
 
     private func ensureImageIndex() {
