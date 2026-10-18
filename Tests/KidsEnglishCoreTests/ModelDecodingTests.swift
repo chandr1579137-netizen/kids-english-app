@@ -31,7 +31,7 @@ final class ModelDecodingTests: XCTestCase {
 
     func testWordsDecode() throws {
         let words = try allWords()
-        XCTAssertEqual(words.count, 1128, "词库总数变了，确认是有意改动")
+        XCTAssertEqual(words.count, 1228, "词库总数变了，确认是有意改动")
         XCTAssertEqual(Set(words.map { $0.word }).count, words.count, "存在重复词条")
         for word in words {
             XCTAssertFalse(word.word.isEmpty)
@@ -54,7 +54,7 @@ final class ModelDecodingTests: XCTestCase {
                               "\(word) 出现在多个主题里")
             }
         }
-        XCTAssertEqual(seen.count, 364, "低龄白名单应恰好 201 词")
+        XCTAssertEqual(seen.count, 464, "低龄白名单应恰好 201 词")
     }
 
     // MARK: - 课文
