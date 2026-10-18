@@ -37,6 +37,7 @@ enum WordStemmer {
         "swept": "sweep", "swung": "swing", "lay": "lie", "lain": "lie",
         "meant": "mean", "fought": "fight", "fed": "feed", "dug": "dig",
         "hung": "hang", "worst": "bad", "best": "good",
+
     ]
 
     /// 不规则复数

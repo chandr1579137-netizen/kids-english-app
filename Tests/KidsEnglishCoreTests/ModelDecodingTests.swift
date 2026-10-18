@@ -31,7 +31,7 @@ final class ModelDecodingTests: XCTestCase {
 
     func testWordsDecode() throws {
         let words = try allWords()
-        XCTAssertEqual(words.count, 1259, "词库总数变了，确认是有意改动")
+        XCTAssertEqual(words.count, 1264, "词库总数变了，确认是有意改动")
         XCTAssertEqual(Set(words.map { $0.word }).count, words.count, "存在重复词条")
         for word in words {
             XCTAssertFalse(word.word.isEmpty)
