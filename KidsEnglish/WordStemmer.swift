@@ -9,7 +9,7 @@ enum WordStemmer {
     static let irregular: [String: String] = [
         "was": "be", "were": "be", "been": "be", "being": "be", "is": "be", "are": "be", "am": "be",
         "had": "have", "has": "have", "having": "have",
-        "went": "go", "gone": "go", "went": "go",
+        "went": "go", "gone": "go",
         "said": "say", "says": "say",
         "made": "make", "came": "come", "found": "find", "flew": "fly", "flown": "fly",
         "saw": "see", "seen": "see", "took": "take", "taken": "take",
