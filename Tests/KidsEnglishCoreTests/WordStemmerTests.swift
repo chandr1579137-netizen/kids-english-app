@@ -15,6 +15,8 @@ final class WordStemmerTests: XCTestCase {
         XCTAssertTrue(candidates("found").contains("find"))
         XCTAssertTrue(candidates("became").contains("become"))
         XCTAssertTrue(candidates("flew").contains("fly"))
+        XCTAssertTrue(candidates("did").contains("do"))
+        XCTAssertTrue(candidates("forgot").contains("forget"))
     }
 
     func testIrregularPlurals() {

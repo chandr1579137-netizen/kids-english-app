@@ -1,6 +1,6 @@
 # 待生成词卡清单
 
-共 **99** 个词：词库里完全没有，需要新配图。
+共 **100** 个词：词库里完全没有，需要新配图。
 
 ## 生图规格
 
@@ -91,7 +91,7 @@
 | butter | 黄油 | butter.jpg |
 | chocolate | 巧克力 | chocolate.jpg |
 
-### 家人（7）
+### 家人（8）
 
 | 单词 | 中文 | 文件名 |
 |---|---|---|
@@ -102,6 +102,7 @@
 | daughter | 女儿 | daughter.jpg |
 | cousin | 表兄弟姐妹 | cousin.jpg |
 | parents | 父母 | parents.jpg |
+| boy | 男孩 | boy.jpg |
 
 ### 家居用品（11）
 
