@@ -64,7 +64,8 @@
    "jellyfish",
    "tortoise",
    "hare",
-   "scorpion"
+   "scorpion",
+   "bear"
   ]
  },
  {
@@ -166,7 +167,8 @@
    "king",
    "queen",
    "prince",
-   "princess"
+   "princess",
+   "son"
   ]
  },
  {
@@ -209,7 +211,8 @@
    "rocket",
    "taxi",
    "truck",
-   "engine"
+   "engine",
+   "train"
   ]
  },
  {
@@ -366,7 +369,10 @@
    "wait",
    "wake",
    "want",
-   "watch"
+   "watch",
+   "cry",
+   "paint",
+   "point"
   ]
  },
  {
@@ -440,7 +446,11 @@
    "silver",
    "smart",
    "smooth",
-   "young"
+   "young",
+   "light",
+   "sweet",
+   "sour",
+   "sharp"
   ]
  }
 ]
