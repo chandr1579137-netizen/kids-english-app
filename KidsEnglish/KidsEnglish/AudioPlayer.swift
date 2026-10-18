@@ -12,10 +12,57 @@ class AudioPlayer {
     var currentTime: Double = 0
     var duration: Double = 0
     var onTimeUpdate: ((Double) -> Void)?
+    /// 来电/闹钟等中断结束后是否需要恢复播放
+    private var interruptionObserver: NSObjectProtocol?
+    private var routeObserver: NSObjectProtocol?
 
     init() {
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
         try? AVAudioSession.sharedInstance().setActive(true)
+
+        // 中断（来电、闹钟、其他 App 抢音频）：开始时暂停，结束后按系统建议恢复，
+        // 否则孩子会以为「点了没反应」，其实播放器卡在中断状态里。
+        interruptionObserver = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.interruptionNotification, object: nil, queue: .main
+        ) { [weak self] note in
+            guard let self,
+                  let raw = note.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+                  let type = AVAudioSession.InterruptionType(rawValue: raw) else { return }
+            switch type {
+            case .began:
+                self.player?.pause()
+                self.isPlaying = false
+            case .ended:
+                let options = note.userInfo?[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
+                if AVAudioSession.InterruptionOptions(rawValue: options).contains(.shouldResume) {
+                    try? AVAudioSession.sharedInstance().setActive(true)
+                    self.player?.play()
+                    self.isPlaying = true
+                }
+            @unknown default:
+                break
+            }
+        }
+
+        // 拔耳机：继续外放会吓到孩子，直接暂停
+        routeObserver = NotificationCenter.default.addObserver(
+            forName: AVAudioSession.routeChangeNotification, object: nil, queue: .main
+        ) { [weak self] note in
+            guard let self,
+                  let raw = note.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt,
+                  AVAudioSession.RouteChangeReason(rawValue: raw) == .oldDeviceUnavailable else { return }
+            self.player?.pause()
+            self.isPlaying = false
+        }
+    }
+
+    deinit {
+        if let interruptionObserver {
+            NotificationCenter.default.removeObserver(interruptionObserver)
+        }
+        if let routeObserver {
+            NotificationCenter.default.removeObserver(routeObserver)
+        }
     }
 
     func play(url: URL, rate: Float = 1.0) {
@@ -89,6 +136,8 @@ class Recorder: NSObject, AVAudioRecorderDelegate {
     var isRecording = false
     var hasRecording = false
     var isPlayingBack = false
+    /// 麦克风权限被拒：界面据此提示「去设置」，而不是点了没反应
+    var permissionDenied = false
     private var fileURL: URL {
         FileManager.default.temporaryDirectory.appendingPathComponent("follow_read.m4a")
     }
@@ -99,6 +148,11 @@ class Recorder: NSObject, AVAudioRecorderDelegate {
 
     private func startRecording() {
         let session = AVAudioSession.sharedInstance()
+        if session.recordPermission == .denied {
+            permissionDenied = true
+            return
+        }
+        permissionDenied = false
         try? session.setCategory(.playAndRecord, mode: .default)
         try? session.setActive(true)
         let settings: [String: Any] = [

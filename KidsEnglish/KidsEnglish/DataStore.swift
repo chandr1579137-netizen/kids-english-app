@@ -191,8 +191,7 @@ class DataStore {
     /// 选了某一本词书时，按这本书自己的顺序。
     static let picturableThemeOrder = [
         "fruits", "animals", "colors", "numbers", "body", "family", "foods", "vehicles",
-        "home", "nature", "toys", "stationery", "places", "time", "actions", "adjectives",
-        "functions", "others"
+        "home", "nature", "toys", "stationery", "places", "actions", "adjectives"
     ]
 
     private var wordThemeRank: [String: (tier: Int, index: Int)] = [:]
@@ -427,4 +426,37 @@ class DataStore {
     func wrongWordsToday() -> [String] { [] }
 
     func studyMinutesToday() -> Int { Int(studySecondsToday / 60) }
+
+    // MARK: - 跨天与重置
+
+    /// App 长时间挂在前台跨过零点时，今日计数必须换到新的一天，
+    /// 否则「每日限时」会把昨天的用量算到今天，一睁眼就被锁。
+    func rolloverDayIfNeeded() {
+        let today = dayString()
+        guard today != todayKey else { return }
+        todayKey = today
+        studySecondsToday = defaults.double(forKey: "study_\(today)")
+        bonusSecondsToday = defaults.double(forKey: "bonus_\(today)")
+        timeUp = false
+        refreshTimeUp()
+    }
+
+    /// 清空全部学习进度（家长中心用）。保留每日限时的设置本身。
+    func resetAllProgress() {
+        completedLessons.removeAll()
+        learnedWords.removeAll()
+        favoriteWords.removeAll()
+        collectedCards.removeAll()
+        gameAnswered = 0
+        gameCorrect = 0
+        studySecondsToday = 0
+        bonusSecondsToday = 0
+        timeUp = false
+
+        for key in defaults.dictionaryRepresentation().keys
+        where key.hasPrefix("study_") || key.hasPrefix("bonus_") {
+            defaults.removeObject(forKey: key)
+        }
+        saveProgress()
+    }
 }

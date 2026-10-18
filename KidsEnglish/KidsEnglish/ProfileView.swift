@@ -119,6 +119,15 @@ struct ProfileView: View {
     private var settingsGroup: some View {
         VStack(spacing: 10) {
             NavigationLink {
+                FavoritesView()
+            } label: {
+                // 「学习报告」里的收藏数原本是个死数字：收藏入口藏在课文点词弹窗里，
+                // 却没有任何页面能看到到底收藏了什么
+                settingRow(icon: "star.fill", title: "我的收藏",
+                           value: "\(store.favoriteWords.count) 个")
+            }
+
+            NavigationLink {
                 SongsView()
             } label: {
                 settingRow(icon: "music.note", title: "英文儿歌")
@@ -278,5 +287,128 @@ struct SettingsDetailView: View {
         let short = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
         return "v\(short) (\(build))"
+    }
+}
+
+// MARK: - 我的收藏（收藏的单词 + 通关收集的卡片）
+
+struct FavoritesView: View {
+    @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
+    @State private var player = AudioPlayer()
+
+    private var words: [WordEntry] {
+        store.favoriteWords
+            .compactMap { store.wordDict[$0] }
+            .sorted { $0.word.lowercased() < $1.word.lowercased() }
+    }
+
+    private var cards: [String] { store.collectedCards.sorted() }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                SubPageHeader(onBack: { dismiss() })
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("我的收藏")
+                        .subPageTitleStyle()
+                    Text("单词 \(words.count) 个 · 卡片 \(cards.count) 张")
+                        .subPageSubtitleStyle()
+                }
+                .padding(.horizontal)
+
+                if words.isEmpty && cards.isEmpty {
+                    Text("还没有收藏。在课文里点一个单词，再点「收藏」，它就会出现在这里。")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(Palette.inkMuted)
+                        .lineSpacing(3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(16)
+                        .whiteCard()
+                        .padding(.horizontal)
+                }
+
+                if !words.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("收藏的单词")
+                            .font(.system(size: 18, weight: .heavy))
+                            .foregroundStyle(Palette.ink)
+                            .padding(.horizontal)
+                        LazyVStack(spacing: 10) {
+                            ForEach(words) { entry in
+                                wordRow(entry)
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+
+                if !cards.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("收集到的卡片")
+                            .font(.system(size: 18, weight: .heavy))
+                            .foregroundStyle(Palette.ink)
+                            .padding(.horizontal)
+                        LazyVGrid(
+                            columns: [GridItem(.adaptive(minimum: 96), spacing: 10)],
+                            spacing: 10
+                        ) {
+                            ForEach(cards, id: \.self) { card in
+                                Text(card)
+                                    .font(.system(size: 15, weight: .bold))
+                                    .foregroundStyle(Palette.ink)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 56)
+                                    .background(Palette.surface,
+                                                in: RoundedRectangle(cornerRadius: Radius.thumb,
+                                                                     style: .continuous))
+                                    .elevationGround()
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+            }
+            .padding(.top, 4)
+            .padding(.bottom, 12)
+        }
+        .creamBackground()
+        .toolbar(.hidden, for: .navigationBar)
+    }
+
+    private func wordRow(_ entry: WordEntry) -> some View {
+        HStack(spacing: 12) {
+            WordIconView(word: entry.word, size: 56)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(entry.word)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundStyle(Palette.ink)
+                Text(entry.meaningCn ?? "")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundStyle(Palette.inkMuted)
+            }
+
+            Spacer(minLength: 6)
+
+            Button {
+                if let url = store.bestAudioURL(forWord: entry.word) {
+                    player.play(url: url)
+                }
+            } label: {
+                Image(systemName: "speaker.wave.2.fill")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(Palette.inkOnColor)
+                    .frame(width: 44, height: 44)
+                    .background(Func.accent, in: Circle())
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("播放 \(entry.word)")
+        }
+        .padding(10)
+        .whiteCard()
     }
 }

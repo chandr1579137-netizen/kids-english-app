@@ -38,6 +38,24 @@ jobs:
       - name: Validate resource JSON
         run: python3 scripts/validate_resources.py KidsEnglish/KidsEnglish/Resources
 
+      # 仓库里 Resources 存了两份（外层与 KidsEnglish/KidsEnglish/ 下），Xcode 用内层。
+      # 历史上两份漂移过；JSON 不像 .swift 有现成的 diff 守卫，这里补上。
+      - name: Verify duplicated resources are in sync
+        run: |
+          fail=0
+          for f in KidsEnglish/Resources/*.json; do
+            b="KidsEnglish/KidsEnglish/Resources/$(basename "$f")"
+            if [ -f "$b" ] && ! diff -q "$f" "$b" >/dev/null; then
+              echo "::error file=$f::与 $b 不一致"
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo "资源双份已漂移，请先同步"
+            exit 1
+          fi
+          echo "资源副本一致 ✓"
+
       - name: Download assets bundle v3 (word icons, lesson illustrations)
         run: |
           curl -sfL -o assets-bundle-v3.zip \
@@ -194,7 +212,8 @@ jobs:
 
           # 二级页：主题词表 / 绘本阅读器 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
-          shoot 20-songs        -uiTab 3 -uiProfile songs
+          shoot 19-favorites    -uiTab 3 -uiProfile favorites
+shoot 20-songs        -uiTab 3 -uiProfile songs
           shoot 21-parent-gate  -uiTab 3 -uiProfile parent
           shoot 22-settings     -uiTab 3 -uiProfile settings
           ls -lh shots

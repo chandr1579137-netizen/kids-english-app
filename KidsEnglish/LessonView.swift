@@ -15,6 +15,7 @@ struct LessonView: View {
     @State private var tappedWord: WordEntry?
     @State private var tappedRawWord: String = ""
     @State private var showUnknownWordAlert = false
+    @State private var showMicDeniedAlert = false
     @State private var showQuiz = false
     @State private var recordingParagraph: String?
 
@@ -90,6 +91,12 @@ struct LessonView: View {
             Button("知道啦") { }
         } message: {
             Text("「\(tappedRawWord)」还没收进来，可以问问爸爸妈妈")
+        }
+        .alert("需要麦克风权限", isPresented: $showMicDeniedAlert) {
+            Button("去设置") { openSystemSettings() }
+            Button("先不用", role: .cancel) { }
+        } message: {
+            Text("跟读要用到麦克风，去「设置」里允许一下就好啦")
         }
         .navigationDestination(isPresented: $showQuiz) {
             QuizView(lesson: lesson)
@@ -177,8 +184,19 @@ struct LessonView: View {
             player.stop()
             playingParagraph = nil
             recorder.toggleRecord()
+            // 权限被拒时 toggleRecord 里什么都不会发生，必须给出可操作的提示，
+            // 否则孩子只会觉得「按了没反应」
+            if recorder.permissionDenied {
+                showMicDeniedAlert = true
+                return
+            }
             recordingParagraph = para.paragraphId
         }
+    }
+
+    private func openSystemSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
     }
 }
 

@@ -104,6 +104,7 @@ struct ParentUnlockView: View {
 struct ParentDashboardView: View {
     @Environment(DataStore.self) private var store
     @Environment(\.dismiss) private var dismiss
+    @State private var showResetConfirm = false
 
     var body: some View {
         ScrollView {
@@ -179,6 +180,29 @@ struct ParentDashboardView: View {
                     .tint(Func.accent)
                 }
 
+                card("数据") {
+                    Button {
+                        showResetConfirm = true
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "trash")
+                                .font(.system(size: 15, weight: .bold))
+                            Text("清除全部学习进度")
+                                .font(.system(size: 16, weight: .bold))
+                        }
+                        .foregroundStyle(Func.negativeDeep)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .background(Func.negative.opacity(0.12),
+                                    in: RoundedRectangle(cornerRadius: Radius.chip, style: .continuous))
+                    }
+                    .buttonStyle(PressableStyle())
+                    Text("清空已学单词、已读课文、收藏与游戏成绩，每日限时设置保留。")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Palette.inkMuted)
+                        .lineSpacing(2)
+                }
+
                 card("关于") {
                     Text("内容来源：magic-english-buddy（GitHub 开源，CC BY-NC-SA 4.0）\n仅限家庭内部学习使用")
                         .font(.system(size: 13, weight: .medium))
@@ -189,6 +213,14 @@ struct ParentDashboardView: View {
             }
             .padding(.top, 4)
             .padding(.bottom, 12)
+        }
+        .confirmationDialog("确定清除全部学习进度？",
+                            isPresented: $showResetConfirm,
+                            titleVisibility: .visible) {
+            Button("清除", role: .destructive) { store.resetAllProgress() }
+            Button("取消", role: .cancel) { }
+        } message: {
+            Text("已学单词、已读课文、收藏和游戏成绩都会清空，且不能撤销。")
         }
     }
 

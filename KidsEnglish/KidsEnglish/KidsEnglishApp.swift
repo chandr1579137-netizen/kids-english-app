@@ -95,6 +95,7 @@ enum LaunchOptions {
 
 struct ContentView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.scenePhase) private var scenePhase
     @State private var tab: AppTab = LaunchOptions.initialTab
 
     var body: some View {
@@ -115,6 +116,11 @@ struct ContentView: View {
             if store.timeUp {
                 TimeUpOverlay()
             }
+        }
+        // 回到前台时核对日期：App 挂着跨过零点不会自动换天，
+        // 昨天的用量会被算进今天的限时里。
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { store.rolloverDayIfNeeded() }
         }
     }
 
@@ -142,6 +148,8 @@ struct ContentView: View {
                     SongsView()
                 case "parent":
                     ParentGateView()
+                case "favorites":
+                    NavigationStack { FavoritesView() }
                 default:
                     NavigationStack { SettingsDetailView() }
                 }
