@@ -115,29 +115,13 @@ jobs:
               sys.exit(1)
           PYEOF
 
-      - name: Cache lesson audio
-        uses: actions/cache@v4
-        with:
-          path: KidsEnglish/KidsEnglish/Resources/audio
-          key: ${{ runner.os }}-audio-${{ hashFiles('KidsEnglish/audio-files.json') }}
-          restore-keys: |
-            ${{ runner.os }}-audio-
-
-      - name: Download lesson audio (from upstream open-source repo)
+      - name: Apply song audio (Aria 统一音色)
+        # 儿歌原始音频在资源包里，unzip -o 会覆盖仓库文件，
+        # 所以解压之后再把仓库里的 Aria 版本盖回去
         run: |
-          cd KidsEnglish/KidsEnglish/Resources/audio
-          python3 << 'PYEOF'
-          import json, urllib.request, os
-          files = json.load(open('../../../audio-files.json'))
-          base = 'https://raw.githubusercontent.com/xckevin/magic-english-buddy/main/public/audio/'
-          ok = 0
-          for f in files:
-              if not os.path.exists(f):
-                  urllib.request.urlretrieve(base + f, f)
-              ok += 1
-          print(f'audio ready: {ok}/{len(files)}')
-          PYEOF
-          ls *.mp3 | wc -l
+          mkdir -p KidsEnglish/KidsEnglish/Resources/audio/songs
+          cp -R KidsEnglish/KidsEnglish/Resources/song-audio/. KidsEnglish/KidsEnglish/Resources/audio/songs/
+          ls KidsEnglish/KidsEnglish/Resources/audio/songs | wc -l
 
       - name: Build (unsigned)
         run: |
