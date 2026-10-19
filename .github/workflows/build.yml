@@ -123,6 +123,28 @@ jobs:
           cp -R KidsEnglish/KidsEnglish/Resources/song-audio/. KidsEnglish/KidsEnglish/Resources/audio/songs/
           ls KidsEnglish/KidsEnglish/Resources/audio/songs | wc -l
 
+      - name: Prune unreferenced audio
+        # 资源包里还带着原版 Kokoro 音频（约 25 MB）和预生成的慢速音频，
+        # 现在所有映射都指向仓库里的 Aria 文件，这两类文件进了包也没人用。
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          root = pathlib.Path('KidsEnglish/KidsEnglish/Resources')
+          audio = root / 'audio'
+          word = json.loads((root / 'word-audio-map.json').read_text())
+          lesson = json.loads((root / 'audio-map.json').read_text())
+          keep = set(word.values()) | set(lesson.values())
+          removed = 0
+          for f in audio.glob('*.mp3'):
+              if f.name not in keep:
+                  f.unlink()
+                  removed += 1
+          print(f'pruned {removed} unreferenced audio files')
+          print('audio files left:', len(list(audio.glob('*.mp3'))))
+          print('songs:', len(list((audio / 'songs').glob('*.mp3'))))
+          PY
+          rm -rf KidsEnglish/KidsEnglish/Resources/audio-slow
+
       - name: Build (unsigned)
         run: |
           xcodebuild -project KidsEnglish/KidsEnglish.xcodeproj \
