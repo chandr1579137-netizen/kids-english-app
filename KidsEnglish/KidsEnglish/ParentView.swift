@@ -33,7 +33,7 @@ struct ParentUnlockView: View {
     @State private var wrong = false
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(spacing: 16) {
                 SubPageHeader(onBack: { dismiss() })
 
@@ -110,7 +110,7 @@ struct ParentDashboardView: View {
     @State private var importMessage: String?
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 SubPageHeader(onBack: { dismiss() })
 
@@ -127,6 +127,26 @@ struct ParentDashboardView: View {
                     statRow("今日学习", "\(store.studyMinutesToday()) 分钟")
                     statRow("收藏单词", "\(store.favoriteWords.count) 个")
                     statRow("收集卡片", "\(store.collectedCards.count) 张")
+                }
+
+                card("已学单词") {
+                    HStack {
+                        Text("\(store.learnedWords.count) 个")
+                            .kidFont(17, .semibold)
+                            .foregroundStyle(Palette.ink)
+                        Spacer()
+                        NavigationLink {
+                            LearnedWordsView()
+                        } label: {
+                            HStack(spacing: 4) {
+                                Text("查看列表")
+                                    .kidFont(15, .semibold)
+                                Image(systemName: "chevron.right")
+                                    .kidFont(12, .bold)
+                            }
+                            .foregroundStyle(Func.infoDeep)
+                        }
+                    }
                 }
 
                 card("每日限时") {

@@ -689,3 +689,75 @@ struct ConfirmCard: View {
         }
     }
 }
+
+
+// MARK: - 长页面「回到顶部」
+//
+// 读短文、课文、单词列表滚几屏之后，返回键在顶部，孩子得一路拖回去。
+// 滚动超过 400pt 时右下角浮出一个按钮，点一下回顶。
+
+private struct KidScrollOffsetKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+struct KidScrollView<Content: View>: View {
+    let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    @State private var showTopButton = false
+    private let topAnchor = "kid-scroll-top"
+
+    var body: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 0) {
+                    Color.clear
+                        .frame(height: 0)
+                        .id(topAnchor)
+                        .background(
+                            GeometryReader { geo in
+                                Color.clear.preference(
+                                    key: KidScrollOffsetKey.self,
+                                    value: geo.frame(in: .named("kid-scroll-space")).minY
+                                )
+                            }
+                        )
+                    content()
+                }
+            }
+            .coordinateSpace(name: "kid-scroll-space")
+            .onPreferenceChange(KidScrollOffsetKey.self) { offset in
+                let shouldShow = offset < -400
+                if shouldShow != showTopButton {
+                    withAnimation(.easeOut(duration: 0.2)) { showTopButton = shouldShow }
+                }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                if showTopButton {
+                    Button {
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            proxy.scrollTo(topAnchor, anchor: .top)
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up")
+                            .kidFont(20, .black)
+                            .foregroundStyle(.white)
+                            .frame(width: 46, height: 46)
+                            .background(Func.infoDeep, in: Circle())
+                            .shadow(color: .black.opacity(0.2), radius: 8, y: 3)
+                    }
+                    .buttonStyle(PressableStyle())
+                    .padding(.trailing, 16)
+                    .padding(.bottom, 16)
+                    .accessibilityLabel("回到顶部")
+                }
+            }
+        }
+    }
+}

@@ -29,7 +29,7 @@ private struct UITextSizeOverride: ViewModifier {
 // MARK: - 5 Tab 定义（复刻截图结构：背单词 / 单词卡 / 读短文 / 绘本 / 我的）
 
 enum AppTab: Int, CaseIterable, Identifiable {
-    case learn, cards, read, profile
+    case learn, cards, read, songs, profile
 
     var id: Int { rawValue }
 
@@ -38,6 +38,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .learn: return "背单词"
         case .cards: return "单词卡"
         case .read: return "读短文"
+        case .songs: return "儿歌"
         case .profile: return "我的"
         }
     }
@@ -47,6 +48,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .learn: return "book"
         case .cards: return "rectangle.on.rectangle"
         case .read: return "doc.text"
+        case .songs: return "music.note"
         case .profile: return "person"
         }
     }
@@ -56,6 +58,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .learn: return "book.fill"
         case .cards: return "rectangle.on.rectangle.fill"
         case .read: return "doc.text.fill"
+        case .songs: return "music.note"
         case .profile: return "person.fill"
         }
     }
@@ -176,17 +179,21 @@ struct ContentView: View {
             }
         case .read:
             ReadView()
+        case .songs:
+            SongsView(asTabRoot: true)
         case .profile:
             // 截图覆盖：儿歌 / 家长验证 / 设置。三个页面各自的容器不同：
             // SongsView、ParentGateView 自带 NavigationStack，设置详情页没有。
             if let page = LaunchOptions.profilePage {
                 switch page {
-                case "songs":
-                    SongsView()
                 case "parent":
                     ParentGateView()
                 case "favorites":
                     NavigationStack { FavoritesView() }
+                case "learned":
+                    NavigationStack { LearnedWordsView() }
+                case "edit":
+                    ProfileView()
                 case "parent-dash":
                     // 截图用：跳过数学题直接进家长仪表盘
                     NavigationStack { ParentDashboardView() }

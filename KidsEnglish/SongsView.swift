@@ -5,6 +5,8 @@ import SwiftUI
 /// 原来是系统 `List` + `.navigationTitle`，和主流程（自绘顶栏 + 白卡 + 糖果按钮）
 /// 不是一套语言；这里改成与其他页一致的卡片列表。
 struct SongsView: View {
+    /// 作为底部 tab 根页时没有「上一页」，不显示返回键
+    var asTabRoot: Bool = false
     @Environment(DataStore.self) private var store
     @Environment(\.dismiss) private var dismiss
     @State private var player = AudioPlayer()
@@ -12,9 +14,13 @@ struct SongsView: View {
     @State private var expandedSong: String?
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                SubPageHeader(onBack: { dismiss() })
+                if asTabRoot {
+                    Color.clear.frame(height: 8)
+                } else {
+                    SubPageHeader(onBack: { dismiss() })
+                }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("英文儿歌")

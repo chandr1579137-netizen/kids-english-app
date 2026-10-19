@@ -2,6 +2,25 @@ import Foundation
 import AVFoundation
 import SwiftUI
 
+/// 音频会话统一入口。
+///
+/// 之前播放器与录音器各自 setCategory：跟读结束若没切回 playback，
+/// 外放会停在 playAndRecord（听感明显偏小），表现为「一会儿大声一会儿小声」。
+enum AudioSession {
+    static func configurePlayback() {
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playback, mode: .spokenAudio)
+        try? session.setActive(true)
+    }
+
+    static func configureRecording() {
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.playAndRecord, mode: .default,
+                                 options: [.defaultToSpeaker, .allowBluetooth])
+        try? session.setActive(true)
+    }
+}
+
 /// 音频播放器：支持逐词高亮（通过定时器回调当前播放时间）
 @Observable
 class AudioPlayer {
@@ -17,8 +36,7 @@ class AudioPlayer {
     private var routeObserver: NSObjectProtocol?
 
     init() {
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-        try? AVAudioSession.sharedInstance().setActive(true)
+        AudioSession.configurePlayback()
 
         // 中断（来电、闹钟、其他 App 抢音频）：开始时暂停，结束后按系统建议恢复，
         // 否则孩子会以为「点了没反应」，其实播放器卡在中断状态里。
@@ -58,6 +76,8 @@ class AudioPlayer {
 
     func play(url: URL, rate: Float = 1.0) {
         stop()
+        // 录音后立刻播放时，会话可能还停在 playAndRecord：每次播放前都重新声明一次
+        AudioSession.configurePlayback()
         let item = AVPlayerItem(url: url)
         player = AVPlayer(playerItem: item)
         duration = 0
@@ -125,67 +145,90 @@ class AudioPlayer {
     }
 }
 
-/// 跟读录音器
+/// 跟读录音器（按「课文 + 段落」分别保存）
+///
+/// 之前全 App 只有一个共享临时文件：任何一段的「回放」都播最后录的那一段，
+/// 而且录过一次后所有段落都显示可回放。
 @Observable
 class Recorder: NSObject, AVAudioRecorderDelegate {
     private var recorder: AVAudioRecorder?
-    private var player: AVAudioPlayer?
+    private var playback: AVAudioPlayer?
+    private var currentKey: String?
+    private(set) var recordedKeys: Set<String> = []
     var isRecording = false
-    var hasRecording = false
     var isPlayingBack = false
     /// 麦克风权限被拒：界面据此提示「去设置」，而不是点了没反应
     var permissionDenied = false
-    private var fileURL: URL {
-        FileManager.default.temporaryDirectory.appendingPathComponent("follow_read.m4a")
+
+    private func fileURL(for key: String) -> URL {
+        let safe = key
+            .replacingOccurrences(of: "#", with: "_")
+            .replacingOccurrences(of: "/", with: "_")
+        return FileManager.default.temporaryDirectory
+            .appendingPathComponent("follow_\(safe).m4a")
     }
 
-    func toggleRecord() {
-        if isRecording { stopRecording() } else { startRecording() }
+    func hasRecording(for key: String) -> Bool {
+        FileManager.default.fileExists(atPath: fileURL(for: key).path)
     }
 
-    private func startRecording() {
+    func toggleRecord(for key: String) {
+        if isRecording && currentKey == key {
+            stopRecording()
+        } else {
+            startRecording(for: key)
+        }
+    }
+
+    private func startRecording(for key: String) {
+        if isRecording { stopRecording() }
         let session = AVAudioSession.sharedInstance()
         if session.recordPermission == .denied {
             permissionDenied = true
             return
         }
         permissionDenied = false
-        try? session.setCategory(.playAndRecord, mode: .default)
-        try? session.setActive(true)
+        AudioSession.configureRecording()
         let settings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 44100,
             AVNumberOfChannelsKey: 1,
         ]
-        recorder = try? AVAudioRecorder(url: fileURL, settings: settings)
+        currentKey = key
+        recorder = try? AVAudioRecorder(url: fileURL(for: key), settings: settings)
         recorder?.delegate = self
         recorder?.record()
         isRecording = true
-        hasRecording = false
     }
 
     private func stopRecording() {
         recorder?.stop()
         isRecording = false
-        hasRecording = FileManager.default.fileExists(atPath: fileURL.path)
-        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-        try? AVAudioSession.sharedInstance().setActive(true)
+        if let key = currentKey, hasRecording(for: key) {
+            recordedKeys.insert(key)
+        }
+        currentKey = nil
+        // 录音会把会话切成 playAndRecord，录完立刻切回播放，否则后面朗读音量偏小
+        AudioSession.configurePlayback()
     }
 
-    func playBack() {
-        guard hasRecording else { return }
-        player = try? AVAudioPlayer(contentsOf: fileURL)
-        player?.play()
+    func playBack(for key: String) {
+        guard hasRecording(for: key) else { return }
+        AudioSession.configurePlayback()
+        playback = try? AVAudioPlayer(contentsOf: fileURL(for: key))
+        playback?.play()
         isPlayingBack = true
-        // 简单起见：按录音时长后重置状态
-        let dur = player?.duration ?? 1
-        DispatchQueue.main.asyncAfter(deadline: .now() + dur + 0.3) { [weak self] in
+        let duration = playback?.duration ?? 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration + 0.3) { [weak self] in
             self?.isPlayingBack = false
         }
     }
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         isRecording = false
-        hasRecording = flag
+        if flag, let key = currentKey, hasRecording(for: key) {
+            recordedKeys.insert(key)
+        }
+        currentKey = nil
     }
 }

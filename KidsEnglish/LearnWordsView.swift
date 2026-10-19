@@ -55,7 +55,7 @@ struct LearnWordsView: View {
     // MARK: - 首页
 
     private var homeContent: some View {
-        ScrollView {
+        KidScrollView {
             // 参考图首页没有大标题 —— 计划卡直接贴顶部，整屏留给出词书和主 CTA
             VStack(alignment: .leading, spacing: 26) {
                 planCard
@@ -267,7 +267,7 @@ struct LearnWordsView: View {
     // MARK: - 学习页（tab 内切换，保留底栏）
 
     private var studyContent: some View {
-        ScrollView {
+        KidScrollView {
             VStack(spacing: 14) {
                 if finished {
                     celebrationView
@@ -405,31 +405,16 @@ struct LearnWordsView: View {
             }
             .padding(.top, 6)
 
-            // 判定与导航同排四键（参考图布局）：中间判定饱和色配白字。
-            // 两侧导航不做成同一种灰：灰＝不可用，会让「下一个」看起来点不动，
-            // 所以「上一个」在第一张卡真正置灰禁用，「下一个」用次级蓝表示可点。
-            HStack(spacing: 8) {
-                judgeKey(title: "上一个", icon: "arrow.left", leadingIcon: true,
-                         fill: Color(red: 0.78, green: 0.78, blue: 0.79),
-                         fg: Palette.ink,
-                         enabled: cardIndex > 0) {
-                    if cardIndex > 0 {
-                        cardIndex -= 1
-                        playBest()
-                    }
+            // 只留两个判定键：「上一个 / 下一个」会让孩子一路点过去，
+            // 从不点「认识」——于是庆祝页显示「学会 0 个」，家长以为没记录。
+            HStack(spacing: 12) {
+                judgeKey(title: "不认识", icon: "xmark",
+                         fill: Func.negativeDeep, fg: .white, height: 64) {
+                    nextCard()
                 }
                 judgeKey(title: "认识", icon: "checkmark",
-                         fill: Func.positiveDeep, fg: .white) {
+                         fill: Func.positiveDeep, fg: .white, height: 64) {
                     markKnown(entry)
-                }
-                judgeKey(title: "不认识", icon: "xmark",
-                         fill: Func.negativeDeep, fg: .white) {
-                    nextCard()
-                }
-                judgeKey(title: "下一个", icon: "arrow.right",
-                         fill: Func.info.opacity(0.42),
-                         fg: Func.infoDeep) {
-                    nextCard()
                 }
             }
             .padding(.top, 4)
@@ -464,11 +449,11 @@ struct LearnWordsView: View {
                           leadingIcon: Bool = false,
                           fill: Color, fg: Color,
                           enabled: Bool = true,
+                          height: CGFloat = 72,
                           action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(spacing: 3) {
                 HStack(spacing: 3) {
-                    // 参考图：「← 上一个」箭头在前，「下一个 →」箭头在后
                     if leadingIcon {
                         Image(systemName: icon)
                             .kidFont(13, .bold)
@@ -483,7 +468,7 @@ struct LearnWordsView: View {
                 .foregroundStyle(enabled ? fg : fg.opacity(0.4))
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 72)
+            .frame(height: height)
             .background(enabled ? fill : Palette.hairline,
                         in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
@@ -501,9 +486,10 @@ struct LearnWordsView: View {
             Text("今天学完啦！")
                 .kidFont(30, .heavy)
                 .foregroundStyle(Palette.ink)
-            Text("你学会了 \(learnedToday.count) 个新单词")
+            Text("今天看了 \(todayWords.count) 个词，学会 \(learnedToday.count) 个")
                 .kidFont(17, .medium)
                 .foregroundStyle(Palette.inkMuted)
+                .multilineTextAlignment(.center)
             VStack(spacing: 12) {
                 AppButton(title: "去巩固", icon: "gamecontroller.fill", tier: .primary) {
                     showStudy = false

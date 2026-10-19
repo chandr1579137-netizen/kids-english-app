@@ -214,7 +214,7 @@ jobs:
           shoot 01-learn    -uiTab 0
           shoot 02-cards    -uiTab 1
           shoot 03-read     -uiTab 2
-          shoot 05-profile  -uiTab 3
+          shoot 05-profile  -uiTab 4
           shoot 06-study    -uiTab 0 -uiStudy
           # 新增：这两页原本不在覆盖内，里面的旧系统色因此长期没被发现
           shoot 07-games    -uiTab 0 -uiConsolidate
@@ -234,11 +234,11 @@ jobs:
 
           # 二级页：主题词表 / 收藏 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
-          shoot 19-favorites    -uiTab 3 -uiProfile favorites
-          shoot 20-songs        -uiTab 3 -uiProfile songs
-          shoot 21-parent-gate  -uiTab 3 -uiProfile parent
-          shoot 22-settings     -uiTab 3 -uiProfile settings
-          shoot 23-parent-dash -uiTab 3 -uiProfile parent-dash
+          shoot 19-favorites    -uiTab 4 -uiProfile favorites
+          shoot 20-songs        -uiTab 3
+          shoot 21-parent-gate  -uiTab 4 -uiProfile parent
+          shoot 22-settings     -uiTab 4 -uiProfile settings
+          shoot 23-parent-dash -uiTab 4 -uiProfile parent-dash
 
           # 大字号：验证 Dynamic Type 下没有文字被裁/错位（-uiLargeText → accessibility2）
           shoot 24-large-learn   -uiTab 0 -uiLargeText
@@ -257,15 +257,18 @@ jobs:
           shoot 35-large-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 7 -uiLargeText
           shoot 36-large-game-dictation     -uiTab 0 -uiConsolidate -uiGame 8 -uiLargeText
           shoot 37-large-theme-words   -uiTab 1 -uiTheme fruits -uiLargeText
-          shoot 38-large-settings      -uiTab 3 -uiProfile settings -uiLargeText
-          shoot 39-large-favorites     -uiTab 3 -uiProfile favorites -uiLargeText
+          shoot 38-large-settings      -uiTab 4 -uiProfile settings -uiLargeText
+          shoot 39-large-favorites     -uiTab 4 -uiProfile favorites -uiLargeText
           # 孩子看得到的提示卡片（系统 Alert 已替换成 App 内样式）
           shoot 40-large-alert-unknown -uiTab 2 -uiLesson -uiAlert unknown -uiLargeText
           shoot 41-large-alert-mic     -uiTab 2 -uiLesson -uiAlert mic -uiLargeText
-          shoot 42-large-alert-clear   -uiTab 3 -uiProfile parent-dash -uiAlert clear -uiLargeText
+          shoot 42-large-alert-clear   -uiTab 4 -uiProfile parent-dash -uiAlert clear -uiLargeText
           # 首次启动的家长说明卡
           shoot 43-guide         -uiTab 0 -uiGuide
           shoot 44-large-guide   -uiTab 0 -uiGuide -uiLargeText
+          # 头像/名字编辑 + 家长中心已学单词
+          shoot 45-profile-edit  -uiTab 4 -uiProfile edit
+          shoot 46-learned-words -uiTab 4 -uiProfile learned
           ls -lh shots
 
       - name: Capture iPad screenshots

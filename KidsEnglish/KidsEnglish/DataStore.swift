@@ -24,6 +24,9 @@ class DataStore {
     var hasSeenGuide: Bool = false
     /// 巩固练习是否只出简单档（level 1–2）的词
     var gameIsSimple: Bool = true
+    /// 孩子自己设置的名字与头像（「我的」页可改）
+    var childName: String = "小宝贝"
+    var avatarEmoji: String = "🧒"
     var gameCorrect: Int = 0
     var gameAnswered: Int = 0
     var studyDates: [String] = []
@@ -111,12 +114,10 @@ class DataStore {
         audioURL(forWord: word)
     }
 
-    /// 预生成的慢速文件。没有时界面改用同一条音频的 0.75 倍速。
+    /// 慢速朗读统一用「正常音频 0.7 倍速」：预生成的 audio-slow 不在响度归一化范围内，
+    /// 和正文音频混着放会忽大忽小，所以不再使用。
     func slowAudioURL(forWord word: String) -> URL? {
-        guard let file = wordAudioMap[word.lowercased()],
-              let root = Bundle.main.resourceURL else { return nil }
-        let url = root.appendingPathComponent("audio-slow/\(file)")
-        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+        nil
     }
 
     func songAudioURL(_ songId: String) -> URL? {
@@ -308,6 +309,8 @@ class DataStore {
         dailyNewWords = defaults.object(forKey: "dailyNewWords") as? Int ?? 10
         hasSeenGuide = defaults.bool(forKey: "hasSeenGuide")
         gameIsSimple = defaults.object(forKey: "gameIsSimple") as? Bool ?? true
+        childName = defaults.string(forKey: "childName") ?? "小宝贝"
+        avatarEmoji = defaults.string(forKey: "avatarEmoji") ?? "🧒"
         gameCorrect = defaults.integer(forKey: "gameCorrect")
         gameAnswered = defaults.integer(forKey: "gameAnswered")
         studyDates = defaults.stringArray(forKey: "studyDates") ?? []
@@ -329,6 +332,8 @@ class DataStore {
         defaults.set(dailyNewWords, forKey: "dailyNewWords")
         defaults.set(hasSeenGuide, forKey: "hasSeenGuide")
         defaults.set(gameIsSimple, forKey: "gameIsSimple")
+        defaults.set(childName, forKey: "childName")
+        defaults.set(avatarEmoji, forKey: "avatarEmoji")
         defaults.set(gameCorrect, forKey: "gameCorrect")
         defaults.set(gameAnswered, forKey: "gameAnswered")
         defaults.set(studyDates, forKey: "studyDates")
@@ -473,7 +478,9 @@ class DataStore {
             showTranslationDefault: showTranslationDefault,
             gameAnswered: gameAnswered,
             gameCorrect: gameCorrect,
-            studyDates: studyDates
+            studyDates: studyDates,
+            childName: childName,
+            avatarEmoji: avatarEmoji
         )
         return ProgressCodec.encode(snapshot)
     }
@@ -496,6 +503,8 @@ class DataStore {
         gameAnswered = snapshot.gameAnswered
         gameCorrect = snapshot.gameCorrect
         studyDates = snapshot.studyDates
+        if let name = snapshot.childName, !name.isEmpty { childName = name }
+        if let emoji = snapshot.avatarEmoji, !emoji.isEmpty { avatarEmoji = emoji }
         saveProgress()
         refreshTimeUp()
         return ProgressCodec.summary(snapshot)

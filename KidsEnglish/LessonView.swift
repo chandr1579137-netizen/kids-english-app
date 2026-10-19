@@ -20,7 +20,7 @@ struct LessonView: View {
     @State private var recordingParagraph: String?
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(spacing: 16) {
                 // 封面：与其他页统一内边距 + Radius.sheet
                 CoverImage(url: store.coverURL(forLesson: lesson.id),
@@ -52,6 +52,7 @@ struct LessonView: View {
                         highlightIndex: highlightIndex[para.paragraphId] ?? -1,
                         showTranslation: showTranslation,
                         isRecording: recordingParagraph == para.paragraphId,
+                        hasRecording: recorder.hasRecording(for: "\(lesson.id)#\(para.paragraphId)"),
                         onPlay: { togglePlay(para) },
                         onWordTap: { word in
                             if let entry = store.lookupWord(word) {
@@ -61,7 +62,8 @@ struct LessonView: View {
                                 showUnknownWordAlert = true
                             }
                         },
-                        onRecord: { toggleRecord(para) }
+                        onRecord: { toggleRecord(para) },
+                        onPlayBack: { recorder.playBack(for: "\(lesson.id)#\(para.paragraphId)") }
                     )
                     .padding(.horizontal)
                 }
@@ -189,7 +191,9 @@ struct LessonView: View {
                 highlightIndex[para.paragraphId] = -1
                 return
             }
-            let ms = t * 1000
+            // 时间轴是「整篇课文音频」的绝对毫秒，而段落音频从 0 开始计时：
+            // 必须加上本段的 audioStart，否则只有第 1 段能对上、后面段落永不亮
+            let ms = t * 1000 + Double(para.audioStart)
             if let idx = para.words.firstIndex(where: { ms >= $0.start && ms < $0.end }) {
                 highlightIndex[para.paragraphId] = idx
             }
@@ -198,13 +202,14 @@ struct LessonView: View {
     }
 
     private func toggleRecord(_ para: Paragraph) {
+        let key = "\(lesson.id)#\(para.paragraphId)"
         if recordingParagraph == para.paragraphId {
-            recorder.toggleRecord()
+            recorder.toggleRecord(for: key)
             recordingParagraph = nil
         } else {
             player.stop()
             playingParagraph = nil
-            recorder.toggleRecord()
+            recorder.toggleRecord(for: key)
             // 权限被拒时 toggleRecord 里什么都不会发生，必须给出可操作的提示，
             // 否则孩子只会觉得「按了没反应」
             if recorder.permissionDenied {
@@ -232,9 +237,11 @@ struct ParagraphCard: View {
     let highlightIndex: Int
     let showTranslation: Bool
     let isRecording: Bool
+    let hasRecording: Bool
     let onPlay: () -> Void
     let onWordTap: (String) -> Void
     let onRecord: () -> Void
+    let onPlayBack: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -266,13 +273,13 @@ struct ParagraphCard: View {
                     fg: isRecording ? .white : Palette.ink,
                     action: onRecord
                 )
-                if recorder.hasRecording && !isRecording {
+                if hasRecording && !isRecording {
                     compactButton(
                         title: "回放",
                         icon: "speaker.wave.2.fill",
                         fill: Palette.hairline,
                         fg: Palette.ink,
-                        action: { recorder.playBack() }
+                        action: onPlayBack
                     )
                 }
                 Spacer()

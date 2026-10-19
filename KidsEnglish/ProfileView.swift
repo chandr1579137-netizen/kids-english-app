@@ -3,10 +3,11 @@ import SwiftUI
 /// "我的" Tab：用户卡 → 学习报告 → 设置组
 struct ProfileView: View {
     @Environment(DataStore.self) private var store
+    @State private var showProfileEdit = false
 
     var body: some View {
         NavigationStack {
-            ScrollView {
+            KidScrollView {
                 VStack(spacing: 14) {
                     userCard
                     reportCard
@@ -19,6 +20,13 @@ struct ProfileView: View {
             .creamBackground()
             .toolbar(.hidden, for: .navigationBar)
         }
+        .sheet(isPresented: $showProfileEdit) {
+            ProfileEditSheet()
+        }
+        .onAppear {
+            // 截图用：直接展示编辑弹窗
+            if LaunchOptions.profilePage == "edit" { showProfileEdit = true }
+        }
     }
 
     // MARK: - 用户卡（紫色渐变，白字 ≥ 4.7:1）
@@ -29,14 +37,16 @@ struct ProfileView: View {
                 Circle()
                     .fill(Palette.surface)
                     .frame(width: 88, height: 88)
-                Text("🧒").kidFont(52)
+                Text(store.avatarEmoji).kidFont(52)
             }
             .overlay(Circle().strokeBorder(.white.opacity(0.85), lineWidth: 3))
 
             VStack(alignment: .leading, spacing: 7) {
-                Text("小宝贝")
+                Text(store.childName)
                     .kidFont(30, .heavy)
                     .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 HStack(spacing: 6) {
                     Image(systemName: "calendar")
@@ -59,6 +69,20 @@ struct ProfileView: View {
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.profileGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
+        .overlay(alignment: .topTrailing) {
+            Button {
+                showProfileEdit = true
+            } label: {
+                Image(systemName: "pencil")
+                    .kidFont(16, .bold)
+                    .foregroundStyle(Palette.ink)
+                    .frame(width: 36, height: 36)
+                    .background(Palette.surface, in: Circle())
+            }
+            .buttonStyle(PressableStyle())
+            .padding(12)
+            .accessibilityLabel("编辑名字和头像")
+        }
         .elevationRaised()
     }
 
@@ -128,12 +152,6 @@ struct ProfileView: View {
             }
 
             NavigationLink {
-                SongsView()
-            } label: {
-                settingRow(icon: "music.note", title: "英文儿歌")
-            }
-
-            NavigationLink {
                 ParentGateView()
             } label: {
                 settingRow(icon: "lock.fill", title: "家长中心", trailingIcon: "lock.fill")
@@ -200,7 +218,7 @@ struct SettingsDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 SubPageHeader(onBack: { dismiss() })
 
@@ -338,7 +356,7 @@ struct FavoritesView: View {
     private var cards: [String] { store.collectedCards.sorted() }
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 SubPageHeader(onBack: { dismiss() })
 
@@ -442,5 +460,165 @@ struct FavoritesView: View {
         }
         .padding(10)
         .whiteCard()
+    }
+}
+
+
+// MARK: - 编辑名字与头像
+
+struct ProfileEditSheet: View {
+    @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var name = ""
+    @State private var emoji = "🧒"
+
+    private let avatars = ["🧒", "👦", "👧", "🐣", "🐼", "🦁", "🐯", "🐰", "🐻", "🐨",
+                           "🦊", "🐸", "🐧", "🦄", "🚀", "⭐️", "🌈", "🍎", "⚽️", "🎨", "🎵", "🐳"]
+    private let columns = [GridItem(.adaptive(minimum: 54), spacing: 10)]
+
+    var body: some View {
+        NavigationStack {
+            KidScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text("名字")
+                        .kidFont(18, .heavy)
+                        .foregroundStyle(Palette.ink)
+                    TextField("小朋友的名字", text: $name)
+                        .kidFont(22, .bold)
+                        .padding(14)
+                        .background(Palette.surface,
+                                    in: RoundedRectangle(cornerRadius: Radius.card))
+                        .onChange(of: name) { _, newValue in
+                            if newValue.count > 10 { name = String(newValue.prefix(10)) }
+                        }
+
+                    Text("头像")
+                        .kidFont(18, .heavy)
+                        .foregroundStyle(Palette.ink)
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(avatars, id: \.self) { item in
+                            Button {
+                                emoji = item
+                            } label: {
+                                Text(item)
+                                    .kidFont(30)
+                                    .frame(width: 54, height: 54)
+                                    .background(emoji == item ? Func.accent.opacity(0.22) : Palette.surface,
+                                                in: Circle())
+                                    .overlay {
+                                        Circle().strokeBorder(
+                                            emoji == item ? Func.accent : Palette.hairline,
+                                            lineWidth: emoji == item ? 2.5 : 1
+                                        )
+                                    }
+                            }
+                            .buttonStyle(PressableStyle())
+                            .accessibilityLabel("头像 \(item)")
+                        }
+                    }
+
+                    AppButton(title: "保存", icon: "checkmark", tier: .primary) {
+                        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+                        store.childName = trimmed.isEmpty ? "小宝贝" : trimmed
+                        store.avatarEmoji = emoji
+                        store.saveProgress()
+                        dismiss()
+                    }
+                    .padding(.top, 6)
+                }
+                .padding(16)
+            }
+            .creamBackground()
+            .navigationTitle("编辑资料")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { dismiss() }
+                }
+            }
+            .onAppear {
+                name = store.childName
+                emoji = store.avatarEmoji
+            }
+        }
+    }
+}
+
+// MARK: - 家长中心：已学单词列表
+
+struct LearnedWordsView: View {
+    @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
+    @State private var player = AudioPlayer()
+
+    private var words: [WordEntry] {
+        store.learnedWords
+            .compactMap { store.wordDict[$0] }
+            .sorted { $0.word.lowercased() < $1.word.lowercased() }
+    }
+
+    var body: some View {
+        KidScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                SubPageHeader(onBack: { dismiss() })
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("已学单词")
+                        .subPageTitleStyle()
+                    Text("共 \(words.count) 个 · 点右侧可以再听一遍")
+                        .subPageSubtitleStyle()
+                }
+                .padding(.horizontal)
+
+                if words.isEmpty {
+                    Text("还没有标记「认识」的单词。学习时点「认识」就会记录在这里。")
+                        .kidFont(15, .medium)
+                        .foregroundStyle(Palette.inkMuted)
+                        .lineSpacing(3)
+                        .padding(16)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .whiteCard()
+                        .padding(.horizontal)
+                } else {
+                    LazyVStack(spacing: 8) {
+                        ForEach(words) { entry in
+                            HStack(spacing: 10) {
+                                Text(entry.word)
+                                    .kidFont(19, .bold)
+                                    .foregroundStyle(Palette.ink)
+                                if let cn = entry.meaningCn {
+                                    Text(cn)
+                                        .kidFont(15, .medium)
+                                        .foregroundStyle(Palette.inkMuted)
+                                }
+                                Spacer()
+                                Button {
+                                    if let url = store.bestAudioURL(forWord: entry.word) {
+                                        player.play(url: url)
+                                    }
+                                } label: {
+                                    Image(systemName: "speaker.wave.2.fill")
+                                        .kidFont(15, .bold)
+                                        .foregroundStyle(Func.infoDeep)
+                                        .frame(width: 36, height: 36)
+                                        .background(Func.info.opacity(0.14), in: Circle())
+                                }
+                                .buttonStyle(PressableStyle())
+                            }
+                            .padding(.horizontal, 14)
+                            .frame(height: 54)
+                            .background(Palette.surface,
+                                        in: RoundedRectangle(cornerRadius: Radius.card))
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+            .padding(.top, 4)
+            .padding(.bottom, 12)
+        }
+        .creamBackground()
+        .toolbar(.hidden, for: .navigationBar)
     }
 }

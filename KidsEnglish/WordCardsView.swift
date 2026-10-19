@@ -9,7 +9,7 @@ struct WordCardsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
+            KidScrollView {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("单词卡").pageTitleStyle()
                         .padding(.horizontal)
@@ -102,7 +102,7 @@ struct ThemeWordsView: View {
     private var words: [WordEntry] { store.words(forTheme: theme.id) }
 
     var body: some View {
-        ScrollView {
+        KidScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 SubPageHeader(onBack: { dismiss() })
 

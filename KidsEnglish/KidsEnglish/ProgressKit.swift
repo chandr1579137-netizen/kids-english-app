@@ -21,6 +21,9 @@ struct ProgressSnapshot: Codable, Equatable {
     var gameAnswered: Int
     var gameCorrect: Int
     var studyDates: [String]
+    /// 孩子自己设置的名字与头像；旧备份没有这两个字段，解码后为 nil
+    var childName: String? = nil
+    var avatarEmoji: String? = nil
 }
 
 /// 备份 JSON 的编解码与恢复文案。纯 Foundation，便于单测。

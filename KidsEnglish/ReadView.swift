@@ -38,7 +38,7 @@ struct ReadView: View {
     }
 
     private var lessonList: some View {
-        ScrollView {
+        KidScrollView {
             // 标题与「单词卡」「绘本」同一套：左对齐 + pageTitleStyle 深蓝。
             // 之前这里是 60pt 居中 + 专属蓝，同一层级出现了两种标题写法。
             VStack(alignment: .leading, spacing: 2) {
