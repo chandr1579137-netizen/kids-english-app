@@ -1,0 +1,1675 @@
+[
+  {
+    "theme": "nature",
+    "word": "forest",
+    "file": "forest.jpg",
+    "kind": "scene",
+    "prompt": "A small forest of five green trees of different heights standing close together on a grassy patch, rounded fluffy canopies and warm brown trunks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "island",
+    "file": "island.jpg",
+    "kind": "scene",
+    "prompt": "A small tropical island with one green palm tree and a sandy shore, surrounded by a ring of light blue water, viewed from a slightly angled top view. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "beach",
+    "file": "beach.jpg",
+    "kind": "scene",
+    "prompt": "A beach scene with golden sand in the foreground, a red starfish and a pink seashell, and soft blue sea with white foam at the top edge. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "air",
+    "file": "air.jpg",
+    "kind": "scene",
+    "prompt": "A soft pale blue swirl of moving air with three tiny white dandelion seeds floating along the curve, light and airy. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "cave",
+    "file": "cave.jpg",
+    "kind": "scene",
+    "prompt": "A gray rocky cave with a rounded dark entrance, layered stone shapes, a little green moss on top and two small stones outside the mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "hill",
+    "file": "hill.jpg",
+    "kind": "scene",
+    "prompt": "A single rounded green hill with a smooth dome shape, soft grass texture, and a few tiny white and yellow flowers at the base. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "plant",
+    "file": "plant.jpg",
+    "kind": "object",
+    "prompt": "A green potted plant with six broad rounded leaves growing from a terracotta flower pot with a rim. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "shell",
+    "file": "shell.jpg",
+    "kind": "object",
+    "prompt": "A single fan-shaped seashell in soft pink and cream, with rounded ridges radiating from the hinge, slightly open. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "valley",
+    "file": "valley.jpg",
+    "kind": "scene",
+    "prompt": "A valley with two rounded green hills on the left and right and a light blue river winding through the low ground between them, a few tiny trees on the slopes. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "water",
+    "file": "water.jpg",
+    "kind": "object",
+    "prompt": "A single large blue water drop with a rounded bottom and pointed top, one big white highlight, and two tiny droplets beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "wave",
+    "file": "wave.jpg",
+    "kind": "scene",
+    "prompt": "A single curling ocean wave in medium blue with a white foamy crest curling over to the right and a few small bubbles above it. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "sand",
+    "file": "sand.jpg",
+    "kind": "object",
+    "prompt": "A small mound of golden sand with soft rounded dunes, a few tiny grains around the base and one small pink shell on the side. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "mud",
+    "file": "mud.jpg",
+    "kind": "object",
+    "prompt": "A brown mud puddle with an irregular rounded shape, glossy dark brown surface, a few small splashes and two little pebbles at the edge. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "ice",
+    "file": "ice.jpg",
+    "kind": "object",
+    "prompt": "Three light blue ice cubes stacked loosely, translucent with white square highlights and sharp rounded edges, two tiny frost sparkles beside them. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "thunder",
+    "file": "thunder.jpg",
+    "kind": "scene",
+    "prompt": "A storm cloud in soft gray-blue with a bright yellow lightning bolt striking down from its center, two tiny white spark lines beside the bolt. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "nature",
+    "word": "puddle",
+    "file": "puddle.jpg",
+    "kind": "object",
+    "prompt": "A light blue puddle with an irregular rounded shape, concentric white ripple rings inside, one small water drop falling into it and two tiny splashes at the edge. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "book",
+    "file": "book.jpg",
+    "kind": "object",
+    "prompt": "A closed hardcover book with a warm red cover, a white bookmark ribbon, and a small gold emblem on the spine. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "pen",
+    "file": "pen.jpg",
+    "kind": "object",
+    "prompt": "A blue ballpoint pen with a silver clip and a fine tip, shown from the side at a slight diagonal. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "pencil",
+    "file": "pencil.jpg",
+    "kind": "object",
+    "prompt": "A yellow wooden pencil with a pink eraser and a silver ferrule, sharpened tip, shown from the side at a slight diagonal. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "map",
+    "file": "map.jpg",
+    "kind": "object",
+    "prompt": "A folded paper map with soft beige land, blue water, a dashed red trail and a red X marker, slightly unfolded. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "picture",
+    "file": "picture.jpg",
+    "kind": "object",
+    "prompt": "A framed picture showing a simple flat landscape with a yellow sun, green hills and a rainbow, in a wooden frame. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "brush",
+    "file": "brush.jpg",
+    "kind": "object",
+    "prompt": "A hairbrush with a pink handle and soft dark bristles, shown from the side. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "letter",
+    "file": "letter.jpg",
+    "kind": "object",
+    "prompt": "A white paper envelope with a red heart sticker sealing the flap, slightly angled. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "crayon",
+    "file": "crayon.jpg",
+    "kind": "object",
+    "prompt": "A single red wax crayon with a paper wrapper, pointed tip, shown from the side. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "eraser",
+    "file": "eraser.jpg",
+    "kind": "object",
+    "prompt": "A pink rectangular eraser with rounded corners and a blue paper sleeve. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "ruler",
+    "file": "ruler.jpg",
+    "kind": "object",
+    "prompt": "A plain wooden ruler with small tick marks but no numbers, shown at a slight diagonal. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "paper",
+    "file": "paper.jpg",
+    "kind": "object",
+    "prompt": "A neat stack of white paper sheets with one sheet slightly offset on top. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "glue",
+    "file": "glue.jpg",
+    "kind": "object",
+    "prompt": "A white glue bottle with an orange cap and a small glue stick beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "scissors",
+    "file": "scissors.jpg",
+    "kind": "object",
+    "prompt": "A pair of blue-handled safety scissors with rounded tips, slightly open. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "notebook",
+    "file": "notebook.jpg",
+    "kind": "object",
+    "prompt": "A spiral notebook with a blue cover and a white spiral binding, closed, with a pencil lying beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "marker",
+    "file": "marker.jpg",
+    "kind": "object",
+    "prompt": "A green felt-tip marker with a matching green cap, shown from the side. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "pencil case",
+    "file": "pencil_case.jpg",
+    "kind": "object",
+    "prompt": "An open blue pencil case with pencils, a pink eraser and a small ruler inside. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "paintbrush",
+    "file": "paintbrush.jpg",
+    "kind": "object",
+    "prompt": "A paintbrush with a blue handle, silver ferrule and red paint on the bristle tip. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "stationery",
+    "word": "stapler",
+    "file": "stapler.jpg",
+    "kind": "object",
+    "prompt": "A red desk stapler with a silver base, shown from the side. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "ball",
+    "file": "ball.jpg",
+    "kind": "object",
+    "prompt": "A colorful beach ball with red, yellow, blue and white panels, fully inflated. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "toy",
+    "file": "toy.jpg",
+    "kind": "object",
+    "prompt": "A wooden toy box overflowing with a red ball, colorful blocks and a small brown teddy bear. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "kite",
+    "file": "kite.jpg",
+    "kind": "object",
+    "prompt": "A red diamond kite with a yellow cross frame and a long tail with three colorful bows. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "game",
+    "file": "game.jpg",
+    "kind": "object",
+    "prompt": "A board game with a colorful board, two dice and four rounded player pieces, no text. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "teddy",
+    "file": "teddy.jpg",
+    "kind": "faceable",
+    "prompt": "A soft brown teddy bear sitting upright with a red bow around its neck, stitched details, simple black dot eyes with white highlights, rosy cheeks and a small smile. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "balloon",
+    "file": "balloon.jpg",
+    "kind": "object",
+    "prompt": "A single red balloon with a shiny highlight and a curled white string. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "blocks",
+    "file": "blocks.jpg",
+    "kind": "object",
+    "prompt": "A stack of colorful wooden building blocks in red, blue, yellow and green with simple shapes but no letters or numbers. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "doll",
+    "file": "doll.jpg",
+    "kind": "faceable",
+    "prompt": "A rag doll with yarn hair in two braids, a patchwork dress, simple black dot eyes with white highlights, rosy cheeks and a small smile. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "puzzle",
+    "file": "puzzle.jpg",
+    "kind": "object",
+    "prompt": "A four-piece jigsaw puzzle partially assembled into a colorful picture of a sun and a green hill, with one piece beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "robot",
+    "file": "robot.jpg",
+    "kind": "faceable",
+    "prompt": "A friendly toy robot in blue and silver with a rounded head, two black dot eyes with white highlights, a small smile, and a simple antenna. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "drum",
+    "file": "drum.jpg",
+    "kind": "object",
+    "prompt": "A red toy drum with a white drumhead, blue rim and two wooden drumsticks resting on top. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "bubbles",
+    "file": "bubbles.jpg",
+    "kind": "object",
+    "prompt": "A blue bubble wand with a round loop and five floating transparent bubbles of different sizes. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "yoyo",
+    "file": "yoyo.jpg",
+    "kind": "object",
+    "prompt": "A red yoyo with a white stripe and a white string looped around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "skateboard",
+    "file": "skateboard.jpg",
+    "kind": "object",
+    "prompt": "A skateboard with a blue deck, red wheels and silver trucks, shown at a slight angle. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "tricycle",
+    "file": "tricycle.jpg",
+    "kind": "object",
+    "prompt": "A red child's tricycle with a silver handlebar, black seat and three black wheels. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "spinning top",
+    "file": "spinning_top.jpg",
+    "kind": "object",
+    "prompt": "A colorful spinning top with red, yellow and blue bands, spinning with circular motion lines around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "marbles",
+    "file": "marbles.jpg",
+    "kind": "object",
+    "prompt": "Three glass marbles with colorful swirls inside, resting together with bright highlights. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "toys",
+    "word": "whistle",
+    "file": "whistle.jpg",
+    "kind": "object",
+    "prompt": "A silver referee whistle with a red lanyard, shown at a slight angle. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "city",
+    "file": "city.jpg",
+    "kind": "scene",
+    "prompt": "A city skyline of colorful tall buildings with many windows, a few rounded trees between them, under a clear sky. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "school",
+    "file": "school.jpg",
+    "kind": "scene",
+    "prompt": "A cheerful school building with a small bell tower, a flag, large windows, a red door and a little tree in front, no sign or lettering. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "park",
+    "file": "park.jpg",
+    "kind": "scene",
+    "prompt": "A green park with a large tree, a wooden bench, a winding path, a small blue pond and colorful flowers. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "bridge",
+    "file": "bridge.jpg",
+    "kind": "scene",
+    "prompt": "A red arched bridge with railings crossing a blue river, with green banks on both sides. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "garden",
+    "file": "garden.jpg",
+    "kind": "scene",
+    "prompt": "A flower garden with a white wooden fence, rows of colorful flowers, a watering can and a small stone path. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "farm",
+    "file": "farm.jpg",
+    "kind": "scene",
+    "prompt": "A farm with a red barn, a gray silo, green fields, a wooden fence and a few round hay bales. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "palace",
+    "file": "palace.jpg",
+    "kind": "scene",
+    "prompt": "A grand fairy-tale palace with golden domes, white columns, blue roofs and a wide staircase. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "tower",
+    "file": "tower.jpg",
+    "kind": "scene",
+    "prompt": "A tall round stone tower with a red conical roof, a small window and a flag on top, standing on a grassy hill. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "village",
+    "file": "village.jpg",
+    "kind": "scene",
+    "prompt": "A cozy village of five small houses with red roofs, a winding path, a few trees and a well. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "kingdom",
+    "file": "kingdom.jpg",
+    "kind": "scene",
+    "prompt": "A fairy-tale kingdom with a large castle on a green hill, colorful flags, and several small houses below. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "hospital",
+    "file": "hospital.jpg",
+    "kind": "scene",
+    "prompt": "A white hospital building with a red cross symbol above the entrance, blue windows, a small tree and a bench outside, no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "zoo",
+    "file": "zoo.jpg",
+    "kind": "scene",
+    "prompt": "A zoo scene with a tall giraffe and a small elephant behind a wooden fence, green trees and a pathway. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "lighthouse",
+    "file": "lighthouse.jpg",
+    "kind": "scene",
+    "prompt": "A tall lighthouse with red and white stripes on a rocky shore, a yellow light beam shining out over blue sea. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "maze",
+    "file": "maze.jpg",
+    "kind": "scene",
+    "prompt": "A green hedge maze seen from above with winding paths and a small golden star at the center. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "shop",
+    "file": "shop.jpg",
+    "kind": "scene",
+    "prompt": "A small shop storefront with a striped red and white awning, a display window with simple objects, and a blue door, no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "library",
+    "file": "library.jpg",
+    "kind": "scene",
+    "prompt": "A cozy library interior with tall wooden bookshelves full of colorful books, a reading table with an open book and a green lamp. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "playground",
+    "file": "playground.jpg",
+    "kind": "scene",
+    "prompt": "A playground with a yellow slide, a swing set, a small sandbox and a red ball on the grass. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "supermarket",
+    "file": "supermarket.jpg",
+    "kind": "scene",
+    "prompt": "A supermarket building with a striped green and white awning, large windows, and two shopping carts outside, no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "restaurant",
+    "file": "restaurant.jpg",
+    "kind": "scene",
+    "prompt": "A cozy restaurant interior with a round table, two chairs, a plate, a glass, and a warm pendant lamp, no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "museum",
+    "file": "museum.jpg",
+    "kind": "scene",
+    "prompt": "A grand museum building with white columns and a wide staircase, with a friendly blue dinosaur skeleton statue in front. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "market",
+    "file": "market.jpg",
+    "kind": "scene",
+    "prompt": "An outdoor market with three stalls under striped awnings, baskets of fruit and vegetables, and a small wooden crate. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "station",
+    "file": "station.jpg",
+    "kind": "scene",
+    "prompt": "A train station platform with a clock, a wooden bench, a small station building and a railway track, no train and no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "airport",
+    "file": "airport.jpg",
+    "kind": "scene",
+    "prompt": "An airport with a control tower, a terminal building and a small white airplane taking off in the sky, no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "cinema",
+    "file": "cinema.jpg",
+    "kind": "scene",
+    "prompt": "A cinema interior with a large blank screen, red curtains, rows of seats and a popcorn bucket in the foreground, no text. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "places",
+    "word": "pool",
+    "file": "pool.jpg",
+    "kind": "scene",
+    "prompt": "A swimming pool with clear blue water, a silver ladder, a beach ball floating and a tiled edge. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "jump",
+    "file": "jump.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers jumping high in the air with both arms raised, knees bent, a few motion lines below his feet. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "swim",
+    "file": "swim.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers swimming in clear blue water with arms stretched forward, wearing blue swim goggles, small splash around him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "fly",
+    "file": "fly.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers flying through the air like a superhero with both arms spread wide and a happy expression, a blue cape fluttering behind him, small clouds around. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "eat",
+    "file": "eat.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting at a small table holding a sandwich with both hands and taking a bite, a plate in front of him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "drink",
+    "file": "drink.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding a blue cup with both hands and drinking water, head tilted back slightly. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "sleep",
+    "file": "sleep.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers lying in bed under a blue blanket with his head on a white pillow, eyes closed peacefully, a small crescent moon above. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "sit",
+    "file": "sit.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting upright on a small wooden chair with hands on his knees. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "stand",
+    "file": "stand.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing straight with arms relaxed at his sides, feet together. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "open",
+    "file": "open.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers opening a red gift box with both hands, the lid lifted and a warm glow coming from inside. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "close",
+    "file": "close.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers closing a blue wooden door with one hand on the handle, body turned toward the door. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "play",
+    "file": "play.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers playing with a red ball, kicking it gently, one foot lifted. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "sing",
+    "file": "sing.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers singing with his mouth open in a happy expression, one hand on his chest, three small colorful music notes floating beside him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "dance",
+    "file": "dance.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes dancing with both arms raised and one foot lifted, her dress twirling, small motion lines around her. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "read",
+    "file": "read.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting cross-legged on the floor reading an open picture book, looking down at the pages. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "write",
+    "file": "write.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting at a small desk writing in a notebook with a yellow pencil, focused expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "draw",
+    "file": "draw.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing at an easel drawing a pink flower on white paper with a crayon. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "walk",
+    "file": "walk.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers walking forward in side view with one foot in front of the other, arms swinging gently. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "look",
+    "file": "look.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers looking through a pair of blue binoculars, curious expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "listen",
+    "file": "listen.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wearing large blue headphones over his ears, eyes closed and smiling, small sound waves beside the headphones. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "touch",
+    "file": "touch.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers reaching out one hand to gently touch a pink flower, careful expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "climb",
+    "file": "climb.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers climbing a sturdy tree with both hands gripping a branch and one foot on the trunk. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "push",
+    "file": "push.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers pushing a large brown cardboard box forward with both hands, leaning into it. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "pull",
+    "file": "pull.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers pulling a thick rope with both hands, leaning back, feet planted. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "catch",
+    "file": "catch.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers catching a red ball with both hands, arms extended forward, eyes on the ball. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "throw",
+    "file": "throw.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers throwing a red ball with one arm extended forward, the other arm balancing, motion lines behind the ball. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "clean",
+    "file": "clean.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers cleaning a window with a yellow spray bottle in one hand and a blue cloth in the other. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "cook",
+    "file": "cook.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wearing a white apron and a chef's hat, stirring a pot on a small stove. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "smile",
+    "file": "smile.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing with a big warm smile, hands relaxed, rosy cheeks. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "laugh",
+    "file": "laugh.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers laughing with his head tilted back and both hands on his belly, mouth open. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "ask",
+    "file": "ask.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers raising one hand high as if asking a question, curious expression, the other hand holding a book. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "break",
+    "file": "break.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers looking sorry beside a broken terracotta flower pot on the floor, spilled soil and a fallen flower. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "bring",
+    "file": "bring.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers carrying a red gift box forward with both hands, walking toward the viewer. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "build",
+    "file": "build.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers building a tower of colorful wooden blocks on the floor, one block in his hand. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "carry",
+    "file": "carry.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers carrying a stack of four colorful books in his arms, chin resting on top of the stack. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "change",
+    "file": "change.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding a blue t-shirt in one hand while wearing a red t-shirt, as if choosing what to wear. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "choose",
+    "file": "choose.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers looking at two ice cream cones, one pink and one brown, with one finger on his chin, deciding. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "collect",
+    "file": "collect.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding a small basket filled with colorful autumn leaves, one leaf in his other hand. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "come",
+    "file": "come.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers walking toward the viewer with both arms open in a welcoming gesture, motion lines behind him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "cover",
+    "file": "cover.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers covering his mouth with both hands in surprise, eyes wide. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "dream",
+    "file": "dream.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sleeping peacefully in bed with a soft blue blanket, a fluffy dream cloud above his head showing a rainbow and three stars. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "fall",
+    "file": "fall.jpg",
+    "kind": "scene",
+    "prompt": "A red apple falling from a green tree with small motion lines above it and two leaves floating down. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "find",
+    "file": "find.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers kneeling and pointing at a tiny red ladybug on a green leaf, delighted expression, a magnifying glass in his other hand. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "give",
+    "file": "give.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding out a red gift box with both hands toward the viewer, smiling. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "go",
+    "file": "go.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers walking away through a doorway with a blue backpack, turning back to wave goodbye. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "grow",
+    "file": "grow.jpg",
+    "kind": "scene",
+    "prompt": "A small green seedling with two leaves growing from soil, a slightly taller sprout beside it, and three small upward motion lines above. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "hear",
+    "file": "hear.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers cupping one hand behind his ear and leaning forward, three small sound wave lines beside his head. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "help",
+    "file": "help.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers helping a cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes carry a heavy brown box, one hand under each side, both smiling. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "hide",
+    "file": "hide.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers hiding behind a large tree trunk and peeking out with one eye, hands gripping the bark. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "know",
+    "file": "know.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers with one finger raised and a glowing yellow light bulb floating above his head, confident smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "learn",
+    "file": "learn.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting at a desk with an open book, a stack of books beside him and a small glowing light bulb above his head. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "love",
+    "file": "love.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers hugging a big red heart with both arms, eyes closed and smiling. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "make",
+    "file": "make.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers folding a white paper airplane at a table, one finished paper airplane beside him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "pick",
+    "file": "pick.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes picking a pink flower from a green bush, holding the stem gently. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "put",
+    "file": "put.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers putting a blue book onto a wooden bookshelf, standing on tiptoes. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "say",
+    "file": "say.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers talking with his mouth open, one hand gesturing, an empty white speech bubble beside his head. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "see",
+    "file": "see.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers pointing at a colorful rainbow in the sky with wide eyes and a big smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "share",
+    "file": "share.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sharing a chocolate chip cookie with a cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes, breaking it in half, both smiling. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "stop",
+    "file": "stop.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding one hand up with the palm facing forward in a clear stop gesture, serious expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "take",
+    "file": "take.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers taking a red apple from a blue bowl on a table, one hand reaching out. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "turn",
+    "file": "turn.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers turning his head and shoulders to look back over his shoulder, a curved blue arrow beside him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "wait",
+    "file": "wait.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting on a wooden bench with his hands in his lap, looking at a small round clock on the wall, patient expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "wake",
+    "file": "wake.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers waking up in bed, sitting up and stretching both arms above his head, warm sunlight from a window. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "want",
+    "file": "want.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers pointing at a red toy robot on a shelf, eyes wide with a hopeful smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "watch",
+    "file": "watch.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sitting on a small sofa watching a television with a colorful cartoon on the screen, popcorn bowl beside him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "cry",
+    "file": "cry.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers crying with two big tears rolling down his cheeks and a sad open mouth, rubbing one eye. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "paint",
+    "file": "paint.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers painting a rainbow on a white canvas at an easel with a paintbrush, a palette in his other hand. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "point",
+    "file": "point.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers pointing with one index finger at a red ball on the floor, looking at it. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "wash",
+    "file": "wash.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers washing his hands under a running silver faucet, soap bubbles around his hands. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "sweep",
+    "file": "sweep.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sweeping the floor with a wooden broom, a small dustpan and pile of dust beside him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "wipe",
+    "file": "wipe.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wiping a wooden table with a blue cloth, leaning forward. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "hop",
+    "file": "hop.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers hopping on one foot with the other foot lifted, arms out for balance, motion lines below. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "skip",
+    "file": "skip.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes skipping rope with a red jump rope, both feet off the ground, happy expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "kick",
+    "file": "kick.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers kicking a black and white soccer ball with one foot, arms out for balance. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "cut",
+    "file": "cut.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers cutting a piece of blue paper with a pair of rounded green safety scissors. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "smell",
+    "file": "smell.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding a pink flower close to his nose and smelling it with his eyes closed, a gentle smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "taste",
+    "file": "taste.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers licking a pink ice cream cone, eyes closed and smiling. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "hug",
+    "file": "hug.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes and a cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers hugging each other warmly, both smiling with eyes closed. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "kiss",
+    "file": "kiss.jpg",
+    "kind": "character",
+    "prompt": "A cartoon mother with shoulder-length brown hair, wearing a coral-pink blouse and a blue skirt kissing a cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers on the cheek, both smiling, a small red heart floating above them. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "clap",
+    "file": "clap.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers clapping his hands together with a happy expression, small motion lines around his hands. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "yawn",
+    "file": "yawn.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers yawning with his mouth wide open and one hand covering his mouth, eyes squeezed shut, sleepy. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "sneeze",
+    "file": "sneeze.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers sneezing into a white tissue held with both hands, eyes closed, small motion lines beside his head. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "actions",
+    "word": "blink",
+    "file": "blink.jpg",
+    "kind": "character",
+    "prompt": "A close-up of a cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers's face with both eyes closed in a blink, small curved motion lines beside his eyes, calm smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "big",
+    "file": "big.jpg",
+    "kind": "animal",
+    "prompt": "A large friendly gray elephant standing with its trunk curled up, big ears spread wide. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "small",
+    "file": "small.jpg",
+    "kind": "animal",
+    "prompt": "A tiny gray mouse standing on its hind legs holding a small piece of yellow cheese. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "little",
+    "file": "little.jpg",
+    "kind": "animal",
+    "prompt": "A little yellow chick with soft fluffy down and a tiny orange beak. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "sad",
+    "file": "sad.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing with drooping shoulders, sad eyes and a downturned mouth, one tear at the corner of his eye. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "good",
+    "file": "good.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers smiling and giving a thumbs up with one hand. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "bad",
+    "file": "bad.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing with his arms crossed and a grumpy expression, a tipped-over flower pot with spilled soil beside him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "new",
+    "file": "new.jpg",
+    "kind": "faceable",
+    "prompt": "A shiny new red toy robot standing proudly with three small sparkles around it, simple black dot eyes and a small smile. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "old",
+    "file": "old.jpg",
+    "kind": "faceable",
+    "prompt": "A worn brown teddy bear with two patches on its tummy and one ear, slightly frayed, simple black dot eyes and a small smile. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "hot",
+    "file": "hot.jpg",
+    "kind": "object",
+    "prompt": "A red mug of hot cocoa with three wavy white steam lines rising above it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "cold",
+    "file": "cold.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers shivering in a blue winter coat, red scarf and blue beanie, arms wrapped around himself, three small snowflakes around him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "pretty",
+    "file": "pretty.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes with a pink flower tucked behind her ear, smiling gently, one hand touching her hair. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "tall",
+    "file": "tall.jpg",
+    "kind": "animal",
+    "prompt": "A tall giraffe with a long neck and brown spots, standing on a grassy patch. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "short",
+    "file": "short.jpg",
+    "kind": "object",
+    "prompt": "A short red candle with a small yellow flame and a little melted wax at the base. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "fast",
+    "file": "fast.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers running very fast with his body leaning forward and three blue speed lines behind him. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "slow",
+    "file": "slow.jpg",
+    "kind": "animal",
+    "prompt": "A small snail with a spiral brown shell slowly moving on a green leaf, two tiny motion lines behind it. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "soft",
+    "file": "soft.jpg",
+    "kind": "animal",
+    "prompt": "A fluffy white bunny sitting with long ears, soft round body and a tiny pink nose. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "long",
+    "file": "long.jpg",
+    "kind": "object",
+    "prompt": "A long red knitted scarf stretched out horizontally with fringed ends, gentle curves. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "warm",
+    "file": "warm.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wrapped in a cozy orange blanket, smiling contentedly, a small yellow sun in the corner. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "cool",
+    "file": "cool.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wearing black sunglasses and giving a thumbs up, confident smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "sleepy",
+    "file": "sleepy.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers in blue pajamas rubbing one eye with a fist, holding a small white pillow under his other arm, eyes half closed. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "hungry",
+    "file": "hungry.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding his tummy with both hands and looking at a sandwich on a plate, hopeful expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "thirsty",
+    "file": "thirsty.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers holding an empty clear glass and looking at it with a thirsty expression, one small blue sweat drop on his forehead. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "tired",
+    "file": "tired.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers slumped in a chair with his head resting on one hand, eyes half closed and a long sigh. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "dirty",
+    "file": "dirty.jpg",
+    "kind": "object",
+    "prompt": "A pair of muddy brown rain boots with mud splashes and a few grass stains. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "wet",
+    "file": "wet.jpg",
+    "kind": "object",
+    "prompt": "A blue umbrella with water droplets dripping from its edges and a small puddle below. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "dry",
+    "file": "dry.jpg",
+    "kind": "scene",
+    "prompt": "A patch of dry cracked brown earth with fine cracks and a small wilting green sprout. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "nice",
+    "file": "nice.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes smiling warmly and offering a pink flower forward with both hands. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "funny",
+    "file": "funny.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers laughing hard while a small green frog sits on top of his head, both hands on his belly. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "strong",
+    "file": "strong.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers flexing one arm to show his muscle with a confident smile, the other hand on his hip. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "afraid",
+    "file": "afraid.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers hiding behind a brown teddy bear held up in front of him, wide eyes and a worried expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "beautiful",
+    "file": "beautiful.jpg",
+    "kind": "scene",
+    "prompt": "A bright rainbow arching over three colorful flowers and a few sparkles, under a soft blue sky. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "brave",
+    "file": "brave.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing confidently with both hands on his hips and a red superhero cape flowing behind him, chest out. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "bright",
+    "file": "bright.jpg",
+    "kind": "object",
+    "prompt": "A glowing yellow light bulb with short bright rays around it and a white highlight. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "careful",
+    "file": "careful.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers walking slowly while balancing a stack of three books on top of his head, arms out, focused expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "clever",
+    "file": "clever.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers with one finger raised and a glowing yellow light bulb above his head, a clever smile, wearing round glasses. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "dark",
+    "file": "dark.jpg",
+    "kind": "scene",
+    "prompt": "A dark blue night sky with a bright crescent moon, five twinkling stars and a small silhouette of a house on a hill. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "deep",
+    "file": "deep.jpg",
+    "kind": "scene",
+    "prompt": "A cross-section of deep blue water with a small orange fish swimming near the bottom, lighter blue surface above and three bubbles rising. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "delicious",
+    "file": "delicious.jpg",
+    "kind": "object",
+    "prompt": "A slice of strawberry layer cake on a small white plate with a silver fork beside it, three sparkles around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "easy",
+    "file": "easy.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers solving a simple two-piece jigsaw puzzle, holding the last piece with a confident smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "empty",
+    "file": "empty.jpg",
+    "kind": "object",
+    "prompt": "An empty clear glass jar with a silver lid beside it, a white highlight on the glass. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "exciting",
+    "file": "exciting.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers opening a red gift box with colorful confetti and stars bursting out, mouth open in delight. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "far",
+    "file": "far.jpg",
+    "kind": "object",
+    "prompt": "A blue telescope on a wooden tripod pointing at a small ringed planet in the night sky, three stars around. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "friendly",
+    "file": "friendly.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers waving warmly with one hand and a big smile, the other hand relaxed. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "full",
+    "file": "full.jpg",
+    "kind": "object",
+    "prompt": "A clear glass filled to the brim with orange juice, a small orange slice on the rim. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "gentle",
+    "file": "gentle.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes gently petting a small gray kitten in her arms, both calm and happy. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "golden",
+    "file": "golden.jpg",
+    "kind": "object",
+    "prompt": "A shiny golden crown with five points and three small red jewels, sparkles around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "hard",
+    "file": "hard.jpg",
+    "kind": "object",
+    "prompt": "A solid gray boulder with angular edges and a few white highlights, sitting on the ground. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "high",
+    "file": "high.jpg",
+    "kind": "scene",
+    "prompt": "A red diamond kite flying high in a blue sky above two small green hills and two white clouds. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "huge",
+    "file": "huge.jpg",
+    "kind": "object",
+    "prompt": "A giant red and yellow beach ball next to a tiny blue ball, showing the size difference, both on the ground. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "interesting",
+    "file": "interesting.jpg",
+    "kind": "object",
+    "prompt": "An open book with a glowing golden light and small stars rising from its pages. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "kind",
+    "file": "kind.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers offering a big red heart with both hands to a cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes, both smiling. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "loud",
+    "file": "loud.jpg",
+    "kind": "object",
+    "prompt": "A red megaphone with three curved yellow sound waves coming out of it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "low",
+    "file": "low.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers crouching down very low with his knees bent and hands near the ground, looking up. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "narrow",
+    "file": "narrow.jpg",
+    "kind": "scene",
+    "prompt": "A narrow alley between two tall brick walls with a stone path, a small green plant at the end. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "peaceful",
+    "file": "peaceful.jpg",
+    "kind": "animal",
+    "prompt": "A gray cat sleeping curled up on a soft blue cushion, eyes closed peacefully, a small green plant beside it. The animal has a cute face with simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "quiet",
+    "file": "quiet.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon girl with two black pigtails, wearing a yellow dress and red shoes holding one finger to her lips in a gentle shh gesture, calm expression. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "ready",
+    "file": "ready.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wearing a blue backpack and giving a thumbs up, standing straight with a determined smile. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "right",
+    "file": "right.jpg",
+    "kind": "object",
+    "prompt": "A big green check mark inside a white circle with three small sparkles around it, no text. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "rough",
+    "file": "rough.jpg",
+    "kind": "object",
+    "prompt": "A piece of rough tree bark with deep grooves and cracks, warm brown. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "safe",
+    "file": "safe.jpg",
+    "kind": "object",
+    "prompt": "A shiny silver padlock with a closed shackle and a small green shield emblem behind it, no text. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "secret",
+    "file": "secret.jpg",
+    "kind": "object",
+    "prompt": "A closed pink diary with a golden heart-shaped lock and a small silver key beside it, three sparkles. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "shallow",
+    "file": "shallow.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers standing ankle-deep in clear shallow water at the beach, looking down at a small orange starfish, gentle ripples. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "shiny",
+    "file": "shiny.jpg",
+    "kind": "object",
+    "prompt": "A sparkling blue diamond with many facets and three white sparkles around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "silver",
+    "file": "silver.jpg",
+    "kind": "object",
+    "prompt": "A shiny silver spoon with a bright white highlight, lying at a slight diagonal. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "smart",
+    "file": "smart.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers wearing round glasses and holding an open book, giving a confident thumbs up. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "smooth",
+    "file": "smooth.jpg",
+    "kind": "object",
+    "prompt": "A smooth pink bar of soap with rounded edges and two small white bubbles beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "young",
+    "file": "young.jpg",
+    "kind": "scene",
+    "prompt": "A young green seedling with two small leaves growing from dark soil, a tiny water droplet on one leaf. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, the scene centered at about 75% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "light",
+    "file": "light.jpg",
+    "kind": "object",
+    "prompt": "A single white feather floating in the air with two small motion lines, light and delicate. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "sweet",
+    "file": "sweet.jpg",
+    "kind": "object",
+    "prompt": "A bright red lollipop with a white swirl and a white stick, three small sparkles around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "sour",
+    "file": "sour.jpg",
+    "kind": "object",
+    "prompt": "A yellow lemon with a green leaf and a bite taken out of it, three wavy sour lines around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "sharp",
+    "file": "sharp.jpg",
+    "kind": "object",
+    "prompt": "A freshly sharpened red pencil with a very pointed graphite tip, a small sparkle at the tip. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "angry",
+    "file": "angry.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers with furrowed brows, clenched fists and red cheeks, angry expression, small red steam lines above his head. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "cute",
+    "file": "cute.jpg",
+    "kind": "faceable",
+    "prompt": "A small gray kitten with a pink bow on its head, big black dot eyes with white highlights, rosy cheeks and a tiny smile. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "heavy",
+    "file": "heavy.jpg",
+    "kind": "character",
+    "prompt": "A cute cartoon boy with short black hair, wearing a blue t-shirt, navy shorts and red sneakers straining to lift a large brown wooden box with both hands, knees bent, sweat drop on his forehead. The character has a round face, simple black dot eyes with white highlights and rosy cheeks. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "round",
+    "file": "round.jpg",
+    "kind": "object",
+    "prompt": "A round blue ball with a white highlight, perfectly circular, sitting on the ground. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "square",
+    "file": "square.jpg",
+    "kind": "object",
+    "prompt": "A square red wooden block with rounded edges and a white highlight, sitting on the ground. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "sticky",
+    "file": "sticky.jpg",
+    "kind": "object",
+    "prompt": "A wooden honey dipper covered in thick golden honey, with a long drip hanging down and a small bee beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "fluffy",
+    "file": "fluffy.jpg",
+    "kind": "object",
+    "prompt": "A fluffy pink cotton candy on a white stick, soft cloud-like texture, two small white highlights. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "spicy",
+    "file": "spicy.jpg",
+    "kind": "object",
+    "prompt": "A bright red chili pepper with a green stem and three small orange flame shapes around it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  },
+  {
+    "theme": "adjectives",
+    "word": "salty",
+    "file": "salty.jpg",
+    "kind": "object",
+    "prompt": "A white salt shaker with a silver cap and small white salt crystals spilling out beside it. No face, no eyes, no mouth. STYLE: flat 2D children's educational flashcard illustration, cute cartoon, clean even dark-brown outlines, flat bright soft colors, almost no gradients, tiny white highlight accents, very light warm off-white paper texture background, single subject centered at about 65% of the square frame with generous empty margins. No text, no letters, no numbers, no logo, no border, no watermark, no cast shadow."
+  }
+]
