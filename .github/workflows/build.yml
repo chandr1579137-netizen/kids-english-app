@@ -79,6 +79,13 @@ jobs:
           echo "illustrations  $(ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l)"
           echo "covers         $(ls KidsEnglish/KidsEnglish/Resources/covers | wc -l)"
 
+      # 交通主题 22 张图为半写实矢量风格，需要在资源包解压后覆盖同名文件。
+      - name: Apply word icon overrides
+        run: |
+          cp -f assets/word-icons-overrides/*.jpg \
+            KidsEnglish/KidsEnglish/Resources/word-icons/
+          echo "overrides      $(ls assets/word-icons-overrides | wc -l)"
+
       # 资源包的 3D 图标是不透明白底，压在彩色卡片上会变成「白方贴纸」。
       # 从边缘泛洪抠掉外圈背景，内部白色（熊猫脸等）保留。
       - name: Make ui-icons transparent
