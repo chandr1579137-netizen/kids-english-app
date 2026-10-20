@@ -160,6 +160,7 @@ enum AppTheme {
         case "stationery": return Color(red: 0.45, green: 0.65, blue: 1.0)
         case "toys": return Color(red: 1.0, green: 0.65, blue: 0.55)
         case "home": return Color(red: 0.65, green: 0.55, blue: 0.85)
+        case "clothing": return Color(red: 0.95, green: 0.55, blue: 0.72)
         case "places": return Color(red: 0.4, green: 0.8, blue: 0.75)
         case "actions": return Color(red: 1.0, green: 0.7, blue: 0.3)
         case "adjectives": return Color(red: 0.75, green: 0.55, blue: 1.0)
@@ -504,6 +505,7 @@ func themeIconName(for themeId: String) -> String {
     case "toys": return "theme-teddy"
     case "nature": return "theme-tree"
     case "home": return "theme-house"
+    case "clothing": return "theme-shirt"
     case "places": return "theme-pin"
     case "actions": return "theme-runner"
     case "adjectives": return "theme-sparkles"

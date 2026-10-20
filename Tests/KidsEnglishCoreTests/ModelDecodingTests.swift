@@ -31,7 +31,7 @@ final class ModelDecodingTests: XCTestCase {
 
     func testWordsDecode() throws {
         let words = try allWords()
-        XCTAssertEqual(words.count, 1265, "词库总数变了，确认是有意改动")
+        XCTAssertEqual(words.count, 1347, "词库总数变了，确认是有意改动")
         XCTAssertEqual(Set(words.map { $0.word }).count, words.count, "存在重复词条")
         for word in words {
             XCTAssertFalse(word.word.isEmpty)
@@ -43,7 +43,7 @@ final class ModelDecodingTests: XCTestCase {
         let themes = try load("word-themes.json", as: [WordTheme].self)
         let index = Set(try allWords().map { $0.word.lowercased() })
 
-        XCTAssertEqual(themes.count, 15)
+        XCTAssertEqual(themes.count, 16)
         var seen = Set<String>()
         for theme in themes {
             XCTAssertFalse(theme.words.isEmpty, "\(theme.id) 是空主题")
@@ -54,7 +54,7 @@ final class ModelDecodingTests: XCTestCase {
                               "\(word) 出现在多个主题里")
             }
         }
-        XCTAssertEqual(seen.count, 491, "低龄白名单（口语词换成正式词后为 491）")
+        XCTAssertEqual(seen.count, 573, "低龄白名单（口语词换成正式词后为 491，数字补充到 100 后为 569，服装与火补词后为 573）")
     }
 
     // MARK: - 课文

@@ -79,7 +79,7 @@ jobs:
           echo "illustrations  $(ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l)"
           echo "covers         $(ls KidsEnglish/KidsEnglish/Resources/covers | wc -l)"
 
-      # 交通主题 22 张图为半写实矢量风格，需要在资源包解压后覆盖同名文件。
+      # 覆盖图在资源包解压后写入：交通主题 22 张半写实矢量图，数字 1–100 共 100 张黑白衬线数字卡。
       - name: Apply word icon overrides
         run: |
           cp -f assets/word-icons-overrides/*.jpg \
@@ -129,6 +129,26 @@ jobs:
           mkdir -p KidsEnglish/KidsEnglish/Resources/audio/songs
           cp -R KidsEnglish/KidsEnglish/Resources/song-audio/. KidsEnglish/KidsEnglish/Resources/audio/songs/
           ls KidsEnglish/KidsEnglish/Resources/audio/songs | wc -l
+
+      # 21–99 数字发音不在资源包里。unzip -o 会覆盖 word-audio-map.json，
+      # 解压后需要把仓库里的增量映射重新并入，否则新发音会被 prune 删掉。
+      - name: Merge number word audio map
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          root = pathlib.Path('KidsEnglish/KidsEnglish/Resources')
+          target = root / 'word-audio-map.json'
+          additions = json.loads(
+              pathlib.Path('assets/number-audio/word-audio-map-additions.json').read_text())
+          mapping = json.loads(target.read_text())
+          mapping.update(additions)
+          target.write_text(json.dumps(mapping, ensure_ascii=False, separators=(',', ':')))
+          missing = [f for f in additions.values() if not (root / 'audio' / f).exists()]
+          print(f'word audio map: {len(mapping)} entries (+{len(additions)})')
+          if missing:
+              print('missing audio files:', missing)
+              sys.exit(1)
+          PY
 
       - name: Prune unreferenced audio
         # 资源包里还带着原版 Kokoro 音频（约 25 MB）。现在所有映射都指向
