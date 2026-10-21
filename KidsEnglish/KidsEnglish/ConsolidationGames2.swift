@@ -435,7 +435,8 @@ struct ConsolidationView: View {
         case findInScene="听音找一找",
              wordToImage="看词选图", audioToImage="听音选图", matching="配对消除",
              wordToAudio="看词选音", imageToWord="看图选词", audioToWord="听音选词",
-             audioToMeaning="听音选义", wordToMeaning="看词选义", dictation="听写训练"
+             audioToMeaning="听音选义", wordToMeaning="看词选义", dictation="听写训练",
+             feedAnimal="喂小动物"   // 放在最后：CI 截图的 -uiGame 下标不用重排
         var id: String { rawValue }
 
         var iconName: String {
@@ -450,13 +451,14 @@ struct ConsolidationView: View {
             case .audioToMeaning: return "game-audiomeaning"
             case .wordToMeaning: return "game-wordmeaning"
             case .dictation: return "game-dictation"
+            case .feedAnimal: return "game-feedanimal"
             }
         }
 
         /// 难度：1 = 简单，2 = 中等
         var difficultyLevel: Int {
             switch self {
-            case .findInScene, .wordToImage, .audioToImage, .wordToAudio, .wordToMeaning:
+            case .findInScene, .feedAnimal, .wordToImage, .audioToImage, .wordToAudio, .wordToMeaning:
                 return 1
             default:
                 return 2
@@ -481,7 +483,7 @@ struct ConsolidationView: View {
         var skill: Skill {
             switch self {
             case .wordToImage, .wordToAudio, .imageToWord, .wordToMeaning: return .look
-            case .findInScene, .audioToImage, .audioToWord, .audioToMeaning: return .listen
+            case .findInScene, .feedAnimal, .audioToImage, .audioToWord, .audioToMeaning: return .listen
             case .matching: return .match
             case .dictation: return .write
             }
@@ -500,6 +502,7 @@ struct ConsolidationView: View {
             case .audioToMeaning: return Color(red: 1.00, green: 0.82, blue: 0.30) // 黄
             case .wordToMeaning: return Color(red: 1.00, green: 0.36, blue: 0.36)  // 红
             case .dictation:     return Color(red: 0.18, green: 0.36, blue: 0.82)  // 深蓝
+            case .feedAnimal:    return Color(red: 0.80, green: 0.56, blue: 0.32)  // 棕
             }
         }
 
@@ -645,6 +648,9 @@ struct ConsolidationView: View {
         if m == .findInScene {
             // 听音找一找自带顶栏（返回 + 星星），整页是场景面板，不套通用标题和滚动容器
             FindInSceneGame(onBack: { mode = nil })
+        } else if m == .feedAnimal {
+            // 喂小动物同样自带顶栏，整页是拖放舞台（放进滚动容器会和拖动手势冲突）
+            FeedAnimalGame(onBack: { mode = nil })
         } else {
             commonGameView(for: m)
         }
@@ -685,7 +691,7 @@ struct ConsolidationView: View {
             ScrollView {
                 Group {
                     switch m {
-                    case .findInScene: EmptyView()
+                    case .findInScene, .feedAnimal: EmptyView()
                     case .wordToImage: WordToImageGame(words: words)
                     case .audioToImage: AudioToImageGame(words: words)
                     case .matching: MatchingGame(words: words)
@@ -1057,6 +1063,466 @@ private struct FindShakeEffect: GeometryEffect {
     var animatableData: CGFloat
     func effectValue(size: CGSize) -> ProjectionTransform {
         ProjectionTransform(CGAffineTransform(translationX: 8 * sin(animatableData * .pi * 6), y: 0))
+    }
+}
+
+// MARK: - 喂小动物
+
+/// 喂小动物：动物说 “I want a banana!”，孩子把托盘里对的食物拖到动物身上。
+/// 喂对：食物飞进去，动物跳一下说 “Yummy banana!”，点亮一颗星；
+/// 喂错：动物轻轻摇头说 “No, thank you!”，食物弹回原位，再说一遍想吃什么；
+/// 没拖到动物身上：食物只弹回原位。没有倒计时，玩的过程中不出现中文。
+struct FeedAnimalGame: View {
+    var onBack: () -> Void
+
+    @Environment(DataStore.self) private var store
+    @State private var player = AudioPlayer()
+
+    @State private var catalog: FeedCatalog?
+    @State private var rounds: [FeedRound] = []
+    @State private var images: [String: UIImage] = [:]
+    @State private var index = 0
+    @State private var stars = 0
+    @State private var finished = false
+    @State private var locked = false
+
+    /// 正在拖的托盘格子（松手弹回 / 飞进动物的动画结束前一直保留，保证它画在最上层）
+    @State private var dragging: Int?
+    @State private var dragOffset: CGSize = .zero
+    /// 喂对了的格子：食物缩小消失
+    @State private var eaten: Int?
+    /// 顶部台词被临时替换成 “Yummy …!” / “No, thank you!”
+    @State private var reply: String?
+    @State private var hop = false
+    @State private var shake: CGFloat = 0
+    @State private var animalFrame: CGRect = .zero
+    @State private var slotFrames: [Int: CGRect] = [:]
+    @State private var successTrigger = 0
+    @State private var errorTrigger = 0
+
+    static let space = "feed-animal"
+    private static let ink = Color(red: 0.36, green: 0.24, blue: 0.14)
+    private static let orange = Color(red: 0.98, green: 0.52, blue: 0.08)
+    private static var args: [String] { ProcessInfo.processInfo.arguments }
+
+    private var round: FeedRound? { rounds[safe: index] }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            topBar
+            if finished {
+                celebration
+            } else if let round {
+                // 舞台 + 托盘作为一组垂直居中；屏幕矮时先等比缩舞台，托盘保持原高
+                Spacer(minLength: 10)
+                VStack(spacing: 20) {
+                    stage(round)
+                    tray(round)
+                        .layoutPriority(2)
+                }
+                Spacer(minLength: 10)
+            } else {
+                Spacer()
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(Palette.canvas.ignoresSafeArea())
+        .coordinateSpace(name: Self.space)
+        .overlay { trail.allowsHitTesting(false) }
+        .onAppear(perform: setup)
+        .sensoryFeedback(.success, trigger: successTrigger)
+        .sensoryFeedback(.impact(weight: .light), trigger: errorTrigger)
+    }
+
+    // MARK: 顶栏：返回 + 5 颗星
+
+    private var topBar: some View {
+        HStack {
+            Button(action: onBack) {
+                Image(systemName: "chevron.left")
+                    .kidFont(20, .bold, maxScale: 1.15)
+                    .foregroundStyle(Palette.ink)
+                    .frame(width: 48, height: 48)
+                    .background(Palette.surface, in: Circle())
+                    .shadow(color: .black.opacity(0.10), radius: 4, y: 2)
+                    .frame(width: 64, height: 64)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("返回")
+
+            Spacer()
+
+            HStack(spacing: 6) {
+                ForEach(0..<FeedGame.roundsPerGame, id: \.self) { i in
+                    Image(systemName: i < stars ? "star.fill" : "star")
+                        .kidFont(26, .bold, maxScale: 1.15)
+                        .foregroundStyle(i < stars ? Color(red: 1.0, green: 0.72, blue: 0.10) : Palette.inkSubtle)
+                }
+            }
+            .accessibilityLabel("\(stars) / \(FeedGame.roundsPerGame)")
+        }
+    }
+
+    // MARK: 舞台：台词 + 喇叭 + 动物（等比，不拉伸）
+
+    private func stage(_ round: FeedRound) -> some View {
+        GeometryReader { geo in
+            let w = geo.size.width, h = geo.size.height
+            let side = min(w * 0.74, h * 0.62)
+            ZStack {
+                // 还没有专门的「喂动物」背景图：米色墙 + 木色地面的渐变占位
+                LinearGradient(colors: [Color(red: 0.98, green: 0.93, blue: 0.82),
+                                        Color(red: 0.96, green: 0.89, blue: 0.76)],
+                               startPoint: .top, endPoint: .bottom)
+                VStack(spacing: 0) {
+                    Spacer()
+                    Rectangle().fill(Self.ink.opacity(0.55)).frame(height: 2)
+                    LinearGradient(colors: [Color(red: 0.92, green: 0.82, blue: 0.62),
+                                            Color(red: 0.89, green: 0.78, blue: 0.57)],
+                                   startPoint: .top, endPoint: .bottom)
+                        .frame(height: h * 0.17)
+                }
+
+                animalView(round.pair.animal)
+                    .frame(width: side, height: side)
+                    .background(FeedFrameReader { animalFrame = $0 })
+                    .scaleEffect(hop ? 1.08 : 1, anchor: .bottom)
+                    .offset(y: hop ? -22 : 0)
+                    .modifier(FindShakeEffect(animatableData: shake))
+                    .position(x: w / 2, y: h * 0.93 - side / 2)
+                    .accessibilityLabel(round.pair.animal)
+
+                lineBar(round)
+                    .frame(width: w)
+                    .position(x: w / 2, y: 52)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 28, style: .continuous)
+                        .strokeBorder(Self.ink, lineWidth: 3))
+        }
+        .aspectRatio(0.88, contentMode: .fit)
+        .frame(maxWidth: .infinity)
+        .layoutPriority(1)
+    }
+
+    private func lineBar(_ round: FeedRound) -> some View {
+        let text = reply ?? round.pair.want
+        let color: Color = reply == nil ? Color(red: 0.13, green: 0.20, blue: 0.47)
+            : (reply == catalog?.noThanks ? Color(red: 0.62, green: 0.38, blue: 0.16)
+                                          : Color(red: 0.12, green: 0.52, blue: 0.20))
+        return HStack(spacing: 10) {
+            Text("“\(text)”")
+                .kidFont(28, .heavy, maxScale: 1.15)
+                .foregroundStyle(color)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .contentTransition(.opacity)
+            Spacer(minLength: 0)
+            Button(action: playWant) {
+                Image(systemName: "speaker.wave.2.fill")
+                    .kidFont(26, .bold, maxScale: 1.15)
+                    .foregroundStyle(.white)
+                    .frame(width: 56, height: 56)
+                    .background(Self.orange, in: Circle())
+                    .padding(4)
+                    .background(Palette.surface, in: Circle())
+                    .overlay(Circle().strokeBorder(Self.ink, lineWidth: 2.5))
+                    .frame(width: 66, height: 66)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("再听一遍")
+        }
+        .padding(.leading, 22)
+        .padding(.trailing, 14)
+    }
+
+    // MARK: 托盘：3 个食物格子（每格 ≥ 64pt）
+
+    private func tray(_ round: FeedRound) -> some View {
+        HStack(spacing: 14) {
+            ForEach(Array(round.options.enumerated()), id: \.offset) { i, food in
+                slot(i, food: food)
+                    .zIndex(dragging == i ? 10 : 0)
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity)
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
+        .zIndex(5)
+    }
+
+    private func slot(_ i: Int, food: String) -> some View {
+        let lifted = dragging == i
+        let gone = eaten == i
+        return ZStack {
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(Color(red: 0.99, green: 0.97, blue: 0.93))
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .strokeBorder(Color(red: 0.80, green: 0.75, blue: 0.68),
+                              style: lifted ? StrokeStyle(lineWidth: 3, dash: [8, 6]) : StrokeStyle(lineWidth: 1.5))
+            foodView(food)
+                .frame(width: 84, height: 84)
+                .scaleEffect(gone ? 0.2 : (lifted ? 1.15 : 1))
+                .opacity(gone ? 0 : 1)
+                .shadow(color: .black.opacity(lifted ? 0.22 : 0), radius: 8, y: 6)
+                .offset(lifted ? dragOffset : .zero)
+        }
+        .frame(width: 104, height: 104)
+        .frame(maxWidth: .infinity)
+        .background(FeedFrameReader { slotFrames[i] = $0 })
+        .contentShape(Rectangle())
+        .gesture(dragGesture(i, food: food))
+        .accessibilityLabel(food)
+        .accessibilityAddTraits(.isButton)
+    }
+
+    /// 拖动时从格子到手指的一条橙色虚线（和示意图一样），帮孩子看清「拿起来了」
+    @ViewBuilder
+    private var trail: some View {
+        if let i = dragging, eaten == nil, let from = slotFrames[i], dragOffset != .zero {
+            let start = CGPoint(x: from.midX, y: from.midY)
+            let end = CGPoint(x: start.x + dragOffset.width, y: start.y + dragOffset.height)
+            let len = hypot(end.x - start.x, end.y - start.y)
+            if len > 60 {
+                let k = (len - 54) / len   // 线停在食物边上，不压住食物
+                Path { p in
+                    p.move(to: start)
+                    p.addLine(to: CGPoint(x: start.x + (end.x - start.x) * k, y: start.y + (end.y - start.y) * k))
+                }
+                .stroke(Self.orange, style: StrokeStyle(lineWidth: 5, lineCap: .round, dash: [2, 12]))
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func animalView(_ word: String) -> some View {
+        if let ui = images[word] {
+            Image(uiImage: ui).resizable().scaledToFit()
+        } else {
+            WordIconView(word: word, size: 160)
+        }
+    }
+
+    @ViewBuilder
+    private func foodView(_ word: String) -> some View {
+        if let ui = images[word] {
+            Image(uiImage: ui).resizable().scaledToFit()
+        } else {
+            WordIconView(word: word, size: 76)
+        }
+    }
+
+    // MARK: 完成页（无中文）
+
+    private var celebration: some View {
+        VStack(spacing: 22) {
+            Spacer()
+            HStack(spacing: 8) {
+                ForEach(0..<FeedGame.roundsPerGame, id: \.self) { _ in
+                    Image(systemName: "star.fill")
+                        .kidFont(44, .bold, maxScale: 1.15)
+                        .foregroundStyle(Color(red: 1.0, green: 0.72, blue: 0.10))
+                }
+            }
+            // 这一轮喂饱的 5 只动物，点一下读单词
+            HStack(spacing: 8) {
+                ForEach(rounds, id: \.pair.animal) { r in
+                    Button {
+                        if let url = store.bestAudioURL(forWord: r.pair.animal) { player.play(url: url) }
+                    } label: {
+                        animalView(r.pair.animal)
+                            .frame(width: 54, height: 54)
+                            .frame(width: 64, height: 64)
+                            .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: .black.opacity(0.08), radius: 3, y: 1)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityLabel(r.pair.animal)
+                }
+            }
+            Text("Great job!")
+                .kidFont(46, .heavy, maxScale: 1.15)
+                .foregroundStyle(Palette.ink)
+            HStack(spacing: 28) {
+                roundButton("arrow.counterclockwise", color: Color(red: 0.20, green: 0.55, blue: 0.95), label: "再玩一次") {
+                    newGame()
+                }
+                roundButton("checkmark", color: Color(red: 0.10, green: 0.62, blue: 0.18), label: "完成", action: onBack)
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .transition(.scale.combined(with: .opacity))
+    }
+
+    private func roundButton(_ symbol: String, color: Color, label: String,
+                             action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .kidFont(34, .heavy, maxScale: 1.15)
+                .foregroundStyle(.white)
+                .frame(width: 84, height: 84)
+                .background(color, in: Circle())
+                .shadow(color: .black.opacity(0.12), radius: 4, y: 2)
+        }
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel(label)
+    }
+
+    // MARK: 逻辑
+
+    private func setup() {
+        guard catalog == nil else { return }
+        guard let url = Bundle.main.url(forResource: "feed-pairs", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let c = FeedCatalog.decode(data) else { return }
+        catalog = c
+        var loaded: [String: UIImage] = [:]
+        for p in c.pairs {
+            for w in [p.animal, p.food] where loaded[w] == nil {
+                if let u = Bundle.main.resourceURL?.appendingPathComponent("scenes/feed/\(w).png"),
+                   let ui = UIImage(contentsOfFile: u.path) {
+                    loaded[w] = ui
+                }
+            }
+        }
+        images = loaded
+        newGame()
+    }
+
+    private func newGame() {
+        guard let catalog else { return }
+        if LaunchOptions.isUIScreenshotRun {
+            // 截图：固定从 monkey 开始、选项顺序固定，方便对图
+            var rng = SeededGenerator(seed: 7)
+            rounds = FeedGame.makeRounds(catalog.pairs, shuffleAnimals: false, using: &rng)
+        } else {
+            rounds = FeedGame.makeRounds(catalog.pairs)
+        }
+        index = 0; stars = 0; locked = false; eaten = nil; dragging = nil
+        dragOffset = .zero; reply = nil; hop = false
+        withAnimation { finished = false }
+
+        if Self.args.contains("-uiFeedDone") {
+            stars = FeedGame.roundsPerGame; finished = true
+            return
+        }
+        if Self.args.contains("-uiFeedDrag") || Self.args.contains("-uiFeedYummy") || Self.args.contains("-uiFeedNo") {
+            locked = true
+            // 等舞台和托盘量好位置再摆出截图状态
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { stageScreenshot() }
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { playWant() }
+    }
+
+    private func stageScreenshot() {
+        guard let round, let ci = round.correctIndex, let from = slotFrames[ci] else { return }
+        let to = CGSize(width: animalFrame.midX - from.midX, height: animalFrame.midY - from.midY)
+        if Self.args.contains("-uiFeedDrag") {
+            dragging = ci
+            dragOffset = CGSize(width: to.width * 0.6, height: to.height * 0.6)
+        } else if Self.args.contains("-uiFeedYummy") {
+            stars = 1; dragging = ci; dragOffset = to; eaten = ci
+            reply = round.pair.yummy
+        } else if Self.args.contains("-uiFeedNo") {
+            reply = catalog?.noThanks
+        }
+    }
+
+    private func audioURL(_ key: String) -> URL? {
+        guard let file = store.audioMap[key] else { return nil }
+        return Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)")
+    }
+
+    private func playWant() {
+        guard let food = round?.pair.food, let url = audioURL(FeedGame.wantKey(food)) else { return }
+        player.play(url: url)
+    }
+
+    private func dragGesture(_ i: Int, food: String) -> some Gesture {
+        DragGesture(minimumDistance: 2, coordinateSpace: .named(Self.space))
+            .onChanged { v in
+                guard !locked, dragging == nil || dragging == i else { return }
+                dragging = i
+                dragOffset = v.translation
+            }
+            .onEnded { v in
+                guard !locked, dragging == i, let round else { return }
+                drop(i, food: food, at: v.location, round: round)
+            }
+    }
+
+    private func springBack(_ i: Int) {
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.6)) { dragOffset = .zero }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+            if dragging == i && dragOffset == .zero { dragging = nil }
+        }
+    }
+
+    private func drop(_ i: Int, food: String, at point: CGPoint, round: FeedRound) {
+        switch FeedGame.outcome(dropping: food, at: point, round: round, animalFrame: animalFrame) {
+        case .missed:
+            springBack(i)
+
+        case .refused:
+            locked = true
+            errorTrigger += 1
+            springBack(i)
+            withAnimation(.linear(duration: 0.6)) { shake += 1 }
+            withAnimation { reply = catalog?.noThanks }
+            if let url = audioURL(FeedGame.noThanksKey) { player.play(url: url) }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                withAnimation { reply = nil }
+                locked = false
+                playWant()
+            }
+
+        case .eaten:
+            locked = true
+            successTrigger += 1
+            let from = slotFrames[i] ?? .zero
+            let to = CGSize(width: animalFrame.midX - from.midX, height: animalFrame.midY - from.midY)
+            withAnimation(.easeIn(duration: 0.3)) { dragOffset = to; eaten = i }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                stars += 1
+                withAnimation { reply = round.pair.yummy }
+                withAnimation(.spring(response: 0.25, dampingFraction: 0.45)) { hop = true }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { hop = false }
+                }
+                if let url = audioURL(FeedGame.yummyKey(round.pair.food)) { player.play(url: url) }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+                eaten = nil; dragging = nil; dragOffset = .zero; reply = nil
+                if index + 1 < rounds.count {
+                    index += 1
+                    locked = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { playWant() }
+                } else {
+                    withAnimation(.spring(response: 0.45, dampingFraction: 0.7)) { finished = true }
+                }
+            }
+        }
+    }
+}
+
+/// 量出某个视图在「喂小动物」坐标系里的位置（判定是否拖到了动物身上用）
+private struct FeedFrameReader: View {
+    let onChange: (CGRect) -> Void
+    var body: some View {
+        GeometryReader { g in
+            let f = g.frame(in: .named(FeedAnimalGame.space))
+            Color.clear
+                .onAppear { onChange(f) }
+                .onChange(of: f) { _, new in onChange(new) }
+        }
     }
 }
 
