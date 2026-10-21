@@ -432,13 +432,15 @@ struct ConsolidationView: View {
     @Environment(\.dismiss) private var dismiss
     let words: [WordEntry]
     enum Mode: String, CaseIterable, Identifiable {
-        case wordToImage="看词选图", audioToImage="听音选图", matching="配对消除",
+        case findInScene="听音找一找",
+             wordToImage="看词选图", audioToImage="听音选图", matching="配对消除",
              wordToAudio="看词选音", imageToWord="看图选词", audioToWord="听音选词",
              audioToMeaning="听音选义", wordToMeaning="看词选义", dictation="听写训练"
         var id: String { rawValue }
 
         var iconName: String {
             switch self {
+            case .findInScene: return "game-findscene"
             case .wordToImage: return "game-lookword"
             case .audioToImage: return "game-listenimage"
             case .matching: return "game-match"
@@ -454,7 +456,7 @@ struct ConsolidationView: View {
         /// 难度：1 = 简单，2 = 中等
         var difficultyLevel: Int {
             switch self {
-            case .wordToImage, .audioToImage, .wordToAudio, .wordToMeaning:
+            case .findInScene, .wordToImage, .audioToImage, .wordToAudio, .wordToMeaning:
                 return 1
             default:
                 return 2
@@ -479,7 +481,7 @@ struct ConsolidationView: View {
         var skill: Skill {
             switch self {
             case .wordToImage, .wordToAudio, .imageToWord, .wordToMeaning: return .look
-            case .audioToImage, .audioToWord, .audioToMeaning: return .listen
+            case .findInScene, .audioToImage, .audioToWord, .audioToMeaning: return .listen
             case .matching: return .match
             case .dictation: return .write
             }
@@ -488,6 +490,7 @@ struct ConsolidationView: View {
         /// 参考图 9 种玩法是 9 个不同色相，不是按技能归成 4 色
         var color: Color {
             switch self {
+            case .findInScene:   return Color(red: 0.93, green: 0.45, blue: 0.62)  // 玫红
             case .wordToImage:   return Color(red: 0.36, green: 0.55, blue: 0.94)  // 蓝
             case .audioToImage:  return Color(red: 0.48, green: 0.78, blue: 0.49)  // 绿
             case .matching:      return Color(red: 0.64, green: 0.48, blue: 0.91)  // 紫
@@ -571,7 +574,7 @@ struct ConsolidationView: View {
                         Text("🎮").kidFont(34, maxScale: 1.15)
                     }
                     .padding(.top, 8)
-                    Text("9 种游戏，越玩越熟")
+                    Text("\(Mode.allCases.count) 种游戏，越玩越熟")
                         .pageSubtitleStyle()
 
                     LazyVGrid(columns: columns, spacing: 12) {
@@ -639,6 +642,15 @@ struct ConsolidationView: View {
 
     @ViewBuilder
     private func gameView(for m: Mode) -> some View {
+        if m == .findInScene {
+            // 听音找一找自带顶栏（返回 + 星星），整页是场景面板，不套通用标题和滚动容器
+            FindInSceneGame(onBack: { mode = nil })
+        } else {
+            commonGameView(for: m)
+        }
+    }
+
+    private func commonGameView(for m: Mode) -> some View {
         VStack(spacing: 0) {
             // 游戏内需要一条返回入口（网格页的顶栏已去掉，改为浮层）
             HStack {
@@ -673,6 +685,7 @@ struct ConsolidationView: View {
             ScrollView {
                 Group {
                     switch m {
+                    case .findInScene: EmptyView()
                     case .wordToImage: WordToImageGame(words: words)
                     case .audioToImage: AudioToImageGame(words: words)
                     case .matching: MatchingGame(words: words)
@@ -687,6 +700,344 @@ struct ConsolidationView: View {
                 .id(m)
             }
         }
+    }
+}
+
+// MARK: - 听音找一找
+
+/// 一张场景面板里摆 7–8 个物品（现成词图抠的透明 PNG），App 只用声音问「Where is the duck?」。
+/// 点对：物品放大 1.15 倍再弹回、金色光圈、读单词 + 表扬，亮一颗星；
+/// 点错：物品左右晃一下，再问一遍。每轮 5 题，没有倒计时，画面上不放中文说明。
+/// 摆放规则（台面贴线、墙面只挂能挂的）在 Models.swift 的 SceneLayout，单测见 SceneTests。
+struct FindInSceneGame: View {
+    var onBack: () -> Void
+
+    @Environment(DataStore.self) private var store
+    @State private var player = AudioPlayer()
+
+    @State private var scenes: [FindScene] = []
+    @State private var scene: FindScene?
+    @State private var background: UIImage?
+    @State private var itemImages: [String: UIImage] = [:]
+    @State private var questions: [String] = []
+    @State private var index = 0
+    @State private var stars = 0
+    @State private var finished = false
+    @State private var locked = false
+    /// 正在「答对」动画中的物品
+    @State private var foundWord: String?
+    @State private var popped = false
+    /// 每个物品被点错的次数，驱动晃动动画
+    @State private var shakes: [String: CGFloat] = [:]
+    @State private var successTrigger = 0
+    @State private var errorTrigger = 0
+
+    static let questionsPerRound = 5
+    /// 复数词用 are（和音频 find#where-<word> 一致）
+    static let pluralWords: Set<String> = ["shoes", "blocks"]
+
+    static func question(for word: String) -> String {
+        pluralWords.contains(word) ? "Where are the \(word)?" : "Where is the \(word)?"
+    }
+
+    private static var args: [String] { ProcessInfo.processInfo.arguments }
+
+    var body: some View {
+        VStack(spacing: 14) {
+            topBar
+            if let scene {
+                if finished {
+                    celebration
+                } else {
+                    panel(scene)
+                    Spacer(minLength: 8)
+                    promptBar
+                }
+            } else {
+                Spacer()
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(Palette.canvas.ignoresSafeArea())
+        .onAppear(perform: setup)
+        .sensoryFeedback(.success, trigger: successTrigger)
+        .sensoryFeedback(.error, trigger: errorTrigger)
+    }
+
+    // MARK: 顶栏：返回 + 5 颗星
+
+    private var topBar: some View {
+        HStack {
+            Button(action: onBack) {
+                Image(systemName: "chevron.left")
+                    .kidFont(20, .bold, maxScale: 1.15)
+                    .foregroundStyle(Palette.ink)
+                    .frame(width: 48, height: 48)
+                    .background(Palette.surface, in: Circle())
+                    .shadow(color: .black.opacity(0.10), radius: 4, y: 2)
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("返回")
+
+            Spacer()
+
+            HStack(spacing: 6) {
+                ForEach(0..<Self.questionsPerRound, id: \.self) { i in
+                    Image(systemName: i < stars ? "star.fill" : "star")
+                        .kidFont(26, .bold, maxScale: 1.15)
+                        .foregroundStyle(i < stars ? Color(red: 1.0, green: 0.72, blue: 0.10) : Palette.inkSubtle)
+                }
+            }
+            .accessibilityLabel("\(stars) / \(Self.questionsPerRound)")
+        }
+        .padding(.top, 4)
+    }
+
+    // MARK: 场景面板（等比显示，不拉伸）
+
+    private func panel(_ scene: FindScene) -> some View {
+        GeometryReader { geo in
+            let w = geo.size.width, h = geo.size.height
+            ZStack(alignment: .topLeading) {
+                Group {
+                    if let background {
+                        Image(uiImage: background).resizable()
+                    } else {
+                        // 背景图缺失时的占位渐变（不影响玩）
+                        LinearGradient(colors: [Color(red: 0.74, green: 0.88, blue: 0.98),
+                                                Color(red: 0.70, green: 0.86, blue: 0.55)],
+                                       startPoint: .top, endPoint: .bottom)
+                            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                    }
+                }
+                .frame(width: w, height: h)
+
+                ForEach(SceneLayout.placements(for: scene), id: \.word) { p in
+                    item(p, side: p.width * w)
+                        .position(x: p.centerX * w, y: p.centerY * h)
+                }
+            }
+        }
+        .aspectRatio(scene.aspectRatio, contentMode: .fit)
+        .frame(maxWidth: .infinity)
+        .layoutPriority(1)
+    }
+
+    private func item(_ p: ScenePlacement, side: CGFloat) -> some View {
+        let isFound = foundWord == p.word
+        let hit = max(side, 64)   // 可点区域不小于 64pt
+        return Button {
+            tap(p.word)
+        } label: {
+            ZStack {
+                if isFound {
+                    Circle()
+                        .fill(Color(red: 1.0, green: 0.85, blue: 0.25).opacity(0.35))
+                        .overlay(Circle().strokeBorder(Color(red: 1.0, green: 0.75, blue: 0.10), lineWidth: 5))
+                        .shadow(color: Color(red: 1.0, green: 0.80, blue: 0.20).opacity(0.9), radius: 10)
+                        .frame(width: side * 1.25, height: side * 1.25)
+                }
+                itemImage(p.word)
+                    .frame(width: side, height: side)
+            }
+            .frame(width: hit, height: hit)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .scaleEffect(isFound && popped ? 1.15 : 1)
+        .modifier(FindShakeEffect(animatableData: shakes[p.word] ?? 0))
+        .zIndex(isFound ? 1 : 0)
+        .accessibilityLabel(p.word)
+    }
+
+    @ViewBuilder
+    private func itemImage(_ word: String) -> some View {
+        if let ui = itemImages[word] {
+            Image(uiImage: ui).resizable().scaledToFit()
+        } else {
+            WordIconView(word: word, size: 60)
+        }
+    }
+
+    // MARK: 底部提示条：只放英文问句 + 喇叭
+
+    private var promptBar: some View {
+        HStack(spacing: 14) {
+            Button(action: playQuestion) {
+                Image(systemName: "speaker.wave.2.fill")
+                    .kidFont(28, .bold, maxScale: 1.15)
+                    .foregroundStyle(.white)
+                    .frame(width: 66, height: 66)
+                    .background(Color(red: 0.98, green: 0.52, blue: 0.08), in: Circle())
+                    .shadow(color: .black.opacity(0.12), radius: 3, y: 2)
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityLabel("再听一遍")
+
+            Text("“\(Self.question(for: questions[safe: index] ?? ""))”")
+                .kidFont(26, .heavy, maxScale: 1.15)
+                .foregroundStyle(Palette.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.55)
+            Spacer(minLength: 0)
+        }
+        .padding(14)
+        .background(Palette.surface, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
+        .shadow(color: .black.opacity(0.08), radius: 6, y: 2)
+    }
+
+    // MARK: 庆祝页（无中文）
+
+    private var celebration: some View {
+        VStack(spacing: 22) {
+            Spacer()
+            HStack(spacing: 8) {
+                ForEach(0..<Self.questionsPerRound, id: \.self) { _ in
+                    Image(systemName: "star.fill")
+                        .kidFont(44, .bold, maxScale: 1.15)
+                        .foregroundStyle(Color(red: 1.0, green: 0.72, blue: 0.10))
+                }
+            }
+            if let word = questions.last {
+                itemImage(word)
+                    .frame(width: 150, height: 150)
+            }
+            Text("Great job!")
+                .kidFont(46, .heavy, maxScale: 1.15)
+                .foregroundStyle(Palette.ink)
+            HStack(spacing: 28) {
+                roundButton("arrow.counterclockwise", color: Color(red: 0.20, green: 0.55, blue: 0.95), label: "再玩一次") {
+                    if let scene { startRound(scene) }
+                }
+                roundButton("arrow.right", color: Color(red: 0.10, green: 0.62, blue: 0.18), label: "换一个场景") {
+                    nextScene()
+                }
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
+        .transition(.scale.combined(with: .opacity))
+    }
+
+    private func roundButton(_ symbol: String, color: Color, label: String,
+                             action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .kidFont(34, .heavy, maxScale: 1.15)
+                .foregroundStyle(.white)
+                .frame(width: 84, height: 84)
+                .background(color, in: Circle())
+                .shadow(color: .black.opacity(0.12), radius: 4, y: 2)
+        }
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel(label)
+    }
+
+    // MARK: 逻辑
+
+    private func setup() {
+        guard scenes.isEmpty else { return }
+        if let url = Bundle.main.url(forResource: "scenes", withExtension: "json", subdirectory: "scenes"),
+           let data = try? Data(contentsOf: url) {
+            scenes = SceneCatalog.decode(data)
+        }
+        let wanted = LaunchOptions.value(for: "-uiScene")
+        guard let first = scenes.first(where: { $0.id == wanted }) ?? scenes.randomElement() else { return }
+        startRound(first)
+    }
+
+    private func load(_ relative: String) -> UIImage? {
+        guard let url = Bundle.main.resourceURL?.appendingPathComponent("scenes/\(relative)") else { return nil }
+        return UIImage(contentsOfFile: url.path)
+    }
+
+    private func startRound(_ s: FindScene) {
+        scene = s
+        background = load(s.background)
+        var images: [String: UIImage] = [:]
+        for item in s.items {
+            if let ui = load("items/\(item.word.replacingOccurrences(of: " ", with: "_")).png") {
+                images[item.word] = ui
+            }
+        }
+        itemImages = images
+        let words = s.items.map(\.word)
+        // 截图模式下固定顺序，方便对图；平时随机出 5 题
+        let pool = LaunchOptions.isUIScreenshotRun ? words : words.shuffled()
+        questions = Array(pool.prefix(Self.questionsPerRound))
+        index = 0; stars = 0; locked = false; foundWord = nil; popped = false; shakes = [:]
+        finished = false
+
+        if Self.args.contains("-uiSceneDone") {
+            stars = Self.questionsPerRound
+            finished = true
+            return
+        }
+        if Self.args.contains("-uiSceneFound"), let w = questions.first {
+            // 截图：展示「答对了」的样子（金色光圈 + 2 颗星）
+            stars = 2; foundWord = w; locked = true
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { playQuestion() }
+    }
+
+    private func nextScene() {
+        guard !scenes.isEmpty else { return }
+        let i = scenes.firstIndex(where: { $0.id == scene?.id }) ?? -1
+        startRound(scenes[(i + 1) % scenes.count])
+    }
+
+    private func audioURL(_ key: String) -> URL? {
+        guard let file = store.audioMap[key] else { return nil }
+        return Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)")
+    }
+
+    private func playQuestion() {
+        guard let word = questions[safe: index],
+              let url = audioURL("find#where-\(word)") else { return }
+        player.play(url: url)
+    }
+
+    private func tap(_ word: String) {
+        guard !locked, !finished, let target = questions[safe: index] else { return }
+        if word == target {
+            locked = true
+            stars += 1
+            successTrigger += 1
+            foundWord = word
+            withAnimation(.spring(response: 0.22, dampingFraction: 0.5)) { popped = true }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { popped = false }
+            }
+            if let url = store.bestAudioURL(forWord: word) { player.play(url: url) }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                if let url = audioURL("find#praise-\(Int.random(in: 1...3))") { player.play(url: url) }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                foundWord = nil
+                if index + 1 < questions.count {
+                    index += 1
+                    locked = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { playQuestion() }
+                } else {
+                    withAnimation(.spring(response: 0.45, dampingFraction: 0.7)) { finished = true }
+                }
+            }
+        } else {
+            errorTrigger += 1
+            withAnimation(.linear(duration: 0.45)) { shakes[word, default: 0] += 1 }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { playQuestion() }
+        }
+    }
+}
+
+/// 点错时左右晃：animatableData 每 +1 晃 3 个来回，停在原位
+private struct FindShakeEffect: GeometryEffect {
+    var animatableData: CGFloat
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        ProjectionTransform(CGAffineTransform(translationX: 8 * sin(animatableData * .pi * 6), y: 0))
     }
 }
 
