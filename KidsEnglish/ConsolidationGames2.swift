@@ -906,9 +906,22 @@ struct FindInSceneGame: View {
                         .foregroundStyle(Color(red: 1.0, green: 0.72, blue: 0.10))
                 }
             }
-            if let word = questions.last {
-                itemImage(word)
-                    .frame(width: 150, height: 150)
+            // 这一轮找到的 5 个物品排成一行，点一下再读一遍
+            HStack(spacing: 8) {
+                ForEach(questions, id: \.self) { word in
+                    Button {
+                        if let url = store.bestAudioURL(forWord: word) { player.play(url: url) }
+                    } label: {
+                        itemImage(word)
+                            .frame(width: 54, height: 54)
+                            .frame(width: 64, height: 64)
+                            .background(Palette.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .shadow(color: .black.opacity(0.08), radius: 3, y: 1)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityLabel(word)
+                }
             }
             Text("Great job!")
                 .kidFont(46, .heavy, maxScale: 1.15)
