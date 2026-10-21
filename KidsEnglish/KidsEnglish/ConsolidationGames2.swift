@@ -743,15 +743,21 @@ struct FindInSceneGame: View {
     private static var args: [String] { ProcessInfo.processInfo.arguments }
 
     var body: some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 0) {
             topBar
             if let scene {
                 if finished {
                     celebration
                 } else {
-                    panel(scene)
-                    Spacer(minLength: 8)
-                    promptBar
+                    // 面板 + 问句条作为一组，在星星行和底栏之间垂直居中；
+                    // 两者间距 20pt。屏幕矮时先缩面板（等比，不拉伸），问句条保持原高。
+                    Spacer(minLength: 10)
+                    VStack(spacing: 20) {
+                        panel(scene)
+                        promptBar
+                            .layoutPriority(2)
+                    }
+                    Spacer(minLength: 10)
                 }
             } else {
                 Spacer()
