@@ -37,6 +37,7 @@
 		654BB740169A2F333CAEB4F1 = {isa = PBXBuildFile; fileRef = FD71565A54ED9F6A12FA784E; };
 		7F0F216588F0037A2F080895 = {isa = PBXBuildFile; fileRef = 42807621712A59ED2A212F1A; };
 		BC1DF44FB040985DDD70BC10 = {isa = PBXBuildFile; fileRef = 252416FE70EAD2BF45F79ABC; };
+		B7FEED0A1D2E4B6C8F0A1B31 = {isa = PBXBuildFile; fileRef = B7FEED0A1D2E4B6C8F0A1B32; };
 		2503F5EC11300CEFE3A6F74C = {isa = PBXBuildFile; fileRef = 1E3664910BAC14F2F73085D9; };
 		9960BF1DF2DB97B421EF442F = {isa = PBXBuildFile; fileRef = 10B653C8504A61148A750B28; };
 		1158BA752400577EF3B7ADD0 = {isa = PBXBuildFile; fileRef = B78F5EDCA032E876F2419E23; };
@@ -85,6 +86,7 @@
 		FD71565A54ED9F6A12FA784E = {isa = PBXFileReference; lastKnownFileType = text.json; path = custom-lessons.json; sourceTree = "<group>"; };
 		42807621712A59ED2A212F1A = {isa = PBXFileReference; lastKnownFileType = text.json; path = custom-songs.json; sourceTree = "<group>"; };
 		252416FE70EAD2BF45F79ABC = {isa = PBXFileReference; lastKnownFileType = text.json; path = custom-audio-map.json; sourceTree = "<group>"; };
+		B7FEED0A1D2E4B6C8F0A1B32 = {isa = PBXFileReference; lastKnownFileType = text.json; path = "feed-pairs.json"; sourceTree = "<group>"; };
 		1E3664910BAC14F2F73085D9 = {isa = PBXFileReference; lastKnownFileType = text.json; path = lessons-l1.json; sourceTree = "<group>"; };
 		10B653C8504A61148A750B28 = {isa = PBXFileReference; lastKnownFileType = text.json; path = lessons-l2.json; sourceTree = "<group>"; };
 		B78F5EDCA032E876F2419E23 = {isa = PBXFileReference; lastKnownFileType = text.json; path = lessons-l3.json; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				654BB740169A2F333CAEB4F1,
 				7F0F216588F0037A2F080895,
 				BC1DF44FB040985DDD70BC10,
+				B7FEED0A1D2E4B6C8F0A1B31,
 				2503F5EC11300CEFE3A6F74C,
 				9960BF1DF2DB97B421EF442F,
 				1158BA752400577EF3B7ADD0,
@@ -222,6 +225,7 @@
 				FD71565A54ED9F6A12FA784E,
 				42807621712A59ED2A212F1A,
 				252416FE70EAD2BF45F79ABC,
+				B7FEED0A1D2E4B6C8F0A1B32,
 				1E3664910BAC14F2F73085D9,
 				10B653C8504A61148A750B28,
 				B78F5EDCA032E876F2419E23,
