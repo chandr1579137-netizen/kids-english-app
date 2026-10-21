@@ -158,3 +158,41 @@ enum Streak {
         return count
     }
 }
+
+// MARK: - 首页单词本
+
+enum HomeBooks {
+    /// 首页单词本的词过滤（可配置）。key = 主题 id，value = 首页这本书只保留的词（小写，按主题原顺序出词）。
+    /// 只影响「背单词」首页：单词本卡片词数、全部单词总数、计划卡「已学 x / 总数」、开始学习出的词。
+    /// 「单词卡」页和词库数据（word-themes.json）不受影响，11–100 仍然在单词卡里。
+    /// 已经学过的 11–100 的 learnedWords 记录不删除，只是不再从首页排进计划。
+    static let homeBookWordFilter: [String: Set<String>] = [
+        "numbers": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+    ]
+
+    /// 某本书在首页上的词（保持主题内原顺序；没有配置过滤的主题原样返回）。
+    static func homeWords(themeId: String, words: [String]) -> [String] {
+        guard let allowed = homeBookWordFilter[themeId] else { return words }
+        return words.filter { allowed.contains($0.lowercased()) }
+    }
+
+    /// 首页「全部单词」可学词集合 = ThemeWhitelist.allowedWords(dictionary:, themes: 各主题经 homeWords 过滤后的词并集)
+    static func allowedWords(dictionary: [String], themes: [WordTheme]) -> Set<String> {
+        let curated = themes.flatMap { homeWords(themeId: $0.id, words: $0.words) }
+        return ThemeWhitelist.allowedWords(dictionary: dictionary, themes: curated)
+    }
+
+    /// 单词本排序：全部单词之后按这个顺序；不在表里的主题按原顺序排最后。
+    /// clothing 放在 home 后面（以前漏了）。
+    static let themeOrder = [
+        "fruits", "animals", "colors", "numbers", "body", "family", "foods", "vehicles",
+        "home", "clothing", "nature", "toys", "stationery", "places", "actions", "adjectives"
+    ]
+
+    static func sorted(_ ids: [String]) -> [String] {
+        let rank = Dictionary(uniqueKeysWithValues: themeOrder.enumerated().map { ($1, $0) })
+        let known = ids.filter { rank[$0] != nil }.sorted { rank[$0]! < rank[$1]! }
+        let unknown = ids.filter { rank[$0] == nil }
+        return known + unknown
+    }
+}

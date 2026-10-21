@@ -11,6 +11,8 @@ class DataStore {
     var audioMap: [String: String] = [:]
     var wordAudioMap: [String: String] = [:]
     var wordDict: [String: WordEntry] = [:]
+    /// 首页可学词表（数字本只留 one..ten；「单词卡」和巩固练习仍用全量 words）
+    var homeWords: [WordEntry] = []
 
     // 进度（持久化）
     var completedLessons: Set<String> = []
@@ -85,6 +87,10 @@ class DataStore {
             themes: wordThemes.flatMap { $0.words }
         )
         words = allWords.filter { allowed.contains($0.word.lowercased()) }
+
+        // 首页词表：数字本只留 one..ten；「单词卡」和巩固练习仍用全量 words。
+        let homeAllowed = HomeBooks.allowedWords(dictionary: allWords.map { $0.word }, themes: wordThemes)
+        homeWords = allWords.filter { homeAllowed.contains($0.word.lowercased()) }
     }
 
     private func load<T: Decodable>(_ name: String, as type: T.Type) -> T? {
@@ -188,6 +194,18 @@ class DataStore {
         return theme.words.compactMap { wordDict[$0.lowercased()] }
     }
 
+    /// 首页某本书的可学词（数字本只留 one..ten）
+    func homeWords(forTheme themeId: String) -> [WordEntry] {
+        guard let theme = wordThemes.first(where: { $0.id == themeId }) else { return [] }
+        return HomeBooks.homeWords(themeId: themeId, words: theme.words)
+            .compactMap { wordDict[$0.lowercased()] }
+    }
+
+    /// 首页计划卡上的「已学」计数（跟首页可学词表同口径）
+    var homeLearnedCount: Int {
+        homeWords.filter { learnedWords.contains($0.id) }.count
+    }
+
     func themeProgress(themeId: String) -> (done: Int, total: Int) {
         let list = words(forTheme: themeId)
         let done = list.filter { learnedWords.contains($0.id) }.count
@@ -196,17 +214,15 @@ class DataStore {
 
     func wordsForCurrentBook() -> [WordEntry] {
         if let id = selectedThemeId {
-            return words(forTheme: id)
+            return homeWords(forTheme: id)
         }
-        return words
+        return homeWords
     }
 
     /// 全部单词时先学能看图的主题（水果、动物、颜色…），虚词和抽象词靠后。
     /// 选了某一本词书时，按这本书自己的顺序。
-    static let picturableThemeOrder = [
-        "fruits", "animals", "colors", "numbers", "body", "family", "foods", "vehicles",
-        "home", "nature", "toys", "stationery", "places", "actions", "adjectives"
-    ]
+    /// 顺序表在 HomeBooks.themeOrder（17 本词书共用一份），这里只是别名。
+    static let picturableThemeOrder = HomeBooks.themeOrder
 
     private var wordThemeRank: [String: (tier: Int, index: Int)] = [:]
     private var didRankThemes = false
@@ -231,7 +247,7 @@ class DataStore {
             pool = wordsForCurrentBook().filter { !learnedWords.contains($0.id) }
         } else {
             ensureThemeRank()
-            let unlearned = words.filter { !learnedWords.contains($0.id) }
+            let unlearned = homeWords.filter { !learnedWords.contains($0.id) }
             // 跨主题交错：第 0 波是每个主题的第一个词，避免大主题独占前 30 天
             pool = StudyPlan.interleavedOrder(unlearned) { entry in
                 let r = wordThemeRank[entry.id] ?? (tier: 900, index: 0)
