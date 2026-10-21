@@ -57,8 +57,8 @@ jobs:
       - name: Verify duplicated resources are in sync
         run: |
           fail=0
-          for f in KidsEnglish/Resources/*.json; do
-            b="KidsEnglish/KidsEnglish/Resources/$(basename "$f")"
+          for f in KidsEnglish/Resources/*.json KidsEnglish/Resources/scenes/*.json; do
+            b="KidsEnglish/KidsEnglish/${f#KidsEnglish/}"
             if [ -f "$b" ] && ! diff -q "$f" "$b" >/dev/null; then
               echo "::error file=$f::与 $b 不一致"
               fail=1
@@ -122,6 +122,15 @@ jobs:
               sys.exit(1)
           PYEOF
 
+      # 听音找一找：场景里的物品用现成词图（覆盖图已写入之后）四边泛洪抠成透明 PNG
+      - name: Make scene item cutouts
+        run: |
+          .venv-icons/bin/python scripts/make_scene_items.py \
+            KidsEnglish/KidsEnglish/Resources/scenes/scenes.json \
+            KidsEnglish/KidsEnglish/Resources/word-icons \
+            KidsEnglish/KidsEnglish/Resources/scenes/items
+          ls KidsEnglish/KidsEnglish/Resources/scenes/items | wc -l
+
       - name: Apply song audio (Aria 统一音色)
         # 儿歌原始音频在资源包里，unzip -o 会覆盖仓库文件，
         # 所以解压之后再把仓库里的 Aria 版本盖回去
@@ -161,7 +170,8 @@ jobs:
           audio = root / 'audio'
           word = json.loads((root / 'word-audio-map.json').read_text())
           lesson = json.loads((root / 'audio-map.json').read_text())
-          keep = set(word.values()) | set(lesson.values())
+          custom = json.loads((root / 'custom-audio-map.json').read_text())
+          keep = set(word.values()) | set(lesson.values()) | set(custom.values())
           removed = 0
           for f in audio.glob('*.mp3'):
               if f.name not in keep:

@@ -52,6 +52,7 @@
 		686BEA4E5CE64DE20884227D = {isa = PBXBuildFile; fileRef = 0165BC5986948FBF449B15F8; };
 		311E08C45361757CC5EBA427 = {isa = PBXBuildFile; fileRef = DEB8EED4E893E335D32F937D; };
 		E96FD2123F6A40C08873612D = {isa = PBXBuildFile; fileRef = 9F2793DCE21A47EEB380CF88; };
+		A5CE0E5F1D2E4B6C8F0A1B21 = {isa = PBXBuildFile; fileRef = A5CE0E5F1D2E4B6C8F0A1B22; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		DEB8EED4E893E335D32F937D = {isa = PBXFileReference; lastKnownFileType = text.json; path = word-themes.json; sourceTree = "<group>"; };
 		205BEB5AA5AEAD82FAB38C09 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F2793DCE21A47EEB380CF88 = {isa = PBXFileReference; lastKnownFileType = folder; path = ui-icons; sourceTree = "<group>"; };
+		A5CE0E5F1D2E4B6C8F0A1B22 = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				686BEA4E5CE64DE20884227D,
 				311E08C45361757CC5EBA427,
 				E96FD2123F6A40C08873612D,
+				A5CE0E5F1D2E4B6C8F0A1B21,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +243,7 @@
 				0165BC5986948FBF449B15F8,
 				DEB8EED4E893E335D32F937D,
 				9F2793DCE21A47EEB380CF88,
+				A5CE0E5F1D2E4B6C8F0A1B22,
 			);
 			name = Resources;
 			path = Resources;
