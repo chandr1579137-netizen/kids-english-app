@@ -245,10 +245,16 @@ jobs:
           }
 
           shoot 01-learn    -uiTab 0
+          # 首页单词本滑到最右：验证 17 本都在
+          shoot 01b-learn-books-right -uiTab 0 -uiBooksScrolled
           shoot 02-cards    -uiTab 1
           shoot 03-read     -uiTab 2
           shoot 05-profile  -uiTab 4
           shoot 06-study    -uiTab 0 -uiStudy
+          # 选数字本后开始学习：只出 one..ten；选服装：只出 clothes/shoes/hat
+          shoot 06b-study-numbers  -uiTab 0 -uiBook numbers -uiStudy
+          shoot 06c-study-clothing -uiTab 0 -uiBook clothing -uiStudy
+          shoot 06d-learn-numbers-selected -uiTab 0 -uiBook numbers
           # 新增：这两页原本不在覆盖内，里面的旧系统色因此长期没被发现
           shoot 07-games    -uiTab 0 -uiConsolidate
           shoot 08-lesson   -uiTab 2 -uiLesson
@@ -275,6 +281,7 @@ jobs:
 
           # 大字号：验证 Dynamic Type 下没有文字被裁/错位（-uiLargeText → accessibility2）
           shoot 24-large-learn   -uiTab 0 -uiLargeText
+          shoot 24b-large-learn-books-right -uiTab 0 -uiBooksScrolled -uiLargeText
           shoot 25-large-cards   -uiTab 1 -uiLargeText
           shoot 26-large-lesson  -uiTab 2 -uiLesson -uiLargeText
 

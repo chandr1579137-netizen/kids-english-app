@@ -206,3 +206,87 @@ final class ProgressKitTests: XCTestCase {
                        "没有按天 key 时什么都不清理")
     }
 }
+
+// MARK: - 首页单词本（真实资源）
+
+/// 这些用例直接读仓库里的 Resources——mock 只能证明过滤逻辑，
+/// 证明不了「数据本身还是 483 词 / 数字本还是 100 词」。
+final class HomeBooksTests: XCTestCase {
+
+    /// Tests/KidsEnglishCoreTests/ProgressKitTests.swift → 仓库根
+    private var resources: URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("KidsEnglish/KidsEnglish/Resources")
+    }
+
+    private func decode<T: Decodable>(_ type: T.Type, from file: String) throws -> T {
+        let data = try Data(contentsOf: resources.appendingPathComponent(file))
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+
+    private func loadThemes() throws -> [WordTheme] {
+        try decode([WordTheme].self, from: "word-themes.json")
+    }
+
+    private func loadDictionary() throws -> [String] {
+        var words: [WordEntry] = []
+        for file in ["words-a.json", "words-b.json", "words-c.json", "words-d.json"] {
+            words += try decode([WordEntry].self, from: file)
+        }
+        return words.map { $0.word }
+    }
+
+    func testHomeNumbersBookIsExactlyOneToTen() throws {
+        let themes = try loadThemes()
+        let numbers = try XCTUnwrap(themes.first { $0.id == "numbers" })
+        let home = HomeBooks.homeWords(themeId: "numbers", words: numbers.words)
+
+        XCTAssertEqual(home, ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"])
+        XCTAssertEqual(home.count, 10)
+        XCTAssertEqual(numbers.words.count, 100, "数据不动：word-themes.json 的数字主题仍是 100 词")
+    }
+
+    func testHomeAllWordsExcludesElevenToHundred() throws {
+        let themes = try loadThemes()
+        let dictionary = try loadDictionary()
+
+        let full = ThemeWhitelist.allowedWords(dictionary: dictionary, themes: themes.flatMap { $0.words })
+        let home = HomeBooks.allowedWords(dictionary: dictionary, themes: themes)
+
+        let numbers = try XCTUnwrap(themes.first { $0.id == "numbers" })
+        let keep = Set(["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"])
+        let otherThemeWords = Set(themes.filter { $0.id != "numbers" }.flatMap { $0.words }.map { $0.lowercased() })
+        let excluded = Set(numbers.words.map { $0.lowercased() }).subtracting(keep).subtracting(otherThemeWords)
+
+        XCTAssertEqual(home, full.subtracting(excluded))
+        XCTAssertEqual(home.count, full.count - 90)
+        XCTAssertFalse(home.contains("eleven"))
+        XCTAssertFalse(home.contains("twenty"))
+        XCTAssertFalse(home.contains("hundred"))
+        XCTAssertTrue(home.contains("ten"))
+        XCTAssertEqual(home.count, 483, "PM acceptance number from data on main 51fad39")
+    }
+
+    func testHomeFilterLeavesOtherThemesUntouched() throws {
+        let themes = try loadThemes()
+        let fruits = try XCTUnwrap(themes.first { $0.id == "fruits" })
+        XCTAssertEqual(HomeBooks.homeWords(themeId: "fruits", words: fruits.words), fruits.words)
+    }
+
+    func testBookOrder() throws {
+        let themes = try loadThemes()
+        let sorted = HomeBooks.sorted(themes.map { $0.id })
+
+        XCTAssertEqual(sorted.count, 16)
+        XCTAssertEqual(Set(sorted), Set(themes.map { $0.id }))
+        XCTAssertEqual(Set(sorted).count, sorted.count, "不应有重复")
+        let home = try XCTUnwrap(sorted.firstIndex(of: "home"))
+        let clothing = try XCTUnwrap(sorted.firstIndex(of: "clothing"))
+        XCTAssertEqual(clothing, home + 1, "clothing 应紧跟在 home 后面")
+        XCTAssertEqual(HomeBooks.sorted(["zzz", "home", "fruits"]), ["fruits", "home", "zzz"],
+                       "未知 id 保持原顺序排最后")
+    }
+}

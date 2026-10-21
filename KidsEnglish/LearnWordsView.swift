@@ -32,6 +32,10 @@ struct LearnWordsView: View {
             .toolbar(.hidden, for: .navigationBar)
             .onAppear {
                 refreshToday()
+                // 截图/复查时预选一本书（如 numbers / clothing）
+                if let id = LaunchOptions.initialBook, store.selectedThemeId != id {
+                    store.selectedThemeId = id
+                }
                 if LaunchOptions.forceConsolidate, !goConsolidate {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         goConsolidate = true
@@ -63,24 +67,41 @@ struct LearnWordsView: View {
 
                 // 选词书
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("选单词本")
-                        .kidFont(28, .heavy)
-                        .foregroundStyle(Palette.ink)
-                        .padding(.horizontal)
-                    // 参考图：4 张卡一行排开，无横向滚动
-                    HStack(spacing: 10) {
-                        allWordsCard
-                        bookCard(fill: AppTheme.bookPink, themeId: "fruits", title: "水果篇",
-                                 subtitle: "\(store.words(forTheme: "fruits").count) 词",
-                                 iconName: "theme-apple")
-                        bookCard(fill: AppTheme.bookGreen, themeId: "animals", title: "动物篇",
-                                 subtitle: "\(store.words(forTheme: "animals").count) 词",
-                                 iconName: "theme-cat")
-                        bookCard(fill: AppTheme.bookPurple, themeId: "vehicles", title: "交通篇",
-                                 subtitle: "\(store.words(forTheme: "vehicles").count) 词",
-                                 iconName: "theme-car")
+                    HStack(alignment: .firstTextBaseline) {
+                        Text("选单词本")
+                            .kidFont(28, .heavy)
+                            .foregroundStyle(Palette.ink)
+                        Spacer()
+                        Text("左右滑 ›")
+                            .kidFont(15, .semibold)
+                            .foregroundStyle(Palette.inkMuted)
                     }
                     .padding(.horizontal)
+
+                    // 17 本：两行横向滚动（参考图是横排卡片墙）
+                    ScrollViewReader { proxy in
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHGrid(rows: [
+                                GridItem(.fixed(112), spacing: 10),
+                                GridItem(.fixed(112), spacing: 10)
+                            ], spacing: 10) {
+                                allWordsCard.id("all")
+                                ForEach(orderedThemes) { theme in
+                                    bookCard(theme).id(theme.id)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 4)   // 给选中白描边和阴影留位置
+                        }
+                        .onAppear {
+                            // CI 截图：滚到最右，证明 17 本都在
+                            if LaunchOptions.booksScrolled, let last = orderedThemes.last {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    proxy.scrollTo(last.id, anchor: .trailing)
+                                }
+                            }
+                        }
+                    }
                 }
 
                 // 主 CTA —— 参考图：开始学习高 80pt / 巩固练习高 72pt
@@ -132,29 +153,29 @@ struct LearnWordsView: View {
     private var planCard: some View {
         // 参考图：满饱和橙渐变 + 白字 + 右侧火箭插图（无底板）
         HStack(alignment: .center, spacing: 2) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text("今日计划")
-                    .kidFont(21, .semibold)
+                    .kidFont(18, .semibold)
                     .foregroundStyle(.white.opacity(0.96))
                 Text("Day \(dayNumber)")
-                    .kidFont(48, .heavy)
+                    .kidFont(40, .heavy)
                     .foregroundStyle(.white)
                 Text("新学 \(todayWords.count) 个词")
-                    .kidFont(24, .bold)
+                    .kidFont(20, .bold)
                     .foregroundStyle(.white)
-                Text("已学 \(store.learnedWords.count) / \(store.words.count)")
-                    .kidFont(18, .semibold)
+                Text("已学 \(store.homeLearnedCount) / \(store.homeWords.count)")
+                    .kidFont(16, .semibold)
                     .foregroundStyle(.white)
             }
             Spacer(minLength: 0)
-            uiIcon("rocket")
+            uiIcon(AppTheme.planRocketIcon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 142, height: 142)
+                .frame(width: 100, height: 100)
         }
         .padding(.horizontal, 22)
-        .padding(.vertical, 18)
-        .frame(maxWidth: .infinity, minHeight: 235)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity, minHeight: 160)
         .background(AppTheme.planGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationRaised()
     }
@@ -164,55 +185,79 @@ struct LearnWordsView: View {
         return store.learnedWords.count / perDay + 1
     }
 
+    /// 数据里的主题按固定顺序排（缺的自动跳过，多出来的排最后）
+    private var orderedThemes: [WordTheme] {
+        HomeBooks.sorted(store.wordThemes.map(\.id)).compactMap { id in
+            store.wordThemes.first { $0.id == id }
+        }
+    }
+
     // MARK: - 选词书卡片
 
-    /// 四张等宽竖条卡：图标在上、名称、词数，满饱和底 + 白字（与参考图一致）
+    /// 每本一张竖卡：封面在奶白圆角块里、名称、首页可学词数，满饱和底 + 白字
     private var allWordsCard: some View {
         let isSelected = store.selectedThemeId == nil
         return Button {
             store.selectedThemeId = nil
             store.saveProgress()
         } label: {
-            bookCardBody(fill: AppTheme.bookBlue, title: "全部单词",
-                         subtitle: "\(store.words.count) 词", iconName: "book",
-                         isSelected: isSelected)
+            bookCardBody(
+                fill: AppTheme.bookColor("all"),
+                title: "全部单词",
+                subtitle: "\(store.homeWords.count) 词",
+                coverWord: coverName("all"),
+                isSelected: isSelected
+            )
         }
         .buttonStyle(PressableStyle())
     }
 
-    private func bookCard(fill: Color, themeId: String, title: String,
-                          subtitle: String, iconName: String) -> some View {
-        let isSelected = store.selectedThemeId == themeId
+    private func bookCard(_ theme: WordTheme) -> some View {
+        let isSelected = store.selectedThemeId == theme.id
         return Button {
-            store.selectedThemeId = themeId
+            store.selectedThemeId = theme.id
             store.saveProgress()
         } label: {
-            bookCardBody(fill: fill, title: title, subtitle: subtitle,
-                         iconName: iconName, isSelected: isSelected)
+            bookCardBody(
+                fill: AppTheme.bookColor(theme.id),
+                title: shortThemeName(theme.nameCn),
+                subtitle: "\(store.homeWords(forTheme: theme.id).count) 词",
+                coverWord: coverName(theme.id),
+                isSelected: isSelected
+            )
         }
         .buttonStyle(PressableStyle())
+    }
+
+    /// 封面图名：优先 book_<theme>.jpg，缺失时退回第 2 节表里的现成词图
+    private func coverName(_ themeId: String) -> String {
+        let name = AppTheme.bookIconWord(for: themeId)
+        return store.iconURL(forWord: name) != nil ? name : AppTheme.bookFallbackIconWord(for: themeId)
     }
 
     private func bookCardBody(fill: Color, title: String, subtitle: String,
-                              iconName: String, isSelected: Bool) -> some View {
-        VStack(spacing: 6) {
-            Spacer(minLength: 0)
-            uiIcon(iconName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 54, height: 54)
-            Spacer(minLength: 0)
+                              coverWord: String, isSelected: Bool) -> some View {
+        VStack(spacing: 3) {
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(Color(red: 1.0, green: 0.97, blue: 0.94))
+                .frame(width: 52, height: 52)
+                .overlay {
+                    WordIconView(word: coverWord, size: 46)
+                }
             Text(title)
-                .kidFont(16, .bold)
+                .kidFont(15, .bold, maxScale: 1.15)
                 .foregroundStyle(.white)
                 .lineLimit(1)
-                .minimumScaleFactor(0.75)
+                .minimumScaleFactor(0.6)
             Text(subtitle)
-                .kidFont(14, .semibold)
+                .kidFont(13, .semibold, maxScale: 1.15)
                 .foregroundStyle(.white.opacity(0.92))
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
         }
-        .padding(.vertical, 12)
-        .frame(width: 82, height: 148)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 4)
+        .frame(width: 76, height: 112)
         .background(fill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .elevationGround()
         // 选中态用白描边，在满饱和底上比换色更清楚

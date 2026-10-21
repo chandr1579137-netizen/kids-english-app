@@ -38,17 +38,6 @@ struct WordCardsView: View {
         }
     }
 
-    /// 卡片只有 ~170pt 宽，四个字的名字在大字号下会被截成「身…」。
-    /// 详情页仍用完整名字，只有网格卡用短名。
-    private func shortThemeName(_ name: String) -> String {
-        switch name {
-        case "身体部位": return "身体"
-        case "家居用品": return "家居"
-        case "交通工具": return "交通"
-        default: return name
-        }
-    }
-
     private func themeCard(_ theme: WordTheme) -> some View {
         let progress = store.themeProgress(themeId: theme.id)
         let isComplete = progress.total > 0 && progress.done >= progress.total
