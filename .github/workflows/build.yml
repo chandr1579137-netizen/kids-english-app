@@ -302,6 +302,10 @@ jobs:
           # 头像/名字编辑 + 家长中心已学单词
           shoot 45-profile-edit  -uiTab 4 -uiProfile edit
           shoot 46-learned-words -uiTab 4 -uiProfile learned
+          # 地方/动作/形容词主题词表：核对平涂词图是否生效
+          shoot 47-theme-places      -uiTab 1 -uiTheme places
+          shoot 48-theme-actions     -uiTab 1 -uiTheme actions
+          shoot 49-theme-adjectives  -uiTab 1 -uiTheme adjectives
           ls -lh shots
 
       - name: Capture iPad screenshots
