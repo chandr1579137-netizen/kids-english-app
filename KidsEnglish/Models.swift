@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(CoreGraphics)
+import CoreGraphics   // 喂小动物的拖放判定用 CGRect / CGPoint（SwiftPM 单测里 Foundation 不带它们的方法）
+#endif
 
 // MARK: - 课文
 
@@ -314,7 +317,6 @@ enum FeedGame {
     }
 
     /// 动物图框放大 30% 后的判定区
-    /// （SwiftPM 单测只链接 Foundation，没有 CoreGraphics 的 insetBy/contains，这里手算）
     static func dropZone(around frame: CGRect, expansion: Double = dropExpansion) -> CGRect {
         let dx = frame.size.width * CGFloat(expansion) / 2
         let dy = frame.size.height * CGFloat(expansion) / 2
