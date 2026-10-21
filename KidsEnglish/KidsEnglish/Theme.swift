@@ -108,6 +108,17 @@ func onFill(_ background: Color) -> Color {
     return onWhite > onInk ? .white : Palette.inkOnColor
 }
 
+/// 卡片只有 ~170pt 宽，四个字的名字在大字号下会被截成「身…」。
+/// 详情页仍用完整名字，只有卡片用短名。
+func shortThemeName(_ name: String) -> String {
+    switch name {
+    case "身体部位": return "身体"
+    case "家居用品": return "家居"
+    case "交通工具": return "交通"
+    default: return name
+    }
+}
+
 // MARK: - App 主题（17 个分类色，保留概念设计图原始色值）
 
 enum AppTheme {
@@ -193,6 +204,61 @@ enum AppTheme {
     static let bookPurple = Color(red: 0.56, green: 0.42, blue: 0.85)  // 交通工具
 
     /// 读短文页大标题用的亮蓝（参考图不是深蓝）
+
+    // MARK: - 17 本单词本：颜色与封面（唯一的映射表，见 docs/pm/proposal-v2.md 第 2 节）
+    /// 卡片底色。"all" = 全部单词。
+    static func bookColor(_ themeId: String) -> Color {
+        switch themeId {
+        case "all": return bookBlue
+        case "fruits": return bookPink
+        case "animals": return bookGreen
+        case "vehicles": return bookPurple
+        case "colors": return hex(0xDA7200)
+        case "numbers": return hex(0x0E8C9B)
+        case "body": return hex(0xDE563A)
+        case "family": return hex(0x5560D6)
+        case "foods": return hex(0xB0601A)
+        case "home": return hex(0x8A5A3C)
+        case "clothing": return hex(0xC94FA8)
+        case "nature": return hex(0x5C8A1A)
+        case "toys": return hex(0xD63A40)
+        case "stationery": return hex(0x2880C4)
+        case "places": return hex(0x008074)
+        case "actions": return hex(0xC48000)
+        case "adjectives": return hex(0x5D7285)
+        default: return bookBlue
+        }
+    }
+
+    private static func hex(_ value: UInt32) -> Color {
+        Color(
+            red: Double((value >> 16) & 0xFF) / 255,
+            green: Double((value >> 8) & 0xFF) / 255,
+            blue: Double(value & 0xFF) / 255
+        )
+    }
+
+    /// 封面图开关：true = 用 Muse 画的 book_<theme>.jpg；false = 退回第 2 节表里的现成词图。改这一行即可切换。
+    static let useBookCoverArt = true
+
+    /// 第 2 节表：每本书用哪个现成词图（book_<theme>.jpg 缺失时的兜底）
+    static let bookIconWords: [String: String] = [
+        "all": "book", "fruits": "apple", "animals": "cat", "colors": "rainbow", "numbers": "marbles",
+        "body": "hand", "family": "family", "foods": "hamburger", "vehicles": "car", "home": "house",
+        "clothing": "clothes", "nature": "tree", "toys": "blocks", "stationery": "pencil", "places": "school",
+        "actions": "run", "adjectives": "happy"
+    ]
+
+    /// 卡片封面要传给 WordIconView 的名字（word-icons 里的文件名，不含扩展名）
+    static func bookIconWord(for themeId: String) -> String {
+        useBookCoverArt ? "book_\(themeId)" : (bookIconWords[themeId] ?? "book")
+    }
+
+    /// 兜底词
+    static func bookFallbackIconWord(for themeId: String) -> String { bookIconWords[themeId] ?? "book" }
+
+    /// 今日计划卡的火箭（ui-icons/rocket_flat.png，平涂版；旧 3D 版 rocket.png 保留不删）
+    static let planRocketIcon = "rocket_flat"
 }
 
 // MARK: - 圆角阶梯（单一基数派生，禁止散装值）
