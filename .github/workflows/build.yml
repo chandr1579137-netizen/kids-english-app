@@ -131,6 +131,14 @@ jobs:
             KidsEnglish/KidsEnglish/Resources/scenes/items
           ls KidsEnglish/KidsEnglish/Resources/scenes/items | wc -l
 
+      - name: Make feed-animal cutouts
+        run: |
+          .venv-icons/bin/python scripts/make_scene_items.py \
+            KidsEnglish/KidsEnglish/Resources/feed-pairs.json \
+            KidsEnglish/KidsEnglish/Resources/word-icons \
+            KidsEnglish/KidsEnglish/Resources/scenes/feed 512
+          ls KidsEnglish/KidsEnglish/Resources/scenes/feed | wc -l
+
       - name: Apply song audio (Aria 统一音色)
         # 儿歌原始音频在资源包里，unzip -o 会覆盖仓库文件，
         # 所以解压之后再把仓库里的 Aria 版本盖回去
