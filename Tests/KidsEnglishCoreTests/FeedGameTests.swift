@@ -109,10 +109,10 @@ final class FeedGameTests: XCTestCase {
     func testDropZoneIsThirtyPercentLarger() {
         let frame = CGRect(x: 100, y: 100, width: 200, height: 200)
         let zone = FeedGame.dropZone(around: frame)
-        XCTAssertEqual(zone.width, 260, accuracy: 0.001)
-        XCTAssertEqual(zone.height, 260, accuracy: 0.001)
-        XCTAssertEqual(zone.midX, frame.midX, accuracy: 0.001)
-        XCTAssertEqual(zone.midY, frame.midY, accuracy: 0.001)
+        XCTAssertEqual(Double(zone.size.width), 260, accuracy: 0.001)
+        XCTAssertEqual(Double(zone.size.height), 260, accuracy: 0.001)
+        XCTAssertEqual(Double(zone.origin.x), 70, accuracy: 0.001)   // 中心不变：四边各外扩 30
+        XCTAssertEqual(Double(zone.origin.y), 70, accuracy: 0.001)
 
         let round = FeedRound(pair: pair("monkey", "banana"), options: ["apple", "banana", "fish"])
         XCTAssertEqual(round.correctIndex, 1)

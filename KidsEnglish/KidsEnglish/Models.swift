@@ -314,13 +314,22 @@ enum FeedGame {
     }
 
     /// 动物图框放大 30% 后的判定区
+    /// （SwiftPM 单测只链接 Foundation，没有 CoreGraphics 的 insetBy/contains，这里手算）
     static func dropZone(around frame: CGRect, expansion: Double = dropExpansion) -> CGRect {
-        frame.insetBy(dx: -frame.width * expansion / 2, dy: -frame.height * expansion / 2)
+        let dx = frame.size.width * CGFloat(expansion) / 2
+        let dy = frame.size.height * CGFloat(expansion) / 2
+        return CGRect(x: frame.origin.x - dx, y: frame.origin.y - dy,
+                      width: frame.size.width + 2 * dx, height: frame.size.height + 2 * dy)
+    }
+
+    static func contains(_ r: CGRect, _ p: CGPoint) -> Bool {
+        p.x >= r.origin.x && p.x <= r.origin.x + r.size.width
+            && p.y >= r.origin.y && p.y <= r.origin.y + r.size.height
     }
 
     static func outcome(dropping food: String, at point: CGPoint,
                         round: FeedRound, animalFrame: CGRect) -> FeedOutcome {
-        guard dropZone(around: animalFrame).contains(point) else { return .missed }
+        guard contains(dropZone(around: animalFrame), point) else { return .missed }
         return food == round.pair.food ? .eaten : .refused
     }
 
