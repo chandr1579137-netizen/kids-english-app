@@ -239,3 +239,112 @@ enum SceneCatalog {
         (try? JSONDecoder().decode([FindScene].self, from: data)) ?? []
     }
 }
+
+// MARK: - 喂小动物
+
+/// feed-pairs.json 里的一组：动物、它爱吃的食物，以及两句英文台词（音频按台词生成）
+struct FeedPair: Codable, Hashable {
+    let animal: String
+    let food: String
+    let want: String     // "I want a banana!"
+    let yummy: String    // "Yummy banana!"
+}
+
+struct FeedCatalog: Codable, Hashable {
+    let noThanks: String // "No, thank you!"
+    let pairs: [FeedPair]
+
+    static func decode(_ data: Data) -> FeedCatalog? {
+        try? JSONDecoder().decode(FeedCatalog.self, from: data)
+    }
+}
+
+/// 一轮：一只动物 + 托盘里的 3 个食物（只有 1 个是对的）
+struct FeedRound: Hashable {
+    let pair: FeedPair
+    let options: [String]
+    var correctIndex: Int? { options.firstIndex(of: pair.food) }
+}
+
+/// 松手结果：喂对了 / 喂错了（动物摇头、食物弹回）/ 没拖到动物身上（只弹回）
+enum FeedOutcome: Equatable {
+    case eaten, refused, missed
+}
+
+/// 可复现的随机数（截图和单元测试用固定种子）
+struct SeededGenerator: RandomNumberGenerator {
+    private var state: UInt64
+    init(seed: UInt64) { state = seed &+ 0x9E37_79B9_7F4A_7C15 }
+    mutating func next() -> UInt64 {   // SplitMix64
+        state &+= 0x9E37_79B9_7F4A_7C15
+        var z = state
+        z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+        z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+        return z ^ (z >> 31)
+    }
+}
+
+enum FeedGame {
+    static let roundsPerGame = 5
+    static let optionCount = 3
+    /// 判定区：动物图框四边各外扩 15%（宽高共放大 30%），4 岁孩子不用拖得很准
+    static let dropExpansion = 0.3
+
+    /// 出题：动物不重复；干扰项来自其他组的食物，且不会和正确答案相同（蜜蜂、熊都吃 honey 时也不会出两个 honey）
+    static func makeRounds<G: RandomNumberGenerator>(_ pairs: [FeedPair],
+                                                     count: Int = roundsPerGame,
+                                                     optionCount: Int = optionCount,
+                                                     shuffleAnimals: Bool = true,
+                                                     using rng: inout G) -> [FeedRound] {
+        var seenAnimals = Set<String>()
+        let unique = pairs.filter { seenAnimals.insert($0.animal.lowercased()).inserted }
+        let chosen = (shuffleAnimals ? unique.shuffled(using: &rng) : unique).prefix(count)
+        var foods: [String] = []
+        for p in pairs where !foods.contains(p.food) { foods.append(p.food) }
+        return chosen.map { pair in
+            let distractors = foods.filter { $0 != pair.food }.shuffled(using: &rng).prefix(max(0, optionCount - 1))
+            let options = ([pair.food] + distractors).shuffled(using: &rng)
+            return FeedRound(pair: pair, options: options)
+        }
+    }
+
+    static func makeRounds(_ pairs: [FeedPair]) -> [FeedRound] {
+        var rng = SystemRandomNumberGenerator()
+        return makeRounds(pairs, using: &rng)
+    }
+
+    /// 动物图框放大 30% 后的判定区
+    static func dropZone(around frame: CGRect, expansion: Double = dropExpansion) -> CGRect {
+        frame.insetBy(dx: -frame.width * expansion / 2, dy: -frame.height * expansion / 2)
+    }
+
+    static func outcome(dropping food: String, at point: CGPoint,
+                        round: FeedRound, animalFrame: CGRect) -> FeedOutcome {
+        guard dropZone(around: animalFrame).contains(point) else { return .missed }
+        return food == round.pair.food ? .eaten : .refused
+    }
+
+    /// custom-audio-map.json 里的键
+    static func wantKey(_ food: String) -> String { "feed#want-\(food)" }
+    static func yummyKey(_ food: String) -> String { "feed#yummy-\(food)" }
+    static let noThanksKey = "feed#no-thanks"
+
+    /// 数据问题清单（空 = 没问题）
+    static func problems(in catalog: FeedCatalog) -> [String] {
+        var out: [String] = []
+        var animals = Set<String>()
+        for p in catalog.pairs {
+            if !animals.insert(p.animal.lowercased()).inserted { out.append("\(p.animal) 重复") }
+            if p.animal == p.food { out.append("\(p.animal) 吃自己") }
+            let food = p.food.lowercased()
+            if !p.want.lowercased().contains(food) { out.append("\(p.animal): want 台词里没有 \(p.food)") }
+            if !p.yummy.lowercased().contains(food) { out.append("\(p.animal): yummy 台词里没有 \(p.food)") }
+            if !p.want.hasPrefix("I want ") || !p.want.hasSuffix("!") { out.append("\(p.animal): want 台词格式不对") }
+            if !p.yummy.hasPrefix("Yummy ") || !p.yummy.hasSuffix("!") { out.append("\(p.animal): yummy 台词格式不对") }
+        }
+        let foods = Set(catalog.pairs.map(\.food))
+        if catalog.pairs.count < roundsPerGame { out.append("动物少于 \(roundsPerGame) 个") }
+        if foods.count < optionCount { out.append("不同的食物少于 \(optionCount) 种") }
+        return out
+    }
+}
