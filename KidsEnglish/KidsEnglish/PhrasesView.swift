@@ -804,12 +804,18 @@ private struct PhraseCardView: View {
                 speakerRow
 
                 VStack(spacing: 2) {
-                    Text(hideText ? "? ? ?" : line.en)
-                        .kidFont(26, .heavy)
-                        .foregroundStyle(hideText ? Palette.inkSubtle : Palette.ink)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.6)
+                    if hideText {
+                        // 回想卡先不给原句：放一个「该你说了」的对话气泡（三个点在跳），
+                        // 不用问号——问号对大人像出错，对不识字的孩子也没有意思
+                        YourTurnBubble()
+                    } else {
+                        Text(line.en)
+                            .kidFont(26, .heavy)
+                            .foregroundStyle(Palette.ink)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.6)
+                    }
                     if showChinese && !hideText {
                         Text(line.zh)
                             .kidFont(16, .medium)
@@ -913,6 +919,34 @@ private struct PhraseCardView: View {
         .buttonStyle(PressableStyle())
         .disabled(!enabled)
         .accessibilityLabel(title)
+    }
+}
+
+/// 「该你说了」：绿色对话气泡里三个点依次跳动（像对方正在说话），回想卡用它代替原句
+private struct YourTurnBubble: View {
+    @State private var phase = 0
+    private let timer = Timer.publish(every: 0.35, on: .main, in: .common).autoconnect()
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ForEach(0..<3, id: \.self) { i in
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 11, height: 11)
+                    .offset(y: phase == i && !LaunchOptions.isUIScreenshotRun ? -4 : 0)
+            }
+        }
+        .padding(.horizontal, 20)
+        .frame(height: 40)
+        .background(Func.positiveDeep, in: Capsule())
+        .overlay(alignment: .bottomLeading) {
+            // 气泡尾巴，指向上面的说话人
+            Circle().fill(Func.positiveDeep).frame(width: 10, height: 10).offset(x: 6, y: 4)
+        }
+        .animation(.easeInOut(duration: 0.25), value: phase)
+        .onReceive(timer) { _ in phase = (phase + 1) % 3 }
+        .accessibilityElement()
+        .accessibilityLabel("轮到你说")
     }
 }
 
