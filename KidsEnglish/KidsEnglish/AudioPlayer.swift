@@ -21,12 +21,22 @@ enum AudioSession {
     }
 }
 
+private final class SpeechFallbackDelegate: NSObject, AVSpeechSynthesizerDelegate {
+    var onFinish: (() -> Void)?
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        onFinish?()
+    }
+}
+
 /// 音频播放器：支持逐词高亮（通过定时器回调当前播放时间）
 @Observable
 class AudioPlayer {
     private var player: AVPlayer?
     private var timeObserver: Any?
     private var endObserver: NSObjectProtocol?
+    private let speech = AVSpeechSynthesizer()
+    private let speechDelegate = SpeechFallbackDelegate()
     var isPlaying = false
     var currentTime: Double = 0
     var duration: Double = 0
@@ -37,6 +47,8 @@ class AudioPlayer {
 
     init() {
         AudioSession.configurePlayback()
+        speech.delegate = speechDelegate
+        speechDelegate.onFinish = { [weak self] in self?.isPlaying = false }
 
         // 中断（来电、闹钟、其他 App 抢音频）：开始时暂停，结束后按系统建议恢复，
         // 否则孩子会以为「点了没反应」，其实播放器卡在中断状态里。
@@ -109,17 +121,42 @@ class AudioPlayer {
         isPlaying = true
     }
 
+    /// 优先播预生成音频；缺文件时退回系统朗读，保证每个词都点得出声
+    func playWord(_ word: String, url: URL?, rate: Float = 1.0) {
+        if let url {
+            play(url: url, rate: rate)
+        } else {
+            speak(word, rate: rate)
+        }
+    }
+
+    func speak(_ text: String, rate: Float = 1.0) {
+        stop()
+        AudioSession.configurePlayback()
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * rate
+        speech.speak(utterance)
+        duration = 0
+        isPlaying = true
+    }
+
     func pause() {
         player?.pause()
+        speech.pauseSpeaking(at: .immediate)
         isPlaying = false
     }
 
     func resume() {
         player?.play()
+        if speech.isPaused {
+            speech.continueSpeaking()
+        }
         isPlaying = true
     }
 
     func stop() {
+        speech.stopSpeaking(at: .immediate)
         if let o = timeObserver {
             player?.removeTimeObserver(o)
             timeObserver = nil

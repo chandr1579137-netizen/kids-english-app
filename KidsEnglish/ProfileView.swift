@@ -445,9 +445,7 @@ struct FavoritesView: View {
             Spacer(minLength: 6)
 
             Button {
-                if let url = store.bestAudioURL(forWord: entry.word) {
-                    player.play(url: url)
-                }
+                player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word))
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
                     .kidFont(18, .semibold)
@@ -594,9 +592,7 @@ struct LearnedWordsView: View {
                                 }
                                 Spacer()
                                 Button {
-                                    if let url = store.bestAudioURL(forWord: entry.word) {
-                                        player.play(url: url)
-                                    }
+                                    player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word))
                                 } label: {
                                     Image(systemName: "speaker.wave.2.fill")
                                         .kidFont(15, .bold)

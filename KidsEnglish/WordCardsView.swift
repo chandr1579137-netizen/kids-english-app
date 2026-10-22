@@ -133,9 +133,7 @@ struct ThemeWordsView: View {
             }
             Spacer()
             Button {
-                if let url = store.bestAudioURL(forWord: entry.word) {
-                    player.play(url: url)
-                }
+                player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word))
             } label: {
                 Image(systemName: "speaker.wave.2.fill")
                     .kidFont(24, .semibold)

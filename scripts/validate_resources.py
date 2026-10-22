@@ -67,6 +67,34 @@ def check_lessons(name, expected_min):
     return len(data)
 
 
+def check_word_audio(words):
+    """每个词都要有发音：映射必须存在且指向真实 mp3。
+
+    21–99 的数字音频不在资源目录里，由 CI 解压资源包后再并入映射，
+    所以这里只校验增量映射覆盖了这些词，文件存在性交给合并步骤。
+    """
+    mapping = json.loads((ROOT / "word-audio-map.json").read_text(encoding="utf-8"))
+    additions_path = ROOT.parents[2] / "assets" / "number-audio" / "word-audio-map-additions.json"
+    additions = json.loads(additions_path.read_text(encoding="utf-8")) if additions_path.exists() else {}
+
+    missing_map, missing_file = [], []
+    for w in words:
+        word = w["word"]
+        key = word.lower()
+        file = mapping.get(key)
+        if file is None:
+            if key not in additions:
+                missing_map.append(word)
+        elif not (ROOT / "audio" / file).exists():
+            missing_file.append(f"{word} → {file}")
+
+    if missing_map:
+        errors.append(f"words: 无发音映射 {len(missing_map)} 个：{', '.join(missing_map[:10])}")
+    if missing_file:
+        errors.append(f"words: 映射指向的音频不存在 {len(missing_file)} 个：{', '.join(missing_file[:10])}")
+    return len(words) - len(missing_map) - len(missing_file)
+
+
 def main():
     total = 0
     for i in range(1, 8):
@@ -90,7 +118,9 @@ def main():
             if w.lower() not in index:
                 errors.append(f"word-themes/{t['id']}: {w} 不在词库")
 
-    print(f"课文 {total} 篇 / 词 {len(words)} 条 / 主题 {len(themes)} 个（{theme_words} 词）")
+    with_audio = check_word_audio(words)
+
+    print(f"课文 {total} 篇 / 词 {len(words)} 条（发音 {with_audio}） / 主题 {len(themes)} 个（{theme_words} 词）")
     if errors:
         print("\n".join(errors[:40]))
         print(f"共 {len(errors)} 处问题")

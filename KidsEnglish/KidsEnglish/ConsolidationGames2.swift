@@ -75,9 +75,8 @@ struct AudioToWordGame: View {
     }
 
     private func playCurrent() {
-        guard let current = quiz[safe: index],
-              let url = store.bestAudioURL(forWord: current.word) else { return }
-        player.play(url: url)
+        guard let current = quiz[safe: index] else { return }
+        player.playWord(current.word, url: store.bestAudioURL(forWord: current.word))
     }
 
     private func optionColor(_ opt: WordEntry) -> Color {
@@ -174,9 +173,8 @@ struct AudioToMeaningGame: View {
     }
 
     private func playCurrent() {
-        guard let current = quiz[safe: index],
-              let url = store.bestAudioURL(forWord: current.word) else { return }
-        player.play(url: url)
+        guard let current = quiz[safe: index] else { return }
+        player.playWord(current.word, url: store.bestAudioURL(forWord: current.word))
     }
 
     private func optionColor(_ opt: WordEntry) -> Color {
@@ -217,9 +215,7 @@ struct WordToMeaningGame: View {
                 Text(current.word)
                     .kidFont(64, .bold, maxScale: 1.15)
                 Button {
-                    if let url = store.bestAudioURL(forWord: current.word) {
-                        player.play(url: url)
-                    }
+                    player.playWord(current.word, url: store.bestAudioURL(forWord: current.word))
                 } label: {
                     Image(systemName: "speaker.wave.2.fill")
                         .kidFont(36, maxScale: 1.15)
@@ -402,9 +398,8 @@ struct DictationGame: View {
     }
 
     private func playCurrent() {
-        guard let current = quiz[safe: index],
-              let url = store.bestAudioURL(forWord: current.word) else { return }
-        player.play(url: url)
+        guard let current = quiz[safe: index] else { return }
+        player.playWord(current.word, url: store.bestAudioURL(forWord: current.word))
     }
 
     private func check() {
@@ -916,7 +911,7 @@ struct FindInSceneGame: View {
             HStack(spacing: 8) {
                 ForEach(questions, id: \.self) { word in
                     Button {
-                        if let url = store.bestAudioURL(forWord: word) { player.play(url: url) }
+                        player.playWord(word, url: store.bestAudioURL(forWord: word))
                     } label: {
                         itemImage(word)
                             .frame(width: 54, height: 54)
@@ -1036,7 +1031,7 @@ struct FindInSceneGame: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { popped = false }
             }
-            if let url = store.bestAudioURL(forWord: word) { player.play(url: url) }
+            player.playWord(word, url: store.bestAudioURL(forWord: word))
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                 if let url = audioURL("find#praise-\(Int.random(in: 1...3))") { player.play(url: url) }
             }
@@ -1333,7 +1328,7 @@ struct FeedAnimalGame: View {
             HStack(spacing: 8) {
                 ForEach(rounds, id: \.pair.animal) { r in
                     Button {
-                        if let url = store.bestAudioURL(forWord: r.pair.animal) { player.play(url: url) }
+                        player.playWord(r.pair.animal, url: store.bestAudioURL(forWord: r.pair.animal))
                     } label: {
                         animalView(r.pair.animal)
                             .frame(width: 54, height: 54)
