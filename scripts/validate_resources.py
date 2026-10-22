@@ -95,6 +95,35 @@ def check_word_audio(words):
     return len(words) - len(missing_map) - len(missing_file)
 
 
+def check_phrases():
+    """「说一说」口语课：每句都要有音频、配图（新图 / 现成词图 / 代码卡三选一）和说话人头像。"""
+    folder = ROOT / "phrases"
+    data = json.loads((folder / "phrases.json").read_text(encoding="utf-8"))
+    overrides = ROOT.parents[2] / "assets" / "word-icons-overrides"
+    avatars = {c["id"]: c["avatar"] for c in data["characters"]}
+    lines = 0
+    for level in data["levels"]:
+        for scene in level["scenes"]:
+            for ln in scene["lines"]:
+                lines += 1
+                lid = ln.get("id", "?")
+                need(ln, ["id", "speaker", "en", "zh", "audio"], f"phrases/{lid}")
+                if not (folder / "audio" / ln["audio"]).exists():
+                    errors.append(f"phrases/{lid}: 缺音频 {ln['audio']}")
+                pics = [k for k in ("image", "icon", "code") if ln.get(k)]
+                if len(pics) != 1:
+                    errors.append(f"phrases/{lid}: 配图要 image / icon / code 三选一，现在是 {pics}")
+                if ln.get("image") and not (folder / "img" / ln["image"]).exists():
+                    errors.append(f"phrases/{lid}: 缺图 {ln['image']}")
+                for key in ("icon", "codeIcon"):
+                    if ln.get(key) and not (overrides / f"{ln[key]}.jpg").exists():
+                        errors.append(f"phrases/{lid}: 词图 {ln[key]} 不在 word-icons-overrides")
+                avatar = avatars.get(ln["speaker"])
+                if avatar is None or not (folder / "avatars" / avatar).exists():
+                    errors.append(f"phrases/{lid}: 说话人 {ln['speaker']} 没有头像")
+    return lines
+
+
 def main():
     total = 0
     for i in range(1, 8):
@@ -119,8 +148,10 @@ def main():
                 errors.append(f"word-themes/{t['id']}: {w} 不在词库")
 
     with_audio = check_word_audio(words)
+    phrase_lines = check_phrases()
 
-    print(f"课文 {total} 篇 / 词 {len(words)} 条（发音 {with_audio}） / 主题 {len(themes)} 个（{theme_words} 词）")
+    print(f"课文 {total} 篇 / 词 {len(words)} 条（发音 {with_audio}） / 主题 {len(themes)} 个（{theme_words} 词）"
+          f" / 口语 {phrase_lines} 句")
     if errors:
         print("\n".join(errors[:40]))
         print(f"共 {len(errors)} 处问题")

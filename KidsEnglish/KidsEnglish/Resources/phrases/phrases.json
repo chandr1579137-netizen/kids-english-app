@@ -1,0 +1,393 @@
+{
+ "version": 1,
+ "characters": [
+  {
+   "id": "amy",
+   "nameEn": "Amy",
+   "nameZh": "艾米",
+   "avatar": "amy.jpg"
+  },
+  {
+   "id": "dad",
+   "nameEn": "Dad",
+   "nameZh": "爸爸",
+   "avatar": "dad.jpg"
+  },
+  {
+   "id": "mom",
+   "nameEn": "Mom",
+   "nameZh": "妈妈",
+   "avatar": "mom.jpg"
+  },
+  {
+   "id": "teacher",
+   "nameEn": "Teacher",
+   "nameZh": "老师",
+   "avatar": "teacher.jpg"
+  },
+  {
+   "id": "tom",
+   "nameEn": "Tom",
+   "nameZh": "汤姆",
+   "avatar": "tom.jpg"
+  }
+ ],
+ "levels": [
+  {
+   "level": 1,
+   "titleZh": "问候与礼貌",
+   "scenes": [
+    {
+     "id": "L1-1",
+     "titleZh": "打招呼",
+     "titleEn": "Hello!",
+     "lines": [
+      {
+       "id": "L1-1-01",
+       "speaker": "tom",
+       "en": "Hello!",
+       "zh": "你好！",
+       "audio": "L1-1-01.mp3",
+       "image": "L1-1-01.jpg"
+      },
+      {
+       "id": "L1-1-02",
+       "speaker": "amy",
+       "en": "Hi!",
+       "zh": "嗨！",
+       "audio": "L1-1-02.mp3",
+       "image": "L1-1-02.jpg"
+      },
+      {
+       "id": "L1-1-03",
+       "speaker": "tom",
+       "en": "How are you?",
+       "zh": "你好吗？",
+       "audio": "L1-1-03.mp3",
+       "image": "L1-1-03.jpg"
+      },
+      {
+       "id": "L1-1-04",
+       "speaker": "amy",
+       "en": "Fine, thanks. And you?",
+       "zh": "很好，谢谢。你呢？",
+       "audio": "L1-1-04.mp3",
+       "image": "L1-1-04.jpg"
+      },
+      {
+       "id": "L1-1-05",
+       "speaker": "tom",
+       "en": "I'm fine, too.",
+       "zh": "我也很好。",
+       "audio": "L1-1-05.mp3",
+       "image": "L1-1-05.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L1-2",
+     "titleZh": "早上好",
+     "titleEn": "Good Morning!",
+     "lines": [
+      {
+       "id": "L1-2-01",
+       "speaker": "mom",
+       "en": "Good morning!",
+       "zh": "早上好！",
+       "audio": "L1-2-01.mp3",
+       "code": "sunrise"
+      },
+      {
+       "id": "L1-2-02",
+       "speaker": "tom",
+       "en": "Good morning, Mom!",
+       "zh": "早上好，妈妈！",
+       "audio": "L1-2-02.mp3",
+       "image": "L1-2-02.jpg"
+      },
+      {
+       "id": "L1-2-03",
+       "speaker": "mom",
+       "en": "Time to get up!",
+       "zh": "该起床啦！",
+       "audio": "L1-2-03.mp3",
+       "icon": "wake"
+      },
+      {
+       "id": "L1-2-04",
+       "speaker": "tom",
+       "en": "I wash my face.",
+       "zh": "我洗脸。",
+       "audio": "L1-2-04.mp3",
+       "image": "L1-2-04.jpg"
+      },
+      {
+       "id": "L1-2-05",
+       "speaker": "tom",
+       "en": "I brush my teeth.",
+       "zh": "我刷牙。",
+       "audio": "L1-2-05.mp3",
+       "image": "L1-2-05.jpg"
+      },
+      {
+       "id": "L1-2-06",
+       "speaker": "tom",
+       "en": "I'm ready!",
+       "zh": "我准备好啦！",
+       "audio": "L1-2-06.mp3",
+       "icon": "ready"
+      }
+     ]
+    },
+    {
+     "id": "L1-3",
+     "titleZh": "请和谢谢",
+     "titleEn": "Please and Thank You",
+     "lines": [
+      {
+       "id": "L1-3-01",
+       "speaker": "tom",
+       "en": "Juice, please!",
+       "zh": "请给我果汁！",
+       "audio": "L1-3-01.mp3",
+       "image": "L1-3-01.jpg"
+      },
+      {
+       "id": "L1-3-02",
+       "speaker": "mom",
+       "en": "Here you are.",
+       "zh": "给你。",
+       "audio": "L1-3-02.mp3",
+       "icon": "give"
+      },
+      {
+       "id": "L1-3-03",
+       "speaker": "tom",
+       "en": "Thank you!",
+       "zh": "谢谢！",
+       "audio": "L1-3-03.mp3",
+       "image": "L1-3-03.jpg"
+      },
+      {
+       "id": "L1-3-04",
+       "speaker": "mom",
+       "en": "You're welcome.",
+       "zh": "不客气。",
+       "audio": "L1-3-04.mp3",
+       "image": "L1-3-04.jpg"
+      },
+      {
+       "id": "L1-3-05",
+       "speaker": "tom",
+       "en": "Sorry!",
+       "zh": "对不起！",
+       "audio": "L1-3-05.mp3",
+       "image": "L1-3-05.jpg"
+      },
+      {
+       "id": "L1-3-06",
+       "speaker": "amy",
+       "en": "It's OK.",
+       "zh": "没关系。",
+       "audio": "L1-3-06.mp3",
+       "image": "L1-3-06.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L1-4",
+     "titleZh": "吃饭啦",
+     "titleEn": "Mealtime",
+     "lines": [
+      {
+       "id": "L1-4-01",
+       "speaker": "mom",
+       "en": "Wash your hands.",
+       "zh": "去洗手。",
+       "audio": "L1-4-01.mp3",
+       "icon": "wash"
+      },
+      {
+       "id": "L1-4-02",
+       "speaker": "tom",
+       "en": "I'm hungry!",
+       "zh": "我饿了！",
+       "audio": "L1-4-02.mp3",
+       "icon": "hungry"
+      },
+      {
+       "id": "L1-4-03",
+       "speaker": "dad",
+       "en": "Let's eat!",
+       "zh": "开饭啦！",
+       "audio": "L1-4-03.mp3",
+       "icon": "eat"
+      },
+      {
+       "id": "L1-4-04",
+       "speaker": "tom",
+       "en": "Yummy!",
+       "zh": "真好吃！",
+       "audio": "L1-4-04.mp3",
+       "icon": "yummy"
+      },
+      {
+       "id": "L1-4-05",
+       "speaker": "tom",
+       "en": "More rice, please.",
+       "zh": "请再给我一点米饭。",
+       "audio": "L1-4-05.mp3",
+       "image": "L1-4-05.jpg"
+      },
+      {
+       "id": "L1-4-06",
+       "speaker": "tom",
+       "en": "I'm thirsty.",
+       "zh": "我渴了。",
+       "audio": "L1-4-06.mp3",
+       "icon": "thirsty"
+      },
+      {
+       "id": "L1-4-07",
+       "speaker": "tom",
+       "en": "I'm full.",
+       "zh": "我吃饱了。",
+       "audio": "L1-4-07.mp3",
+       "image": "L1-4-07.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L1-5",
+     "titleZh": "说再见",
+     "titleEn": "Goodbye!",
+     "lines": [
+      {
+       "id": "L1-5-01",
+       "speaker": "teacher",
+       "en": "Good afternoon!",
+       "zh": "下午好！",
+       "audio": "L1-5-01.mp3",
+       "code": "afternoon",
+       "codeIcon": "school"
+      },
+      {
+       "id": "L1-5-02",
+       "speaker": "dad",
+       "en": "Let's go home.",
+       "zh": "我们回家吧。",
+       "audio": "L1-5-02.mp3",
+       "image": "L1-5-02.jpg"
+      },
+      {
+       "id": "L1-5-03",
+       "speaker": "tom",
+       "en": "I have to go.",
+       "zh": "我得走啦。",
+       "audio": "L1-5-03.mp3",
+       "icon": "go"
+      },
+      {
+       "id": "L1-5-04",
+       "speaker": "tom",
+       "en": "Goodbye, Amy!",
+       "zh": "再见，艾米！",
+       "audio": "L1-5-04.mp3",
+       "image": "L1-5-04.jpg"
+      },
+      {
+       "id": "L1-5-05",
+       "speaker": "amy",
+       "en": "Bye-bye!",
+       "zh": "拜拜！",
+       "audio": "L1-5-05.mp3",
+       "image": "L1-5-05.jpg"
+      },
+      {
+       "id": "L1-5-06",
+       "speaker": "tom",
+       "en": "See you tomorrow!",
+       "zh": "明天见！",
+       "audio": "L1-5-06.mp3",
+       "code": "tomorrow",
+       "codeIcon": "school"
+      },
+      {
+       "id": "L1-5-07",
+       "speaker": "amy",
+       "en": "See you later!",
+       "zh": "待会儿见！",
+       "audio": "L1-5-07.mp3",
+       "image": "L1-5-07.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L1-6",
+     "titleZh": "晚上好·晚安",
+     "titleEn": "Good Night!",
+     "lines": [
+      {
+       "id": "L1-6-01",
+       "speaker": "tom",
+       "en": "Good evening, Dad!",
+       "zh": "晚上好，爸爸！",
+       "audio": "L1-6-01.mp3",
+       "code": "evening",
+       "codeIcon": "house"
+      },
+      {
+       "id": "L1-6-02",
+       "speaker": "dad",
+       "en": "It's bedtime.",
+       "zh": "该睡觉啦。",
+       "audio": "L1-6-02.mp3",
+       "code": "night",
+       "codeIcon": "bed"
+      },
+      {
+       "id": "L1-6-03",
+       "speaker": "tom",
+       "en": "I'm sleepy.",
+       "zh": "我困了。",
+       "audio": "L1-6-03.mp3",
+       "icon": "sleepy"
+      },
+      {
+       "id": "L1-6-04",
+       "speaker": "tom",
+       "en": "A story, please!",
+       "zh": "请给我讲个故事！",
+       "audio": "L1-6-04.mp3",
+       "image": "L1-6-04.jpg"
+      },
+      {
+       "id": "L1-6-05",
+       "speaker": "tom",
+       "en": "Good night, Mom.",
+       "zh": "晚安，妈妈。",
+       "audio": "L1-6-05.mp3",
+       "icon": "sleep"
+      },
+      {
+       "id": "L1-6-06",
+       "speaker": "dad",
+       "en": "I love you.",
+       "zh": "我爱你。",
+       "audio": "L1-6-06.mp3",
+       "icon": "kiss"
+      },
+      {
+       "id": "L1-6-07",
+       "speaker": "tom",
+       "en": "I love you, too.",
+       "zh": "我也爱你。",
+       "audio": "L1-6-07.mp3",
+       "image": "L1-6-07.jpg"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

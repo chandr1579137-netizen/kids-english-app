@@ -26,7 +26,10 @@ private struct UITextSizeOverride: ViewModifier {
     }
 }
 
-// MARK: - 5 Tab 定义（复刻截图结构：背单词 / 单词卡 / 读短文 / 绘本 / 我的）
+// MARK: - 5 Tab 定义（背单词 / 单词卡 / 说一说 / 儿歌 / 我的）
+//
+// 第 3 个 tab 原来是「读短文」，现在是「说一说」口语课（PhrasesView.swift）。
+// rawValue 不变（还是 2），CI 的 `-uiTab 2` 参数照用。
 
 enum AppTab: Int, CaseIterable, Identifiable {
     case learn, cards, read, songs, profile
@@ -37,7 +40,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         switch self {
         case .learn: return "背单词"
         case .cards: return "单词卡"
-        case .read: return "读短文"
+        case .read: return "说一说"
         case .songs: return "儿歌"
         case .profile: return "我的"
         }
@@ -47,7 +50,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         switch self {
         case .learn: return "book"
         case .cards: return "rectangle.on.rectangle"
-        case .read: return "doc.text"
+        case .read: return "bubble.left.and.bubble.right"
         case .songs: return "music.note"
         case .profile: return "person"
         }
@@ -57,7 +60,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         switch self {
         case .learn: return "book.fill"
         case .cards: return "rectangle.on.rectangle.fill"
-        case .read: return "doc.text.fill"
+        case .read: return "bubble.left.and.bubble.right.fill"
         case .songs: return "music.note"
         case .profile: return "person.fill"
         }
@@ -187,7 +190,13 @@ struct ContentView: View {
                 WordCardsView()
             }
         case .read:
-            ReadView()
+            // 旧「读短文」已下线（先藏后删）：只剩 `-uiLesson` 截图参数还能打开旧课文页，
+            // 用来保留课文页提示卡片的回归截图；孩子点 tab 进的是口语课。
+            if LaunchOptions.forceLesson {
+                ReadView()
+            } else {
+                PhrasesHomeView()
+            }
         case .songs:
             SongsView(asTabRoot: true)
         case .profile:
