@@ -123,7 +123,9 @@ struct ParentDashboardView: View {
                 .padding(.horizontal)
 
                 card("学习报告") {
-                    statRow("已完成课程", "\(store.completedCount) / \(store.lessons.count)")
+                    statRow("说一说", "\(store.completedPhraseScenes.count) / \(store.phraseCatalog?.allScenes.count ?? 0) 个场景")
+                    // 旧「读短文」已下线（先藏后删），进度只读归档，不再增加
+                    statRow("旧版短文（已归档）", "\(store.completedCount) 篇")
                     statRow("今日学习", "\(store.studyMinutesToday()) 分钟")
                     statRow("收藏单词", "\(store.favoriteWords.count) 个")
                     statRow("收集卡片", "\(store.collectedCards.count) 张")
@@ -199,6 +201,39 @@ struct ParentDashboardView: View {
                         Text("课文默认显示中文翻译")
                             .kidFont(17, .semibold)
                             .foregroundStyle(Palette.ink)
+                    }
+                    .tint(Func.accent)
+                }
+
+                card("说一说（口语课）") {
+                    Toggle(isOn: Binding(
+                        get: { store.phraseShowChinese },
+                        set: { store.phraseShowChinese = $0; store.saveProgress() }
+                    )) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("卡片下显示中文")
+                                .kidFont(17, .semibold)
+                                .foregroundStyle(Palette.ink)
+                            Text("方便陪学；孩子看图听声就能懂，默认不显示")
+                                .kidFont(13, .medium)
+                                .foregroundStyle(Palette.inkMuted)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .tint(Func.accent)
+
+                    Toggle(isOn: Binding(
+                        get: { store.phraseUnlockAll },
+                        set: { store.phraseUnlockAll = $0; store.saveProgress() }
+                    )) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("全部解锁")
+                                .kidFont(17, .semibold)
+                                .foregroundStyle(Palette.ink)
+                            Text("默认按顺序一课一课开")
+                                .kidFont(13, .medium)
+                                .foregroundStyle(Palette.inkMuted)
+                        }
                     }
                     .tint(Func.accent)
                 }

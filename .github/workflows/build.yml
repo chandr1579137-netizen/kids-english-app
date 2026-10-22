@@ -373,6 +373,28 @@ jobs:
           shoot 56f-split-cold         -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord cold
           shoot 56g-split-short        -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord short
           shoot 56h-split-low          -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord low
+          # 说一说（口语课 L1，替换读短文）：列表、学（跟读三态 + 中文）、看一遍、轮到你、完成、热身、5 张代码卡、大字号
+          shoot 60a-phrases-home         -uiTab 2
+          shoot 60b-phrases-home-progress -uiTab 2 -uiPhraseCompleted L1-1,L1-2
+          shoot 61a-phrase-learn         -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 0
+          shoot 61b-phrase-recording     -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 1 -uiPhraseDemo recording
+          shoot 61c-phrase-praised       -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 1 -uiPhraseDemo praised
+          shoot 61d-phrase-learn-zh      -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 3 -uiPhraseChinese
+          shoot 61e-phrase-watch         -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 5
+          shoot 61f-phrase-turn          -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 6
+          shoot 61g-phrase-turn-answer   -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 6 -uiPhraseDemo answer
+          shoot 61h-phrase-done          -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 11
+          shoot 61i-phrase-warmup        -uiTab 2 -uiPhraseScene L1-2 -uiPhraseStep 0
+          shoot 62a-phrase-code-sunrise  -uiTab 2 -uiPhraseScene L1-2 -uiPhraseStep 2
+          shoot 62b-phrase-code-afternoon -uiTab 2 -uiPhraseScene L1-5 -uiPhraseStep 2
+          shoot 62c-phrase-code-tomorrow -uiTab 2 -uiPhraseScene L1-5 -uiPhraseStep 7
+          shoot 62d-phrase-code-evening  -uiTab 2 -uiPhraseScene L1-6 -uiPhraseStep 2
+          shoot 62e-phrase-code-night    -uiTab 2 -uiPhraseScene L1-6 -uiPhraseStep 3
+          shoot 62f-phrase-icon-card     -uiTab 2 -uiPhraseScene L1-4 -uiPhraseStep 2
+          shoot 62g-phrase-bg-card       -uiTab 2 -uiPhraseScene L1-5 -uiPhraseStep 3
+          shoot 63a-large-phrases-home   -uiTab 2 -uiLargeText
+          shoot 63b-large-phrase-learn   -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 3 -uiPhraseChinese -uiLargeText
+          shoot 63c-large-phrase-done    -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 11 -uiLargeText
           # 主题词表：自然篇平涂 + air 已移出；家人篇 cousin/son/daughter 已移出
           shoot 55a-redo-theme-nature  -uiTab 1 -uiTheme nature
           shoot 55b-redo-theme-family  -uiTab 1 -uiTheme family
@@ -430,6 +452,8 @@ jobs:
           shoot ipad-01-learn   -uiTab 0
           shoot ipad-02-cards   -uiTab 1
           shoot ipad-08-lesson  -uiTab 2 -uiLesson
+          shoot ipad-60-phrases-home -uiTab 2
+          shoot ipad-61-phrase-learn -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 0
           shoot ipad-large-02-cards -uiTab 1 -uiLargeText
           ls -lh shoot-ipad
 

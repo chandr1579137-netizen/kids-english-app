@@ -103,8 +103,8 @@ struct ProfileView: View {
                 metric(icon: "book.fill", color: Func.infoDeep,
                        value: "\(store.learnedWords.count)", label: "已学单词")
                 divider
-                metric(icon: "book.closed.fill", color: Func.positiveDeep,
-                       value: "\(store.completedLessons.count)", label: "已读短文")
+                metric(icon: "bubble.left.and.bubble.right.fill", color: Func.positiveDeep,
+                       value: "\(store.completedPhraseScenes.count)", label: "说一说")
                 divider
                 metric(icon: "target", color: Func.accentDeep,
                        value: "\(store.gameAccuracy)%", label: "游戏正确率")
@@ -369,7 +369,7 @@ struct FavoritesView: View {
                 .padding(.horizontal)
 
                 if words.isEmpty && cards.isEmpty {
-                    Text("还没有收藏。在课文里点一个单词，再点「收藏」，它就会出现在这里。")
+                    Text("还没有收藏。学完一个「说一说」场景，就能得到一张卡片。")
                         .kidFont(15, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(3)
@@ -405,7 +405,7 @@ struct FavoritesView: View {
                             spacing: 10
                         ) {
                             ForEach(cards, id: \.self) { card in
-                                Text(card)
+                                Text(PhraseCards.title(for: card, catalog: store.phraseCatalog))
                                     .kidFont(15, .bold)
                                     .foregroundStyle(Palette.ink)
                                     .lineLimit(1)

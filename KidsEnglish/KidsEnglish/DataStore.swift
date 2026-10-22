@@ -16,6 +16,8 @@ class DataStore {
     var lessonDict: [String: WordEntry] = [:]
     /// 首页可学词表（数字本只留 one..ten；「单词卡」和巩固练习仍用全量 words）
     var homeWords: [WordEntry] = []
+    /// 「说一说」口语课（Resources/phrases/phrases.json）
+    var phraseCatalog: PhraseCatalog? = nil
 
     // 进度（持久化）
     var completedLessons: Set<String> = []
@@ -35,6 +37,8 @@ class DataStore {
     var gameCorrect: Int = 0
     var gameAnswered: Int = 0
     var studyDates: [String] = []
+    /// 口语课已完成的场景（id 如 L1-1）。旧课文进度 completedLessons 原样保留、只读归档。
+    var completedPhraseScenes: Set<String> = []
 
     // 家长控制
     var timeLimitMinutes: Int = 20   // 0 = 不限
@@ -42,6 +46,10 @@ class DataStore {
     var bonusSecondsToday: Double = 0
     var timeUp: Bool = false
     var showTranslationDefault = true
+    /// 口语课：家长打开后所有场景都能点（默认按顺序解锁）
+    var phraseUnlockAll = false
+    /// 口语课：卡片下方显示中文（给不会英语的家长陪学；孩子界面默认不显示）
+    var phraseShowChinese = false
 
     private let defaults = UserDefaults.standard
     private var timer: Timer?
@@ -84,6 +92,10 @@ class DataStore {
         audioMap = am
         wordAudioMap = load("word-audio-map.json", as: [String: String].self) ?? [:]
         wordThemes = load("word-themes.json", as: [WordTheme].self) ?? []
+        if let url = Bundle.main.url(forResource: "phrases", withExtension: "json", subdirectory: "phrases"),
+           let data = try? Data(contentsOf: url) {
+            phraseCatalog = PhraseCatalog.decode(data)
+        }
 
         // 低龄白名单：words-*.json 是全龄语料（夹杂 is / genesis / 1000 这类词），
         // 可学词表只保留 word-themes.json 里策展过的词。主题空了就说明资源没打包好，
@@ -141,6 +153,13 @@ class DataStore {
         let flat = root.appendingPathComponent("audio/\(songId).mp3")
         if FileManager.default.fileExists(atPath: flat.path) { return flat }
         return nil
+    }
+
+    /// 口语课资源：phrases/audio、phrases/img、phrases/avatars（文件夹引用，原样进包）
+    func phraseFileURL(_ folder: String, _ file: String) -> URL? {
+        guard let url = Bundle.main.resourceURL?.appendingPathComponent("phrases/\(folder)/\(file)"),
+              FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
     }
 
     func coverURL(forLesson lessonId: String) -> URL? {
@@ -320,6 +339,17 @@ class DataStore {
         saveProgress()
     }
 
+    // MARK: - 口语课进度
+
+    /// 记下完成一个场景。第一次完成返回 true（发星星和收集卡），重复学不再发奖励。
+    @discardableResult
+    func completePhraseScene(_ id: String) -> Bool {
+        let first = completedPhraseScenes.insert(id).inserted
+        if first { collectedCards.insert(PhraseCards.id(for: id)) }
+        saveProgress()
+        return first
+    }
+
     // MARK: - 持久化
 
     private func loadProgress() {
@@ -338,6 +368,9 @@ class DataStore {
         gameCorrect = defaults.integer(forKey: "gameCorrect")
         gameAnswered = defaults.integer(forKey: "gameAnswered")
         studyDates = defaults.stringArray(forKey: "studyDates") ?? []
+        completedPhraseScenes = Set(defaults.stringArray(forKey: "completedPhraseScenes") ?? [])
+        phraseUnlockAll = defaults.bool(forKey: "phraseUnlockAll")
+        phraseShowChinese = defaults.bool(forKey: "phraseShowChinese")
         timeLimitMinutes = defaults.object(forKey: "timeLimitMinutes") as? Int ?? 20
         showTranslationDefault = defaults.object(forKey: "showTranslation") as? Bool ?? true
         todayKey = dayString()
@@ -361,6 +394,9 @@ class DataStore {
         defaults.set(gameCorrect, forKey: "gameCorrect")
         defaults.set(gameAnswered, forKey: "gameAnswered")
         defaults.set(studyDates, forKey: "studyDates")
+        defaults.set(Array(completedPhraseScenes), forKey: "completedPhraseScenes")
+        defaults.set(phraseUnlockAll, forKey: "phraseUnlockAll")
+        defaults.set(phraseShowChinese, forKey: "phraseShowChinese")
         defaults.set(timeLimitMinutes, forKey: "timeLimitMinutes")
         defaults.set(showTranslationDefault, forKey: "showTranslation")
         defaults.set(bonusSecondsToday, forKey: "bonus_\(todayKey)")
@@ -465,6 +501,7 @@ class DataStore {
         learnedWords.removeAll()
         favoriteWords.removeAll()
         collectedCards.removeAll()
+        completedPhraseScenes.removeAll()
         gameAnswered = 0
         gameCorrect = 0
         studySecondsToday = 0
@@ -504,7 +541,8 @@ class DataStore {
             gameCorrect: gameCorrect,
             studyDates: studyDates,
             childName: childName,
-            avatarEmoji: avatarEmoji
+            avatarEmoji: avatarEmoji,
+            completedPhraseScenes: completedPhraseScenes.sorted()
         )
         return ProgressCodec.encode(snapshot)
     }
@@ -529,6 +567,8 @@ class DataStore {
         studyDates = snapshot.studyDates
         if let name = snapshot.childName, !name.isEmpty { childName = name }
         if let emoji = snapshot.avatarEmoji, !emoji.isEmpty { avatarEmoji = emoji }
+        // 旧备份没有口语进度（nil）：保留本机现有的，不覆盖成空
+        if let scenes = snapshot.completedPhraseScenes { completedPhraseScenes = Set(scenes) }
         saveProgress()
         refreshTimeUp()
         return ProgressCodec.summary(snapshot)

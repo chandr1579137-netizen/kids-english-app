@@ -1,0 +1,3571 @@
+{
+ "version": 2,
+ "generated": "2026-10-22",
+ "note": "L1–L7 日常口语。每句的 src 是它来自 source150.json 的哪几句（空数组表示补充的儿童句）；special_picture 不为空的句子需要特殊画法（不出现数字/字母）；reuse_icon 表示可以直接复用的现有词图。",
+ "characters": [
+  {
+   "id": "tom",
+   "zh": "Tom 汤姆（男孩，4岁，主角）"
+  },
+  {
+   "id": "amy",
+   "zh": "Amy 艾米（女孩，好朋友）"
+  },
+  {
+   "id": "mom",
+   "zh": "妈妈"
+  },
+  {
+   "id": "dad",
+   "zh": "爸爸"
+  },
+  {
+   "id": "teacher",
+   "zh": "幼儿园老师（女）"
+  },
+  {
+   "id": "grandma",
+   "zh": "奶奶"
+  },
+  {
+   "id": "grandpa",
+   "zh": "爷爷"
+  },
+  {
+   "id": "farmer",
+   "zh": "农民叔叔"
+  },
+  {
+   "id": "staff",
+   "zh": "动物园工作人员阿姨"
+  }
+ ],
+ "levels": [
+  {
+   "level": 1,
+   "title_zh": "问候与礼貌",
+   "max_words": 4,
+   "new_patterns": [
+    "Hello / Hi",
+    "How are you? – Fine, thanks.",
+    "Good morning / afternoon / evening / night",
+    "… , please. / Thank you.",
+    "Sorry. – It's OK.",
+    "I'm + 感受（hungry/sleepy）",
+    "See you … / Goodbye"
+   ],
+   "scenes": [
+    {
+     "id": "L1-1",
+     "title_zh": "打招呼",
+     "title_en": "Hello!",
+     "setting": "公园小路上，Tom 遇见 Amy",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Hello!",
+       "zh": "你好！",
+       "picture": "Tom 笑着向 Amy 挥手",
+       "src": [
+        1
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Hi!",
+       "zh": "嗨！",
+       "picture": "Amy 笑着挥手回应",
+       "src": [
+        1
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "How are you?",
+       "zh": "你好吗？",
+       "picture": "Tom 歪着头、摊开一只手",
+       "src": [
+        6
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Fine, thanks. And you?",
+       "zh": "很好，谢谢。你呢？",
+       "picture": "Amy 竖起大拇指，再手心朝上指向 Tom",
+       "src": [
+        7
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "fine（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm fine, too.",
+       "zh": "我也很好。",
+       "picture": "Tom 也竖起大拇指，两人都笑",
+       "src": [
+        8
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "fine（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L1-2",
+     "title_zh": "早上好",
+     "title_en": "Good Morning!",
+     "setting": "清晨卧室和卫生间",
+     "lines": [
+      {
+       "speaker": "mom",
+       "en": "Good morning!",
+       "zh": "早上好！",
+       "picture": "妈妈拉开窗帘，阳光照进来（太阳不画脸）",
+       "src": [
+        2
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Good morning, Mom!",
+       "zh": "早上好，妈妈！",
+       "picture": "Tom 坐在床上伸懒腰",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "Time to get up!",
+       "zh": "该起床啦！",
+       "picture": "妈妈轻轻掀开被子，Tom 揉眼睛",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）",
+        "get（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I wash my face.",
+       "zh": "我洗脸。",
+       "picture": "Tom 在洗手池前用毛巾擦脸",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I brush my teeth.",
+       "zh": "我刷牙。",
+       "picture": "Tom 拿牙刷刷牙，嘴边有白泡泡",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm ready!",
+       "zh": "我准备好啦！",
+       "picture": "Tom 背着小书包站在门口，双手举高",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L1-3",
+     "title_zh": "请和谢谢",
+     "title_en": "Please and Thank You",
+     "setting": "家里餐桌和客厅",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Juice, please!",
+       "zh": "请给我果汁！",
+       "picture": "Tom 双手合十看着一杯橙汁",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "juice",
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "Here you are.",
+       "zh": "给你。",
+       "picture": "妈妈把橙汁递给 Tom",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Thank you!",
+       "zh": "谢谢！",
+       "picture": "Tom 双手接过杯子点头",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "You're welcome.",
+       "zh": "不客气。",
+       "picture": "妈妈摸摸 Tom 的头",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Sorry!",
+       "zh": "对不起！",
+       "picture": "Tom 不小心碰倒 Amy 的积木，双手捂嘴",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "It's OK.",
+       "zh": "没关系。",
+       "picture": "Amy 摆摆手笑，旁边是倒下的积木",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "blocks",
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L1-4",
+     "title_zh": "吃饭啦",
+     "title_en": "Mealtime",
+     "setting": "厨房和餐桌，一家三口",
+     "lines": [
+      {
+       "speaker": "mom",
+       "en": "Wash your hands.",
+       "zh": "去洗手。",
+       "picture": "Tom 在水池前搓手，满手泡泡",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "wash",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm hungry!",
+       "zh": "我饿了！",
+       "picture": "Tom 摸着肚子看桌上的饭菜",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "dad",
+       "en": "Let's eat!",
+       "zh": "开饭啦！",
+       "picture": "一家三口围坐餐桌，桌上有米饭和汤",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Yummy!",
+       "zh": "真好吃！",
+       "picture": "Tom 拿勺子吃饭，满脸开心",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "yummy",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "More rice, please.",
+       "zh": "请再给我一点米饭。",
+       "picture": "Tom 把空碗递给爸爸",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "rice",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm thirsty.",
+       "zh": "我渴了。",
+       "picture": "Tom 伸手去拿一杯牛奶",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm full.",
+       "zh": "我吃饱了。",
+       "picture": "Tom 拍拍圆鼓鼓的肚子，碗空了",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L1-5",
+     "title_zh": "说再见",
+     "title_en": "Goodbye!",
+     "setting": "下午幼儿园门口，爸爸来接 Tom",
+     "lines": [
+      {
+       "speaker": "teacher",
+       "en": "Good afternoon!",
+       "zh": "下午好！",
+       "picture": "老师在幼儿园门口向爸爸微笑问好",
+       "src": [
+        2
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "afternoon（词库无）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "Let's go home.",
+       "zh": "我们回家吧。",
+       "picture": "爸爸向 Tom 伸出手",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "home（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I have to go.",
+       "zh": "我得走啦。",
+       "picture": "Tom 背上小书包，转身看 Amy",
+       "src": [
+        15
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Goodbye, Amy!",
+       "zh": "再见，艾米！",
+       "picture": "Tom 牵着爸爸的手回头挥手",
+       "src": [
+        12
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Bye-bye!",
+       "zh": "拜拜！",
+       "picture": "Amy 跳起来挥手",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "See you tomorrow!",
+       "zh": "明天见！",
+       "picture": "Tom 和 Amy 隔着校门挥手",
+       "src": [
+        13
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "tomorrow（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "See you later!",
+       "zh": "待会儿见！",
+       "picture": "Amy 在楼下花园里向楼上窗口的 Tom 挥手",
+       "src": [
+        14
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "later（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L1-6",
+     "title_zh": "晚上好·晚安",
+     "title_en": "Good Night!",
+     "setting": "晚上家里，爸爸下班回来，然后睡觉",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Good evening, Dad!",
+       "zh": "晚上好，爸爸！",
+       "picture": "爸爸开门进屋，Tom 扑过去，窗外天黑有星星",
+       "src": [
+        2
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "evening（词库有）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "It's bedtime.",
+       "zh": "该睡觉啦。",
+       "picture": "卧室亮着小台灯，窗外有月亮（月亮不画脸）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "bedtime（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm sleepy.",
+       "zh": "我困了。",
+       "picture": "Tom 穿睡衣打哈欠",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "sleepy",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "A story, please!",
+       "zh": "请给我讲个故事！",
+       "picture": "Tom 在被窝里把图画书递给爸爸",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "story（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Good night, Mom.",
+       "zh": "晚安，妈妈。",
+       "picture": "妈妈给 Tom 盖被子",
+       "src": [
+        11
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "dad",
+       "en": "I love you.",
+       "zh": "我爱你。",
+       "picture": "爸爸亲亲 Tom 的额头，旁边一颗小红心",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "love",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I love you, too.",
+       "zh": "我也爱你。",
+       "picture": "Tom 抱住爸爸的脖子",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 2,
+   "title_zh": "我是谁·这是什么",
+   "max_words": 6,
+   "new_patterns": [
+    "What's your name? – I'm … / My name is …",
+    "Who are you? / Are you …? – Yes, I am. / No, I'm not.",
+    "What's this? – It's a … / Is that a …?",
+    "What color is …?",
+    "Is this your …? / Whose … is this? – It's Amy's.",
+    "Is this yours? – Yes, it's mine."
+   ],
+   "scenes": [
+    {
+     "id": "L2-1",
+     "title_zh": "认识新朋友",
+     "title_en": "Nice to Meet You",
+     "setting": "幼儿园教室，Tom 认识新同学 Amy",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "What's your name?",
+       "zh": "你叫什么名字？",
+       "picture": "Amy 笑着指向 Tom",
+       "src": [
+        76
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm Tom.",
+       "zh": "我是汤姆。",
+       "picture": "Tom 拍拍自己胸口",
+       "src": [
+        3
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "May I have your name?",
+       "zh": "可以告诉我你的名字吗？",
+       "picture": "Tom 有礼貌地微微弯腰，手心朝上指向 Amy",
+       "src": [
+        77
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "My name is Amy.",
+       "zh": "我叫艾米。",
+       "picture": "Amy 用手指着自己",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Nice to meet you.",
+       "zh": "很高兴认识你。",
+       "picture": "两个孩子握手",
+       "src": [
+        87
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "meet（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Nice to meet you, too.",
+       "zh": "我也很高兴认识你。",
+       "picture": "两人继续握手，旁边有小爱心",
+       "src": [
+        88
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "meet（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "How old are you?",
+       "zh": "你几岁啦？",
+       "picture": "Amy 好奇地歪头",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm four.",
+       "zh": "我四岁。",
+       "picture": "Tom 伸出四根手指",
+       "src": [],
+       "special_picture": "用手指个数表示，不画数字",
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L2-2",
+     "title_zh": "猜猜我是谁",
+     "title_en": "Who Are You?",
+     "setting": "化装游戏：孩子们戴动物头套",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "Who are you?",
+       "zh": "你是谁？",
+       "picture": "戴狮子头套的孩子站在 Amy 面前",
+       "src": [
+        61
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm a lion!",
+       "zh": "我是狮子！",
+       "picture": "Tom 戴狮子头套张开双手做吼叫状",
+       "src": [
+        62
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Are you Tom?",
+       "zh": "你是汤姆吗？",
+       "picture": "Amy 指着狮子头套，眯眼猜",
+       "src": [
+        4
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Yes, I am!",
+       "zh": "是的，我是！",
+       "picture": "Tom 摘下头套笑",
+       "src": [
+        5
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Are you a cat?",
+       "zh": "你是小猫吗？",
+       "picture": "Tom 指着戴兔耳朵头箍的 Amy",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "No, I'm not.",
+       "zh": "不，我不是。",
+       "picture": "Amy 摇头",
+       "src": [
+        5
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "I'm a rabbit!",
+       "zh": "我是小兔子！",
+       "picture": "Amy 双手放头顶学兔子跳",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L2-3",
+     "title_zh": "这是什么",
+     "title_en": "What's This?",
+     "setting": "客厅地毯上，Amy 拿着玩具问 Tom",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "What's this?",
+       "zh": "这是什么？",
+       "picture": "Amy 举起一支笔",
+       "src": [
+        31
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "It's a pen.",
+       "zh": "是一支笔。",
+       "picture": "一支笔",
+       "src": [
+        32
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Is that a car?",
+       "zh": "那是小汽车吗？",
+       "picture": "Amy 指向远处地上的一个玩具车",
+       "src": [
+        37
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "No, it isn't. It's a bus.",
+       "zh": "不是，那是公共汽车。",
+       "picture": "一辆玩具公共汽车",
+       "src": [
+        38
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "What's this in English?",
+       "zh": "这个用英语怎么说？",
+       "picture": "Tom 举起一个苹果，看着妈妈",
+       "src": [
+        39
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "english（词库无）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "It's an apple.",
+       "zh": "是苹果。",
+       "picture": "一个红苹果",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "apple",
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "What color is your new book?",
+       "zh": "你的新书是什么颜色？",
+       "picture": "Tom 抱着一本新图画书（封面只有图）",
+       "src": [
+        40
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "color（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "It's red.",
+       "zh": "是红色。",
+       "picture": "红色封面的书",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "book",
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L2-4",
+     "title_zh": "是你的吗",
+     "title_en": "Is This Yours?",
+     "setting": "幼儿园玩具角，收拾玩具",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "Is this your ball?",
+       "zh": "这是你的球吗？",
+       "picture": "Amy 捧着一个沙滩球",
+       "src": [
+        33
+       ],
+       "special_picture": null,
+       "reuse_icon": "ball",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Yes, it is.",
+       "zh": "是的，是我的。",
+       "picture": "Tom 点头接球",
+       "src": [
+        34
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Is this your hat?",
+       "zh": "这是你的帽子吗？",
+       "picture": "Amy 举起一顶草帽",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "hat",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "No, it isn't.",
+       "zh": "不，不是。",
+       "picture": "Tom 摇头摆手",
+       "src": [
+        34
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Whose hat is this?",
+       "zh": "这是谁的帽子？",
+       "picture": "Tom 拿着草帽四处看",
+       "src": [
+        35
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "teacher",
+       "en": "It's Amy's.",
+       "zh": "是艾米的。",
+       "picture": "老师指着 Amy，Amy 举手",
+       "src": [
+        36
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "teacher",
+       "en": "Is this yours?",
+       "zh": "这是你的吗？",
+       "picture": "老师举起一个泰迪熊看着 Tom",
+       "src": [
+        48
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "yours（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Yes, it's mine.",
+       "zh": "是的，是我的。",
+       "picture": "Tom 开心地抱住泰迪熊",
+       "src": [
+        49
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "mine（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L2-5",
+     "title_zh": "我的心情",
+     "title_en": "How Do You Feel?",
+     "setting": "家里客厅，妈妈和 Tom",
+     "lines": [
+      {
+       "speaker": "mom",
+       "en": "How do you feel?",
+       "zh": "你感觉怎么样？",
+       "picture": "妈妈蹲下来温柔地看着 Tom",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "feel（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm happy!",
+       "zh": "我很开心！",
+       "picture": "Tom 张开双臂大笑",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "happy",
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "Are you OK?",
+       "zh": "你还好吗？",
+       "picture": "Tom 坐在地上，妈妈跑过来",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm sad.",
+       "zh": "我很难过。",
+       "picture": "Tom 眼角挂泪撅着嘴",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "sad",
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "Big hug!",
+       "zh": "抱一抱！",
+       "picture": "妈妈紧紧抱住 Tom",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "hug",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'm OK now.",
+       "zh": "我现在没事啦。",
+       "picture": "Tom 擦干眼泪又笑了",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L2-6",
+     "title_zh": "一起玩",
+     "title_en": "Let's Play!",
+     "setting": "客厅地毯，搭积木",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Let's play!",
+       "zh": "我们一起玩吧！",
+       "picture": "Tom 抱着一盒积木跑向 Amy",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "blocks",
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "OK!",
+       "zh": "好呀！",
+       "picture": "Amy 拍手跳起来",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "My turn.",
+       "zh": "轮到我了。",
+       "picture": "Tom 指着自己，手里拿一块积木",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Your turn.",
+       "zh": "轮到你了。",
+       "picture": "Amy 把积木推给 Tom",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Help me, please.",
+       "zh": "请帮帮我。",
+       "picture": "积木塔太高，Tom 踮脚够不着",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Let's share!",
+       "zh": "我们一起分享吧！",
+       "picture": "两个孩子一起玩同一堆积木",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "share",
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Good job!",
+       "zh": "真棒！",
+       "picture": "积木塔搭好了，Amy 竖起大拇指",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "job（词库无）"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 3,
+   "title_zh": "找东西·在幼儿园",
+   "max_words": 6,
+   "new_patterns": [
+    "Where is/are my …? – On the … / Over there.",
+    "Do you know where …?",
+    "Which is your …? – The big one.",
+    "Mine is …",
+    "Are these … yours? – Some of them are mine.",
+    "课堂句：May I …? / Could you say it again? / Any questions?"
+   ],
+   "scenes": [
+    {
+     "id": "L3-1",
+     "title_zh": "找东西",
+     "title_en": "Where Is It?",
+     "setting": "家里客厅和卧室",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Where is my teddy?",
+       "zh": "我的小熊在哪儿？",
+       "picture": "Tom 摊开双手东张西望",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "It's on the bed.",
+       "zh": "在床上。",
+       "picture": "泰迪熊坐在床上",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "bed",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Where are my shoes?",
+       "zh": "我的鞋子在哪儿？",
+       "picture": "Tom 光着脚站在门口",
+       "src": [
+        50
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Do you know where they are?",
+       "zh": "你知道它们在哪儿吗？",
+       "picture": "Tom 拉着妈妈的衣角问",
+       "src": [
+        51
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "they（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Over there.",
+       "zh": "在那边。",
+       "picture": "妈妈指向门边的鞋架",
+       "src": [
+        52
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "dad",
+       "en": "Where is my book?",
+       "zh": "我的书在哪儿？",
+       "picture": "爸爸在找东西",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "On the desk.",
+       "zh": "在书桌上。",
+       "picture": "一本书放在书桌上",
+       "src": [
+        53
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Here it is!",
+       "zh": "找到啦！",
+       "picture": "Tom 举着书递给爸爸",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L3-2",
+     "title_zh": "哪个是你的",
+     "title_en": "Which Is Yours?",
+     "setting": "幼儿园门口的书包架",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "I found your pen!",
+       "zh": "我捡到你的笔啦！",
+       "picture": "Amy 从桌子底下捡起一支笔",
+       "src": [
+        54
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "found（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "No. Mine is blue.",
+       "zh": "不是。我的是蓝色的。",
+       "picture": "Tom 摇头，指着自己手里的蓝色笔",
+       "src": [
+        55
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "mine（词库无）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Which is your bag?",
+       "zh": "哪个是你的书包？",
+       "picture": "老师指着挂着的两个书包",
+       "src": [
+        56
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "which（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "The bigger one.",
+       "zh": "大一点的那个。",
+       "picture": "一大一小两个书包，Tom 指大的",
+       "src": [
+        57
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "bigger（词库无）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "The one on the hook?",
+       "zh": "挂钩上的那个吗？",
+       "picture": "老师指着挂钩上的书包",
+       "src": [
+        58
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "hook（词库无）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Are these books all yours?",
+       "zh": "这些书都是你的吗？",
+       "picture": "桌上一摞图画书",
+       "src": [
+        59
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "yours（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Some of them are mine.",
+       "zh": "有一些是我的。",
+       "picture": "Tom 从书堆里抽出两本",
+       "src": [
+        60
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "mine（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L3-3",
+     "title_zh": "上学啦",
+     "title_en": "At School",
+     "setting": "幼儿园教室门口",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "May I come in?",
+       "zh": "我可以进来吗？",
+       "picture": "Tom 在教室门口轻轻敲门",
+       "src": [
+        16
+       ],
+       "special_picture": null,
+       "reuse_icon": "door",
+       "new_words": []
+      },
+      {
+       "speaker": "teacher",
+       "en": "Come in, please.",
+       "zh": "请进。",
+       "picture": "老师微笑招手",
+       "src": [
+        17
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "teacher",
+       "en": "Sit down, please.",
+       "zh": "请坐。",
+       "picture": "老师指向小椅子，Tom 坐下",
+       "src": [
+        18
+       ],
+       "special_picture": null,
+       "reuse_icon": "sit",
+       "new_words": [
+        "down（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "It's time for class.",
+       "zh": "上课时间到了。",
+       "picture": "老师站在黑板前（黑板上只画图形，不写字），孩子们坐好",
+       "src": [
+        19
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）",
+        "class（词库无）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Who is here today?",
+       "zh": "今天谁来了？",
+       "picture": "老师看着全班点名",
+       "src": [
+        21
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "today（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Here!",
+       "zh": "到！",
+       "picture": "Tom 高高举手",
+       "src": [
+        22
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "teacher",
+       "en": "Open your books, please.",
+       "zh": "请打开书。",
+       "picture": "桌上摊开的图画书（只有图）",
+       "src": [
+        20
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Where's the toilet, please?",
+       "zh": "请问厕所在哪儿？",
+       "picture": "Tom 夹着腿举手，有点着急",
+       "src": [
+        44
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "toilet（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L3-4",
+     "title_zh": "画画课",
+     "title_en": "Art Class",
+     "setting": "幼儿园美术课",
+     "lines": [
+      {
+       "speaker": "teacher",
+       "en": "Does everyone have paper?",
+       "zh": "每个人都有纸吗？",
+       "picture": "老师举起一张白纸",
+       "src": [
+        23
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "everyone（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Are you ready?",
+       "zh": "准备好了吗？",
+       "picture": "孩子们拿起蜡笔",
+       "src": [
+        25
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "teacher",
+       "en": "Do you understand?",
+       "zh": "听明白了吗？",
+       "picture": "老师在画板上画了一个圆形示范",
+       "src": [
+        26
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "understand（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Could you say it again?",
+       "zh": "您能再说一遍吗？",
+       "picture": "Tom 把手放耳边，没听清",
+       "src": [
+        27
+       ],
+       "special_picture": null,
+       "reuse_icon": "ear",
+       "new_words": [
+        "could（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Who has a different idea?",
+       "zh": "谁有不一样的想法？",
+       "picture": "老师看着孩子们，几个孩子举手",
+       "src": [
+        24
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "different（词库有）",
+        "idea（词库无）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Any questions?",
+       "zh": "有问题吗？",
+       "picture": "老师张开双手看着大家",
+       "src": [
+        28
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "questions（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "That's all for today.",
+       "zh": "今天就到这里。",
+       "picture": "孩子们开心地举起自己的画",
+       "src": [
+        29
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "that's（词库无）",
+        "today（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "Give me your picture, please.",
+       "zh": "请把你的画交给我。",
+       "picture": "Tom 把画双手交给老师",
+       "src": [
+        30
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 4,
+   "title_zh": "他是谁·做什么",
+   "max_words": 7,
+   "new_patterns": [
+    "Who is …? – He's my … / She's …",
+    "Is that girl a …? – No, she isn't.",
+    "What do you do? / What does he do? – He's a doctor.",
+    "I don't know. / I have no idea. / I think so.",
+    "This is … He's my classmate.",
+    "What's your family name? / How do you spell it?",
+    "Do you have …? – Yes, I do. / I have some left."
+   ],
+   "scenes": [
+    {
+     "id": "L4-1",
+     "title_zh": "那是谁",
+     "title_en": "Who Is He?",
+     "setting": "公园里远远看见几个人",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "Who is the boy over there?",
+       "zh": "那边那个男孩是谁？",
+       "picture": "Amy 指向远处玩滑板的男孩",
+       "src": [
+        63
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "He's my brother.",
+       "zh": "他是我哥哥。",
+       "picture": "Tom 骄傲地挥手，哥哥也挥手",
+       "src": [
+        64
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Is that girl a student?",
+       "zh": "那个女孩是学生吗？",
+       "picture": "远处一个背书包的小女孩",
+       "src": [
+        65
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "student（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "No, she isn't.",
+       "zh": "不，她不是。",
+       "picture": "那个女孩其实在推婴儿车玩",
+       "src": [
+        66
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Who is she?",
+       "zh": "她是谁？",
+       "picture": "Amy 好奇地指着",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I really don't know.",
+       "zh": "我真的不知道。",
+       "picture": "Tom 耸耸肩摊手",
+       "src": [
+        72
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "really（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "I have no idea.",
+       "zh": "我也一点都不知道。",
+       "picture": "Amy 也耸肩，两人都笑",
+       "src": [
+        73
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "idea（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L4-2",
+     "title_zh": "大人做什么",
+     "title_en": "Jobs",
+     "setting": "农场参观日",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "What do you do?",
+       "zh": "您是做什么的？",
+       "picture": "Tom 抬头问戴草帽的叔叔",
+       "src": [
+        67
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "farmer",
+       "en": "I'm a farmer.",
+       "zh": "我是农民。",
+       "picture": "叔叔扛着锄头站在菜地边",
+       "src": [
+        68
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "farmer（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "What does he do?",
+       "zh": "他是做什么的？",
+       "picture": "Amy 指着一个穿白大褂的叔叔",
+       "src": [
+        69
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "He's a doctor.",
+       "zh": "他是医生。",
+       "picture": "穿白大褂、挂听诊器的叔叔",
+       "src": [
+        70
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "doctor（词库无）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Is she a teacher?",
+       "zh": "她是老师吗？",
+       "picture": "一位抱着图画书的阿姨",
+       "src": [
+        71
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "teacher（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Is she a bus driver?",
+       "zh": "她是公交车司机吗？",
+       "picture": "一位坐在公交车驾驶座的阿姨",
+       "src": [
+        74
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "driver（词库无）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Yes, I think so.",
+       "zh": "是的，我觉得是。",
+       "picture": "Amy 点点头",
+       "src": [
+        75
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "think（词库有）",
+        "so（词库有）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L4-3",
+     "title_zh": "介绍朋友",
+     "title_en": "This Is My Friend",
+     "setting": "Tom 带 Amy 回家",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Mom, let me introduce my friend.",
+       "zh": "妈妈，我来介绍我的朋友。",
+       "picture": "Tom 牵着 Amy 走到妈妈面前",
+       "src": [
+        85
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "let（词库有）",
+        "introduce（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "This is Amy. She's my classmate.",
+       "zh": "这是艾米，她是我的同学。",
+       "picture": "Tom 手心朝上指着 Amy",
+       "src": [
+        86
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "classmate（词库无）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Hello, Amy!",
+       "zh": "你好，艾米！",
+       "picture": "妈妈弯腰微笑",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "How do you do?",
+       "zh": "您好！",
+       "picture": "Amy 有礼貌地鞠躬",
+       "src": [
+        90
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Let me introduce myself.",
+       "zh": "我来介绍一下自己。",
+       "picture": "Amy 挺直站好，像在台上",
+       "src": [
+        89
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "let（词库有）",
+        "introduce（词库无）",
+        "myself（词库无）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "My name is Amelia.",
+       "zh": "我叫阿米莉亚。",
+       "picture": "Amy 指着自己",
+       "src": [
+        78
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Just call me Amy.",
+       "zh": "就叫我艾米吧。",
+       "picture": "Amy 笑着眨眼",
+       "src": [
+        79
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "just（词库有）",
+        "call（词库有）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L4-4",
+     "title_zh": "你姓什么",
+     "title_en": "Family Name",
+     "setting": "幼儿园新同学",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Who is the girl in pink?",
+       "zh": "穿粉色衣服的女孩是谁？",
+       "picture": "一个穿粉裙子的女孩站在门口",
+       "src": [
+        83
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Could you introduce me to her?",
+       "zh": "你能把我介绍给她吗？",
+       "picture": "Tom 拉着老师的手",
+       "src": [
+        84
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "could（词库有）",
+        "introduce（词库无）",
+        "her（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "What's your family name?",
+       "zh": "你姓什么？",
+       "picture": "老师弯腰问 Tom",
+       "src": [
+        80
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "My family name is Wang.",
+       "zh": "我姓王。",
+       "picture": "Tom 拍拍胸口",
+       "src": [
+        81
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "teacher",
+       "en": "How do you spell it?",
+       "zh": "怎么拼？",
+       "picture": "老师拿着空白名牌和蜡笔（名牌上不写字）",
+       "src": [
+        82
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "spell（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "W-A-N-G.",
+       "zh": "W-A-N-G。",
+       "picture": "Tom 一边说一边用手指在空中画（画面不出现字母）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L4-5",
+     "title_zh": "借文具",
+     "title_en": "Do You Have …?",
+     "setting": "画画课的桌子旁",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Do you have a crayon?",
+       "zh": "你有蜡笔吗？",
+       "picture": "Tom 看着空空的桌面",
+       "src": [
+        106
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Yes, I do.",
+       "zh": "是的，我有。",
+       "picture": "Amy 举起一盒蜡笔",
+       "src": [
+        107
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Does your crayon box have pink?",
+       "zh": "你的蜡笔盒里有粉色吗？",
+       "picture": "Tom 指着 Amy 的蜡笔盒",
+       "src": [
+        112
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Do you have glue? I need some.",
+       "zh": "你有胶水吗？我需要一点。",
+       "picture": "Tom 拿着剪下的纸片",
+       "src": [
+        116
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "need（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "I have some left.",
+       "zh": "我还剩一些。",
+       "picture": "Amy 晃晃快用完的胶水瓶",
+       "src": [
+        117
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "left（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Can I have some more?",
+       "zh": "我能再要一点吗？",
+       "picture": "Tom 双手合十",
+       "src": [
+        118
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "Do you have my pencil?",
+       "zh": "你拿了我的铅笔吗？",
+       "picture": "Amy 在桌上找铅笔",
+       "src": [
+        119
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Yes, I have your eraser, too.",
+       "zh": "是的，我还拿了你的橡皮。",
+       "picture": "Tom 递回一支铅笔和一块橡皮",
+       "src": [
+        120
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 5,
+   "title_zh": "家人·星期·月份",
+   "max_words": 7,
+   "new_patterns": [
+    "How is your …? – She is very well.",
+    "Do you have any brothers or sisters?",
+    "… , doesn't he? – No, he doesn't.",
+    "What a … you have!",
+    "What day is it today? – It's Monday.",
+    "What month is it? – It's December.",
+    "What season is it?"
+   ],
+   "scenes": [
+    {
+     "id": "L5-1",
+     "title_zh": "你家有谁",
+     "title_en": "My Family",
+     "setting": "Amy 来 Tom 家玩",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "How is your mom?",
+       "zh": "你妈妈好吗？",
+       "picture": "Tom 问刚进门的 Amy",
+       "src": [
+        9
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "She is very well, thank you.",
+       "zh": "她很好，谢谢。",
+       "picture": "Amy 笑着点头",
+       "src": [
+        10
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "very（词库有）",
+        "well（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Do you have any brothers or sisters?",
+       "zh": "你有兄弟姐妹吗？",
+       "picture": "Amy 好奇地看着墙上的全家福（照片里只有人像）",
+       "src": [
+        110
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "or（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Yes, I have a big brother.",
+       "zh": "有，我有一个哥哥。",
+       "picture": "全家福里 Tom 和哥哥",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Do you have any brothers?",
+       "zh": "你有兄弟吗？",
+       "picture": "Tom 反问",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "amy",
+       "en": "No, I'm the only child.",
+       "zh": "没有，我是独生女。",
+       "picture": "Amy 被爸爸妈妈一左一右抱着",
+       "src": [
+        111
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L5-2",
+     "title_zh": "去奶奶家",
+     "title_en": "At Grandma's",
+     "setting": "周末去奶奶家",
+     "lines": [
+      {
+       "speaker": "mom",
+       "en": "What a beautiful garden you have!",
+       "zh": "您的花园真漂亮！",
+       "picture": "奶奶家开满花的小花园",
+       "src": [
+        114
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "How big is your house, Grandma?",
+       "zh": "奶奶，您的房子有多大？",
+       "picture": "Tom 抬头看奶奶家的房子",
+       "src": [
+        41
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "grandma",
+       "en": "Come and see!",
+       "zh": "快进来看看！",
+       "picture": "奶奶笑着推开门",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Grandpa has a dog, doesn't he?",
+       "zh": "爷爷有一只狗，对吧？",
+       "picture": "Tom 四处找狗",
+       "src": [
+        108
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "grandma",
+       "en": "No, he doesn't. He has a cat.",
+       "zh": "没有，他有一只猫。",
+       "picture": "爷爷怀里抱着一只猫",
+       "src": [
+        109
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "What's the name of the cat?",
+       "zh": "这只猫叫什么名字？",
+       "picture": "Tom 摸着猫",
+       "src": [
+        43
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "name（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Do you have shampoo here?",
+       "zh": "这儿有洗发水吗？",
+       "picture": "洗澡时间，Tom 坐在浴缸里满头泡泡",
+       "src": [
+        113
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "shampoo（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L5-3",
+     "title_zh": "今天星期几",
+     "title_en": "What Day Is It?",
+     "setting": "早上家里，准备出门",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "What day is it today?",
+       "zh": "今天星期几？",
+       "picture": "Tom 一边穿鞋一边问",
+       "src": [
+        91
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "day（词库有）",
+        "today（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "It's Monday today.",
+       "zh": "今天星期一。",
+       "picture": "妈妈指着墙上的周计划图（每天一个小图标，不写字）",
+       "src": [
+        92
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "monday（词库无）",
+        "today（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Time for school!",
+       "zh": "该上学啦！",
+       "picture": "妈妈递给 Tom 小书包",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "What day is tomorrow?",
+       "zh": "明天星期几？",
+       "picture": "Tom 回头问",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "day（词库有）",
+        "tomorrow（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Tomorrow is Tuesday.",
+       "zh": "明天星期二。",
+       "picture": "周计划图上第二格亮起来",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "tomorrow（词库有）",
+        "tuesday（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I can't wait for Saturday!",
+       "zh": "我好想快点到星期六！",
+       "picture": "Tom 想象周六在公园放风筝的样子（想象气泡）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "can't（词库无）",
+        "saturday（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L5-4",
+     "title_zh": "几月份",
+     "title_en": "What Month Is It?",
+     "setting": "冬天窗外下雪",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "What month is it?",
+       "zh": "现在几月？",
+       "picture": "Tom 趴在窗边看雪",
+       "src": [
+        95
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "month（词库有）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "It's December.",
+       "zh": "现在是十二月。",
+       "picture": "窗外大雪纷飞",
+       "src": [
+        96
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "december（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "What season is it?",
+       "zh": "现在是什么季节？",
+       "picture": "Tom 回头问爸爸",
+       "src": [
+        97
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "season（词库无）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "It's winter.",
+       "zh": "是冬天。",
+       "picture": "雪地、松树和挂着冰凌的屋檐",
+       "src": [
+        98
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "winter（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "It's so cold!",
+       "zh": "好冷呀！",
+       "picture": "Tom 戴着手套搓手",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "so（词库有）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "Let's make a snowman!",
+       "zh": "我们去堆雪人吧！",
+       "picture": "爸爸和 Tom 在院子里堆雪人",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "snowman（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L5-5",
+     "title_zh": "天气怎么样",
+     "title_en": "What's the Weather Like?",
+     "setting": "周六早上，准备出门玩",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "What's the weather like?",
+       "zh": "天气怎么样？",
+       "picture": "Tom 拉开窗帘往外看",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "weather（词库无）",
+        "like（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "It's sunny today.",
+       "zh": "今天是晴天。",
+       "picture": "窗外蓝天白云、阳光明亮（太阳不画脸）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "sunny（词库无）",
+        "today（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Is it windy?",
+       "zh": "有风吗？",
+       "picture": "树叶被风吹得摇来摇去",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "windy（词库无）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Yes! Let's fly a kite.",
+       "zh": "有！我们去放风筝吧。",
+       "picture": "妈妈和 Tom 在草地上放风筝",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": "kite",
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Oh, it's cloudy now.",
+       "zh": "哎呀，现在变阴天了。",
+       "picture": "天上飘来大片乌云",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "cloudy（词库无）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Take your umbrella.",
+       "zh": "带上你的雨伞。",
+       "picture": "妈妈把一把黄色小雨伞递给 Tom",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "umbrella（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L5-6",
+     "title_zh": "买鞋子",
+     "title_en": "Shoe Shop",
+     "setting": "商场鞋店（店里没有招牌文字）",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Can I try them on?",
+       "zh": "我可以试穿吗？",
+       "picture": "Tom 指着货架上的一双红色运动鞋",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "try（词库有）"
+       ]
+      },
+      {
+       "speaker": "staff",
+       "en": "Sure. Here you are.",
+       "zh": "当然可以，给你。",
+       "picture": "店员阿姨把鞋递给 Tom",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "sure（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "They're too small.",
+       "zh": "太小了。",
+       "picture": "Tom 穿着鞋，脚趾顶到鞋头，皱眉",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "they're（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Do you have a bigger one?",
+       "zh": "有大一点的吗？",
+       "picture": "Tom 举起鞋子问店员",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "bigger（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "This one is just right!",
+       "zh": "这双正合适！",
+       "picture": "Tom 穿着新鞋开心地跳起来",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "just（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "You look great!",
+       "zh": "你穿着真好看！",
+       "picture": "妈妈竖起大拇指",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "great（词库有）"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 6,
+   "title_zh": "几点了·特别的日子",
+   "max_words": 7,
+   "new_patterns": [
+    "What time is it? – It's … o'clock / half past … / a quarter past …",
+    "It's almost … o'clock.",
+    "My watch says …",
+    "What's the date today? – It's June the first.",
+    "When is your birthday? – My birthday is in May.",
+    "Come to my party! – What time? – At three o'clock."
+   ],
+   "scenes": [
+    {
+     "id": "L6-1",
+     "title_zh": "几点了",
+     "title_en": "What Time Is It?",
+     "setting": "家里墙上挂着无数字钟",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "What time is it now?",
+       "zh": "现在几点？",
+       "picture": "Tom 指着墙上的钟",
+       "src": [
+        121
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "It's two o'clock.",
+       "zh": "两点了。",
+       "picture": "钟：短针指 2 的位置，长针指 12 的位置",
+       "src": [
+        122
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "o'clock（词库无）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "It's not four o'clock.",
+       "zh": "还没到四点呢。",
+       "picture": "钟：短针在 2 和 3 之间；Tom 着急地看着门口",
+       "src": [
+        127
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "o'clock（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "It's half past nine.",
+       "zh": "九点半了。",
+       "picture": "早上的钟：短针在 9 和 10 中间，长针指 6 的位置",
+       "src": [
+        125
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "half（词库无）",
+        "past（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "It's twelve o'clock. Lunch time!",
+       "zh": "十二点了，吃午饭！",
+       "picture": "两根针都指着最上面，桌上摆好午饭",
+       "src": [
+        126
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "o'clock（词库无）",
+        "lunch（词库无）",
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "It's a quarter past five.",
+       "zh": "五点一刻了。",
+       "picture": "傍晚的钟：短针刚过 5，长针指 3 的位置",
+       "src": [
+        123
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "quarter（词库无）",
+        "past（词库有）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L6-2",
+     "title_zh": "我的小手表",
+     "title_en": "My Watch",
+     "setting": "Tom 戴着新玩具手表",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "What time is it on your watch?",
+       "zh": "你的手表上几点了？",
+       "picture": "Amy 凑过来看 Tom 的手表",
+       "src": [
+        130
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "My watch says two o'clock.",
+       "zh": "我的表是两点。",
+       "picture": "手表表盘特写，无数字",
+       "src": [
+        128
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "o'clock（词库无）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "My watch is two minutes fast.",
+       "zh": "我的表快了两分钟。",
+       "picture": "Amy 也伸出手腕，两块表并排，长针稍微不一样",
+       "src": [
+        129
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "minutes（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "It's almost four o'clock.",
+       "zh": "快四点了。",
+       "picture": "钟：短针快到 4，长针快到 12",
+       "src": [
+        124
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "almost（词库无）",
+        "o'clock（词库无）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Time for the cartoon!",
+       "zh": "动画片时间到啦！",
+       "picture": "两人跑向电视（屏幕上只画卡通动物）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）",
+        "cartoon（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L6-3",
+     "title_zh": "生日派对",
+     "title_en": "Birthday Party",
+     "setting": "幼儿园门口，Amy 邀请 Tom",
+     "lines": [
+      {
+       "speaker": "amy",
+       "en": "Tomorrow is my birthday!",
+       "zh": "明天是我的生日！",
+       "picture": "Amy 抱着一个大气球蹦跳",
+       "src": [
+        94
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "tomorrow（词库有）",
+        "birthday（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Happy birthday!",
+       "zh": "生日快乐！",
+       "picture": "Tom 拍手",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "birthday（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "Come to my party!",
+       "zh": "来参加我的派对吧！",
+       "picture": "Amy 递给 Tom 一张画着蛋糕的邀请卡（不写字）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "party（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "What time?",
+       "zh": "几点？",
+       "picture": "Tom 接过卡片",
+       "src": [
+        142
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "At three o'clock.",
+       "zh": "三点。",
+       "picture": "无数字钟：短针指 3",
+       "src": [
+        143
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "o'clock（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'll see you tomorrow.",
+       "zh": "我们明天见。",
+       "picture": "两人挥手告别",
+       "src": [
+        144
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "tomorrow（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "When is your birthday?",
+       "zh": "你的生日是什么时候？",
+       "picture": "Amy 歪头问",
+       "src": [
+        140
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "when（词库有）",
+        "birthday（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "My birthday is in May.",
+       "zh": "我的生日在五月。",
+       "picture": "Tom 想象五月开满花的公园里过生日（想象气泡）",
+       "src": [
+        141
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "birthday（词库有）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L6-4",
+     "title_zh": "儿童节",
+     "title_en": "Children's Day",
+     "setting": "六一儿童节早上",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "What's the date today?",
+       "zh": "今天几号？",
+       "picture": "Tom 揉着眼睛走进客厅",
+       "src": [
+        93
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "date（词库无）",
+        "today（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Today is June the first.",
+       "zh": "今天是六月一日。",
+       "picture": "墙上日历空白格里贴着一颗大星星",
+       "src": [
+        139
+       ],
+       "special_picture": "日历页只画空白方格，用贴纸/小星星标出那一天，不写数字和字母",
+       "reuse_icon": null,
+       "new_words": [
+        "today（词库有）",
+        "june（词库无）",
+        "first（词库有）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "It's Children's Day!",
+       "zh": "今天是儿童节！",
+       "picture": "客厅挂满彩旗和气球",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "children's（词库无）",
+        "day（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Hooray! Let's go to the park!",
+       "zh": "太好了！我们去公园吧！",
+       "picture": "Tom 跳起来欢呼",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "hooray（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L6-5",
+     "title_zh": "我的一天",
+     "title_en": "My Day",
+     "setting": "Tom 介绍自己的一天，每句配一个无数字钟",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "I get up at seven o'clock.",
+       "zh": "我七点起床。",
+       "picture": "Tom 起床伸懒腰，旁边小钟：短针指 7",
+       "src": [],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "get（词库有）",
+        "o'clock（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I go to school at eight.",
+       "zh": "我八点去上学。",
+       "picture": "Tom 背书包出门，旁边小钟：短针指 8",
+       "src": [],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I have lunch at twelve.",
+       "zh": "我十二点吃午饭。",
+       "picture": "Tom 在幼儿园吃午饭，小钟两针都朝上",
+       "src": [],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "lunch（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I play in the park at four.",
+       "zh": "我四点在公园玩。",
+       "picture": "Tom 荡秋千，旁边小钟：短针指 4",
+       "src": [],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Bedtime is half past eight.",
+       "zh": "八点半睡觉。",
+       "picture": "Tom 在被窝里，旁边小钟：短针在 8 和 9 中间，长针朝下",
+       "src": [],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "bedtime（词库无）",
+        "half（词库无）",
+        "past（词库有）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L6-6",
+     "title_zh": "过新年",
+     "title_en": "Happy New Year!",
+     "setting": "春节/元旦的晚上，全家团聚",
+     "lines": [
+      {
+       "speaker": "grandma",
+       "en": "Happy New Year!",
+       "zh": "新年快乐！",
+       "picture": "奶奶抱住 Tom，窗外有烟花",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "year（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Is it January the first?",
+       "zh": "今天是一月一日吗？",
+       "picture": "Tom 指着墙上的日历，一格贴着红色贴纸",
+       "src": [],
+       "special_picture": "日历页只画空白方格，用贴纸/小星星标出那一天，不写数字和字母",
+       "reuse_icon": null,
+       "new_words": [
+        "january（词库无）",
+        "first（词库有）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "Yes, it is!",
+       "zh": "是的！",
+       "picture": "爸爸笑着点头",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Let's watch the fireworks!",
+       "zh": "我们去看烟花吧！",
+       "picture": "全家站在阳台上看五彩烟花",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "fireworks（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Can I have a red envelope?",
+       "zh": "我可以要一个红包吗？",
+       "picture": "Tom 双手作揖，奶奶拿着一个红包（红包上不写字）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "envelope（词库无）"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 7,
+   "title_zh": "计划·过去·更长的句子",
+   "max_words": 8,
+   "new_patterns": [
+    "What will you do this weekend? – I'll …",
+    "What did you do last …? – I went …",
+    "Does … open at …? – It opens at …",
+    "How long …? – Only …",
+    "We must be on time. / There are only … left.",
+    "It's been a long time! / I'll be back in … days.",
+    "… is put off."
+   ],
+   "scenes": [
+    {
+     "id": "L7-1",
+     "title_zh": "周末计划",
+     "title_en": "This Weekend",
+     "setting": "星期五晚上，一家人聊周末",
+     "lines": [
+      {
+       "speaker": "dad",
+       "en": "What will you do this weekend?",
+       "zh": "这个周末你想做什么？",
+       "picture": "一家人坐在沙发上",
+       "src": [
+        99
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "weekend（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'll go to the zoo!",
+       "zh": "我要去动物园！",
+       "picture": "Tom 想象动物园里的长颈鹿（想象气泡）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "What will you do the day after tomorrow?",
+       "zh": "后天你要做什么？",
+       "picture": "妈妈笑着问",
+       "src": [
+        102
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "day（词库有）",
+        "after（词库有）",
+        "tomorrow（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I'll visit my grandma.",
+       "zh": "我要去看奶奶。",
+       "picture": "Tom 想象抱住奶奶（想象气泡）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "visit（词库有）"
+       ]
+      },
+      {
+       "speaker": "amy",
+       "en": "What did you do last weekend?",
+       "zh": "你上个周末做了什么？",
+       "picture": "第二天在幼儿园，Amy 问 Tom",
+       "src": [
+        103
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "last（词库有）",
+        "weekend（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I went to the beach.",
+       "zh": "我去了海边。",
+       "picture": "Tom 想起海边堆沙堡（回忆气泡）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "I'll go to school for five days.",
+       "zh": "我要上五天学。",
+       "picture": "Tom 背书包，旁边五个小书包图标排成一排（不写数字）",
+       "src": [
+        104
+       ],
+       "special_picture": "用 5 个小图标表示天数，不写数字",
+       "reuse_icon": null,
+       "new_words": [
+        "days（词库有）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L7-2",
+     "title_zh": "去动物园",
+     "title_en": "At the Zoo",
+     "setting": "动物园门口和园内",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Does the zoo open at nine?",
+       "zh": "动物园九点开门吗？",
+       "picture": "一家人站在动物园大门前，门上无字",
+       "src": [
+        100
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "staff",
+       "en": "It opens at eight on weekends.",
+       "zh": "周末八点就开门了。",
+       "picture": "工作人员阿姨指着门边的无数字钟",
+       "src": [
+        101
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "weekends（词库无）"
+       ]
+      },
+      {
+       "speaker": "dad",
+       "en": "Any tickets left?",
+       "zh": "还有票吗？",
+       "picture": "爸爸在售票窗口前问（票上只画动物图案）",
+       "src": [
+        115
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "tickets（词库无）",
+        "left（词库无）"
+       ]
+      },
+      {
+       "speaker": "staff",
+       "en": "Yes, here you are.",
+       "zh": "有的，给您。",
+       "picture": "工作人员递出三张画着动物的票",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "How long is the snake?",
+       "zh": "这条蛇有多长？",
+       "picture": "玻璃窗里一条长长的蛇",
+       "src": [
+        42
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "How long will the show last?",
+       "zh": "表演要演多久？",
+       "picture": "海豚表演池边",
+       "src": [
+        148
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "show（词库有）",
+        "last（词库有）"
+       ]
+      },
+      {
+       "speaker": "staff",
+       "en": "Only ten minutes.",
+       "zh": "只有十分钟。",
+       "picture": "海豚跃出水面",
+       "src": [
+        149
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "minutes（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L7-3",
+     "title_zh": "爷爷来了",
+     "title_en": "Grandpa Is Here",
+     "setting": "机场到达口，然后在家",
+     "lines": [
+      {
+       "speaker": "mom",
+       "en": "Grandpa's plane is late.",
+       "zh": "爷爷的飞机晚点了。",
+       "picture": "机场大厅，一家人在等，窗外有飞机",
+       "src": [
+        134
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "late（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "It's been a long time, Grandpa!",
+       "zh": "爷爷，好久不见啦！",
+       "picture": "Tom 扑进爷爷怀里",
+       "src": [
+        105
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "been（词库无）",
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "grandpa",
+       "en": "What did you do last summer?",
+       "zh": "去年夏天你做了什么？",
+       "picture": "爷爷抱着 Tom 问",
+       "src": [
+        147
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "last（词库有）",
+        "summer（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "I swam in the sea!",
+       "zh": "我在海里游泳了！",
+       "picture": "Tom 回忆戴泳圈在海里游（回忆气泡）",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "swam（词库无）"
+       ]
+      },
+      {
+       "speaker": "grandpa",
+       "en": "I'll be back in three days.",
+       "zh": "我三天后回来。",
+       "picture": "爷爷提着小行李箱在门口",
+       "src": [
+        150
+       ],
+       "special_picture": "用 3 个太阳/月亮小图标表示三天，不写数字",
+       "reuse_icon": null,
+       "new_words": [
+        "back（词库无）",
+        "days（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Do you know the exact date?",
+       "zh": "你知道具体哪一天吗？",
+       "picture": "Tom 拉着爷爷的手",
+       "src": [
+        145
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "exact（词库无）",
+        "date（词库无）"
+       ]
+      },
+      {
+       "speaker": "grandpa",
+       "en": "Let's check the calendar.",
+       "zh": "我们看看日历吧。",
+       "picture": "爷爷和 Tom 一起看墙上的日历，在一格上贴星星",
+       "src": [
+        146
+       ],
+       "special_picture": "日历页只画空白方格，用贴纸/小星星标出那一天，不写数字和字母",
+       "reuse_icon": null,
+       "new_words": [
+        "check（词库无）",
+        "calendar（词库无）"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "L7-4",
+     "title_zh": "别迟到",
+     "title_en": "Hurry Up!",
+     "setting": "早上上学前",
+     "lines": [
+      {
+       "speaker": "mom",
+       "en": "We must be on time!",
+       "zh": "我们必须准时！",
+       "picture": "妈妈拿着 Tom 的外套在门口",
+       "src": [
+        131
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "must（词库有）",
+        "time（词库有）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "There are only two minutes left.",
+       "zh": "只剩两分钟了。",
+       "picture": "墙上无数字钟，长针快到 12",
+       "src": [
+        132
+       ],
+       "special_picture": "无数字钟面：圆形钟只画 12 个小圆点刻度，不写数字，指针指向对应位置",
+       "reuse_icon": null,
+       "new_words": [
+        "minutes（词库无）",
+        "left（词库无）"
+       ]
+      },
+      {
+       "speaker": "mom",
+       "en": "Can you finish your milk quickly?",
+       "zh": "你能快点喝完牛奶吗？",
+       "picture": "Tom 捧着牛奶杯大口喝",
+       "src": [
+        133
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "finish（词库有）",
+        "quickly（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Yes! I'm ready!",
+       "zh": "好了！我准备好啦！",
+       "picture": "Tom 擦擦嘴跳下椅子",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "tom",
+       "en": "Let's go!",
+       "zh": "出发！",
+       "picture": "Tom 和妈妈手牵手跑出门",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      }
+     ]
+    },
+    {
+     "id": "L7-5",
+     "title_zh": "下雨天",
+     "title_en": "Rainy Day",
+     "setting": "周日早上下大雨",
+     "lines": [
+      {
+       "speaker": "tom",
+       "en": "Look! It's raining.",
+       "zh": "看！下雨了。",
+       "picture": "Tom 趴在窗边，窗外大雨",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "The picnic is put off.",
+       "zh": "野餐要推迟了。",
+       "picture": "门边放着野餐篮",
+       "src": [
+        135
+       ],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "picnic（词库无）",
+        "off（词库无）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "Oh no! I'm sad.",
+       "zh": "哎呀！我好难过。",
+       "picture": "Tom 撅着嘴",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": []
+      },
+      {
+       "speaker": "mom",
+       "en": "Let's have a picnic at home!",
+       "zh": "我们在家里野餐吧！",
+       "picture": "客厅地上铺着野餐布，有三明治和水果",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "picnic（词库无）",
+        "home（词库有）"
+       ]
+      },
+      {
+       "speaker": "tom",
+       "en": "What a great idea!",
+       "zh": "真是个好主意！",
+       "picture": "Tom 开心地坐在野餐布上",
+       "src": [],
+       "special_picture": null,
+       "reuse_icon": null,
+       "new_words": [
+        "great（词库有）",
+        "idea（词库无）"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
