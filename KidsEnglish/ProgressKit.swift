@@ -224,6 +224,8 @@ enum CardMeaning {
         "point": "指",
         // 交通篇：engine 改画蒸汽火车头（半写实 3D，和交通篇同风格）
         "engine": "火车头",
+        // 词图画的是孩子睡觉做梦（梦泡泡里骑恐龙）；词典释义「梦想」和图对不上
+        "dream": "做梦",
     ]
 
     static func meaning(for entry: WordEntry) -> String? {

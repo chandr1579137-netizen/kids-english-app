@@ -47,6 +47,9 @@ final class CardMeaningConfusablesTests: XCTestCase {
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["old"])).meaningCn, "旧的")
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["engine"])).meaningCn, "火车头")
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["rough"])).meaningCn, "粗糙的")
+        // dream 词图是睡觉做梦；课文查词仍用词典原释义「梦想」
+        XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["dream"])).meaningCn, "做梦")
+        XCTAssertEqual(dict["dream"]?.meaningCn, "梦想")
         // 其他字段不变
         XCTAssertEqual(light.word, dict["light"]?.word)
         XCTAssertEqual(light.phonetic, dict["light"]?.phonetic)
