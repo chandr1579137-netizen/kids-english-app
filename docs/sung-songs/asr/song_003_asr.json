@@ -1,0 +1,185 @@
+{
+ "file": "song_003_sung.mp3",
+ "cuts": [
+  1.54,
+  6.24,
+  10.58,
+  14.75,
+  19.1,
+  23.38,
+  27.74,
+  31.91,
+  36.83
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Red and Yellow, Green and Blue  Pretty colors just for you  Orange, purple, pink, so bright  Rainbow dancing in the light  Red and Yellow, Green and Blue  Pretty colors just for you  Orange, purple, pink, so bright Rainbow dancing in the light",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Red and yellow, green and blue,",
+     "heard": "Red and yellow, green and blue",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Pretty colors just for you.",
+     "heard": "Pretty colors just for you",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Orange, purple, pink so bright,",
+     "heard": "Orange purple pink so bright",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Rainbow dancing in the light!",
+     "heard": "Rainbow dancing in the light",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Red and yellow, green and blue,",
+     "heard": "Red and yellow, green and blue",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Pretty colors just for you.",
+     "heard": "Pretty colors just for you",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Orange, purple, pink so bright,",
+     "heard": "Orange, purple, pink, so bright",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Rainbow dancing in the light!",
+     "heard": "Rainbow dancing in the light",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Red and yellow, green and blue Pretty colors just for you  Orange, purple, pink so bright Rainbow dancing in the light  Red and yellow, green and blue Pretty colors just for you  Orange, purple, pink, so bright  Rainbow dancing in the light",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Red and yellow, green and blue,",
+     "heard": "Red and yellow, green and blue",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Pretty colors just for you.",
+     "heard": "Pretty colors just for you",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Orange, purple, pink so bright,",
+     "heard": "Orange, purple, pink, so bright",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Rainbow dancing in the light!",
+     "heard": "Rainbow dancing in the light",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Red and yellow, green and blue,",
+     "heard": "Red and yellow, green and blue",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Pretty colors just for you.",
+     "heard": "Pretty colors just for you",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Orange, purple, pink so bright,",
+     "heard": "Orange, purple, pink, so bright",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Rainbow dancing in the light!",
+     "heard": "Rainbow dancing in the light",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "red and yellow green and blue pretty colors just for you orange purple pink so bright  rainbow dancing in the light red and yellow green and blue pretty colors just for you  Orange, purple, pink, so bright Rainbow dancing in the light",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Red and yellow, green and blue,",
+     "heard": "Red and yellow, green and blue",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Pretty colors just for you.",
+     "heard": "Pretty colors just for you",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Orange, purple, pink so bright,",
+     "heard": "Orange, purple, pink, so bright",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Rainbow dancing in the light!",
+     "heard": "Rainbow dancing in the light",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Red and yellow, green and blue,",
+     "heard": "Red and yellow, green and blue",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Pretty colors just for you.",
+     "heard": "Pretty colors just for you",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Orange, purple, pink so bright,",
+     "heard": "Orange, purple, pink, so bright",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Rainbow dancing in the light!",
+     "heard": "Rainbow dancing in the light",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": true
+}

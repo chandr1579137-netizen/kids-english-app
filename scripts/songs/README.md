@@ -1,6 +1,6 @@
 # App 儿歌真唱（scripts/songs）
 
-App 里的 10 首儿歌（`KidsEnglish/KidsEnglish/Resources/songs.json`）都改成真人风格的演唱版，替换原来的朗读版，文件是 `KidsEnglish/KidsEnglish/Resources/song-audio/<id>.mp3`。CI 打包时会把它们拷到 `audio/songs/`，播放器用 `DataStore.songAudioURL` 读取，路径和文件名都没变。
+App 里的 10 首儿歌（`KidsEnglish/KidsEnglish/Resources/songs.json`）要改成真人风格的演唱版，替换原来的朗读版，文件是 `KidsEnglish/KidsEnglish/Resources/song-audio/<id>.mp3`。CI 打包时会把它们拷到 `audio/songs/`，播放器用 `DataStore.songAudioURL` 读取，路径和文件名都没变。现在 song_003、004、007、009 已换成演唱版；另外 6 首的演唱版还没通过验收，App 里仍是朗读版，最好的一版放在 `docs/sung-songs/candidates/`。
 
 做法和 song_007 C 版（原样品 PR #9）一样：OpenUtau 命令行唱人声，FluidSynth 弹伴奏，ffmpeg 混音，全自动。**歌词一字不改**：`make_song.py` 会核对 `song_specs.py` 里的歌词和 `songs.json` 是否完全一致，不一致就报错。
 
@@ -14,6 +14,7 @@ App 里的 10 首儿歌（`KidsEnglish/KidsEnglish/Resources/songs.json`）都�
 | `diction.json` | 吐字表：显式 ARPAbet 音素、辅音提前量、句末换气长度；分全局和单首两层 |
 | `make_song.py` | 旋律谱 → OpenUtau 工程 `.ustx`、MIDI（人声带歌词 + 钢琴 + 钢片琴）、每句时间轴 |
 | `render_song.py` | 一键渲染；加 `--install` 直接拷进 App 的 `song-audio/` |
+| `song_specs.py` 里每首可选 |`bpm` 速度、`breath` 换气、`velc` 咬字速度曲线（100 = 原速，小于 100 更慢）、`voice` 唱法（0 Root、1 Fragrance、2 Nectar，默认 2）、`accomp_below_db` 伴奏比人声低多少 dB（默认 9） |
 | `asr_check.py` | 验收：faster-whisper small.en、medium.en、large-v3 三个模型，逐句和整首都要和歌词一字不差 |
 | `song_007/` | song_007 C 版的生成脚本、吐字表、工程和时间轴（来自样品分支 509320b） |
 | `licenses/` | 音库条款（文字和截图）以及各工具的许可 |

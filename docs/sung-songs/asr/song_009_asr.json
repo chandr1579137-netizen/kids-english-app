@@ -1,0 +1,185 @@
+{
+ "file": "song_009_sung.mp3",
+ "cuts": [
+  1.9,
+  7.19,
+  12.19,
+  17.17,
+  22.17,
+  27.18,
+  32.22,
+  37.23,
+  42.9
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Sleepy moon is in the sky Stars are winking way up high  Close your eyes, my little dear Sweet dreams, goodnight is here  Sleepy moon is in the sky  Stars are winking way up high  Close your eyes my little dear  Sweet dreams, goodnight is here",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Sleepy moon is in the sky,",
+     "heard": "Sleepy moon is in the sky",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Stars are winking way up high.",
+     "heard": "Stars are winking way up high",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Close your eyes, my little dear,",
+     "heard": "Close your eyes, my little dear",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Sweet dreams, good night is here!",
+     "heard": "Sweet dreams, good night is here",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Sleepy moon is in the sky,",
+     "heard": "Sleepy moon is in the sky",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Stars are winking way up high.",
+     "heard": "Stars are winking way up high",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Close your eyes, my little dear,",
+     "heard": "Close your eyes my little dear",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Sweet dreams, good night is here!",
+     "heard": "Sweet dreams, good night is here.",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Sleepy moon is in the sky Stars are winking way up high  Close your eyes, my little dear Sweet dreams, good night is here  Sleepy moon is in the sky, stars are winking way up high  Close your eyes my little dear, sweet dreams, good night is here",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Sleepy moon is in the sky,",
+     "heard": "Sleepy moon is in the sky",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Stars are winking way up high.",
+     "heard": "Stars are winking way up high",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Close your eyes, my little dear,",
+     "heard": "Close your eyes, my little dear",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Sweet dreams, good night is here!",
+     "heard": "Sweet dreams, good night is here",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Sleepy moon is in the sky,",
+     "heard": "Sleepy moon is in the sky",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Stars are winking way up high.",
+     "heard": "Stars are winking way up high",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Close your eyes, my little dear,",
+     "heard": "Close your eyes my little dear",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Sweet dreams, good night is here!",
+     "heard": "Sweet dreams, good night is here",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "sleepy moon is in the sky stars are winking way up high close your eyes my little dear  sweet dreams good night is here sleepy moon is in the sky stars are winking  Way up high  Close your eyes  My little dear  Sweet dreams  Good night is here",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Sleepy moon is in the sky,",
+     "heard": "Sleepy moon is in the sky",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Stars are winking way up high.",
+     "heard": "Stars are winking way up high",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Close your eyes, my little dear,",
+     "heard": "Close your eyes, my little dear",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Sweet dreams, good night is here!",
+     "heard": "Sweet dreams, good night is here",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Sleepy moon is in the sky,",
+     "heard": "Sleepy moon is in the sky",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Stars are winking way up high.",
+     "heard": "Stars are winking way up high",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Close your eyes, my little dear,",
+     "heard": "Close your eyes, my little dear",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Sweet dreams, good night is here!",
+     "heard": "Sweet dreams, good night is here.",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": true
+}
