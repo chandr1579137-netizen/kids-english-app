@@ -38,7 +38,7 @@ final class PhraseAudio {
     private let player = AudioPlayer()
     private var token = 0
     /// 正在播哪一句（头像据此跳动）
-    private(set) var playingLineId: String?
+    private(set) var playingLineId: String? = nil
 
     func play(_ url: URL?, rate: Float = 1.0, lineId: String? = nil, onEnd: (() -> Void)? = nil) {
         token += 1
@@ -74,12 +74,12 @@ final class PhraseAudio {
 /// 跟读录音：开着电平表，孩子说完停顿一下就自动结束；只判断出没出声（SpeakCheck）。
 @Observable
 final class PhraseVoiceRecorder {
-    private var recorder: AVAudioRecorder?
-    private var meterTimer: Timer?
-    private var playback: AVAudioPlayer?
-    private var onFinish: ((Bool) -> Void)?
+    private var recorder: AVAudioRecorder? = nil
+    private var meterTimer: Timer? = nil
+    private var playback: AVAudioPlayer? = nil
+    private var onFinish: ((Bool) -> Void)? = nil
     private var peak: Float = -160
-    private var lastLoudAt: Date?
+    private var lastLoudAt: Date? = nil
     private var startedAt = Date()
 
     private(set) var isRecording = false
@@ -233,7 +233,7 @@ final class PhraseLessonController {
     /// 每次表扬加 1，触发星星动效
     private(set) var praiseTick = 0
     /// 「看」这一步正在放第几句
-    private(set) var watchIndex: Int?
+    private(set) var watchIndex: Int? = nil
     private(set) var watchFinished = false
     /// 完成页：这次是不是第一次学完（第一次才发星星和卡片）
     private(set) var firstCompletion = false
