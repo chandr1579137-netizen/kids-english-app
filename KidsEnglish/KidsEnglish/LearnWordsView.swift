@@ -553,11 +553,21 @@ struct LearnWordsView: View {
     // MARK: - 逻辑
 
     private func refreshToday() {
-        todayWords = store.planDays().first ?? []
+        todayWords = planToday()
+    }
+
+    private func planToday() -> [WordEntry] {
+        var list = store.planDays().first ?? []
+        // 截图：-uiStudyWord <word> 让第一张卡就是这个词
+        if let w = LaunchOptions.studyWord?.lowercased(), let entry = store.wordDict[w] {
+            list.removeAll { $0.id == entry.id }
+            list.insert(entry, at: 0)
+        }
+        return list
     }
 
     private func startStudy() {
-        todayWords = store.planDays().first ?? []
+        todayWords = planToday()
         learnedToday = []
         cardIndex = 0
         finished = false

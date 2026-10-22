@@ -10,7 +10,10 @@ class DataStore {
     var wordThemes: [WordTheme] = []
     var audioMap: [String: String] = [:]
     var wordAudioMap: [String: String] = [:]
+    /// 卡片/游戏/收藏用的词条（一词多义只显示与词图一致的义项）
     var wordDict: [String: WordEntry] = [:]
+    /// 课文点词查词用的原词条（完整多义释义）
+    var lessonDict: [String: WordEntry] = [:]
     /// 首页可学词表（数字本只留 one..ten；「单词卡」和巩固练习仍用全量 words）
     var homeWords: [WordEntry] = []
 
@@ -68,7 +71,10 @@ class DataStore {
         for part in ["a", "b", "c", "d"] {
             allWords.append(contentsOf: load("words-\(part).json", as: [WordEntry].self) ?? [])
         }
-        // 全量词典：课文里点任意词都能查到（不受低龄白名单影响）
+        // 全量词典：课文里点任意词都能查到（不受低龄白名单影响），保留原多义释义
+        for w in allWords { lessonDict[w.word.lowercased()] = w }
+        // 卡片/游戏用的词条：一词多义的只显示与词图一致的义项（CardMeaning，见 ProgressKit.swift）
+        allWords = allWords.map { CardMeaning.applying(to: $0) }
         for w in allWords { wordDict[w.word.lowercased()] = w }
         var baseSongs = load("songs.json", as: [Song].self) ?? []
         baseSongs.append(contentsOf: load("custom-songs.json", as: [Song].self) ?? [])
@@ -179,10 +185,10 @@ class DataStore {
 
     func lookupWord(_ raw: String) -> WordEntry? {
         let w = raw.lowercased().trimmingCharacters(in: .punctuationCharacters)
-        if let entry = wordDict[w] { return entry }
+        if let entry = lessonDict[w] { return entry }
         // 课文里点到的多是变形（stars / had / deeper），查原形
         for candidate in WordStemmer.candidates(for: raw) {
-            if let entry = wordDict[candidate] { return entry }
+            if let entry = lessonDict[candidate] { return entry }
         }
         return nil
     }

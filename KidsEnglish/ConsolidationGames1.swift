@@ -164,10 +164,8 @@ struct WordToImageGame: View {
     private func setupQuestion() {
         guard index < questions.count else { return }
         let target = questions[index]
-        let distractors = store.words
-            .filter { $0.word != target.word }
-            .shuffled()
-            .prefix(3)
+        // 易混组（cat/kitten、sea/ocean…）不同时出现在选项里
+        let distractors = Confusables.pickDistractors(from: store.words.shuffled(), for: target)
         options = ([target] + Array(distractors)).shuffled()
         correctIndex = options.firstIndex(where: { $0.word == target.word })
         pickedState = [:]
@@ -326,10 +324,8 @@ struct AudioToImageGame: View {
     private func setupQuestion() {
         guard index < questions.count else { return }
         let target = questions[index]
-        let distractors = store.words
-            .filter { $0.word != target.word }
-            .shuffled()
-            .prefix(3)
+        // 易混组（cat/kitten、sea/ocean…）不同时出现在选项里
+        let distractors = Confusables.pickDistractors(from: store.words.shuffled(), for: target)
         options = ([target] + Array(distractors)).shuffled()
         correctIndex = options.firstIndex(where: { $0.word == target.word })
         pickedState = [:]
@@ -501,7 +497,8 @@ struct MatchingGame: View {
 
     private func startNewGame() {
         // 6 对 = 12 张卡，3 列 × 4 行铺满屏幕；4 对只占两行，下半屏全空
-        let pairs = Array(words.shuffled().prefix(min(6, words.count)))
+        // 同一屏的词两两不同组（cat 和 kitten 不同时出现）
+        let pairs = Confusables.pickDistinct(words.shuffled(), count: min(6, words.count))
         var list: [Card] = []
         for (i, w) in pairs.enumerated() {
             list.append(Card(id: i * 2, word: w.word, isImage: false))
@@ -696,10 +693,8 @@ struct WordToAudioGame: View {
     private func setupQuestion() {
         guard index < questions.count else { return }
         let target = questions[index]
-        let distractors = store.words
-            .filter { $0.word != target.word }
-            .shuffled()
-            .prefix(3)
+        // 易混组（cat/kitten、sea/ocean…）不同时出现在选项里
+        let distractors = Confusables.pickDistractors(from: store.words.shuffled(), for: target)
         options = ([target] + Array(distractors)).shuffled()
         correctIndex = options.firstIndex(where: { $0.word == target.word })
         pickedState = [:]
@@ -873,10 +868,8 @@ struct ImageToWordGame: View {
     private func setupQuestion() {
         guard index < questions.count else { return }
         let target = questions[index]
-        let distractors = store.words
-            .filter { $0.word != target.word }
-            .shuffled()
-            .prefix(3)
+        // 易混组（cat/kitten、sea/ocean…）不同时出现在选项里
+        let distractors = Confusables.pickDistractors(from: store.words.shuffled(), for: target)
         options = ([target] + Array(distractors)).shuffled()
         correctIndex = options.firstIndex(where: { $0.word == target.word })
         pickedState = [:]

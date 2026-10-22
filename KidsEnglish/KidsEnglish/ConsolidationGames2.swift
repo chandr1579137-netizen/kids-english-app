@@ -68,8 +68,8 @@ struct AudioToWordGame: View {
 
     private func setupOptions() {
         guard let current = quiz[safe: index] else { return }
-        var pool = store.words.filter { $0.word != current.word }.shuffled()
-        options = ([current] + Array(pool.prefix(3))).shuffled()
+        let pool = store.words.filter { $0.word != current.word }.shuffled()
+        options = ([current] + Confusables.pickDistractors(from: pool, for: current)).shuffled()
         picked = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { playCurrent() }
     }
@@ -167,8 +167,8 @@ struct AudioToMeaningGame: View {
 
     private func setupOptions() {
         guard let current = quiz[safe: index] else { return }
-        var pool = words.filter { $0.word != current.word && !($0.meaningCn ?? "").isEmpty }.shuffled()
-        options = ([current] + Array(pool.prefix(3))).shuffled()
+        let pool = words.filter { $0.word != current.word && !($0.meaningCn ?? "").isEmpty }.shuffled()
+        options = ([current] + Confusables.pickDistractors(from: pool, for: current, distinctMeaning: true)).shuffled()
         picked = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { playCurrent() }
     }
@@ -271,7 +271,7 @@ struct WordToMeaningGame: View {
     private func setupOptions() {
         guard let current = quiz[safe: index] else { return }
         let pool = words.filter { $0.word != current.word && !($0.meaningCn ?? "").isEmpty }.shuffled()
-        options = ([current] + Array(pool.prefix(3))).shuffled()
+        options = ([current] + Confusables.pickDistractors(from: pool, for: current, distinctMeaning: true)).shuffled()
         picked = nil
     }
 

@@ -195,3 +195,115 @@ enum HomeBooks {
         return known + unknown
     }
 }
+
+// MARK: - 卡片专用释义
+
+/// 一词多义时，卡片和看图/释义游戏只显示与词图一致的那个义项（词图表意重做，2026-10-22）。
+/// 词典里的 meaningCn 不改：课文里点词查词仍显示完整多义释义（DataStore.lookupWord 用原词条）。
+enum CardMeaning {
+    /// key 小写；来源 meaning-audit/redo-list.json 中 action=meaning_fix 的条目，
+    /// 以及重画时要求同步改释义的 light / sharp / engine。
+    static let overrides: [String: String] = [
+        "train": "火车",
+        "letter": "信",
+        "ask": "问",
+        "choose": "选择",
+        "pick": "摘",
+        "kind": "善良的",
+        "old": "旧的",
+        "short": "短的",
+        "bright": "明亮的",
+        "hard": "硬的",
+        "young": "幼小的",
+        "sweet": "甜的",
+        "sharp": "尖的",
+        "light": "轻的",
+        // A14 双格图是粗糙的树皮；词典释义是「汹涌的」（rough sea），和图对不上
+        "rough": "粗糙的",
+        "turn": "转圈",
+        "point": "指",
+        // 交通篇：engine 改画蒸汽火车头（半写实 3D，和交通篇同风格）
+        "engine": "火车头",
+    ]
+
+    static func meaning(for entry: WordEntry) -> String? {
+        overrides[entry.word.lowercased()] ?? entry.meaningCn
+    }
+
+    /// 返回卡片用的词条：有覆盖就换掉 meaningCn，其余字段原样保留。
+    static func applying(to entry: WordEntry) -> WordEntry {
+        guard let cn = overrides[entry.word.lowercased()] else { return entry }
+        return WordEntry(word: entry.word, phonetic: entry.phonetic, meaningCn: cn,
+                         meaningEn: entry.meaningEn, partOfSpeech: entry.partOfSpeech,
+                         examples: entry.examples, emoji: entry.emoji, level: entry.level)
+    }
+}
+
+// MARK: - 易混词组
+
+/// 看图/听音选词游戏里，同一组的词不同时出现在一道题的选项里（包括正确答案和干扰项）。
+/// 例如 cat 和 kitten、sea 和 ocean 图很像或意思几乎一样，同时出现孩子没法判断。
+/// 来源 meaning-audit/redo-list.json 的 confusable_groups（33 组）。
+enum Confusables {
+    static let groups: [[String]] = [
+        ["small", "little"], ["sea", "ocean", "wave"], ["pretty", "beautiful"], ["sleepy", "tired"],
+        ["look", "see", "watch"], ["hear", "listen"], ["love", "hug"], ["chicken", "hen"],
+        ["cat", "kitten"], ["dog", "puppy"], ["rabbit", "hare"], ["turtle", "tortoise"],
+        ["pear", "pomelo"], ["train", "subway", "engine"], ["ship", "boat", "sailboat"],
+        ["van", "truck", "ambulance"], ["plane", "spaceship", "rocket"], ["yellow", "gold", "orange"],
+        ["head", "face"], ["mouth", "teeth", "tongue"], ["mother", "aunt"], ["father", "uncle"],
+        ["girl", "sister"], ["boy", "brother", "child"], ["draw", "paint"], ["clean", "wipe", "sweep"],
+        ["jump", "hop"], ["shop", "market", "supermarket"], ["bring", "carry", "take"],
+        ["cake", "delicious"], ["honey", "sticky"], ["juice", "full"], ["lemon", "sour"],
+    ]
+
+    /// 词 → 所在组号（一个词可能在多组里）
+    private static let index: [String: Set<Int>] = {
+        var map: [String: Set<Int>] = [:]
+        for (i, group) in groups.enumerated() {
+            for w in group { map[w.lowercased(), default: []].insert(i) }
+        }
+        return map
+    }()
+
+    /// 两个词是否在同一个易混组里（同一个词不算冲突）
+    static func conflict(_ a: String, _ b: String) -> Bool {
+        let x = a.lowercased(), y = b.lowercased()
+        guard x != y, let ga = index[x], let gb = index[y] else { return false }
+        return !ga.isDisjoint(with: gb)
+    }
+
+    /// 从（已打乱的）候选里按顺序挑干扰项：跳过答案本身、和答案或已选项同组的词；
+    /// `distinctMeaning` 为 true 时（释义选择题）再跳过中文释义与已选项相同的词。
+    static func pickDistractors(from pool: [WordEntry], for target: WordEntry,
+                                count: Int = 3, distinctMeaning: Bool = false) -> [WordEntry] {
+        var chosen: [WordEntry] = []
+        var meanings: Set<String> = [target.meaningCn ?? ""]
+        for candidate in pool {
+            if chosen.count >= count { break }
+            if candidate.word.lowercased() == target.word.lowercased() { continue }
+            if conflict(candidate.word, target.word) { continue }
+            if chosen.contains(where: { $0.word.lowercased() == candidate.word.lowercased()
+                || conflict($0.word, candidate.word) }) { continue }
+            if distinctMeaning {
+                let m = candidate.meaningCn ?? ""
+                if meanings.contains(m) { continue }
+                meanings.insert(m)
+            }
+            chosen.append(candidate)
+        }
+        return chosen
+    }
+
+    /// 从（已打乱的）候选里挑最多 `count` 个两两不同组的词（连连看等一屏多词的玩法）。
+    static func pickDistinct(_ pool: [WordEntry], count: Int) -> [WordEntry] {
+        var chosen: [WordEntry] = []
+        for candidate in pool {
+            if chosen.count >= count { break }
+            if chosen.contains(where: { $0.word.lowercased() == candidate.word.lowercased()
+                || conflict($0.word, candidate.word) }) { continue }
+            chosen.append(candidate)
+        }
+        return chosen
+    }
+}
