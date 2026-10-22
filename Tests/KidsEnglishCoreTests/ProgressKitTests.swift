@@ -210,7 +210,7 @@ final class ProgressKitTests: XCTestCase {
 // MARK: - 首页单词本（真实资源）
 
 /// 这些用例直接读仓库里的 Resources——mock 只能证明过滤逻辑，
-/// 证明不了「数据本身还是 483 词 / 数字本还是 100 词」。
+/// 证明不了「首页全部单词 = 词库白名单全集 / 数字本是 100 词」。
 final class HomeBooksTests: XCTestCase {
 
     /// Tests/KidsEnglishCoreTests/ProgressKitTests.swift → 仓库根
@@ -239,35 +239,36 @@ final class HomeBooksTests: XCTestCase {
         return words.map { $0.word }
     }
 
-    func testHomeNumbersBookIsExactlyOneToTen() throws {
+    func testHomeNumbersBookIsOneToHundred() throws {
         let themes = try loadThemes()
         let numbers = try XCTUnwrap(themes.first { $0.id == "numbers" })
         let home = HomeBooks.homeWords(themeId: "numbers", words: numbers.words)
 
-        XCTAssertEqual(home, ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"])
-        XCTAssertEqual(home.count, 10)
-        XCTAssertEqual(numbers.words.count, 100, "数据不动：word-themes.json 的数字主题仍是 100 词")
+        XCTAssertEqual(home, numbers.words, "首页数字本 = 单词卡里的数字主题，顺序不变")
+        XCTAssertEqual(home.count, 100)
+        XCTAssertEqual(home.first, "one")
+        XCTAssertTrue(home.contains("eleven"))
+        XCTAssertTrue(home.contains("hundred"))
     }
 
-    func testHomeAllWordsExcludesElevenToHundred() throws {
+    func testHomeAllWordsIsTheFullWhitelist() throws {
         let themes = try loadThemes()
         let dictionary = try loadDictionary()
 
+        // 期望值从数据算：所有主题词（含数字 1–100）与词库交集
         let full = ThemeWhitelist.allowedWords(dictionary: dictionary, themes: themes.flatMap { $0.words })
         let home = HomeBooks.allowedWords(dictionary: dictionary, themes: themes)
+        XCTAssertEqual(home, full)
 
+        // 数字 11–100 这 90 个词只在数字主题里出现，所以比 1–10 版本多出正好 90 个
         let numbers = try XCTUnwrap(themes.first { $0.id == "numbers" })
-        let keep = Set(["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"])
         let otherThemeWords = Set(themes.filter { $0.id != "numbers" }.flatMap { $0.words }.map { $0.lowercased() })
-        let excluded = Set(numbers.words.map { $0.lowercased() }).subtracting(keep).subtracting(otherThemeWords)
-
-        XCTAssertEqual(home, full.subtracting(excluded))
-        XCTAssertEqual(home.count, full.count - 90)
-        XCTAssertFalse(home.contains("eleven"))
-        XCTAssertFalse(home.contains("twenty"))
-        XCTAssertFalse(home.contains("hundred"))
-        XCTAssertTrue(home.contains("ten"))
-        XCTAssertEqual(home.count, 483, "PM acceptance number from data on main 51fad39")
+        let elevenUp = Set(numbers.words.dropFirst(10).map { $0.lowercased() })
+        XCTAssertEqual(elevenUp.count, 90)
+        XCTAssertTrue(elevenUp.isDisjoint(with: otherThemeWords), "11–100 不应和其他主题重复")
+        XCTAssertTrue(elevenUp.isSubset(of: home))
+        XCTAssertEqual(home.subtracting(elevenUp).count + 90, home.count)
+        XCTAssertEqual(home.count, 573, "PM acceptance number (483 + 90), computed from data")
     }
 
     func testHomeFilterLeavesOtherThemesUntouched() throws {

@@ -269,7 +269,7 @@ jobs:
           shoot 03-read     -uiTab 2
           shoot 05-profile  -uiTab 4
           shoot 06-study    -uiTab 0 -uiStudy
-          # 选数字本后开始学习：只出 one..ten；选服装：只出 clothes/shoes/hat
+          # 选数字本后开始学习：数字本是完整的 1–100；选服装：只出 clothes/shoes/hat
           shoot 06b-study-numbers  -uiTab 0 -uiBook numbers -uiStudy
           shoot 06c-study-clothing -uiTab 0 -uiBook clothing -uiStudy
           shoot 06d-learn-numbers-selected -uiTab 0 -uiBook numbers
@@ -305,6 +305,8 @@ jobs:
 
           # 二级页：主题词表 / 收藏 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
+          # 单词卡里的数字主题：1–100，和首页数字本一致
+          shoot 18b-theme-numbers -uiTab 1 -uiTheme numbers
           shoot 19-favorites    -uiTab 4 -uiProfile favorites
           shoot 20-songs        -uiTab 3
           shoot 21-parent-gate  -uiTab 4 -uiProfile parent
