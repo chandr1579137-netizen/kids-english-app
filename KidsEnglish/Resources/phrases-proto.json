@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "note": "日常口语原型（proto/daily-phrases，不合并）。内容复制自 /workspace/kea-phrases/phrases.json 的 p08_eat；icon 按 plan.md §7（null = 灰色占位框）；音频 edge-tts。",
+  "characters": [
+    {
+      "id": "tom",
+      "name": "Tom",
+      "avatar": "boy",
+      "side": "right"
+    },
+    {
+      "id": "mom",
+      "name": "Mom",
+      "avatar": "mother",
+      "side": "left"
+    },
+    {
+      "id": "dad",
+      "name": "Dad",
+      "avatar": "father",
+      "side": "left"
+    }
+  ],
+  "scene": {
+    "id": "p08_eat",
+    "title_zh": "吃饭啦",
+    "title_en": "Mealtime",
+    "image": "scene_kitchen.jpg",
+    "lines": [
+      {
+        "id": "p08_eat_01",
+        "speaker": "mom",
+        "en": "Wash your hands.",
+        "zh": "去洗手。",
+        "icon": "wash",
+        "audio": "p08_eat_01.mp3",
+        "voice": "en-US-AriaNeural",
+        "pitch": "+0Hz"
+      },
+      {
+        "id": "p08_eat_02",
+        "speaker": "tom",
+        "en": "I'm hungry!",
+        "zh": "我饿了！",
+        "icon": "hungry",
+        "audio": "p08_eat_02.mp3",
+        "voice": "en-US-AnaNeural",
+        "pitch": "-10%"
+      },
+      {
+        "id": "p08_eat_03",
+        "speaker": "dad",
+        "en": "Let's eat!",
+        "zh": "开饭啦！",
+        "icon": "food",
+        "audio": "p08_eat_03.mp3",
+        "voice": "en-US-GuyNeural",
+        "pitch": "+0Hz"
+      },
+      {
+        "id": "p08_eat_04",
+        "speaker": "tom",
+        "en": "Yummy!",
+        "zh": "真好吃！",
+        "icon": "yummy",
+        "audio": "p08_eat_04.mp3",
+        "voice": "en-US-AnaNeural",
+        "pitch": "-10%"
+      },
+      {
+        "id": "p08_eat_05",
+        "speaker": "tom",
+        "en": "More rice, please.",
+        "zh": "请再给我一点米饭。",
+        "icon": "rice",
+        "audio": "p08_eat_05.mp3",
+        "voice": "en-US-AnaNeural",
+        "pitch": "-10%"
+      },
+      {
+        "id": "p08_eat_06",
+        "speaker": "tom",
+        "en": "I'm thirsty.",
+        "zh": "我渴了。",
+        "icon": "thirsty",
+        "audio": "p08_eat_06.mp3",
+        "voice": "en-US-AnaNeural",
+        "pitch": "-10%"
+      },
+      {
+        "id": "p08_eat_07",
+        "speaker": "tom",
+        "en": "I'm full.",
+        "zh": "我吃饱了。",
+        "icon": null,
+        "audio": "p08_eat_07.mp3",
+        "voice": "en-US-AnaNeural",
+        "pitch": "-10%"
+      }
+    ]
+  }
+}
