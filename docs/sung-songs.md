@@ -2,8 +2,10 @@
 
 `songs.json` 里的 10 首儿歌，目标是把朗读版换成演唱版，**歌词一字不改**。验收标准很严：三个语音识别模型逐句、整首都要和歌词逐词一致才算过。
 
-- 现在 **4 首过了**，已换成演唱版：song_003、song_004、song_007、song_009。
-- **6 首还没过**：song_001、002、005、006、008、010。App 里仍用原来的朗读版；每首最好的一版放在 `docs/sung-songs/candidates/`（不打包进 App），下面列出没听对的词。
+- **6 首是演唱版**：song_003、004、005、007、008、009。
+  - 其中 003、004、007、009 三个模型全过。
+  - 005、008 各差一个模型的一处，产品经理看过后验收通过，原因写在下面各首里。
+- **4 首仍是朗读版**：song_001、002、006、010。演唱版没过验收，不再继续试。每首最好的一版放在 `docs/sung-songs/candidates/`（不打包进 App），下面列出没听对的词。
 
 脚本和做法见 [`scripts/songs/README.md`](../scripts/songs/README.md)。「经典儿歌」栏目不在 `songs.json` 里，这次没有涉及。
 
@@ -18,26 +20,24 @@
 
 | id | 歌名 | 状态 | 速度 BPM | 时长 | 验收（逐句通过数，整首 ✓/✗） |
 |---|---|---|---|---|---|
-| song_001 | The Little Red Apple（小红苹果） | 仍是朗读版（演唱候选没过验收） | 112 | 38.5 s | small.en 8/8 ✗；medium.en 7/8 ✗；large-v3 8/8 ✓ |
-| song_002 | Hop Little Bunny（小兔子跳跳） | 仍是朗读版（演唱候选没过验收） | 116 | 37.2 s | small.en 7/8 ✗；medium.en 6/8 ✗；large-v3 4/8 ✗ |
+| song_001 | The Little Red Apple（小红苹果） | 朗读版（演唱候选没过验收，不再继续） | 112 | 38.5 s | small.en 8/8 ✗；medium.en 7/8 ✗；large-v3 8/8 ✓ |
+| song_002 | Hop Little Bunny（小兔子跳跳） | 朗读版（演唱候选没过验收，不再继续） | 116 | 37.2 s | small.en 7/8 ✗；medium.en 6/8 ✗；large-v3 4/8 ✗ |
 | song_003 | Rainbow Colors（彩虹的颜色） | 演唱版（三个模型全过） | 112 | 38.5 s | small.en 8/8 ✓；medium.en 8/8 ✓；large-v3 8/8 ✓ |
 | song_004 | One Two Three Four Five（一二三四五） | 演唱版（三个模型全过） | 112 | 38.5 s | small.en 8/8 ✓；medium.en 8/8 ✓；large-v3 8/8 ✓ |
-| song_005 | My Happy Family（我快乐的一家） | 仍是朗读版（演唱候选没过验收） | 112 | 38.5 s | small.en 8/8 ✓；medium.en 6/8 ✓；large-v3 8/8 ✓ |
-| song_006 | Twinkle Rain（闪亮的雨） | 仍是朗读版（演唱候选没过验收） | 108 | 39.8 s | small.en 6/8 ✗；medium.en 6/8 ✓；large-v3 8/8 ✗ |
+| song_005 | My Happy Family（我快乐的一家） | 演唱版（产品经理验收，见下） | 112 | 38.5 s | small.en 8/8 ✓；medium.en 6/8 ✓；large-v3 8/8 ✓ |
+| song_006 | Twinkle Rain（闪亮的雨） | 朗读版（演唱候选没过验收，不再继续） | 108 | 39.8 s | small.en 6/8 ✗；medium.en 6/8 ✓；large-v3 8/8 ✗ |
 | song_007 | Clap Your Hands（拍拍手） | 演唱版（三个模型全过） | 113 | 31.8 s | small.en 6/6 ✓；medium.en 6/6 ✓；large-v3 6/6 ✓ |
-| song_008 | Good Morning Sun（早安太阳） | 仍是朗读版（演唱候选没过验收） | 112 | 38.5 s | small.en 7/8 ✓；medium.en 8/8 ✓；large-v3 8/8 ✓ |
+| song_008 | Good Morning Sun（早安太阳） | 演唱版（产品经理验收，见下） | 112 | 38.5 s | small.en 7/8 ✓；medium.en 8/8 ✓；large-v3 8/8 ✓ |
 | song_009 | The Sleepy Moon（困倦的月亮） | 演唱版（三个模型全过） | 96 | 44.5 s | small.en 8/8 ✓；medium.en 8/8 ✓；large-v3 8/8 ✓ |
-| song_010 | Wash Wash Wash（洗洗洗） | 仍是朗读版（演唱候选没过验收） | 112 | 38.5 s | small.en 6/8 ✗；medium.en 8/8 ✗；large-v3 4/8 ✗ |
+| song_010 | Wash Wash Wash（洗洗洗） | 朗读版（演唱候选没过验收，不再继续） | 112 | 38.5 s | small.en 6/8 ✗；medium.en 8/8 ✗；large-v3 4/8 ✗ |
 
-## 没过的歌：试了什么
+## 仍是朗读版的歌：试了什么
 
-每首都试了 10 版以上：挪休止、改音素（如 tx 送气 t、ch r 的 tree、hh o p 的 hop）、辅音提前、慢速（96 BPM）、Root 唱法、咬字速度 velc 40–160、伴奏压低到 15 dB。识别结果会在这些词上来回跳，改好一处常常别处又错，没有一版三个模型全过。常错的词：
+每首都试了 10 版以上（005、008 现在这一版也是这样试出来的）：挪休止、改音素（如 tx 送气 t、ch r 的 tree、hh o p 的 hop）、辅音提前、慢速（96 BPM）、Root 唱法、咬字速度 velc 40–160、伴奏压低到 15 dB。识别结果会在这些词上来回跳，改好一处常常别处又错，没有一版三个模型全过，所以这 4 首不再继续试。常错的词：
 
 - song_001：tree 听成 trees（“tree so” 连读）、apple 听成 a bow / purple、neat 和 so 连成 Sony
 - song_002：Hop 听成 Hup / Help、twitch 听成 switch、ear 听成 hair / ears
-- song_005：Daddy 听成 Steady / Teddy（medium.en）、days 听成 day
 - song_006：Pitter-patter 听成 Peter Peter / Bitter / Play the pattern、town 听成 tongue
-- song_008：tree 听成 trees、sun 听成同音的 son。最好的一版只差 small.en 第 5 句把 sun 写成同音的 son，medium.en 和 large-v3 全过；同音词没法靠唱法区分，要不要放行请产品经理定
 - song_010：Rub-a-dub 听成 Rub it up / Rubber the / Rubbered up
 
 ## 每首歌
@@ -95,10 +95,9 @@
 
 ### song_005 My Happy Family（我快乐的一家）
 
-- 文件：`docs/sung-songs/candidates/song_005_best.mp3`
+- 文件：`KidsEnglish/KidsEnglish/Resources/song-audio/song_005.mp3`
 - 速度 112 BPM，时长 38.5 秒（整段唱两遍）
-- 最好的一版：`song_005@v5`，相对提交的谱：伴奏低 15 dB（其余同提交的谱）
-- 谱和吐字表：`docs/sung-songs/candidates/song_005/`
+- **产品经理验收通过：small.en、large-v3 逐句和整首全过；只有 medium.en 一个模型在第 1、5 句把 Daddy 听成 Steady（is 的 s 和 Daddy 连读），整首 medium.en 也是对的。**
 - small.en：逐句 8/8，整首 通过
 - medium.en：逐句 6/8，整首 通过
   - L1 “This is Daddy, big and strong,” → “This is Steady, Big and Strong”
@@ -132,10 +131,9 @@
 
 ### song_008 Good Morning Sun（早安太阳）
 
-- 文件：`docs/sung-songs/candidates/song_008_best.mp3`
+- 文件：`KidsEnglish/KidsEnglish/Resources/song-audio/song_008.mp3`
 - 速度 112 BPM，时长 38.5 秒（整段唱两遍）
-- 最好的一版：`song_008@q81`，相对提交的谱：are 用 ah r、tree 用 ch r i、句末换气 480 tick；伴奏低 15 dB
-- 谱和吐字表：`docs/sung-songs/candidates/song_008/`
+- **产品经理验收通过：medium.en、large-v3 逐句和整首全过；small.en 整首也对，只有第 5 句把 sun 写成同音词 son。两个词读音完全一样，唱法没法区分，不算唱错。**
 - small.en：逐句 7/8，整首 通过
   - L5 “Good morning, sun, so warm and bright,” → “Good morning, son, so warm and bright.”
 - medium.en：逐句 8/8，整首 通过

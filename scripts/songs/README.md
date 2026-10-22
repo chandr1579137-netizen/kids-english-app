@@ -1,6 +1,6 @@
 # App 儿歌真唱（scripts/songs）
 
-App 里的 10 首儿歌（`KidsEnglish/KidsEnglish/Resources/songs.json`）要改成真人风格的演唱版，替换原来的朗读版，文件是 `KidsEnglish/KidsEnglish/Resources/song-audio/<id>.mp3`。CI 打包时会把它们拷到 `audio/songs/`，播放器用 `DataStore.songAudioURL` 读取，路径和文件名都没变。现在 song_003、004、007、009 已换成演唱版；另外 6 首的演唱版还没通过验收，App 里仍是朗读版，最好的一版放在 `docs/sung-songs/candidates/`。
+App 里的 10 首儿歌（`KidsEnglish/KidsEnglish/Resources/songs.json`）要改成真人风格的演唱版，替换原来的朗读版，文件是 `KidsEnglish/KidsEnglish/Resources/song-audio/<id>.mp3`。CI 打包时会把它们拷到 `audio/songs/`，播放器用 `DataStore.songAudioURL` 读取，路径和文件名都没变。现在 6 首是演唱版：song_003、004、005、007、008、009（005、008 各差一个模型的一处，产品经理验收通过，原因见 docs）。另外 4 首（001、002、006、010）的演唱版没过验收，App 里仍是朗读版，不再继续试；最好的一版放在 `docs/sung-songs/candidates/`。
 
 做法和 song_007 C 版（原样品 PR #9）一样：OpenUtau 命令行唱人声，FluidSynth 弹伴奏，ffmpeg 混音，全自动。**歌词一字不改**：`make_song.py` 会核对 `song_specs.py` 里的歌词和 `songs.json` 是否完全一致，不一致就报错。
 
