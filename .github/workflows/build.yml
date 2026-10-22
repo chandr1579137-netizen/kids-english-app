@@ -349,6 +349,14 @@ jobs:
           shoot 47-theme-places      -uiTab 1 -uiTheme places
           shoot 48-theme-actions     -uiTab 1 -uiTheme actions
           shoot 49-theme-adjectives  -uiTab 1 -uiTheme adjectives
+          # ???????????proto/daily-phrases????????????????????7 ??????
+          shoot 50a-phrases-chat         -uiTab 2 -uiPhrases A -uiPhraseStep 3
+          shoot 50b-phrases-chat-role    -uiTab 2 -uiPhrases A -uiPhraseRole -uiPhraseStep 4
+          shoot 51a-phrases-card         -uiTab 2 -uiPhrases B -uiPhraseStep 0
+          shoot 51b-phrases-card-record  -uiTab 2 -uiPhrases B -uiPhraseStep 1 -uiPhraseRecord
+          shoot 52a-phrases-scene        -uiTab 2 -uiPhrases C
+          shoot 52b-phrases-scene-tapped -uiTab 2 -uiPhrases C -uiPhraseStep 2
+          shoot 53-large-phrases-chat    -uiTab 2 -uiPhrases A -uiPhraseStep 3 -uiLargeText
           ls -lh shots
 
       - name: Capture iPad screenshots

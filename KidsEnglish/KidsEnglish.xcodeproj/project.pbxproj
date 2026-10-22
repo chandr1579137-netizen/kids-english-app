@@ -54,6 +54,9 @@
 		311E08C45361757CC5EBA427 = {isa = PBXBuildFile; fileRef = DEB8EED4E893E335D32F937D; };
 		E96FD2123F6A40C08873612D = {isa = PBXBuildFile; fileRef = 9F2793DCE21A47EEB380CF88; };
 		A5CE0E5F1D2E4B6C8F0A1B21 = {isa = PBXBuildFile; fileRef = A5CE0E5F1D2E4B6C8F0A1B22; };
+		D41E0B0A0000000000000A01 = {isa = PBXBuildFile; fileRef = D41E0B0A0000000000000A02; };
+		D41E0B0A0000000000000A03 = {isa = PBXBuildFile; fileRef = D41E0B0A0000000000000A04; };
+		D41E0B0A0000000000000A05 = {isa = PBXBuildFile; fileRef = D41E0B0A0000000000000A06; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +109,9 @@
 		205BEB5AA5AEAD82FAB38C09 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KidsEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F2793DCE21A47EEB380CF88 = {isa = PBXFileReference; lastKnownFileType = folder; path = ui-icons; sourceTree = "<group>"; };
 		A5CE0E5F1D2E4B6C8F0A1B22 = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
+		D41E0B0A0000000000000A02 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesProtoView.swift; sourceTree = "<group>"; };
+		D41E0B0A0000000000000A04 = {isa = PBXFileReference; lastKnownFileType = text.json; path = "phrases-proto.json"; sourceTree = "<group>"; };
+		D41E0B0A0000000000000A06 = {isa = PBXFileReference; lastKnownFileType = folder; path = "phrase-audio"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +149,8 @@
 				311E08C45361757CC5EBA427,
 				E96FD2123F6A40C08873612D,
 				A5CE0E5F1D2E4B6C8F0A1B21,
+				D41E0B0A0000000000000A03,
+				D41E0B0A0000000000000A05,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +182,7 @@
 				B0C0EBB7D3D58B3DBFF55853,
 				2BA2E781B1DD863B23665DC3,
 				3D29CCBCC29B74C97A68D3B8,
+				D41E0B0A0000000000000A01,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +221,7 @@
 				D59B3075C4C050DF24C9714D,
 				BE87BC4EF31FE5F9536F7399,
 				06DDC59A3EAF81A85BF8D133,
+				D41E0B0A0000000000000A02,
 				4CE3262B4DC14E135606997D,
 				7B4E574B6B1E9297421E61F2,
 				6A24552DB64E4E90B793821F,
@@ -248,6 +258,8 @@
 				DEB8EED4E893E335D32F937D,
 				9F2793DCE21A47EEB380CF88,
 				A5CE0E5F1D2E4B6C8F0A1B22,
+				D41E0B0A0000000000000A04,
+				D41E0B0A0000000000000A06,
 			);
 			name = Resources;
 			path = Resources;

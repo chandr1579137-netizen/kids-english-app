@@ -172,6 +172,17 @@ struct ContentView: View {
 
     @ViewBuilder
     private var content: some View {
+        // 「日常口语」版式原型（只做原型，不合并）：`-uiPhrases A|B|C` 直接当根视图渲染，
+        // 不接入任何 tab，现有「读短文」不受影响。见 PhrasesProtoView.swift。
+        if let layout = LaunchOptions.phrasesLayout {
+            PhrasesProtoView(layout: layout)
+        } else {
+            tabContent
+        }
+    }
+
+    @ViewBuilder
+    private var tabContent: some View {
         switch tab {
         case .learn:
             LearnWordsView()
