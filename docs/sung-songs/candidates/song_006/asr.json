@@ -1,0 +1,190 @@
+{
+ "file": "song_006@w70_sung.mp3",
+ "cuts": [
+  1.62,
+  6.42,
+  10.87,
+  15.33,
+  19.72,
+  24.14,
+  28.57,
+  33.08,
+  38.18
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "delete: hold -> "
+   ],
+   "full_text": "Pitter, patter, rain comes down Washing, clean, the sleepy town  Hold your umbrella, don't be late Rainbows waiting at the gate  Pitter, patter, rain comes down Washing, clean, the sleepy town  your umbrella don't be late rainbows waiting at the gate",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Pitter-patter, rain comes down,",
+     "heard": "Pitter patter, rain comes down",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Washing clean the sleepy town.",
+     "heard": "Washing clean the sleepy town",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Hold your umbrella, don't be late,",
+     "heard": "Hold your umbrella, don't be late",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Rainbow's waiting at the gate!",
+     "heard": "Rainbows waiting at the gate",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Pitter-patter, rain comes down,",
+     "heard": "Play the pattern, rain comes down",
+     "ok": false
+    },
+    {
+     "line": 5,
+     "lyric": "Washing clean the sleepy town.",
+     "heard": "Washing clean the sleepy tongue",
+     "ok": false
+    },
+    {
+     "line": 6,
+     "lyric": "Hold your umbrella, don't be late,",
+     "heard": "Hold your umbrella, don't be late",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Rainbow's waiting at the gate!",
+     "heard": "Rainbows waiting at the gate.",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": false,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Pitter, patter, rain comes down Washing clean the sleepy town  Hold your umbrella, don't be late Rainbows waiting at the gate  Pitter, patter, rain comes down Washing clean the sleepy town  Hold your umbrella, don't be late  Rainbows waiting at the gate",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Pitter-patter, rain comes down,",
+     "heard": "Pitter-patter rain comes down",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Washing clean the sleepy town.",
+     "heard": "Washing clean the sleepy town",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Hold your umbrella, don't be late,",
+     "heard": "uh",
+     "ok": false
+    },
+    {
+     "line": 3,
+     "lyric": "Rainbow's waiting at the gate!",
+     "heard": "Rainbows waitin' at the gate",
+     "ok": false
+    },
+    {
+     "line": 4,
+     "lyric": "Pitter-patter, rain comes down,",
+     "heard": "Pitter-patter rain comes down",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Washing clean the sleepy town.",
+     "heard": "Washing clean the sleepy town.",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Hold your umbrella, don't be late,",
+     "heard": "Hold your umbrella, don't be late",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Rainbow's waiting at the gate!",
+     "heard": "Rainbows waiting at the gate",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": false,
+   "full_errors": [
+    "replace: pitter patter -> peter peter",
+    "replace: pitter patter -> peter peter"
+   ],
+   "full_text": "Peter, Peter, rain comes down Washing clean the sleepy town  Hold your umbrella, don't be late Rainbows waiting at the gate  Peter, Peter, rain comes down Washing clean the sleepy town  Hold your umbrella, don't be late  Rainbow's waiting at the gate",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Pitter-patter, rain comes down,",
+     "heard": "Pitter patter rain comes down",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Washing clean the sleepy town.",
+     "heard": "Washing clean the sleepy town",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Hold your umbrella, don't be late,",
+     "heard": "Hold your umbrella, don't be late",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Rainbow's waiting at the gate!",
+     "heard": "Rainbows waiting at the gate",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Pitter-patter, rain comes down,",
+     "heard": "Pitter patter rain comes down",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Washing clean the sleepy town.",
+     "heard": "Washing clean the sleepy town",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Hold your umbrella, don't be late,",
+     "heard": "Hold your umbrella, don't be late",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Rainbow's waiting at the gate!",
+     "heard": "Rainbows waiting at the gate",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": false
+}
