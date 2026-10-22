@@ -40,6 +40,8 @@ CHORDS = {
     "A2": ["F", "C", "G", "C"],
     "B":  ["C", "F", "C", "G"],
 }
+DICTION = None               # --diction：吐字表（见 diction_clear.json），None = 原样品
+
 LINE_CHORDS = ["A1", "A2", "B", "B", "A1", "A2"]
 TRIADS = {"C": [48, 60, 64, 67], "F": [41, 60, 65, 69], "G": [43, 59, 62, 67]}
 
@@ -65,11 +67,20 @@ def build_notes():
 def ustx(notes, total, singer):
     def note_yaml(n):
         pos, dur, tone, lyric, _ = n
-        exps = "\n".join(f"    - {{index: {i}, abbr: clr, value: 2}}" for i in range(4))  # 2 = Nectar（柔和）
+        nclr, ovr = 4, ""
+        if DICTION is not None:
+            d = DICTION.get("words", {}).get(lyric)
+            nclr = 8                       # 长单词（如 stomp 5 个音素）每个音素都用 Nectar
+            if d:
+                lyric = f"{lyric}[{d['ph']}]"   # 显式 ARPAbet 音素
+                offs = d.get("off", {})
+                if offs:
+                    ovr = "\n" + "\n".join(f"    - {{index: {int(i)}, offset: {int(v)}}}" for i, v in sorted(offs.items(), key=lambda kv: int(kv[0])))
+        exps = "\n".join(f"    - {{index: {i}, abbr: clr, value: 2}}" for i in range(nclr))  # 2 = Nectar（柔和）
         return f"""  - position: {pos}
     duration: {dur}
     tone: {tone}
-    lyric: {lyric}
+    lyric: {json.dumps(lyric) if "[" in lyric else lyric}
     pitch:
       data:
       - {{x: -25, y: 0, shape: io}}
@@ -79,14 +90,20 @@ def ustx(notes, total, singer):
     tuning: 0
     phoneme_expressions:
 {exps}
-    phoneme_overrides: []"""
+    phoneme_overrides:{ovr if ovr else " []"}"""
     body = "\n".join(note_yaml(n) for n in notes)
+    exprs, curves = "{}", "[]"
+    velc = (DICTION or {}).get("velc")
+    if velc is not None and velc != 100:   # 速度曲线：<100 = 吐字更慢更清楚（DiffSinger velocity，对数刻度）
+        exprs = ("\n  velc: {name: velocity (curve), abbr: velc, type: Curve, min: 0, max: 200, "
+                 "default_value: 100, is_flag: false}")
+        curves = f"\n  - xs: [0, {total}]\n    ys: [{int(velc)}, {int(velc)}]\n    abbr: velc"
     return f"""name: song_007 Clap Your Hands
 comment: 'Tune: Ah! vous dirai-je, maman (traditional French, first printed 1761, public domain). Lyrics: KidsEnglish original.'
 output_dir: Vocal
 cache_dir: UCache
 ustx_version: '0.9'
-expressions: {{}}
+expressions: {exprs}
 key: 0
 time_signatures:
 - {{bar_position: 0, beat_per_bar: 4, beat_unit: 4}}
@@ -111,7 +128,7 @@ voice_parts:
   duration: {total}
   notes:
 {body}
-  curves: []
+  curves: {curves}
 wave_parts: []
 """
 
@@ -182,15 +199,20 @@ def midi(tracks):
 
 
 def main():
-    global BPM, SEC_PER_TICK
+    global BPM, SEC_PER_TICK, DICTION
     ap = argparse.ArgumentParser()
     ap.add_argument("out")
     ap.add_argument("singer", nargs="?", default="Hoshino Hanami ~AIdol~ for DiffSinger v1.0")
     ap.add_argument("--bpm", type=float, default=84, help="tempo only; pitch/key unchanged")
     ap.add_argument("--tag", default="", help="file-name suffix, e.g. _A_101bpm")
+    ap.add_argument("--diction", default=None, help="吐字表 JSON（显式音素 + 辅音提前量），例如 diction_clear.json")
     a = ap.parse_args()
     BPM = int(a.bpm) if a.bpm == int(a.bpm) else a.bpm
     SEC_PER_TICK = 60.0 / BPM / PPQ
+    if a.diction:
+        DICTION = json.loads(Path(a.diction).read_text(encoding="utf-8"))
+        global BREATH
+        BREATH = int(DICTION.get("breath", BREATH))   # 句末换气（tick）：留长一点，下一句开头的辅音有地方放
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     singer, tag = a.singer, a.tag
     notes, spans, end = build_notes()

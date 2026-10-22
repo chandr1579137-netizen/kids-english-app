@@ -16,7 +16,46 @@
 | `song_007_sung_A_101bpm.mp3` / `.wav` | **加速版 A**：101 BPM（比 84 快约 20%），35.3 秒 |
 | `song_007_sung_B_113bpm.mp3` / `.wav` | **加速版 B**：113 BPM（比 84 快约 35%），31.7 秒 |
 | `song_007_A_101bpm.*`、`song_007_B_113bpm.*` | A/B 两版的 ustx、mid 和时间轴 |
+| `song_007_sung_C_113bpm_clear.mp3` / `.wav` | **C 版（推荐）**：113 BPM，改善吐字，31.7 秒。做法见下文「C 版」一节 |
+| `song_007_C_113bpm_clear.*`、`diction_clear.json` | C 版的 ustx、mid、时间轴，以及吐字表 |
+| `asr_check_lines.py`、`asr_check_full.py` | 语音识别核对脚本：逐句识别一次，整首识别一次 |
 | `licenses/` | 音库条款截图和全文，以及各工具的许可 |
+
+## C 版：113 BPM，吐字更清楚（2026-10-22）
+
+用户反馈 B 版的速度可以，但发音要准、要清楚，适合 4 岁孩子跟唱。原来的问题是 "stomp" 被听成 stump，"clap" 被听成 clip，"blink" 被听成 blank。
+
+**改法**全部写在 `diction_clear.json` 里。`make_song007.py --diction diction_clear.json` 会把它写进 ustx，渲染流程不变，仍然是 OpenUtau 命令行、FluidSynth、ffmpeg，全自动：
+```
+python render_song007.py --tools <qs1-tools> --out . --bpm 113 --tag _C_113bpm_clear --diction diction_clear.json
+```
+
+| 改动 | 内容 | 原因 |
+|---|---|---|
+| clap | 显式音素 `k l a p`（原来是 `k l ae p`）；k 提前 30 tick | 音库的 ae 偏闭，像 clip；用音库里训练得最多的开口 a，再让 k 的爆破更清楚 |
+| stomp | `s t o m p`（原来是 `aa`） | aa 和 ao 都会被听成 stump；圆唇的 o 才稳定地听成 stomp |
+| blink | 固定为 `b l ih ng k` | 试过 iy：blink 是清楚了，但下一个词 eyes 会被听成 "ass"，所以保持标准读音 |
+| 句末换气 | 从十六分音符改成八分音符 | 下一句开头的 s、k 有地方放，不再粘在上一句的 "three"、"me" 后面。旋律音高和小节数都没变，只是每句最后一个长音短了半拍 |
+| 每个音素都设成 Nectar | 原来只设了前 4 个音素 | stomp 有 5 个音素，最后的 p 原来会回落到 Root 音色 |
+
+- **试过但没有用的方法**：
+  - 把辅音大幅提前（60–120 tick）：s 会被拉得太长，反而听成 "dump"。
+  - DiffSinger 速度曲线 velc 设成 70 或 80：没有改善。
+  - 用声门塞音 q 或 cl 把 "and"、"up" 隔开：小模型反而把 blink 听成 blank。
+  - 这些试验的工程没有放进仓库。
+- **音库**：仍然用 Hoshino Hanami（Nectar），条款不变，见 `licenses/`。英文元音和辅音的训练量足够，没有必要换音库。
+
+**语音识别核对**（faster-whisper，int8，temperature 0，beam 5，不给提示词，听的是成品混音）：
+- **逐句**：用纯人声找到每句之间的换气点并在那里切开，句尾的 z 和下一句开头的 s、k 各归各句，然后每句单独识别。
+- **整首**：一次识别整首歌，只听到人声结束后 0.25 秒（29.98 秒）为止。
+  - 这样剪是因为 whisper 按 30 秒一段处理。剩下的零点几秒纯伴奏尾巴会让 medium.en 幻听出 "thank you"，这不是听错了歌词。
+- **结果**：small.en、medium.en、large-v3 三个模型，逐句和整首都与歌词一字不差，6 句全部正确。B 版（只改速度）用同样的方法核对时，small.en 和 medium.en 都有听错的词（stump、clip 等）。
+- 多语种模型 medium（非 .en）整首也全对；逐句有 2 处听错（stomp 听成 put，up 听成 out）。small 多语种模型在唱歌上不稳定（会循环幻听），不作为依据。
+
+| 版本 | 时长 | 平均 / 峰值音量 | 响度 | 结尾 "me"（C4 = 261.63 Hz） | "hands"（G4 = 392.00 Hz） |
+|---|---|---|---|---|---|
+| B（113 BPM） | 31.76 s | -27.9 / -13.1 dB | -24.8 LUFS | 261.96 Hz | 392.04 Hz |
+| C（113 BPM clear） | 31.76 s | -28.0 / -11.6 dB | -24.8 LUFS | 262.13 Hz | 391.96 Hz |
 
 ## 加速版 A / B（2026-10-22）
 

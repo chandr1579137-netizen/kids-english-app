@@ -35,6 +35,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--bpm", type=float, default=84)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--diction", default=None, help="吐字表 JSON，传给 make_song007.py")
+    ap.add_argument("--keep-vocal", action="store_true", help="另存纯人声 <name>_vocal.wav（用来做语音识别核对）")
     ap.add_argument("--singer", default="Hoshino Hanami ~AIdol~ for DiffSinger v1.0")
     a = ap.parse_args()
     tools, out = Path(a.tools), Path(a.out)
@@ -43,7 +45,8 @@ def main():
 
     # 1. 乐谱 → .ustx / .mid / 伴奏 .mid / 时间轴
     tag = a.tag
-    run([sys.executable, str(HERE / "make_song007.py"), str(out), a.singer, "--bpm", f"{a.bpm:g}", "--tag", tag])
+    run([sys.executable, str(HERE / "make_song007.py"), str(out), a.singer, "--bpm", f"{a.bpm:g}", "--tag", tag]
+        + (["--diction", a.diction] if a.diction else []))
     shutil.move(str(out / f"song_007_accomp{tag}.mid"), work / "song_007_accomp.mid")
     vocal_end = json.loads((out / f"song_007{tag}_timing.json").read_text(encoding="utf-8"))[-1]["end"]
     total = round(vocal_end + 2.0, 2)        # 84 BPM: 40.0 + 2 = 42 s（与原样品相同）
@@ -81,6 +84,8 @@ def main():
     info = {"bpm": a.bpm, "total_s": total, "vocal_mean_db": v, "accomp_mean_db_before": acc, "accomp_gain_db": round(acc_gain, 2),
             "master_gain_db": round(gain, 2), "final_mean_db": mean_db(out / f"song_007_sung{tag}.wav")}
     print(json.dumps(info, indent=1))
+    if a.keep_vocal:
+        shutil.copy(work / "vocal.wav", out / f"song_007_sung{tag}_vocal.wav")
     shutil.rmtree(work)
 
 

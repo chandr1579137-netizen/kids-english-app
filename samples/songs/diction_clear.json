@@ -1,0 +1,22 @@
+{
+ "_doc": "song_007 吐字表（C 版 113 BPM clear）。words: 显式 ARPAbet/音库音素（写进 ustx 的 lyric[...]），off: 某个音素的位置偏移（tick，负数=提前）。breath: 句末换气 tick（240 = 八分音符）。velc: DiffSinger 速度曲线（100 = 原速）。",
+ "breath": 240,
+ "velc": 100,
+ "words": {
+  "clap": {
+   "ph": "k l a p",
+   "off": {
+    "0": -30
+   },
+   "_why": "ae 被听成 clip；音库训练最多的 a 更开口，k 提前 30 tick 让爆破更清楚"
+  },
+  "stomp": {
+   "ph": "s t o m p",
+   "_why": "aa/ao 被听成 stump；用圆唇的 o"
+  },
+  "blink": {
+   "ph": "b l ih ng k",
+   "_why": "固定成标准 CMU 读音（iy 会把后面的 eyes 带成 ass）"
+  }
+ }
+}
