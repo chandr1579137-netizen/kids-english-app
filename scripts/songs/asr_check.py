@@ -8,7 +8,7 @@
   没给纯人声就按乐谱时间切。
 - 整首：只听到最后一句结束后 0.25 秒（whisper 按 30 秒一段处理，零点几秒的纯伴奏尾巴会让它幻听出 "thank you"）。
 - 比对前的统一：小写；连字符当空格；去掉撇号（rainbow's = rainbows，don't = dont，读音相同）；
-  数字转英文（1 → one … 10 → ten）；goodnight → good night。
+  数字转英文（1 → one … 10 → ten）；goodnight → good night；英式拼写 colours → colors。
 全部通过时退出码为 0。
 """
 import sys, json, re, subprocess, difflib, os
@@ -20,7 +20,7 @@ opts = dict(a[2:].split("=", 1) if "=" in a else (a[2:], "1") for a in sys.argv[
 timing = json.load(open(args[0], encoding="utf-8")); f = args[1]
 models = opts.get("models", "small.en,medium.en,large-v3").split(",")
 NUM = {str(i): w for i, w in enumerate("zero one two three four five six seven eight nine ten".split())}
-EQ = {"goodnight": ["good", "night"]}
+EQ = {"goodnight": ["good", "night"], "colours": ["colors"]}
 
 
 def norm(t):

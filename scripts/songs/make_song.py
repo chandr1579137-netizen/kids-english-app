@@ -2,7 +2,7 @@
 """App 儿歌真唱：从 song_specs.py 的旋律谱生成 OpenUtau 工程（.ustx）、MIDI 和每句时间轴。
 
 做法和 song_007 C 版（samples/songs 的 113 BPM clear）一样：
-  - 前奏 1 小节钢琴主和弦；整段唱 repeat 遍；最后一个音延长 1 小节收尾。
+  - 前奏 1 小节钢琴主和弦；整段唱 repeat 遍；最后一个音照谱唱完（end_hold 可加长），再加 1 小节钢琴收尾。
   - 句末留八分音符换气，下一句开头的辅音有地方放（C 版的经验）。
   - 每个音素都用 Hanami 的 Nectar（柔和）唱法。
   - diction.json 里的吐字表：显式 ARPAbet 音素（写成 lyric[音素]）和辅音位置偏移。
@@ -47,10 +47,13 @@ def parse_line(text, notes):
         melis = t.startswith("~")
         p, d = t.lstrip("~").split(":")
         ticks = round(float(d) * PPQ)
-        if melis:
+        if p == "R":                      # 休止（逗号处的小停顿，让词尾辅音和下一个词分开）
+            out.append((None, None, ticks))
+        elif melis:
             out.append(("+", midi_no(p), ticks))
         else:
             out.append((syl[i], midi_no(p), ticks)); i += 1
+    assert out[-1][0] is not None, f"句末不能是休止：{text}"
     assert i == len(syl), f"音节数 {len(syl)} 和音符数 {i} 不一致：{text}"
     assert sum(n[2] for n in out) == 2 * BAR, f"每句应为 8 拍：{text}"
     return out
@@ -60,6 +63,9 @@ def build(spec, lyrics_en):
     """音符 [(pos, dur, tone, lyric, line_no)]、每句时间 [(start, end, text)]、总长"""
     notes, spans = [], []
     t = BAR
+    # 最后一个音拖多少 tick（默认 0：照谱唱完，后面一小节只有钢琴收尾。
+    # 拖一整小节的长元音会让语音识别把词尾听错，比如 light → world）
+    hold = round(spec.get("end_hold", 0) * PPQ)
     lines = spec["lines"] * spec.get("repeat", 2)
     texts = lyrics_en * spec.get("repeat", 2)
     for li, ((text, ns), en) in enumerate(zip(lines, texts)):
@@ -67,13 +73,15 @@ def build(spec, lyrics_en):
         start = t
         last_line = li == len(lines) - 1
         for k, (lyr, tone, d) in enumerate(parsed):
+            if lyr is None:
+                t += d; continue
             last = k == len(parsed) - 1
-            dur = d + (BAR if last and last_line else 0)
+            dur = d + (hold if last and last_line else 0)
             sing = dur - (BREATH if last and not last_line else 0)
             notes.append((t, sing, tone, lyr, li))
             t += dur
         spans.append((start, t if last_line else t - BREATH, en))
-    return notes, spans, t
+    return notes, spans, t + (BAR - hold)   # 最后一小节钢琴收尾
 
 
 def harmonize(notes, end):
@@ -91,7 +99,7 @@ def harmonize(notes, end):
                     score[c] += w
         chords.append((hb, max(score, key=score.get)))
     chords[-1] = (chords[-1][0], "C")
-    # 收尾小节（最后一个音延长的那一小节）也是 C
+    # 收尾小节也是 C
     return [(hb, c if hb < end - BAR else "C") for hb, c in chords]
 
 
@@ -205,7 +213,7 @@ def main():
     diction = json.loads(Path(a.diction).read_text(encoding="utf-8"))
     bpm = spec["bpm"]
     global BREATH
-    BREATH = int(diction.get("breath", BREATH))
+    BREATH = int(spec.get("breath", diction.get("breath", BREATH)))
     notes, spans, end = build(spec, lyrics_en)
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     sid = a.song_id
