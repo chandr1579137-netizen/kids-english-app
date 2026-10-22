@@ -35,6 +35,7 @@ def main():
     ap.add_argument("--tools", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--diction", default=str(HERE / "diction.json"))
+    ap.add_argument("--specs", default=str(HERE / "song_specs.py"))
     ap.add_argument("--keep-vocal", action="store_true", help="另存纯人声 <id>_sung_vocal.wav（语音识别切句用）")
     ap.add_argument("--install", action="store_true")
     a = ap.parse_args()
@@ -42,7 +43,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     work = out / f"_work_{sid}"; work.mkdir(exist_ok=True)
 
-    run([sys.executable, str(HERE / "make_song.py"), sid, str(out), "--diction", a.diction])
+    run([sys.executable, str(HERE / "make_song.py"), sid, str(out), "--diction", a.diction, "--specs", a.specs])
     shutil.move(str(out / f"{sid}_accomp.mid"), work / "accomp.mid")
     vocal_end = json.loads((out / f"{sid}_timing.json").read_text(encoding="utf-8"))[-1]["end"]
     total = round(vocal_end + 2.0, 2)

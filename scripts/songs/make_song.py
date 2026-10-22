@@ -8,7 +8,7 @@
   - diction.json 里的吐字表：显式 ARPAbet 音素（写成 lyric[音素]）和辅音位置偏移。
   - 伴奏：钢琴每半小节一个和弦（按旋律自动配 C/F/G/Am/Dm），钢片琴轻轻跟一遍旋律。
 
-用法：python make_song.py song_001 <输出目录> [--songs-json <songs.json>] [--diction diction.json]
+用法：python make_song.py song_001 <输出目录> [--songs-json <songs.json>] [--diction diction.json] [--specs song_specs.py]
 输出：<id>.ustx、<id>.mid（指挥轨 + 人声带歌词 + 钢琴 + 钢片琴）、<id>_accomp.mid、<id>_timing.json
 """
 import argparse, json, re, struct
@@ -200,9 +200,10 @@ def main():
     ap.add_argument("song_id"); ap.add_argument("out")
     ap.add_argument("--songs-json", default=str(HERE.parents[1] / "KidsEnglish/KidsEnglish/Resources/songs.json"))
     ap.add_argument("--diction", default=str(HERE / "diction.json"))
+    ap.add_argument("--specs", default=str(HERE / "song_specs.py"), help="旋律谱文件（试不同版本时用）")
     a = ap.parse_args()
     import importlib.util
-    spec_mod = importlib.util.spec_from_file_location("song_specs", HERE / "song_specs.py")
+    spec_mod = importlib.util.spec_from_file_location("song_specs", a.specs)
     m = importlib.util.module_from_spec(spec_mod); spec_mod.loader.exec_module(m)
     spec = m.SONGS[a.song_id]
     song = next(s for s in json.loads(Path(a.songs_json).read_text(encoding="utf-8")) if s["id"] == a.song_id)

@@ -9,7 +9,7 @@
 - 整首：只听到最后一句结束后 0.25 秒（whisper 按 30 秒一段处理，零点几秒的纯伴奏尾巴会让它幻听出 "thank you"）。
 - 比对前的统一：小写；连字符当空格；去掉撇号（rainbow's = rainbows，don't = dont，读音相同）；
   数字转英文（1 → one … 10 → ten）；goodnight → good night；英式拼写 colours → colors。
-全部通过时退出码为 0。
+全部通过时退出码为 0。--stop-on-fail：某个模型没过就停（批量试版本时用）。
 """
 import sys, json, re, subprocess, difflib, os
 import numpy as np
@@ -75,6 +75,8 @@ for mn in models:
         seg, _ = m.transcribe(x[int(cuts[i] * 16000):int(cuts[i + 1] * 16000)], **kw)
         txt = " ".join(s.text for s in seg).strip()
         lines.append({"line": i, "lyric": timing[i]["text"], "heard": txt, "ok": norm(txt) == REF[i]})
+        if "stop-on-fail" in opts and not lines[-1]["ok"]:
+            break
     seg, _ = m.transcribe(x[:int((timing[-1]["end"] + 0.25) * 16000)], **kw)
     full = " ".join(s.text for s in seg).strip()
     ref = sum(REF, []); hyp = norm(full)
@@ -86,6 +88,8 @@ for mn in models:
     print(f"[{mn}] lines {'PASS' if ok_lines else 'FAIL'} | full {'PASS' if ok_full else 'FAIL ' + str(errs)}")
     for l in lines:
         print(f"   L{l['line']} {'OK ' if l['ok'] else 'BAD'} {l['lyric']:40s} | {l['heard']}")
+    if "stop-on-fail" in opts and not allok:     # 试多个版本时省时间：一个模型没过就不再往下听
+        break
 if "json" in opts:
     json.dump({"file": os.path.basename(f), "cuts": cuts, "models": results, "pass": allok},
               open(opts["json"], "w", encoding="utf-8"), ensure_ascii=False, indent=1)
