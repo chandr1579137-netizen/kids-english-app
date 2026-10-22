@@ -6,10 +6,13 @@
 按 install-and-songs.md §5 Q-S1：C 大调、4/4、84 BPM、音域 C4–A4，
 每个四分音符一个音节，句末二分音符；前奏 1 小节，最后一个音延长 1 小节。
 
-用法：python make_song007.py <输出目录> [singer-id]
+用法：python make_song007.py <输出目录> [singer-id] [--bpm 84] [--tag ""]
+      --bpm 只改速度（音高、调号不变）；--tag 加在文件名上，例如 --bpm 101 --tag _A_101bpm
+      → song_007_A_101bpm.ustx / .mid / _timing.json。默认 84 BPM、无 tag，输出与原样品完全相同。
 输出：song_007.ustx（人声工程）、song_007.mid（人声旋律 + 歌词 + 伴奏，三轨）、
       song_007_accomp.mid（只有伴奏，给 FluidSynth）、song_007_timing.json
 """
+import argparse
 import json
 import struct
 import sys
@@ -179,19 +182,28 @@ def midi(tracks):
 
 
 def main():
-    out = Path(sys.argv[1]); out.mkdir(parents=True, exist_ok=True)
-    singer = sys.argv[2] if len(sys.argv) > 2 else "Hoshino Hanami ~AIdol~ for DiffSinger v1.0"
+    global BPM, SEC_PER_TICK
+    ap = argparse.ArgumentParser()
+    ap.add_argument("out")
+    ap.add_argument("singer", nargs="?", default="Hoshino Hanami ~AIdol~ for DiffSinger v1.0")
+    ap.add_argument("--bpm", type=float, default=84, help="tempo only; pitch/key unchanged")
+    ap.add_argument("--tag", default="", help="file-name suffix, e.g. _A_101bpm")
+    a = ap.parse_args()
+    BPM = int(a.bpm) if a.bpm == int(a.bpm) else a.bpm
+    SEC_PER_TICK = 60.0 / BPM / PPQ
+    out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+    singer, tag = a.singer, a.tag
     notes, spans, end = build_notes()
     total = end
-    (out / "song_007.ustx").write_text(ustx(notes, total, json.dumps(singer)), encoding="utf-8", newline="\n")
+    (out / f"song_007{tag}.ustx").write_text(ustx(notes, total, json.dumps(singer)), encoding="utf-8", newline="\n")
     piano, celesta = accomp_tracks(notes, end)
-    (out / "song_007.mid").write_bytes(midi([conductor(), vocal_track(notes), piano, celesta]))
-    (out / "song_007_accomp.mid").write_bytes(midi([conductor(), piano, celesta]))
+    (out / f"song_007{tag}.mid").write_bytes(midi([conductor(), vocal_track(notes), piano, celesta]))
+    (out / f"song_007_accomp{tag}.mid").write_bytes(midi([conductor(), piano, celesta]))
     timing = [{"line": i, "text": LINES[i][0],
                "start": round(s * SEC_PER_TICK, 2), "end": round(e * SEC_PER_TICK, 2)}
               for i, (s, e) in enumerate(spans)]
-    (out / "song_007_timing.json").write_text(json.dumps(timing, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(f"notes={len(notes)} words={sum(1 for n in notes if n[3] != '+')} total={end * SEC_PER_TICK:.2f}s")
+    (out / f"song_007{tag}_timing.json").write_text(json.dumps(timing, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"bpm={BPM} notes={len(notes)} words={sum(1 for n in notes if n[3] != '+')} total={end * SEC_PER_TICK:.2f}s")
     for t in timing:
         print(t)
 

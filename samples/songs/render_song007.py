@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """一键渲染 song_007 真唱样品（Windows，全自动，无需点界面）。
 
-  python render_song007.py --tools <qs1-tools 目录> --out <输出目录>
+  python render_song007.py --tools <qs1-tools 目录> --out <输出目录> [--bpm 84] [--tag ""]
+    例：--bpm 101 --tag _A_101bpm → song_007_sung_A_101bpm.wav/.mp3（只改速度，重新合成，音高不变）
 
 依赖（都装在 <tools> 下，不进仓库）：
   ou-build/OpenUtau.exe      由 OpenUtau PR #2162（headless render）编译
@@ -32,6 +33,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tools", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--bpm", type=float, default=84)
+    ap.add_argument("--tag", default="")
     ap.add_argument("--singer", default="Hoshino Hanami ~AIdol~ for DiffSinger v1.0")
     a = ap.parse_args()
     tools, out = Path(a.tools), Path(a.out)
@@ -39,14 +42,18 @@ def main():
     work = out / "_work"; work.mkdir(exist_ok=True)
 
     # 1. 乐谱 → .ustx / .mid / 伴奏 .mid / 时间轴
-    run([sys.executable, str(HERE / "make_song007.py"), str(out), a.singer])
-    shutil.move(str(out / "song_007_accomp.mid"), work / "song_007_accomp.mid")
+    tag = a.tag
+    run([sys.executable, str(HERE / "make_song007.py"), str(out), a.singer, "--bpm", f"{a.bpm:g}", "--tag", tag])
+    shutil.move(str(out / f"song_007_accomp{tag}.mid"), work / "song_007_accomp.mid")
+    vocal_end = json.loads((out / f"song_007{tag}_timing.json").read_text(encoding="utf-8"))[-1]["end"]
+    total = round(vocal_end + 2.0, 2)        # 84 BPM: 40.0 + 2 = 42 s（与原样品相同）
+    fade_st = round(total - 1.5, 2)
 
     # 2. OpenUtau 命令行渲染人声（PR #2162）
     (tools / "ou-build" / "Cache").mkdir(exist_ok=True)   # headless 模式不会自己建缓存目录
     env = dict(os.environ, DOTNET_ROOT=os.environ.get("DOTNET_ROOT", str(Path.home() / ".dotnet")))
     run([str(tools / "ou-build" / "OpenUtau.exe"), "render",
-         "--input", str(out / "song_007.ustx"), "--output", str(work / "vocal.wav"),
+         "--input", str(out / f"song_007{tag}.ustx"), "--output", str(work / "vocal.wav"),
          "--singers-path", str(tools / "Singers")], env=env)
 
     # 3. FluidSynth 伴奏（钢琴 + 钢片琴）
@@ -63,16 +70,16 @@ def main():
          "-filter_complex",
          f"[0:a]aresample=44100,aformat=channel_layouts=stereo[v];"
          f"[1:a]aresample=44100,aformat=channel_layouts=stereo,volume={acc_gain:.2f}dB[a];"
-         f"[v][a]amix=inputs=2:duration=longest:normalize=0,afade=t=out:st=40.5:d=1.5[m]",
-         "-map", "[m]", "-t", "42", str(work / "mix_raw.wav")])
+         f"[v][a]amix=inputs=2:duration=longest:normalize=0,afade=t=out:st={fade_st}:d=1.5[m]",
+         "-map", "[m]", "-t", f"{total}", str(work / "mix_raw.wav")])
     gain = TARGET_MEAN_DB - mean_db(work / "mix_raw.wav")
     run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(work / "mix_raw.wav"),
          "-af", f"volume={gain:.2f}dB,alimiter=limit=0.89:level=false",
-         "-ar", "44100", "-c:a", "pcm_s16le", str(out / "song_007_sung.wav")])
-    run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(out / "song_007_sung.wav"),
-         "-c:a", "libmp3lame", "-b:a", "160k", "-ar", "44100", str(out / "song_007_sung.mp3")])
-    info = {"vocal_mean_db": v, "accomp_mean_db_before": acc, "accomp_gain_db": round(acc_gain, 2),
-            "master_gain_db": round(gain, 2), "final_mean_db": mean_db(out / "song_007_sung.wav")}
+         "-ar", "44100", "-c:a", "pcm_s16le", str(out / f"song_007_sung{tag}.wav")])
+    run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", str(out / f"song_007_sung{tag}.wav"),
+         "-c:a", "libmp3lame", "-b:a", "160k", "-ar", "44100", str(out / f"song_007_sung{tag}.mp3")])
+    info = {"bpm": a.bpm, "total_s": total, "vocal_mean_db": v, "accomp_mean_db_before": acc, "accomp_gain_db": round(acc_gain, 2),
+            "master_gain_db": round(gain, 2), "final_mean_db": mean_db(out / f"song_007_sung{tag}.wav")}
     print(json.dumps(info, indent=1))
     shutil.rmtree(work)
 
