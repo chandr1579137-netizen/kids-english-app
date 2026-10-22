@@ -202,7 +202,7 @@ enum HomeBooks {
 /// 词典里的 meaningCn 不改：课文里点词查词仍显示完整多义释义（DataStore.lookupWord 用原词条）。
 enum CardMeaning {
     /// key 小写；来源 meaning-audit/redo-list.json 中 action=meaning_fix 的条目，
-    /// 以及重画时要求同步改释义的 light / sharp。
+    /// 以及重画时要求同步改释义的 light / sharp / engine。
     static let overrides: [String: String] = [
         "train": "火车",
         "letter": "信",
@@ -220,6 +220,8 @@ enum CardMeaning {
         "light": "轻的",
         "turn": "转圈",
         "point": "指",
+        // 交通篇：engine 改画蒸汽火车头（半写实 3D，和交通篇同风格）
+        "engine": "火车头",
     ]
 
     static func meaning(for entry: WordEntry) -> String? {
