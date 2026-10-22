@@ -26,6 +26,9 @@ struct ProgressSnapshot: Codable, Equatable {
     var avatarEmoji: String? = nil
     /// 口语课已完成的场景；旧备份没有这个字段，解码后为 nil
     var completedPhraseScenes: [String]? = nil
+    /// 宝宝模式：词的复习状态、每天的贴纸；旧备份没有，解码后为 nil
+    var babyWords: [String: BabyWordState]? = nil
+    var babyStickers: [String: String]? = nil
 }
 
 /// 备份 JSON 的编解码与恢复文案。纯 Foundation，便于单测。
@@ -50,8 +53,10 @@ enum ProgressCodec {
     /// 恢复成功后展示给用户的文案，格式与旧实现一致。
     static func summary(_ snapshot: ProgressSnapshot) -> String {
         let base = "已恢复：\(snapshot.completedLessons.count) 篇课文、\(snapshot.learnedWords.count) 个单词"
-        guard let scenes = snapshot.completedPhraseScenes, !scenes.isEmpty else { return base }
-        return base + "、\(scenes.count) 个口语场景"
+        var text = base
+        if let scenes = snapshot.completedPhraseScenes, !scenes.isEmpty { text += "、\(scenes.count) 个口语场景" }
+        if let baby = snapshot.babyWords, !baby.isEmpty { text += "、宝宝模式 \(baby.count) 个词" }
+        return text
     }
 }
 

@@ -18,6 +18,8 @@ class DataStore {
     var homeWords: [WordEntry] = []
     /// 「说一说」口语课（Resources/phrases/phrases.json）
     var phraseCatalog: PhraseCatalog? = nil
+    /// 宝宝模式词包（Resources/baby-path.json）
+    var babyData: BabyPathData? = nil
 
     // 进度（持久化）
     var completedLessons: Set<String> = []
@@ -39,6 +41,10 @@ class DataStore {
     var studyDates: [String] = []
     /// 口语课已完成的场景（id 如 L1-1）。旧课文进度 completedLessons 原样保留、只读归档。
     var completedPhraseScenes: Set<String> = []
+    /// 宝宝模式：每个学过的词的复习状态（key 是词）
+    var babyWords: [String: BabyWordState] = [:]
+    /// 宝宝模式：每天完成后得到的贴纸（日期 → 那天的贴纸词）
+    var babyStickers: [String: String] = [:]
 
     // 家长控制
     var timeLimitMinutes: Int = 20   // 0 = 不限
@@ -50,6 +56,12 @@ class DataStore {
     var phraseUnlockAll = false
     /// 口语课：卡片下方显示中文（给不会英语的家长陪学；孩子界面默认不显示）
     var phraseShowChinese = false
+    /// 宝宝模式（4 岁）：开着时整个 App 换成宝宝底栏（今天 / 图画 / 说一说 / 儿歌 / 家长）
+    var babyMode = false
+    /// 宝宝模式每天学几个新词（3–8，默认 3）
+    var babyNewPerDay = 3
+    /// 宝宝模式：家长打开后所有词包都能学
+    var babyUnlockAll = false
 
     private let defaults = UserDefaults.standard
     private var timer: Timer?
@@ -92,6 +104,10 @@ class DataStore {
         audioMap = am
         wordAudioMap = load("word-audio-map.json", as: [String: String].self) ?? [:]
         wordThemes = load("word-themes.json", as: [WordTheme].self) ?? []
+        if let url = Bundle.main.url(forResource: "baby-path", withExtension: "json"),
+           let data = try? Data(contentsOf: url) {
+            babyData = BabyPathData.decode(data)
+        }
         if let url = Bundle.main.url(forResource: "phrases", withExtension: "json", subdirectory: "phrases"),
            let data = try? Data(contentsOf: url) {
             phraseCatalog = PhraseCatalog.decode(data)
@@ -350,6 +366,39 @@ class DataStore {
         return first
     }
 
+    // MARK: - 宝宝模式进度
+
+    var babyKnown: Set<String> { Set(babyWords.keys) }
+
+    var todayKeyString: String { dayString() }
+
+    /// 学完一张新词卡：放进第 0 格，明天复习（已经学过的不重置）
+    func babyLearn(_ word: String) {
+        guard babyWords[word] == nil else { return }
+        babyWords[word] = BabyPlan.learned(today: Date(), timeZone: .current)
+        learnedWords.insert(word)
+        saveProgress()
+    }
+
+    /// 复习题第一次就答对 → 升一格；答错 → 回第 0 格明天再来
+    func babyReviewed(_ word: String, correct: Bool) {
+        guard let state = babyWords[word] else { return }
+        babyWords[word] = BabyPlan.after(state, correct: correct, today: Date(), timeZone: .current)
+        saveProgress()
+    }
+
+    /// 完成今天：发今天的贴纸。一天只发一张，返回是不是今天第一次完成
+    @discardableResult
+    func babyFinishToday(sticker: String) -> Bool {
+        let key = dayString()
+        guard babyStickers[key] == nil else { return false }
+        babyStickers[key] = sticker
+        saveProgress()
+        return true
+    }
+
+    var babyDoneToday: Bool { babyStickers[dayString()] != nil }
+
     // MARK: - 持久化
 
     private func loadProgress() {
@@ -371,6 +420,19 @@ class DataStore {
         completedPhraseScenes = Set(defaults.stringArray(forKey: "completedPhraseScenes") ?? [])
         phraseUnlockAll = defaults.bool(forKey: "phraseUnlockAll")
         phraseShowChinese = defaults.bool(forKey: "phraseShowChinese")
+        if let data = defaults.data(forKey: "babyWords"),
+           let states = try? JSONDecoder().decode([String: BabyWordState].self, from: data) {
+            babyWords = states
+        }
+        babyStickers = defaults.dictionary(forKey: "babyStickers") as? [String: String] ?? [:]
+        babyNewPerDay = min(max(defaults.object(forKey: "babyNewPerDay") as? Int ?? 3, 3), 8)
+        babyUnlockAll = defaults.bool(forKey: "babyUnlockAll")
+        // 宝宝模式默认值：全新安装打开；已经有学习进度的老用户保持原来的模式，家长中心可切换
+        if let saved = defaults.object(forKey: "babyMode") as? Bool {
+            babyMode = saved
+        } else {
+            babyMode = learnedWords.isEmpty && completedLessons.isEmpty && completedPhraseScenes.isEmpty
+        }
         timeLimitMinutes = defaults.object(forKey: "timeLimitMinutes") as? Int ?? 20
         showTranslationDefault = defaults.object(forKey: "showTranslation") as? Bool ?? true
         todayKey = dayString()
@@ -397,6 +459,11 @@ class DataStore {
         defaults.set(Array(completedPhraseScenes), forKey: "completedPhraseScenes")
         defaults.set(phraseUnlockAll, forKey: "phraseUnlockAll")
         defaults.set(phraseShowChinese, forKey: "phraseShowChinese")
+        if let data = try? JSONEncoder().encode(babyWords) { defaults.set(data, forKey: "babyWords") }
+        defaults.set(babyStickers, forKey: "babyStickers")
+        defaults.set(babyNewPerDay, forKey: "babyNewPerDay")
+        defaults.set(babyUnlockAll, forKey: "babyUnlockAll")
+        defaults.set(babyMode, forKey: "babyMode")
         defaults.set(timeLimitMinutes, forKey: "timeLimitMinutes")
         defaults.set(showTranslationDefault, forKey: "showTranslation")
         defaults.set(bonusSecondsToday, forKey: "bonus_\(todayKey)")
@@ -502,6 +569,8 @@ class DataStore {
         favoriteWords.removeAll()
         collectedCards.removeAll()
         completedPhraseScenes.removeAll()
+        babyWords.removeAll()
+        babyStickers.removeAll()
         gameAnswered = 0
         gameCorrect = 0
         studySecondsToday = 0
@@ -542,7 +611,9 @@ class DataStore {
             studyDates: studyDates,
             childName: childName,
             avatarEmoji: avatarEmoji,
-            completedPhraseScenes: completedPhraseScenes.sorted()
+            completedPhraseScenes: completedPhraseScenes.sorted(),
+            babyWords: babyWords,
+            babyStickers: babyStickers
         )
         return ProgressCodec.encode(snapshot)
     }
@@ -569,6 +640,8 @@ class DataStore {
         if let emoji = snapshot.avatarEmoji, !emoji.isEmpty { avatarEmoji = emoji }
         // 旧备份没有口语进度（nil）：保留本机现有的，不覆盖成空
         if let scenes = snapshot.completedPhraseScenes { completedPhraseScenes = Set(scenes) }
+        if let words = snapshot.babyWords { babyWords = words }
+        if let stickers = snapshot.babyStickers { babyStickers = stickers }
         saveProgress()
         refreshTimeUp()
         return ProgressCodec.summary(snapshot)

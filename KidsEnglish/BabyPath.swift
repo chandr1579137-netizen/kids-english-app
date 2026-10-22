@@ -160,6 +160,25 @@ enum BabyPlan {
         steps.append(.done)
         return steps
     }
+
+    /// 今天已经完成后「再玩一次」：只玩听音选图，从学过的词里出题，不改复习进度
+    static func replay(_ data: BabyPathData, known: Set<String>, unlockAll: Bool,
+                       using rng: inout some RandomNumberGenerator) -> [BabyStep] {
+        let pool = openPacks(data, known: known, unlockAll: unlockAll).flatMap(\.words)
+        let learned = data.allWords.filter(known.contains)
+        guard !learned.isEmpty else { return [.done] }
+        var picks = Array(learned.shuffled(using: &rng).prefix(gameRounds))
+        while picks.count < gameRounds { picks.append(learned.randomElement(using: &rng)!) }
+        return picks.map { .game(round(answer: $0, pool: pool, data: data, using: &rng)) } + [.done]
+    }
+
+    /// 今天的贴纸：今天学的第一个新词；没有新词就用今天复习的第一个词
+    static func sticker(for steps: [BabyStep]) -> String? {
+        for s in steps { if case .learn(let w) = s { return w } }
+        for s in steps { if case .review(let r) = s { return r.answer } }
+        for s in steps { if case .game(let r) = s { return r.answer } }
+        return nil
+    }
 }
 
 /// 截图和单测用的可复现随机数（SplitMix64）

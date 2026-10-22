@@ -205,6 +205,58 @@ struct ParentDashboardView: View {
                     .tint(Func.accent)
                 }
 
+                card("宝宝模式（4 岁）") {
+                    Toggle(isOn: Binding(
+                        get: { store.babyMode },
+                        set: { store.babyMode = $0; store.saveProgress() }
+                    )) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("打开宝宝模式")
+                                .kidFont(17, .semibold)
+                                .foregroundStyle(Palette.ink)
+                            Text("孩子只看到 今天 / 图画 / 说一说 / 儿歌 四个页签，其余内容在家长页后面")
+                                .kidFont(13, .medium)
+                                .foregroundStyle(Palette.inkMuted)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .tint(Func.accent)
+
+                    HStack {
+                        Text("每天新学")
+                            .kidFont(17, .semibold)
+                            .foregroundStyle(Palette.ink)
+                        Spacer()
+                        Stepper(value: Binding(
+                            get: { store.babyNewPerDay },
+                            set: { store.babyNewPerDay = min(max($0, 3), 8); store.saveProgress() }
+                        ), in: 3...8) {
+                            Text("\(store.babyNewPerDay) 个词")
+                                .kidFont(17, .bold)
+                                .foregroundStyle(Func.infoDeep)
+                        }
+                        .fixedSize()
+                    }
+
+                    Toggle(isOn: Binding(
+                        get: { store.babyUnlockAll },
+                        set: { store.babyUnlockAll = $0; store.saveProgress() }
+                    )) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("解锁全部词包")
+                                .kidFont(17, .semibold)
+                                .foregroundStyle(Palette.ink)
+                            Text("默认前 7 包先开，学完再按顺序开后面的")
+                                .kidFont(13, .medium)
+                                .foregroundStyle(Palette.inkMuted)
+                        }
+                    }
+                    .tint(Func.accent)
+
+                    statRow("宝宝模式已学", "\(store.babyWords.count) / \(store.babyData?.allWords.count ?? 0) 个词")
+                    statRow("贴纸", "\(store.babyStickers.count) 张")
+                }
+
                 card("说一说（口语课）") {
                     Toggle(isOn: Binding(
                         get: { store.phraseShowChinese },
