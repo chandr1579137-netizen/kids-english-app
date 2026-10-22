@@ -268,7 +268,11 @@ final class HomeBooksTests: XCTestCase {
         XCTAssertTrue(elevenUp.isDisjoint(with: otherThemeWords), "11–100 不应和其他主题重复")
         XCTAssertTrue(elevenUp.isSubset(of: home))
         XCTAssertEqual(home.subtracting(elevenUp).count + 90, home.count)
-        XCTAssertEqual(home.count, 573, "PM acceptance number (483 + 90), computed from data")
+        // 「全部单词」= 所有主题词与词库的交集，从数据算（不写死；当前数据下是 552）
+        let expected = Set(themes.flatMap { $0.words }.map { $0.lowercased() })
+            .intersection(dictionary.map { $0.lowercased() })
+        XCTAssertEqual(home.count, expected.count)
+        XCTAssertEqual(home.count, 90 + home.subtracting(elevenUp).count)
     }
 
     func testHomeFilterLeavesOtherThemesUntouched() throws {

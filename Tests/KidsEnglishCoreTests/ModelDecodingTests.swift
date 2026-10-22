@@ -54,7 +54,9 @@ final class ModelDecodingTests: XCTestCase {
                               "\(word) 出现在多个主题里")
             }
         }
-        XCTAssertEqual(seen.count, 573, "低龄白名单（口语词换成正式词后为 491，数字补充到 100 后为 569，服装与火补词后为 573）")
+        // 总数从数据算，不写死：每个主题词都在词库里且不跨主题重复，所以白名单 = 各主题词数之和。
+        // （历史：491 → 569 数字补到 100 → 573 服装与火补词 → 552 移出 21 个看图学不会的词）
+        XCTAssertEqual(seen.count, themes.reduce(0) { $0 + $1.words.count })
     }
 
     // MARK: - 课文
