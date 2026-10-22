@@ -35,6 +35,9 @@ extension LaunchOptions {
     /// `-uiBabyDoneToday` 截图时假装今天已经完成（首页显示贴纸和「再玩一次」）
     static var babyDoneToday: Bool { ProcessInfo.processInfo.arguments.contains("-uiBabyDoneToday") }
 
+    /// `-uiBabyStickers N` 截图时假装前 N 天都得了贴纸（贴纸本截图用，不写进度）
+    static var babyStickerDemo: Int { value(for: "-uiBabyStickers").flatMap { Int($0) } ?? 0 }
+
     /// 现在是不是宝宝模式：截图默认走正常模式（原有截图不受影响），加 `-uiBaby` 才进宝宝模式
     static func isBaby(_ store: DataStore) -> Bool {
         isUIScreenshotRun ? forceBaby : store.babyMode
@@ -90,7 +93,13 @@ struct BabyRootView: View {
                 case .pictures: BabyPicturesView()
                 case .talk: PhrasesHomeView()
                 case .songs: SongsView(asTabRoot: true)
-                case .parent: NavigationStack { ParentGateView() }
+                case .parent:
+                    // 截图用 `-uiProfile parent-dash` 跳过数学题，直接拍家长中心
+                    if LaunchOptions.profilePage == "parent-dash" {
+                        NavigationStack { ParentDashboardView() }
+                    } else {
+                        NavigationStack { ParentGateView() }
+                    }
                 }
             }
             .frame(maxWidth: KidLayout.readableWidth)
@@ -215,6 +224,13 @@ struct BabyTodayView: View {
         return store.babyStickers[store.todayKeyString]
     }
 
+    /// 截图用：前 N 天的假贴纸，按词包顺序取词
+    private func demoSticker(_ i: Int, of count: Int) -> String? {
+        let n = LaunchOptions.babyStickerDemo
+        guard n > 0, i >= count - 1 - n, let words = store.babyData?.allWords else { return nil }
+        return words[(i * 5) % words.count]
+    }
+
     /// 这一周的贴纸：完成的日子是那天的贴纸，没完成的是虚线圆圈
     private var stickerWeek: some View {
         let cal = Calendar(identifier: .gregorian)
@@ -225,7 +241,7 @@ struct BabyTodayView: View {
         return HStack(spacing: 8) {
             ForEach(Array(days.enumerated()), id: \.offset) { i, day in
                 let isToday = i == days.count - 1
-                let w = isToday ? (doneToday ? todaySticker : nil) : store.babyStickers[day]
+                let w = isToday ? (doneToday ? todaySticker : nil) : (store.babyStickers[day] ?? demoSticker(i, of: days.count))
                 ZStack {
                     if let w {
                         Circle().fill(PhraseColors.gold.opacity(0.25))
