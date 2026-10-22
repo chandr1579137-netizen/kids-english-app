@@ -1,0 +1,195 @@
+{
+ "file": "song_010@z102_sung.mp3",
+ "cuts": [
+  1.54,
+  6.17,
+  10.44,
+  14.69,
+  19.05,
+  23.32,
+  27.65,
+  31.76,
+  36.83
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "replace: a dub -> up the",
+    "replace: a dub -> up the"
+   ],
+   "full_text": "Wash, wash, wash your little hands Rub up the bubbles in my hands  Rinse them clean from left to right Hands so clean and feeling light  Wash, wash, wash your little hands Rub up the bubbles in my hands  Rinse them clean from left to right  Hands so clean and feeling light",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Wash, wash, wash your little hands,",
+     "heard": "Wash, wash, wash your little hands.",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Rub-a-dub, bubbles in my hands.",
+     "heard": "Rub up the bubbles in my hands.",
+     "ok": false
+    },
+    {
+     "line": 2,
+     "lyric": "Rinse them clean from left to right,",
+     "heard": "Rinse them clean from left to right",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Hands so clean and feeling light!",
+     "heard": "Hands so clean and feeling light",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Wash, wash, wash your little hands,",
+     "heard": "Wash, wash, wash your little hands.",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Rub-a-dub, bubbles in my hands.",
+     "heard": "Rub a cup of bubbles in my hands",
+     "ok": false
+    },
+    {
+     "line": 6,
+     "lyric": "Rinse them clean from left to right,",
+     "heard": "Rinse them clean from left to right",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Hands so clean and feeling light!",
+     "heard": "Hands so clean and feeling light",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": true,
+   "full_ok": false,
+   "full_errors": [
+    "replace: rub a dub -> rubbered up",
+    "replace: rub a dub -> rubbered up"
+   ],
+   "full_text": "Wash, wash, wash your little hands Rubbered up bubbles in my hands  Rinse them clean from left to right Hands so clean and feeling light  Wash, wash, wash your little hands Rubbered up bubbles in my hands  Rinse them clean from left to right  Hands so clean and feeling light",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Wash, wash, wash your little hands,",
+     "heard": "Wash, wash, wash your little hands",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Rub-a-dub, bubbles in my hands.",
+     "heard": "Rub-a-dub-bubbles in my hands",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Rinse them clean from left to right,",
+     "heard": "Rinse them clean from left to right",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Hands so clean and feeling light!",
+     "heard": "Hands so clean and feeling light",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Wash, wash, wash your little hands,",
+     "heard": "Wash, wash, wash your little hands",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Rub-a-dub, bubbles in my hands.",
+     "heard": "Rub-a-dub bubbles in my hands",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Rinse them clean from left to right,",
+     "heard": "Rinse them clean from left to right",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Hands so clean and feeling light!",
+     "heard": "Hands so clean and feeling light",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "replace: rub a dub -> rubber the",
+    "replace: rub a dub -> rubber the",
+    "replace: so -> all"
+   ],
+   "full_text": "Wash, wash, wash your little hands Rubber the bubbles in my hands  Rinse them clean from left to right Hands so clean and feeling light  Wash, wash, wash your little hands Rubber the bubbles in my hands  Rinse them clean from left to right  Hands all clean and feeling light",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Wash, wash, wash your little hands,",
+     "heard": "Wash, wash, wash your little hands.",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Rub-a-dub, bubbles in my hands.",
+     "heard": "Rubber duck bubbles in my hands",
+     "ok": false
+    },
+    {
+     "line": 2,
+     "lyric": "Rinse them clean from left to right,",
+     "heard": "Thank drugs.好吧 [♪  ~~ ~~ ~~INAUDIBLE",
+     "ok": false
+    },
+    {
+     "line": 3,
+     "lyric": "Hands so clean and feeling light!",
+     "heard": "So clean and feeling light",
+     "ok": false
+    },
+    {
+     "line": 4,
+     "lyric": "Wash, wash, wash your little hands,",
+     "heard": "Wash, wash, wash your little hands",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Rub-a-dub, bubbles in my hands.",
+     "heard": "Rubber the bubbles in my hands",
+     "ok": false
+    },
+    {
+     "line": 6,
+     "lyric": "Rinse them clean from left to right,",
+     "heard": "Rinse them clean from left to right",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Hands so clean and feeling light!",
+     "heard": "Hands so clean and feeling light",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": false
+}
