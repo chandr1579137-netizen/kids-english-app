@@ -88,8 +88,8 @@ enum PhraseAvatarCrop {
     static func crop(for avatar: String) -> (cx: CGFloat, cy: CGFloat, size: CGFloat) {
         switch avatar {
         case "boy": return (0.46, 0.21, 0.38)
-        case "mother": return (0.50, 0.18, 0.34)
-        case "father": return (0.50, 0.18, 0.32)
+        case "mother": return (0.50, 0.22, 0.44)
+        case "father": return (0.50, 0.24, 0.46)
         default: return (0.5, 0.5, 1.0)
         }
     }
@@ -378,7 +378,7 @@ struct PhraseChatLayout: View {
 
                 ScrollViewReader { proxy in
                     ScrollView {
-                        VStack(spacing: 12) {
+                        VStack(spacing: 10) {
                             ForEach(Array(lines.prefix(visible).enumerated()), id: \.element.id) { i, line in
                                 bubbleRow(i, line)
                                     .id(line.id)
@@ -387,6 +387,14 @@ struct PhraseChatLayout: View {
                         }
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
+                    }
+                    // 顶部渐隐：滚出去的气泡是「淡出」而不是被一刀切
+                    .mask {
+                        VStack(spacing: 0) {
+                            LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
+                                .frame(height: 16)
+                            Color.black
+                        }
                     }
                     .onChange(of: current) { _, new in
                         guard let new, lines.indices.contains(new) else { return }
@@ -478,7 +486,7 @@ struct PhraseChatLayout: View {
             PhrasePicture(icon: line.icon, size: 56)
         }
         .padding(.horizontal, 14)
-        .padding(.vertical, 10)
+        .padding(.vertical, 8)
         .background(isTom ? Func.infoDeep : Palette.surface,
                     in: RoundedRectangle(cornerRadius: 20, style: .continuous))
         .overlay {
