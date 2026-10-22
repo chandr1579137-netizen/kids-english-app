@@ -46,6 +46,7 @@ final class CardMeaningConfusablesTests: XCTestCase {
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["sharp"])).meaningCn, "尖的")
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["old"])).meaningCn, "旧的")
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["engine"])).meaningCn, "火车头")
+        XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["rough"])).meaningCn, "粗糙的")
         // 其他字段不变
         XCTAssertEqual(light.word, dict["light"]?.word)
         XCTAssertEqual(light.phonetic, dict["light"]?.phonetic)

@@ -218,6 +218,8 @@ enum CardMeaning {
         "sweet": "甜的",
         "sharp": "尖的",
         "light": "轻的",
+        // A14 双格图是粗糙的树皮；词典释义是「汹涌的」（rough sea），和图对不上
+        "rough": "粗糙的",
         "turn": "转圈",
         "point": "指",
         // 交通篇：engine 改画蒸汽火车头（半写实 3D，和交通篇同风格）
