@@ -91,6 +91,9 @@ enum LaunchOptions {
     /// `-uiBook <themeId>` 截图时预选一本书（如 numbers / clothing）
     static var initialBook: String? { value(for: "-uiBook") }
 
+    /// `-uiStudyWord <word>` 学习页第一张卡直接显示这个词（截图核对词图，如双格对比高亮 big / smooth）
+    static var studyWord: String? { value(for: "-uiStudyWord") }
+
     /// `-uiConsolidate` 直接进入巩固练习 —— 游戏页原本不在截图覆盖内，
     /// 里面的旧系统色（Color.green / .blue / .red）因此长期没人看见
     static var forceConsolidate: Bool { args.contains("-uiConsolidate") }

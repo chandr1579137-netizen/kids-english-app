@@ -349,6 +349,18 @@ jobs:
           shoot 47-theme-places      -uiTab 1 -uiTheme places
           shoot 48-theme-actions     -uiTab 1 -uiTheme actions
           shoot 49-theme-adjectives  -uiTab 1 -uiTheme adjectives
+          # 词图表意重做：学习页大卡核对双格对比高亮（目标格彩色、另一格褪色）、卡片专用释义、整体中高亮
+          shoot 54a-redo-study-big     -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord big
+          shoot 54b-redo-study-small   -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord small
+          shoot 54c-redo-study-smooth  -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord smooth
+          shoot 54d-redo-study-rough   -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord rough
+          shoot 54e-redo-study-light   -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord light
+          shoot 54f-redo-study-aunt    -uiTab 0 -uiBook family -uiStudy -uiStudyWord aunt
+          shoot 54g-redo-study-stand   -uiTab 0 -uiBook actions -uiStudy -uiStudyWord stand
+          # 主题词表：自然篇平涂 + air 已移出；家人篇 cousin/son/daughter 已移出
+          shoot 55a-redo-theme-nature  -uiTab 1 -uiTheme nature
+          shoot 55b-redo-theme-family  -uiTab 1 -uiTheme family
+          shoot 55c-redo-theme-body    -uiTab 1 -uiTheme body
           ls -lh shots
 
       - name: Capture iPad screenshots
