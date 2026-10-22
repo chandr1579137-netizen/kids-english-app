@@ -1,0 +1,189 @@
+{
+ "file": "song_001@z11_sung.mp3",
+ "cuts": [
+  1.54,
+  5.92,
+  10.55,
+  14.73,
+  19.04,
+  23.12,
+  27.69,
+  31.91,
+  36.83
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": true,
+   "full_ok": false,
+   "full_errors": [
+    "replace: apple -> a bow"
+   ],
+   "full_text": "Little Red Apple round and sweet Hanging on the tree so neat  I will pick you 1, 2, 3 Yummy Apple just for me  Little Red Apple round and sweet Hanging on the tree so neat  I will pick you 1, 2, 3  Yummy, a bow just for me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Little red apple, round and sweet,",
+     "heard": "little red apple round and sweet",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Hanging on the tree so neat.",
+     "heard": "Hanging on the tree so neat",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "I will pick you, one two three,",
+     "heard": "I will pick you 1, 2, 3",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Yummy apple, just for me!",
+     "heard": "Yummy apple, just for me.",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Little red apple, round and sweet,",
+     "heard": "Little Red Apple round and sweet",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Hanging on the tree so neat.",
+     "heard": "Hanging on the tree so neat",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "I will pick you, one two three,",
+     "heard": "I will pick you 1, 2, 3",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Yummy apple, just for me!",
+     "heard": "Yummy apple just for me",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "replace: yummy apple just for me -> y y"
+   ],
+   "full_text": "Little red apple round and sweet Hanging on the tree so neat  I will pick you one, two, three Yummy apple just for me  Little red apple round and sweet Hanging on the tree so neat  I will pick you one, two, three  Y  y",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Little red apple, round and sweet,",
+     "heard": "little red apple round and sweet",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Hanging on the tree so neat.",
+     "heard": "Hanging on the trees so neat",
+     "ok": false
+    },
+    {
+     "line": 2,
+     "lyric": "I will pick you, one two three,",
+     "heard": "I will pick you, 1, 2, 3",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Yummy apple, just for me!",
+     "heard": "Yummy apple just for me",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Little red apple, round and sweet,",
+     "heard": "Little Red Apple, round and sweet",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Hanging on the tree so neat.",
+     "heard": "Hanging on the tree so neat",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "I will pick you, one two three,",
+     "heard": "I will pick you 1, 2, 3",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Yummy apple, just for me!",
+     "heard": "Yummy apple just for me",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Little red apple, round and sweet, hanging on the tree so neat, I will pick you, one, two, three, yummy apple just for me.  Little red apple, round and sweet  Hanging on the tree so neat  I will pick you, one, two, three  Yummy apple just for me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Little red apple, round and sweet,",
+     "heard": "Little red apple round and sweet",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Hanging on the tree so neat.",
+     "heard": "Hanging on the tree so neat",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "I will pick you, one two three,",
+     "heard": "I will pick you, one, two, three",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Yummy apple, just for me!",
+     "heard": "Yummy apple just for me.",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Little red apple, round and sweet,",
+     "heard": "Little red apple, round and sweet",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Hanging on the tree so neat.",
+     "heard": "Hanging on the tree so neat",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "I will pick you, one two three,",
+     "heard": "I will pick you, one, two, three",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Yummy apple, just for me!",
+     "heard": "Yummy apple just for me",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": false
+}

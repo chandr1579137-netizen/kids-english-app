@@ -1,0 +1,108 @@
+{
+ "_doc": "吐字表。words 对所有歌生效，songs.<id> 只对那首歌生效。ph = 显式音素（写进 ustx 的 lyric[...]），off = 某个音素的位置偏移（tick，负数 = 提前）。breath = 句末换气（tick，240 = 八分音符；song_specs.py 里可按歌覆盖）。tx 是音库里送气更明显的 t，用在词尾（light、neat、late）能让 t 听得出来。clap/stomp/blink 三条来自 song_007 C 版。",
+ "breath": 240,
+ "words": {
+  "clap": {
+   "ph": "k l a p",
+   "off": {
+    "0": -30
+   }
+  },
+  "stomp": {
+   "ph": "s t o m p"
+  },
+  "blink": {
+   "ph": "b l ih ng k"
+  },
+  "orange": {
+   "ph": "ao r ah n jh"
+  },
+  "light": {
+   "ph": "l ay tx",
+   "off": {
+    "0": -60
+   }
+  },
+  "late": {
+   "ph": "l ey tx",
+   "off": {
+    "0": -60
+   }
+  },
+  "daddy": {
+   "ph": "d ae d iy"
+  },
+  "pitter": {
+   "ph": "p ih t er"
+  },
+  "patter": {
+   "ph": "p ae t er"
+  },
+  "dreams": {
+   "ph": "d r iy m z"
+  },
+  "them": {
+   "ph": "dh eh m"
+  },
+  "neat": {
+   "ph": "n iy tx"
+  }
+ },
+ "songs": {
+  "song_001": {
+   "hanging": {
+    "ph": "hh a ng i ng"
+   },
+   "tree": {
+    "ph": "t r i"
+   },
+   "just": {
+    "ph": "jh ah s tx"
+   },
+   "apple": {
+    "ph": "ae p ah l"
+   }
+  },
+  "song_002": {
+   "ear": {
+    "ph": "iy er"
+   },
+   "hop": {
+    "ph": "hh aa p",
+    "off": {
+     "0": -60
+    }
+   }
+  },
+  "song_010": {
+   "dub": {
+    "ph": "d ah b"
+   },
+   "feeling": {
+    "ph": "f iy l iy ng"
+   },
+   "light": {
+    "ph": "l a i tx"
+   },
+   "clean": {
+    "ph": "k l iy n",
+    "off": {
+     "0": -30
+    }
+   }
+  },
+  "song_006": {
+   "rain": {
+    "ph": "r ey n"
+   }
+  },
+  "song_008": {
+   "sun": {
+    "ph": "s ah n"
+   },
+   "tree": {
+    "ph": "t r i"
+   }
+  }
+ }
+}
