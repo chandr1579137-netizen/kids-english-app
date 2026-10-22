@@ -103,7 +103,7 @@ def harmonize(notes, end):
     return [(hb, c if hb < end - BAR else "C") for hb, c in chords]
 
 
-def ustx(spec_id, title, tune, notes, total, diction, bpm):
+def ustx(spec_id, title, tune, notes, total, diction, bpm, voice=2, velc=None):
     words = diction.get("words", {})
     words.update(diction.get("songs", {}).get(spec_id, {}))
     def note_yaml(n):
@@ -118,7 +118,7 @@ def ustx(spec_id, title, tune, notes, total, diction, bpm):
                                        for i, v in sorted(offs.items(), key=lambda kv: int(kv[0])))
         else:
             lyric_out = json.dumps(lyric) if not re.fullmatch(r"[a-z+]+", lyric) else lyric
-        exps = "\n".join(f"    - {{index: {i}, abbr: clr, value: 2}}" for i in range(8))  # 2 = Nectar
+        exps = "\n".join(f"    - {{index: {i}, abbr: clr, value: {voice}}}" for i in range(8))  # 2 = Nectar
         return f"""  - position: {pos}
     duration: {dur}
     tone: {tone}
@@ -134,13 +134,18 @@ def ustx(spec_id, title, tune, notes, total, diction, bpm):
 {exps}
     phoneme_overrides:{ovr if ovr else " []"}"""
     body = "\n".join(note_yaml(n) for n in notes)
+    # velc：DiffSinger 的咬字速度曲线（100 = 原速，小于 100 = 咬字更慢、更清楚）
+    # CLI 渲染不会自动登记 velc，要在工程里声明，否则曲线会被丢掉
+    exp_decl = " {}" if velc is None else ("\n  velc: {name: velocity (curve), abbr: velc, type: Curve, min: 0, max: 200, "
+                                         "default_value: 100, is_flag: false}")
+    curves = " []" if velc is None else f"\n  - xs: [0, {total}]\n    ys: [{int(velc)}, {int(velc)}]\n    abbr: velc"
     comment = json.dumps(f"Tune: {tune}. Lyrics: KidsEnglish songs.json (unchanged).")
     return f"""name: {json.dumps(spec_id + ' ' + title)}
 comment: {comment}
 output_dir: Vocal
 cache_dir: UCache
 ustx_version: '0.9'
-expressions: {{}}
+expressions:{exp_decl}
 key: 0
 time_signatures:
 - {{bar_position: 0, beat_per_bar: 4, beat_unit: 4}}
@@ -165,7 +170,7 @@ voice_parts:
   duration: {total}
   notes:
 {body}
-  curves: []
+  curves:{curves}
 wave_parts: []
 """
 
@@ -218,7 +223,8 @@ def main():
     notes, spans, end = build(spec, lyrics_en)
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     sid = a.song_id
-    (out / f"{sid}.ustx").write_text(ustx(sid, song["title"], spec["tune"], notes, end, diction, bpm),
+    (out / f"{sid}.ustx").write_text(ustx(sid, song["title"], spec["tune"], notes, end, diction, bpm,
+                                          spec.get("voice", 2), spec.get("velc")),
                                      encoding="utf-8", newline="\n")
     us = int(60_000_000 / bpm)
     cond = track([meta(0, 0x51, us.to_bytes(3, "big")), meta(0, 0x58, bytes([4, 2, 24, 8])), meta(0, 0x03, b"Conductor")])

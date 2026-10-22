@@ -58,8 +58,12 @@ def main():
     run([str(fs), "-ni", "-q", "-r", "44100", "-g", "0.5", "-R", "0", "-C", "0",
          "-F", str(work / "accomp.wav"), str(tools / "soundfont" / "FluidR3_GM.sf2"), str(work / "accomp.mid")])
 
+    import importlib.util
+    sm = importlib.util.spec_from_file_location("song_specs", a.specs)
+    specs = importlib.util.module_from_spec(sm); sm.loader.exec_module(specs)
+    below = specs.SONGS.get(sid, {}).get("accomp_below_db", ACCOMP_BELOW_VOCAL_DB)
     v, acc = mean_db(work / "vocal.wav"), mean_db(work / "accomp.wav")
-    acc_gain = (v - ACCOMP_BELOW_VOCAL_DB) - acc
+    acc_gain = (v - below) - acc
     run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
          "-i", str(work / "vocal.wav"), "-i", str(work / "accomp.wav"), "-filter_complex",
          f"[0:a]aresample=44100,aformat=channel_layouts=stereo[v];"
