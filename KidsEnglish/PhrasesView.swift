@@ -773,6 +773,7 @@ private struct PhraseLessonBody: View {
 
 private struct PhraseCardView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.dynamicTypeSize) private var typeSize
     let c: PhraseLessonController
     let line: PhraseLine
     let showChinese: Bool
@@ -784,7 +785,8 @@ private struct PhraseCardView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let side = min(geo.size.width - 40, geo.size.height * 0.5)
+            // 大字号时文字和按钮都变高，图要让出位置，否则原句会压到说话人名字上
+            let side = min(geo.size.width - 40, geo.size.height * (typeSize >= .xxLarge ? 0.38 : 0.5))
             VStack(spacing: 10) {
                 Spacer(minLength: 0)
                 Button { c.replay() } label: {
@@ -806,7 +808,8 @@ private struct PhraseCardView: View {
                         .kidFont(26, .heavy)
                         .foregroundStyle(hideText ? Palette.inkSubtle : Palette.ink)
                         .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.6)
                     if showChinese && !hideText {
                         Text(line.zh)
                             .kidFont(16, .medium)
@@ -821,7 +824,7 @@ private struct PhraseCardView: View {
                 mainButtons
                 smallButtons
             }
-            .frame(width: geo.size.width)
+            .frame(width: geo.size.width, height: geo.size.height)
         }
         .overlay(alignment: .top) {
             if c.phase == .recording { listeningBadge.padding(.top, 4) }
@@ -1027,6 +1030,7 @@ private struct PraiseBurst: View {
 
 private struct PhraseWatchView: View {
     @Environment(DataStore.self) private var store
+    @Environment(\.dynamicTypeSize) private var typeSize
     let c: PhraseLessonController
     let showChinese: Bool
 
@@ -1037,7 +1041,7 @@ private struct PhraseWatchView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let side = min(geo.size.width - 40, geo.size.height * 0.52)
+            let side = min(geo.size.width - 40, geo.size.height * (typeSize >= .xxLarge ? 0.4 : 0.52))
             VStack(spacing: 12) {
                 Spacer(minLength: 0)
                 if let line = shown {
@@ -1054,6 +1058,8 @@ private struct PhraseWatchView: View {
                         .kidFont(26, .heavy)
                         .foregroundStyle(Palette.ink)
                         .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.6)
                         .padding(.horizontal, 20)
                     if showChinese {
                         Text(line.zh)
@@ -1082,7 +1088,7 @@ private struct PhraseWatchView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 8)
             }
-            .frame(width: geo.size.width)
+            .frame(width: geo.size.width, height: geo.size.height)
             .animation(.easeInOut(duration: 0.25), value: c.watchIndex)
         }
     }
@@ -1267,9 +1273,6 @@ struct PhraseCodeCard: View {
             RoundedRectangle(cornerRadius: side * 0.04)
                 .strokeBorder(Color(red: 0.62, green: 0.42, blue: 0.24), lineWidth: side * 0.05)
                 .padding(side * 0.06)
-            Rectangle().fill(Color(red: 0.62, green: 0.42, blue: 0.24))
-                .frame(width: side * 0.03)
-                .padding(.vertical, side * 0.06)
         }
     }
 
