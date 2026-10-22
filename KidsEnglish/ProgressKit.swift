@@ -312,21 +312,21 @@ enum Confusables {
 
 // MARK: - 双格对比高亮词图
 
-/// 词图表意重做的两格图（38 张）：
-/// - A 类 34 张：左右两格对比，目标格保留原色、另一格降饱和变浅
-///   （meaning-audit/tools_highlight.py 的 hl-left / hl-right 后处理，muse-batch.json 中 type=A）；
-/// - 两格前后变化 4 张：stand（E07）、change（D06）、close（E13）、clean（E16），左格 → 右格带箭头，
-///   直接按两格画出（没有后处理）。
-/// 学习页大卡对这类图不做径向边缘渐隐：两格都是用来对比的，必须完整看得见。
-/// 词图文件名里没有标记（都是 <word>.jpg），所以这里登记词表；单张图不受影响。
+/// 词图还是「两格 / 整幅对比」的词（学习页大卡对这类图不做径向边缘渐隐，两格都要完整看得见）：
+/// - 两格前后变化 4 张：stand（E07）、change（D06）、close（E13）、clean（E16），左格 → 右格带箭头；
+/// - heavy / light：A11 跷跷板是一整幅画（石头和羽毛在同一块板上），不能从中间裁开；
+/// - little：和 small 是同一张 A01 的同一半，裁开会和 small.jpg 一模一样，暂时保留双格高亮图。
+/// 其余 31 个反义词（big/small、smooth/rough…）已改成只显示自己高亮的那一格（fix/pair-split），
+/// 按普通单张图显示（带径向渐隐）。
+/// 词图文件名里没有标记（都是 <word>.jpg），所以这里登记词表。
 enum PairIcons {
     static let words: Set<String> = [
-        "big", "small", "little", "tall", "short", "long", "fast", "slow",
-        "hot", "cold", "old", "new", "young", "full", "empty", "wet", "dry",
-        "soft", "hard", "heavy", "light", "high", "low", "deep", "shallow",
-        "smooth", "rough", "dark", "bright", "good", "bad", "dirty", "sharp", "far",
         // 两格前后变化（带箭头）
         "stand", "change", "close", "clean",
+        // 整幅对比场景，不裁
+        "heavy", "light",
+        // 和 small 同一半，裁了会重复
+        "little",
     ]
 
     /// 这个词的词图是不是双格对比高亮图

@@ -364,6 +364,15 @@ jobs:
           shoot 54j-study-change       -uiTab 0 -uiBook actions -uiStudy -uiStudyWord change
           shoot 54k-study-close        -uiTab 0 -uiBook actions -uiStudy -uiStudyWord close
           shoot 54l-study-clean        -uiTab 0 -uiBook actions -uiStudy -uiStudyWord clean
+          # 反义词拆图：每个词只显示自己高亮的那一格，裁掉多余纸底放大到约 80%（按普通单张图带径向渐隐）
+          shoot 56a-split-big          -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord big
+          shoot 56b-split-small        -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord small
+          shoot 56c-split-smooth       -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord smooth
+          shoot 56d-split-rough        -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord rough
+          shoot 56e-split-hot          -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord hot
+          shoot 56f-split-cold         -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord cold
+          shoot 56g-split-short        -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord short
+          shoot 56h-split-low          -uiTab 0 -uiBook adjectives -uiStudy -uiStudyWord low
           # 主题词表：自然篇平涂 + air 已移出；家人篇 cousin/son/daughter 已移出
           shoot 55a-redo-theme-nature  -uiTab 1 -uiTheme nature
           shoot 55b-redo-theme-family  -uiTab 1 -uiTheme family

@@ -61,9 +61,10 @@ final class CardMeaningConfusablesTests: XCTestCase {
 
     // MARK: 双格对比高亮词图
 
-    func testPairIconsAre38KnownWordsWithIcons() throws {
+    /// 反义词拆图（fix/pair-split）后只剩 7 个两格 / 整幅对比图
+    func testPairIconsAre7KnownWordsWithIcons() throws {
         let dict = try dictionary()
-        XCTAssertEqual(PairIcons.words.count, 38)
+        XCTAssertEqual(PairIcons.words.count, 7)
         let icons = resources.appendingPathComponent("word-icons")
         for w in PairIcons.words {
             XCTAssertNotNil(dict[w], "双格图 \(w) 不在词典里")
@@ -72,14 +73,46 @@ final class CardMeaningConfusablesTests: XCTestCase {
         }
     }
 
+    /// 31 个拆成单格的反义词
+    static let splitWords = [
+        "big", "small", "tall", "short", "long", "fast", "slow", "hot", "cold", "old", "new",
+        "young", "full", "empty", "wet", "dry", "soft", "hard", "high", "low", "deep", "shallow",
+        "smooth", "rough", "dark", "bright", "good", "bad", "dirty", "sharp", "far",
+    ]
+
     func testIsHighlightedPair() {
-        for w in ["big", "small", "smooth", "rough", "Light", "far", "stand", "change", "close", "clean"] {
+        // 两格前后变化（箭头）、跷跷板整幅图、little 仍是两格图：不做边缘渐隐
+        for w in ["stand", "change", "close", "clean", "heavy", "Light", "little"] {
             XCTAssertTrue(PairIcons.isHighlightedPair(w), w)
         }
-        // 单张图保持原来的边缘渐隐
-        for w in ["apple", "dream", "aunt", "cat", "engine"] {
+        // 拆成单格的反义词和其他单张图一样，保持原来的边缘渐隐
+        XCTAssertEqual(Self.splitWords.count, 31)
+        for w in Self.splitWords + ["apple", "dream", "aunt", "cat", "engine"] {
             XCTAssertFalse(PairIcons.isHighlightedPair(w), w)
         }
+    }
+
+    /// 拆图后反义词各有自己的图：内置词图（Resources/word-icons 再叠 assets/word-icons-overrides，
+    /// 和 CI 的 Apply word icon overrides 一样）里没有任何两个词的图片文件字节完全相同
+    func testNoTwoWordIconsAreByteIdentical() throws {
+        let fm = FileManager.default
+        let root = resources.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        var files: [String: URL] = [:]
+        for dir in [resources.appendingPathComponent("word-icons"),
+                    root.appendingPathComponent("assets/word-icons-overrides")] {
+            for name in try fm.contentsOfDirectory(atPath: dir.path) where name.hasSuffix(".jpg") {
+                files[name] = dir.appendingPathComponent(name)   // 后者覆盖前者
+            }
+        }
+        XCTAssertGreaterThan(files.count, 500)
+        var seen: [Data: String] = [:]
+        var dups: [String] = []
+        for name in files.keys.sorted() {
+            let data = try Data(contentsOf: files[name]!)
+            if let other = seen[data] { dups.append("\(other) = \(name)") } else { seen[data] = name }
+        }
+        XCTAssertEqual(dups, [], "这些词图字节完全相同：\(dups)")
+        for w in Self.splitWords { XCTAssertNotNil(files["\(w).jpg"], "\(w).jpg 不存在") }
     }
 
     // MARK: 易混组
