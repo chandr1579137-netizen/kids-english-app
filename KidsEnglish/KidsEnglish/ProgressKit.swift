@@ -224,6 +224,8 @@ enum CardMeaning {
         "point": "指",
         // 交通篇：engine 改画蒸汽火车头（半写实 3D，和交通篇同风格）
         "engine": "火车头",
+        // 词图画的是孩子睡觉做梦（梦泡泡里骑恐龙）；词典释义「梦想」和图对不上
+        "dream": "做梦",
     ]
 
     static func meaning(for entry: WordEntry) -> String? {
@@ -305,5 +307,30 @@ enum Confusables {
             chosen.append(candidate)
         }
         return chosen
+    }
+}
+
+// MARK: - 双格对比高亮词图
+
+/// 词图表意重做的两格图（38 张）：
+/// - A 类 34 张：左右两格对比，目标格保留原色、另一格降饱和变浅
+///   （meaning-audit/tools_highlight.py 的 hl-left / hl-right 后处理，muse-batch.json 中 type=A）；
+/// - 两格前后变化 4 张：stand（E07）、change（D06）、close（E13）、clean（E16），左格 → 右格带箭头，
+///   直接按两格画出（没有后处理）。
+/// 学习页大卡对这类图不做径向边缘渐隐：两格都是用来对比的，必须完整看得见。
+/// 词图文件名里没有标记（都是 <word>.jpg），所以这里登记词表；单张图不受影响。
+enum PairIcons {
+    static let words: Set<String> = [
+        "big", "small", "little", "tall", "short", "long", "fast", "slow",
+        "hot", "cold", "old", "new", "young", "full", "empty", "wet", "dry",
+        "soft", "hard", "heavy", "light", "high", "low", "deep", "shallow",
+        "smooth", "rough", "dark", "bright", "good", "bad", "dirty", "sharp", "far",
+        // 两格前后变化（带箭头）
+        "stand", "change", "close", "clean",
+    ]
+
+    /// 这个词的词图是不是双格对比高亮图
+    static func isHighlightedPair(_ word: String) -> Bool {
+        words.contains(word.lowercased())
     }
 }

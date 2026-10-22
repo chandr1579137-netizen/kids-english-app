@@ -411,16 +411,22 @@ struct LearnWordsView: View {
                     center: .center, startRadius: 10, endRadius: 130
                 )
                 .frame(width: 250, height: 200)
-                // 词图是带灰底的实拍图，用径向遮罩把边缘化开，
-                // 避免出现一块灰色方片（参考图是透明 3D 插图）
-                WordIconView(word: entry.word, size: 158)
-                    .mask(
-                        RadialGradient(
-                            colors: [.black, .black, .clear],
-                            center: .center,
-                            startRadius: 53, endRadius: 80
+                if PairIcons.isHighlightedPair(entry.word) {
+                    // 双格对比高亮图（big/small、smooth/rough…）：不做边缘渐隐，
+                    // 变淡的那一格是用来对比的，要完整看得清（只保留圆角）
+                    WordIconView(word: entry.word, size: 158)
+                } else {
+                    // 词图是带灰底的实拍图，用径向遮罩把边缘化开，
+                    // 避免出现一块灰色方片（参考图是透明 3D 插图）
+                    WordIconView(word: entry.word, size: 158)
+                        .mask(
+                            RadialGradient(
+                                colors: [.black, .black, .clear],
+                                center: .center,
+                                startRadius: 53, endRadius: 80
+                            )
                         )
-                    )
+                }
             }
 
             Text(entry.word)

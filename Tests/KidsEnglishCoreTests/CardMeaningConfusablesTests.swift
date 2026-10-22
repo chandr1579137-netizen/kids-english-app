@@ -47,6 +47,9 @@ final class CardMeaningConfusablesTests: XCTestCase {
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["old"])).meaningCn, "旧的")
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["engine"])).meaningCn, "火车头")
         XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["rough"])).meaningCn, "粗糙的")
+        // dream 词图是睡觉做梦；课文查词仍用词典原释义「梦想」
+        XCTAssertEqual(CardMeaning.applying(to: try XCTUnwrap(dict["dream"])).meaningCn, "做梦")
+        XCTAssertEqual(dict["dream"]?.meaningCn, "梦想")
         // 其他字段不变
         XCTAssertEqual(light.word, dict["light"]?.word)
         XCTAssertEqual(light.phonetic, dict["light"]?.phonetic)
@@ -54,6 +57,29 @@ final class CardMeaningConfusablesTests: XCTestCase {
         // 没有覆盖的词原样返回
         let apple = try XCTUnwrap(dict["apple"])
         XCTAssertEqual(CardMeaning.applying(to: apple), apple)
+    }
+
+    // MARK: 双格对比高亮词图
+
+    func testPairIconsAre38KnownWordsWithIcons() throws {
+        let dict = try dictionary()
+        XCTAssertEqual(PairIcons.words.count, 38)
+        let icons = resources.appendingPathComponent("word-icons")
+        for w in PairIcons.words {
+            XCTAssertNotNil(dict[w], "双格图 \(w) 不在词典里")
+            XCTAssertTrue(FileManager.default.fileExists(atPath: icons.appendingPathComponent("\(w).jpg").path),
+                          "双格图 \(w).jpg 不存在")
+        }
+    }
+
+    func testIsHighlightedPair() {
+        for w in ["big", "small", "smooth", "rough", "Light", "far", "stand", "change", "close", "clean"] {
+            XCTAssertTrue(PairIcons.isHighlightedPair(w), w)
+        }
+        // 单张图保持原来的边缘渐隐
+        for w in ["apple", "dream", "aunt", "cat", "engine"] {
+            XCTAssertFalse(PairIcons.isHighlightedPair(w), w)
+        }
     }
 
     // MARK: 易混组
