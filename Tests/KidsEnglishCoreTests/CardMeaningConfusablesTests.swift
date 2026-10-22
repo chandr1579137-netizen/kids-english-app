@@ -61,9 +61,9 @@ final class CardMeaningConfusablesTests: XCTestCase {
 
     // MARK: 双格对比高亮词图
 
-    func testPairIconsAre34KnownWordsWithIcons() throws {
+    func testPairIconsAre38KnownWordsWithIcons() throws {
         let dict = try dictionary()
-        XCTAssertEqual(PairIcons.words.count, 34)
+        XCTAssertEqual(PairIcons.words.count, 38)
         let icons = resources.appendingPathComponent("word-icons")
         for w in PairIcons.words {
             XCTAssertNotNil(dict[w], "双格图 \(w) 不在词典里")
@@ -73,7 +73,7 @@ final class CardMeaningConfusablesTests: XCTestCase {
     }
 
     func testIsHighlightedPair() {
-        for w in ["big", "small", "smooth", "rough", "Light", "far"] {
+        for w in ["big", "small", "smooth", "rough", "Light", "far", "stand", "change", "close", "clean"] {
             XCTAssertTrue(PairIcons.isHighlightedPair(w), w)
         }
         // 单张图保持原来的边缘渐隐
