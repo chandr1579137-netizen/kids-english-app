@@ -37,7 +37,7 @@ SONGS = {
     ("Rain|bow dan|cing in the light!",     "A4:1 G4:1 F4:1 E4:1 D4:1 E4:1 C4:2"),
 ]),
 "song_004": dict(bpm=112, breath=480, tune="original", lines=[
-    ("One, two, three, four, five,",        "C4:1 D4:1 E4:1 F4:1 G4:4"),
+    ("One, two, three, four, five,",        "C4:0.75 R:0.25 D4:0.75 R:0.25 E4:0.75 R:0.25 F4:0.75 R:0.25 G4:4"),
     ("Lit|tle fish are all a|live.",        "A4:0.5 A4:0.5 G4:1 E4:1 F4:1 E4:1 D4:3"),
     ("Six, sev|en, eight, nine, ten,",      "A4:1 G4:0.5 G4:0.5 F4:1 E4:1 D4:4"),
     ("Count them all and start a|gain!",    "E4:1 E4:1 F4:1 G4:1 E4:1 D4:1 C4:2"),
@@ -58,13 +58,13 @@ SONGS = {
     tune="Ludwig van Beethoven, \"Ode to Joy\" theme from Symphony No. 9 in D minor, Op. 125, 4th movement (1824); "
          "public domain. Source: https://en.wikipedia.org/wiki/Ode_to_Joy  (melody transposed to C, rhythm adapted to the syllables)",
     lines=[
-    ("Good mor|ning, sun, so warm and bright,", "E4:0.5 E4:0.5 F4:0.75 R:0.25 G4:0.75 R:0.25 G4:1 F4:1 E4:1 D4:2"),
+    ("Good mor|ning, sun, so warm and bright,", "E4:1 E4:0.5 F4:0.5 G4:0.5 R:0.5 G4:1 F4:1 E4:1 D4:2"),
     ("Thank you for your gol|den light.",       "C4:1 C4:1 D4:1 E4:1 E4:1.5 D4:0.5 D4:2"),
     ("Birds are sing|ing in the tree,",         "E4:1 E4:1 F4:1 G4:1 G4:1 F4:1 E4:2"),
     ("A brand-new day for you and me!",         "C4:0.5 C4:0.5 D4:1 E4:1 E4:1 D4:1.5 C4:0.5 C4:2"),
 ]),
 "song_009": dict(bpm=96, tune="original (lullaby)", lines=[
-    ("Sleep|y moon is in the sky,",         "E4:1 G4:1 G4:1 E4:1 F4:1 E4:1 D4:2"),
+    ("Sleep|y moon is in the sky,",         "E4:1 G4:1 G4:1.5 E4:0.5 F4:1 E4:1 D4:2"),
     ("Stars are wink|ing way up high.",     "C4:1 E4:1 G4:1 A4:1 G4:1 F4:1 E4:2"),
     ("Close your eyes, my lit|tle dear,",   "F4:1 A4:1 A4:1 F4:1 G4:1 F4:1 E4:2"),
     ("Sweet dreams, good night is here!",   "G4:1 E4:0.75 R:0.25 F4:1 D4:1 D4:1 C4:3"),

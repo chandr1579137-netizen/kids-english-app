@@ -30,13 +30,10 @@
    }
   },
   "daddy": {
-   "ph": "d a d iy"
+   "ph": "d ae d iy"
   },
   "pitter": {
-   "ph": "p ih t er",
-   "off": {
-    "0": -40
-   }
+   "ph": "p ih t er"
   },
   "patter": {
    "ph": "p ae t er"
@@ -56,11 +53,11 @@
    "hanging": {
     "ph": "hh a ng i ng"
    },
-   "so": {
-    "ph": "s ow",
-    "off": {
-     "0": 30
-    }
+   "tree": {
+    "ph": "t r i"
+   },
+   "just": {
+    "ph": "jh ah s tx"
    }
   },
   "song_002": {
@@ -89,6 +86,19 @@
     "off": {
      "0": -30
     }
+   }
+  },
+  "song_006": {
+   "rain": {
+    "ph": "r ey n"
+   }
+  },
+  "song_008": {
+   "sun": {
+    "ph": "s ah n"
+   },
+   "tree": {
+    "ph": "t r i"
    }
   }
  }
