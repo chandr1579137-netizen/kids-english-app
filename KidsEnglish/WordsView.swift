@@ -44,7 +44,7 @@ struct WordDetailView: View {
                 }
                 HStack(spacing: 20) {
                     Button {
-                        if let url = store.audioURL(forWord: entry.word) { player.play(url: url) }
+                        player.playWord(entry.word, url: store.audioURL(forWord: entry.word))
                     } label: {
                         Label("🔊 发音", systemImage: "speaker.wave.2.fill")
                     }

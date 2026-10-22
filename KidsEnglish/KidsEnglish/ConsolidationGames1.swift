@@ -206,9 +206,7 @@ struct WordToImageGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.playWord(w.word, url: store.bestAudioURL(forWord: w.word))
     }
 }
 
@@ -369,9 +367,7 @@ struct AudioToImageGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.playWord(w.word, url: store.bestAudioURL(forWord: w.word))
     }
 }
 
@@ -561,9 +557,7 @@ struct MatchingGame: View {
     }
 
     private func playWord(_ word: String) {
-        if let url = store.bestAudioURL(forWord: word) {
-            player.play(url: url)
-        }
+        player.playWord(word, url: store.bestAudioURL(forWord: word))
     }
 }
 
@@ -734,9 +728,7 @@ struct WordToAudioGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.playWord(w.word, url: store.bestAudioURL(forWord: w.word))
     }
 }
 
@@ -910,8 +902,6 @@ struct ImageToWordGame: View {
     }
 
     private func playWord(_ w: WordEntry) {
-        if let url = store.bestAudioURL(forWord: w.word) {
-            player.play(url: url)
-        }
+        player.playWord(w.word, url: store.bestAudioURL(forWord: w.word))
     }
 }

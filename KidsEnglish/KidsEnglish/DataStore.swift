@@ -118,8 +118,10 @@ class DataStore {
     }
 
     func audioURL(forWord word: String) -> URL? {
-        guard let file = wordAudioMap[word.lowercased()] else { return nil }
-        return Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)")
+        guard let file = wordAudioMap[word.lowercased()],
+              let url = Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)"),
+              FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
     }
 
     func bestAudioURL(forWord word: String) -> URL? {

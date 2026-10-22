@@ -613,17 +613,15 @@ struct LearnWordsView: View {
     }
 
     private func playBest(for entry: WordEntry) {
-        if let url = store.bestAudioURL(forWord: entry.word) {
-            player.play(url: url)
-        }
+        player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word))
     }
 
     private func playSlow(for entry: WordEntry) {
         // 优先用预生成的慢速文件；没有就把同一条音频放慢到 0.7 倍
         if let url = store.slowAudioURL(forWord: entry.word) {
             player.play(url: url)
-        } else if let url = store.bestAudioURL(forWord: entry.word) {
-            player.play(url: url, rate: 0.7)
+        } else {
+            player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word), rate: 0.7)
         }
     }
 }
