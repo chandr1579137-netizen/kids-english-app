@@ -126,7 +126,7 @@ struct LearnWordsView: View {
                         goConsolidate = true
                     } label: {
                         HStack(spacing: 8) {
-                            Text("巩固练习 · 9 种玩法")
+                            Text("巩固练习 · \(ConsolidationView.Mode.allCases.count) 种玩法")
                                 .kidFont(26, .heavy)
                             Image(systemName: "gamecontroller.fill")
                                 .kidFont(23, .bold)

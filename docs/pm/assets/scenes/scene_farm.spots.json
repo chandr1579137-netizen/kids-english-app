@@ -1,0 +1,78 @@
+{
+  "file": "scene_farm.jpg",
+  "size": [
+    2048,
+    2048
+  ],
+  "native_size": [
+    1600,
+    1600
+  ],
+  "upscale": "Lanczos 1600→2048",
+  "panel_bbox_px": [
+    304,
+    335,
+    1743,
+    1731
+  ],
+  "spot_box_px": 220,
+  "note": "Approximate centres of clear empty areas (box ±110px is free of outlines except grass tufts/floorboard lines). x_rel/y_rel are 0–1 of the full 2048 image.",
+  "spots": [
+    {
+      "id": 1,
+      "area": "meadow",
+      "x": 480,
+      "y": 1300,
+      "x_rel": 0.234,
+      "y_rel": 0.635
+    },
+    {
+      "id": 2,
+      "area": "meadow",
+      "x": 820,
+      "y": 1300,
+      "x_rel": 0.4,
+      "y_rel": 0.635
+    },
+    {
+      "id": 3,
+      "area": "meadow",
+      "x": 1180,
+      "y": 1300,
+      "x_rel": 0.576,
+      "y_rel": 0.635
+    },
+    {
+      "id": 4,
+      "area": "meadow",
+      "x": 1540,
+      "y": 1300,
+      "x_rel": 0.752,
+      "y_rel": 0.635
+    },
+    {
+      "id": 5,
+      "area": "meadow",
+      "x": 600,
+      "y": 1570,
+      "x_rel": 0.293,
+      "y_rel": 0.767
+    },
+    {
+      "id": 6,
+      "area": "meadow",
+      "x": 1020,
+      "y": 1570,
+      "x_rel": 0.498,
+      "y_rel": 0.767
+    },
+    {
+      "id": 7,
+      "area": "meadow",
+      "x": 1440,
+      "y": 1570,
+      "x_rel": 0.703,
+      "y_rel": 0.767
+    }
+  ]
+}

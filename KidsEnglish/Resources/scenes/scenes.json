@@ -1,0 +1,379 @@
+[
+ {
+  "id": "farm",
+  "background": "scene_farm.jpg",
+  "sourceSize": [
+   2048,
+   2048
+  ],
+  "panel": [
+   304,
+   335,
+   1743,
+   1731
+  ],
+  "itemSize": 0.18,
+  "spots": [
+   {
+    "id": 1,
+    "kind": "ground",
+    "x": 480,
+    "y": 1300
+   },
+   {
+    "id": 2,
+    "kind": "ground",
+    "x": 820,
+    "y": 1300
+   },
+   {
+    "id": 3,
+    "kind": "ground",
+    "x": 1180,
+    "y": 1300
+   },
+   {
+    "id": 4,
+    "kind": "ground",
+    "x": 1540,
+    "y": 1300
+   },
+   {
+    "id": 5,
+    "kind": "ground",
+    "x": 600,
+    "y": 1570
+   },
+   {
+    "id": 6,
+    "kind": "ground",
+    "x": 1020,
+    "y": 1570
+   },
+   {
+    "id": 7,
+    "kind": "ground",
+    "x": 1440,
+    "y": 1570
+   }
+  ],
+  "items": [
+   {
+    "word": "cow",
+    "spot": 1
+   },
+   {
+    "word": "pig",
+    "spot": 2
+   },
+   {
+    "word": "hen",
+    "spot": 3
+   },
+   {
+    "word": "horse",
+    "spot": 4
+   },
+   {
+    "word": "sheep",
+    "spot": 5
+   },
+   {
+    "word": "duck",
+    "spot": 6
+   },
+   {
+    "word": "dog",
+    "spot": 7
+   }
+  ]
+ },
+ {
+  "id": "kitchen",
+  "background": "scene_kitchen.jpg",
+  "sourceSize": [
+   2048,
+   2048
+  ],
+  "panel": [
+   141,
+   145,
+   1905,
+   1908
+  ],
+  "itemSize": 0.18,
+  "spots": [
+   {
+    "id": 1,
+    "kind": "counter",
+    "x": 450,
+    "y": 880
+   },
+   {
+    "id": 2,
+    "kind": "counter",
+    "x": 1020,
+    "y": 880
+   },
+   {
+    "id": 3,
+    "kind": "counter",
+    "x": 1600,
+    "y": 880
+   },
+   {
+    "id": 4,
+    "kind": "ground",
+    "x": 400,
+    "y": 1500
+   },
+   {
+    "id": 5,
+    "kind": "ground",
+    "x": 900,
+    "y": 1500
+   },
+   {
+    "id": 6,
+    "kind": "ground",
+    "x": 1400,
+    "y": 1500
+   },
+   {
+    "id": 7,
+    "kind": "ground",
+    "x": 650,
+    "y": 1740
+   },
+   {
+    "id": 8,
+    "kind": "ground",
+    "x": 1300,
+    "y": 1740
+   }
+  ],
+  "items": [
+   {
+    "word": "cup",
+    "spot": 1
+   },
+   {
+    "word": "milk",
+    "spot": 2
+   },
+   {
+    "word": "bread",
+    "spot": 3
+   },
+   {
+    "word": "cat",
+    "spot": 4
+   },
+   {
+    "word": "chair",
+    "spot": 5
+   },
+   {
+    "word": "box",
+    "spot": 6
+   },
+   {
+    "word": "mouse",
+    "spot": 7
+   },
+   {
+    "word": "bag",
+    "spot": 8
+   }
+  ],
+  "counterTopY": 1010
+ },
+ {
+  "id": "park",
+  "background": "scene_park.jpg",
+  "sourceSize": [
+   2048,
+   2048
+  ],
+  "panel": [
+   211,
+   215,
+   1821,
+   1840
+  ],
+  "itemSize": 0.18,
+  "spots": [
+   {
+    "id": 1,
+    "kind": "ground",
+    "x": 480,
+    "y": 1150
+   },
+   {
+    "id": 2,
+    "kind": "ground",
+    "x": 780,
+    "y": 1100
+   },
+   {
+    "id": 3,
+    "kind": "ground",
+    "x": 560,
+    "y": 1400
+   },
+   {
+    "id": 4,
+    "kind": "ground",
+    "x": 460,
+    "y": 1640
+   },
+   {
+    "id": 5,
+    "kind": "ground",
+    "x": 1620,
+    "y": 1150
+   },
+   {
+    "id": 6,
+    "kind": "ground",
+    "x": 1660,
+    "y": 1440
+   },
+   {
+    "id": 7,
+    "kind": "ground",
+    "x": 1640,
+    "y": 1690
+   }
+  ],
+  "items": [
+   {
+    "word": "ball",
+    "spot": 1
+   },
+   {
+    "word": "kite",
+    "spot": 2
+   },
+   {
+    "word": "bird",
+    "spot": 3
+   },
+   {
+    "word": "rabbit",
+    "spot": 4
+   },
+   {
+    "word": "balloon",
+    "spot": 5
+   },
+   {
+    "word": "squirrel",
+    "spot": 6
+   },
+   {
+    "word": "butterfly",
+    "spot": 7
+   }
+  ]
+ },
+ {
+  "id": "bedroom",
+  "background": "scene_bedroom.jpg",
+  "sourceSize": [
+   2048,
+   2048
+  ],
+  "panel": [
+   263,
+   270,
+   1785,
+   1793
+  ],
+  "itemSize": 0.18,
+  "spots": [
+   {
+    "id": 1,
+    "kind": "ground",
+    "x": 470,
+    "y": 1360
+   },
+   {
+    "id": 2,
+    "kind": "ground",
+    "x": 470,
+    "y": 1640
+   },
+   {
+    "id": 3,
+    "kind": "ground",
+    "x": 1580,
+    "y": 1360
+   },
+   {
+    "id": 4,
+    "kind": "ground",
+    "x": 1580,
+    "y": 1640
+   },
+   {
+    "id": 5,
+    "kind": "ground",
+    "x": 870,
+    "y": 1520
+   },
+   {
+    "id": 6,
+    "kind": "ground",
+    "x": 1180,
+    "y": 1520
+   },
+   {
+    "id": 7,
+    "kind": "wall",
+    "x": 560,
+    "y": 800
+   },
+   {
+    "id": 8,
+    "kind": "wall",
+    "x": 1500,
+    "y": 800
+   }
+  ],
+  "items": [
+   {
+    "word": "teddy",
+    "spot": 1
+   },
+   {
+    "word": "robot",
+    "spot": 2
+   },
+   {
+    "word": "drum",
+    "spot": 3
+   },
+   {
+    "word": "shoes",
+    "spot": 4
+   },
+   {
+    "word": "blocks",
+    "spot": 5
+   },
+   {
+    "word": "doll",
+    "spot": 6
+   },
+   {
+    "word": "clock",
+    "spot": 7
+   },
+   {
+    "word": "picture",
+    "spot": 8
+   }
+  ]
+ }
+]

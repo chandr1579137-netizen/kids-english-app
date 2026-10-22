@@ -1,0 +1,330 @@
+[
+  {
+    "file": "scene_farm.jpg",
+    "size": [
+      2048,
+      2048
+    ],
+    "native_size": [
+      1600,
+      1600
+    ],
+    "upscale": "Lanczos 1600→2048",
+    "panel_bbox_px": [
+      304,
+      335,
+      1743,
+      1731
+    ],
+    "spot_box_px": 220,
+    "note": "Approximate centres of clear empty areas (box ±110px is free of outlines except grass tufts/floorboard lines). x_rel/y_rel are 0–1 of the full 2048 image.",
+    "spots": [
+      {
+        "id": 1,
+        "area": "meadow",
+        "x": 480,
+        "y": 1300,
+        "x_rel": 0.234,
+        "y_rel": 0.635
+      },
+      {
+        "id": 2,
+        "area": "meadow",
+        "x": 820,
+        "y": 1300,
+        "x_rel": 0.4,
+        "y_rel": 0.635
+      },
+      {
+        "id": 3,
+        "area": "meadow",
+        "x": 1180,
+        "y": 1300,
+        "x_rel": 0.576,
+        "y_rel": 0.635
+      },
+      {
+        "id": 4,
+        "area": "meadow",
+        "x": 1540,
+        "y": 1300,
+        "x_rel": 0.752,
+        "y_rel": 0.635
+      },
+      {
+        "id": 5,
+        "area": "meadow",
+        "x": 600,
+        "y": 1570,
+        "x_rel": 0.293,
+        "y_rel": 0.767
+      },
+      {
+        "id": 6,
+        "area": "meadow",
+        "x": 1020,
+        "y": 1570,
+        "x_rel": 0.498,
+        "y_rel": 0.767
+      },
+      {
+        "id": 7,
+        "area": "meadow",
+        "x": 1440,
+        "y": 1570,
+        "x_rel": 0.703,
+        "y_rel": 0.767
+      }
+    ]
+  },
+  {
+    "file": "scene_kitchen.jpg",
+    "size": [
+      2048,
+      2048
+    ],
+    "native_size": [
+      1600,
+      1600
+    ],
+    "upscale": "Lanczos 1600→2048",
+    "panel_bbox_px": [
+      141,
+      145,
+      1905,
+      1908
+    ],
+    "spot_box_px": 220,
+    "note": "Approximate centres of clear empty areas (box ±110px is free of outlines except grass tufts/floorboard lines). x_rel/y_rel are 0–1 of the full 2048 image.",
+    "spots": [
+      {
+        "id": 1,
+        "area": "countertop (stand on top edge y≈1010)",
+        "x": 450,
+        "y": 880,
+        "x_rel": 0.22,
+        "y_rel": 0.43
+      },
+      {
+        "id": 2,
+        "area": "countertop (stand on top edge y≈1010)",
+        "x": 1020,
+        "y": 880,
+        "x_rel": 0.498,
+        "y_rel": 0.43
+      },
+      {
+        "id": 3,
+        "area": "countertop (stand on top edge y≈1010)",
+        "x": 1600,
+        "y": 880,
+        "x_rel": 0.781,
+        "y_rel": 0.43
+      },
+      {
+        "id": 4,
+        "area": "floor",
+        "x": 400,
+        "y": 1500,
+        "x_rel": 0.195,
+        "y_rel": 0.732
+      },
+      {
+        "id": 5,
+        "area": "floor",
+        "x": 900,
+        "y": 1500,
+        "x_rel": 0.439,
+        "y_rel": 0.732
+      },
+      {
+        "id": 6,
+        "area": "floor",
+        "x": 1400,
+        "y": 1500,
+        "x_rel": 0.684,
+        "y_rel": 0.732
+      },
+      {
+        "id": 7,
+        "area": "floor",
+        "x": 650,
+        "y": 1740,
+        "x_rel": 0.317,
+        "y_rel": 0.85
+      },
+      {
+        "id": 8,
+        "area": "floor",
+        "x": 1300,
+        "y": 1740,
+        "x_rel": 0.635,
+        "y_rel": 0.85
+      }
+    ]
+  },
+  {
+    "file": "scene_park.jpg",
+    "size": [
+      2048,
+      2048
+    ],
+    "native_size": [
+      1600,
+      1600
+    ],
+    "upscale": "Lanczos 1600→2048",
+    "panel_bbox_px": [
+      211,
+      215,
+      1821,
+      1840
+    ],
+    "spot_box_px": 220,
+    "note": "Approximate centres of clear empty areas (box ±110px is free of outlines except grass tufts/floorboard lines). x_rel/y_rel are 0–1 of the full 2048 image.",
+    "spots": [
+      {
+        "id": 1,
+        "area": "left lawn",
+        "x": 480,
+        "y": 1150,
+        "x_rel": 0.234,
+        "y_rel": 0.562
+      },
+      {
+        "id": 2,
+        "area": "left lawn",
+        "x": 780,
+        "y": 1100,
+        "x_rel": 0.381,
+        "y_rel": 0.537
+      },
+      {
+        "id": 3,
+        "area": "left lawn",
+        "x": 560,
+        "y": 1400,
+        "x_rel": 0.273,
+        "y_rel": 0.684
+      },
+      {
+        "id": 4,
+        "area": "left lawn",
+        "x": 460,
+        "y": 1640,
+        "x_rel": 0.225,
+        "y_rel": 0.801
+      },
+      {
+        "id": 5,
+        "area": "right lawn",
+        "x": 1620,
+        "y": 1150,
+        "x_rel": 0.791,
+        "y_rel": 0.562
+      },
+      {
+        "id": 6,
+        "area": "right lawn",
+        "x": 1660,
+        "y": 1440,
+        "x_rel": 0.811,
+        "y_rel": 0.703
+      },
+      {
+        "id": 7,
+        "area": "right lawn",
+        "x": 1640,
+        "y": 1690,
+        "x_rel": 0.801,
+        "y_rel": 0.825
+      }
+    ]
+  },
+  {
+    "file": "scene_bedroom.jpg",
+    "size": [
+      2048,
+      2048
+    ],
+    "native_size": [
+      1600,
+      1600
+    ],
+    "upscale": "Lanczos 1600→2048",
+    "panel_bbox_px": [
+      263,
+      270,
+      1785,
+      1793
+    ],
+    "spot_box_px": 220,
+    "note": "Approximate centres of clear empty areas (box ±110px is free of outlines except grass tufts/floorboard lines). x_rel/y_rel are 0–1 of the full 2048 image.",
+    "spots": [
+      {
+        "id": 1,
+        "area": "floor left",
+        "x": 470,
+        "y": 1360,
+        "x_rel": 0.229,
+        "y_rel": 0.664
+      },
+      {
+        "id": 2,
+        "area": "floor left",
+        "x": 470,
+        "y": 1640,
+        "x_rel": 0.229,
+        "y_rel": 0.801
+      },
+      {
+        "id": 3,
+        "area": "floor right",
+        "x": 1580,
+        "y": 1360,
+        "x_rel": 0.771,
+        "y_rel": 0.664
+      },
+      {
+        "id": 4,
+        "area": "floor right",
+        "x": 1580,
+        "y": 1640,
+        "x_rel": 0.771,
+        "y_rel": 0.801
+      },
+      {
+        "id": 5,
+        "area": "rug",
+        "x": 870,
+        "y": 1520,
+        "x_rel": 0.425,
+        "y_rel": 0.742
+      },
+      {
+        "id": 6,
+        "area": "rug",
+        "x": 1180,
+        "y": 1520,
+        "x_rel": 0.576,
+        "y_rel": 0.742
+      },
+      {
+        "id": 7,
+        "area": "wall left of window",
+        "x": 560,
+        "y": 800,
+        "x_rel": 0.273,
+        "y_rel": 0.391
+      },
+      {
+        "id": 8,
+        "area": "wall right of window",
+        "x": 1500,
+        "y": 800,
+        "x_rel": 0.732,
+        "y_rel": 0.391
+      }
+    ]
+  }
+]

@@ -57,8 +57,8 @@ jobs:
       - name: Verify duplicated resources are in sync
         run: |
           fail=0
-          for f in KidsEnglish/Resources/*.json; do
-            b="KidsEnglish/KidsEnglish/Resources/$(basename "$f")"
+          for f in KidsEnglish/Resources/*.json KidsEnglish/Resources/scenes/*.json; do
+            b="KidsEnglish/KidsEnglish/${f#KidsEnglish/}"
             if [ -f "$b" ] && ! diff -q "$f" "$b" >/dev/null; then
               echo "::error file=$f::与 $b 不一致"
               fail=1
@@ -122,6 +122,15 @@ jobs:
               sys.exit(1)
           PYEOF
 
+      # 听音找一找：场景里的物品用现成词图（覆盖图已写入之后）四边泛洪抠成透明 PNG
+      - name: Make scene item cutouts
+        run: |
+          .venv-icons/bin/python scripts/make_scene_items.py \
+            KidsEnglish/KidsEnglish/Resources/scenes/scenes.json \
+            KidsEnglish/KidsEnglish/Resources/word-icons \
+            KidsEnglish/KidsEnglish/Resources/scenes/items
+          ls KidsEnglish/KidsEnglish/Resources/scenes/items | wc -l
+
       - name: Apply song audio (Aria 统一音色)
         # 儿歌原始音频在资源包里，unzip -o 会覆盖仓库文件，
         # 所以解压之后再把仓库里的 Aria 版本盖回去
@@ -161,7 +170,8 @@ jobs:
           audio = root / 'audio'
           word = json.loads((root / 'word-audio-map.json').read_text())
           lesson = json.loads((root / 'audio-map.json').read_text())
-          keep = set(word.values()) | set(lesson.values())
+          custom = json.loads((root / 'custom-audio-map.json').read_text())
+          keep = set(word.values()) | set(lesson.values()) | set(custom.values())
           removed = 0
           for f in audio.glob('*.mp3'):
               if f.name not in keep:
@@ -259,17 +269,25 @@ jobs:
           shoot 07-games    -uiTab 0 -uiConsolidate
           shoot 08-lesson   -uiTab 2 -uiLesson
 
+          # 听音找一找（Mode 第 0 个）：4 个场景各一张，另有「答对了」和「5 题做完」的样子
+          shoot 09a-game-find-farm     -uiTab 0 -uiConsolidate -uiGame 0 -uiScene farm
+          shoot 09b-game-find-kitchen  -uiTab 0 -uiConsolidate -uiGame 0 -uiScene kitchen
+          shoot 09c-game-find-park     -uiTab 0 -uiConsolidate -uiGame 0 -uiScene park
+          shoot 09d-game-find-bedroom  -uiTab 0 -uiConsolidate -uiGame 0 -uiScene bedroom
+          shoot 09e-game-find-found    -uiTab 0 -uiConsolidate -uiGame 0 -uiScene farm -uiSceneFound
+          shoot 09f-game-find-done     -uiTab 0 -uiConsolidate -uiGame 0 -uiScene kitchen -uiSceneDone
+
           # 9 个玩法内页：此前全部是盲区（只有网格页被拍过）。
           # 顺序同 ConsolidationView.Mode 的声明顺序。
-          shoot 09-game-word2image    -uiTab 0 -uiConsolidate -uiGame 0
-          shoot 10-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 1
-          shoot 11-game-matching      -uiTab 0 -uiConsolidate -uiGame 2
-          shoot 12-game-word2audio    -uiTab 0 -uiConsolidate -uiGame 3
-          shoot 13-game-image2word    -uiTab 0 -uiConsolidate -uiGame 4
-          shoot 14-game-audio2word    -uiTab 0 -uiConsolidate -uiGame 5
-          shoot 15-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 6
-          shoot 16-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 7
-          shoot 17-game-dictation     -uiTab 0 -uiConsolidate -uiGame 8
+          shoot 09-game-word2image    -uiTab 0 -uiConsolidate -uiGame 1
+          shoot 10-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 2
+          shoot 11-game-matching      -uiTab 0 -uiConsolidate -uiGame 3
+          shoot 12-game-word2audio    -uiTab 0 -uiConsolidate -uiGame 4
+          shoot 13-game-image2word    -uiTab 0 -uiConsolidate -uiGame 5
+          shoot 14-game-audio2word    -uiTab 0 -uiConsolidate -uiGame 6
+          shoot 15-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 7
+          shoot 16-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 8
+          shoot 17-game-dictation     -uiTab 0 -uiConsolidate -uiGame 9
 
           # 二级页：主题词表 / 收藏 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
@@ -287,15 +305,16 @@ jobs:
 
           # 大字号 × 元素最密的页面：游戏内页、学习判定、主题词表、设置
           shoot 27-large-study        -uiTab 0 -uiStudy -uiLargeText
-          shoot 28-large-game-word2image    -uiTab 0 -uiConsolidate -uiGame 0 -uiLargeText
-          shoot 29-large-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 1 -uiLargeText
-          shoot 30-large-game-matching      -uiTab 0 -uiConsolidate -uiGame 2 -uiLargeText
-          shoot 31-large-game-word2audio    -uiTab 0 -uiConsolidate -uiGame 3 -uiLargeText
-          shoot 32-large-game-image2word    -uiTab 0 -uiConsolidate -uiGame 4 -uiLargeText
-          shoot 33-large-game-audio2word    -uiTab 0 -uiConsolidate -uiGame 5 -uiLargeText
-          shoot 34-large-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 6 -uiLargeText
-          shoot 35-large-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 7 -uiLargeText
-          shoot 36-large-game-dictation     -uiTab 0 -uiConsolidate -uiGame 8 -uiLargeText
+          shoot 27b-large-game-find-kitchen -uiTab 0 -uiConsolidate -uiGame 0 -uiScene kitchen -uiLargeText
+          shoot 28-large-game-word2image    -uiTab 0 -uiConsolidate -uiGame 1 -uiLargeText
+          shoot 29-large-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 2 -uiLargeText
+          shoot 30-large-game-matching      -uiTab 0 -uiConsolidate -uiGame 3 -uiLargeText
+          shoot 31-large-game-word2audio    -uiTab 0 -uiConsolidate -uiGame 4 -uiLargeText
+          shoot 32-large-game-image2word    -uiTab 0 -uiConsolidate -uiGame 5 -uiLargeText
+          shoot 33-large-game-audio2word    -uiTab 0 -uiConsolidate -uiGame 6 -uiLargeText
+          shoot 34-large-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 7 -uiLargeText
+          shoot 35-large-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 8 -uiLargeText
+          shoot 36-large-game-dictation     -uiTab 0 -uiConsolidate -uiGame 9 -uiLargeText
           shoot 37-large-theme-words   -uiTab 1 -uiTheme fruits -uiLargeText
           shoot 38-large-settings      -uiTab 4 -uiProfile settings -uiLargeText
           shoot 39-large-favorites     -uiTab 4 -uiProfile favorites -uiLargeText

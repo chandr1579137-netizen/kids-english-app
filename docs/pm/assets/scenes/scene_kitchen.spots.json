@@ -1,0 +1,86 @@
+{
+  "file": "scene_kitchen.jpg",
+  "size": [
+    2048,
+    2048
+  ],
+  "native_size": [
+    1600,
+    1600
+  ],
+  "upscale": "Lanczos 1600→2048",
+  "panel_bbox_px": [
+    141,
+    145,
+    1905,
+    1908
+  ],
+  "spot_box_px": 220,
+  "note": "Approximate centres of clear empty areas (box ±110px is free of outlines except grass tufts/floorboard lines). x_rel/y_rel are 0–1 of the full 2048 image.",
+  "spots": [
+    {
+      "id": 1,
+      "area": "countertop (stand on top edge y≈1010)",
+      "x": 450,
+      "y": 880,
+      "x_rel": 0.22,
+      "y_rel": 0.43
+    },
+    {
+      "id": 2,
+      "area": "countertop (stand on top edge y≈1010)",
+      "x": 1020,
+      "y": 880,
+      "x_rel": 0.498,
+      "y_rel": 0.43
+    },
+    {
+      "id": 3,
+      "area": "countertop (stand on top edge y≈1010)",
+      "x": 1600,
+      "y": 880,
+      "x_rel": 0.781,
+      "y_rel": 0.43
+    },
+    {
+      "id": 4,
+      "area": "floor",
+      "x": 400,
+      "y": 1500,
+      "x_rel": 0.195,
+      "y_rel": 0.732
+    },
+    {
+      "id": 5,
+      "area": "floor",
+      "x": 900,
+      "y": 1500,
+      "x_rel": 0.439,
+      "y_rel": 0.732
+    },
+    {
+      "id": 6,
+      "area": "floor",
+      "x": 1400,
+      "y": 1500,
+      "x_rel": 0.684,
+      "y_rel": 0.732
+    },
+    {
+      "id": 7,
+      "area": "floor",
+      "x": 650,
+      "y": 1740,
+      "x_rel": 0.317,
+      "y_rel": 0.85
+    },
+    {
+      "id": 8,
+      "area": "floor",
+      "x": 1300,
+      "y": 1740,
+      "x_rel": 0.635,
+      "y_rel": 0.85
+    }
+  ]
+}
