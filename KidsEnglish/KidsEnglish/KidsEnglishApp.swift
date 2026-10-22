@@ -31,7 +31,14 @@ private struct UITextSizeOverride: ViewModifier {
 // 第 3 个 tab 原来是「读短文」，现在是「说一说」口语课（PhrasesView.swift）。
 // rawValue 不变（还是 2），CI 的 `-uiTab 2` 参数照用。
 
-enum AppTab: Int, CaseIterable, Identifiable {
+/// 底栏的一项：正常模式（AppTab）和宝宝模式（BabyTab）共用同一个底栏样式
+protocol KidTabItem: CaseIterable, Identifiable, Hashable {
+    var title: String { get }
+    var icon: String { get }
+    var selectedIcon: String { get }
+}
+
+enum AppTab: Int, CaseIterable, Identifiable, KidTabItem {
     case learn, cards, read, songs, profile
 
     var id: Int { rawValue }
@@ -227,12 +234,12 @@ struct ContentView: View {
 
 // MARK: - 自定义底栏（复刻参考图：圆角方块图标底 + 下方文字）
 
-struct KidTabBar: View {
-    @Binding var selection: AppTab
+struct KidTabBar<Tab: KidTabItem>: View {
+    @Binding var selection: Tab
 
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(AppTab.allCases) { item in
+            ForEach(Array(Tab.allCases)) { item in
                 let isSelected = selection == item
                 Button {
                     guard selection != item else { return }

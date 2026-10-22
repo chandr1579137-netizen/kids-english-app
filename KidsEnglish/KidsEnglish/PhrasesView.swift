@@ -952,7 +952,7 @@ private struct YourTurnBubble: View {
 }
 
 /// 话筒：等孩子说时一跳一跳，录音时外圈跟着音量变大
-private struct PhraseMicButton: View {
+struct PhraseMicButton: View {
     let phase: PhraseLessonController.Phase
     let level: CGFloat
     let action: () -> Void
@@ -996,7 +996,7 @@ private struct PhraseMicButton: View {
 }
 
 /// 「下一个」：该走的时候一跳一跳
-private struct PulsingNextButton: View {
+struct PulsingNextButton: View {
     let highlight: Bool
     let label: String
     let action: () -> Void
@@ -1026,7 +1026,7 @@ private struct PulsingNextButton: View {
 }
 
 /// 表扬时从图上飞出的星星
-private struct PraiseBurst: View {
+struct PraiseBurst: View {
     let tick: Int
     let show: Bool
     @State private var go = false
