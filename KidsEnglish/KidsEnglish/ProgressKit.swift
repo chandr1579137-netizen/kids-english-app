@@ -164,11 +164,10 @@ enum Streak {
 enum HomeBooks {
     /// 首页单词本的词过滤（可配置）。key = 主题 id，value = 首页这本书只保留的词（小写，按主题原顺序出词）。
     /// 只影响「背单词」首页：单词本卡片词数、全部单词总数、计划卡「已学 x / 总数」、开始学习出的词。
-    /// 「单词卡」页和词库数据（word-themes.json）不受影响，11–100 仍然在单词卡里。
-    /// 已经学过的 11–100 的 learnedWords 记录不删除，只是不再从首页排进计划。
-    static let homeBookWordFilter: [String: Set<String>] = [
-        "numbers": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
-    ]
+    /// 「单词卡」页和词库数据（word-themes.json）不受影响。
+    /// 目前为空：数字本在首页也是完整的 1–100（用户决定，取消了之前「首页只放 1–10」的限制）。
+    /// 以后要再对某本书做首页精选，往这里加一项即可，总数会自动从数据重新算。
+    static let homeBookWordFilter: [String: Set<String>] = [:]
 
     /// 某本书在首页上的词（保持主题内原顺序；没有配置过滤的主题原样返回）。
     static func homeWords(themeId: String, words: [String]) -> [String] {
