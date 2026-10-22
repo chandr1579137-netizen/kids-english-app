@@ -160,12 +160,12 @@ struct BabyTodayView: View {
                     VStack(spacing: 6) {
                         HStack(spacing: 8) {
                             if doneToday, let w = todaySticker {
-                                BabyPicture(word: w, size: 76)
+                                BabyPicture(word: pic(w), size: 76)
                                 Image(systemName: "checkmark.circle.fill")
                                     .kidFont(34, .bold, maxScale: 1.1)
                                     .foregroundStyle(Func.positiveDeep)
                             } else {
-                                ForEach(preview, id: \.self) { w in BabyPicture(word: w, size: 70) }
+                                ForEach(preview, id: \.self) { w in BabyPicture(word: pic(w), size: 70) }
                             }
                         }
                         .padding(12)
@@ -207,6 +207,9 @@ struct BabyTodayView: View {
         }
     }
 
+    /// 词 → 配图用的词（mom 用平涂的 mother 图）。资源包里同名的 mom / dad 是旧 3D 图，不能直接用
+    private func pic(_ w: String) -> String { store.babyData?.picture(for: w) ?? w }
+
     private var todaySticker: String? {
         if LaunchOptions.babyDoneToday { return preview.first ?? store.babyData?.allWords.first }
         return store.babyStickers[store.todayKeyString]
@@ -226,7 +229,7 @@ struct BabyTodayView: View {
                 ZStack {
                     if let w {
                         Circle().fill(PhraseColors.gold.opacity(0.25))
-                        BabyPicture(word: w, size: 38)
+                        BabyPicture(word: pic(w), size: 38)
                             .clipShape(Circle())
                     } else {
                         Circle().strokeBorder(Palette.inkSubtle,
@@ -878,15 +881,18 @@ struct BabyPackView: View {
     }
 }
 
-/// 宝宝模式的词图：圆角大方块
+/// 宝宝模式的词图：圆角大方块。
+/// 自己再做一次「词 → 配图词」映射（幂等）：资源包里同名的 mom / dad / grandma 是旧 3D 图，
+/// 调用方漏映射也只会拿到平涂的 mother / father / grandmother。
 struct BabyPicture: View {
     @Environment(DataStore.self) private var store
     let word: String
     let size: CGFloat
 
     var body: some View {
+        let w = store.babyData?.picture(for: word) ?? word
         Group {
-            if let url = store.iconURL(forWord: word), let ui = UIImage(contentsOfFile: url.path) {
+            if let url = store.iconURL(forWord: w), let ui = UIImage(contentsOfFile: url.path) {
                 Image(uiImage: ui).resizable().scaledToFill()
             } else {
                 PhraseColors.paper
