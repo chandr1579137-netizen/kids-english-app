@@ -8,6 +8,9 @@
 
 用法：
     python3 scripts/make_scene_items.py <scenes.json> <word-icons 目录> <输出目录>
+    python3 scripts/make_scene_items.py <feed-pairs.json> <word-icons 目录> <输出目录> 512
+第一个参数也可以是「喂小动物」的 feed-pairs.json：此时把每组的 animal 和 food 都抠出来。
+第四个参数可选，是输出边长（默认 256）。
 """
 import json
 import sys
@@ -84,7 +87,14 @@ def cut(src: Path, dst: Path):
 def main():
     scenes_json, icons, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
     out.mkdir(parents=True, exist_ok=True)
-    words = sorted({item["word"] for s in json.loads(scenes_json.read_text()) for item in s["items"]})
+    global SIDE
+    if len(sys.argv) > 4:
+        SIDE = int(sys.argv[4])
+    data = json.loads(scenes_json.read_text())
+    if isinstance(data, dict) and "pairs" in data:      # 喂小动物 feed-pairs.json
+        words = sorted({w for p in data["pairs"] for w in (p["animal"], p["food"])})
+    else:                                               # 听音找一找 scenes.json
+        words = sorted({item["word"] for s in data for item in s["items"]})
     missing = []
     for word in words:
         name = word.replace(" ", "_")

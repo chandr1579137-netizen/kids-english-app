@@ -131,6 +131,14 @@ jobs:
             KidsEnglish/KidsEnglish/Resources/scenes/items
           ls KidsEnglish/KidsEnglish/Resources/scenes/items | wc -l
 
+      - name: Make feed-animal cutouts
+        run: |
+          .venv-icons/bin/python scripts/make_scene_items.py \
+            KidsEnglish/KidsEnglish/Resources/feed-pairs.json \
+            KidsEnglish/KidsEnglish/Resources/word-icons \
+            KidsEnglish/KidsEnglish/Resources/scenes/feed 512
+          ls KidsEnglish/KidsEnglish/Resources/scenes/feed | wc -l
+
       - name: Apply song audio (Aria 统一音色)
         # 儿歌原始音频在资源包里，unzip -o 会覆盖仓库文件，
         # 所以解压之后再把仓库里的 Aria 版本盖回去
@@ -288,6 +296,12 @@ jobs:
           shoot 15-game-audio2meaning -uiTab 0 -uiConsolidate -uiGame 7
           shoot 16-game-word2meaning  -uiTab 0 -uiConsolidate -uiGame 8
           shoot 17-game-dictation     -uiTab 0 -uiConsolidate -uiGame 9
+          # 喂小动物（第 11 种玩法，-uiGame 10）：出题 / 拖动中 / 喂对 / 喂错 / 完成
+          shoot 17a-game-feed            -uiTab 0 -uiConsolidate -uiGame 10
+          shoot 17b-game-feed-drag       -uiTab 0 -uiConsolidate -uiGame 10 -uiFeedDrag
+          shoot 17c-game-feed-yummy      -uiTab 0 -uiConsolidate -uiGame 10 -uiFeedYummy
+          shoot 17d-game-feed-no         -uiTab 0 -uiConsolidate -uiGame 10 -uiFeedNo
+          shoot 17e-game-feed-done       -uiTab 0 -uiConsolidate -uiGame 10 -uiFeedDone
 
           # 二级页：主题词表 / 收藏 / 儿歌 / 家长验证 / 设置
           shoot 18-theme-words  -uiTab 1 -uiTheme fruits
@@ -306,6 +320,7 @@ jobs:
           # 大字号 × 元素最密的页面：游戏内页、学习判定、主题词表、设置
           shoot 27-large-study        -uiTab 0 -uiStudy -uiLargeText
           shoot 27b-large-game-find-kitchen -uiTab 0 -uiConsolidate -uiGame 0 -uiScene kitchen -uiLargeText
+          shoot 27c-large-game-feed    -uiTab 0 -uiConsolidate -uiGame 10 -uiFeedDrag -uiLargeText
           shoot 28-large-game-word2image    -uiTab 0 -uiConsolidate -uiGame 1 -uiLargeText
           shoot 29-large-game-audio2image   -uiTab 0 -uiConsolidate -uiGame 2 -uiLargeText
           shoot 30-large-game-matching      -uiTab 0 -uiConsolidate -uiGame 3 -uiLargeText

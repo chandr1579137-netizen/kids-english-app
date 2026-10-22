@@ -1,0 +1,59 @@
+{
+ "noThanks": "No, thank you!",
+ "pairs": [
+  {
+   "animal": "monkey",
+   "food": "banana",
+   "want": "I want a banana!",
+   "yummy": "Yummy banana!"
+  },
+  {
+   "animal": "rabbit",
+   "food": "vegetable",
+   "want": "I want some vegetables!",
+   "yummy": "Yummy vegetables!"
+  },
+  {
+   "animal": "cat",
+   "food": "fish",
+   "want": "I want a fish!",
+   "yummy": "Yummy fish!"
+  },
+  {
+   "animal": "dog",
+   "food": "meat",
+   "want": "I want some meat!",
+   "yummy": "Yummy meat!"
+  },
+  {
+   "animal": "mouse",
+   "food": "cheese",
+   "want": "I want some cheese!",
+   "yummy": "Yummy cheese!"
+  },
+  {
+   "animal": "bee",
+   "food": "honey",
+   "want": "I want some honey!",
+   "yummy": "Yummy honey!"
+  },
+  {
+   "animal": "bear",
+   "food": "honey",
+   "want": "I want some honey!",
+   "yummy": "Yummy honey!"
+  },
+  {
+   "animal": "horse",
+   "food": "apple",
+   "want": "I want an apple!",
+   "yummy": "Yummy apple!"
+  },
+  {
+   "animal": "kitten",
+   "food": "milk",
+   "want": "I want some milk!",
+   "yummy": "Yummy milk!"
+  }
+ ]
+}
