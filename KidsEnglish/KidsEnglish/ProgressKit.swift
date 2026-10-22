@@ -307,3 +307,23 @@ enum Confusables {
         return chosen
     }
 }
+
+// MARK: - 双格对比高亮词图
+
+/// 词图表意重做 A 类（34 张）：左右两格对比，目标格保留原色、另一格降饱和变浅
+/// （meaning-audit/tools_highlight.py 的 hl-left / hl-right 后处理，muse-batch.json 中 type=A）。
+/// 学习页大卡对这类图不做径向边缘渐隐：变淡的那一格是用来对比的，必须完整看得见。
+/// 词图文件名里没有标记（都是 <word>.jpg），所以这里登记词表；单张图不受影响。
+enum PairIcons {
+    static let words: Set<String> = [
+        "big", "small", "little", "tall", "short", "long", "fast", "slow",
+        "hot", "cold", "old", "new", "young", "full", "empty", "wet", "dry",
+        "soft", "hard", "heavy", "light", "high", "low", "deep", "shallow",
+        "smooth", "rough", "dark", "bright", "good", "bad", "dirty", "sharp", "far",
+    ]
+
+    /// 这个词的词图是不是双格对比高亮图
+    static func isHighlightedPair(_ word: String) -> Bool {
+        words.contains(word.lowercased())
+    }
+}

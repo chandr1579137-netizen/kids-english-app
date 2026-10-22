@@ -56,6 +56,29 @@ final class CardMeaningConfusablesTests: XCTestCase {
         XCTAssertEqual(CardMeaning.applying(to: apple), apple)
     }
 
+    // MARK: 双格对比高亮词图
+
+    func testPairIconsAre34KnownWordsWithIcons() throws {
+        let dict = try dictionary()
+        XCTAssertEqual(PairIcons.words.count, 34)
+        let icons = resources.appendingPathComponent("word-icons")
+        for w in PairIcons.words {
+            XCTAssertNotNil(dict[w], "双格图 \(w) 不在词典里")
+            XCTAssertTrue(FileManager.default.fileExists(atPath: icons.appendingPathComponent("\(w).jpg").path),
+                          "双格图 \(w).jpg 不存在")
+        }
+    }
+
+    func testIsHighlightedPair() {
+        for w in ["big", "small", "smooth", "rough", "Light", "far"] {
+            XCTAssertTrue(PairIcons.isHighlightedPair(w), w)
+        }
+        // 单张图保持原来的边缘渐隐
+        for w in ["apple", "dream", "aunt", "cat", "engine"] {
+            XCTAssertFalse(PairIcons.isHighlightedPair(w), w)
+        }
+    }
+
     // MARK: 易混组
 
     func testGroupsAreKnownWords() throws {
