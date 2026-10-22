@@ -1,0 +1,193 @@
+{
+ "file": "song_002@z23_sung.mp3",
+ "cuts": [
+  1.4699999999999998,
+  5.82,
+  10.24,
+  14.05,
+  18.27,
+  22.38,
+  26.78,
+  30.59,
+  35.57
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "replace: hop hop -> help help",
+    "insert:  -> spring",
+    "replace: twitch -> switch"
+   ],
+   "full_text": "Help, help, little bunny, hop around so funny, wiggle your nose, twitch your ear, spring  Spring is finally here, hop, hop, little bunny, hop around so funny, wiggle your nose,  Switch your ear, spring is finally here",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Hop, hop, little bunny,",
+     "heard": "Hup, hup, little bunny.",
+     "ok": false
+    },
+    {
+     "line": 1,
+     "lyric": "Hop around so funny.",
+     "heard": "Hop around, so funny",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Wiggle your nose, twitch your ear,",
+     "heard": "Wiggle your nose, twitch your ear",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Spring is finally here!",
+     "heard": "Spring is finally here",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Hop, hop, little bunny,",
+     "heard": "Hop, hop, little bunny.",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Hop around so funny.",
+     "heard": "Hop around, so funny",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Wiggle your nose, twitch your ear,",
+     "heard": "Wiggle your nose, twitch your ear",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Spring is finally here!",
+     "heard": "Spring is finally here",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "replace: ear -> hair"
+   ],
+   "full_text": "Hop hop little bunny, hop around so funny Wiggle your nose, twitch your ear, spring  is finally here Hop hop little bunny, hop around so funny  wiggle your nose, twitch your hair, spring is finally here",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Hop, hop, little bunny,",
+     "heard": "Help, help, little bunny",
+     "ok": false
+    },
+    {
+     "line": 1,
+     "lyric": "Hop around so funny.",
+     "heard": "Hop around, so funny",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Wiggle your nose, twitch your ear,",
+     "heard": "Wiggle your nose, twitch your ear",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Spring is finally here!",
+     "heard": "Spring is finally here",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Hop, hop, little bunny,",
+     "heard": "Hop, hop, little bunny",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Hop around so funny.",
+     "heard": "Hop around, so funny",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Wiggle your nose, twitch your ear,",
+     "heard": "Wiggle your nose, switch your hair",
+     "ok": false
+    },
+    {
+     "line": 7,
+     "lyric": "Spring is finally here!",
+     "heard": "Spring is finally here",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": false,
+   "full_ok": false,
+   "full_errors": [
+    "replace: twitch -> switch"
+   ],
+   "full_text": "hop hop little bunny hop around so funny wiggle your nose twitch your ear spring is finally here  hop hop little bunny hop around so funny wiggle your nose switch your ear spring is finally here",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Hop, hop, little bunny,",
+     "heard": "Hup, hup, little bunny.",
+     "ok": false
+    },
+    {
+     "line": 1,
+     "lyric": "Hop around so funny.",
+     "heard": "Hop around so funny",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Wiggle your nose, twitch your ear,",
+     "heard": "Wiggle your nose, switch your ear",
+     "ok": false
+    },
+    {
+     "line": 3,
+     "lyric": "Spring is finally here!",
+     "heard": "Spring is finally here",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Hop, hop, little bunny,",
+     "heard": "Hup, hup, little bunny.",
+     "ok": false
+    },
+    {
+     "line": 5,
+     "lyric": "Hop around so funny.",
+     "heard": "Hop around so funny",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Wiggle your nose, twitch your ear,",
+     "heard": "Wiggle your nose, switch your ear",
+     "ok": false
+    },
+    {
+     "line": 7,
+     "lyric": "Spring is finally here!",
+     "heard": "Spring is finally here",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": false
+}

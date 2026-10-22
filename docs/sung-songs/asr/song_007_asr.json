@@ -1,0 +1,147 @@
+{
+ "file": "song_007_sung.mp3",
+ "cuts": [
+  1.52,
+  6.07,
+  10.34,
+  14.41,
+  18.84,
+  23.05,
+  30.13
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Clap your hands, one, two, three  Stomp your feet along with me  Nod your head and blink your eyes  Now we reach up to the skies  Clap your hands, one, two, three  Stomp your feet along with me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Clap your hands, one two three,",
+     "heard": "Clap your hands, 1, 2, 3",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Stomp your feet along with me.",
+     "heard": "Stomp your feet along with me",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Nod your head and blink your eyes,",
+     "heard": "Nod your head and blink your eyes",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Now we reach up to the skies!",
+     "heard": "Now we reach up to the skies",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Clap your hands, one two three,",
+     "heard": "Clap your hands, 1, 2, 3",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Stomp your feet along with me.",
+     "heard": "Stomp your feet along with me",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Clap your hands, 1, 2, 3 Stomp your feet along with me  Nod your head and blink your eyes Now we reach up to the skies  Clap your hands, 1, 2, 3 Stomp your feet along with me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Clap your hands, one two three,",
+     "heard": "Clap your hands one, two, three",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Stomp your feet along with me.",
+     "heard": "Stomp your feet along with me",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Nod your head and blink your eyes,",
+     "heard": "Nod your head and blink your eyes",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Now we reach up to the skies!",
+     "heard": "Now we reach up to the skies",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Clap your hands, one two three,",
+     "heard": "Clap your hands, one, two, three",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Stomp your feet along with me.",
+     "heard": "Stomp your feet along with me",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Clap your hands, one, two, three Stomp your feet along with me  Nod your head and blink your eyes Now we reach up to the skies  Clap your hands, one, two, three Stomp your feet along with me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Clap your hands, one two three,",
+     "heard": "Clap your hands, one, two, three.",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Stomp your feet along with me.",
+     "heard": "Stomp your feet along with me",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Nod your head and blink your eyes,",
+     "heard": "Nod your head and blink your eyes",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Now we reach up to the skies!",
+     "heard": "Now we reach up to the skies",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Clap your hands, one two three,",
+     "heard": "Clap your hands, one, two, three.",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Stomp your feet along with me.",
+     "heard": "Stomp your feet along with me",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": true
+}

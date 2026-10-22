@@ -1,0 +1,185 @@
+{
+ "file": "song_004_sung.mp3",
+ "cuts": [
+  1.54,
+  6.32,
+  10.33,
+  14.81,
+  18.92,
+  23.46,
+  27.47,
+  31.93,
+  36.83
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "One, two, three, four, five Little fish are all alive  Six, seven, eight, nine, ten Count them all and start again  One, two, three, four, five Little fish are all alive  6, 7, 8, 9, 10  Count them all and start again",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "One, two, three, four, five,",
+     "heard": "1, 2, 3, 4, 5",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Little fish are all alive.",
+     "heard": "Little fish are all alive.",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Six, seven, eight, nine, ten,",
+     "heard": "6, 7, 8, 9, 10",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Count them all and start again!",
+     "heard": "Count them all and start again",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "One, two, three, four, five,",
+     "heard": "1, 2, 3, 4, 5",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Little fish are all alive.",
+     "heard": "Little fish are all alive",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Six, seven, eight, nine, ten,",
+     "heard": "6, 7, 8, 9, 10",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Count them all and start again!",
+     "heard": "Count them all and start again",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "One, two, three, four, five Little fish are all alive  Six, seven, eight, nine, ten Count them all and start again  One, two, three, four, five Little fish are all alive  6, 7, 8, 9, 10  Count them all and start again",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "One, two, three, four, five,",
+     "heard": "1, 2, 3, 4, 5",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Little fish are all alive.",
+     "heard": "Little fish are all alive",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Six, seven, eight, nine, ten,",
+     "heard": "Six, seven, eight, nine, ten",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Count them all and start again!",
+     "heard": "Count them all and start again",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "One, two, three, four, five,",
+     "heard": "One, two, three, four, five",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Little fish are all alive.",
+     "heard": "Little fish are all alive",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Six, seven, eight, nine, ten,",
+     "heard": "Six, seven, eight, nine, ten",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Count them all and start again!",
+     "heard": "Count them all and start again",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "1, 2, 3, 4, 5 Little fish are all alive  6, 7, 8, 9, 10 Count them all and start again  1, 2, 3, 4, 5 Little fish are all alive  6, 7, 8, 9, 10  Count them all and start again",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "One, two, three, four, five,",
+     "heard": "1, 2, 3, 4, 5",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Little fish are all alive.",
+     "heard": "Little fish are all alive",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Six, seven, eight, nine, ten,",
+     "heard": "6, 7, 8, 9, 10",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Count them all and start again!",
+     "heard": "Count them all and start again",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "One, two, three, four, five,",
+     "heard": "One, two, three, four, five.",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Little fish are all alive.",
+     "heard": "Little fish are all alive",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Six, seven, eight, nine, ten,",
+     "heard": "6, 7, 8, 9, 10",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Count them all and start again!",
+     "heard": "Count them all and start again",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": true
+}

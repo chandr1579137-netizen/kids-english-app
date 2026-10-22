@@ -1,0 +1,185 @@
+{
+ "file": "song_005@v5_sung.mp3",
+ "cuts": [
+  1.54,
+  6.16,
+  10.4,
+  14.74,
+  19.1,
+  23.3,
+  27.55,
+  31.88,
+  36.83
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "This is Daddy, Big and Strong.  Mommy sings a happy song.  Sister laughs and brother plays.  Love is here on sunny days.  This is Daddy, Big and Strong.  Mommy sings a happy song.  Sister laughs and brother plays  Love is here on sunny days",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "This is Daddy, big and strong,",
+     "heard": "This is Daddy Big and Strong",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Mommy sings a happy song.",
+     "heard": "Mommy sings a happy song",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Sister laughs and brother plays,",
+     "heard": "Sister laughs and brother plays",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Love is here on sunny days!",
+     "heard": "Love is here on sunny days.",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "This is Daddy, big and strong,",
+     "heard": "This is Daddy Big and Strong.",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Mommy sings a happy song.",
+     "heard": "Mommy sings a happy song",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Sister laughs and brother plays,",
+     "heard": "Sister laughs and brother plays",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Love is here on sunny days!",
+     "heard": "Love is here on sunny days",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": false,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "This is daddy big and strong Mommy sings a happy song  Sister laughs and brother plays Love is here on sunny days  This is daddy big and strong Mommy sings a happy song  Sister laughs and brother plays  Love is here on sunny days",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "This is Daddy, big and strong,",
+     "heard": "This is Steady, Big and Strong",
+     "ok": false
+    },
+    {
+     "line": 1,
+     "lyric": "Mommy sings a happy song.",
+     "heard": "Mommy sings a happy song",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Sister laughs and brother plays,",
+     "heard": "Sister laughs and brother plays",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Love is here on sunny days!",
+     "heard": "Love is here on sunny days",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "This is Daddy, big and strong,",
+     "heard": "This is Steady, Big and Strong",
+     "ok": false
+    },
+    {
+     "line": 5,
+     "lyric": "Mommy sings a happy song.",
+     "heard": "Mommy sings a happy song",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Sister laughs and brother plays,",
+     "heard": "Sister laughs and brother plays",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Love is here on sunny days!",
+     "heard": "Love is here on sunny days",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "This is Daddy, big and strong Mommy sings a happy song  Sister laughs and brother plays Love is here on sunny days  This is Daddy, big and strong Mommy sings a happy song  Sister laughs and brother plays  Love is here on sunny days",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "This is Daddy, big and strong,",
+     "heard": "This is Daddy Big and Strong.",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Mommy sings a happy song.",
+     "heard": "Mommy sings a happy song",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Sister laughs and brother plays,",
+     "heard": "Sister laughs and brother plays",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "Love is here on sunny days!",
+     "heard": "Love is here on sunny days",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "This is Daddy, big and strong,",
+     "heard": "This is Daddy big and strong",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Mommy sings a happy song.",
+     "heard": "Mommy sings a happy song",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Sister laughs and brother plays,",
+     "heard": "Sister laughs and brother plays",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "Love is here on sunny days!",
+     "heard": "Love is here on sunny days.",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": false
+}

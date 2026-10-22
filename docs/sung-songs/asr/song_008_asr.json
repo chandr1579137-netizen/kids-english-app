@@ -1,0 +1,185 @@
+{
+ "file": "song_008@q81_sung.mp3",
+ "cuts": [
+  1.54,
+  6.21,
+  10.4,
+  14.71,
+  18.92,
+  23.22,
+  27.81,
+  31.85,
+  36.83
+ ],
+ "models": {
+  "small.en": {
+   "lines_ok": false,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Good morning sun, so warm and bright Thank you for your golden light  Birds are singing in the tree A brand new day for you and me  Good morning sun, so warm and bright Thank you for your golden light  Birds are singing in the tree  A brand new day for you and me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Good morning, sun, so warm and bright,",
+     "heard": "Good morning sun, so warm and bright.",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Thank you for your golden light.",
+     "heard": "Thank you for your golden light",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Birds are singing in the tree,",
+     "heard": "Birds are singing in the tree.",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "A brand-new day for you and me!",
+     "heard": "A brand new day for you and me",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Good morning, sun, so warm and bright,",
+     "heard": "Good morning, son, so warm and bright.",
+     "ok": false
+    },
+    {
+     "line": 5,
+     "lyric": "Thank you for your golden light.",
+     "heard": "Thank you for your golden light",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Birds are singing in the tree,",
+     "heard": "Birds are singing in the tree",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "A brand-new day for you and me!",
+     "heard": "A brand new day for you and me",
+     "ok": true
+    }
+   ]
+  },
+  "medium.en": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Good morning sun, so warm and bright Thank you for your golden light  Birds are singing in the tree A brand new day for you and me  Good morning sun, so warm and bright Thank you for your golden light  Birds are singing in the tree  A brand new day for you and me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Good morning, sun, so warm and bright,",
+     "heard": "Good morning sun, so warm and bright",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Thank you for your golden light.",
+     "heard": "Thank you for your golden light",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Birds are singing in the tree,",
+     "heard": "Birds are singing in the tree",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "A brand-new day for you and me!",
+     "heard": "A brand new day for you and me",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Good morning, sun, so warm and bright,",
+     "heard": "Good morning Sun so warm and bright",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Thank you for your golden light.",
+     "heard": "Thank you for your golden light",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Birds are singing in the tree,",
+     "heard": "Birds are singing in the tree",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "A brand-new day for you and me!",
+     "heard": "A brand new day for you and me",
+     "ok": true
+    }
+   ]
+  },
+  "large-v3": {
+   "lines_ok": true,
+   "full_ok": true,
+   "full_errors": [],
+   "full_text": "Good morning sun, so warm and bright Thank you for your golden light  Birds are singing in the tree A brand new day for you and me  Good morning sun, so warm and bright Thank you for your golden light  Birds are singing in the tree  A brand new day for you and me",
+   "lines": [
+    {
+     "line": 0,
+     "lyric": "Good morning, sun, so warm and bright,",
+     "heard": "Good morning sun, so warm and bright.",
+     "ok": true
+    },
+    {
+     "line": 1,
+     "lyric": "Thank you for your golden light.",
+     "heard": "Thank you for your golden light",
+     "ok": true
+    },
+    {
+     "line": 2,
+     "lyric": "Birds are singing in the tree,",
+     "heard": "Birds are singing in the tree",
+     "ok": true
+    },
+    {
+     "line": 3,
+     "lyric": "A brand-new day for you and me!",
+     "heard": "A brand new day for you and me",
+     "ok": true
+    },
+    {
+     "line": 4,
+     "lyric": "Good morning, sun, so warm and bright,",
+     "heard": "Good morning sun so warm and bright",
+     "ok": true
+    },
+    {
+     "line": 5,
+     "lyric": "Thank you for your golden light.",
+     "heard": "Thank you for your golden light",
+     "ok": true
+    },
+    {
+     "line": 6,
+     "lyric": "Birds are singing in the tree,",
+     "heard": "Birds are singing in the tree.",
+     "ok": true
+    },
+    {
+     "line": 7,
+     "lyric": "A brand-new day for you and me!",
+     "heard": "A brand new day for you and me",
+     "ok": true
+    }
+   ]
+  }
+ },
+ "pass": false
+}
