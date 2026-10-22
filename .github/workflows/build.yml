@@ -359,6 +359,11 @@ jobs:
           shoot 54g-redo-study-stand   -uiTab 0 -uiBook actions -uiStudy -uiStudyWord stand
           # 双格对比图去掉大卡边缘渐隐；dream 卡片释义「做梦」
           shoot 54h-study-dream        -uiTab 0 -uiBook actions -uiStudy -uiStudyWord dream
+          # 两格前后变化图（带箭头）也不做边缘渐隐
+          shoot 54i-study-stand        -uiTab 0 -uiBook actions -uiStudy -uiStudyWord stand
+          shoot 54j-study-change       -uiTab 0 -uiBook actions -uiStudy -uiStudyWord change
+          shoot 54k-study-close        -uiTab 0 -uiBook actions -uiStudy -uiStudyWord close
+          shoot 54l-study-clean        -uiTab 0 -uiBook actions -uiStudy -uiStudyWord clean
           # 主题词表：自然篇平涂 + air 已移出；家人篇 cousin/son/daughter 已移出
           shoot 55a-redo-theme-nature  -uiTab 1 -uiTheme nature
           shoot 55b-redo-theme-family  -uiTab 1 -uiTheme family
