@@ -42,7 +42,7 @@ SONGS = {
     ("Six, sev|en, eight, nine, ten,",      "A4:1 G4:0.5 G4:0.5 F4:1 E4:1 D4:4"),
     ("Count them all and start a|gain!",    "E4:1 E4:1 F4:1 G4:1 E4:1 D4:1 C4:2"),
 ]),
-"song_005": dict(bpm=112, tune="original", lines=[
+"song_005": dict(accomp_below_db=15, bpm=112, tune="original", lines=[
     ("This is Dad|dy, big and strong,",     "G4:1 E4:1 G4:1.5 E4:0.5 F4:1 A4:1 G4:2"),
     ("Mom|my sings a hap|py song.",         "F4:1 D4:1 F4:1 A4:1 G4:1 F4:1 E4:2"),
     ("Sis|ter laughs and broth|er plays,",  "E4:1 C4:1 E4:1 G4:1 A4:1 A4:1 G4:2"),
@@ -54,7 +54,7 @@ SONGS = {
     ("Hold your um|brel|la, don't be late,", "A4:1 G4:0.5 F4:0.5 A4:1 G4:1 E4:1 F4:1 G4:2"),
     ("Rain|bow's wait|ing at the gate!",    "A4:1 G4:1 F4:1 E4:1 F4:1 D4:1 C4:2"),
 ]),
-"song_008": dict(bpm=112,
+"song_008": dict(accomp_below_db=15, breath=480, bpm=112,
     tune="Ludwig van Beethoven, \"Ode to Joy\" theme from Symphony No. 9 in D minor, Op. 125, 4th movement (1824); "
          "public domain. Source: https://en.wikipedia.org/wiki/Ode_to_Joy  (melody transposed to C, rhythm adapted to the syllables)",
     lines=[
