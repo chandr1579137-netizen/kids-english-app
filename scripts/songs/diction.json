@@ -1,0 +1,10 @@
+{
+ "_doc": "吐字表。words 对所有歌生效，songs.<id> 只对那首歌生效。ph = 显式音素（写进 ustx 的 lyric[...]），off = 某个音素的位置偏移（tick，负数 = 提前）。breath = 句末换气（tick，240 = 八分音符）。clap/stomp/blink 三条来自 song_007 C 版。",
+ "breath": 240,
+ "words": {
+  "clap":  {"ph": "k l a p", "off": {"0": -30}},
+  "stomp": {"ph": "s t o m p"},
+  "blink": {"ph": "b l ih ng k"}
+ },
+ "songs": {}
+}
