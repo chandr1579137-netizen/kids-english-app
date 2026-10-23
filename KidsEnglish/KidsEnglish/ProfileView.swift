@@ -21,7 +21,8 @@ struct ProfileView: View {
             .toolbar(.hidden, for: .navigationBar)
         }
         .sheet(isPresented: $showProfileEdit) {
-            ProfileEditSheet()
+            // 名字和头像就是孩子档案（多孩子共用手机，见 ProfilesView.swift）
+            ChildEditView(profile: store.currentProfile)
         }
         .onAppear {
             // 截图用：直接展示编辑弹窗
@@ -33,13 +34,10 @@ struct ProfileView: View {
 
     private var userCard: some View {
         HStack(spacing: 16) {
-            ZStack {
-                Circle()
-                    .fill(Palette.surface)
-                    .frame(width: 88, height: 88)
-                Text(store.avatarEmoji).kidFont(52)
+            if let p = store.currentProfile {
+                ProfileAvatarView(profile: p, size: 88)
+                    .overlay(Circle().strokeBorder(.white.opacity(0.85), lineWidth: 3))
             }
-            .overlay(Circle().strokeBorder(.white.opacity(0.85), lineWidth: 3))
 
             VStack(alignment: .leading, spacing: 7) {
                 Text(store.childName)
@@ -56,12 +54,7 @@ struct ProfileView: View {
                 }
                 .foregroundStyle(.white.opacity(0.96))
 
-                HStack(spacing: 6) {
-                    Text("🔥").kidFont(15)
-                    Text("连续打卡 \(store.streakDays) 天")
-                        .kidFont(16, .semibold)
-                }
-                .foregroundStyle(.white.opacity(0.96))
+                // 不做「连续打卡」：不给孩子打卡压力（Studycat、Khan Kids 都刻意不做）
             }
 
             Spacer(minLength: 0)
@@ -461,87 +454,6 @@ struct FavoritesView: View {
     }
 }
 
-
-// MARK: - 编辑名字与头像
-
-struct ProfileEditSheet: View {
-    @Environment(DataStore.self) private var store
-    @Environment(\.dismiss) private var dismiss
-
-    @State private var name = ""
-    @State private var emoji = "🧒"
-
-    private let avatars = ["🧒", "👦", "👧", "🐣", "🐼", "🦁", "🐯", "🐰", "🐻", "🐨",
-                           "🦊", "🐸", "🐧", "🦄", "🚀", "⭐️", "🌈", "🍎", "⚽️", "🎨", "🎵", "🐳"]
-    private let columns = [GridItem(.adaptive(minimum: 54), spacing: 10)]
-
-    var body: some View {
-        NavigationStack {
-            KidScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    Text("名字")
-                        .kidFont(18, .heavy)
-                        .foregroundStyle(Palette.ink)
-                    TextField("小朋友的名字", text: $name)
-                        .kidFont(22, .bold)
-                        .padding(14)
-                        .background(Palette.surface,
-                                    in: RoundedRectangle(cornerRadius: Radius.card))
-                        .onChange(of: name) { _, newValue in
-                            if newValue.count > 10 { name = String(newValue.prefix(10)) }
-                        }
-
-                    Text("头像")
-                        .kidFont(18, .heavy)
-                        .foregroundStyle(Palette.ink)
-                    LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(avatars, id: \.self) { item in
-                            Button {
-                                emoji = item
-                            } label: {
-                                Text(item)
-                                    .kidFont(30)
-                                    .frame(width: 54, height: 54)
-                                    .background(emoji == item ? Func.accent.opacity(0.22) : Palette.surface,
-                                                in: Circle())
-                                    .overlay {
-                                        Circle().strokeBorder(
-                                            emoji == item ? Func.accent : Palette.hairline,
-                                            lineWidth: emoji == item ? 2.5 : 1
-                                        )
-                                    }
-                            }
-                            .buttonStyle(PressableStyle())
-                            .accessibilityLabel("头像 \(item)")
-                        }
-                    }
-
-                    AppButton(title: "保存", icon: "checkmark", tier: .primary) {
-                        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-                        store.childName = trimmed.isEmpty ? "小宝贝" : trimmed
-                        store.avatarEmoji = emoji
-                        store.saveProgress()
-                        dismiss()
-                    }
-                    .padding(.top, 6)
-                }
-                .padding(16)
-            }
-            .creamBackground()
-            .navigationTitle("编辑资料")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("取消") { dismiss() }
-                }
-            }
-            .onAppear {
-                name = store.childName
-                emoji = store.avatarEmoji
-            }
-        }
-    }
-}
 
 // MARK: - 家长中心：已学单词列表
 

@@ -108,6 +108,8 @@ struct ParentDashboardView: View {
     @State private var showImport = false
     @State private var importText = ""
     @State private var importMessage: String?
+    /// 新格式备份：解析好了、等家长确认（确认前不写任何数据）
+    @State private var pendingFamily: FamilyBackup?
 
     var body: some View {
         KidScrollView {
@@ -121,6 +123,12 @@ struct ParentDashboardView: View {
                         .subPageSubtitleStyle()
                 }
                 .padding(.horizontal)
+
+                // 最上面：切换看哪个孩子（下面的报告和设置都是这个孩子的）+ 管理孩子
+                ParentChildrenCard()
+                    .padding(16)
+                    .whiteCard()
+                    .padding(.horizontal)
 
                 // 宝宝模式一栏放最前：开着宝宝模式时，家长进来最常改的就是它
                 card("启蒙模式") {
@@ -326,6 +334,18 @@ struct ParentDashboardView: View {
             .padding(.bottom, 12)
         }
         .overlay {
+            if let family = pendingFamily {
+                ConfirmCard(emoji: "📦",
+                            title: "用备份替换全部孩子？",
+                            message: BackupCodec.confirmMessage(family),
+                            confirmTitle: "替换",
+                            destructive: true,
+                            onConfirm: {
+                                importMessage = store.applyFamilyBackup(family)
+                                pendingFamily = nil
+                            },
+                            onCancel: { pendingFamily = nil })
+            }
             if showResetConfirm {
                 ConfirmCard(emoji: "🗑️",
                             title: "确定清除全部学习进度？",
@@ -342,6 +362,7 @@ struct ParentDashboardView: View {
         .onAppear {
             // 截图用：直接展示确认卡片
             if LaunchOptions.alertDemo == "clear" { showResetConfirm = true }
+            if LaunchOptions.importConfirmDemo { pendingFamily = LaunchOptions.demoFamilyBackup(store) }
         }
         .sheet(isPresented: $showImport) {
             importSheet
@@ -382,11 +403,18 @@ struct ParentDashboardView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("恢复") {
-                        let result = store.importSnapshotJSON(importText)
-                        importMessage = result
-                        if result.hasPrefix("已恢复") {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                                showImport = false
+                        switch store.parseBackup(importText) {
+                        case .family(let family):
+                            // 新格式会替换所有孩子：先关掉粘贴页，弹确认框
+                            showImport = false
+                            pendingFamily = family
+                        case .single, .invalid:
+                            let result = store.importSnapshotJSON(importText)
+                            importMessage = result
+                            if result.hasPrefix("已恢复") {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    showImport = false
+                                }
                             }
                         }
                     }

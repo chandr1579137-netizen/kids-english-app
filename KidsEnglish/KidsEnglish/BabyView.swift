@@ -153,6 +153,15 @@ struct BabyTodayView: View {
             }
         }
         .creamBackground()
+        .overlay(alignment: .topLeading) {
+            if controller == nil {
+                HomeProfileButton(size: 52).padding(.leading, 16).padding(.top, 8)
+            }
+        }
+        .onChange(of: store.currentProfileId) { _, _ in
+            controller?.stopAll()
+            controller = nil
+        }
         .onAppear {
             if LaunchOptions.babyStep != nil, controller == nil { start(replay: false) }
         }
@@ -463,11 +472,12 @@ final class BabySessionController {
         audio.stop()
         phase = .recording
         let my = token
-        recorder.start(key: "baby-\(w)") { [weak self] spoke in
+        let key = "\(store.currentProfileId)-baby-\(w)"   // 录音按孩子分开
+        recorder.start(key: key) { [weak self] spoke in
             guard let self, self.token == my else { return }
             if spoke {
                 self.phase = .playingBack
-                self.recorder.playBack("baby-\(w)") { [weak self] in
+                self.recorder.playBack(key) { [weak self] in
                     guard let self, self.token == my else { return }
                     self.praiseTick += 1
                     self.phase = .praised
