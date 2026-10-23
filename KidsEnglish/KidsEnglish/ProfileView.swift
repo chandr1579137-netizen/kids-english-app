@@ -315,7 +315,7 @@ struct SettingsDetailView: View {
                     Text("英语小伙伴 KidsEnglish · \(appVersion)")
                         .kidFont(14, .semibold)
                         .foregroundStyle(Palette.ink)
-                    Text("课文与音频来自开源项目 magic-english-buddy（CC BY-NC-SA 4.0），仅限家庭内部学习使用。")
+                    Text("单词词库来自开源项目 magic-english-buddy（CC BY-NC-SA 4.0），仅限家庭内部学习使用。")
                         .kidFont(13, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineSpacing(3)

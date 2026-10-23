@@ -177,8 +177,6 @@ struct ParentDashboardView: View {
 
                 card("学习报告") {
                     statRow("说一说", "\(store.completedPhraseScenes.count) / \(store.phraseCatalog?.allScenes.count ?? 0) 个场景")
-                    // 旧「读短文」已下线（先藏后删），进度只读归档，不再增加
-                    statRow("旧版短文（已归档）", "\(store.completedCount) 篇")
                     statRow("今日学习", "\(store.studyMinutesToday()) 分钟")
                     statRow("收藏单词", "\(store.favoriteWords.count) 个")
                     statRow("收集卡片", "\(store.collectedCards.count) 张")
@@ -244,18 +242,6 @@ struct ParentDashboardView: View {
                         }
                         .buttonStyle(PressableStyle())
                     }
-                }
-
-                card("显示") {
-                    Toggle(isOn: Binding(
-                        get: { store.showTranslationDefault },
-                        set: { store.showTranslationDefault = $0; store.saveProgress() }
-                    )) {
-                        Text("课文默认显示中文翻译")
-                            .kidFont(17, .semibold)
-                            .foregroundStyle(Palette.ink)
-                    }
-                    .tint(Func.accent)
                 }
 
                 card("说一说（口语课）") {
@@ -343,7 +329,7 @@ struct ParentDashboardView: View {
             if showResetConfirm {
                 ConfirmCard(emoji: "🗑️",
                             title: "确定清除全部学习进度？",
-                            message: "已学单词、已读课文、收藏和游戏成绩都会清空，且不能撤销。",
+                            message: "已学单词、说一说和启蒙模式进度、收藏和游戏成绩都会清空，且不能撤销。",
                             confirmTitle: "清除",
                             destructive: true,
                             onConfirm: {
