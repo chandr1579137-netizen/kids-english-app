@@ -388,6 +388,414 @@
      ]
     }
    ]
+  },
+  {
+   "level": 2,
+   "titleZh": "我是谁·这是什么",
+   "scenes": [
+    {
+     "id": "L2-1",
+     "titleZh": "认识新朋友",
+     "titleEn": "Nice to Meet You",
+     "lines": [
+      {
+       "id": "L2-1-01",
+       "speaker": "amy",
+       "en": "What's your name?",
+       "zh": "你叫什么名字？",
+       "audio": "L2-1-01.mp3",
+       "image": "L2-1-01.jpg"
+      },
+      {
+       "id": "L2-1-02",
+       "speaker": "tom",
+       "en": "I'm Tom.",
+       "zh": "我是汤姆。",
+       "audio": "L2-1-02.mp3",
+       "image": "L2-1-02.jpg"
+      },
+      {
+       "id": "L2-1-03",
+       "speaker": "tom",
+       "en": "May I have your name?",
+       "zh": "可以告诉我你的名字吗？",
+       "audio": "L2-1-03.mp3",
+       "image": "L2-1-03.jpg"
+      },
+      {
+       "id": "L2-1-04",
+       "speaker": "amy",
+       "en": "My name is Amy.",
+       "zh": "我叫艾米。",
+       "audio": "L2-1-04.mp3",
+       "image": "L2-1-04.jpg"
+      },
+      {
+       "id": "L2-1-05",
+       "speaker": "amy",
+       "en": "Nice to meet you.",
+       "zh": "很高兴认识你。",
+       "audio": "L2-1-05.mp3",
+       "image": "L2-1-05.jpg"
+      },
+      {
+       "id": "L2-1-06",
+       "speaker": "tom",
+       "en": "Nice to meet you, too.",
+       "zh": "我也很高兴认识你。",
+       "audio": "L2-1-06.mp3",
+       "image": "L2-1-06.jpg"
+      },
+      {
+       "id": "L2-1-07",
+       "speaker": "amy",
+       "en": "How old are you?",
+       "zh": "你几岁啦？",
+       "audio": "L2-1-07.mp3",
+       "image": "L2-1-07.jpg"
+      },
+      {
+       "id": "L2-1-08",
+       "speaker": "tom",
+       "en": "I'm five.",
+       "zh": "我五岁。",
+       "audio": "L2-1-08.mp3",
+       "code": "candles"
+      }
+     ]
+    },
+    {
+     "id": "L2-2",
+     "titleZh": "猜猜我是谁",
+     "titleEn": "Who Are You?",
+     "lines": [
+      {
+       "id": "L2-2-01",
+       "speaker": "amy",
+       "en": "Who are you?",
+       "zh": "你是谁？",
+       "audio": "L2-2-01.mp3",
+       "image": "L2-2-01.jpg"
+      },
+      {
+       "id": "L2-2-02",
+       "speaker": "tom",
+       "en": "I'm a lion!",
+       "zh": "我是狮子！",
+       "audio": "L2-2-02.mp3",
+       "icon": "lion"
+      },
+      {
+       "id": "L2-2-03",
+       "speaker": "amy",
+       "en": "Are you Tom?",
+       "zh": "你是汤姆吗？",
+       "audio": "L2-2-03.mp3",
+       "image": "L2-2-03.jpg"
+      },
+      {
+       "id": "L2-2-04",
+       "speaker": "tom",
+       "en": "Yes, I am!",
+       "zh": "是的，我是！",
+       "audio": "L2-2-04.mp3",
+       "code": "yes",
+       "codeIcon": "boy"
+      },
+      {
+       "id": "L2-2-05",
+       "speaker": "tom",
+       "en": "Are you a cat?",
+       "zh": "你是小猫吗？",
+       "audio": "L2-2-05.mp3",
+       "image": "L2-2-05.jpg"
+      },
+      {
+       "id": "L2-2-06",
+       "speaker": "amy",
+       "en": "No, I'm not.",
+       "zh": "不，我不是。",
+       "audio": "L2-2-06.mp3",
+       "code": "no",
+       "codeIcon": "cat"
+      },
+      {
+       "id": "L2-2-07",
+       "speaker": "amy",
+       "en": "I'm a rabbit!",
+       "zh": "我是小兔子！",
+       "audio": "L2-2-07.mp3",
+       "icon": "rabbit"
+      }
+     ]
+    },
+    {
+     "id": "L2-3",
+     "titleZh": "这是什么",
+     "titleEn": "What's This?",
+     "lines": [
+      {
+       "id": "L2-3-01",
+       "speaker": "amy",
+       "en": "What's this?",
+       "zh": "这是什么？",
+       "audio": "L2-3-01.mp3",
+       "image": "L2-3-01.jpg"
+      },
+      {
+       "id": "L2-3-02",
+       "speaker": "tom",
+       "en": "It's a pen.",
+       "zh": "是一支笔。",
+       "audio": "L2-3-02.mp3",
+       "icon": "pen"
+      },
+      {
+       "id": "L2-3-03",
+       "speaker": "amy",
+       "en": "Is that a car?",
+       "zh": "那是小汽车吗？",
+       "audio": "L2-3-03.mp3",
+       "icon": "car"
+      },
+      {
+       "id": "L2-3-04",
+       "speaker": "tom",
+       "en": "No, it isn't. It's a bus.",
+       "zh": "不是，那是公共汽车。",
+       "audio": "L2-3-04.mp3",
+       "icon": "bus"
+      },
+      {
+       "id": "L2-3-05",
+       "speaker": "tom",
+       "en": "What's this in English?",
+       "zh": "这个用英语怎么说？",
+       "audio": "L2-3-05.mp3",
+       "image": "L2-3-05.jpg"
+      },
+      {
+       "id": "L2-3-06",
+       "speaker": "mom",
+       "en": "It's an apple.",
+       "zh": "是苹果。",
+       "audio": "L2-3-06.mp3",
+       "icon": "apple"
+      },
+      {
+       "id": "L2-3-07",
+       "speaker": "amy",
+       "en": "What color is your new book?",
+       "zh": "你的新书是什么颜色？",
+       "audio": "L2-3-07.mp3",
+       "icon": "book"
+      },
+      {
+       "id": "L2-3-08",
+       "speaker": "tom",
+       "en": "It's red.",
+       "zh": "是红色。",
+       "audio": "L2-3-08.mp3",
+       "icon": "red"
+      }
+     ]
+    },
+    {
+     "id": "L2-4",
+     "titleZh": "是你的吗",
+     "titleEn": "Is This Yours?",
+     "lines": [
+      {
+       "id": "L2-4-01",
+       "speaker": "amy",
+       "en": "Is this your ball?",
+       "zh": "这是你的球吗？",
+       "audio": "L2-4-01.mp3",
+       "icon": "ball"
+      },
+      {
+       "id": "L2-4-02",
+       "speaker": "tom",
+       "en": "Yes, it is.",
+       "zh": "是的，是我的。",
+       "audio": "L2-4-02.mp3",
+       "code": "yes",
+       "codeIcon": "ball"
+      },
+      {
+       "id": "L2-4-03",
+       "speaker": "amy",
+       "en": "Is this your hat?",
+       "zh": "这是你的帽子吗？",
+       "audio": "L2-4-03.mp3",
+       "icon": "hat"
+      },
+      {
+       "id": "L2-4-04",
+       "speaker": "tom",
+       "en": "No, it isn't.",
+       "zh": "不，不是。",
+       "audio": "L2-4-04.mp3",
+       "icon": "stop"
+      },
+      {
+       "id": "L2-4-05",
+       "speaker": "tom",
+       "en": "Whose hat is this?",
+       "zh": "这是谁的帽子？",
+       "audio": "L2-4-05.mp3",
+       "image": "L2-4-05.jpg"
+      },
+      {
+       "id": "L2-4-06",
+       "speaker": "teacher",
+       "en": "It's Amy's.",
+       "zh": "是艾米的。",
+       "audio": "L2-4-06.mp3",
+       "image": "L2-4-06.jpg"
+      },
+      {
+       "id": "L2-4-07",
+       "speaker": "teacher",
+       "en": "Is this yours?",
+       "zh": "这是你的吗？",
+       "audio": "L2-4-07.mp3",
+       "icon": "teddy"
+      },
+      {
+       "id": "L2-4-08",
+       "speaker": "tom",
+       "en": "Yes, it's mine.",
+       "zh": "是的，是我的。",
+       "audio": "L2-4-08.mp3",
+       "icon": "love"
+      }
+     ]
+    },
+    {
+     "id": "L2-5",
+     "titleZh": "我的心情",
+     "titleEn": "How Do You Feel?",
+     "lines": [
+      {
+       "id": "L2-5-01",
+       "speaker": "mom",
+       "en": "How do you feel?",
+       "zh": "你感觉怎么样？",
+       "audio": "L2-5-01.mp3",
+       "code": "mood",
+       "codeIcons": [
+        "laugh",
+        "tired",
+        "angry"
+       ]
+      },
+      {
+       "id": "L2-5-02",
+       "speaker": "tom",
+       "en": "I'm happy!",
+       "zh": "我很开心！",
+       "audio": "L2-5-02.mp3",
+       "icon": "happy"
+      },
+      {
+       "id": "L2-5-03",
+       "speaker": "mom",
+       "en": "Are you OK?",
+       "zh": "你还好吗？",
+       "audio": "L2-5-03.mp3",
+       "icon": "kind"
+      },
+      {
+       "id": "L2-5-04",
+       "speaker": "tom",
+       "en": "I'm sad.",
+       "zh": "我很难过。",
+       "audio": "L2-5-04.mp3",
+       "icon": "sad"
+      },
+      {
+       "id": "L2-5-05",
+       "speaker": "mom",
+       "en": "Big hug!",
+       "zh": "抱一抱！",
+       "audio": "L2-5-05.mp3",
+       "icon": "hug"
+      },
+      {
+       "id": "L2-5-06",
+       "speaker": "tom",
+       "en": "I'm OK now.",
+       "zh": "我现在没事啦。",
+       "audio": "L2-5-06.mp3",
+       "icon": "brave"
+      }
+     ]
+    },
+    {
+     "id": "L2-6",
+     "titleZh": "一起玩",
+     "titleEn": "Let's Play!",
+     "lines": [
+      {
+       "id": "L2-6-01",
+       "speaker": "tom",
+       "en": "Let's play!",
+       "zh": "我们一起玩吧！",
+       "audio": "L2-6-01.mp3",
+       "icon": "play"
+      },
+      {
+       "id": "L2-6-02",
+       "speaker": "amy",
+       "en": "OK!",
+       "zh": "好呀！",
+       "audio": "L2-6-02.mp3",
+       "icon": "thumb"
+      },
+      {
+       "id": "L2-6-03",
+       "speaker": "tom",
+       "en": "My turn.",
+       "zh": "轮到我了。",
+       "audio": "L2-6-03.mp3",
+       "image": "L2-6-03.jpg"
+      },
+      {
+       "id": "L2-6-04",
+       "speaker": "amy",
+       "en": "Your turn.",
+       "zh": "轮到你了。",
+       "audio": "L2-6-04.mp3",
+       "image": "L2-6-04.jpg"
+      },
+      {
+       "id": "L2-6-05",
+       "speaker": "tom",
+       "en": "Help me, please.",
+       "zh": "请帮帮我。",
+       "audio": "L2-6-05.mp3",
+       "icon": "help"
+      },
+      {
+       "id": "L2-6-06",
+       "speaker": "amy",
+       "en": "Let's share!",
+       "zh": "我们一起分享吧！",
+       "audio": "L2-6-06.mp3",
+       "icon": "share"
+      },
+      {
+       "id": "L2-6-07",
+       "speaker": "amy",
+       "en": "Good job!",
+       "zh": "真棒！",
+       "audio": "L2-6-07.mp3",
+       "icon": "clap"
+      }
+     ]
+    }
+   ]
   }
  ]
 }

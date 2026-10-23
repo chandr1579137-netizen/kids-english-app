@@ -316,7 +316,13 @@ final class PhraseLessonController {
                     self.revealAnswer()
                 }
             }
-            if firstOfKind {
+            if scene.isReview && index == 0 {
+                // 复习课开头：「Do you remember?」再「Now you say it!」
+                audio.play(promptURL("prompt_review")) { [weak self] in
+                    guard let self, self.token == my else { return }
+                    self.audio.play(self.promptURL("prompt_turn")) { wait() }
+                }
+            } else if firstOfKind {
                 audio.play(promptURL("prompt_turn")) { wait() }
             } else {
                 wait()
@@ -535,7 +541,7 @@ struct PhrasesHomeView: View {
             .padding(.top, 4)
             .padding(.bottom, 10)
 
-            starStrip(total: levels.reduce(0) { $0 + $1.scenes.count })
+            starStrip(levels: levels)
                 .padding(.horizontal)
                 .padding(.bottom, 14)
 
@@ -577,16 +583,23 @@ struct PhrasesHomeView: View {
         }
     }
 
-    /// 已得星星：一个场景一颗，孩子看得懂的进度
-    private func starStrip(total: Int) -> some View {
-        let got = completed.count
-        return HStack(spacing: 6) {
-            ForEach(0..<max(total, 1), id: \.self) { i in
-                Image(systemName: i < got ? "star.fill" : "star")
-                    .kidFont(22, .bold, maxScale: 1.1)
-                    .foregroundStyle(i < got ? PhraseColors.gold : Palette.inkSubtle)
+    /// 已得星星：一节课一颗（复习课也算），一级一行，孩子看得懂的进度。
+    /// 一级 8 颗（6 节新课 + 2 节复习），一行放得下，不会把整页撑宽。
+    private func starStrip(levels: [PhraseLevel]) -> some View {
+        let total = levels.reduce(0) { $0 + $1.scenes.count }
+        let got = levels.reduce(0) { n, level in n + level.scenes.filter { completed.contains($0.id) }.count }
+        return VStack(alignment: .leading, spacing: 4) {
+            ForEach(levels) { level in
+                let done = level.scenes.filter { completed.contains($0.id) }.count
+                HStack(spacing: 6) {
+                    ForEach(0..<level.scenes.count, id: \.self) { i in
+                        Image(systemName: i < done ? "star.fill" : "star")
+                            .kidFont(22, .bold, maxScale: 1.1)
+                            .foregroundStyle(i < done ? PhraseColors.gold : Palette.inkSubtle)
+                    }
+                    Spacer(minLength: 0)
+                }
             }
-            Spacer(minLength: 0)
         }
         .accessibilityElement()
         .accessibilityLabel("已得 \(got) 颗星，一共 \(total) 颗")
@@ -606,7 +619,9 @@ struct PhraseSceneTile: View {
     var body: some View {
         VStack(spacing: 6) {
             GeometryReader { geo in
-                if let first = scene.lines.first {
+                if scene.isReview {
+                    PhraseReviewCover(scene: scene, side: geo.size.width)
+                } else if let first = scene.lines.first {
                     PhrasePicture(line: first, side: geo.size.width, corner: 18)
                 }
             }
@@ -667,6 +682,40 @@ struct PhraseSceneTile: View {
         }
         .frame(width: 36, height: 36)
         .overlay { Circle().strokeBorder(Color.white, lineWidth: 2) }
+    }
+}
+
+/// 复习课封面：前 3 课的封面图叠成一摞，中间一个金色的「再来一遍」圆标
+struct PhraseReviewCover: View {
+    let scene: PhraseScene
+    let side: CGFloat
+
+    var body: some View {
+        // 复习课的前 3 句正好是那 3 课各自的第一句（封面）
+        let covers = Array(scene.lines.prefix(PhraseReview.every))
+        ZStack {
+            PhraseColors.gold.opacity(0.18)
+            ForEach(Array(covers.enumerated()), id: \.offset) { i, line in
+                PhrasePicture(line: line, side: side * 0.5, corner: 12)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Color.white, lineWidth: 3)
+                    }
+                    .shadow(color: .black.opacity(0.15), radius: 3, y: 2)
+                    .rotationEffect(.degrees(Double(i - 1) * 12))
+                    .offset(x: CGFloat(i - 1) * side * 0.2, y: CGFloat(abs(i - 1)) * side * 0.04 - side * 0.06)
+            }
+            ZStack {
+                Circle().fill(PhraseColors.gold)
+                Circle().strokeBorder(Color.white, lineWidth: 3)
+                Image(systemName: "arrow.counterclockwise")
+                    .font(.system(size: side * 0.14, weight: .black))
+                    .foregroundStyle(.white)
+            }
+            .frame(width: side * 0.3, height: side * 0.3)
+            .offset(y: side * 0.26)
+        }
+        .frame(width: side, height: side)
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
 
@@ -1192,7 +1241,9 @@ private struct PhraseDoneView: View {
             Text("You did it!")
                 .kidFont(32, .heavy)
                 .foregroundStyle(Palette.ink)
-            Text(c.firstCompletion ? "得到一颗星和一张卡片「\(c.scene.titleEn)」" : "又学了一遍，真棒！")
+            Text(c.firstCompletion
+                 ? (c.scene.isReview ? "得到一颗星" : "得到一颗星和一张卡片「\(c.scene.titleEn)」")
+                 : (c.scene.isReview ? "又复习了一遍，真棒！" : "又学了一遍，真棒！"))
                 .kidFont(17, .semibold)
                 .foregroundStyle(Palette.inkMuted)
                 .multilineTextAlignment(.center)
@@ -1248,7 +1299,7 @@ struct PhrasePicture: View {
             } else if let icon = line.icon, let ui = PhraseImageCache.image(store.iconURL(forWord: icon)) {
                 Image(uiImage: ui).resizable().scaledToFill()
             } else if let code = line.code {
-                PhraseCodeCard(kind: code, icon: line.codeIcon, side: side)
+                PhraseCodeCard(kind: code, icon: line.codeIcon, icons: line.codeIcons ?? [], side: side)
             } else {
                 PhraseColors.paper
             }
@@ -1284,11 +1335,15 @@ struct PhraseAvatarView: View {
     }
 }
 
-/// 代码画的卡片：日出 / 下午 / 明天 / 傍晚 / 夜里。太阳和月亮都没有脸，图里没有字。
+/// 代码画的卡片：日出 / 下午 / 明天 / 傍晚 / 夜里 / 蜡烛 / 对勾 / 叉 / 心情表。
+/// 太阳和月亮都没有脸，图里没有字和数字（对勾、叉是形状）。
 struct PhraseCodeCard: View {
     let kind: String
     let icon: String?
+    var icons: [String] = []
     let side: CGFloat
+    /// 动画进度：蜡烛点亮了几根 / 对勾叉弹出 / 心情表亮到第几格。截图时直接停在最后一帧。
+    @State private var beat = 0
 
     var body: some View {
         ZStack {
@@ -1297,10 +1352,121 @@ struct PhraseCodeCard: View {
             case "afternoon": afternoon
             case "tomorrow": tomorrow
             case "evening": evening
+            case "candles": candles
+            case "yes": mark(yes: true)
+            case "no": mark(yes: false)
+            case "mood": mood
             default: night
             }
         }
         .frame(width: side, height: side)
+        .onAppear(perform: animate)
+    }
+
+    /// 蜡烛逐根点亮；对勾叉稍等一下再弹出；心情表三格轮流亮
+    private func animate() {
+        let steps: Int
+        switch kind {
+        case "candles": steps = PhraseCodeCardSpec.candleCount
+        case "yes", "no": steps = 1
+        case "mood": steps = max(icons.count, 1)
+        default: return
+        }
+        guard !LaunchOptions.isUIScreenshotRun else { beat = kind == "mood" ? 1 : steps; return }
+        beat = 0
+        for i in 1...steps {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35 + Double(i - 1) * 0.45) {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.55)) { beat = i }
+            }
+        }
+    }
+
+    // MARK: L2：五根蜡烛（I'm five.）
+
+    private var candles: some View {
+        let colors: [Color] = [Color(red: 0.98, green: 0.45, blue: 0.45), Color(red: 0.42, green: 0.7, blue: 0.98),
+                               Color(red: 0.99, green: 0.8, blue: 0.3), Color(red: 0.5, green: 0.82, blue: 0.5),
+                               Color(red: 0.8, green: 0.55, blue: 0.95)]
+        return ZStack {
+            PhraseColors.paper
+            VStack(spacing: 0) {
+                HStack(alignment: .bottom, spacing: side * 0.06) {
+                    ForEach(0..<PhraseCodeCardSpec.candleCount, id: \.self) { i in
+                        VStack(spacing: side * 0.008) {
+                            flame
+                                .opacity(i < beat ? 1 : 0)
+                                .scaleEffect(i < beat ? 1 : 0.2, anchor: .bottom)
+                            RoundedRectangle(cornerRadius: side * 0.015)
+                                .fill(colors[i % colors.count])
+                                .overlay { RoundedRectangle(cornerRadius: side * 0.015).stroke(PhraseColors.outline, lineWidth: 2) }
+                                .frame(width: side * 0.075, height: side * 0.22)
+                        }
+                    }
+                }
+                // 蛋糕
+                RoundedRectangle(cornerRadius: side * 0.05)
+                    .fill(Color(red: 1.0, green: 0.88, blue: 0.9))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: side * 0.05).stroke(PhraseColors.outline, lineWidth: 2.5)
+                    }
+                    .frame(width: side * 0.72, height: side * 0.24)
+                Capsule()
+                    .fill(Color.white)
+                    .overlay { Capsule().stroke(PhraseColors.outline, lineWidth: 2) }
+                    .frame(width: side * 0.86, height: side * 0.05)
+            }
+            .offset(y: side * 0.06)
+        }
+    }
+
+    private var flame: some View {
+        Ellipse()
+            .fill(PhraseColors.sun)
+            .overlay { Ellipse().fill(Color(red: 1.0, green: 0.55, blue: 0.2)).padding(side * 0.012).offset(y: side * 0.01) }
+            .overlay { Ellipse().stroke(PhraseColors.outline, lineWidth: 1.5) }
+            .frame(width: side * 0.06, height: side * 0.1)
+    }
+
+    // MARK: L2：对勾 / 叉（Yes, I am! / No, I'm not. / Yes, it is.）
+
+    private func mark(yes: Bool) -> some View {
+        ZStack {
+            PhraseColors.paper
+            iconTile(size: side * 0.62)
+                .offset(x: -side * 0.06, y: -side * 0.04)
+            ZStack {
+                Circle().fill(yes ? Func.positiveDeep : Color(red: 0.9, green: 0.27, blue: 0.27))
+                Circle().strokeBorder(Color.white, lineWidth: side * 0.018)
+                Image(systemName: yes ? "checkmark" : "xmark")
+                    .font(.system(size: side * 0.15, weight: .black))
+                    .foregroundStyle(.white)
+            }
+            .frame(width: side * 0.32, height: side * 0.32)
+            .shadow(color: .black.opacity(0.18), radius: 5, y: 3)
+            .scaleEffect(beat > 0 ? 1 : 0.1)
+            .opacity(beat > 0 ? 1 : 0)
+            .position(x: side * 0.74, y: side * 0.72)
+        }
+    }
+
+    // MARK: L2：心情表（How do you feel?）
+
+    private var mood: some View {
+        ZStack {
+            PhraseColors.paper
+            HStack(spacing: side * 0.04) {
+                ForEach(Array(icons.enumerated()), id: \.offset) { i, word in
+                    let lit = beat == i + 1
+                    WordIconView(word: word, size: side * 0.27)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                .strokeBorder(lit ? Func.accent : Color.white, lineWidth: lit ? 5 : 3)
+                        }
+                        .shadow(color: .black.opacity(0.15), radius: 4, y: 2)
+                        .scaleEffect(lit ? 1.12 : 1.0)
+                }
+            }
+        }
     }
 
     private var sunrise: some View {
