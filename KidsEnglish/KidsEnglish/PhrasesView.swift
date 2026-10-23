@@ -559,6 +559,7 @@ struct PhrasesHomeView: View {
                                 PhraseLessonView(scene: scene)
                             } label: {
                                 PhraseSceneTile(scene: scene,
+                                                showChinese: store.phraseShowChinese || LaunchOptions.phraseChinese,
                                                 done: completed.contains(scene.id),
                                                 isNext: scene.id == next,
                                                 locked: !unlocked)
@@ -594,6 +595,8 @@ struct PhrasesHomeView: View {
 /// 场景卡：第一句的图当封面
 struct PhraseSceneTile: View {
     let scene: PhraseScene
+    /// 孩子屏幕默认不显示中文；家长中心打开「卡片下显示中文」才显示场景中文名
+    var showChinese = false
     let done: Bool
     let isNext: Bool
     let locked: Bool
@@ -620,10 +623,12 @@ struct PhraseSceneTile: View {
                 .foregroundStyle(Palette.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-            Text(scene.titleZh)
-                .kidFont(14, .semibold)
-                .foregroundStyle(Palette.inkMuted)
-                .lineLimit(1)
+            if showChinese {
+                Text(scene.titleZh)
+                    .kidFont(14, .semibold)
+                    .foregroundStyle(Palette.inkMuted)
+                    .lineLimit(1)
+            }
         }
         .padding(8)
         .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.card, style: .continuous))

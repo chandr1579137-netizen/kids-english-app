@@ -55,7 +55,7 @@ enum ProgressCodec {
         let base = "已恢复：\(snapshot.completedLessons.count) 篇课文、\(snapshot.learnedWords.count) 个单词"
         var text = base
         if let scenes = snapshot.completedPhraseScenes, !scenes.isEmpty { text += "、\(scenes.count) 个口语场景" }
-        if let baby = snapshot.babyWords, !baby.isEmpty { text += "、宝宝模式 \(baby.count) 个词" }
+        if let baby = snapshot.babyWords, !baby.isEmpty { text += "、启蒙模式 \(baby.count) 个词" }
         return text
     }
 }

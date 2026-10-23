@@ -71,6 +71,16 @@ final class PhraseTests: XCTestCase {
         }
     }
 
+    /// 头像下的名字用 Mother / Father，句子里保留 Mom / Dad（用户原话）
+    func testParentsAreNamedMotherAndFatherButSentencesKeepMomDad() throws {
+        let catalog = try loadCatalog()
+        XCTAssertEqual(catalog.character("mom")?.nameEn, "Mother")
+        XCTAssertEqual(catalog.character("dad")?.nameEn, "Father")
+        let lines = catalog.allScenes.flatMap(\.lines).map(\.en)
+        XCTAssertTrue(lines.contains("Good morning, Mom!"))
+        XCTAssertTrue(lines.contains("Good evening, Dad!"))
+    }
+
     func testPromptAudioExists() {
         for name in ["prompt_say", "prompt_again", "prompt_watch", "prompt_turn",
                      "prompt_great", "prompt_well", "prompt_yay", "prompt_done"] {

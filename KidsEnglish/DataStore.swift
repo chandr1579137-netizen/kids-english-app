@@ -58,8 +58,8 @@ class DataStore {
     var phraseShowChinese = false
     /// 宝宝模式（4 岁）：开着时整个 App 换成宝宝底栏（今天 / 图画 / 说一说 / 儿歌 / 家长）
     var babyMode = false
-    /// 宝宝模式每天学几个新词（3–8，默认 3）
-    var babyNewPerDay = 3
+    /// 启蒙模式（代码里仍叫 baby）每天学几个新词（3–8，默认 4；孩子 5 岁，见 decisions.md D8）
+    var babyNewPerDay = 4
     /// 宝宝模式：家长打开后所有词包都能学
     var babyUnlockAll = false
 
@@ -425,7 +425,7 @@ class DataStore {
             babyWords = states
         }
         babyStickers = defaults.dictionary(forKey: "babyStickers") as? [String: String] ?? [:]
-        babyNewPerDay = min(max(defaults.object(forKey: "babyNewPerDay") as? Int ?? 3, 3), 8)
+        babyNewPerDay = min(max(defaults.object(forKey: "babyNewPerDay") as? Int ?? 4, 3), 8)
         babyUnlockAll = defaults.bool(forKey: "babyUnlockAll")
         // 宝宝模式默认值：全新安装打开；已经有学习进度的老用户保持原来的模式，家长中心可切换
         if let saved = defaults.object(forKey: "babyMode") as? Bool {

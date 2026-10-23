@@ -376,6 +376,8 @@ jobs:
           # 说一说（口语课 L1，替换读短文）：列表、学（跟读三态 + 中文）、看一遍、轮到你、完成、热身、5 张代码卡、大字号
           shoot 60a-phrases-home         -uiTab 2
           shoot 60b-phrases-home-progress -uiTab 2 -uiPhraseCompleted L1-1,L1-2
+          # 家长打开「卡片下显示中文」后，场景卡才显示中文名
+          shoot 60c-phrases-home-zh      -uiTab 2 -uiPhraseChinese
           shoot 61a-phrase-learn         -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 0
           shoot 61b-phrase-recording     -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 1 -uiPhraseDemo recording
           shoot 61c-phrase-praised       -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 1 -uiPhraseDemo praised
