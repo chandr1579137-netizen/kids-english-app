@@ -49,8 +49,9 @@ TARGET_MEAN_DB = -27.5
 CHARACTERS = {
     "tom": ("Tom", "汤姆", "en-US-AnaNeural", "-8%"),
     "amy": ("Amy", "艾米", "en-US-AnaNeural", "+0%"),
-    "mom": ("Mom", "妈妈", "en-US-AriaNeural", "+0%"),
-    "dad": ("Dad", "爸爸", "en-US-GuyNeural", "+0%"),
+    # 头像下的名字用 Mother / Father（用户原话：「不要用dad，要用father，不要用mom，要用mother」），句子里保留 Mom / Dad
+    "mom": ("Mother", "妈妈", "en-US-AriaNeural", "+0%"),
+    "dad": ("Father", "爸爸", "en-US-GuyNeural", "+0%"),
     "teacher": ("Teacher", "老师", "en-US-JennyNeural", "+0%"),
     "grandma": ("Grandma", "奶奶", "en-US-MichelleNeural", "+0%"),
     "grandpa": ("Grandpa", "爷爷", "en-US-ChristopherNeural", "+0%"),
@@ -72,6 +73,13 @@ PROMPTS = {
 }
 
 # 代码画的卡片：images-plan 里的 code_kind + 句子 → App 里的画法名
+# 个别句子单独调朗读参数（屏幕上的原句不变）：whisper 核对时听错的句子在这里修。
+# L1-4-07 "I'm full." 单独一句时 full / four 很像，medium.en 听成 "I'm four."；
+# Tom 的降调 8% 不变，只放慢 16%、用感叹号的语气读，两个模型都能听对（见 docs/daily-phrases/asr-L1.md）。
+TTS_OVERRIDES = {
+    "L1-4-07": ("I'm full!", "-16%"),
+}
+
 CODE_CARDS = {
     "L1-2-01": "sunrise",
     "L1-5-01": "afternoon",
@@ -99,10 +107,10 @@ def mean_db(path: pathlib.Path) -> float:
     return float(re.search(r"mean_volume: (-?[\d.]+) dB", r.stderr).group(1))
 
 
-async def tts(text: str, voice: str, pitch: str, out: pathlib.Path) -> None:
+async def tts(text: str, voice: str, pitch: str, out: pathlib.Path, rate: str = "+0%") -> None:
     with tempfile.TemporaryDirectory() as tmp:
         raw = pathlib.Path(tmp) / "raw.mp3"
-        await edge_tts.Communicate(text, voice, pitch=pitch).save(str(raw))
+        await edge_tts.Communicate(text, voice, pitch=pitch, rate=rate).save(str(raw))
         gain = TARGET_MEAN_DB - mean_db(raw)
         subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(raw),
                         "-af", f"volume={gain:.2f}dB,alimiter=limit=0.89:level=false",
@@ -171,7 +179,8 @@ async def main() -> int:
                 speakers.add(ln["speaker"])
                 out = RES / "audio" / f"{line_id}.mp3"
                 _, _, voice, pitch = CHARACTERS[ln["speaker"]]
-                await tts(ln["en"], voice, pitch, out)
+                say, rate = TTS_OVERRIDES.get(line_id, (ln["en"], "+0%"))
+                await tts(say, voice, pitch, out, rate)
                 lines.append({"id": line_id, "speaker": ln["speaker"], "en": ln["en"], "zh": ln["zh"],
                               "audio": out.name, **picture_for(line_id, p, args.art)})
                 print(f"{line_id} {ln['speaker']:8} {ln['en']}")

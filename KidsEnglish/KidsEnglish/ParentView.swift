@@ -123,13 +123,13 @@ struct ParentDashboardView: View {
                 .padding(.horizontal)
 
                 // 宝宝模式一栏放最前：开着宝宝模式时，家长进来最常改的就是它
-                card("宝宝模式（4 岁）") {
+                card("启蒙模式") {
                     Toggle(isOn: Binding(
                         get: { store.babyMode },
                         set: { store.babyMode = $0; store.saveProgress() }
                     )) {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("打开宝宝模式")
+                            Text("打开启蒙模式")
                                 .kidFont(17, .semibold)
                                 .foregroundStyle(Palette.ink)
                             Text("孩子只看到 今天 / 图画 / 说一说 / 儿歌 四个页签，其余内容在家长页后面")
@@ -171,7 +171,7 @@ struct ParentDashboardView: View {
                     }
                     .tint(Func.accent)
 
-                    statRow("宝宝模式已学", "\(store.babyWords.count) / \(store.babyData?.allWords.count ?? 0) 个词")
+                    statRow("启蒙模式已学", "\(store.babyWords.count) / \(store.babyData?.allWords.count ?? 0) 个词")
                     statRow("贴纸", "\(store.babyStickers.count) 张")
                 }
 

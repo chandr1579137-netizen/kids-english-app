@@ -341,8 +341,8 @@ struct FirstRunGuide: View {
     private var items: [Item] { LaunchOptions.isBaby(store) ? babyItems : normalItems }
 
     private let babyItems: [Item] = [
-        Item(emoji: "👶", title: "宝宝模式：不识字也能自己玩",
-             detail: "孩子点「今天」的大按钮：复习、学 3 个新词、听音选图，大约 5–7 分钟，做完得一张贴纸"),
+        Item(emoji: "🌱", title: "启蒙模式：不识字也能自己玩",
+             detail: "孩子点「今天」的大按钮：复习、学几个新词、听音选图，做完得一张贴纸"),
         Item(emoji: "👨‍👩‍👧", title: "家长中心在「家长」页签",
              detail: "进入前要答一道数学题；可改每天新词数、解锁全部词包，也能切回正常模式"),
         Item(emoji: "⏰", title: "每日限时默认 20 分钟",
