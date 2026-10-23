@@ -173,7 +173,7 @@ struct BabyTodayView: View {
                 Spacer(minLength: 0)
                 // Tom 和今天要学的三张图
                 HStack(alignment: .center, spacing: 14) {
-                    PhraseAvatarView(speaker: "tom", size: 110, active: false)
+                    PhraseAvatarView(speaker: "tom", size: preview.count > 3 ? 84 : 110, active: false)
                         .offset(y: bounce ? -10 : 0)
                     VStack(spacing: 6) {
                         HStack(spacing: 8) {
@@ -183,7 +183,8 @@ struct BabyTodayView: View {
                                     .kidFont(34, .bold, maxScale: 1.1)
                                     .foregroundStyle(Func.positiveDeep)
                             } else {
-                                ForEach(preview, id: \.self) { w in BabyPicture(word: pic(w), size: 70) }
+                                // 每天 4 个新词时小图缩一点，不然 Tom 会被挤出屏幕
+                                ForEach(preview, id: \.self) { w in BabyPicture(word: pic(w), size: preview.count > 3 ? 56 : 70) }
                             }
                         }
                         .padding(12)
