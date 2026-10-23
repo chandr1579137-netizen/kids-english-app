@@ -70,14 +70,12 @@ jobs:
           fi
           echo "资源副本一致 ✓"
 
-      - name: Download assets bundle v3 (word icons, lesson illustrations)
+      - name: Download assets bundle v3 (word icons)
         run: |
           curl -sfL -o assets-bundle-v3.zip \
             "https://github.com/chandr1579137-netizen/kids-english-app/releases/download/assets-v3/assets-bundle-v3.zip"
           unzip -q -o assets-bundle-v3.zip
           echo "word-icons     $(ls KidsEnglish/KidsEnglish/Resources/word-icons | wc -l)"
-          echo "illustrations  $(ls KidsEnglish/KidsEnglish/Resources/lesson-illustrations | wc -l)"
-          echo "covers         $(ls KidsEnglish/KidsEnglish/Resources/covers | wc -l)"
 
       # 覆盖图在资源包解压后写入：交通主题 22 张半写实矢量图，数字 1–100 共 100 张黑白衬线数字卡。
       - name: Apply word icon overrides
@@ -177,9 +175,9 @@ jobs:
           root = pathlib.Path('KidsEnglish/KidsEnglish/Resources')
           audio = root / 'audio'
           word = json.loads((root / 'word-audio-map.json').read_text())
-          lesson = json.loads((root / 'audio-map.json').read_text())
           custom = json.loads((root / 'custom-audio-map.json').read_text())
-          keep = set(word.values()) | set(lesson.values()) | set(custom.values())
+          # 旧课文已删除：资源包里带的课文音频不在任何映射里，会在这里被一起删掉
+          keep = set(word.values()) | set(custom.values())
           removed = 0
           for f in audio.glob('*.mp3'):
               if f.name not in keep:
@@ -275,7 +273,6 @@ jobs:
           shoot 06d-learn-numbers-selected -uiTab 0 -uiBook numbers
           # 新增：这两页原本不在覆盖内，里面的旧系统色因此长期没被发现
           shoot 07-games    -uiTab 0 -uiConsolidate
-          shoot 08-lesson   -uiTab 2 -uiLesson
 
           # 听音找一找（Mode 第 0 个）：4 个场景各一张，另有「答对了」和「5 题做完」的样子
           shoot 09a-game-find-farm     -uiTab 0 -uiConsolidate -uiGame 0 -uiScene farm
@@ -317,7 +314,6 @@ jobs:
           shoot 24-large-learn   -uiTab 0 -uiLargeText
           shoot 24b-large-learn-books-right -uiTab 0 -uiBooksScrolled -uiLargeText
           shoot 25-large-cards   -uiTab 1 -uiLargeText
-          shoot 26-large-lesson  -uiTab 2 -uiLesson -uiLargeText
 
           # 大字号 × 元素最密的页面：游戏内页、学习判定、主题词表、设置
           shoot 27-large-study        -uiTab 0 -uiStudy -uiLargeText
@@ -336,8 +332,6 @@ jobs:
           shoot 38-large-settings      -uiTab 4 -uiProfile settings -uiLargeText
           shoot 39-large-favorites     -uiTab 4 -uiProfile favorites -uiLargeText
           # 孩子看得到的提示卡片（系统 Alert 已替换成 App 内样式）
-          shoot 40-large-alert-unknown -uiTab 2 -uiLesson -uiAlert unknown -uiLargeText
-          shoot 41-large-alert-mic     -uiTab 2 -uiLesson -uiAlert mic -uiLargeText
           shoot 42-large-alert-clear   -uiTab 4 -uiProfile parent-dash -uiAlert clear -uiLargeText
           # 首次启动的家长说明卡
           shoot 43-guide         -uiTab 0 -uiGuide
@@ -475,7 +469,6 @@ jobs:
           }
           shoot ipad-01-learn   -uiTab 0
           shoot ipad-02-cards   -uiTab 1
-          shoot ipad-08-lesson  -uiTab 2 -uiLesson
           shoot ipad-60-phrases-home -uiTab 2
           shoot ipad-61-phrase-learn -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 0
           shoot ipad-70-baby-today -uiBaby

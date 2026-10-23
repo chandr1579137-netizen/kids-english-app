@@ -4,7 +4,6 @@ import SwiftUI
 @Observable
 class DataStore {
     // 数据
-    var lessons: [Lesson] = []
     var words: [WordEntry] = []
     var songs: [Song] = []
     var wordThemes: [WordTheme] = []
@@ -12,8 +11,6 @@ class DataStore {
     var wordAudioMap: [String: String] = [:]
     /// 卡片/游戏/收藏用的词条（一词多义只显示与词图一致的义项）
     var wordDict: [String: WordEntry] = [:]
-    /// 课文点词查词用的原词条（完整多义释义）
-    var lessonDict: [String: WordEntry] = [:]
     /// 首页可学词表（数字本只留 one..ten；「单词卡」和巩固练习仍用全量 words）
     var homeWords: [WordEntry] = []
     /// 「说一说」口语课（Resources/phrases/phrases.json）
@@ -39,7 +36,8 @@ class DataStore {
     var gameCorrect: Int = 0
     var gameAnswered: Int = 0
     var studyDates: [String] = []
-    /// 口语课已完成的场景（id 如 L1-1）。旧课文进度 completedLessons 原样保留、只读归档。
+    /// 口语课已完成的场景（id 如 L1-1）。
+    /// 旧课文已删除；completedLessons / quizBest 仍从存储读出、随备份导出导入，只是界面不再显示（老数据不丢）。
     var completedPhraseScenes: Set<String> = []
     /// 宝宝模式：每个学过的词的复习状态（key 是词）
     var babyWords: [String: BabyWordState] = [:]
@@ -68,7 +66,6 @@ class DataStore {
     private var todayKey: String = ""
     private var isForeground = true
     private var wordIndex: [String: URL] = [:]
-    private var coverIndex: [String: URL] = [:]
     private var didIndexImages = false
 
     init() {
@@ -80,28 +77,18 @@ class DataStore {
     // MARK: - 数据加载
 
     private func loadJSON() {
-        var base: [Lesson] = []
-        for lv in 1...7 {
-            base.append(contentsOf: load("lessons-l\(lv).json", as: [Lesson].self) ?? [])
-        }
-        base.append(contentsOf: load("custom-lessons.json", as: [Lesson].self) ?? [])
-        lessons = base
-        lessons.sort { ($0.level, $0.id) < ($1.level, $1.id) }
         var allWords: [WordEntry] = []
         for part in ["a", "b", "c", "d"] {
             allWords.append(contentsOf: load("words-\(part).json", as: [WordEntry].self) ?? [])
         }
-        // 全量词典：课文里点任意词都能查到（不受低龄白名单影响），保留原多义释义
-        for w in allWords { lessonDict[w.word.lowercased()] = w }
         // 卡片/游戏用的词条：一词多义的只显示与词图一致的义项（CardMeaning，见 ProgressKit.swift）
         allWords = allWords.map { CardMeaning.applying(to: $0) }
         for w in allWords { wordDict[w.word.lowercased()] = w }
         var baseSongs = load("songs.json", as: [Song].self) ?? []
         baseSongs.append(contentsOf: load("custom-songs.json", as: [Song].self) ?? [])
         songs = baseSongs
-        var am = load("audio-map.json", as: [String: String].self) ?? [:]
-        for (k, v) in (load("custom-audio-map.json", as: [String: String].self) ?? [:]) { am[k] = v }
-        audioMap = am
+        // 小游戏的句子音频（找一找 / 喂小动物）。旧课文的 audio-map.json 已随课文删除
+        audioMap = load("custom-audio-map.json", as: [String: String].self) ?? [:]
         wordAudioMap = load("word-audio-map.json", as: [String: String].self) ?? [:]
         wordThemes = load("word-themes.json", as: [WordTheme].self) ?? []
         if let url = Bundle.main.url(forResource: "baby-path", withExtension: "json"),
@@ -140,11 +127,6 @@ class DataStore {
 
     // MARK: - 资源路径
 
-    func audioURL(forLesson lessonId: String, paragraphId: String) -> URL? {
-        guard let file = audioMap["\(lessonId)#\(paragraphId)"] else { return nil }
-        return Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)")
-    }
-
     func audioURL(forWord word: String) -> URL? {
         guard let file = wordAudioMap[word.lowercased()],
               let url = Bundle.main.resourceURL?.appendingPathComponent("audio/\(file)"),
@@ -178,16 +160,6 @@ class DataStore {
         return url
     }
 
-    func coverURL(forLesson lessonId: String) -> URL? {
-        ensureImageIndex()
-        if let lesson = lessons.first(where: { $0.id == lessonId }),
-           let cover = lesson.coverImage {
-            let base = URL(fileURLWithPath: cover).deletingPathExtension().lastPathComponent.lowercased()
-            if let url = coverIndex[base] { return url }
-        }
-        return coverIndex[lessonId.lowercased()]
-    }
-
     func iconURL(forWord word: String) -> URL? {
         ensureImageIndex()
         let key = word.lowercased()
@@ -212,22 +184,8 @@ class DataStore {
             let path = url.path
             if path.contains("/word-icons/") {
                 wordIndex[base] = url
-            } else if path.contains("/ui-icons/") {
-                continue
-            } else if path.contains("/covers/") || path.contains("/lesson-illustrations/") {
-                if coverIndex[base] == nil { coverIndex[base] = url }
             }
         }
-    }
-
-    func lookupWord(_ raw: String) -> WordEntry? {
-        let w = raw.lowercased().trimmingCharacters(in: .punctuationCharacters)
-        if let entry = lessonDict[w] { return entry }
-        // 课文里点到的多是变形（stars / had / deeper），查原形
-        for candidate in WordStemmer.candidates(for: raw) {
-            if let entry = lessonDict[candidate] { return entry }
-        }
-        return nil
     }
 
     // MARK: - 主题与今日计划
@@ -300,25 +258,6 @@ class DataStore {
         return StudyPlan.chunked(pool, size: dailyNewWords)
     }
 
-    /// 课文没有封面文件时，用课里最具体的那个词的 emoji。
-    func coverEmoji(for lessonId: String) -> String {
-        ensureThemeRank()
-        guard let lesson = lessons.first(where: { $0.id == lessonId }) else { return "📖" }
-        var best: (tier: Int, emoji: String)?
-        for para in lesson.content {
-            for timing in para.words {
-                let key = timing.word.lowercased().trimmingCharacters(in: .punctuationCharacters)
-                guard let emoji = wordDict[key]?.emoji, !emoji.isEmpty else { continue }
-                let tier = wordThemeRank[key]?.tier ?? 900
-                guard tier < 14 else { continue }
-                if best == nil || tier < best!.tier {
-                    best = (tier, emoji)
-                }
-            }
-        }
-        return best?.emoji ?? "📖"
-    }
-
     func markLearned(_ word: String) {
         learnedWords.insert(word.lowercased())
     }
@@ -332,27 +271,6 @@ class DataStore {
     var gameAccuracy: Int {
         guard gameAnswered > 0 else { return 0 }
         return Int((Double(gameCorrect) / Double(gameAnswered) * 100).rounded())
-    }
-
-    // MARK: - 关卡解锁
-
-    func isUnlocked(_ lesson: Lesson) -> Bool {
-        guard let idx = lessons.firstIndex(where: { $0.id == lesson.id }) else { return false }
-        if idx == 0 { return true }
-        return completedLessons.contains(lessons[idx - 1].id)
-    }
-
-    func lessons(for level: Int) -> [Lesson] {
-        lessons.filter { $0.level == level }
-    }
-
-    func completeLesson(_ id: String, quizScore: Double?) {
-        completedLessons.insert(id)
-        if let s = quizScore {
-            let old = quizBest[id] ?? 0
-            quizBest[id] = max(old, s)
-        }
-        saveProgress()
     }
 
     // MARK: - 口语课进度
@@ -541,7 +459,6 @@ class DataStore {
 
     // MARK: - 学习报告
 
-    var completedCount: Int { completedLessons.count }
 
     func wrongWordsToday() -> [String] { [] }
 

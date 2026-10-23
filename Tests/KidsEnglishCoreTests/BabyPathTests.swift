@@ -166,12 +166,12 @@ final class BabyPathTests: XCTestCase {
         """
         var snap = try XCTUnwrap(ProgressCodec.decode(old))
         XCTAssertNil(snap.babyWords)
-        XCTAssertEqual(ProgressCodec.summary(snap), "已恢复：0 篇课文、0 个单词")
+        XCTAssertEqual(ProgressCodec.summary(snap), "已恢复：0 个单词")
         snap.babyWords = ["cat": BabyWordState(box: 1, due: "2026-10-24")]
         snap.babyStickers = ["2026-10-22": "cat"]
         let back = try XCTUnwrap(ProgressCodec.decode(ProgressCodec.encode(snap)))
         XCTAssertEqual(back.babyWords, snap.babyWords)
         XCTAssertEqual(back.babyStickers, snap.babyStickers)
-        XCTAssertEqual(ProgressCodec.summary(back), "已恢复：0 篇课文、0 个单词、启蒙模式 1 个词")
+        XCTAssertEqual(ProgressCodec.summary(back), "已恢复：0 个单词、启蒙模式 1 个词")
     }
 }

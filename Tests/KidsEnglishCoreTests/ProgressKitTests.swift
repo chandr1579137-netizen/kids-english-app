@@ -110,11 +110,11 @@ final class ProgressKitTests: XCTestCase {
         var snapshot = makeSnapshot()
         snapshot.completedLessons = ["a", "b", "c"]
         snapshot.learnedWords = ["apple", "banana"]
-        XCTAssertEqual(ProgressCodec.summary(snapshot), "已恢复：3 篇课文、2 个单词")
+        XCTAssertEqual(ProgressCodec.summary(snapshot), "已恢复：2 个单词")
 
         snapshot.completedLessons = []
         snapshot.learnedWords = []
-        XCTAssertEqual(ProgressCodec.summary(snapshot), "已恢复：0 篇课文、0 个单词")
+        XCTAssertEqual(ProgressCodec.summary(snapshot), "已恢复：0 个单词")
     }
 
     // MARK: - 跨天

@@ -108,8 +108,6 @@ enum LaunchOptions {
     /// 里面的旧系统色（Color.green / .blue / .red）因此长期没人看见
     static var forceConsolidate: Bool { args.contains("-uiConsolidate") }
 
-    /// `-uiLesson` 直接打开读短文的第一课
-    static var forceLesson: Bool { args.contains("-uiLesson") }
 
     /// `-uiLargeText` 用最大档文字截图，验证 Dynamic Type 下布局不塌
     static var largeText: Bool { args.contains("-uiLargeText") }
@@ -122,7 +120,7 @@ enum LaunchOptions {
     /// 引导卡会盖住所有页面截图。
     static var isUIScreenshotRun: Bool { args.contains { $0.hasPrefix("-ui") } }
 
-    /// `-uiAlert <unknown|mic>` 直接弹出课文页的提示卡片（截图覆盖用）
+    /// `-uiAlert clear` 直接弹出家长中心「清除进度」确认卡片（截图覆盖用）
     static var alertDemo: String? { value(for: "-uiAlert") }
 
     // MARK: 截图覆盖补充（每个页面一个参数，都是「直接渲染」而不是 push）
@@ -204,13 +202,7 @@ struct ContentView: View {
                 WordCardsView()
             }
         case .read:
-            // 旧「读短文」已下线（先藏后删）：只剩 `-uiLesson` 截图参数还能打开旧课文页，
-            // 用来保留课文页提示卡片的回归截图；孩子点 tab 进的是口语课。
-            if LaunchOptions.forceLesson {
-                ReadView()
-            } else {
-                PhrasesHomeView()
-            }
+            PhrasesHomeView()
         case .songs:
             SongsView(asTabRoot: true)
         case .profile:

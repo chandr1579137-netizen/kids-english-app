@@ -34,15 +34,6 @@ final class StarterBookRemovalTests: XCTestCase {
         try ["a", "b", "c", "d"].flatMap { try decode([WordEntry].self, from: "words-\($0).json") }
     }
 
-    private func lessonText() throws -> Set<String> {
-        var lessons: [Lesson] = []
-        for level in 1...7 { lessons += try decode([Lesson].self, from: "lessons-l\(level).json") }
-        lessons += try decode([Lesson].self, from: "custom-lessons.json")
-        let text = lessons.flatMap { $0.content.map { $0.text } }.joined(separator: " ").lowercased()
-        let tokens = text.split { !$0.isLetter }.map(String.init)
-        return Set(tokens)
-    }
-
     func testListHas21Words() {
         XCTAssertEqual(Self.removedWords.count, 21)
     }
@@ -61,18 +52,13 @@ final class StarterBookRemovalTests: XCTestCase {
         XCTAssertTrue(learnable.isDisjoint(with: Self.removedWords), "单词卡 / 巩固练习里不应再有这 21 个词")
     }
 
-    func testStillInDictionaryAndLessons() throws {
+    /// 21 个词移出启蒙词书后仍留在词典里。旧课文已删除（用户：「旧课文：全部下线」），
+    /// 原来「这些词仍在课文里」的那一半检查随课文一起去掉。
+    func testStillInDictionary() throws {
         let dict = Dictionary(uniqueKeysWithValues: try dictionary().map { ($0.word.lowercased(), $0) })
         for w in Self.removedWords {
-            let entry = try XCTUnwrap(dict[w], "\(w) 必须留在词典里（课文点词查词要用）")
+            let entry = try XCTUnwrap(dict[w], "\(w) 必须留在词典里")
             XCTAssertFalse((entry.meaningCn ?? "").isEmpty)
-        }
-        // 课文原文不改：移词前出现在课文里的 15 个词，现在仍然都在
-        let inLessons = ["gentle", "careful", "clever", "exciting", "peaceful", "safe", "right", "huge",
-                         "make", "learn", "son", "hare", "tortoise", "kingdom", "air"]
-        let tokens = try lessonText()
-        for w in inLessons {
-            XCTAssertTrue(tokens.contains(w), "课文里应该还有 \(w)")
         }
     }
 

@@ -189,7 +189,7 @@ final class PhraseTests: XCTestCase {
         """
         let snapshot = try XCTUnwrap(ProgressCodec.decode(old))
         XCTAssertNil(snapshot.completedPhraseScenes)
-        XCTAssertEqual(ProgressCodec.summary(snapshot), "已恢复：1 篇课文、1 个单词")
+        XCTAssertEqual(ProgressCodec.summary(snapshot), "已恢复：1 个单词")
     }
 
     func testPhraseProgressRoundTripsAndShowsInSummary() throws {
@@ -201,6 +201,6 @@ final class PhraseTests: XCTestCase {
         snapshot.completedPhraseScenes = ["L1-1", "L1-2"]
         let back = try XCTUnwrap(ProgressCodec.decode(ProgressCodec.encode(snapshot)))
         XCTAssertEqual(back.completedPhraseScenes, ["L1-1", "L1-2"])
-        XCTAssertEqual(ProgressCodec.summary(back), "已恢复：0 篇课文、0 个单词、2 个口语场景")
+        XCTAssertEqual(ProgressCodec.summary(back), "已恢复：0 个单词、2 个口语场景")
     }
 }

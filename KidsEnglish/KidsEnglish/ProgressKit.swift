@@ -52,7 +52,8 @@ enum ProgressCodec {
 
     /// 恢复成功后展示给用户的文案，格式与旧实现一致。
     static func summary(_ snapshot: ProgressSnapshot) -> String {
-        let base = "已恢复：\(snapshot.completedLessons.count) 篇课文、\(snapshot.learnedWords.count) 个单词"
+        // 旧课文已删除：completedLessons 仍随备份带着，但恢复文案不再提「篇课文」
+        let base = "已恢复：\(snapshot.learnedWords.count) 个单词"
         var text = base
         if let scenes = snapshot.completedPhraseScenes, !scenes.isEmpty { text += "、\(scenes.count) 个口语场景" }
         if let baby = snapshot.babyWords, !baby.isEmpty { text += "、启蒙模式 \(baby.count) 个词" }
@@ -208,7 +209,7 @@ enum HomeBooks {
 // MARK: - 卡片专用释义
 
 /// 一词多义时，卡片和看图/释义游戏只显示与词图一致的那个义项（词图表意重做，2026-10-22）。
-/// 词典里的 meaningCn 不改：课文里点词查词仍显示完整多义释义（DataStore.lookupWord 用原词条）。
+/// 词典里的 meaningCn 不改，只在卡片和游戏里换成和词图一致的义项。
 enum CardMeaning {
     /// key 小写；来源 meaning-audit/redo-list.json 中 action=meaning_fix 的条目，
     /// 以及重画时要求同步改释义的 light / sharp / engine。
