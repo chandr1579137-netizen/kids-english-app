@@ -89,6 +89,9 @@ TOM_PROMPTS = {
 # Tom 的降调 8% 不变，只放慢 16%、用感叹号的语气读，两个模型都能听对（见 docs/daily-phrases/asr-L1.md）。
 TTS_OVERRIDES = {
     "L1-4-07": ("I'm full!", "-16%"),
+    # L2：small.en 把 "I'm five." 听成 "and five"、book 听成 bot（见 docs/daily-phrases/asr-L2.md）
+    "L2-1-08": ("I'm five!", "-16%"),
+    "L2-3-07": ("What color is your new book?", "-20%"),
 }
 
 CODE_CARDS = {
