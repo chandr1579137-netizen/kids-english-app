@@ -8,7 +8,7 @@ import Combine
 // 一句一卡（版式 B），一次学一个场景，约 5 分钟。课内流程见 Phrases.swift 的 PhraseLessonPlan，
 // 设计依据见 docs/pm/phrases-lesson-v1.md。孩子不识字：所有提示都靠声音、大图和按钮动效，
 // 英文原句只当小字常驻，中文默认不显示（家长中心可开）。
-// 旧「读短文」代码和进度原样保留、不可达（先藏后删，见 docs/retire-90-lessons-plan.md）。
+// 旧「读短文」90 篇课文已删除（PR E）；completedLessons 等老进度只留在存储和备份里。
 
 // MARK: 启动参数（CI 截图用）
 
