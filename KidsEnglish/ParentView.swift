@@ -184,7 +184,7 @@ struct ParentDashboardView: View {
                 }
 
                 card("学习报告") {
-                    statRow("说一说", "\(store.completedPhraseScenes.count) / \(store.phraseCatalog?.allScenes.count ?? 0) 个场景")
+                    statRow("说一说", "\(store.completedPhraseScenes.count) / \(store.phraseCatalog?.allScenes.count ?? 0) 节课")
                     statRow("今日学习", "\(store.studyMinutesToday()) 分钟")
                     statRow("收藏单词", "\(store.favoriteWords.count) 个")
                     statRow("收集卡片", "\(store.collectedCards.count) 张")

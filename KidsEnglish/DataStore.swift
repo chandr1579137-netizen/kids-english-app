@@ -288,7 +288,7 @@ class DataStore {
     @discardableResult
     func completePhraseScene(_ id: String) -> Bool {
         let first = completedPhraseScenes.insert(id).inserted
-        if first { collectedCards.insert(PhraseCards.id(for: id)) }
+        if first && !PhraseReview.isReview(id) { collectedCards.insert(PhraseCards.id(for: id)) }
         saveProgress()
         return first
     }

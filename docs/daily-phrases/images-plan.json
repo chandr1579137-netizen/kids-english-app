@@ -1595,11 +1595,11 @@
    "scene_zh": "认识新朋友",
    "line_id": "L2-1-08",
    "speaker": "tom",
-   "en": "I'm four.",
-   "zh": "我四岁。",
+   "en": "I'm five.",
+   "zh": "我五岁。",
    "decision": "code",
    "code_kind": "count",
-   "code_spec": "四根蜡烛（代码画的简单蜡烛形状+小火苗）排一排，逐根点亮，不写数字",
+   "code_spec": "五根蜡烛（D8：孩子现在 5 岁；代码画的简单蜡烛形状+小火苗）排一排，逐根点亮，不写数字",
    "code_icons": []
   },
   {
