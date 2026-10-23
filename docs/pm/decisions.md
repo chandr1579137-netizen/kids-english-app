@@ -62,7 +62,7 @@
 
 | # | 问题 | 决定 |
 |---|---|---|
-| D6 | 宝宝模式里家人词写 mom / dad，还是 mother / father | **保持 mom / dad / grandma / grandpa**，图下的字和读音都不改（产品经理决定，会告知用户） |
+| D6 | 宝宝模式里家人词写 mom / dad，还是 mother / father | **保持 mom / dad / grandma / grandpa**，图下的字和读音都不改（用户原话：「可以，宝宝模式保留 mom / dad」） |
 
 ### D6 宝宝模式保留 mom / dad
 
@@ -70,7 +70,7 @@
 - 宝宝模式教的是孩子真正会开口叫的词。4 岁孩子叫妈妈会说 mom，不会说 mother。
 - 「说一说」的句子里也是 Mom / Dad，两边教的是同一个词。
 - 配图仍用平涂的 mother / father / grandmother / grandfather，不用资源包里同名的旧 3D 图。
-- 用户如果想改，再改。
+- 产品经理提出，用户已确认（原话：「可以，宝宝模式保留 mom / dad」）。
 
 ## 还没定的
 
