@@ -26,12 +26,55 @@ final class BabyPathTests: XCTestCase {
 
     // MARK: - 数据
 
-    func testTenPacksSixtyEightUniqueWords() throws {
+    /// 数量从数据算，不写死：原来的 10 包顺序不变排在最前，新包都锁着、按顺序打开；没有重复的词
+    func testPackOrderLockingAndNoDuplicateWords() throws {
         let d = try load()
-        XCTAssertEqual(d.packs.count, 10)
-        XCTAssertEqual(d.allWords.count, 68)
-        XCTAssertEqual(Set(d.allWords).count, 68, "同一个词出现在两个包里")
-        XCTAssertEqual(d.packs.filter(\.locked).map(\.id), ["numbers-2", "clothes", "weather"])
+        XCTAssertEqual(Array(d.packs.prefix(10).map(\.id)),
+                       ["family", "animals", "colors", "numbers", "food", "body", "actions", "numbers-2", "clothes", "weather"])
+        XCTAssertEqual(Set(d.allWords).count, d.allWords.count, "同一个词出现在两个包里")
+        XCTAssertEqual(d.packs.filter { !$0.locked }.count, 7, "只有前 7 包一开始就开")
+        for pack in d.packs.dropFirst(10) {
+            XCTAssertTrue(pack.locked, "\(pack.id): 新包要锁着")
+            XCTAssertTrue((6...10).contains(pack.words.count) || pack.id == "family-2",
+                          "\(pack.id): 每包 6–10 个词（家人 2 例外，5 个）")
+        }
+    }
+
+    /// v2 新包：每包一个句型，每个词一句完整例句（不靠程序拼）
+    func testNewPacksHaveFullSentences() throws {
+        let d = try load()
+        for pack in d.packs.dropFirst(10) {
+            let pattern = try XCTUnwrap(pack.pattern, "\(pack.id): 缺句型")
+            XCTAssertTrue(pattern.contains("___"))
+            for w in pack.words {
+                let s = try XCTUnwrap(d.sentence(for: w), "\(pack.id)/\(w): 缺例句")
+                XCTAssertFalse(s.contains("___"), "\(w): 例句里还有空")
+                XCTAssertTrue(s.first?.isUppercase == true && ".!?".contains(s.last!), "\(w): 例句要完整：\(s)")
+            }
+        }
+        XCTAssertEqual(d.sentence(for: "elephant"), "Look, an elephant!", "冠词写死")
+        XCTAssertEqual(d.sentence(for: "eleven"), "I can count to eleven!")
+        XCTAssertEqual(d.sentence(for: "happy"), "I'm happy.", "happy / sad 用 I'm")
+    }
+
+    /// 反义词：同一对同一天学，出题时互为干扰项
+    func testOppositePairsAreLearnedTogetherAndUsedAsDistractors() throws {
+        let d = try load()
+        XCTAssertEqual(d.partner(of: "big"), "small")
+        XCTAssertEqual(d.partner(of: "small"), "big")
+        XCTAssertEqual(d.partner(of: "new"), "old")
+        XCTAssertNil(d.partner(of: "cat"))
+        let everythingBefore = Set(d.packs.prefix(while: { $0.id != "opposites-1" }).flatMap(\.words))
+        for count in 3...8 {
+            let today = BabyPlan.newWords(d, known: everythingBefore, unlockAll: true, count: count)
+            for w in today { XCTAssertTrue(today.contains(d.partner(of: w)!), "\(w) 和它的反义词要同一天学") }
+            XCTAssertTrue(today.count == count || today.count == count + 1)
+        }
+        var rng = SeededGenerator(seed: 5)
+        for _ in 0..<20 {
+            let r = BabyPlan.round(answer: "big", pool: d.allWords, data: d, using: &rng)
+            XCTAssertTrue(r.options.contains("small"), "听 big 时 small 一定是选项")
+        }
     }
 
     /// 每个词都有平涂词图和发音；不收带字的毛绒字母图（hello / hi / bye / yes / no / I / you）
@@ -63,7 +106,7 @@ final class BabyPathTests: XCTestCase {
         let open = BabyPlan.openPacks(d, known: firstSeven, unlockAll: false).map(\.id)
         XCTAssertEqual(open.count, 8)
         XCTAssertEqual(open.last, "numbers-2")
-        XCTAssertEqual(BabyPlan.openPacks(d, known: [], unlockAll: true).count, 10)
+        XCTAssertEqual(BabyPlan.openPacks(d, known: [], unlockAll: true).count, d.packs.count, "全部解锁 = 所有包")
     }
 
     func testNewWordsFollowPackOrderAndSkipKnown() throws {

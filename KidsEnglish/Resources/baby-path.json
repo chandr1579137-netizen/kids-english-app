@@ -1,6 +1,6 @@
 {
- "version": 1,
- "note": "宝宝模式词包（4 岁）。来自 PR #3 的 4 岁路线，去掉了「打招呼」包（hello/hi/bye 等改由「说一说」L1 用整句教，现成词图是带字的毛绒字母）。设计见 docs/pm/baby-mode-v1.md。",
+ "version": 2,
+ "note": "启蒙模式词包（原名宝宝模式；孩子 5 岁）。前 10 包来自 PR #3 的 4 岁路线；后面 21 包是 v2 扩充（产品经理审过，见 docs/pm/baby-packs-v2.md），每词一句完整例句。",
  "pictures": {
   "mom": "mother",
   "dad": "father",
@@ -155,6 +155,589 @@
     "hot",
     "cold"
    ]
+  },
+  {
+   "id": "fruits-2",
+   "nameZh": "水果",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "pear",
+    "grape",
+    "strawberry",
+    "cherry",
+    "lemon",
+    "mango",
+    "peach",
+    "pineapple",
+    "watermelon"
+   ],
+   "pattern": "I like ___.",
+   "sentences": {
+    "pear": "I like pears.",
+    "grape": "I like grapes.",
+    "strawberry": "I like strawberries.",
+    "cherry": "I like cherries.",
+    "lemon": "I like lemons.",
+    "mango": "I like mangoes.",
+    "peach": "I like peaches.",
+    "pineapple": "I like pineapples.",
+    "watermelon": "I like watermelon."
+   }
+  },
+  {
+   "id": "farm",
+   "nameZh": "农场动物",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "hen",
+    "sheep",
+    "goat",
+    "donkey",
+    "mouse",
+    "frog",
+    "bee"
+   ],
+   "pattern": "It's a ___.",
+   "sentences": {
+    "hen": "It's a hen.",
+    "sheep": "It's a sheep.",
+    "goat": "It's a goat.",
+    "donkey": "It's a donkey.",
+    "mouse": "It's a mouse.",
+    "frog": "It's a frog.",
+    "bee": "It's a bee."
+   }
+  },
+  {
+   "id": "zoo",
+   "nameZh": "动物园",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "elephant",
+    "lion",
+    "tiger",
+    "monkey",
+    "giraffe",
+    "zebra",
+    "panda",
+    "kangaroo",
+    "hippo",
+    "crocodile"
+   ],
+   "pattern": "Look, a ___!",
+   "sentences": {
+    "elephant": "Look, an elephant!",
+    "lion": "Look, a lion!",
+    "tiger": "Look, a tiger!",
+    "monkey": "Look, a monkey!",
+    "giraffe": "Look, a giraffe!",
+    "zebra": "Look, a zebra!",
+    "panda": "Look, a panda!",
+    "kangaroo": "Look, a kangaroo!",
+    "hippo": "Look, a hippo!",
+    "crocodile": "Look, a crocodile!"
+   }
+  },
+  {
+   "id": "sea",
+   "nameZh": "海洋动物",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "dolphin",
+    "whale",
+    "shark",
+    "octopus",
+    "turtle",
+    "crab",
+    "starfish",
+    "jellyfish",
+    "seal"
+   ],
+   "pattern": "I see a ___.",
+   "sentences": {
+    "dolphin": "I see a dolphin.",
+    "whale": "I see a whale.",
+    "shark": "I see a shark.",
+    "octopus": "I see an octopus.",
+    "turtle": "I see a turtle.",
+    "crab": "I see a crab.",
+    "starfish": "I see a starfish.",
+    "jellyfish": "I see a jellyfish.",
+    "seal": "I see a seal."
+   }
+  },
+  {
+   "id": "bugs-birds",
+   "nameZh": "小虫和鸟",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "butterfly",
+    "ant",
+    "spider",
+    "owl",
+    "eagle",
+    "swan",
+    "peacock"
+   ],
+   "pattern": "Where is the ___?",
+   "sentences": {
+    "butterfly": "Where is the butterfly?",
+    "ant": "Where is the ant?",
+    "spider": "Where is the spider?",
+    "owl": "Where is the owl?",
+    "eagle": "Where is the eagle?",
+    "swan": "Where is the swan?",
+    "peacock": "Where is the peacock?"
+   }
+  },
+  {
+   "id": "food-2",
+   "nameZh": "好吃的",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "cheese",
+    "cookie",
+    "juice",
+    "noodles",
+    "soup",
+    "meat",
+    "pizza",
+    "sandwich",
+    "honey"
+   ],
+   "pattern": "___, please!",
+   "sentences": {
+    "cheese": "Cheese, please!",
+    "cookie": "A cookie, please!",
+    "juice": "Juice, please!",
+    "noodles": "Noodles, please!",
+    "soup": "Soup, please!",
+    "meat": "Meat, please!",
+    "pizza": "Pizza, please!",
+    "sandwich": "A sandwich, please!",
+    "honey": "Honey, please!"
+   }
+  },
+  {
+   "id": "toys",
+   "nameZh": "玩具",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "ball",
+    "kite",
+    "teddy",
+    "balloon",
+    "blocks",
+    "doll",
+    "puzzle",
+    "robot",
+    "drum",
+    "yoyo"
+   ],
+   "pattern": "I have a ___.",
+   "sentences": {
+    "ball": "I have a ball.",
+    "kite": "I have a kite.",
+    "teddy": "I have a teddy.",
+    "balloon": "I have a balloon.",
+    "blocks": "I have blocks.",
+    "doll": "I have a doll.",
+    "puzzle": "I have a puzzle.",
+    "robot": "I have a robot.",
+    "drum": "I have a drum.",
+    "yoyo": "I have a yoyo."
+   }
+  },
+  {
+   "id": "home",
+   "nameZh": "家里的东西",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "door",
+    "window",
+    "chair",
+    "table",
+    "bed",
+    "lamp",
+    "sofa",
+    "clock",
+    "box",
+    "key"
+   ],
+   "pattern": "This is my ___.",
+   "sentences": {
+    "door": "This is my door.",
+    "window": "This is my window.",
+    "chair": "This is my chair.",
+    "table": "This is my table.",
+    "bed": "This is my bed.",
+    "lamp": "This is my lamp.",
+    "sofa": "This is my sofa.",
+    "clock": "This is my clock.",
+    "box": "This is my box.",
+    "key": "This is my key."
+   }
+  },
+  {
+   "id": "kitchen",
+   "nameZh": "厨房",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "cup",
+    "spoon",
+    "fork",
+    "plate",
+    "bowl",
+    "fridge"
+   ],
+   "pattern": "Where's my ___?",
+   "sentences": {
+    "cup": "Where's my cup?",
+    "spoon": "Where's my spoon?",
+    "fork": "Where's my fork?",
+    "plate": "Where's my plate?",
+    "bowl": "Where's my bowl?",
+    "fridge": "Where's the fridge?"
+   }
+  },
+  {
+   "id": "school-things",
+   "nameZh": "文具",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "book",
+    "pen",
+    "pencil",
+    "crayon",
+    "eraser",
+    "ruler",
+    "scissors",
+    "paper",
+    "glue"
+   ],
+   "pattern": "Give me the ___.",
+   "sentences": {
+    "book": "Give me the book.",
+    "pen": "Give me the pen.",
+    "pencil": "Give me the pencil.",
+    "crayon": "Give me the crayon.",
+    "eraser": "Give me the eraser.",
+    "ruler": "Give me the ruler.",
+    "scissors": "Give me the scissors.",
+    "paper": "Give me the paper.",
+    "glue": "Give me the glue."
+   }
+  },
+  {
+   "id": "vehicles",
+   "nameZh": "交通工具",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "car",
+    "bus",
+    "train",
+    "plane",
+    "boat",
+    "bike",
+    "taxi",
+    "truck"
+   ],
+   "pattern": "I can see a ___.",
+   "sentences": {
+    "car": "I can see a car.",
+    "bus": "I can see a bus.",
+    "train": "I can see a train.",
+    "plane": "I can see a plane.",
+    "boat": "I can see a boat.",
+    "bike": "I can see a bike.",
+    "taxi": "I can see a taxi.",
+    "truck": "I can see a truck."
+   }
+  },
+  {
+   "id": "places",
+   "nameZh": "地方",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "school",
+    "park",
+    "zoo",
+    "farm",
+    "shop",
+    "hospital",
+    "library",
+    "playground"
+   ],
+   "pattern": "Let's go to the ___.",
+   "sentences": {
+    "school": "Let's go to school.",
+    "park": "Let's go to the park.",
+    "zoo": "Let's go to the zoo.",
+    "farm": "Let's go to the farm.",
+    "shop": "Let's go to the shop.",
+    "hospital": "Let's go to the hospital.",
+    "library": "Let's go to the library.",
+    "playground": "Let's go to the playground."
+   }
+  },
+  {
+   "id": "nature-2",
+   "nameZh": "大自然",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "tree",
+    "flower",
+    "leaf",
+    "grass",
+    "moon",
+    "star",
+    "snow",
+    "sea",
+    "mountain",
+    "river"
+   ],
+   "pattern": "Look at the ___!",
+   "sentences": {
+    "tree": "Look at the tree!",
+    "flower": "Look at the flower!",
+    "leaf": "Look at the leaf!",
+    "grass": "Look at the grass!",
+    "moon": "Look at the moon!",
+    "star": "Look at the star!",
+    "snow": "Look at the snow!",
+    "sea": "Look at the sea!",
+    "mountain": "Look at the mountain!",
+    "river": "Look at the river!"
+   }
+  },
+  {
+   "id": "body-2",
+   "nameZh": "身体 2",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "arm",
+    "leg",
+    "face",
+    "teeth",
+    "finger",
+    "knee"
+   ],
+   "pattern": "Touch your ___.",
+   "sentences": {
+    "arm": "Touch your arm.",
+    "leg": "Touch your leg.",
+    "face": "Touch your face.",
+    "teeth": "Touch your teeth.",
+    "finger": "Touch your finger.",
+    "knee": "Touch your knee."
+   }
+  },
+  {
+   "id": "family-2",
+   "nameZh": "家人 2",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "sister",
+    "brother",
+    "friend",
+    "aunt",
+    "uncle"
+   ],
+   "pattern": "This is my ___.",
+   "sentences": {
+    "sister": "This is my sister.",
+    "brother": "This is my brother.",
+    "friend": "This is my friend.",
+    "aunt": "This is my aunt.",
+    "uncle": "This is my uncle."
+   }
+  },
+  {
+   "id": "actions-2",
+   "nameZh": "我会做 2",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "swim",
+    "fly",
+    "sit",
+    "stand",
+    "sing",
+    "dance",
+    "read",
+    "draw",
+    "walk",
+    "climb"
+   ],
+   "pattern": "I can ___.",
+   "sentences": {
+    "swim": "I can swim.",
+    "fly": "I can fly.",
+    "sit": "I can sit.",
+    "stand": "I can stand.",
+    "sing": "I can sing.",
+    "dance": "I can dance.",
+    "read": "I can read.",
+    "draw": "I can draw.",
+    "walk": "I can walk.",
+    "climb": "I can climb."
+   }
+  },
+  {
+   "id": "actions-3",
+   "nameZh": "我会做 3",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "kick",
+    "throw",
+    "catch",
+    "hug",
+    "kiss",
+    "smile",
+    "laugh",
+    "cry",
+    "cook",
+    "clean"
+   ],
+   "pattern": "Let's ___!",
+   "sentences": {
+    "kick": "Let's kick the ball!",
+    "throw": "Let's throw the ball!",
+    "catch": "Let's catch the ball!",
+    "hug": "Let's hug!",
+    "kiss": "Give me a kiss!",
+    "smile": "Let's smile!",
+    "laugh": "Let's laugh!",
+    "cry": "Don't cry!",
+    "cook": "Let's cook!",
+    "clean": "Let's clean up!"
+   }
+  },
+  {
+   "id": "opposites-1",
+   "nameZh": "反义词 1",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "big",
+    "small",
+    "tall",
+    "short",
+    "fast",
+    "slow",
+    "happy",
+    "sad"
+   ],
+   "pattern": "It's ___.",
+   "sentences": {
+    "big": "It's big.",
+    "small": "It's small.",
+    "tall": "It's tall.",
+    "short": "It's short.",
+    "fast": "It's fast.",
+    "slow": "It's slow.",
+    "happy": "I'm happy.",
+    "sad": "I'm sad."
+   },
+   "pairs": true
+  },
+  {
+   "id": "opposites-2",
+   "nameZh": "反义词 2",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "wet",
+    "dry",
+    "full",
+    "empty",
+    "loud",
+    "quiet",
+    "old",
+    "new"
+   ],
+   "pattern": "It's ___.",
+   "sentences": {
+    "wet": "It's wet.",
+    "dry": "It's dry.",
+    "full": "It's full.",
+    "empty": "It's empty.",
+    "loud": "It's loud.",
+    "quiet": "It's quiet.",
+    "old": "It's old.",
+    "new": "It's new."
+   },
+   "pairs": true
+  },
+  {
+   "id": "numbers-3",
+   "nameZh": "数字 11–20",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+    "twenty"
+   ],
+   "pattern": "I can count to ___!",
+   "sentences": {
+    "eleven": "I can count to eleven!",
+    "twelve": "I can count to twelve!",
+    "thirteen": "I can count to thirteen!",
+    "fourteen": "I can count to fourteen!",
+    "fifteen": "I can count to fifteen!",
+    "sixteen": "I can count to sixteen!",
+    "seventeen": "I can count to seventeen!",
+    "eighteen": "I can count to eighteen!",
+    "nineteen": "I can count to nineteen!",
+    "twenty": "I can count to twenty!"
+   }
+  },
+  {
+   "id": "feelings",
+   "nameZh": "我的感受",
+   "songId": null,
+   "locked": true,
+   "words": [
+    "hungry",
+    "thirsty",
+    "angry",
+    "afraid",
+    "sleepy",
+    "tired"
+   ],
+   "pattern": "I'm ___.",
+   "sentences": {
+    "hungry": "I'm hungry.",
+    "thirsty": "I'm thirsty.",
+    "angry": "I'm angry.",
+    "afraid": "I'm afraid.",
+    "sleepy": "I'm sleepy.",
+    "tired": "I'm tired."
+   }
   }
  ]
 }
