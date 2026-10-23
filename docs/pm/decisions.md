@@ -60,6 +60,18 @@
 - 工程设置暂时不改，仍保留 `TARGETED_DEVICE_FAMILY = "1,2"`（App 还能装在 iPad 上），免得影响 CI。
 - CI 里的 iPad 截图步骤如果一直拖慢构建或者容易失败，可以单独开一个小 PR 去掉。去掉之前先告诉产品经理。
 
+| # | 问题 | 决定 |
+|---|---|---|
+| D6 | 宝宝模式里家人词写 mom / dad，还是 mother / father | **保持 mom / dad / grandma / grandpa**，图下的字和读音都不改（产品经理决定，会告知用户） |
+
+### D6 宝宝模式保留 mom / dad
+
+- 用户「不要用 dad，要用 father；不要用 mom，要用 mother」这句话，说的是「说一说」头像下面的名字。用户也确认过：句子里保留 Mom / Dad。
+- 宝宝模式教的是孩子真正会开口叫的词。4 岁孩子叫妈妈会说 mom，不会说 mother。
+- 「说一说」的句子里也是 Mom / Dad，两边教的是同一个词。
+- 配图仍用平涂的 mother / father / grandmother / grandfather，不用资源包里同名的旧 3D 图。
+- 用户如果想改，再改。
+
 ## 还没定的
 
 - 旧课文下线时，要不要保留约 8 篇 L1 小故事（`retire-90-lessons-plan.md` 里的 Q2）。在这条定下来之前，只做第一步「藏起来」，不删课文数据。
