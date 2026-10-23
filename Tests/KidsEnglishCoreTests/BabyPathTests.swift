@@ -106,7 +106,7 @@ final class BabyPathTests: XCTestCase {
         let open = BabyPlan.openPacks(d, known: firstSeven, unlockAll: false).map(\.id)
         XCTAssertEqual(open.count, 8)
         XCTAssertEqual(open.last, "numbers-2")
-        XCTAssertEqual(BabyPlan.openPacks(d, known: [], unlockAll: true).count, 10)
+        XCTAssertEqual(BabyPlan.openPacks(d, known: [], unlockAll: true).count, d.packs.count, "全部解锁 = 所有包")
     }
 
     func testNewWordsFollowPackOrderAndSkipKnown() throws {
