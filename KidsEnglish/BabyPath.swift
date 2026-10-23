@@ -12,6 +12,12 @@ struct BabyPack: Codable, Hashable, Identifiable {
     /// 默认锁着的包（家长中心可全部解锁；前面的包都学完也会自动打开）
     let locked: Bool
     let words: [String]
+    /// 这一包的句型（v2：每天一课加 1 个句型），如 "I like ___."
+    var pattern: String? = nil
+    /// 每个词一句完整的例句（冠词、复数都写死，不靠程序拼）
+    var sentences: [String: String]? = nil
+    /// 反义词包：词按一对一对排列（big, small, tall, short…），同一对同一天学、出题时互为干扰项
+    var pairs: Bool? = nil
 }
 
 struct BabyPathData: Codable, Hashable {
@@ -31,6 +37,16 @@ struct BabyPathData: Codable, Hashable {
     func pack(containing word: String) -> BabyPack? {
         packs.first { $0.words.contains(word) }
     }
+
+    /// 反义词包里和它成对的那个词（big ↔ small）；不在反义词包里返回 nil
+    func partner(of word: String) -> String? {
+        guard let p = pack(containing: word), p.pairs == true, let i = p.words.firstIndex(of: word) else { return nil }
+        let j = i ^ 1
+        return p.words.indices.contains(j) ? p.words[j] : nil
+    }
+
+    /// 这个词的例句（没有就 nil）
+    func sentence(for word: String) -> String? { pack(containing: word)?.sentences?[word] }
 }
 
 /// 一个词的复习状态：第几格（越大隔得越久）+ 下次该复习的日子（yyyy-MM-dd）
@@ -83,10 +99,16 @@ enum BabyPlan {
 
     // MARK: 每日计划
 
-    /// 今天的新词：按包的顺序，跳过学过的，取 count 个
+    /// 今天的新词：按包的顺序，跳过学过的，取 count 个。
+    /// 反义词一对必须同一天学：取到一对里的一个，就把另一个也带上（可能比 count 多 1 个）
     static func newWords(_ data: BabyPathData, known: Set<String>, unlockAll: Bool, count: Int) -> [String] {
-        let pool = openPacks(data, known: known, unlockAll: unlockAll).flatMap(\.words)
-        return Array(pool.filter { !known.contains($0) }.prefix(max(0, count)))
+        let pool = openPacks(data, known: known, unlockAll: unlockAll).flatMap(\.words).filter { !known.contains($0) }
+        var out: [String] = []
+        for w in pool where out.count < max(0, count) && !out.contains(w) {
+            out.append(w)
+            if let p = data.partner(of: w), !known.contains(p), !out.contains(p) { out.append(p) }
+        }
+        return out
     }
 
     /// 今天到期的旧词：先复习最早到期的，同一天到期的先复习格子小的（记得最不牢的）
@@ -122,7 +144,13 @@ enum BabyPlan {
     static func round(answer: String, pool: [String], data: BabyPathData,
                       using rng: inout some RandomNumberGenerator) -> BabyRound {
         var chosen: [String] = []
-        for candidate in pool.shuffled(using: &rng) {
+        // 反义词：同一对的另一个词优先当干扰项（听 big 时，small 一定在选项里）
+        var candidates = pool.shuffled(using: &rng)
+        if let p = data.partner(of: answer), let i = candidates.firstIndex(of: p) {
+            candidates.remove(at: i)
+            candidates.insert(p, at: 0)
+        }
+        for candidate in candidates {
             if chosen.count >= optionCount - 1 { break }
             if candidate == answer || chosen.contains(candidate) { continue }
             let clash = ([answer] + chosen).contains { other in
