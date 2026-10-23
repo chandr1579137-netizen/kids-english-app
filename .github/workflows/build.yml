@@ -410,6 +410,16 @@ jobs:
           shoot 77a-large-baby-today      -uiBaby -uiLargeText
           shoot 77b-large-baby-game       -uiBaby -uiBabyStep 3 -uiLargeText
           shoot 78-baby-guide             -uiBaby -uiGuide
+          # 多孩子档案（假档案只在内存里）：谁来学、首页头像（两种模式）、家长中心切换与管理、添加 / 删除 / 导入确认、我的
+          shoot 80a-who-two              -uiProfiles 2 -uiWho
+          shoot 80b-home-avatar          -uiTab 0 -uiProfiles 2
+          shoot 80c-home-avatar-baby     -uiBaby -uiProfiles 2
+          shoot 80d-parent-children      -uiTab 4 -uiProfile parent-dash -uiProfiles 2
+          shoot 80e-child-add            -uiTab 4 -uiProfile parent-dash -uiProfiles 2 -uiChildEdit add
+          shoot 80f-child-delete         -uiTab 4 -uiProfile parent-dash -uiProfiles 2 -uiDeleteConfirm
+          shoot 80g-import-confirm       -uiTab 4 -uiProfile parent-dash -uiProfiles 2 -uiImportConfirm
+          shoot 80h-profile-page         -uiTab 4 -uiProfiles 2
+          shoot 80i-who-four             -uiProfiles 4 -uiWho
           shoot 70c-baby-stickers         -uiBaby -uiBabyDoneToday -uiBabyStickers 4
           shoot 75d-baby-pack-family      -uiBaby -uiBabyTab 1 -uiBabyPack family
           shoot 76c-baby-parent-settings  -uiBaby -uiBabyTab 4 -uiProfile parent-dash

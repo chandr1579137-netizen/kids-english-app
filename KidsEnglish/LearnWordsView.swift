@@ -48,6 +48,10 @@ struct LearnWordsView: View {
             .onChange(of: store.dailyNewWords) { _, _ in
                 refreshToday()
             }
+            .onChange(of: store.currentProfileId) { _, _ in
+                showStudy = false
+                refreshToday()
+            }
             .navigationDestination(isPresented: $goConsolidate) {
                 ConsolidationView(words: GamePool.filtered(
                     learnedToday.isEmpty ? todayWords : learnedToday,
@@ -62,6 +66,10 @@ struct LearnWordsView: View {
         KidScrollView {
             // 参考图首页没有大标题 —— 计划卡直接贴顶部，整屏留给出词书和主 CTA
             VStack(alignment: .leading, spacing: 26) {
+                // 左上角：当前孩子（2 个以上孩子时点一下换人）
+                HomeProfileButton(size: 44)
+                    .padding(.horizontal)
+                    .padding(.bottom, -14)
                 planCard
                     .padding(.horizontal)
 

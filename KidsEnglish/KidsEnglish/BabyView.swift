@@ -153,6 +153,15 @@ struct BabyTodayView: View {
             }
         }
         .creamBackground()
+        .overlay(alignment: .topLeading) {
+            if controller == nil {
+                HomeProfileButton(size: 52).padding(.leading, 16).padding(.top, 8)
+            }
+        }
+        .onChange(of: store.currentProfileId) { _, _ in
+            controller?.stopAll()
+            controller = nil
+        }
         .onAppear {
             if LaunchOptions.babyStep != nil, controller == nil { start(replay: false) }
         }
@@ -164,7 +173,7 @@ struct BabyTodayView: View {
                 Spacer(minLength: 0)
                 // Tom 和今天要学的三张图
                 HStack(alignment: .center, spacing: 14) {
-                    PhraseAvatarView(speaker: "tom", size: 110, active: false)
+                    PhraseAvatarView(speaker: "tom", size: preview.count > 3 ? 84 : 110, active: false)
                         .offset(y: bounce ? -10 : 0)
                     VStack(spacing: 6) {
                         HStack(spacing: 8) {
@@ -174,7 +183,8 @@ struct BabyTodayView: View {
                                     .kidFont(34, .bold, maxScale: 1.1)
                                     .foregroundStyle(Func.positiveDeep)
                             } else {
-                                ForEach(preview, id: \.self) { w in BabyPicture(word: pic(w), size: 70) }
+                                // 每天 4 个新词时小图缩一点，不然 Tom 会被挤出屏幕
+                                ForEach(preview, id: \.self) { w in BabyPicture(word: pic(w), size: preview.count > 3 ? 56 : 70) }
                             }
                         }
                         .padding(12)
@@ -463,11 +473,12 @@ final class BabySessionController {
         audio.stop()
         phase = .recording
         let my = token
-        recorder.start(key: "baby-\(w)") { [weak self] spoke in
+        let key = "\(store.currentProfileId)-baby-\(w)"   // 录音按孩子分开
+        recorder.start(key: key) { [weak self] spoke in
             guard let self, self.token == my else { return }
             if spoke {
                 self.phase = .playingBack
-                self.recorder.playBack("baby-\(w)") { [weak self] in
+                self.recorder.playBack(key) { [weak self] in
                     guard let self, self.token == my else { return }
                     self.praiseTick += 1
                     self.phase = .praised

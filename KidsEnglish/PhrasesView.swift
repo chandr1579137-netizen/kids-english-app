@@ -265,7 +265,8 @@ final class PhraseLessonController {
 
     var currentLine: PhraseLine? { line(for: step) }
 
-    private var recordingKey: String { "\(currentLine?.id ?? scene.id)-\(index)" }
+    /// 录音文件按孩子分开（多孩子共用一台手机）
+    private var recordingKey: String { "\(store.currentProfileId)-\(currentLine?.id ?? scene.id)-\(index)" }
 
     var hasOwnRecording: Bool { recorder.hasRecording(recordingKey) }
 

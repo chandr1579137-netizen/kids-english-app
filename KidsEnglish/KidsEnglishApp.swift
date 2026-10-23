@@ -172,6 +172,12 @@ struct ContentView: View {
                 TimeUpOverlay()
             }
 
+            // 多孩子：2 个以上孩子时，打开 App / 离开超过 10 分钟回来，先问「谁来学？」
+            if store.whoIsLearningVisible {
+                WhoIsLearningView()
+                    .transition(.opacity)
+            }
+
             // 首次启动：给家长一页说明。截图模式（任意 -ui* 参数）下不自动弹，
             // 否则全新安装的引导卡会盖住所有页面截图。
             if LaunchOptions.forceGuide
@@ -182,7 +188,12 @@ struct ContentView: View {
         // 回到前台时核对日期：App 挂着跨过零点不会自动换天，
         // 昨天的用量会被算进今天的限时里。
         .onChange(of: scenePhase) { _, phase in
-            if phase == .active { store.rolloverDayIfNeeded() }
+            if phase == .active {
+                store.rolloverDayIfNeeded()
+                store.noteForeground()
+            } else if phase == .background {
+                store.noteBackground()
+            }
         }
     }
 

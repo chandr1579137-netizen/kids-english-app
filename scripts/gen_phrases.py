@@ -72,6 +72,11 @@ PROMPTS = {
     "prompt_done": "You did it!",
 }
 
+# Tom 说的旁白（多孩子档案的「谁来学？」页，见 docs/pm/profiles-v1.md）
+TOM_PROMPTS = {
+    "prompt_who": "Who's learning today?",
+}
+
 # 代码画的卡片：images-plan 里的 code_kind + 句子 → App 里的画法名
 # 个别句子单独调朗读参数（屏幕上的原句不变）：whisper 核对时听错的句子在这里修。
 # L1-4-07 "I'm full." 单独一句时 full / four 很像，medium.en 听成 "I'm four."；
@@ -195,6 +200,9 @@ async def main() -> int:
 
     for name, text in PROMPTS.items():
         await tts(text, "en-US-AriaNeural", "+0%", RES / "audio" / f"{name}.mp3")
+    _, _, tom_voice, tom_pitch = CHARACTERS["tom"]
+    for name, text in TOM_PROMPTS.items():
+        await tts(text, tom_voice, tom_pitch, RES / "audio" / f"{name}.mp3")
 
     data = {"version": 1, "characters": characters, "levels": levels}
     text = json.dumps(data, ensure_ascii=False, indent=1) + "\n"

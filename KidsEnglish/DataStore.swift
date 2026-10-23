@@ -44,6 +44,12 @@ class DataStore {
     /// 宝宝模式：每天完成后得到的贴纸（日期 → 那天的贴纸词）
     var babyStickers: [String: String] = [:]
 
+    // 多孩子档案（Profiles.swift）：按孩子分开的 key 一律经 k(_:) 加前缀 `p.<id>.`
+    var profiles: [ChildProfile] = []
+    var currentProfileId: String = ProfileMigration.firstId
+    /// 「谁来学？」页是否正在显示（ContentView 盖在最上层）
+    var whoIsLearningVisible = false
+
     // 家长控制
     var timeLimitMinutes: Int = 20   // 0 = 不限
     var studySecondsToday: Double = 0
@@ -70,7 +76,10 @@ class DataStore {
 
     init() {
         loadJSON()
+        loadProfiles()
         loadProgress()
+        whoIsLearningVisible = LaunchOptions.isUIScreenshotRun ? LaunchOptions.forceWho
+            : WhoIsLearning.onLaunch(profileCount: profiles.count)
         startDayTracking()
     }
 
@@ -317,74 +326,176 @@ class DataStore {
 
     var babyDoneToday: Bool { babyStickers[dayString()] != nil }
 
+    // MARK: - 多孩子档案
+
+    /// 按孩子分开的 key：`p.<当前孩子 id>.<原 key>`（共用的 key 原样返回）
+    func k(_ key: String) -> String { ProfileKeys.scoped(key, profile: currentProfileId) }
+
+    var currentProfile: ChildProfile? { profiles.first { $0.id == currentProfileId } }
+
+    /// 截图用的假档案只在内存里，不写进存储（截图之间共用一个安装）
+    private var profilesAreDemo: Bool { LaunchOptions.demoProfiles > 0 }
+
+    private func loadProfiles() {
+        if let data = defaults.data(forKey: "profiles"),
+           let list = try? JSONDecoder().decode([ChildProfile].self, from: data), !list.isEmpty {
+            profiles = list
+        } else {
+            // 第一次用多孩子档案：现有进度全部复制到孩子 1 名下（旧 key 不删，能回退）
+            let first = ProfileMigration.firstProfile(childName: defaults.string(forKey: "childName"))
+            for c in ProfileMigration.copies(existingKeys: Array(defaults.dictionaryRepresentation().keys),
+                                             to: first.id) where defaults.object(forKey: c.to) == nil {
+                defaults.set(defaults.object(forKey: c.from), forKey: c.to)
+            }
+            profiles = [first]
+            currentProfileId = first.id
+            saveProfiles()
+        }
+        let saved = defaults.string(forKey: "currentProfileId") ?? profiles[0].id
+        currentProfileId = profiles.contains { $0.id == saved } ? saved : profiles[0].id
+        if profilesAreDemo { profiles = LaunchOptions.demoProfileList(profiles) }
+    }
+
+    private func saveProfiles() {
+        guard !profilesAreDemo else { return }
+        if let data = try? JSONEncoder().encode(profiles) { defaults.set(data, forKey: "profiles") }
+        defaults.set(currentProfileId, forKey: "currentProfileId")
+    }
+
+    /// 换孩子：先存当前孩子，再读新孩子的全部进度
+    func switchProfile(_ id: String) {
+        guard profiles.contains(where: { $0.id == id }) else { return }
+        if id != currentProfileId {
+            saveProgress()
+            currentProfileId = id
+            saveProfiles()
+            loadProgress()
+        }
+        whoIsLearningVisible = false
+    }
+
+    /// 添加孩子：默认值和全新安装一样（启蒙模式开、每天 4 个新词、从第一课开始、每日限时 20 分钟）——
+    /// 新孩子名下还没有任何 key，loadProgress 读到的都是默认值
+    @discardableResult
+    func addProfile(name: String?, avatar: String, color: Int) -> ChildProfile? {
+        guard ProfileRoster.canAdd(profiles) else { return nil }
+        var p = ProfileRoster.newProfile(existing: profiles, id: "p" + UUID().uuidString.prefix(8).lowercased())
+        let trimmed = (name ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmed.isEmpty { p.name = String(trimmed.prefix(10)) }
+        p.avatar = avatar
+        p.color = color
+        profiles.append(p)
+        saveProfiles()
+        return p
+    }
+
+    func updateProfile(_ p: ChildProfile) {
+        guard let i = profiles.firstIndex(where: { $0.id == p.id }) else { return }
+        profiles[i] = p
+        if p.id == currentProfileId { childName = p.name }
+        saveProfiles()
+    }
+
+    /// 删除孩子：连同他名下的全部 key 一起删。最后一个孩子不能删
+    func deleteProfile(_ id: String) {
+        guard ProfileRoster.canDelete(profiles), profiles.contains(where: { $0.id == id }) else { return }
+        for key in ProfileKeys.keys(of: id, in: Array(defaults.dictionaryRepresentation().keys)) {
+            defaults.removeObject(forKey: key)
+        }
+        profiles.removeAll { $0.id == id }
+        if id == currentProfileId {
+            currentProfileId = profiles[0].id
+            loadProgress()
+        }
+        saveProfiles()
+    }
+
+    func noteBackground(_ date: Date = Date()) {
+        defaults.set(date.timeIntervalSince1970, forKey: "lastBackgroundAt")
+    }
+
+    /// 回到前台：离开超过 10 分钟、有 2 个以上孩子，就先问「谁来学？」
+    func noteForeground(_ now: Date = Date()) {
+        let t = defaults.double(forKey: "lastBackgroundAt")
+        let since = t > 0 ? Date(timeIntervalSince1970: t) : nil
+        if WhoIsLearning.onReturn(profileCount: profiles.count, backgroundedAt: since, now: now) {
+            whoIsLearningVisible = true
+        }
+    }
+
     // MARK: - 持久化
 
     private func loadProgress() {
-        completedLessons = Set(defaults.stringArray(forKey: "completedLessons") ?? [])
-        if let d = defaults.dictionary(forKey: "quizBest") as? [String: Double] { quizBest = d }
-        favoriteWords = Set(defaults.stringArray(forKey: "favoriteWords") ?? [])
-        collectedCards = Set(defaults.stringArray(forKey: "collectedCards") ?? [])
-        learnedWords = Set(defaults.stringArray(forKey: "learnedWords") ?? [])
-        let theme = defaults.string(forKey: "selectedThemeId") ?? ""
+        completedLessons = Set(defaults.stringArray(forKey: k("completedLessons")) ?? [])
+        if let d = defaults.dictionary(forKey: k("quizBest")) as? [String: Double] { quizBest = d }
+        favoriteWords = Set(defaults.stringArray(forKey: k("favoriteWords")) ?? [])
+        collectedCards = Set(defaults.stringArray(forKey: k("collectedCards")) ?? [])
+        learnedWords = Set(defaults.stringArray(forKey: k("learnedWords")) ?? [])
+        let theme = defaults.string(forKey: k("selectedThemeId")) ?? ""
         selectedThemeId = theme.isEmpty ? nil : theme
-        dailyNewWords = defaults.object(forKey: "dailyNewWords") as? Int ?? 10
+        dailyNewWords = defaults.object(forKey: k("dailyNewWords")) as? Int ?? 10
         hasSeenGuide = defaults.bool(forKey: "hasSeenGuide")
-        gameIsSimple = defaults.object(forKey: "gameIsSimple") as? Bool ?? true
-        childName = defaults.string(forKey: "childName") ?? "小宝贝"
-        avatarEmoji = defaults.string(forKey: "avatarEmoji") ?? "🧒"
-        gameCorrect = defaults.integer(forKey: "gameCorrect")
-        gameAnswered = defaults.integer(forKey: "gameAnswered")
-        studyDates = defaults.stringArray(forKey: "studyDates") ?? []
-        completedPhraseScenes = Set(defaults.stringArray(forKey: "completedPhraseScenes") ?? [])
-        phraseUnlockAll = defaults.bool(forKey: "phraseUnlockAll")
-        phraseShowChinese = defaults.bool(forKey: "phraseShowChinese")
-        if let data = defaults.data(forKey: "babyWords"),
+        gameIsSimple = defaults.object(forKey: k("gameIsSimple")) as? Bool ?? true
+        childName = currentProfile?.name ?? defaults.string(forKey: k("childName")) ?? "孩子 1"
+        avatarEmoji = defaults.string(forKey: k("avatarEmoji")) ?? "🧒"
+        gameCorrect = defaults.integer(forKey: k("gameCorrect"))
+        gameAnswered = defaults.integer(forKey: k("gameAnswered"))
+        studyDates = defaults.stringArray(forKey: k("studyDates")) ?? []
+        completedPhraseScenes = Set(defaults.stringArray(forKey: k("completedPhraseScenes")) ?? [])
+        phraseUnlockAll = defaults.bool(forKey: k("phraseUnlockAll"))
+        phraseShowChinese = defaults.bool(forKey: k("phraseShowChinese"))
+        if let data = defaults.data(forKey: k("babyWords")),
            let states = try? JSONDecoder().decode([String: BabyWordState].self, from: data) {
             babyWords = states
         }
-        babyStickers = defaults.dictionary(forKey: "babyStickers") as? [String: String] ?? [:]
-        babyNewPerDay = min(max(defaults.object(forKey: "babyNewPerDay") as? Int ?? 4, 3), 8)
-        babyUnlockAll = defaults.bool(forKey: "babyUnlockAll")
+        babyStickers = defaults.dictionary(forKey: k("babyStickers")) as? [String: String] ?? [:]
+        babyNewPerDay = min(max(defaults.object(forKey: k("babyNewPerDay")) as? Int ?? 4, 3), 8)
+        babyUnlockAll = defaults.bool(forKey: k("babyUnlockAll"))
         // 宝宝模式默认值：全新安装打开；已经有学习进度的老用户保持原来的模式，家长中心可切换
-        if let saved = defaults.object(forKey: "babyMode") as? Bool {
+        if let saved = defaults.object(forKey: k("babyMode")) as? Bool {
             babyMode = saved
         } else {
             babyMode = learnedWords.isEmpty && completedLessons.isEmpty && completedPhraseScenes.isEmpty
         }
-        timeLimitMinutes = defaults.object(forKey: "timeLimitMinutes") as? Int ?? 20
-        showTranslationDefault = defaults.object(forKey: "showTranslation") as? Bool ?? true
+        timeLimitMinutes = defaults.object(forKey: k("timeLimitMinutes")) as? Int ?? 20
+        showTranslationDefault = defaults.object(forKey: k("showTranslation")) as? Bool ?? true
         todayKey = dayString()
-        studySecondsToday = defaults.double(forKey: "study_\(todayKey)")
-        bonusSecondsToday = defaults.double(forKey: "bonus_\(todayKey)")
+        studySecondsToday = defaults.double(forKey: k("study_\(todayKey)"))
+        bonusSecondsToday = defaults.double(forKey: k("bonus_\(todayKey)"))
         refreshTimeUp()
     }
 
     func saveProgress() {
-        defaults.set(Array(completedLessons), forKey: "completedLessons")
-        defaults.set(quizBest, forKey: "quizBest")
-        defaults.set(Array(favoriteWords), forKey: "favoriteWords")
-        defaults.set(Array(collectedCards), forKey: "collectedCards")
-        defaults.set(Array(learnedWords), forKey: "learnedWords")
-        defaults.set(selectedThemeId ?? "", forKey: "selectedThemeId")
-        defaults.set(dailyNewWords, forKey: "dailyNewWords")
+        // 「我的」页改的名字就是这个孩子档案的名字
+        if let i = profiles.firstIndex(where: { $0.id == currentProfileId }), profiles[i].name != childName {
+            profiles[i].name = childName
+            saveProfiles()
+        }
+        defaults.set(Array(completedLessons), forKey: k("completedLessons"))
+        defaults.set(quizBest, forKey: k("quizBest"))
+        defaults.set(Array(favoriteWords), forKey: k("favoriteWords"))
+        defaults.set(Array(collectedCards), forKey: k("collectedCards"))
+        defaults.set(Array(learnedWords), forKey: k("learnedWords"))
+        defaults.set(selectedThemeId ?? "", forKey: k("selectedThemeId"))
+        defaults.set(dailyNewWords, forKey: k("dailyNewWords"))
         defaults.set(hasSeenGuide, forKey: "hasSeenGuide")
-        defaults.set(gameIsSimple, forKey: "gameIsSimple")
-        defaults.set(childName, forKey: "childName")
-        defaults.set(avatarEmoji, forKey: "avatarEmoji")
-        defaults.set(gameCorrect, forKey: "gameCorrect")
-        defaults.set(gameAnswered, forKey: "gameAnswered")
-        defaults.set(studyDates, forKey: "studyDates")
-        defaults.set(Array(completedPhraseScenes), forKey: "completedPhraseScenes")
-        defaults.set(phraseUnlockAll, forKey: "phraseUnlockAll")
-        defaults.set(phraseShowChinese, forKey: "phraseShowChinese")
-        if let data = try? JSONEncoder().encode(babyWords) { defaults.set(data, forKey: "babyWords") }
-        defaults.set(babyStickers, forKey: "babyStickers")
-        defaults.set(babyNewPerDay, forKey: "babyNewPerDay")
-        defaults.set(babyUnlockAll, forKey: "babyUnlockAll")
-        defaults.set(babyMode, forKey: "babyMode")
-        defaults.set(timeLimitMinutes, forKey: "timeLimitMinutes")
-        defaults.set(showTranslationDefault, forKey: "showTranslation")
-        defaults.set(bonusSecondsToday, forKey: "bonus_\(todayKey)")
+        defaults.set(gameIsSimple, forKey: k("gameIsSimple"))
+        defaults.set(childName, forKey: k("childName"))
+        defaults.set(avatarEmoji, forKey: k("avatarEmoji"))
+        defaults.set(gameCorrect, forKey: k("gameCorrect"))
+        defaults.set(gameAnswered, forKey: k("gameAnswered"))
+        defaults.set(studyDates, forKey: k("studyDates"))
+        defaults.set(Array(completedPhraseScenes), forKey: k("completedPhraseScenes"))
+        defaults.set(phraseUnlockAll, forKey: k("phraseUnlockAll"))
+        defaults.set(phraseShowChinese, forKey: k("phraseShowChinese"))
+        if let data = try? JSONEncoder().encode(babyWords) { defaults.set(data, forKey: k("babyWords")) }
+        defaults.set(babyStickers, forKey: k("babyStickers"))
+        defaults.set(babyNewPerDay, forKey: k("babyNewPerDay"))
+        defaults.set(babyUnlockAll, forKey: k("babyUnlockAll"))
+        defaults.set(babyMode, forKey: k("babyMode"))
+        defaults.set(timeLimitMinutes, forKey: k("timeLimitMinutes"))
+        defaults.set(showTranslationDefault, forKey: k("showTranslation"))
+        defaults.set(bonusSecondsToday, forKey: k("bonus_\(todayKey)"))
     }
 
     // MARK: - 每日时长（只统计前台）
@@ -402,7 +513,7 @@ class DataStore {
         let key = dayString()
         if !studyDates.contains(key) {
             studyDates.append(key)
-            defaults.set(studyDates, forKey: "studyDates")
+            defaults.set(studyDates, forKey: k("studyDates"))
         }
     }
 
@@ -437,7 +548,7 @@ class DataStore {
             }
             guard self.isForeground, !self.timeUp else { return }
             self.studySecondsToday += 1
-            self.defaults.set(self.studySecondsToday, forKey: "study_\(self.todayKey)")
+            self.defaults.set(self.studySecondsToday, forKey: self.k("study_\(self.todayKey)"))
             if self.timeLimitMinutes > 0,
                self.studySecondsToday >= self.allowanceSeconds() {
                 self.timeUp = true
@@ -450,7 +561,7 @@ class DataStore {
         let minutes = timeLimitMinutes > 0 ? timeLimitMinutes : 20
         bonusSecondsToday += Double(minutes * 60)
         timeUp = false
-        defaults.set(bonusSecondsToday, forKey: "bonus_\(todayKey)")
+        defaults.set(bonusSecondsToday, forKey: k("bonus_\(todayKey)"))
     }
 
     func resetTimeUp() {
@@ -473,8 +584,8 @@ class DataStore {
         guard DayKey.isNewDay(stored: todayKey, now: now, timeZone: .current) else { return }
         let today = DayKey.key(for: now, timeZone: .current)
         todayKey = today
-        studySecondsToday = defaults.double(forKey: "study_\(today)")
-        bonusSecondsToday = defaults.double(forKey: "bonus_\(today)")
+        studySecondsToday = defaults.double(forKey: k("study_\(today)"))
+        bonusSecondsToday = defaults.double(forKey: k("bonus_\(today)"))
         timeUp = false
         refreshTimeUp()
     }
@@ -494,7 +605,8 @@ class DataStore {
         bonusSecondsToday = 0
         timeUp = false
 
-        let staleKeys = ResetPlan.keysToPurge(from: Array(defaults.dictionaryRepresentation().keys))
+        // 只清当前孩子按天分桶的用时，别的孩子不动
+        let staleKeys = ProfileKeys.dailyKeys(of: currentProfileId, in: Array(defaults.dictionaryRepresentation().keys))
         for key in staleKeys {
             defaults.removeObject(forKey: key)
         }
@@ -509,9 +621,9 @@ class DataStore {
 
     // MARK: - 备份与恢复
 
-    /// 进度快照的数据结构见 ProgressKit.swift 的 ProgressSnapshot。
-    func exportSnapshotJSON() -> String {
-        let snapshot = ProgressSnapshot(
+    /// 当前孩子的进度快照（结构见 ProgressKit.swift 的 ProgressSnapshot）
+    private func currentSnapshot() -> ProgressSnapshot {
+        ProgressSnapshot(
             version: 1,
             exportedAt: ISO8601DateFormatter().string(from: Date()),
             completedLessons: completedLessons.sorted(),
@@ -532,15 +644,10 @@ class DataStore {
             babyWords: babyWords,
             babyStickers: babyStickers
         )
-        return ProgressCodec.encode(snapshot)
     }
 
-    /// 返回给界面显示的结果文案；解析失败时不做任何修改。
-    @discardableResult
-    func importSnapshotJSON(_ text: String) -> String {
-        guard let snapshot = ProgressCodec.decode(text) else {
-            return "这段文字不是有效的进度备份"
-        }
+    /// 把一份快照写进当前孩子（旧备份缺的字段保留本机现有的，不覆盖成空）
+    private func apply(_ snapshot: ProgressSnapshot) {
         completedLessons = Set(snapshot.completedLessons)
         learnedWords = Set(snapshot.learnedWords)
         favoriteWords = Set(snapshot.favoriteWords)
@@ -555,12 +662,82 @@ class DataStore {
         studyDates = snapshot.studyDates
         if let name = snapshot.childName, !name.isEmpty { childName = name }
         if let emoji = snapshot.avatarEmoji, !emoji.isEmpty { avatarEmoji = emoji }
-        // 旧备份没有口语进度（nil）：保留本机现有的，不覆盖成空
         if let scenes = snapshot.completedPhraseScenes { completedPhraseScenes = Set(scenes) }
         if let words = snapshot.babyWords { babyWords = words }
         if let stickers = snapshot.babyStickers { babyStickers = stickers }
         saveProgress()
         refreshTimeUp()
+    }
+
+    /// 别的孩子的进度：直接从存储读，不切换当前孩子（导出会在 SwiftUI 渲染时调用，不能改状态）
+    private func storedSnapshot(of id: String) -> ProgressSnapshot {
+        func key(_ k: String) -> String { ProfileKeys.scoped(k, profile: id) }
+        var words: [String: BabyWordState]? = nil
+        if let data = defaults.data(forKey: key("babyWords")) {
+            words = try? JSONDecoder().decode([String: BabyWordState].self, from: data)
+        }
+        let theme = defaults.string(forKey: key("selectedThemeId")) ?? ""
+        return ProgressSnapshot(
+            version: 1,
+            exportedAt: ISO8601DateFormatter().string(from: Date()),
+            completedLessons: (defaults.stringArray(forKey: key("completedLessons")) ?? []).sorted(),
+            learnedWords: (defaults.stringArray(forKey: key("learnedWords")) ?? []).sorted(),
+            favoriteWords: (defaults.stringArray(forKey: key("favoriteWords")) ?? []).sorted(),
+            collectedCards: (defaults.stringArray(forKey: key("collectedCards")) ?? []).sorted(),
+            quizBest: defaults.dictionary(forKey: key("quizBest")) as? [String: Double] ?? [:],
+            selectedThemeId: theme.isEmpty ? nil : theme,
+            dailyNewWords: defaults.object(forKey: key("dailyNewWords")) as? Int ?? 10,
+            timeLimitMinutes: defaults.object(forKey: key("timeLimitMinutes")) as? Int ?? 20,
+            showTranslationDefault: defaults.object(forKey: key("showTranslation")) as? Bool ?? true,
+            gameAnswered: defaults.integer(forKey: key("gameAnswered")),
+            gameCorrect: defaults.integer(forKey: key("gameCorrect")),
+            studyDates: defaults.stringArray(forKey: key("studyDates")) ?? [],
+            childName: profiles.first { $0.id == id }?.name,
+            avatarEmoji: defaults.string(forKey: key("avatarEmoji")),
+            completedPhraseScenes: (defaults.stringArray(forKey: key("completedPhraseScenes")) ?? []).sorted(),
+            babyWords: words ?? [:],
+            babyStickers: defaults.dictionary(forKey: key("babyStickers")) as? [String: String] ?? [:]
+        )
+    }
+
+    /// 导出：version 2，包含所有孩子。只读，不改任何状态
+    func exportSnapshotJSON() -> String {
+        let entries = profiles.map { p in
+            FamilyBackup.Entry(profile: p, progress: p.id == currentProfileId ? currentSnapshot() : storedSnapshot(of: p.id))
+        }
+        return BackupCodec.encode(FamilyBackup(exportedAt: ISO8601DateFormatter().string(from: Date()),
+                                               profiles: entries))
+    }
+
+    /// 只解析、不写入：新格式要先让家长确认（见 ParentView 的导入确认框）
+    func parseBackup(_ text: String) -> BackupCodec.Parsed { BackupCodec.parse(text) }
+
+    /// 旧格式（一份进度）导入到当前孩子。返回给界面显示的结果文案；解析失败时不做任何修改。
+    @discardableResult
+    func importSnapshotJSON(_ text: String) -> String {
+        guard case .single(let snapshot) = BackupCodec.parse(text) else {
+            return "这段文字不是有效的进度备份"
+        }
+        apply(snapshot)
         return ProgressCodec.summary(snapshot)
+    }
+
+    /// 新格式：家长确认后，用备份里的孩子整体替换现在的全部孩子和进度
+    @discardableResult
+    func applyFamilyBackup(_ backup: FamilyBackup) -> String {
+        let all = Array(defaults.dictionaryRepresentation().keys)
+        for p in profiles {
+            for key in ProfileKeys.keys(of: p.id, in: all) { defaults.removeObject(forKey: key) }
+        }
+        profiles = backup.profiles.map(\.profile)
+        for entry in backup.profiles {
+            currentProfileId = entry.profile.id
+            loadProgress()
+            apply(entry.progress)
+        }
+        currentProfileId = profiles[0].id
+        saveProfiles()
+        loadProgress()
+        return "已恢复：\(backup.profiles.count) 个孩子（\(backup.childNames.joined(separator: "、"))）"
     }
 }
