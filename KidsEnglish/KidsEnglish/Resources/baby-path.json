@@ -1,0 +1,160 @@
+{
+ "version": 1,
+ "note": "宝宝模式词包（4 岁）。来自 PR #3 的 4 岁路线，去掉了「打招呼」包（hello/hi/bye 等改由「说一说」L1 用整句教，现成词图是带字的毛绒字母）。设计见 docs/pm/baby-mode-v1.md。",
+ "pictures": {
+  "mom": "mother",
+  "dad": "father",
+  "grandma": "grandmother",
+  "grandpa": "grandfather"
+ },
+ "packs": [
+  {
+   "id": "family",
+   "nameZh": "家人",
+   "songId": "song_005",
+   "locked": false,
+   "words": [
+    "mom",
+    "dad",
+    "grandma",
+    "grandpa",
+    "baby",
+    "boy",
+    "girl",
+    "family"
+   ]
+  },
+  {
+   "id": "animals",
+   "nameZh": "小动物",
+   "songId": "song_002",
+   "locked": false,
+   "words": [
+    "cat",
+    "dog",
+    "bird",
+    "fish",
+    "duck",
+    "rabbit",
+    "pig",
+    "cow",
+    "horse",
+    "bear"
+   ]
+  },
+  {
+   "id": "colors",
+   "nameZh": "颜色",
+   "songId": "song_003",
+   "locked": false,
+   "words": [
+    "red",
+    "blue",
+    "yellow",
+    "green",
+    "black",
+    "white",
+    "pink",
+    "orange"
+   ]
+  },
+  {
+   "id": "numbers",
+   "nameZh": "数字 1–5",
+   "songId": "song_004",
+   "locked": false,
+   "words": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five"
+   ]
+  },
+  {
+   "id": "food",
+   "nameZh": "吃的喝的",
+   "songId": "song_001",
+   "locked": false,
+   "words": [
+    "apple",
+    "banana",
+    "milk",
+    "water",
+    "egg",
+    "bread",
+    "rice",
+    "cake"
+   ]
+  },
+  {
+   "id": "body",
+   "nameZh": "身体",
+   "songId": "song_007",
+   "locked": false,
+   "words": [
+    "eye",
+    "ear",
+    "nose",
+    "mouth",
+    "hand",
+    "foot",
+    "head",
+    "hair"
+   ]
+  },
+  {
+   "id": "actions",
+   "nameZh": "我会做",
+   "songId": "song_010",
+   "locked": false,
+   "words": [
+    "run",
+    "jump",
+    "eat",
+    "drink",
+    "sleep",
+    "look",
+    "clap",
+    "wash"
+   ]
+  },
+  {
+   "id": "numbers-2",
+   "nameZh": "数字 6–10",
+   "songId": "song_004",
+   "locked": true,
+   "words": [
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten"
+   ]
+  },
+  {
+   "id": "clothes",
+   "nameZh": "衣服",
+   "songId": "song_010",
+   "locked": true,
+   "words": [
+    "hat",
+    "shoes",
+    "clothes"
+   ]
+  },
+  {
+   "id": "weather",
+   "nameZh": "天气",
+   "songId": "song_006",
+   "locked": true,
+   "words": [
+    "sun",
+    "rain",
+    "cloud",
+    "hot",
+    "cold"
+   ]
+  }
+ ]
+}

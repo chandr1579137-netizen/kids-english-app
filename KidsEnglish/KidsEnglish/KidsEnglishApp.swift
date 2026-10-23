@@ -31,7 +31,14 @@ private struct UITextSizeOverride: ViewModifier {
 // 第 3 个 tab 原来是「读短文」，现在是「说一说」口语课（PhrasesView.swift）。
 // rawValue 不变（还是 2），CI 的 `-uiTab 2` 参数照用。
 
-enum AppTab: Int, CaseIterable, Identifiable {
+/// 底栏的一项：正常模式（AppTab）和宝宝模式（BabyTab）共用同一个底栏样式
+protocol KidTabItem: CaseIterable, Identifiable, Hashable {
+    var title: String { get }
+    var icon: String { get }
+    var selectedIcon: String { get }
+}
+
+enum AppTab: Int, CaseIterable, Identifiable, KidTabItem {
     case learn, cards, read, songs, profile
 
     var id: Int { rawValue }
@@ -151,11 +158,16 @@ struct ContentView: View {
             // 绘本末排被压、学习页判定键被切都是这么来的（实测内容到了
             // 840–874pt 的 home indicator 区）。改成 VStack 后可用高度被
             // 真正切走，视口底边 = 底栏顶边。
-            VStack(spacing: 0) {
-                // iPad：内容列限宽居中；iPhone 上 maxWidth(720) 大于屏宽，不生效。
-                content
-                    .frame(maxWidth: KidLayout.readableWidth)
-                KidTabBar(selection: $tab)
+            if babyActive {
+                // 宝宝模式：今天 / 图画 / 说一说 / 儿歌 / 家长（BabyView.swift）
+                BabyRootView()
+            } else {
+                VStack(spacing: 0) {
+                    // iPad：内容列限宽居中；iPhone 上 maxWidth(720) 大于屏宽，不生效。
+                    content
+                        .frame(maxWidth: KidLayout.readableWidth)
+                    KidTabBar(selection: $tab)
+                }
             }
 
             if store.timeUp {
@@ -175,6 +187,8 @@ struct ContentView: View {
             if phase == .active { store.rolloverDayIfNeeded() }
         }
     }
+
+    private var babyActive: Bool { LaunchOptions.isBaby(store) }
 
     @ViewBuilder
     private var content: some View {
@@ -227,12 +241,12 @@ struct ContentView: View {
 
 // MARK: - 自定义底栏（复刻参考图：圆角方块图标底 + 下方文字）
 
-struct KidTabBar: View {
-    @Binding var selection: AppTab
+struct KidTabBar<Tab: KidTabItem>: View {
+    @Binding var selection: Tab
 
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(AppTab.allCases) { item in
+            ForEach(Array(Tab.allCases)) { item in
                 let isSelected = selection == item
                 Button {
                     guard selection != item else { return }
@@ -324,7 +338,20 @@ struct FirstRunGuide: View {
         let detail: String
     }
 
-    private let items: [Item] = [
+    private var items: [Item] { LaunchOptions.isBaby(store) ? babyItems : normalItems }
+
+    private let babyItems: [Item] = [
+        Item(emoji: "👶", title: "宝宝模式：不识字也能自己玩",
+             detail: "孩子点「今天」的大按钮：复习、学 3 个新词、听音选图，大约 5–7 分钟，做完得一张贴纸"),
+        Item(emoji: "👨‍👩‍👧", title: "家长中心在「家长」页签",
+             detail: "进入前要答一道数学题；可改每天新词数、解锁全部词包，也能切回正常模式"),
+        Item(emoji: "⏰", title: "每日限时默认 20 分钟",
+             detail: "到时间会锁屏，需要家长在家长中心解锁或调整"),
+        Item(emoji: "💾", title: "进度可以导出备份",
+             detail: "换手机前在家长中心导出文本；恢复会覆盖当前进度"),
+    ]
+
+    private let normalItems: [Item] = [
         Item(emoji: "📚", title: "每天 10 个新词",
              detail: "首页「开始学习」按每日计划走；词由 15 个主题交错排，每天都有新主题"),
         Item(emoji: "👨‍👩‍👧", title: "家长中心在「我的」页底部",

@@ -395,6 +395,28 @@ jobs:
           shoot 63a-large-phrases-home   -uiTab 2 -uiLargeText
           shoot 63b-large-phrase-learn   -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 3 -uiPhraseChinese -uiLargeText
           shoot 63c-large-phrase-done    -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 11 -uiLargeText
+          # 宝宝模式（4 岁）：首页、学新词（跟读三态）、听音选图（对 / 错）、复习、贴纸、图画册、说一说、家长页、大字号、说明卡
+          shoot 70a-baby-today            -uiBaby
+          shoot 70b-baby-today-done       -uiBaby -uiBabyDoneToday
+          shoot 71a-baby-learn            -uiBaby -uiBabyStep 0
+          shoot 71b-baby-learn-recording  -uiBaby -uiBabyStep 1 -uiBabyDemo recording
+          shoot 71c-baby-learn-praised    -uiBaby -uiBabyStep 2 -uiBabyDemo praised
+          shoot 72a-baby-game             -uiBaby -uiBabyStep 3
+          shoot 72b-baby-game-correct     -uiBaby -uiBabyStep 4 -uiBabyDemo correct
+          shoot 72c-baby-game-wrong       -uiBaby -uiBabyStep 5 -uiBabyDemo wrong
+          shoot 73a-baby-review           -uiBaby -uiBabyKnown 8 -uiBabyStep 0
+          shoot 74a-baby-done             -uiBaby -uiBabyStep 8
+          shoot 75a-baby-pictures         -uiBaby -uiBabyTab 1
+          shoot 75b-baby-pictures-progress -uiBaby -uiBabyTab 1 -uiBabyKnown 20
+          shoot 75c-baby-pack             -uiBaby -uiBabyTab 1 -uiBabyPack animals
+          shoot 76a-baby-talk             -uiBaby -uiBabyTab 2
+          shoot 76b-baby-parent           -uiBaby -uiBabyTab 4
+          shoot 77a-large-baby-today      -uiBaby -uiLargeText
+          shoot 77b-large-baby-game       -uiBaby -uiBabyStep 3 -uiLargeText
+          shoot 78-baby-guide             -uiBaby -uiGuide
+          shoot 70c-baby-stickers         -uiBaby -uiBabyDoneToday -uiBabyStickers 4
+          shoot 75d-baby-pack-family      -uiBaby -uiBabyTab 1 -uiBabyPack family
+          shoot 76c-baby-parent-settings  -uiBaby -uiBabyTab 4 -uiProfile parent-dash
           # 主题词表：自然篇平涂 + air 已移出；家人篇 cousin/son/daughter 已移出
           shoot 55a-redo-theme-nature  -uiTab 1 -uiTheme nature
           shoot 55b-redo-theme-family  -uiTab 1 -uiTheme family
@@ -454,6 +476,9 @@ jobs:
           shoot ipad-08-lesson  -uiTab 2 -uiLesson
           shoot ipad-60-phrases-home -uiTab 2
           shoot ipad-61-phrase-learn -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 0
+          shoot ipad-70-baby-today -uiBaby
+          shoot ipad-72-baby-game -uiBaby -uiBabyStep 3
+          shoot ipad-75-baby-pack-family -uiBaby -uiBabyTab 1 -uiBabyPack family
           shoot ipad-large-02-cards -uiTab 1 -uiLargeText
           ls -lh shoot-ipad
 
