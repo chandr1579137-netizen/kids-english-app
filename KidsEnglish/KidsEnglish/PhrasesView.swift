@@ -541,7 +541,7 @@ struct PhrasesHomeView: View {
             .padding(.top, 4)
             .padding(.bottom, 10)
 
-            starStrip(total: levels.reduce(0) { $0 + $1.scenes.count })
+            starStrip(levels: levels)
                 .padding(.horizontal)
                 .padding(.bottom, 14)
 
@@ -583,16 +583,23 @@ struct PhrasesHomeView: View {
         }
     }
 
-    /// 已得星星：一个场景一颗，孩子看得懂的进度
-    private func starStrip(total: Int) -> some View {
-        let got = completed.count
-        return HStack(spacing: 6) {
-            ForEach(0..<max(total, 1), id: \.self) { i in
-                Image(systemName: i < got ? "star.fill" : "star")
-                    .kidFont(22, .bold, maxScale: 1.1)
-                    .foregroundStyle(i < got ? PhraseColors.gold : Palette.inkSubtle)
+    /// 已得星星：一节课一颗（复习课也算），一级一行，孩子看得懂的进度。
+    /// 一级 8 颗（6 节新课 + 2 节复习），一行放得下，不会把整页撑宽。
+    private func starStrip(levels: [PhraseLevel]) -> some View {
+        let total = levels.reduce(0) { $0 + $1.scenes.count }
+        let got = levels.reduce(0) { n, level in n + level.scenes.filter { completed.contains($0.id) }.count }
+        return VStack(alignment: .leading, spacing: 4) {
+            ForEach(levels) { level in
+                let done = level.scenes.filter { completed.contains($0.id) }.count
+                HStack(spacing: 6) {
+                    ForEach(0..<level.scenes.count, id: \.self) { i in
+                        Image(systemName: i < done ? "star.fill" : "star")
+                            .kidFont(22, .bold, maxScale: 1.1)
+                            .foregroundStyle(i < done ? PhraseColors.gold : Palette.inkSubtle)
+                    }
+                    Spacer(minLength: 0)
+                }
             }
-            Spacer(minLength: 0)
         }
         .accessibilityElement()
         .accessibilityLabel("已得 \(got) 颗星，一共 \(total) 颗")
@@ -1234,7 +1241,9 @@ private struct PhraseDoneView: View {
             Text("You did it!")
                 .kidFont(32, .heavy)
                 .foregroundStyle(Palette.ink)
-            Text(c.firstCompletion ? "得到一颗星和一张卡片「\(c.scene.titleEn)」" : "又学了一遍，真棒！")
+            Text(c.firstCompletion
+                 ? (c.scene.isReview ? "得到一颗星" : "得到一颗星和一张卡片「\(c.scene.titleEn)」")
+                 : (c.scene.isReview ? "又复习了一遍，真棒！" : "又学了一遍，真棒！"))
                 .kidFont(17, .semibold)
                 .foregroundStyle(Palette.inkMuted)
                 .multilineTextAlignment(.center)
