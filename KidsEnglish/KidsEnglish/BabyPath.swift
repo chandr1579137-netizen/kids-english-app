@@ -209,6 +209,7 @@ enum BabyStep: Equatable, Hashable {
 
 enum BabyPlan {
     /// 复习间隔（天）：第 0 格明天复习，之后 2、4、7、14、30 天
+    static let defaultNewPerDay = 4
     static let intervals = [1, 2, 4, 7, 14, 30]
     /// 每天最多复习几个旧词
     static let reviewLimit = 4
@@ -347,7 +348,7 @@ enum BabyPlan {
 
     /// 今天的新词：按包的顺序，跳过学过的，取 count 个。
     /// 反义词一对必须同一天学：取到一对里的一个，就把另一个也带上（可能比 count 多 1 个）
-    static func newWords(_ data: BabyPathData, known: Set<String>, unlockAll: Bool, count: Int) -> [String] {
+    static func newWords(_ data: BabyPathData, known: Set<String>, unlockAll: Bool, count: Int = defaultNewPerDay) -> [String] {
         let pool = openPacks(data, known: known, unlockAll: unlockAll).flatMap(\.words).filter { !known.contains($0) }
         var out: [String] = []
         for w in pool where out.count < max(0, count) && !out.contains(w) {

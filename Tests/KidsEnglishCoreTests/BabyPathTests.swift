@@ -190,15 +190,15 @@ final class BabyPathTests: XCTestCase {
         let reviews = ["mom", "dad"]
         let steps = BabyPlan.session(d, newWords: newWords, reviews: reviews,
                                      known: Set(d.packs[0].words), unlockAll: false,
-                                     chosenGame: .listenChoice, using: &rng)
+                                     gameKind: .listenChoice, using: &rng)
 
         // 1. 唱一唱：animals 包有儿歌 old-macdonald
-        XCTAssertEqual(steps.first, .sing(words: newWords, songId: "old-macdonald"))
+        XCTAssertEqual(steps.first, .sing(packId: "animals", songId: "old-macdonald", words: newWords))
 
         // 无儿歌的词包（如 clothes）：songId 为 nil（走 4 拍鼓点节奏念词）
         let clothesSteps = BabyPlan.session(d, newWords: ["shirt", "pants", "shoes", "hat"], reviews: [],
-                                            known: [], unlockAll: true, chosenGame: .listenChoice, using: &rng)
-        XCTAssertEqual(clothesSteps.first, .sing(words: ["shirt", "pants", "shoes", "hat"], songId: nil))
+                                            known: [], unlockAll: true, gameKind: .listenChoice, using: &rng)
+        XCTAssertEqual(clothesSteps.first, .sing(packId: "clothes", songId: nil, words: ["shirt", "pants", "shoes", "hat"]))
 
         // 2. 复习
         let revAnswers = steps.compactMap { (s: BabyStep) -> String? in if case .review(let r) = s { return r.answer } else { return nil } }
@@ -227,28 +227,29 @@ final class BabyPathTests: XCTestCase {
 
         // 7. 贴纸完成页，且阶段号单调不减
         XCTAssertEqual(steps.last, .done)
-        let stages = steps.compactMap(\.stage).map(\.rawValue)
-        XCTAssertEqual(stages, stages.sorted(), "6 步阶段顺序必须从 1 到 6 单调递增")
+        let stages: [Int] = steps.compactMap { $0.stage?.rawValue }
+        XCTAssertEqual(stages, stages.sorted(), "6 步阶段顺序必须从 0 到 5 单调递增")
         XCTAssertEqual(BabyPlan.sticker(for: steps), "cat")
     }
 
     /// 游戏轮换：不连着两天选同一个游戏；只选和今天这些词搭得上的游戏
-    func testGameRotationNeverRepeatsAndRespectsCompatibility() {
+    func testGameRotationNeverRepeatsAndRespectsCompatibility() throws {
+        let d = try load()
         let colorWords = ["red", "blue", "yellow", "green"]
-        let colorCompatible = BabyPlan.compatibleGames(for: colorWords)
-        XCTAssertFalse(colorCompatible.contains(.followMe), "颜色词不能出『Tom 说你做』")
-        XCTAssertFalse(colorCompatible.contains(.shadowDrag), "纯色块剪影都一样，不能出『影子配对』")
-        XCTAssertEqual(Set(colorCompatible), Set([.listenChoice, .memoryFlip]))
+        let colorCompatible = BabyPlan.compatibleGames(for: colorWords, data: d, includeCoreOnly: true)
+        XCTAssertFalse(colorCompatible.contains(BabyGameKind.followMe), "颜色词不能出『Tom 说你做』")
+        XCTAssertFalse(colorCompatible.contains(BabyGameKind.shadowDrag), "纯色块剪影都一样，不能出『影子配对』")
+        XCTAssertEqual(Set(colorCompatible), Set([BabyGameKind.listenChoice, BabyGameKind.memoryFlip]))
 
-        let bodyWords = ["head", "eyes", "ears", "nose"]
-        let bodyCompatible = BabyPlan.compatibleGames(for: bodyWords)
-        XCTAssertTrue(bodyCompatible.contains(.followMe), "身体词可以出『Tom 说你做』")
-        XCTAssertTrue(bodyCompatible.contains(.shadowDrag), "身体词可以出『影子配对』")
+        let bodyWords = ["head", "eye", "ear", "nose"]
+        let bodyCompatible = BabyPlan.compatibleGames(for: bodyWords, data: d, includeCoreOnly: true)
+        XCTAssertTrue(bodyCompatible.contains(BabyGameKind.followMe), "身体词可以出『Tom 说你做』")
+        XCTAssertTrue(bodyCompatible.contains(BabyGameKind.shadowDrag), "身体词可以出『影子配对』")
 
         var rng = SeededGenerator(seed: 19)
         var last: BabyGameKind? = nil
         for _ in 0..<60 {
-            let picked = BabyPlan.pickGame(words: bodyWords, lastGame: last, using: &rng)
+            let picked = BabyPlan.pickGame(for: bodyWords, data: d, lastGame: last, using: &rng)
             if let last {
                 XCTAssertNotEqual(picked, last, "连着两天不能选同一个游戏")
             }
@@ -277,7 +278,7 @@ final class BabyPathTests: XCTestCase {
         let pickSteps = steps.compactMap { (s: BabyStep) -> [BabyGameKind]? in
             if case .pickGame(let g) = s { return g } else { return nil }
         }
-        XCTAssertEqual(pickSteps.count, 1, "复习日未指定游戏时应先出戳泡泡选游戏步骤")
+        XCTAssertEqual(pickSteps.count, 1, "复习日应先出戳泡泡选游戏步骤")
         XCTAssertEqual(pickSteps.first?.count, 3, "复习日应提供 3 个游戏泡泡")
     }
 
@@ -285,10 +286,11 @@ final class BabyPathTests: XCTestCase {
     func testThreeNewGamesQuestionGeneration() throws {
         let d = try load()
         var rng = SeededGenerator(seed: 23)
+        let allPool = d.allWords
 
         // 1. 翻翻乐 G1：6 张卡 = 3 对，同一屏不撞易混词、不用同一张图
         for pack in d.packs {
-            let cards = BabyPlan.makeMemoryCards(d, targets: pack.words, known: Set(d.allWords), using: &rng)
+            let cards = BabyPlan.makeMemoryCards(targets: pack.words, pool: allPool, data: d, using: &rng)
             XCTAssertEqual(cards.count, 6, "\(pack.id): 翻翻乐固定 6 张卡")
             let unique = Array(Set(cards))
             XCTAssertEqual(unique.count, 3, "\(pack.id): 翻翻乐应由 3 个不同词各出现 2 次组成")
@@ -303,27 +305,30 @@ final class BabyPathTests: XCTestCase {
             }
         }
 
-        // 2. 影子配对 G2：5 题，每题 3 选 1，不出纯色或数字词，不连着两题考同一个词
-        let shadowRounds = BabyPlan.makeShadowRounds(d, targets: ["cat", "dog", "bird", "fish"],
-                                                     known: Set(d.packs[0].words), unlockAll: false, using: &rng)
+        // 2. 影子配对 G2：5 题，每题 3 选 1，只出可生成剪影的词包，不连着两题考同一个词
+        let shadowRounds = BabyPlan.makeShadowRounds(targets: ["cat", "dog", "bird", "fish"],
+                                                     reviews: ["mom", "dad"],
+                                                     pool: d.packs[0].words + d.packs[1].words,
+                                                     data: d, using: &rng)
         XCTAssertEqual(shadowRounds.count, BabyPlan.gameRounds)
         for r in shadowRounds {
             XCTAssertEqual(r.options.count, 3)
             XCTAssertTrue(r.options.contains(r.answer))
             for opt in r.options {
-                XCTAssertFalse(BabyPlan.nonShadowWords.contains(opt), "影子配对不应出纯色/数字词 \(opt)")
+                XCTAssertTrue(BabyPlan.isShadowCompatible(opt, data: d), "影子配对不应出无剪影词 \(opt)")
             }
         }
-        for (a, b) in zip(shadowRounds.map(\.answer), shadowRounds.dropFirst().map(\.answer)) {
+        let answers = shadowRounds.map { $0.answer }
+        for (a, b) in zip(answers, answers.dropFirst()) {
             XCTAssertNotEqual(a, b)
         }
 
         // 3. Tom 说你做 G5：只出身体和动作词
-        let followWords = BabyPlan.makeFollowMeWords(d, targets: ["head", "nose", "jump", "clap"],
-                                                     known: Set(d.allWords), count: 3, using: &rng)
+        let followWords = BabyPlan.makeFollowMeWords(targets: ["head", "nose", "jump", "clap"],
+                                                     reviews: [], pool: allPool, using: &rng)
         XCTAssertEqual(followWords.count, 3)
         for w in followWords {
-            XCTAssertTrue(BabyPlan.followMeWords.contains(w), "\(w) 必须是身体或动作词")
+            XCTAssertTrue(BabyPlan.isFollowMeCompatible(w), "\(w) 必须是身体或动作词")
             XCTAssertNotNil(BabyPlan.followMeCommands[w])
         }
     }
@@ -336,7 +341,7 @@ final class BabyPathTests: XCTestCase {
         XCTAssertEqual(steps.last, .done)
         XCTAssertTrue(steps.count >= 2, "再玩一次至少有游戏步和完成页")
         for s in steps.dropLast() {
-            XCTAssertEqual(s.stage, .play, "再玩一次只出第 4 步『玩一玩』小游戏")
+            XCTAssertEqual(s.stage, BabyStage.game, "再玩一次只出第 4 步『玩一玩』小游戏")
         }
         XCTAssertEqual(BabyPlan.replay(d, known: [], unlockAll: false, using: &rng), [.done])
     }
