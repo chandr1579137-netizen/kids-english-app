@@ -178,7 +178,7 @@ struct TomMoodView: View {
     private var badge: some View {
         let badgeSize = max(24, size * 0.38)
         switch mood {
-        case .happy:
+        case .normal, .happy:
             ZStack {
                 Circle().fill(Func.positiveDeep)
                 Image(systemName: "face.smiling.inverse")
@@ -480,33 +480,27 @@ final class BabySessionController {
                 reviews: dueList,
                 known: known,
                 unlockAll: false,
-                lastGame: nil,
-                chosenGame: isRevDay ? nil : (forcedGame ?? .listenChoice),
+                gameKind: forcedGame ?? .listenChoice,
                 reviewDay: isRevDay,
                 using: &rng
             )
         } else {
             var rng = SystemRandomNumberGenerator()
+            let picked = BabyPlan.pickGame(for: sessionFocusWords, data: data, lastGame: store.babyLastGame, using: &rng)
             if replay {
-                plan = BabyPlan.replay(data, known: known, unlockAll: store.babyUnlockAll, lastGame: store.babyLastGame, using: &rng)
+                plan = BabyPlan.replay(data, known: known, unlockAll: store.babyUnlockAll, gameKind: picked, using: &rng)
             } else {
-                let picked = BabyPlan.pickGame(words: sessionFocusWords, lastGame: store.babyLastGame, using: &rng)
                 plan = BabyPlan.session(
                     data,
                     newWords: newList,
                     reviews: dueList,
                     known: known,
                     unlockAll: store.babyUnlockAll,
-                    lastGame: store.babyLastGame,
-                    chosenGame: isRevDay ? nil : picked,
+                    gameKind: picked,
                     reviewDay: isRevDay,
                     using: &rng
                 )
-                if !isRevDay {
-                    store.babyNoteTodaySession(words: newList, game: picked)
-                } else {
-                    store.babyNoteTodaySession(words: Array(dueList.prefix(4)), game: nil)
-                }
+                store.babyNoteTodaySession(words: Array(sessionFocusWords.prefix(4)), game: picked)
             }
         }
 
@@ -720,7 +714,7 @@ final class BabySessionController {
     private func enterStepBody(token my: Int) {
         guard self.token == my else { return }
         switch step {
-        case .sing(let ws, let songId):
+        case .sing(_, let songId, let ws):
             phase = .listening
             chantIndex = 0
             if let songId, let url = store.songAudioURL(songId) {
@@ -842,33 +836,17 @@ final class BabySessionController {
     func pickBubbleGame(_ kind: BabyGameKind) {
         guard !frozen, case .pickGame = step else { return }
         var rng = SystemRandomNumberGenerator()
-        var gameSteps: [BabyStep] = []
-        switch kind {
-        case .listenChoice:
-            let pool = BabyPlan.distractorPool(data, known: sessionKnownWords, focus: sessionFocusWords, unlockAll: sessionUnlockAll)
-            for r in BabyPlan.makeRounds(targets: sessionFocusWords, pool: pool, count: BabyPlan.gameRounds, using: &rng) {
-                gameSteps.append(.game(r))
-            }
-        case .memoryFlip:
-            let cards = BabyPlan.makeMemoryCards(data, targets: sessionFocusWords, known: sessionKnownWords, using: &rng)
-            if cards.count == 6 { gameSteps.append(.memoryGame(cards)) }
-        case .shadowDrag:
-            for r in BabyPlan.makeShadowRounds(data, targets: sessionFocusWords, known: sessionKnownWords, unlockAll: sessionUnlockAll, count: BabyPlan.gameRounds, using: &rng) {
-                gameSteps.append(.shadowGame(r))
-            }
-        case .followMe:
-            for w in BabyPlan.makeFollowMeWords(data, targets: sessionFocusWords, known: sessionKnownWords, count: 3, using: &rng) {
-                gameSteps.append(.followMe(w))
-            }
-        }
-        if gameSteps.isEmpty {
-            let pool = BabyPlan.distractorPool(data, known: sessionKnownWords, focus: sessionFocusWords, unlockAll: sessionUnlockAll)
-            for r in BabyPlan.makeRounds(targets: sessionFocusWords, pool: pool, count: BabyPlan.gameRounds, using: &rng) {
-                gameSteps.append(.game(r))
-            }
+        let pool = BabyPlan.openPacks(data, known: sessionKnownWords.union(sessionFocusWords), unlockAll: sessionUnlockAll).flatMap(\.words)
+        var gSteps = BabyPlan.gameSteps(kind: kind, newWords: sessionFocusWords, reviews: sessionFocusWords, pool: pool, data: data, using: &rng)
+        if gSteps.isEmpty {
+            gSteps = BabyPlan.gameSteps(kind: .listenChoice, newWords: sessionFocusWords, reviews: sessionFocusWords, pool: pool, data: data, using: &rng)
         }
         store.babyNoteTodaySession(words: Array(sessionFocusWords.prefix(4)), game: kind)
-        steps.replaceSubrange(index...index, with: gameSteps)
+        var endIdx = index
+        while endIdx + 1 < steps.count, steps[endIdx + 1].stage == .game {
+            endIdx += 1
+        }
+        steps.replaceSubrange(index...endIdx, with: gSteps)
         enterStepBody(token: token)
     }
 
@@ -966,7 +944,7 @@ final class BabySessionController {
     func replayWord(rate: Float = 1.0) {
         guard !frozen else { return }
         switch step {
-        case .sing(let ws, let songId):
+        case .sing(_, let songId, let ws):
             if let songId, let url = store.songAudioURL(songId) {
                 audio.play(url)
             } else if chantIndex < ws.count {
@@ -1095,7 +1073,7 @@ struct BabySessionView: View {
     @ViewBuilder
     private var stepContent: some View {
         switch c.step {
-        case .sing(let ws, let songId):
+        case .sing(_, let songId, let ws):
             BabySingView(c: c, words: ws, songId: songId).id(c.index)
         case .review(let r), .game(let r):
             BabyChoiceView(c: c, round: r).id(c.index)
@@ -1174,7 +1152,7 @@ struct BabySessionView: View {
         case .sing: return Func.accent
         case .review: return Func.positiveDeep
         case .learn: return Func.accentDeep
-        case .play: return Func.infoDeep
+        case .game: return Func.infoDeep
         case .sentence: return PhraseColors.gold
         case .sayIt: return Func.positiveDeep
         }
@@ -1590,10 +1568,12 @@ private struct BabyBubblePickView: View {
 
     private func bubbleMeta(for kind: BabyGameKind) -> (title: String, icon: String, tint: Color) {
         switch kind {
-        case .listenChoice: return ("听音选图", "speaker.wave.2.fill", Func.positiveDeep)
-        case .memoryFlip: return ("翻翻乐", "square.grid.2x2.fill", Func.accent)
-        case .shadowDrag: return ("影子配对", "circle.lefthalf.filled", Func.infoDeep)
-        case .followMe: return ("跟着做", "figure.dance", PhraseColors.gold)
+        case .listenChoice: return (kind.titleZh, "speaker.wave.2.fill", Func.positiveDeep)
+        case .memoryFlip: return (kind.titleZh, "square.grid.2x2.fill", Func.accent)
+        case .shadowDrag: return (kind.titleZh, "circle.lefthalf.filled", Func.infoDeep)
+        case .followMe: return (kind.titleZh, "figure.dance", PhraseColors.gold)
+        case .feedAnimal: return (kind.titleZh, "carrot.fill", Func.accentDeep)
+        case .findInScene: return (kind.titleZh, "magnifyingglass.circle.fill", Func.infoDeep)
         }
     }
 }
