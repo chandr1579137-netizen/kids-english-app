@@ -199,10 +199,16 @@ final class PhraseTests: XCTestCase {
             case "crayons": limit = PhraseCodeCardSpec.crayonCount
             default: limit = p.slots?.count ?? 0
             }
-            if let max = PhraseCodeCardSpec.slotCount[code], let slots = p.slots {
-                XCTAssertLessThanOrEqual(slots.count, max, "\(line.id): 格子太多")
+            if let most = PhraseCodeCardSpec.slotCount[code], let slots = p.slots {
+                XCTAssertLessThanOrEqual(slots.count, most, "\(line.id): 格子太多")
             }
-            for i in (p.glow ?? []) + (p.blink ?? []) + (p.star ?? []) + (p.sticker ?? []) + (p.faded ?? []) {
+            var marked: [Int] = []
+            marked.append(contentsOf: p.glow ?? [])
+            marked.append(contentsOf: p.blink ?? [])
+            marked.append(contentsOf: p.star ?? [])
+            marked.append(contentsOf: p.sticker ?? [])
+            marked.append(contentsOf: p.faded ?? [])
+            for i in marked {
                 XCTAssertTrue((0..<limit).contains(i), "\(line.id): 第 \(i) 格不存在")
             }
             if code == "clock" {
