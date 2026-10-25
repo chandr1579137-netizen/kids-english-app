@@ -7,6 +7,7 @@
   docs/daily-phrases/images-plan.json      每句配图怎么来：new / reuse / code
 输入（不在仓库里，--art 指定目录）：
   L1-x-yy.jpg            新画的句子图（assets/daily-phrases 分支 qoder-art/L1）；有就优先用
+  N19_xxx.jpg            L2 起按 images-plan 的 new_id 命名的新图（同分支 gemini-art/L2）
   avatar_<speaker>.jpg   说话人头像
   bg_<name>.webp         场景背景
 
@@ -21,7 +22,10 @@
 音量和单词发音对齐：平均 -27.5 dB，24 kHz 单声道 48 kbps。慢速不另生成，
 App 里和单词一样用 AVPlayer 变速（0.75 倍）。
 
-用法：python scripts/gen_phrases.py --art <素材目录> [--levels 1]
+已有的配音默认不重新生成（edge-tts 每次合成的文件都不完全一样，免得无谓改动）；
+要重新生成就删掉对应 mp3，或加 --redo-audio。
+
+用法：python scripts/gen_phrases.py --art <素材目录> [--levels 1,2] [--redo-audio]
 """
 import argparse
 import asyncio
@@ -70,6 +74,8 @@ PROMPTS = {
     "prompt_well": "Well done!",
     "prompt_yay": "Yay!",
     "prompt_done": "You did it!",
+    # 复习课开头（每 3 课一次，只回想）
+    "prompt_review": "Do you remember?",
 }
 
 # Tom 说的旁白（多孩子档案的「谁来学？」页，见 docs/pm/profiles-v1.md）
@@ -83,6 +89,9 @@ TOM_PROMPTS = {
 # Tom 的降调 8% 不变，只放慢 16%、用感叹号的语气读，两个模型都能听对（见 docs/daily-phrases/asr-L1.md）。
 TTS_OVERRIDES = {
     "L1-4-07": ("I'm full!", "-16%"),
+    # L2：small.en 把 "I'm five." 听成 "and five"、book 听成 bot（见 docs/daily-phrases/asr-L2.md）
+    "L2-1-08": ("I'm five!", "-16%"),
+    "L2-3-07": ("What color is your new book?", "-20%"),
 }
 
 CODE_CARDS = {
@@ -91,6 +100,14 @@ CODE_CARDS = {
     "L1-5-06": "tomorrow",
     "L1-6-01": "evening",
     "L1-6-02": "night",
+    # L2：五根蜡烛（D8 孩子 5 岁，原稿 I'm four. 改成 I'm five.）
+    "L2-1-08": "candles",
+    # 对勾 / 叉 叠在现成小图上（形状，不是字母）
+    "L2-2-04": "yes",
+    "L2-2-06": "no",
+    "L2-4-02": "yes",
+    # 心情表：三张现成小图并排
+    "L2-5-01": "mood",
 }
 
 _orig = data_classes.TTSConfig.validate_string_param
@@ -135,11 +152,19 @@ def picture_for(line_id: str, plan: dict, art: pathlib.Path) -> dict:
     """每句配图三选一：image（新图/背景，打包进 phrases/img）、icon（现成词图）、code（代码画）。"""
     if line_id in CODE_CARDS:
         icons = [i["word"] for i in plan.get("code_icons", [])]
+        for w in icons:
+            if not (OVERRIDES / f"{w}.jpg").exists():
+                raise SystemExit(f"{line_id}: 代码卡的小图 {w}.jpg 不在 word-icons-overrides 里")
+        if len(icons) > 1:
+            return {"code": CODE_CARDS[line_id], "codeIcons": icons}
         return {"code": CODE_CARDS[line_id], **({"codeIcon": icons[0]} if icons else {})}
     decision = plan["decision"]
     # 方案里「勉强能用」的复用图（juice 只画了果汁…），Qoder 另画了专属图的，优先用专属图
+    named = art / f"{plan.get('new_id', '')}.jpg"
     if decision == "new" or (art / f"{line_id}.jpg").exists():
         src = art / f"{line_id}.jpg"
+        if not src.exists() and plan.get("new_id") and named.exists():
+            src = named
         if not src.exists():
             raise SystemExit(f"缺新图：{src}")
         square(src, RES / "img" / f"{line_id}.jpg", 768)
@@ -162,6 +187,7 @@ async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--art", required=True, type=pathlib.Path)
     ap.add_argument("--levels", default="1", help="逗号分隔，如 1 或 1,2")
+    ap.add_argument("--redo-audio", action="store_true", help="已有的 mp3 也重新生成")
     args = ap.parse_args()
     levels_wanted = {int(x) for x in args.levels.split(",")}
 
@@ -185,7 +211,8 @@ async def main() -> int:
                 out = RES / "audio" / f"{line_id}.mp3"
                 _, _, voice, pitch = CHARACTERS[ln["speaker"]]
                 say, rate = TTS_OVERRIDES.get(line_id, (ln["en"], "+0%"))
-                await tts(say, voice, pitch, out, rate)
+                if args.redo_audio or not out.exists():
+                    await tts(say, voice, pitch, out, rate)
                 lines.append({"id": line_id, "speaker": ln["speaker"], "en": ln["en"], "zh": ln["zh"],
                               "audio": out.name, **picture_for(line_id, p, args.art)})
                 print(f"{line_id} {ln['speaker']:8} {ln['en']}")
@@ -199,10 +226,14 @@ async def main() -> int:
         characters.append({"id": sid, "nameEn": en, "nameZh": zh, "avatar": f"{sid}.jpg"})
 
     for name, text in PROMPTS.items():
-        await tts(text, "en-US-AriaNeural", "+0%", RES / "audio" / f"{name}.mp3")
+        out = RES / "audio" / f"{name}.mp3"
+        if args.redo_audio or not out.exists():
+            await tts(text, "en-US-AriaNeural", "+0%", out)
     _, _, tom_voice, tom_pitch = CHARACTERS["tom"]
     for name, text in TOM_PROMPTS.items():
-        await tts(text, tom_voice, tom_pitch, RES / "audio" / f"{name}.mp3")
+        out = RES / "audio" / f"{name}.mp3"
+        if args.redo_audio or not out.exists():
+            await tts(text, tom_voice, tom_pitch, out)
 
     data = {"version": 1, "characters": characters, "levels": levels}
     text = json.dumps(data, ensure_ascii=False, indent=1) + "\n"

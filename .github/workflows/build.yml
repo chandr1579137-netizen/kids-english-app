@@ -391,6 +391,21 @@ jobs:
           shoot 63a-large-phrases-home   -uiTab 2 -uiLargeText
           shoot 63b-large-phrase-learn   -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 3 -uiPhraseChinese -uiLargeText
           shoot 63c-large-phrase-done    -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 11 -uiLargeText
+          # 复习课（每 3 课一次，只回想）
+          shoot 64a-phrases-home-review  -uiTab 2 -uiPhraseCompleted L1-1,L1-2,L1-3
+          shoot 64b-phrase-review-turn   -uiTab 2 -uiPhraseScene L1-R1 -uiPhraseStep 0
+          shoot 64c-phrase-review-answer -uiTab 2 -uiPhraseScene L1-R1 -uiPhraseStep 3 -uiPhraseDemo answer
+          shoot 64d-phrase-review-done   -uiTab 2 -uiPhraseScene L1-R1 -uiPhraseStep 6
+          shoot 64e-phrase-after-review-warmup -uiTab 2 -uiPhraseScene L1-4 -uiPhraseStep 0
+          # L2（新图 16 张 + 新代码卡）
+          shoot 65a-phrase-l2-learn      -uiTab 2 -uiPhraseScene L2-1 -uiPhraseStep 2
+          shoot 65b-phrase-code-candles  -uiTab 2 -uiPhraseScene L2-1 -uiPhraseStep 9
+          shoot 65c-phrase-code-yes      -uiTab 2 -uiPhraseScene L2-2 -uiPhraseStep 5
+          shoot 65d-phrase-code-no       -uiTab 2 -uiPhraseScene L2-2 -uiPhraseStep 7
+          shoot 65e-phrase-code-mood     -uiTab 2 -uiPhraseScene L2-5 -uiPhraseStep 2
+          shoot 65f-phrase-l2-teacher    -uiTab 2 -uiPhraseScene L2-4 -uiPhraseStep 7
+          shoot 65g-phrase-l2-watch      -uiTab 2 -uiPhraseScene L2-6 -uiPhraseStep 9
+          shoot 65h-phrase-l2-review     -uiTab 2 -uiPhraseScene L2-R2 -uiPhraseStep 0
           # 宝宝模式（4 岁）：首页、学新词（跟读三态）、听音选图（对 / 错）、复习、贴纸、图画册、说一说、家长页、大字号、说明卡
           shoot 70a-baby-today            -uiBaby
           shoot 70b-baby-today-done       -uiBaby -uiBabyDoneToday

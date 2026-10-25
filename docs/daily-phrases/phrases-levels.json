@@ -643,9 +643,9 @@
       },
       {
        "speaker": "tom",
-       "en": "I'm four.",
-       "zh": "我四岁。",
-       "picture": "Tom 伸出四根手指",
+       "en": "I'm five.",
+       "zh": "我五岁。",
+       "picture": "Tom 伸出五根手指（D8：孩子现在 5 岁）",
        "src": [],
        "special_picture": "用手指个数表示，不画数字",
        "reuse_icon": null,

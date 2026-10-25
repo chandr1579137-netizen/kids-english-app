@@ -25,7 +25,7 @@ NUM = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": "fiv
 
 
 # 只是写法不同、读音一样的词：识别成哪种都算对
-SAME = {"okay": "ok", "goodnight": "good night"}
+SAME = {"okay": "ok", "goodnight": "good night", "colour": "color"}
 
 
 def words(text: str) -> list[str]:
@@ -68,7 +68,7 @@ def main() -> int:
     summary = f"共 {len(lines)} 句，两个模型都逐词一致 {len(lines) - len(bad)} 句，不一致 {len(bad)} 句。"
     md = "\n".join([f"# 「说一说」音频识别核对（L{','.join(map(str, sorted(wanted)))}）", "",
                     f"模型：{' + '.join(MODELS)}（faster-whisper，int8，temperature 0，beam 5，无提示词）。",
-                    "比对前统一大小写、去标点，连字符当空格，数字转英文；OK/okay、Goodnight/Good night 算一致。", "", summary, "", *rows, ""])
+                    "比对前统一大小写、去标点，连字符当空格，数字转英文；OK/okay、Goodnight/Good night、colour/color 算一致。", "", summary, "", *rows, ""])
     if args.out:
         (ROOT / args.out).write_text(md, encoding="utf-8")
     print(summary)
