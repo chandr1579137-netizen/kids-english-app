@@ -552,9 +552,12 @@ struct ParentTodayCard: View {
                             .kidFont(15, .bold)
                             .foregroundStyle(Func.infoDeep)
                         Text("今日句子：\(todaySentencesText)")
-                            .kidFont(14, .bold)
+                            .kidFont(13, .bold)
                             .foregroundStyle(Palette.ink)
-                            .lineLimit(1)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.82)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
                         Spacer(minLength: 0)
                         Image(systemName: "speaker.wave.2.fill")
                             .kidFont(13, .bold)
@@ -603,29 +606,31 @@ struct ParentTodayCard: View {
         return Button {
             playChildOrModel(word: w, key: key)
         } label: {
-            HStack(spacing: 8) {
-                BabyPicture(word: pic, size: 42)
+            HStack(spacing: 6) {
+                BabyPicture(word: pic, size: 36)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(w)
                         .kidFont(15, .heavy)
                         .foregroundStyle(Palette.ink)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.72)
                     Text(cn.isEmpty ? "点听发音" : cn)
                         .kidFont(12, .medium)
                         .foregroundStyle(Palette.inkMuted)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                 }
                 Spacer(minLength: 0)
                 ZStack {
                     Circle()
                         .fill(hasRec ? Func.positive.opacity(0.18) : Palette.canvasCool)
-                        .frame(width: 30, height: 30)
+                        .frame(width: 28, height: 28)
                     Image(systemName: hasRec ? "waveform" : "speaker.wave.2.fill")
-                        .font(.system(size: 13, weight: .bold))
+                        .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(hasRec ? Func.positiveDeep : Func.infoDeep)
                 }
             }
-            .padding(8)
+            .padding(7)
             .background(Palette.canvasCool.opacity(0.65), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
             .overlay {
                 RoundedRectangle(cornerRadius: 14, style: .continuous)

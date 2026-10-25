@@ -1637,7 +1637,20 @@ private struct BabyMemoryFlipView: View {
                             RoundedRectangle(cornerRadius: side * 0.16, style: .continuous)
                                 .strokeBorder(isMatched ? Func.positiveDeep : Func.accent, lineWidth: isMatched ? 6 : 4)
                         }
-                        .overlay { PraiseBurst(tick: c.praiseTick, show: isMatched) }
+                        .overlay(alignment: .bottomTrailing) {
+                            if isMatched {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 22, weight: .bold))
+                                    .foregroundStyle(Func.positiveDeep)
+                                    .background(Color.white, in: Circle())
+                                    .padding(6)
+                            }
+                        }
+                        .overlay {
+                            PraiseBurst(tick: c.praiseTick, show: isMatched)
+                                .scaleEffect(0.42)
+                                .allowsHitTesting(false)
+                        }
                 } else {
                     RoundedRectangle(cornerRadius: side * 0.16, style: .continuous)
                         .fill(
