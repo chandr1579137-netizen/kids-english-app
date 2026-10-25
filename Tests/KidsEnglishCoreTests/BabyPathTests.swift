@@ -193,12 +193,12 @@ final class BabyPathTests: XCTestCase {
                                      gameKind: .listenChoice, using: &rng)
 
         // 1. 唱一唱：animals 包有儿歌 old-macdonald
-        XCTAssertEqual(steps.first, .sing(packId: "animals", songId: "old-macdonald", words: newWords))
+        XCTAssertEqual(steps.first, .sing(packId: "animals", songId: "song_002", words: newWords))
 
         // 无儿歌的词包（如 clothes）：songId 为 nil（走 4 拍鼓点节奏念词）
-        let clothesSteps = BabyPlan.session(d, newWords: ["shirt", "pants", "shoes", "hat"], reviews: [],
+        let clothesSteps = BabyPlan.session(d, newWords: ["ball", "doll", "teddy", "kite"], reviews: [],
                                             known: [], unlockAll: true, gameKind: .listenChoice, using: &rng)
-        XCTAssertEqual(clothesSteps.first, .sing(packId: "clothes", songId: nil, words: ["shirt", "pants", "shoes", "hat"]))
+        XCTAssertEqual(clothesSteps.first, .sing(packId: "toys", songId: nil, words: ["ball", "doll", "teddy", "kite"]))
 
         // 2. 复习
         let revAnswers = steps.compactMap { (s: BabyStep) -> String? in if case .review(let r) = s { return r.answer } else { return nil } }
@@ -219,7 +219,7 @@ final class BabyPathTests: XCTestCase {
             if case .sentence(let w, let t) = s { return (w, t) } else { return nil }
         }
         XCTAssertEqual(sentences.map(\.0), ["cat", "dog"])
-        XCTAssertEqual(sentences.map(\.1), ["It's a cat.", "It's a dog."])
+        XCTAssertEqual(sentences.map(\.1), ["I see a cat.", "I see a dog."])
 
         // 6. 自己说：出今天的新词
         let sayIt = steps.compactMap { (s: BabyStep) -> String? in if case .sayIt(let w) = s { return w } else { return nil } }
