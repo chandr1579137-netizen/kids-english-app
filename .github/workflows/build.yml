@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .build
-          key: ${{ runner.os }}-swiftpm-${{ hashFiles('Package.swift', 'KidsEnglish/KidsEnglish/Models.swift', 'KidsEnglish/KidsEnglish/WordStemmer.swift', 'KidsEnglish/KidsEnglish/ProgressKit.swift', 'KidsEnglish/KidsEnglish/StudyPlan.swift') }}
+          key: ${{ runner.os }}-swiftpm-${{ hashFiles('Package.swift', 'KidsEnglish/KidsEnglish/Models.swift', 'KidsEnglish/KidsEnglish/WordStemmer.swift', 'KidsEnglish/KidsEnglish/ProgressKit.swift', 'KidsEnglish/KidsEnglish/StudyPlan.swift', 'KidsEnglish/KidsEnglish/BabyPath.swift', 'KidsEnglish/KidsEnglish/Profiles.swift') }}
           restore-keys: |
             ${{ runner.os }}-swiftpm-
 
@@ -416,25 +416,36 @@ jobs:
           shoot 66g-code-preview-7     -uiTab 2 -uiCodePreview 6
           shoot 66h-code-preview-8     -uiTab 2 -uiCodePreview 7
           shoot 66i-code-preview-9     -uiTab 2 -uiCodePreview 8
-          # 宝宝模式（4 岁）：首页、学新词（跟读三态）、听音选图（对 / 错）、复习、贴纸、图画册、说一说、家长页、大字号、说明卡
-          shoot 70a-baby-today            -uiBaby
-          shoot 70b-baby-today-done       -uiBaby -uiBabyDoneToday
-          shoot 71a-baby-learn            -uiBaby -uiBabyStep 0
-          shoot 71b-baby-learn-recording  -uiBaby -uiBabyStep 1 -uiBabyDemo recording
-          shoot 71c-baby-learn-praised    -uiBaby -uiBabyStep 2 -uiBabyDemo praised
-          shoot 72a-baby-game             -uiBaby -uiBabyStep 3
-          shoot 72b-baby-game-correct     -uiBaby -uiBabyStep 4 -uiBabyDemo correct
-          shoot 72c-baby-game-wrong       -uiBaby -uiBabyStep 5 -uiBabyDemo wrong
-          shoot 73a-baby-review           -uiBaby -uiBabyKnown 8 -uiBabyStep 0
-          shoot 74a-baby-done             -uiBaby -uiBabyStep 8
-          shoot 75a-baby-pictures         -uiBaby -uiBabyTab 1
-          shoot 75b-baby-pictures-progress -uiBaby -uiBabyTab 1 -uiBabyKnown 20
-          shoot 75c-baby-pack             -uiBaby -uiBabyTab 1 -uiBabyPack animals
-          shoot 76a-baby-talk             -uiBaby -uiBabyTab 2
-          shoot 76b-baby-parent           -uiBaby -uiBabyTab 4
-          shoot 77a-large-baby-today      -uiBaby -uiLargeText
-          shoot 77b-large-baby-game       -uiBaby -uiBabyStep 3 -uiLargeText
-          shoot 78-baby-guide             -uiBaby -uiGuide
+          # 宝宝模式（4 岁）v2：首页、6 步各 1 张 + 过场、3 个新游戏各 2 张、复习日戳泡泡、家长中心「今天」卡片
+          shoot 70a-baby-today               -uiBaby
+          shoot 70b-baby-today-done          -uiBaby -uiBabyDoneToday
+          shoot 70d-baby-sing                -uiBaby -uiBabyStep 0
+          shoot 70e-baby-intro               -uiBaby -uiBabyStep 1 -uiBabyIntro
+          shoot 71a-baby-learn               -uiBaby -uiBabyStep 1
+          shoot 71b-baby-learn-recording     -uiBaby -uiBabyStep 2 -uiBabyDemo recording
+          shoot 71c-baby-learn-praised       -uiBaby -uiBabyStep 3 -uiBabyDemo praised
+          shoot 72a-baby-game                -uiBaby -uiBabyStep 5
+          shoot 72b-baby-game-correct        -uiBaby -uiBabyStep 6 -uiBabyDemo correct
+          shoot 72c-baby-game-wrong          -uiBaby -uiBabyStep 7 -uiBabyDemo wrong
+          shoot 72d-baby-game-memory         -uiBaby -uiBabyGame memory
+          shoot 72e-baby-game-memory-solved  -uiBaby -uiBabyGame memory -uiBabyDemo solved
+          shoot 72f-baby-game-shadow         -uiBaby -uiBabyGame shadow
+          shoot 72g-baby-game-shadow-correct -uiBaby -uiBabyGame shadow -uiBabyDemo correct
+          shoot 72h-baby-game-follow         -uiBaby -uiBabyGame follow
+          shoot 72i-baby-game-follow-correct -uiBaby -uiBabyGame follow -uiBabyDemo correct
+          shoot 73a-baby-review              -uiBaby -uiBabyKnown 8 -uiBabyStep 1
+          shoot 73b-baby-review-day-bubbles  -uiBaby -uiBabyKnown 16 -uiBabyReviewDay
+          shoot 73c-baby-sentence            -uiBaby -uiBabyStep 10
+          shoot 73d-baby-sayit               -uiBaby -uiBabyStep 12
+          shoot 74a-baby-done                -uiBaby -uiBabyStep 16
+          shoot 75a-baby-pictures            -uiBaby -uiBabyTab 1
+          shoot 75b-baby-pictures-progress   -uiBaby -uiBabyTab 1 -uiBabyKnown 20
+          shoot 75c-baby-pack                -uiBaby -uiBabyTab 1 -uiBabyPack animals
+          shoot 76a-baby-talk                -uiBaby -uiBabyTab 2
+          shoot 76b-baby-parent              -uiBaby -uiBabyTab 4
+          shoot 77a-large-baby-today         -uiBaby -uiLargeText
+          shoot 77b-large-baby-game          -uiBaby -uiBabyStep 5 -uiLargeText
+          shoot 78-baby-guide                -uiBaby -uiGuide
           # 多孩子档案（假档案只在内存里）：谁来学、首页头像（两种模式）、家长中心切换与管理、添加 / 删除 / 导入确认、我的
           shoot 80a-who-two              -uiProfiles 2 -uiWho
           shoot 80b-home-avatar          -uiTab 0 -uiProfiles 2
@@ -507,7 +518,7 @@ jobs:
           shoot ipad-60-phrases-home -uiTab 2
           shoot ipad-61-phrase-learn -uiTab 2 -uiPhraseScene L1-1 -uiPhraseStep 0
           shoot ipad-70-baby-today -uiBaby
-          shoot ipad-72-baby-game -uiBaby -uiBabyStep 3
+          shoot ipad-72-baby-game -uiBaby -uiBabyStep 5
           shoot ipad-75-baby-pack-family -uiBaby -uiBabyTab 1 -uiBabyPack family
           shoot ipad-large-02-cards -uiTab 1 -uiLargeText
           ls -lh shoot-ipad
