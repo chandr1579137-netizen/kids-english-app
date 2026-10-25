@@ -156,6 +156,94 @@ final class PhraseTests: XCTestCase {
         }
     }
 
+    // MARK: - L3–L7 代码卡
+
+    private func loadPreview() throws -> PhraseCodePreview {
+        let data = try Data(contentsOf: phrases.appendingPathComponent("code-preview.json"))
+        return try XCTUnwrap(PhraseCodePreview.decode(data), "code-preview.json 解不开")
+    }
+
+    /// 出图方案里 L3–L7 的 52 张代码卡都有画法，App 都画得出来
+    func testEveryLaterCodeCardHasADrawing() throws {
+        let plan = try JSONSerialization.jsonObject(
+            with: Data(contentsOf: root.appendingPathComponent("docs/daily-phrases/images-plan.json"))) as? [String: Any]
+        let planned = (plan?["lines"] as? [[String: Any]] ?? [])
+            .filter { $0["decision"] as? String == "code" && ($0["level"] as? Int ?? 0) >= 3 }
+            .compactMap { $0["line_id"] as? String }
+        let preview = try loadPreview().lines
+        XCTAssertEqual(planned.count, 52)
+        XCTAssertEqual(preview.map(\.id), planned)
+        for line in preview {
+            let code = try XCTUnwrap(line.code, line.id)
+            XCTAssertTrue(PhraseCodeCardSpec.kinds.contains(code), "\(line.id): App 里没有画法 \(code)")
+        }
+    }
+
+    func testLaterCodeCardParamsAreInRange() throws {
+        let overrides = root.appendingPathComponent("assets/word-icons-overrides")
+        for line in try loadPreview().lines {
+            let code = line.code ?? ""
+            let p = line.codeParams ?? PhraseCodeParams()
+            var words = [line.codeIcon].compactMap { $0 }
+            for slot in p.slots ?? [] {
+                let items = PhraseSlot.parse(slot)
+                XCTAssertEqual(items.count, slot.isEmpty ? 0 : slot.split(separator: "+").count, "\(line.id): 认不出 \(slot)")
+                for case .icon(let w) in items { words.append(w) }
+            }
+            for w in words {
+                XCTAssertTrue(exists(overrides.appendingPathComponent("\(w).jpg")), "\(line.id): 小图 \(w) 不在仓库里")
+            }
+            let limit: Int
+            switch code {
+            case "calendar", "yes": limit = PhraseCodeCardSpec.calendarCells
+            case "crayons": limit = PhraseCodeCardSpec.crayonCount
+            default: limit = p.slots?.count ?? 0
+            }
+            if let max = PhraseCodeCardSpec.slotCount[code], let slots = p.slots {
+                XCTAssertLessThanOrEqual(slots.count, max, "\(line.id): 格子太多")
+            }
+            for i in (p.glow ?? []) + (p.blink ?? []) + (p.star ?? []) + (p.sticker ?? []) + (p.faded ?? []) {
+                XCTAssertTrue((0..<limit).contains(i), "\(line.id): 第 \(i) 格不存在")
+            }
+            if code == "clock" {
+                XCTAssertNotNil(PhraseClock.parse(p.time ?? ""), "\(line.id): 时间写错 \(p.time ?? "")")
+                for t in [p.cross, p.pair].compactMap({ $0 }) {
+                    XCTAssertNotNil(PhraseClock.parse(t), "\(line.id): 时间写错 \(t)")
+                }
+            }
+            if code == "row" { XCTAssertNotNil(line.codeIcon); XCTAssertGreaterThan(p.count ?? 0, 0) }
+        }
+    }
+
+    /// 钟面不写数字，全靠指针角度：几个关键时间的角度
+    func testClockHandAngles() {
+        XCTAssertEqual(PhraseClock.parse("2:30")?.hour, 2)
+        XCTAssertEqual(PhraseClock.parse("2:30")?.minute, 30)
+        XCTAssertNil(PhraseClock.parse("25:00"))
+        XCTAssertNil(PhraseClock.parse("two"))
+        let twelve = PhraseClock.angles(hour: 12, minute: 0)
+        XCTAssertEqual(twelve.hour, 0); XCTAssertEqual(twelve.minute, 0)
+        let halfNine = PhraseClock.angles(hour: 9, minute: 30)
+        XCTAssertEqual(halfNine.hour, 285); XCTAssertEqual(halfNine.minute, 180)
+        let quarterFive = PhraseClock.angles(hour: 5, minute: 15)
+        XCTAssertEqual(quarterFive.minute, 90)
+        // 3:58：长针差一点到 12
+        XCTAssertEqual(PhraseClock.angles(hour: 3, minute: 58).minute, 348)
+    }
+
+    func testSlotParsing() {
+        XCTAssertEqual(PhraseSlot.parse("sun+moon"), [.sun, .moon])
+        XCTAssertEqual(PhraseSlot.parse("icon:boy+icon:girl"), [.icon("boy"), .icon("girl")])
+        XCTAssertEqual(PhraseSlot.parse(""), [])
+        XCTAssertEqual(PhraseSlot.parse("bag"), [.bag])
+    }
+
+    /// L3–L7 上线前，代码卡预览不会混进正式课程
+    func testCodePreviewIsNotInTheCourse() throws {
+        let course = Set(try loadCatalog().allLessons.flatMap(\.lines).map(\.id))
+        XCTAssertTrue(try loadPreview().lines.allSatisfy { !course.contains($0.id) })
+    }
+
     // MARK: - 复习课
 
     func testReviewPicksTwoLinesFromEachOfTheLastThreeLessonsInterleaved() throws {

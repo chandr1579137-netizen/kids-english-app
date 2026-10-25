@@ -35,6 +35,8 @@ struct PhraseLine: Codable, Hashable, Identifiable {
     var codeIcon: String? = nil
     /// 代码卡上并排的几张现成小图（心情表）
     var codeIcons: [String]? = nil
+    /// L3 起的代码卡参数（钟表几点、一周哪格亮…），见 PhraseCodeParams
+    var codeParams: PhraseCodeParams? = nil
 }
 
 struct PhraseScene: Codable, Hashable, Identifiable {
@@ -88,12 +90,114 @@ struct PhraseCatalog: Codable, Hashable {
 
 // MARK: - 代码画的卡片
 
-/// App 里能画的代码卡（PhrasesView 的 PhraseCodeCard），单测用它检查 JSON 里没有画不出来的卡
+/// App 里能画的代码卡（PhrasesView 的 PhraseCodeCard、PhraseTimeCards 的 PhraseTimeCard），
+/// 单测用它检查 JSON 里没有画不出来的卡
 enum PhraseCodeCardSpec {
     static let kinds: Set<String> = ["sunrise", "afternoon", "tomorrow", "evening", "night",
                                      "candles", "yes", "no", "mood"]
+        .union(timeKinds)
+    /// L3 起的画法（PhraseTimeCard）：钟表 / 一周 / 月历 / 12 个月 / 四格 / 日子条 / 一排小图 / 蜡笔盒
+    static let timeKinds: Set<String> = ["clock", "week", "calendar", "months", "quad", "days", "row", "crayons"]
     /// I'm five.：五根蜡烛（D8 孩子 5 岁）
     static let candleCount = 5
+    /// 每种画法最多几格
+    static let slotCount: [String: Int] = ["week": 7, "months": 12, "quad": 4, "days": 4]
+    static let calendarCells = 35
+    static let crayonCount = 8
+}
+
+/// 代码卡参数。数据由 scripts/phrase_code_specs.py 写进 phrases.json；格子从 0 数起。
+struct PhraseCodeParams: Codable, Hashable {
+    // 钟表
+    /// 几点几分，如 "2:30"
+    var time: String? = nil
+    /// 钟的样子：wall 挂钟（带钟摆）/ watch 手表 / party 彩色派对钟；不写就是普通圆钟
+    var face: String? = nil
+    /// 问句：指针先转几圈再停下
+    var spin: Bool? = nil
+    /// 长针从 12 走过几分钟，画成涂色扇形（一刻钟、十分钟）
+    var sweep: Int? = nil
+    /// false：只画长针（问「多久」）
+    var hourHand: Bool? = nil
+    /// 加粗高亮哪根针：hour / minute
+    var bold: String? = nil
+    /// 旁边一个被划掉的小钟（It's not four o'clock.）
+    var cross: String? = nil
+    /// 旁边第二块表（快两分钟）
+    var pair: String? = nil
+    /// 手表换一种表带颜色
+    var strap: Bool? = nil
+    /// 钟旁一个无脸小太阳（早上）
+    var sun: Bool? = nil
+    /// 钟旁两个周末小格
+    var weekend: Bool? = nil
+
+    // 格子（一周 / 12 个月 / 四格 / 日子条 / 月历）
+    /// 每格放什么，写法见 PhraseSlot
+    var slots: [String]? = nil
+    var glow: [Int]? = nil
+    var blink: [Int]? = nil
+    var star: [Int]? = nil
+    var sticker: [Int]? = nil
+    var faded: [Int]? = nil
+    /// 依次轮流亮（问句）
+    var cycle: Bool? = nil
+    /// 整张卡轻轻闪（问句）
+    var pulse: Bool? = nil
+    /// 向左的「过去」箭头
+    var arrowBack: Bool? = nil
+
+    // 其他
+    /// 一排几个小图，逐个点亮
+    var count: Int? = nil
+    /// 对勾放在想法泡泡里（我想是的）
+    var think: Bool? = nil
+    /// 对勾叠在什么上：calendar 小月历（不写就是 codeIcon 小图）
+    var base: String? = nil
+}
+
+/// 格子里的东西：用 + 连起来，如 "sun+moon"、"icon:boy+icon:girl"
+enum PhraseSlot: Equatable {
+    case bag, play, sun, moon, star
+    case icon(String)
+
+    static func parse(_ text: String) -> [PhraseSlot] {
+        text.split(separator: "+").compactMap { token in
+            switch token {
+            case "bag": return .bag
+            case "play": return .play
+            case "sun": return .sun
+            case "moon": return .moon
+            case "star": return .star
+            default:
+                guard token.hasPrefix("icon:") else { return nil }
+                return .icon(String(token.dropFirst(5)))
+            }
+        }
+    }
+}
+
+/// 钟面：几点几分 → 两根针的角度（从 12 点方向顺时针，单位度）
+enum PhraseClock {
+    static func parse(_ text: String) -> (hour: Int, minute: Int)? {
+        let parts = text.split(separator: ":")
+        guard parts.count == 2, let h = Int(parts[0]), let m = Int(parts[1]),
+              (0...23).contains(h), (0...59).contains(m) else { return nil }
+        return (h, m)
+    }
+
+    static func angles(hour: Int, minute: Int) -> (hour: Double, minute: Double) {
+        (Double(hour % 12) * 30 + Double(minute) * 0.5, Double(minute) * 6)
+    }
+}
+
+/// L3–L7 代码卡预览（Resources/phrases/code-preview.json），这几级配图到齐前先截图验收
+struct PhraseCodePreview: Codable {
+    let lines: [PhraseLine]
+
+    static func decode(_ data: Data) -> PhraseCodePreview? {
+        try? JSONDecoder().decode(PhraseCodePreview.self, from: data)
+    }
 }
 
 // MARK: - 复习课

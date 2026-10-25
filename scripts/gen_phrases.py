@@ -25,7 +25,12 @@ App 里和单词一样用 AVPlayer 变速（0.75 倍）。
 已有的配音默认不重新生成（edge-tts 每次合成的文件都不完全一样，免得无谓改动）；
 要重新生成就删掉对应 mp3，或加 --redo-audio。
 
+L3 起的代码卡（钟表、一周、月历…）参数在 scripts/phrase_code_specs.py。
+--code-preview 只生成 Resources/phrases/code-preview.json（L3–L7 全部代码卡，截图验收用），
+不需要配图和配音。
+
 用法：python scripts/gen_phrases.py --art <素材目录> [--levels 1,2] [--redo-audio]
+      python scripts/gen_phrases.py --code-preview
 """
 import argparse
 import asyncio
@@ -39,6 +44,9 @@ import tempfile
 import edge_tts
 from edge_tts import data_classes
 from PIL import Image
+
+sys.path.insert(0, str(pathlib.Path(__file__).absolute().parent))
+from phrase_code_specs import CODE_SPECS, icons_used, line_fields  # noqa: E402
 
 # 不用 resolve()：在 subst 短盘符下运行时它会还原成超长路径（Windows 260 字符限制）
 ROOT = pathlib.Path(__file__).absolute().parent.parent
@@ -150,6 +158,8 @@ def square(src: pathlib.Path, out: pathlib.Path, side: int) -> None:
 
 def picture_for(line_id: str, plan: dict, art: pathlib.Path) -> dict:
     """每句配图三选一：image（新图/背景，打包进 phrases/img）、icon（现成词图）、code（代码画）。"""
+    if line_id in CODE_SPECS:
+        return line_fields(line_id)
     if line_id in CODE_CARDS:
         icons = [i["word"] for i in plan.get("code_icons", [])]
         for w in icons:
@@ -183,9 +193,46 @@ def picture_for(line_id: str, plan: dict, art: pathlib.Path) -> dict:
     raise SystemExit(f"{line_id}: 未知配图方式 {decision}（code 卡要先写进 CODE_CARDS）")
 
 
+def check_code_specs(plan: dict) -> None:
+    """L3–L7 每张代码卡都有画法；方案里要放的小图都放了，且都在仓库里"""
+    for line_id, p in plan.items():
+        if p["decision"] != "code" or p["level"] < 3:
+            continue
+        if line_id not in CODE_SPECS:
+            raise SystemExit(f"{line_id}: 代码卡还没写进 phrase_code_specs.py")
+        used = icons_used(CODE_SPECS[line_id])
+        missing = {i["word"] for i in p.get("code_icons", [])} - used
+        if missing:
+            raise SystemExit(f"{line_id}: 方案里的小图 {sorted(missing)} 没放进卡片")
+        for w in used:
+            if not (OVERRIDES / f"{w}.jpg").exists():
+                raise SystemExit(f"{line_id}: 小图 {w}.jpg 不在 word-icons-overrides 里")
+    extra = set(CODE_SPECS) - {k for k, p in plan.items() if p["decision"] == "code"}
+    if extra:
+        raise SystemExit(f"phrase_code_specs.py 里多了方案中不是代码卡的句子：{sorted(extra)}")
+
+
+def write_code_preview(src: dict, plan: dict) -> None:
+    lines = []
+    for lv in src["levels"]:
+        for sc in lv["scenes"]:
+            for i, ln in enumerate(sc["lines"], 1):
+                line_id = f"{sc['id']}-{i:02d}"
+                if line_id in CODE_SPECS:
+                    assert plan[line_id]["en"] == ln["en"], line_id
+                    lines.append({"id": line_id, "speaker": ln["speaker"], "en": ln["en"], "zh": ln["zh"],
+                                  "audio": "", **line_fields(line_id)})
+    text = json.dumps({"lines": lines}, ensure_ascii=False, indent=1) + "\n"
+    (RES / "code-preview.json").write_text(text, encoding="utf-8")
+    MIRROR.mkdir(parents=True, exist_ok=True)
+    (MIRROR / "code-preview.json").write_text(text, encoding="utf-8")
+    print(f"code-preview.json: {len(lines)} 张代码卡")
+
+
 async def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--art", required=True, type=pathlib.Path)
+    ap.add_argument("--art", type=pathlib.Path)
+    ap.add_argument("--code-preview", action="store_true", help="只生成 L3–L7 代码卡预览")
     ap.add_argument("--levels", default="1", help="逗号分隔，如 1 或 1,2")
     ap.add_argument("--redo-audio", action="store_true", help="已有的 mp3 也重新生成")
     args = ap.parse_args()
@@ -193,6 +240,12 @@ async def main() -> int:
 
     src = json.loads((DOCS / "phrases-levels.json").read_text(encoding="utf-8"))
     plan = {p["line_id"]: p for p in json.loads((DOCS / "images-plan.json").read_text(encoding="utf-8"))["lines"]}
+    check_code_specs(plan)
+    if args.code_preview:
+        write_code_preview(src, plan)
+        return 0
+    if args.art is None:
+        ap.error("要生成课程数据需要 --art")
     for d in ("img", "avatars", "audio"):
         (RES / d).mkdir(parents=True, exist_ok=True)
 
