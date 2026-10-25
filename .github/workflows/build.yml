@@ -406,6 +406,16 @@ jobs:
           shoot 65f-phrase-l2-teacher    -uiTab 2 -uiPhraseScene L2-4 -uiPhraseStep 7
           shoot 65g-phrase-l2-watch      -uiTab 2 -uiPhraseScene L2-6 -uiPhraseStep 9
           shoot 65h-phrase-l2-review     -uiTab 2 -uiPhraseScene L2-R2 -uiPhraseStep 0
+          # L3–L7 代码卡预览（52 张，一页 6 张；这几级配图到齐前先验收画法）
+          shoot 66a-code-preview-1     -uiTab 2 -uiCodePreview 0
+          shoot 66b-code-preview-2     -uiTab 2 -uiCodePreview 1
+          shoot 66c-code-preview-3     -uiTab 2 -uiCodePreview 2
+          shoot 66d-code-preview-4     -uiTab 2 -uiCodePreview 3
+          shoot 66e-code-preview-5     -uiTab 2 -uiCodePreview 4
+          shoot 66f-code-preview-6     -uiTab 2 -uiCodePreview 5
+          shoot 66g-code-preview-7     -uiTab 2 -uiCodePreview 6
+          shoot 66h-code-preview-8     -uiTab 2 -uiCodePreview 7
+          shoot 66i-code-preview-9     -uiTab 2 -uiCodePreview 8
           # 宝宝模式（4 岁）：首页、学新词（跟读三态）、听音选图（对 / 错）、复习、贴纸、图画册、说一说、家长页、大字号、说明卡
           shoot 70a-baby-today            -uiBaby
           shoot 70b-baby-today-done       -uiBaby -uiBabyDoneToday

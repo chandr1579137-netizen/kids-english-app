@@ -509,7 +509,9 @@ struct PhrasesHomeView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if let id = LaunchOptions.phraseSceneId,
+                if let page = LaunchOptions.codePreviewPage {
+                    PhraseCodePreviewView(page: page)
+                } else if let id = LaunchOptions.phraseSceneId,
                    let scene = store.phraseCatalog?.allScenes.first(where: { $0.id == id }) {
                     PhraseLessonView(scene: scene)
                 } else {
@@ -1299,7 +1301,8 @@ struct PhrasePicture: View {
             } else if let icon = line.icon, let ui = PhraseImageCache.image(store.iconURL(forWord: icon)) {
                 Image(uiImage: ui).resizable().scaledToFill()
             } else if let code = line.code {
-                PhraseCodeCard(kind: code, icon: line.codeIcon, icons: line.codeIcons ?? [], side: side)
+                PhraseCodeCard(kind: code, icon: line.codeIcon, icons: line.codeIcons ?? [],
+                               params: line.codeParams, side: side)
             } else {
                 PhraseColors.paper
             }
@@ -1341,6 +1344,7 @@ struct PhraseCodeCard: View {
     let kind: String
     let icon: String?
     var icons: [String] = []
+    var params: PhraseCodeParams? = nil
     let side: CGFloat
     /// 动画进度：蜡烛点亮了几根 / 对勾叉弹出 / 心情表亮到第几格。截图时直接停在最后一帧。
     @State private var beat = 0
@@ -1356,7 +1360,10 @@ struct PhraseCodeCard: View {
             case "yes": mark(yes: true)
             case "no": mark(yes: false)
             case "mood": mood
-            default: night
+            case "night": night
+            default:
+                // L3 起的钟表、一周、月历等（PhraseTimeCards.swift）
+                PhraseTimeCard(kind: kind, params: params ?? PhraseCodeParams(), icon: icon, side: side)
             }
         }
         .frame(width: side, height: side)
@@ -1432,8 +1439,25 @@ struct PhraseCodeCard: View {
     private func mark(yes: Bool) -> some View {
         ZStack {
             PhraseColors.paper
-            iconTile(size: side * 0.62)
-                .offset(x: -side * 0.06, y: -side * 0.04)
+            if params?.base == "calendar", let params {
+                PhraseMiniCalendar(params: params, side: side * 0.78)
+                    .offset(x: -side * 0.06, y: -side * 0.04)
+            } else {
+                iconTile(size: side * 0.62)
+                    .offset(x: -side * 0.06, y: -side * 0.04)
+            }
+            if params?.think == true {
+                // 想法泡泡：我想是的
+                ZStack {
+                    Circle().fill(Color.white).frame(width: side * 0.42, height: side * 0.42)
+                    Circle().stroke(PhraseColors.outline, lineWidth: 2).frame(width: side * 0.42, height: side * 0.42)
+                    Circle().fill(Color.white).overlay { Circle().stroke(PhraseColors.outline, lineWidth: 2) }
+                        .frame(width: side * 0.07, height: side * 0.07).offset(x: -side * 0.2, y: side * 0.22)
+                    Circle().fill(Color.white).overlay { Circle().stroke(PhraseColors.outline, lineWidth: 2) }
+                        .frame(width: side * 0.045, height: side * 0.045).offset(x: -side * 0.27, y: side * 0.3)
+                }
+                .position(x: side * 0.74, y: side * 0.72)
+            }
             ZStack {
                 Circle().fill(yes ? Func.positiveDeep : Color(red: 0.9, green: 0.27, blue: 0.27))
                 Circle().strokeBorder(Color.white, lineWidth: side * 0.018)

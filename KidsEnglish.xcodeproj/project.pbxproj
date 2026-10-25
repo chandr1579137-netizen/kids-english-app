@@ -43,6 +43,7 @@
 		E1A5E0000000000000000021 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000022; };
 		E1A5E0000000000000000031 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000032; };
 		E1A5E0000000000000000033 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000034; };
+		E1A5E0000000000000000035 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000036; };
 		E1A5E0000000000000000023 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000024; };
 		E1A5E0000000000000000025 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000026; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		E1A5E0000000000000000022 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyPath.swift; sourceTree = "<group>"; };
 		E1A5E0000000000000000032 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profiles.swift; sourceTree = "<group>"; };
 		E1A5E0000000000000000034 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesView.swift; sourceTree = "<group>"; };
+		E1A5E0000000000000000036 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseTimeCards.swift; sourceTree = "<group>"; };
 		E1A5E0000000000000000024 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyView.swift; sourceTree = "<group>"; };
 		E1A5E0000000000000000026 = {isa = PBXFileReference; lastKnownFileType = text.json; path = "baby-path.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 				E1A5E0000000000000000021,
 				E1A5E0000000000000000031,
 				E1A5E0000000000000000033,
+				E1A5E0000000000000000035,
 				E1A5E0000000000000000023,
 				E4016839B914DDD1BFBFB271,
 				2BA2E781B1DD863B23665DC3,
@@ -180,6 +183,7 @@
 				E1A5E0000000000000000022,
 				E1A5E0000000000000000032,
 				E1A5E0000000000000000034,
+				E1A5E0000000000000000036,
 				E1A5E0000000000000000024,
 				BF4DE41E689475BD10C83CE8,
 				BE87BC4EF31FE5F9536F7399,
