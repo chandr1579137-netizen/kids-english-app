@@ -22,7 +22,19 @@
     "boy",
     "girl",
     "family"
-   ]
+   ],
+   "pattern": "This is my ___.",
+   "sentences": {
+    "mom": "This is my mom.",
+    "dad": "This is my dad.",
+    "grandma": "This is my grandma.",
+    "grandpa": "This is my grandpa.",
+    "baby": "This is the baby.",
+    "boy": "I'm a boy.",
+    "girl": "I'm a girl.",
+    "family": "This is my family."
+   },
+   "tipZh": "翻全家福或见到家人时，指着跟孩子说：This is my mom! This is my dad!"
   },
   {
    "id": "animals",
@@ -40,7 +52,21 @@
     "cow",
     "horse",
     "bear"
-   ]
+   ],
+   "pattern": "I see a ___.",
+   "sentences": {
+    "cat": "I see a cat.",
+    "dog": "I see a dog.",
+    "bird": "I see a bird.",
+    "fish": "I see a fish.",
+    "duck": "I see a duck.",
+    "rabbit": "I see a rabbit.",
+    "pig": "I see a pig.",
+    "cow": "I see a cow.",
+    "horse": "I see a horse.",
+    "bear": "I see a bear."
+   },
+   "tipZh": "散步或看绘本遇到小动物时问孩子：What do you see? I see a dog!"
   },
   {
    "id": "colors",
@@ -56,7 +82,19 @@
     "white",
     "pink",
     "orange"
-   ]
+   ],
+   "pattern": "It's ___.",
+   "sentences": {
+    "red": "It's red.",
+    "blue": "It's blue.",
+    "yellow": "It's yellow.",
+    "green": "It's green.",
+    "black": "It's black.",
+    "white": "It's white.",
+    "pink": "It's pink.",
+    "orange": "It's orange."
+   },
+   "tipZh": "选衣服或玩积木时指着颜色问：What color is it? It's red!"
   },
   {
    "id": "numbers",
@@ -69,7 +107,16 @@
     "three",
     "four",
     "five"
-   ]
+   ],
+   "pattern": "I have ___ ___.",
+   "sentences": {
+    "one": "I have one apple.",
+    "two": "I have two apples.",
+    "three": "I have three apples.",
+    "four": "I have four apples.",
+    "five": "I have five apples."
+   },
+   "tipZh": "分水果或点心时和孩子一起边摆边数：One, two, three! I have three apples."
   },
   {
    "id": "food",
@@ -85,7 +132,19 @@
     "bread",
     "rice",
     "cake"
-   ]
+   ],
+   "pattern": "I like ___.",
+   "sentences": {
+    "apple": "I like apples.",
+    "banana": "I like bananas.",
+    "milk": "I like milk.",
+    "water": "I like water.",
+    "egg": "I like eggs.",
+    "bread": "I like bread.",
+    "rice": "I like rice.",
+    "cake": "I like cake."
+   },
+   "tipZh": "吃饭时问孩子：Apple or banana? 引导孩子说：I like apples."
   },
   {
    "id": "body",
@@ -101,7 +160,19 @@
     "foot",
     "head",
     "hair"
-   ]
+   ],
+   "pattern": "This is my ___.",
+   "sentences": {
+    "eye": "This is my eye.",
+    "ear": "This is my ear.",
+    "nose": "This is my nose.",
+    "mouth": "This is my mouth.",
+    "hand": "This is my hand.",
+    "foot": "This is my foot.",
+    "head": "This is my head.",
+    "hair": "This is my hair."
+   },
+   "tipZh": "洗脸或照镜子时和孩子玩指部位游戏：Touch your nose! This is my nose."
   },
   {
    "id": "actions",
@@ -117,7 +188,19 @@
     "look",
     "clap",
     "wash"
-   ]
+   ],
+   "pattern": "I can ___.",
+   "sentences": {
+    "run": "I can run.",
+    "jump": "I can jump.",
+    "eat": "I can eat.",
+    "drink": "I can drink.",
+    "sleep": "I can sleep.",
+    "look": "Look at me!",
+    "clap": "I can clap.",
+    "wash": "I can wash my hands."
+   },
+   "tipZh": "在家活动时边做动作边喊口令：Jump! I can jump! Clap your hands!"
   },
   {
    "id": "numbers-2",
@@ -130,7 +213,16 @@
     "eight",
     "nine",
     "ten"
-   ]
+   ],
+   "pattern": "I have ___ ___.",
+   "sentences": {
+    "six": "I have six apples.",
+    "seven": "I have seven apples.",
+    "eight": "I have eight apples.",
+    "nine": "I have nine apples.",
+    "ten": "I have ten apples."
+   },
+   "tipZh": "上下楼梯或收玩具时和孩子一起数到十：Six, seven, eight, nine, ten!"
   },
   {
    "id": "clothes",
@@ -141,7 +233,14 @@
     "hat",
     "shoes",
     "clothes"
-   ]
+   ],
+   "pattern": "I'm wearing a ___.",
+   "sentences": {
+    "hat": "I'm wearing a hat.",
+    "shoes": "I'm wearing shoes.",
+    "clothes": "I'm wearing nice clothes."
+   },
+   "tipZh": "出门穿鞋戴帽时对孩子说：I'm wearing a hat! I'm wearing shoes!"
   },
   {
    "id": "weather",
@@ -154,7 +253,16 @@
     "cloud",
     "hot",
     "cold"
-   ]
+   ],
+   "pattern": "It's ___.",
+   "sentences": {
+    "sun": "Look at the sun!",
+    "rain": "Look at the rain!",
+    "cloud": "Look at the cloud!",
+    "hot": "It's hot.",
+    "cold": "It's cold."
+   },
+   "tipZh": "早上拉开窗帘看天气时对孩子说：Look at the sun! It's hot today."
   },
   {
    "id": "fruits-2",
@@ -183,7 +291,8 @@
     "peach": "I like peaches.",
     "pineapple": "I like pineapples.",
     "watermelon": "I like watermelon."
-   }
+   },
+   "tipZh": "买水果或切果盘时问孩子：Do you like strawberries? I like pears."
   },
   {
    "id": "farm",
@@ -208,7 +317,8 @@
     "mouse": "It's a mouse.",
     "frog": "It's a frog.",
     "bee": "It's a bee."
-   }
+   },
+   "tipZh": "看绘本或去农庄时指着动物问：What's this? It's a sheep!"
   },
   {
    "id": "zoo",
@@ -239,7 +349,8 @@
     "kangaroo": "Look, a kangaroo!",
     "hippo": "Look, a hippo!",
     "crocodile": "Look, a crocodile!"
-   }
+   },
+   "tipZh": "看动物图册时和孩子轮流指认：Look, an elephant! Look, a panda!"
   },
   {
    "id": "sea",
@@ -268,7 +379,8 @@
     "starfish": "I see a starfish.",
     "jellyfish": "I see a jellyfish.",
     "seal": "I see a seal."
-   }
+   },
+   "tipZh": "洗澡玩水或看海洋绘本时说：I see a dolphin! I see a turtle!"
   },
   {
    "id": "bugs-birds",
@@ -293,7 +405,8 @@
     "eagle": "Where is the eagle?",
     "swan": "Where is the swan?",
     "peacock": "Where is the peacock?"
-   }
+   },
+   "tipZh": "在公园草地散步时和孩子一起找：Where is the butterfly?"
   },
   {
    "id": "food-2",
@@ -322,7 +435,8 @@
     "pizza": "Pizza, please!",
     "sandwich": "A sandwich, please!",
     "honey": "Honey, please!"
-   }
+   },
+   "tipZh": "点餐或拿点心时教孩子有礼貌地说：Juice, please! Noodles, please!"
   },
   {
    "id": "toys",
@@ -353,7 +467,8 @@
     "robot": "I have a robot.",
     "drum": "I have a drum.",
     "yoyo": "I have a yoyo."
-   }
+   },
+   "tipZh": "收拾玩具箱时让孩子拿起玩具说：I have a ball! I have a teddy!"
   },
   {
    "id": "home",
@@ -384,7 +499,8 @@
     "clock": "This is my clock.",
     "box": "This is my box.",
     "key": "This is my key."
-   }
+   },
+   "tipZh": "在房间里指着家具和孩子一问一答：This is my bed! This is my chair!"
   },
   {
    "id": "kitchen",
@@ -407,7 +523,8 @@
     "plate": "Where's my plate?",
     "bowl": "Where's my bowl?",
     "fridge": "Where's the fridge?"
-   }
+   },
+   "tipZh": "准备开饭摆餐具时问孩子：Where's my spoon? Where's my cup?"
   },
   {
    "id": "school-things",
@@ -436,7 +553,8 @@
     "scissors": "Give me the scissors.",
     "paper": "Give me the paper.",
     "glue": "Give me the glue."
-   }
+   },
+   "tipZh": "画画或做手工时请孩子递工具：Give me the crayon, please!"
   },
   {
    "id": "vehicles",
@@ -463,7 +581,8 @@
     "bike": "I can see a bike.",
     "taxi": "I can see a taxi.",
     "truck": "I can see a truck."
-   }
+   },
+   "tipZh": "出门在路上看到车时和孩子比赛喊出来：I can see a bus! I can see a car!"
   },
   {
    "id": "places",
@@ -490,7 +609,8 @@
     "hospital": "Let's go to the hospital.",
     "library": "Let's go to the library.",
     "playground": "Let's go to the playground."
-   }
+   },
+   "tipZh": "周末出门前跟孩子说今天去哪：Let's go to the park! Let's go to the zoo!"
   },
   {
    "id": "nature-2",
@@ -521,7 +641,8 @@
     "sea": "Look at the sea!",
     "mountain": "Look at the mountain!",
     "river": "Look at the river!"
-   }
+   },
+   "tipZh": "去公园散步或抬头看夜空时说：Look at the tree! Look at the moon!"
   },
   {
    "id": "body-2",
@@ -541,10 +662,11 @@
     "arm": "Touch your arm.",
     "leg": "Touch your leg.",
     "face": "Touch your face.",
-    "teeth": "Touch your teeth.",
+    "teeth": "Show me your teeth.",
     "finger": "Touch your finger.",
     "knee": "Touch your knee."
-   }
+   },
+   "tipZh": "洗澡或刷牙时发出指令：Touch your arm! Show me your teeth!"
   },
   {
    "id": "family-2",
@@ -565,7 +687,8 @@
     "friend": "This is my friend.",
     "aunt": "This is my aunt.",
     "uncle": "This is my uncle."
-   }
+   },
+   "tipZh": "和哥哥姐姐或小伙伴玩时介绍：This is my sister! This is my friend!"
   },
   {
    "id": "actions-2",
@@ -587,7 +710,7 @@
    "pattern": "I can ___.",
    "sentences": {
     "swim": "I can swim.",
-    "fly": "I can fly.",
+    "fly": "Birds can fly.",
     "sit": "I can sit.",
     "stand": "I can stand.",
     "sing": "I can sing.",
@@ -596,7 +719,8 @@
     "draw": "I can draw.",
     "walk": "I can walk.",
     "climb": "I can climb."
-   }
+   },
+   "tipZh": "在客厅地板上和孩子边做动作边说：I can dance! Birds can fly!"
   },
   {
    "id": "actions-3",
@@ -627,7 +751,8 @@
     "cry": "Don't cry!",
     "cook": "Let's cook!",
     "clean": "Let's clean up!"
-   }
+   },
+   "tipZh": "睡前或玩球时跟孩子互动：Let's kick the ball! Let's hug!"
   },
   {
    "id": "opposites-1",
@@ -655,6 +780,7 @@
     "happy": "I'm happy.",
     "sad": "I'm sad."
    },
+   "tipZh": "拿一大一小两个东西对比给孩子看：It's big! It's small!",
    "pairs": true
   },
   {
@@ -683,6 +809,7 @@
     "old": "It's old.",
     "new": "It's new."
    },
+   "tipZh": "洗手擦干或开关盒子时对比说：It's wet! It's dry! It's full!",
    "pairs": true
   },
   {
@@ -714,7 +841,8 @@
     "eighteen": "I can count to eighteen!",
     "nineteen": "I can count to nineteen!",
     "twenty": "I can count to twenty!"
-   }
+   },
+   "tipZh": "数积木或拍手游戏时从 11 数到 20：I can count to twenty!"
   },
   {
    "id": "feelings",
@@ -737,7 +865,8 @@
     "afraid": "I'm afraid.",
     "sleepy": "I'm sleepy.",
     "tired": "I'm tired."
-   }
+   },
+   "tipZh": "孩子饿了或困了时教他表达感受：I'm hungry! I'm sleepy!"
   }
  ]
 }

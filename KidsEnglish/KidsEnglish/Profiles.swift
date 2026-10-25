@@ -53,6 +53,7 @@ enum ProfileKeys {
         "selectedThemeId", "dailyNewWords", "gameIsSimple", "childName", "avatarEmoji",
         "gameCorrect", "gameAnswered", "studyDates", "completedPhraseScenes", "phraseUnlockAll",
         "phraseShowChinese", "babyWords", "babyStickers", "babyNewPerDay", "babyUnlockAll", "babyMode",
+        "babyLastGame", "babyTodayWords", "babyTodayDate",
         "timeLimitMinutes", "showTranslation",
     ]
 

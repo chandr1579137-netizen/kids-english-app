@@ -130,6 +130,14 @@ struct ParentDashboardView: View {
                     .whiteCard()
                     .padding(.horizontal)
 
+                // 启蒙模式下展示当前孩子的「今天」卡片：今日 4 词（中英+配图）、点听孩子录音、今日句子、生活里这样用
+                if LaunchOptions.isBaby(store) {
+                    ParentTodayCard()
+                        .padding(16)
+                        .whiteCard()
+                        .padding(.horizontal)
+                }
+
                 // 宝宝模式一栏放最前：开着宝宝模式时，家长进来最常改的就是它
                 card("启蒙模式") {
                     Toggle(isOn: Binding(
@@ -462,6 +470,188 @@ struct ParentDashboardView: View {
             Text(value)
                 .kidFont(16, .bold)
                 .foregroundStyle(Func.infoDeep)
+        }
+    }
+}
+
+// MARK: - 家长中心「今天」卡片（docs/pm/daily-lesson-v2.md §7）
+
+/// 每个孩子名下的「今天」卡片：
+/// 1. 今天学的 4 个词（配图 + 英文 + 中文）与今日句子
+/// 2. 点一下播放孩子在第 3 步录下的声音（`<profileId>-baby-<word>`），没录过则放标准发音
+/// 3. 词包写死的「生活里这样用」亲子互动提示，全离线
+struct ParentTodayCard: View {
+    @Environment(DataStore.self) private var store
+    @State private var recorder = PhraseVoiceRecorder()
+    @State private var wordPlayer = AudioPlayer()
+    @State private var phraseAudio = PhraseAudio()
+    @State private var playingWord: String?
+
+    private var todayWords: [String] {
+        guard let data = store.babyData else { return [] }
+        if store.babyTodayDate == store.todayKeyString, !store.babyTodayWords.isEmpty {
+            return store.babyTodayWords
+        }
+        let known: Set<String>
+        if let demoStates = BabyDemo.states(data) {
+            known = Set(demoStates.keys)
+        } else {
+            known = store.babyKnown
+        }
+        return BabyPlan.newWords(data, known: known, unlockAll: store.babyUnlockAll, count: store.babyNewPerDay)
+    }
+
+    private var primaryPack: BabyPack? {
+        guard let data = store.babyData, let first = todayWords.first else { return nil }
+        return data.pack(containing: first)
+    }
+
+    private var todaySentencesText: String {
+        guard let data = store.babyData else { return "" }
+        let sents = todayWords.prefix(2).compactMap { data.sentence(for: $0) }
+        return sents.joined(separator: "  ")
+    }
+
+    var body: some View {
+        let words = todayWords
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("今天学的")
+                    .kidFont(18, .heavy)
+                    .foregroundStyle(Palette.ink)
+                if let pack = primaryPack {
+                    Text(pack.nameZh)
+                        .kidFont(13, .bold)
+                        .foregroundStyle(Func.accentDeep)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 3)
+                        .background(Func.accent.opacity(0.16), in: Capsule())
+                }
+                Spacer()
+                Text("点小喇叭听录音")
+                    .kidFont(12, .semibold)
+                    .foregroundStyle(Palette.inkMuted)
+            }
+
+            // 今日 4 个词（2×2 网格：配图 + 英文 + 中文 + 录音回放按钮）
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
+                ForEach(words, id: \.self) { w in
+                    wordCell(w)
+                }
+            }
+
+            // 今日句子
+            if !todaySentencesText.isEmpty {
+                Button {
+                    if let first = words.first {
+                        phraseAudio.play(store.phraseFileURL("audio", "baby_sent_\(first).mp3"))
+                    }
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "text.bubble.fill")
+                            .kidFont(15, .bold)
+                            .foregroundStyle(Func.infoDeep)
+                        Text("今日句子：\(todaySentencesText)")
+                            .kidFont(13, .bold)
+                            .foregroundStyle(Palette.ink)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.82)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                        Image(systemName: "speaker.wave.2.fill")
+                            .kidFont(13, .bold)
+                            .foregroundStyle(Func.infoDeep)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 9)
+                    .background(Palette.canvasCool, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                }
+                .buttonStyle(PressableStyle())
+            }
+
+            // 生活里这样用（写死在词包里，全离线）
+            if let tip = primaryPack?.tipZh, !tip.isEmpty {
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: "lightbulb.fill")
+                        .kidFont(15, .bold)
+                        .foregroundStyle(PhraseColors.gold)
+                        .padding(.top, 2)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("生活里这样用")
+                            .kidFont(13, .heavy)
+                            .foregroundStyle(Func.accentDeep)
+                        Text(tip)
+                            .kidFont(13, .medium)
+                            .foregroundStyle(Palette.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(PhraseColors.gold.opacity(0.14), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            }
+        }
+        .onDisappear {
+            wordPlayer.stop()
+            phraseAudio.stop()
+        }
+    }
+
+    private func wordCell(_ w: String) -> some View {
+        let key = "\(store.currentProfileId)-baby-\(w)"
+        let hasRec = recorder.hasRecording(key) || LaunchOptions.isUIScreenshotRun
+        let cn = store.wordDict[w]?.meaningCn ?? ""
+        let pic = store.babyData?.picture(for: w) ?? w
+        return Button {
+            playChildOrModel(word: w, key: key)
+        } label: {
+            HStack(spacing: 6) {
+                BabyPicture(word: pic, size: 36)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(w)
+                        .kidFont(15, .heavy)
+                        .foregroundStyle(Palette.ink)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
+                    Text(cn.isEmpty ? "点听发音" : cn)
+                        .kidFont(12, .medium)
+                        .foregroundStyle(Palette.inkMuted)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                }
+                Spacer(minLength: 0)
+                ZStack {
+                    Circle()
+                        .fill(hasRec ? Func.positive.opacity(0.18) : Palette.canvasCool)
+                        .frame(width: 28, height: 28)
+                    Image(systemName: hasRec ? "waveform" : "speaker.wave.2.fill")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(hasRec ? Func.positiveDeep : Func.infoDeep)
+                }
+            }
+            .padding(7)
+            .background(Palette.canvasCool.opacity(0.65), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .strokeBorder(playingWord == w ? Func.positiveDeep : Palette.hairline, lineWidth: 1.2)
+            }
+        }
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel("\(w)，\(cn)")
+    }
+
+    private func playChildOrModel(word: String, key: String) {
+        playingWord = word
+        if recorder.hasRecording(key) {
+            recorder.playBack(key) {
+                playingWord = nil
+            }
+        } else {
+            wordPlayer.playWord(word, url: store.audioURL(forWord: word))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if playingWord == word { playingWord = nil }
+            }
         }
     }
 }

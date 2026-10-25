@@ -43,6 +43,11 @@ class DataStore {
     var babyWords: [String: BabyWordState] = [:]
     /// 宝宝模式：每天完成后得到的贴纸（日期 → 那天的贴纸词）
     var babyStickers: [String: String] = [:]
+    /// 启蒙模式 v2：上一次玩的游戏种类（同一个游戏不连着两天出现）
+    var babyLastGame: BabyGameKind? = nil
+    /// 启蒙模式 v2：今天这节课学的词（供家长中心「今天」卡片展示，即便今天已学完也不变）
+    var babyTodayWords: [String] = []
+    var babyTodayDate: String = ""
 
     // 多孩子档案（Profiles.swift）：按孩子分开的 key 一律经 k(_:) 加前缀 `p.<id>.`
     var profiles: [ChildProfile] = []
@@ -299,11 +304,36 @@ class DataStore {
 
     var todayKeyString: String { dayString() }
 
+    /// 已完成贴纸的天数（不含今天），用来判断今天是不是每 4 天一次的复习日
+    var babyCompletedDaysBeforeToday: Int {
+        let today = dayString()
+        return babyStickers.keys.filter { $0 != today }.count
+    }
+
+    /// 记下今天课上学的词与玩过的游戏
+    func babyNoteTodaySession(words: [String], game: BabyGameKind) {
+        let today = dayString()
+        if babyTodayDate != today || babyTodayWords.isEmpty {
+            babyTodayDate = today
+            babyTodayWords = words
+        }
+        babyLastGame = game
+        saveProgress()
+    }
+
     /// 学完一张新词卡：放进第 0 格，明天复习（已经学过的不重置）
     func babyLearn(_ word: String) {
         guard babyWords[word] == nil else { return }
         babyWords[word] = BabyPlan.learned(today: Date(), timeZone: .current)
         learnedWords.insert(word)
+        let today = dayString()
+        if babyTodayDate != today {
+            babyTodayDate = today
+            babyTodayWords = []
+        }
+        if !babyTodayWords.contains(word) {
+            babyTodayWords.append(word)
+        }
         saveProgress()
     }
 
@@ -447,8 +477,13 @@ class DataStore {
         if let data = defaults.data(forKey: k("babyWords")),
            let states = try? JSONDecoder().decode([String: BabyWordState].self, from: data) {
             babyWords = states
+        } else {
+            babyWords = [:]
         }
         babyStickers = defaults.dictionary(forKey: k("babyStickers")) as? [String: String] ?? [:]
+        babyLastGame = defaults.string(forKey: k("babyLastGame")).flatMap { BabyGameKind(rawValue: $0) }
+        babyTodayWords = defaults.stringArray(forKey: k("babyTodayWords")) ?? []
+        babyTodayDate = defaults.string(forKey: k("babyTodayDate")) ?? ""
         babyNewPerDay = min(max(defaults.object(forKey: k("babyNewPerDay")) as? Int ?? 4, 3), 8)
         babyUnlockAll = defaults.bool(forKey: k("babyUnlockAll"))
         // 宝宝模式默认值：全新安装打开；已经有学习进度的老用户保持原来的模式，家长中心可切换
@@ -490,6 +525,9 @@ class DataStore {
         defaults.set(phraseShowChinese, forKey: k("phraseShowChinese"))
         if let data = try? JSONEncoder().encode(babyWords) { defaults.set(data, forKey: k("babyWords")) }
         defaults.set(babyStickers, forKey: k("babyStickers"))
+        defaults.set(babyLastGame?.rawValue ?? "", forKey: k("babyLastGame"))
+        defaults.set(babyTodayWords, forKey: k("babyTodayWords"))
+        defaults.set(babyTodayDate, forKey: k("babyTodayDate"))
         defaults.set(babyNewPerDay, forKey: k("babyNewPerDay"))
         defaults.set(babyUnlockAll, forKey: k("babyUnlockAll"))
         defaults.set(babyMode, forKey: k("babyMode"))
@@ -599,6 +637,9 @@ class DataStore {
         completedPhraseScenes.removeAll()
         babyWords.removeAll()
         babyStickers.removeAll()
+        babyLastGame = nil
+        babyTodayWords.removeAll()
+        babyTodayDate = ""
         gameAnswered = 0
         gameCorrect = 0
         studySecondsToday = 0
