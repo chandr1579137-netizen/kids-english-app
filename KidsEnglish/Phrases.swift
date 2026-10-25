@@ -93,9 +93,8 @@ struct PhraseCatalog: Codable, Hashable {
 /// App 里能画的代码卡（PhrasesView 的 PhraseCodeCard、PhraseTimeCards 的 PhraseTimeCard），
 /// 单测用它检查 JSON 里没有画不出来的卡
 enum PhraseCodeCardSpec {
-    static let kinds: Set<String> = ["sunrise", "afternoon", "tomorrow", "evening", "night",
-                                     "candles", "yes", "no", "mood"]
-        .union(timeKinds)
+    static let kinds: Set<String> = Set(["sunrise", "afternoon", "tomorrow", "evening", "night",
+                                         "candles", "yes", "no", "mood"]).union(timeKinds)
     /// L3 起的画法（PhraseTimeCard）：钟表 / 一周 / 月历 / 12 个月 / 四格 / 日子条 / 一排小图 / 蜡笔盒
     static let timeKinds: Set<String> = ["clock", "week", "calendar", "months", "quad", "days", "row", "crayons"]
     /// I'm five.：五根蜡烛（D8 孩子 5 岁）
