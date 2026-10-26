@@ -26,6 +26,12 @@
    "avatar": "grandma.jpg"
   },
   {
+   "id": "grandpa",
+   "nameEn": "Grandpa",
+   "nameZh": "爷爷",
+   "avatar": "grandpa.jpg"
+  },
+  {
    "id": "mom",
    "nameEn": "Mother",
    "nameZh": "妈妈",
@@ -2348,6 +2354,400 @@
        "zh": "我可以要一个红包吗？",
        "audio": "L6-6-05.mp3",
        "image": "L6-6-05.jpg"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 7,
+   "titleZh": "计划·过去·更长的句子",
+   "scenes": [
+    {
+     "id": "L7-1",
+     "titleZh": "周末计划",
+     "titleEn": "This Weekend",
+     "lines": [
+      {
+       "id": "L7-1-01",
+       "speaker": "dad",
+       "en": "What will you do this weekend?",
+       "zh": "这个周末你想做什么？",
+       "audio": "L7-1-01.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "icon:park",
+         "icon:zoo"
+        ],
+        "glow": [
+         5,
+         6
+        ]
+       }
+      },
+      {
+       "id": "L7-1-02",
+       "speaker": "tom",
+       "en": "I'll go to the zoo!",
+       "zh": "我要去动物园！",
+       "audio": "L7-1-02.mp3",
+       "image": "L7-1-02.jpg"
+      },
+      {
+       "id": "L7-1-03",
+       "speaker": "mom",
+       "en": "What will you do the day after tomorrow?",
+       "zh": "后天你要做什么？",
+       "audio": "L7-1-03.mp3",
+       "code": "days",
+       "codeParams": {
+        "slots": [
+         "sun",
+         "sun",
+         "sun"
+        ],
+        "glow": [
+         2
+        ]
+       }
+      },
+      {
+       "id": "L7-1-04",
+       "speaker": "tom",
+       "en": "I'll visit my grandma.",
+       "zh": "我要去看奶奶。",
+       "audio": "L7-1-04.mp3",
+       "icon": "grandmother"
+      },
+      {
+       "id": "L7-1-05",
+       "speaker": "amy",
+       "en": "What did you do last weekend?",
+       "zh": "你上个周末做了什么？",
+       "audio": "L7-1-05.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "play",
+         "play"
+        ],
+        "faded": [
+         5,
+         6
+        ],
+        "arrowBack": true
+       }
+      },
+      {
+       "id": "L7-1-06",
+       "speaker": "tom",
+       "en": "I went to the beach.",
+       "zh": "我去了海边。",
+       "audio": "L7-1-06.mp3",
+       "icon": "beach"
+      },
+      {
+       "id": "L7-1-07",
+       "speaker": "tom",
+       "en": "I'll go to school for five days.",
+       "zh": "我要上五天学。",
+       "audio": "L7-1-07.mp3",
+       "code": "row",
+       "codeIcon": "school",
+       "codeParams": {
+        "count": 5
+       }
+      }
+     ]
+    },
+    {
+     "id": "L7-2",
+     "titleZh": "去动物园",
+     "titleEn": "At the Zoo",
+     "lines": [
+      {
+       "id": "L7-2-01",
+       "speaker": "tom",
+       "en": "Does the zoo open at nine?",
+       "zh": "动物园九点开门吗？",
+       "audio": "L7-2-01.mp3",
+       "code": "clock",
+       "codeIcon": "zoo",
+       "codeParams": {
+        "time": "9:00"
+       }
+      },
+      {
+       "id": "L7-2-02",
+       "speaker": "staff",
+       "en": "It opens at eight on weekends.",
+       "zh": "周末八点就开门了。",
+       "audio": "L7-2-02.mp3",
+       "code": "clock",
+       "codeIcon": "zoo",
+       "codeParams": {
+        "time": "8:00",
+        "weekend": true
+       }
+      },
+      {
+       "id": "L7-2-03",
+       "speaker": "dad",
+       "en": "Any tickets left?",
+       "zh": "还有票吗？",
+       "audio": "L7-2-03.mp3",
+       "image": "L7-2-03.jpg"
+      },
+      {
+       "id": "L7-2-04",
+       "speaker": "staff",
+       "en": "Yes, here you are.",
+       "zh": "有的，给您。",
+       "audio": "L7-2-04.mp3",
+       "image": "L7-2-04.jpg"
+      },
+      {
+       "id": "L7-2-05",
+       "speaker": "tom",
+       "en": "How long is the snake?",
+       "zh": "这条蛇有多长？",
+       "audio": "L7-2-05.mp3",
+       "icon": "snake"
+      },
+      {
+       "id": "L7-2-06",
+       "speaker": "tom",
+       "en": "How long will the show last?",
+       "zh": "表演要演多久？",
+       "audio": "L7-2-06.mp3",
+       "code": "clock",
+       "codeIcon": "dolphin",
+       "codeParams": {
+        "time": "12:10",
+        "hourHand": false,
+        "sweep": 10,
+        "pulse": true
+       }
+      },
+      {
+       "id": "L7-2-07",
+       "speaker": "staff",
+       "en": "Only ten minutes.",
+       "zh": "只有十分钟。",
+       "audio": "L7-2-07.mp3",
+       "code": "clock",
+       "codeIcon": "dolphin",
+       "codeParams": {
+        "time": "12:10",
+        "hourHand": false,
+        "sweep": 10
+       }
+      }
+     ]
+    },
+    {
+     "id": "L7-3",
+     "titleZh": "爷爷来了",
+     "titleEn": "Grandpa Is Here",
+     "lines": [
+      {
+       "id": "L7-3-01",
+       "speaker": "mom",
+       "en": "Grandpa's plane is late.",
+       "zh": "爷爷的飞机晚点了。",
+       "audio": "L7-3-01.mp3",
+       "icon": "airport"
+      },
+      {
+       "id": "L7-3-02",
+       "speaker": "tom",
+       "en": "It's been a long time, Grandpa!",
+       "zh": "爷爷，好久不见啦！",
+       "audio": "L7-3-02.mp3",
+       "image": "L7-3-02.jpg"
+      },
+      {
+       "id": "L7-3-03",
+       "speaker": "grandpa",
+       "en": "What did you do last summer?",
+       "zh": "去年夏天你做了什么？",
+       "audio": "L7-3-03.mp3",
+       "code": "quad",
+       "codeParams": {
+        "slots": [
+         "icon:flower",
+         "sun",
+         "icon:leaf",
+         "icon:snow"
+        ],
+        "glow": [
+         1
+        ],
+        "arrowBack": true
+       }
+      },
+      {
+       "id": "L7-3-04",
+       "speaker": "tom",
+       "en": "I swam in the sea!",
+       "zh": "我在海里游泳了！",
+       "audio": "L7-3-04.mp3",
+       "icon": "swim"
+      },
+      {
+       "id": "L7-3-05",
+       "speaker": "grandpa",
+       "en": "I'll be back in three days.",
+       "zh": "我三天后回来。",
+       "audio": "L7-3-05.mp3",
+       "code": "days",
+       "codeParams": {
+        "slots": [
+         "sun+moon",
+         "sun+moon",
+         "sun+moon",
+         "icon:house"
+        ]
+       }
+      },
+      {
+       "id": "L7-3-06",
+       "speaker": "tom",
+       "en": "Do you know the exact date?",
+       "zh": "你知道具体哪一天吗？",
+       "audio": "L7-3-06.mp3",
+       "code": "calendar",
+       "codeParams": {
+        "blink": [
+         17
+        ]
+       }
+      },
+      {
+       "id": "L7-3-07",
+       "speaker": "grandpa",
+       "en": "Let's check the calendar.",
+       "zh": "我们看看日历吧。",
+       "audio": "L7-3-07.mp3",
+       "code": "calendar",
+       "codeParams": {
+        "star": [
+         17
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "L7-4",
+     "titleZh": "别迟到",
+     "titleEn": "Hurry Up!",
+     "lines": [
+      {
+       "id": "L7-4-01",
+       "speaker": "mom",
+       "en": "We must be on time!",
+       "zh": "我们必须准时！",
+       "audio": "L7-4-01.mp3",
+       "code": "clock",
+       "codeIcon": "go",
+       "codeParams": {
+        "time": "8:58"
+       }
+      },
+      {
+       "id": "L7-4-02",
+       "speaker": "mom",
+       "en": "There are only two minutes left.",
+       "zh": "只剩两分钟了。",
+       "audio": "L7-4-02.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "8:58",
+        "bold": "minute"
+       }
+      },
+      {
+       "id": "L7-4-03",
+       "speaker": "mom",
+       "en": "Can you finish your milk quickly?",
+       "zh": "你能快点喝完牛奶吗？",
+       "audio": "L7-4-03.mp3",
+       "icon": "drink"
+      },
+      {
+       "id": "L7-4-04",
+       "speaker": "tom",
+       "en": "Yes! I'm ready!",
+       "zh": "好了！我准备好啦！",
+       "audio": "L7-4-04.mp3",
+       "image": "L7-4-04.jpg"
+      },
+      {
+       "id": "L7-4-05",
+       "speaker": "tom",
+       "en": "Let's go!",
+       "zh": "出发！",
+       "audio": "L7-4-05.mp3",
+       "icon": "run"
+      }
+     ]
+    },
+    {
+     "id": "L7-5",
+     "titleZh": "下雨天",
+     "titleEn": "Rainy Day",
+     "lines": [
+      {
+       "id": "L7-5-01",
+       "speaker": "tom",
+       "en": "Look! It's raining.",
+       "zh": "看！下雨了。",
+       "audio": "L7-5-01.mp3",
+       "icon": "rain"
+      },
+      {
+       "id": "L7-5-02",
+       "speaker": "mom",
+       "en": "The picnic is put off.",
+       "zh": "野餐要推迟了。",
+       "audio": "L7-5-02.mp3",
+       "image": "L7-5-02.jpg"
+      },
+      {
+       "id": "L7-5-03",
+       "speaker": "tom",
+       "en": "Oh no! I'm sad.",
+       "zh": "哎呀！我好难过。",
+       "audio": "L7-5-03.mp3",
+       "icon": "cry"
+      },
+      {
+       "id": "L7-5-04",
+       "speaker": "mom",
+       "en": "Let's have a picnic at home!",
+       "zh": "我们在家里野餐吧！",
+       "audio": "L7-5-04.mp3",
+       "image": "L7-5-04.jpg"
+      },
+      {
+       "id": "L7-5-05",
+       "speaker": "tom",
+       "en": "What a great idea!",
+       "zh": "真是个好主意！",
+       "audio": "L7-5-05.mp3",
+       "image": "L7-5-05.jpg"
       }
      ]
     }
