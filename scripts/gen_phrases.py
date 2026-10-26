@@ -100,6 +100,11 @@ TTS_OVERRIDES = {
     # L2：small.en 把 "I'm five." 听成 "and five"、book 听成 bot（见 docs/daily-phrases/asr-L2.md）
     "L2-1-08": ("I'm five!", "-16%"),
     "L2-3-07": ("What color is your new book?", "-20%"),
+
+    # L3：small.en 把 "your pen" 听成 "Japan"（调慢 16%，见 docs/daily-phrases/asr-L3.md）
+
+    "L3-2-01": ("I found your pen.", "-10%"),
+
 }
 
 CODE_CARDS = {

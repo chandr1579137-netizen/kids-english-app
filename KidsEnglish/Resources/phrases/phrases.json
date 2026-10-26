@@ -796,6 +796,288 @@
      ]
     }
    ]
+  },
+  {
+   "level": 3,
+   "titleZh": "找东西·在幼儿园",
+   "scenes": [
+    {
+     "id": "L3-1",
+     "titleZh": "找东西",
+     "titleEn": "Where Is It?",
+     "lines": [
+      {
+       "id": "L3-1-01",
+       "speaker": "tom",
+       "en": "Where is my teddy?",
+       "zh": "我的小熊在哪儿？",
+       "audio": "L3-1-01.mp3",
+       "image": "L3-1-01.jpg"
+      },
+      {
+       "id": "L3-1-02",
+       "speaker": "mom",
+       "en": "It's on the bed.",
+       "zh": "在床上。",
+       "audio": "L3-1-02.mp3",
+       "icon": "bed"
+      },
+      {
+       "id": "L3-1-03",
+       "speaker": "tom",
+       "en": "Where are my shoes?",
+       "zh": "我的鞋子在哪儿？",
+       "audio": "L3-1-03.mp3",
+       "icon": "shoes"
+      },
+      {
+       "id": "L3-1-04",
+       "speaker": "tom",
+       "en": "Do you know where they are?",
+       "zh": "你知道它们在哪儿吗？",
+       "audio": "L3-1-04.mp3",
+       "image": "L3-1-04.jpg"
+      },
+      {
+       "id": "L3-1-05",
+       "speaker": "mom",
+       "en": "Over there.",
+       "zh": "在那边。",
+       "audio": "L3-1-05.mp3",
+       "icon": "point"
+      },
+      {
+       "id": "L3-1-06",
+       "speaker": "dad",
+       "en": "Where is my book?",
+       "zh": "我的书在哪儿？",
+       "audio": "L3-1-06.mp3",
+       "image": "L3-1-06.jpg"
+      },
+      {
+       "id": "L3-1-07",
+       "speaker": "tom",
+       "en": "On the desk.",
+       "zh": "在书桌上。",
+       "audio": "L3-1-07.mp3",
+       "icon": "desk"
+      },
+      {
+       "id": "L3-1-08",
+       "speaker": "tom",
+       "en": "Here it is!",
+       "zh": "找到啦！",
+       "audio": "L3-1-08.mp3",
+       "icon": "find"
+      }
+     ]
+    },
+    {
+     "id": "L3-2",
+     "titleZh": "哪个是你的",
+     "titleEn": "Which Is Yours?",
+     "lines": [
+      {
+       "id": "L3-2-01",
+       "speaker": "amy",
+       "en": "I found your pen!",
+       "zh": "我捡到你的笔啦！",
+       "audio": "L3-2-01.mp3",
+       "image": "L3-2-01.jpg"
+      },
+      {
+       "id": "L3-2-02",
+       "speaker": "tom",
+       "en": "No. Mine is blue.",
+       "zh": "不是。我的是蓝色的。",
+       "audio": "L3-2-02.mp3",
+       "icon": "blue"
+      },
+      {
+       "id": "L3-2-03",
+       "speaker": "teacher",
+       "en": "Which is your bag?",
+       "zh": "哪个是你的书包？",
+       "audio": "L3-2-03.mp3",
+       "image": "L3-2-03.jpg"
+      },
+      {
+       "id": "L3-2-04",
+       "speaker": "tom",
+       "en": "The bigger one.",
+       "zh": "大一点的那个。",
+       "audio": "L3-2-04.mp3",
+       "icon": "big"
+      },
+      {
+       "id": "L3-2-05",
+       "speaker": "teacher",
+       "en": "The one on the hook?",
+       "zh": "挂钩上的那个吗？",
+       "audio": "L3-2-05.mp3",
+       "image": "L3-2-05.jpg"
+      },
+      {
+       "id": "L3-2-06",
+       "speaker": "teacher",
+       "en": "Are these books all yours?",
+       "zh": "这些书都是你的吗？",
+       "audio": "L3-2-06.mp3",
+       "image": "L3-2-06.jpg"
+      },
+      {
+       "id": "L3-2-07",
+       "speaker": "tom",
+       "en": "Some of them are mine.",
+       "zh": "有一些是我的。",
+       "audio": "L3-2-07.mp3",
+       "icon": "carry"
+      }
+     ]
+    },
+    {
+     "id": "L3-3",
+     "titleZh": "上学啦",
+     "titleEn": "At School",
+     "lines": [
+      {
+       "id": "L3-3-01",
+       "speaker": "tom",
+       "en": "May I come in?",
+       "zh": "我可以进来吗？",
+       "audio": "L3-3-01.mp3",
+       "icon": "open"
+      },
+      {
+       "id": "L3-3-02",
+       "speaker": "teacher",
+       "en": "Come in, please.",
+       "zh": "请进。",
+       "audio": "L3-3-02.mp3",
+       "image": "L3-3-02.jpg"
+      },
+      {
+       "id": "L3-3-03",
+       "speaker": "teacher",
+       "en": "Sit down, please.",
+       "zh": "请坐。",
+       "audio": "L3-3-03.mp3",
+       "icon": "sit"
+      },
+      {
+       "id": "L3-3-04",
+       "speaker": "teacher",
+       "en": "It's time for class.",
+       "zh": "上课时间到了。",
+       "audio": "L3-3-04.mp3",
+       "image": "L3-3-04.jpg"
+      },
+      {
+       "id": "L3-3-05",
+       "speaker": "teacher",
+       "en": "Who is here today?",
+       "zh": "今天谁来了？",
+       "audio": "L3-3-05.mp3",
+       "image": "L3-3-05.jpg"
+      },
+      {
+       "id": "L3-3-06",
+       "speaker": "tom",
+       "en": "Here!",
+       "zh": "到！",
+       "audio": "L3-3-06.mp3",
+       "image": "L3-3-06.jpg"
+      },
+      {
+       "id": "L3-3-07",
+       "speaker": "teacher",
+       "en": "Open your books, please.",
+       "zh": "请打开书。",
+       "audio": "L3-3-07.mp3",
+       "icon": "read"
+      },
+      {
+       "id": "L3-3-08",
+       "speaker": "tom",
+       "en": "Where's the toilet, please?",
+       "zh": "请问厕所在哪儿？",
+       "audio": "L3-3-08.mp3",
+       "image": "L3-3-08.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L3-4",
+     "titleZh": "画画课",
+     "titleEn": "Art Class",
+     "lines": [
+      {
+       "id": "L3-4-01",
+       "speaker": "teacher",
+       "en": "Does everyone have paper?",
+       "zh": "每个人都有纸吗？",
+       "audio": "L3-4-01.mp3",
+       "icon": "paper"
+      },
+      {
+       "id": "L3-4-02",
+       "speaker": "teacher",
+       "en": "Are you ready?",
+       "zh": "准备好了吗？",
+       "audio": "L3-4-02.mp3",
+       "image": "L3-4-02.jpg"
+      },
+      {
+       "id": "L3-4-03",
+       "speaker": "teacher",
+       "en": "Do you understand?",
+       "zh": "听明白了吗？",
+       "audio": "L3-4-03.mp3",
+       "image": "L3-4-03.jpg"
+      },
+      {
+       "id": "L3-4-04",
+       "speaker": "tom",
+       "en": "Could you say it again?",
+       "zh": "您能再说一遍吗？",
+       "audio": "L3-4-04.mp3",
+       "icon": "hear"
+      },
+      {
+       "id": "L3-4-05",
+       "speaker": "teacher",
+       "en": "Who has a different idea?",
+       "zh": "谁有不一样的想法？",
+       "audio": "L3-4-05.mp3",
+       "icon": "know"
+      },
+      {
+       "id": "L3-4-06",
+       "speaker": "teacher",
+       "en": "Any questions?",
+       "zh": "有问题吗？",
+       "audio": "L3-4-06.mp3",
+       "image": "L3-4-06.jpg"
+      },
+      {
+       "id": "L3-4-07",
+       "speaker": "teacher",
+       "en": "That's all for today.",
+       "zh": "今天就到这里。",
+       "audio": "L3-4-07.mp3",
+       "image": "L3-4-07.jpg"
+      },
+      {
+       "id": "L3-4-08",
+       "speaker": "teacher",
+       "en": "Give me your picture, please.",
+       "zh": "请把你的画交给我。",
+       "audio": "L3-4-08.mp3",
+       "icon": "picture"
+      }
+     ]
+    }
+   ]
   }
  ]
 }
