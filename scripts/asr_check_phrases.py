@@ -21,11 +21,13 @@ ROOT = pathlib.Path(__file__).absolute().parent.parent
 PH = ROOT / "KidsEnglish" / "KidsEnglish" / "Resources" / "phrases"
 MODELS = ["small.en", "medium.en"]
 NUM = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six",
-       "7": "seven", "8": "eight", "9": "nine", "10": "ten", "11": "eleven", "12": "twelve"}
+       "7": "seven", "8": "eight", "9": "nine", "10": "ten", "11": "eleven", "12": "twelve",
+       "1st": "first", "2nd": "second", "3rd": "third", "4th": "fourth", "5th": "fifth"}
 
 
-# 只是写法不同、读音一样的词：识别成哪种都算对
-SAME = {"okay": "ok", "goodnight": "good night", "colour": "color", "wong": "wang"}
+# 只是写法不同、读音一样的词：识别成哪种都算对（如合写、序数词缩写）
+SAME = {"okay": "ok", "goodnight": "good night", "colour": "color", "wong": "wang",
+        "lunchtime": "lunch time"}
 
 
 def words(text: str) -> list[str]:

@@ -1889,6 +1889,469 @@
      ]
     }
    ]
+  },
+  {
+   "level": 6,
+   "titleZh": "几点了·特别的日子",
+   "scenes": [
+    {
+     "id": "L6-1",
+     "titleZh": "几点了",
+     "titleEn": "What Time Is It?",
+     "lines": [
+      {
+       "id": "L6-1-01",
+       "speaker": "tom",
+       "en": "What time is it now?",
+       "zh": "现在几点？",
+       "audio": "L6-1-01.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "2:00",
+        "face": "wall",
+        "spin": true
+       }
+      },
+      {
+       "id": "L6-1-02",
+       "speaker": "mom",
+       "en": "It's two o'clock.",
+       "zh": "两点了。",
+       "audio": "L6-1-02.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "2:00",
+        "bold": "hour"
+       }
+      },
+      {
+       "id": "L6-1-03",
+       "speaker": "mom",
+       "en": "It's not four o'clock.",
+       "zh": "还没到四点呢。",
+       "audio": "L6-1-03.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "2:30",
+        "cross": "4:00"
+       }
+      },
+      {
+       "id": "L6-1-04",
+       "speaker": "tom",
+       "en": "It's half past nine.",
+       "zh": "九点半了。",
+       "audio": "L6-1-04.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "9:30",
+        "sun": true
+       }
+      },
+      {
+       "id": "L6-1-05",
+       "speaker": "mom",
+       "en": "It's twelve o'clock. Lunch time!",
+       "zh": "十二点了，吃午饭！",
+       "audio": "L6-1-05.mp3",
+       "code": "clock",
+       "codeIcon": "rice",
+       "codeParams": {
+        "time": "12:00"
+       }
+      },
+      {
+       "id": "L6-1-06",
+       "speaker": "tom",
+       "en": "It's a quarter past five.",
+       "zh": "五点一刻了。",
+       "audio": "L6-1-06.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "5:15",
+        "sweep": 15
+       }
+      }
+     ]
+    },
+    {
+     "id": "L6-2",
+     "titleZh": "我的小手表",
+     "titleEn": "My Watch",
+     "lines": [
+      {
+       "id": "L6-2-01",
+       "speaker": "amy",
+       "en": "What time is it on your watch?",
+       "zh": "你的手表上几点了？",
+       "audio": "L6-2-01.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "2:00",
+        "face": "watch",
+        "spin": true
+       }
+      },
+      {
+       "id": "L6-2-02",
+       "speaker": "tom",
+       "en": "My watch says two o'clock.",
+       "zh": "我的表是两点。",
+       "audio": "L6-2-02.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "2:00",
+        "face": "watch",
+        "strap": true
+       }
+      },
+      {
+       "id": "L6-2-03",
+       "speaker": "amy",
+       "en": "My watch is two minutes fast.",
+       "zh": "我的表快了两分钟。",
+       "audio": "L6-2-03.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "2:00",
+        "face": "watch",
+        "pair": "2:02"
+       }
+      },
+      {
+       "id": "L6-2-04",
+       "speaker": "tom",
+       "en": "It's almost four o'clock.",
+       "zh": "快四点了。",
+       "audio": "L6-2-04.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "3:58",
+        "bold": "minute",
+        "pulse": true
+       }
+      },
+      {
+       "id": "L6-2-05",
+       "speaker": "amy",
+       "en": "Time for the cartoon!",
+       "zh": "动画片时间到啦！",
+       "audio": "L6-2-05.mp3",
+       "icon": "watch"
+      }
+     ]
+    },
+    {
+     "id": "L6-3",
+     "titleZh": "生日派对",
+     "titleEn": "Birthday Party",
+     "lines": [
+      {
+       "id": "L6-3-01",
+       "speaker": "amy",
+       "en": "Tomorrow is my birthday!",
+       "zh": "明天是我的生日！",
+       "audio": "L6-3-01.mp3",
+       "code": "days",
+       "codeParams": {
+        "slots": [
+         "star",
+         "icon:cake"
+        ],
+        "glow": [
+         1
+        ]
+       }
+      },
+      {
+       "id": "L6-3-02",
+       "speaker": "tom",
+       "en": "Happy birthday!",
+       "zh": "生日快乐！",
+       "audio": "L6-3-02.mp3",
+       "icon": "cake"
+      },
+      {
+       "id": "L6-3-03",
+       "speaker": "amy",
+       "en": "Come to my party!",
+       "zh": "来参加我的派对吧！",
+       "audio": "L6-3-03.mp3",
+       "icon": "balloon"
+      },
+      {
+       "id": "L6-3-04",
+       "speaker": "tom",
+       "en": "What time?",
+       "zh": "几点？",
+       "audio": "L6-3-04.mp3",
+       "code": "clock",
+       "codeIcon": "balloon",
+       "codeParams": {
+        "time": "3:00",
+        "face": "party",
+        "spin": true
+       }
+      },
+      {
+       "id": "L6-3-05",
+       "speaker": "amy",
+       "en": "At three o'clock.",
+       "zh": "三点。",
+       "audio": "L6-3-05.mp3",
+       "code": "clock",
+       "codeParams": {
+        "time": "3:00"
+       }
+      },
+      {
+       "id": "L6-3-06",
+       "speaker": "tom",
+       "en": "I'll see you tomorrow.",
+       "zh": "我们明天见。",
+       "audio": "L6-3-06.mp3",
+       "code": "days",
+       "codeParams": {
+        "slots": [
+         "icon:boy+icon:girl",
+         "sun"
+        ],
+        "glow": [
+         1
+        ]
+       }
+      },
+      {
+       "id": "L6-3-07",
+       "speaker": "amy",
+       "en": "When is your birthday?",
+       "zh": "你的生日是什么时候？",
+       "audio": "L6-3-07.mp3",
+       "code": "months",
+       "codeIcon": "cake",
+       "codeParams": {
+        "slots": [
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         ""
+        ],
+        "cycle": true
+       }
+      },
+      {
+       "id": "L6-3-08",
+       "speaker": "tom",
+       "en": "My birthday is in May.",
+       "zh": "我的生日在五月。",
+       "audio": "L6-3-08.mp3",
+       "code": "months",
+       "codeIcon": "cake",
+       "codeParams": {
+        "slots": [
+         "",
+         "",
+         "",
+         "",
+         "icon:flower",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         ""
+        ],
+        "glow": [
+         4
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "L6-4",
+     "titleZh": "儿童节",
+     "titleEn": "Children's Day",
+     "lines": [
+      {
+       "id": "L6-4-01",
+       "speaker": "tom",
+       "en": "What's the date today?",
+       "zh": "今天几号？",
+       "audio": "L6-4-01.mp3",
+       "code": "calendar",
+       "codeParams": {
+        "blink": [
+         10
+        ]
+       }
+      },
+      {
+       "id": "L6-4-02",
+       "speaker": "mom",
+       "en": "Today is June the first.",
+       "zh": "今天是六月一日。",
+       "audio": "L6-4-02.mp3",
+       "code": "calendar",
+       "codeParams": {
+        "star": [
+         0
+        ]
+       }
+      },
+      {
+       "id": "L6-4-03",
+       "speaker": "dad",
+       "en": "It's Children's Day!",
+       "zh": "今天是儿童节！",
+       "audio": "L6-4-03.mp3",
+       "image": "L6-4-03.jpg"
+      },
+      {
+       "id": "L6-4-04",
+       "speaker": "tom",
+       "en": "Hooray! Let's go to the park!",
+       "zh": "太好了！我们去公园吧！",
+       "audio": "L6-4-04.mp3",
+       "icon": "park"
+      }
+     ]
+    },
+    {
+     "id": "L6-5",
+     "titleZh": "我的一天",
+     "titleEn": "My Day",
+     "lines": [
+      {
+       "id": "L6-5-01",
+       "speaker": "tom",
+       "en": "I get up at seven o'clock.",
+       "zh": "我七点起床。",
+       "audio": "L6-5-01.mp3",
+       "code": "clock",
+       "codeIcon": "wake",
+       "codeParams": {
+        "time": "7:00"
+       }
+      },
+      {
+       "id": "L6-5-02",
+       "speaker": "tom",
+       "en": "I go to school at eight.",
+       "zh": "我八点去上学。",
+       "audio": "L6-5-02.mp3",
+       "code": "clock",
+       "codeIcon": "go",
+       "codeParams": {
+        "time": "8:00"
+       }
+      },
+      {
+       "id": "L6-5-03",
+       "speaker": "tom",
+       "en": "I have lunch at twelve.",
+       "zh": "我十二点吃午饭。",
+       "audio": "L6-5-03.mp3",
+       "code": "clock",
+       "codeIcon": "eat",
+       "codeParams": {
+        "time": "12:00"
+       }
+      },
+      {
+       "id": "L6-5-04",
+       "speaker": "tom",
+       "en": "I play in the park at four.",
+       "zh": "我四点在公园玩。",
+       "audio": "L6-5-04.mp3",
+       "code": "clock",
+       "codeIcon": "playground",
+       "codeParams": {
+        "time": "4:00"
+       }
+      },
+      {
+       "id": "L6-5-05",
+       "speaker": "tom",
+       "en": "Bedtime is half past eight.",
+       "zh": "八点半睡觉。",
+       "audio": "L6-5-05.mp3",
+       "code": "clock",
+       "codeIcon": "sleep",
+       "codeParams": {
+        "time": "8:30"
+       }
+      }
+     ]
+    },
+    {
+     "id": "L6-6",
+     "titleZh": "过新年",
+     "titleEn": "Happy New Year!",
+     "lines": [
+      {
+       "id": "L6-6-01",
+       "speaker": "grandma",
+       "en": "Happy New Year!",
+       "zh": "新年快乐！",
+       "audio": "L6-6-01.mp3",
+       "image": "L6-6-01.jpg"
+      },
+      {
+       "id": "L6-6-02",
+       "speaker": "tom",
+       "en": "Is it January the first?",
+       "zh": "今天是一月一日吗？",
+       "audio": "L6-6-02.mp3",
+       "code": "calendar",
+       "codeParams": {
+        "sticker": [
+         0
+        ]
+       }
+      },
+      {
+       "id": "L6-6-03",
+       "speaker": "dad",
+       "en": "Yes, it is!",
+       "zh": "是的！",
+       "audio": "L6-6-03.mp3",
+       "code": "yes",
+       "codeParams": {
+        "base": "calendar",
+        "sticker": [
+         0
+        ]
+       }
+      },
+      {
+       "id": "L6-6-04",
+       "speaker": "tom",
+       "en": "Let's watch the fireworks!",
+       "zh": "我们去看烟花吧！",
+       "audio": "L6-6-04.mp3",
+       "image": "L6-6-04.jpg"
+      },
+      {
+       "id": "L6-6-05",
+       "speaker": "tom",
+       "en": "Can I have a red envelope?",
+       "zh": "我可以要一个红包吗？",
+       "audio": "L6-6-05.mp3",
+       "image": "L6-6-05.jpg"
+      }
+     ]
+    }
+   ]
   }
  ]
 }
