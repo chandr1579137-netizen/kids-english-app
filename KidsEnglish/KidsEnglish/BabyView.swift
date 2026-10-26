@@ -52,6 +52,8 @@ extension LaunchOptions {
         case "memory", "memoryFlip": return .memoryFlip
         case "shadow", "shadowDrag": return .shadowDrag
         case "follow", "followMe": return .followMe
+        case "rhyme", "rhymeMatch": return .rhymeMatch
+        case "syllable", "syllableClap": return .syllableClap
         default: return nil
         }
     }
@@ -409,6 +411,16 @@ final class BabySessionController {
     private let words = AudioPlayer()
     let audio = PhraseAudio()
     let recorder = PhraseVoiceRecorder()
+    private let drumPlayer = AudioPlayer()
+
+    /// 拍手数音节实时拍数
+    private(set) var drumTaps = 0
+    /// 押韵配对中正在播放示范音的卡片（高亮放大）
+    private(set) var activeSpeakingWord: String? = nil
+    /// 押韵配对答题反馈状态（true: 答对高亮; false: 答错提示）
+    private(set) var rhymeFeedback: Bool? = nil
+    /// 拍手数音节答题反馈
+    private(set) var syllableFeedback: Int? = nil
 
     private(set) var index = 0
     private(set) var phase: Phase = .idle
@@ -516,6 +528,8 @@ final class BabySessionController {
                 case (.memoryFlip, .memoryGame): return true
                 case (.shadowDrag, .shadowGame): return true
                 case (.followMe, .followMe): return true
+                case (.rhymeMatch, .rhymeGame): return true
+                case (.syllableClap, .syllableGame): return true
                 default: return false
                 }
             }) {
@@ -612,6 +626,31 @@ final class BabySessionController {
             default:
                 phase = .inviting
             }
+        case .rhymeGame:
+            switch LaunchOptions.babyDemo {
+            case "correct", "solved":
+                phase = .solved
+                praiseTick = 1
+                tomMood = .clap
+            case "wrong":
+                phase = .inviting
+                tomMood = .thinking
+            default:
+                phase = .inviting
+            }
+        case .syllableGame(let r):
+            switch LaunchOptions.babyDemo {
+            case "correct", "solved":
+                phase = .solved
+                praiseTick = 1
+                tomMood = .clap
+                drumTaps = r.count
+            case "wrong":
+                phase = .inviting
+                tomMood = .thinking
+            default:
+                phase = .inviting
+            }
         case .sentence:
             switch LaunchOptions.babyDemo {
             case "recording": phase = .recording
@@ -677,6 +716,10 @@ final class BabySessionController {
         wrong = []
         firstTry = true
         tomMood = .happy
+        drumTaps = 0
+        activeSpeakingWord = nil
+        rhymeFeedback = nil
+        syllableFeedback = nil
 
         let currentStage = step.stage
         if let stage = currentStage, stage != previousStage {
@@ -769,6 +812,24 @@ final class BabySessionController {
             prompt("baby_cmd_\(w)") { [weak self] in
                 guard let self, self.token == my else { return }
                 self.sayWord(w) { [weak self] in
+                    guard let self, self.token == my else { return }
+                    self.phase = .inviting
+                }
+            }
+
+        case .rhymeGame(let r):
+            phase = .listening
+            prompt("tom_do_they_rhyme") { [weak self] in
+                guard let self, self.token == my else { return }
+                self.playRhymeComparison(r, token: my)
+            }
+
+        case .syllableGame(let r):
+            phase = .listening
+            drumTaps = 0
+            prompt("tom_clap_with_me") { [weak self] in
+                guard let self, self.token == my else { return }
+                self.sayWord(r.word) { [weak self] in
                     guard let self, self.token == my else { return }
                     self.phase = .inviting
                 }
@@ -939,6 +1000,99 @@ final class BabySessionController {
         }
     }
 
+    // MARK: 押韵配对：两词对比发音与选择答案
+
+    func playRhymeComparison(_ r: BabyRhymeRound, token my: Int) {
+        activeSpeakingWord = r.word1
+        sayWord(r.word1) { [weak self] in
+            guard let self, self.token == my else { return }
+            self.activeSpeakingWord = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                guard self.token == my else { return }
+                self.activeSpeakingWord = r.word2
+                self.sayWord(r.word2) { [weak self] in
+                    guard let self, self.token == my else { return }
+                    self.activeSpeakingWord = nil
+                    self.phase = .inviting
+                }
+            }
+        }
+    }
+
+    func chooseRhyme(_ childRhymeAnswer: Bool) {
+        guard !frozen, case .rhymeGame(let r) = step, phase != .solved else { return }
+        let my = token
+        if childRhymeAnswer == r.rhymes {
+            phase = .solved
+            praiseTick += 1
+            tomMood = .clap
+            rhymeFeedback = true
+            prompt(["prompt_great", "prompt_well", "prompt_yay"][praiseTick % 3]) { [weak self] in
+                guard let self, self.token == my else { return }
+                self.rhymeFeedback = nil
+                self.next()
+            }
+        } else {
+            tomMood = .thinking
+            rhymeFeedback = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                guard let self, self.token == my else { return }
+                self.rhymeFeedback = nil
+                self.playRhymeComparison(r, token: my)
+            }
+        }
+    }
+
+    // MARK: 拍手数音节：敲小鼓与选择音节数
+
+    func tapSyllableDrum() {
+        guard !frozen else { return }
+        drumTaps = min(drumTaps + 1, 3)
+        let url = store.phraseFileURL("audio", "drum_beat.mp3")
+        drumPlayer.play(url: url)
+    }
+
+    func chooseSyllable(_ count: Int) {
+        guard !frozen, case .syllableGame(let r) = step, phase != .solved else { return }
+        let my = token
+        if count == r.count {
+            phase = .solved
+            praiseTick += 1
+            tomMood = .clap
+            syllableFeedback = count
+            playDrumBeats(count: count, token: my) { [weak self] in
+                guard let self, self.token == my else { return }
+                self.prompt(["prompt_great", "prompt_well", "prompt_yay"][self.praiseTick % 3]) { [weak self] in
+                    guard let self, self.token == my else { return }
+                    self.syllableFeedback = nil
+                    self.next()
+                }
+            }
+        } else {
+            tomMood = .thinking
+            syllableFeedback = count
+            playDrumBeats(count: r.count, token: my) { [weak self] in
+                guard let self, self.token == my else { return }
+                self.syllableFeedback = nil
+                self.tomMood = .happy
+            }
+        }
+    }
+
+    private func playDrumBeats(count: Int, token my: Int, completion: (() -> Void)? = nil) {
+        func beat(i: Int) {
+            guard i < count else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { completion?() }
+                return
+            }
+            drumTaps = i + 1
+            let url = store.phraseFileURL("audio", "drum_beat.mp3")
+            drumPlayer.play(url: url)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.38) { beat(i: i + 1) }
+        }
+        beat(i: 0)
+    }
+
     // MARK: 重播示范音
 
     func replayWord(rate: Float = 1.0) {
@@ -958,6 +1112,10 @@ final class BabySessionController {
             prompt("baby_cmd_\(w)") { [weak self] in
                 self?.sayWord(w, rate: rate)
             }
+        case .rhymeGame(let r):
+            playRhymeComparison(r, token: token)
+        case .syllableGame(let r):
+            sayWord(r.word, rate: rate)
         case .sentence(let w, _):
             prompt("baby_sent_\(w)")
         case .pickGame, .memoryGame, .done:
@@ -1039,6 +1197,7 @@ final class BabySessionController {
         token += 1
         audio.stop()
         words.stop()
+        drumPlayer.stop()
         recorder.cancel()
     }
 }
@@ -1087,6 +1246,10 @@ struct BabySessionView: View {
             BabyShadowDragView(c: c, round: r).id(c.index)
         case .followMe(let w):
             BabyFollowMeView(c: c, word: w).id(c.index)
+        case .rhymeGame(let r):
+            BabyRhymeMatchView(c: c, round: r).id(c.index)
+        case .syllableGame(let r):
+            BabySyllableClapView(c: c, round: r).id(c.index)
         case .sentence(let w, let text):
             BabySentenceCard(c: c, word: w, text: text).id(c.index)
         case .sayIt(let w):
@@ -1572,6 +1735,8 @@ private struct BabyBubblePickView: View {
         case .memoryFlip: return (kind.titleZh, "square.grid.2x2.fill", Func.accent)
         case .shadowDrag: return (kind.titleZh, "circle.lefthalf.filled", Func.infoDeep)
         case .followMe: return (kind.titleZh, "figure.dance", PhraseColors.gold)
+        case .rhymeMatch: return (kind.titleZh, "music.note.list", Func.accentDeep)
+        case .syllableClap: return (kind.titleZh, "hands.clap.fill", PhraseColors.gold)
         case .feedAnimal: return (kind.titleZh, "carrot.fill", Func.accentDeep)
         case .findInScene: return (kind.titleZh, "magnifyingglass.circle.fill", Func.infoDeep)
         }
@@ -2023,6 +2188,254 @@ private struct BabyFollowMeView: View {
             guard !LaunchOptions.isUIScreenshotRun else { return }
             withAnimation(.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) { bounce = true }
         }
+    }
+}
+
+// MARK: - 第 4 步（小游戏 E）：押韵配对（听两词判断是否押韵）
+
+private struct BabyRhymeMatchView: View {
+    let c: BabySessionController
+    let round: BabyRhymeRound
+
+    var body: some View {
+        GeometryReader { geo in
+            let cardSide = min((geo.size.width - 56) / 2, geo.size.height * 0.38)
+            let solved = c.phase == .solved
+            VStack(spacing: 14) {
+                Spacer(minLength: 0)
+
+                // 顶部 Tom 提示栏
+                HStack(spacing: 12) {
+                    TomMoodView(mood: c.tomMood, size: 68)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("押韵配对")
+                            .kidFont(16, .bold)
+                            .foregroundStyle(Func.accentDeep)
+                        Text("听一听，尾音一样吗？")
+                            .kidFont(22, .heavy)
+                            .foregroundStyle(Palette.ink)
+                    }
+                    Spacer(minLength: 0)
+                }
+                .padding(14)
+                .background(Palette.surface, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .elevationGround()
+                .padding(.horizontal, 16)
+
+                // 中间两张词卡并排
+                HStack(spacing: 16) {
+                    rhymeCard(word: round.word1, side: cardSide)
+                    rhymeCard(word: round.word2, side: cardSide)
+                }
+                .padding(.horizontal, 12)
+
+                Spacer(minLength: 0)
+
+                // 底部操作区：再听一遍 + 押韵 (一样) / 不押韵 (不同)
+                HStack(spacing: 16) {
+                    Button { c.replayWord() } label: {
+                        Image(systemName: "speaker.wave.2.fill")
+                            .kidFont(24, .bold, maxScale: 1.1)
+                            .foregroundStyle(.white)
+                            .frame(width: 58, height: 58)
+                            .background(Func.infoDeep, in: Circle())
+                    }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityLabel("再听一遍")
+
+                    // 押韵（一样）
+                    Button { c.chooseRhyme(true) } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .kidFont(26, .bold)
+                            Text("一样 (押韵)")
+                                .kidFont(18, .heavy)
+                        }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 60)
+                        .background(Func.positiveDeep, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        .elevationRaised()
+                        .scaleEffect(c.rhymeFeedback == true ? 1.05 : 1.0)
+                    }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityLabel("一样押韵")
+
+                    // 不押韵（不同）
+                    Button { c.chooseRhyme(false) } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "hand.raised.fill")
+                                .kidFont(24, .bold)
+                            Text("不一样")
+                                .kidFont(18, .heavy)
+                        }
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 60)
+                        .background(Func.accentDeep, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        .elevationRaised()
+                    }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityLabel("不一样")
+                }
+                .padding(.horizontal, 16)
+            }
+            .frame(width: geo.size.width, height: geo.size.height)
+        }
+    }
+
+    private func rhymeCard(word: String, side: CGFloat) -> some View {
+        let isSpeaking = c.activeSpeakingWord == word
+        let solved = c.phase == .solved
+        return Button { c.sayWord(word) } label: {
+            VStack(spacing: 6) {
+                BabyPicture(word: c.picture(word), size: side - 16)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .strokeBorder(isSpeaking ? Func.accent : (solved ? Func.positiveDeep : Color.white),
+                                          lineWidth: isSpeaking ? 6 : (solved ? 5 : 4))
+                    }
+                    .scaleEffect(isSpeaking ? 1.04 : 1.0)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSpeaking)
+                Text(word)
+                    .kidFont(18, .heavy)
+                    .foregroundStyle(Palette.ink)
+            }
+            .padding(8)
+            .background(Palette.surface, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .elevationRaised()
+            .overlay { PraiseBurst(tick: c.praiseTick, show: solved) }
+        }
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel(word)
+    }
+}
+
+// MARK: - 第 4 步（小游戏 F）：拍手数音节（1/2/3 音节感知）
+
+private struct BabySyllableClapView: View {
+    let c: BabySessionController
+    let round: BabySyllableRound
+    @State private var drumBounce = false
+
+    var body: some View {
+        GeometryReader { geo in
+            let picSide = min(geo.size.width - 96, geo.size.height * 0.34)
+            let solved = c.phase == .solved
+            VStack(spacing: 12) {
+                Spacer(minLength: 0)
+
+                // 顶部 Tom 提示栏
+                HStack(spacing: 12) {
+                    TomMoodView(mood: c.tomMood, size: 68)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("拍手数音节")
+                            .kidFont(16, .bold)
+                            .foregroundStyle(PhraseColors.gold)
+                        Text("听单词，拍几下？")
+                            .kidFont(22, .heavy)
+                            .foregroundStyle(Palette.ink)
+                    }
+                    Spacer(minLength: 0)
+                }
+                .padding(14)
+                .background(Palette.surface, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .elevationGround()
+                .padding(.horizontal, 16)
+
+                // 居中大图
+                Button { c.replayWord() } label: {
+                    VStack(spacing: 4) {
+                        BabyPicture(word: c.picture(round.word), size: picSide)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                    .strokeBorder(solved ? Func.positiveDeep : Color.white, lineWidth: solved ? 6 : 4)
+                            }
+                        Text(round.word)
+                            .kidFont(20, .heavy)
+                            .foregroundStyle(Palette.ink)
+                    }
+                    .padding(8)
+                    .background(Palette.surface, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
+                    .elevationRaised()
+                    .overlay { PraiseBurst(tick: c.praiseTick, show: solved) }
+                }
+                .buttonStyle(PressableStyle())
+                .accessibilityLabel(round.word)
+
+                // 中间可交互拍手小木鼓
+                Button {
+                    c.tapSyllableDrum()
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.45)) { drumBounce = true }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) { drumBounce = false }
+                } label: {
+                    HStack(spacing: 14) {
+                        Image(systemName: "hands.clap.fill")
+                            .kidFont(28, .bold)
+                            .foregroundStyle(PhraseColors.gold)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("敲小鼓拍一拍")
+                                .kidFont(16, .heavy)
+                                .foregroundStyle(Palette.ink)
+                            HStack(spacing: 6) {
+                                ForEach(1...3, id: \.self) { dot in
+                                    Circle()
+                                        .fill(dot <= c.drumTaps ? PhraseColors.gold : Palette.hairline)
+                                        .frame(width: 10, height: 10)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Palette.surface, in: Capsule())
+                    .overlay { Capsule().strokeBorder(PhraseColors.gold.opacity(0.6), lineWidth: 2) }
+                    .scaleEffect(drumBounce ? 1.15 : 1.0)
+                }
+                .buttonStyle(PressableStyle())
+                .accessibilityLabel("敲小鼓")
+
+                Spacer(minLength: 0)
+
+                // 底部 1、2、3 音节选项按钮
+                HStack(spacing: 14) {
+                    syllableButton(count: 1, dots: "●", label: "1 拍")
+                    syllableButton(count: 2, dots: "● ●", label: "2 拍")
+                    syllableButton(count: 3, dots: "● ● ●", label: "3 拍")
+                }
+                .padding(.horizontal, 16)
+            }
+            .frame(width: geo.size.width, height: geo.size.height)
+        }
+    }
+
+    private func syllableButton(count: Int, dots: String, label: String) -> some View {
+        let isAnswer = count == round.count
+        let isChosen = c.syllableFeedback == count
+        let solved = c.phase == .solved && isAnswer
+        return Button { c.chooseSyllable(count) } label: {
+            VStack(spacing: 4) {
+                Text("\(count)")
+                    .kidFont(26, .heavy)
+                Text(dots)
+                    .kidFont(13, .bold)
+                Text(label)
+                    .kidFont(12, .heavy)
+            }
+            .foregroundStyle(solved ? .white : Palette.ink)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(solved ? Func.positiveDeep : (isChosen ? PhraseColors.gold : Palette.surface),
+                        in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                    .strokeBorder(solved ? Color.white : Palette.hairline, lineWidth: solved ? 3 : 1.5)
+            }
+            .elevationRaised()
+            .scaleEffect(solved ? 1.06 : 1.0)
+        }
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel("\(count) 拍")
     }
 }
 
