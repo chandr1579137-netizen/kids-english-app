@@ -274,10 +274,14 @@ final class PhraseTests: XCTestCase {
         XCTAssertEqual(PhraseSlot.parse("bag"), [.bag])
     }
 
-    /// L3–L7 上线前，代码卡预览不会混进正式课程
+    /// 尚未上线的代码卡（L6–L7）不会提前混进正式课程，已上线的代码卡（L4–L5）在课程中
     func testCodePreviewIsNotInTheCourse() throws {
         let course = Set(try loadCatalog().allLessons.flatMap(\.lines).map(\.id))
-        XCTAssertTrue(try loadPreview().lines.allSatisfy { !course.contains($0.id) })
+        let preview = try loadPreview().lines
+        let unreleased = preview.filter { $0.id.hasPrefix("L6-") || $0.id.hasPrefix("L7-") }
+        let released = preview.filter { $0.id.hasPrefix("L4-") || $0.id.hasPrefix("L5-") }
+        XCTAssertTrue(unreleased.allSatisfy { !course.contains($0.id) }, "未上线代码卡不能提前混入正式课")
+        XCTAssertTrue(released.allSatisfy { course.contains($0.id) }, "已上线代码卡应在正式课中")
     }
 
     // MARK: - 复习课
