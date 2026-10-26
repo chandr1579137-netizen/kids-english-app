@@ -25,7 +25,7 @@ NUM = {"0": "zero", "1": "one", "2": "two", "3": "three", "4": "four", "5": "fiv
 
 
 # 只是写法不同、读音一样的词：识别成哪种都算对
-SAME = {"okay": "ok", "goodnight": "good night", "colour": "color"}
+SAME = {"okay": "ok", "goodnight": "good night", "colour": "color", "wong": "wang"}
 
 
 def words(text: str) -> list[str]:

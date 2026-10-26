@@ -103,8 +103,12 @@ TTS_OVERRIDES = {
 
     # L3：small.en 把 "your pen" 听成 "Japan"（调慢 16%，见 docs/daily-phrases/asr-L3.md）
 
-    "L3-2-01": ("I found your pen.", "-10%"),
-
+        "L3-2-01": ("I found your pen.", "-10%"),
+    # L4：Wang 用 Wong 读音避免听成西语 Juan、拼读字母分段、pink/more 调慢微调
+    "L4-4-04": ("My family name is Wong.", "-10%"),
+    "L4-4-06": ("W, A, N, G.", "-10%"),
+    "L4-5-03": ("Does your crayon box have pink?", "-10%"),
+    "L4-5-06": ("Can I have some more?", "-10%"),
 }
 
 CODE_CARDS = {
