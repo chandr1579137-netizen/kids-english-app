@@ -74,7 +74,8 @@ final class PhraseTests: XCTestCase {
                 XCTAssertTrue(exists(overrides.appendingPathComponent("\(codeIcon).jpg")), "\(line.id): 小图 \(codeIcon) 不在仓库里")
             }
             if line.code == "yes" || line.code == "no" {
-                XCTAssertNotNil(line.codeIcon, "\(line.id): 对勾 / 叉要叠在一张小图上")
+                let hasBase = line.codeIcon != nil || line.codeParams?.base != nil
+                XCTAssertTrue(hasBase, "\(line.id): 对勾 / 叉要叠在一张小图或底图上")
             }
             if line.code == "mood" {
                 XCTAssertEqual(line.codeIcons?.count, 3, "\(line.id): 心情表是三张小图")
