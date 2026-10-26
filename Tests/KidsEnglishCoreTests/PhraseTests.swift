@@ -24,13 +24,14 @@ final class PhraseTests: XCTestCase {
 
     func testLevelsHaveExpectedLessonsAndReviews() throws {
         let catalog = try loadCatalog()
-        XCTAssertEqual(catalog.levels.map(\.level), [1, 2, 3, 4, 5])
+        XCTAssertEqual(catalog.levels.map(\.level), [1, 2, 3, 4, 5, 6])
         XCTAssertEqual(catalog.allScenes.map(\.id), [
             "L1-1", "L1-2", "L1-3", "L1-R1", "L1-4", "L1-5", "L1-6", "L1-R2",
             "L2-1", "L2-2", "L2-3", "L2-R1", "L2-4", "L2-5", "L2-6", "L2-R2",
             "L3-1", "L3-2", "L3-3", "L3-R1", "L3-4",
             "L4-1", "L4-2", "L4-3", "L4-R1", "L4-4", "L4-5",
             "L5-1", "L5-2", "L5-3", "L5-R1", "L5-4", "L5-5", "L5-6", "L5-R2",
+            "L6-1", "L6-2", "L6-3", "L6-R1", "L6-4", "L6-5", "L6-6", "L6-R2",
         ])
         let lines = catalog.allLessons.flatMap(\.lines)
         XCTAssertEqual(catalog.levels[0].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 38)
@@ -38,6 +39,7 @@ final class PhraseTests: XCTestCase {
         XCTAssertEqual(catalog.levels[2].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 31)
         XCTAssertEqual(catalog.levels[3].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 35)
         XCTAssertEqual(catalog.levels[4].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 37)
+        XCTAssertEqual(catalog.levels[5].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 33)
         XCTAssertEqual(Set(lines.map(\.id)).count, lines.count, "句子 id 重复")
     }
 
@@ -123,6 +125,14 @@ final class PhraseTests: XCTestCase {
     /// L5 每句最多 7 个词（Do you have any brothers or sisters?）
     func testL5LinesAreShort() throws {
         for line in try loadCatalog().levels[4].scenes.flatMap(\.lines) {
+            let words = line.en.split(whereSeparator: { $0 == " " })
+            XCTAssertLessThanOrEqual(words.count, 7, "\(line.id): \(line.en)")
+        }
+    }
+
+    /// L6 每句最多 7 个词（What time is it on your watch?）
+    func testL6LinesAreShort() throws {
+        for line in try loadCatalog().levels[5].scenes.flatMap(\.lines) {
             let words = line.en.split(whereSeparator: { $0 == " " })
             XCTAssertLessThanOrEqual(words.count, 7, "\(line.id): \(line.en)")
         }
@@ -274,12 +284,12 @@ final class PhraseTests: XCTestCase {
         XCTAssertEqual(PhraseSlot.parse("bag"), [.bag])
     }
 
-    /// 尚未上线的代码卡（L6–L7）不会提前混进正式课程，已上线的代码卡（L4–L5）在课程中
+    /// 尚未上线的代码卡（L7）不会提前混进正式课程，已上线的代码卡（L4–L6）在课程中
     func testCodePreviewIsNotInTheCourse() throws {
         let course = Set(try loadCatalog().allLessons.flatMap(\.lines).map(\.id))
         let preview = try loadPreview().lines
-        let unreleased = preview.filter { $0.id.hasPrefix("L6-") || $0.id.hasPrefix("L7-") }
-        let released = preview.filter { $0.id.hasPrefix("L4-") || $0.id.hasPrefix("L5-") }
+        let unreleased = preview.filter { $0.id.hasPrefix("L7-") }
+        let released = preview.filter { $0.id.hasPrefix("L4-") || $0.id.hasPrefix("L5-") || $0.id.hasPrefix("L6-") }
         XCTAssertTrue(unreleased.allSatisfy { !course.contains($0.id) }, "未上线代码卡不能提前混入正式课")
         XCTAssertTrue(released.allSatisfy { course.contains($0.id) }, "已上线代码卡应在正式课中")
     }
