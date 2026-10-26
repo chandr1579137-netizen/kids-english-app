@@ -22,16 +22,18 @@ final class PhraseTests: XCTestCase {
 
     // MARK: - 数据与素材
 
-    func testL1AndL2HaveSixLessonsEachWithReviewsAfterEveryThird() throws {
+    func testLevelsHaveExpectedLessonsAndReviews() throws {
         let catalog = try loadCatalog()
-        XCTAssertEqual(catalog.levels.map(\.level), [1, 2])
+        XCTAssertEqual(catalog.levels.map(\.level), [1, 2, 3])
         XCTAssertEqual(catalog.allScenes.map(\.id), [
             "L1-1", "L1-2", "L1-3", "L1-R1", "L1-4", "L1-5", "L1-6", "L1-R2",
             "L2-1", "L2-2", "L2-3", "L2-R1", "L2-4", "L2-5", "L2-6", "L2-R2",
+            "L3-1", "L3-2", "L3-3", "L3-R1", "L3-4",
         ])
         let lines = catalog.allLessons.flatMap(\.lines)
         XCTAssertEqual(catalog.levels[0].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 38)
         XCTAssertEqual(catalog.levels[1].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 44)
+        XCTAssertEqual(catalog.levels[2].scenes.filter { !$0.isReview }.flatMap(\.lines).count, 31)
         XCTAssertEqual(Set(lines.map(\.id)).count, lines.count, "句子 id 重复")
     }
 
@@ -93,6 +95,14 @@ final class PhraseTests: XCTestCase {
     /// L2 每句最多 6 个词（What color is your new book?）
     func testL2LinesAreShort() throws {
         for line in try loadCatalog().levels[1].scenes.flatMap(\.lines) {
+            let words = line.en.split(whereSeparator: { $0 == " " })
+            XCTAssertLessThanOrEqual(words.count, 6, "\(line.id): \(line.en)")
+        }
+    }
+
+    /// L3 每句最多 6 个词（Do you know where they are?）
+    func testL3LinesAreShort() throws {
+        for line in try loadCatalog().levels[2].scenes.flatMap(\.lines) {
             let words = line.en.split(whereSeparator: { $0 == " " })
             XCTAssertLessThanOrEqual(words.count, 6, "\(line.id): \(line.en)")
         }
