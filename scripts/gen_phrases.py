@@ -109,6 +109,9 @@ TTS_OVERRIDES = {
     "L4-4-06": ("W, A, N, G.", "-10%"),
     "L4-5-03": ("Does your crayon box have pink?", "-10%"),
     "L4-5-06": ("Can I have some more?", "-10%"),
+    # L7：Tom 语速微调以防 nine 听成 night、the 听成 this
+    "L7-2-01": ("Does the zoo open at nine?", "-10%"),
+    "L7-2-05": ("How long is the snake.", "-10%"),
 }
 
 CODE_CARDS = {
@@ -310,3 +313,4 @@ async def main() -> int:
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     raise SystemExit(asyncio.run(main()))
+
