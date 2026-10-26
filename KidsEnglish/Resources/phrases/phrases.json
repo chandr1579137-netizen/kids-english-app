@@ -14,6 +14,12 @@
    "avatar": "dad.jpg"
   },
   {
+   "id": "farmer",
+   "nameEn": "Farmer",
+   "nameZh": "农民叔叔",
+   "avatar": "farmer.jpg"
+  },
+  {
    "id": "mom",
    "nameEn": "Mother",
    "nameZh": "妈妈",
@@ -1074,6 +1080,338 @@
        "zh": "请把你的画交给我。",
        "audio": "L3-4-08.mp3",
        "icon": "picture"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 4,
+   "titleZh": "他是谁·做什么",
+   "scenes": [
+    {
+     "id": "L4-1",
+     "titleZh": "那是谁",
+     "titleEn": "Who Is He?",
+     "lines": [
+      {
+       "id": "L4-1-01",
+       "speaker": "amy",
+       "en": "Who is the boy over there?",
+       "zh": "那边那个男孩是谁？",
+       "audio": "L4-1-01.mp3",
+       "icon": "boy"
+      },
+      {
+       "id": "L4-1-02",
+       "speaker": "tom",
+       "en": "He's my brother.",
+       "zh": "他是我哥哥。",
+       "audio": "L4-1-02.mp3",
+       "icon": "brother"
+      },
+      {
+       "id": "L4-1-03",
+       "speaker": "amy",
+       "en": "Is that girl a student?",
+       "zh": "那个女孩是学生吗？",
+       "audio": "L4-1-03.mp3",
+       "image": "L4-1-03.jpg"
+      },
+      {
+       "id": "L4-1-04",
+       "speaker": "tom",
+       "en": "No, she isn't.",
+       "zh": "不，她不是。",
+       "audio": "L4-1-04.mp3",
+       "code": "no",
+       "codeIcon": "school"
+      },
+      {
+       "id": "L4-1-05",
+       "speaker": "amy",
+       "en": "Who is she?",
+       "zh": "她是谁？",
+       "audio": "L4-1-05.mp3",
+       "icon": "girl"
+      },
+      {
+       "id": "L4-1-06",
+       "speaker": "tom",
+       "en": "I really don't know.",
+       "zh": "我真的不知道。",
+       "audio": "L4-1-06.mp3",
+       "image": "L4-1-06.jpg"
+      },
+      {
+       "id": "L4-1-07",
+       "speaker": "amy",
+       "en": "I have no idea.",
+       "zh": "我也一点都不知道。",
+       "audio": "L4-1-07.mp3",
+       "image": "L4-1-07.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L4-2",
+     "titleZh": "大人做什么",
+     "titleEn": "Jobs",
+     "lines": [
+      {
+       "id": "L4-2-01",
+       "speaker": "tom",
+       "en": "What do you do?",
+       "zh": "您是做什么的？",
+       "audio": "L4-2-01.mp3",
+       "image": "L4-2-01.jpg"
+      },
+      {
+       "id": "L4-2-02",
+       "speaker": "farmer",
+       "en": "I'm a farmer.",
+       "zh": "我是农民。",
+       "audio": "L4-2-02.mp3",
+       "image": "L4-2-02.jpg"
+      },
+      {
+       "id": "L4-2-03",
+       "speaker": "amy",
+       "en": "What does he do?",
+       "zh": "他是做什么的？",
+       "audio": "L4-2-03.mp3",
+       "image": "L4-2-03.jpg"
+      },
+      {
+       "id": "L4-2-04",
+       "speaker": "tom",
+       "en": "He's a doctor.",
+       "zh": "他是医生。",
+       "audio": "L4-2-04.mp3",
+       "image": "L4-2-04.jpg"
+      },
+      {
+       "id": "L4-2-05",
+       "speaker": "amy",
+       "en": "Is she a teacher?",
+       "zh": "她是老师吗？",
+       "audio": "L4-2-05.mp3",
+       "image": "L4-2-05.jpg"
+      },
+      {
+       "id": "L4-2-06",
+       "speaker": "tom",
+       "en": "Is she a bus driver?",
+       "zh": "她是公交车司机吗？",
+       "audio": "L4-2-06.mp3",
+       "image": "L4-2-06.jpg"
+      },
+      {
+       "id": "L4-2-07",
+       "speaker": "amy",
+       "en": "Yes, I think so.",
+       "zh": "是的，我觉得是。",
+       "audio": "L4-2-07.mp3",
+       "code": "yes",
+       "codeIcon": "bus",
+       "codeParams": {
+        "think": true
+       }
+      }
+     ]
+    },
+    {
+     "id": "L4-3",
+     "titleZh": "介绍朋友",
+     "titleEn": "This Is My Friend",
+     "lines": [
+      {
+       "id": "L4-3-01",
+       "speaker": "tom",
+       "en": "Mom, let me introduce my friend.",
+       "zh": "妈妈，我来介绍我的朋友。",
+       "audio": "L4-3-01.mp3",
+       "icon": "friend"
+      },
+      {
+       "id": "L4-3-02",
+       "speaker": "tom",
+       "en": "This is Amy. She's my classmate.",
+       "zh": "这是艾米，她是我的同学。",
+       "audio": "L4-3-02.mp3",
+       "image": "L4-3-02.jpg"
+      },
+      {
+       "id": "L4-3-03",
+       "speaker": "mom",
+       "en": "Hello, Amy!",
+       "zh": "你好，艾米！",
+       "audio": "L4-3-03.mp3",
+       "image": "L4-3-03.jpg"
+      },
+      {
+       "id": "L4-3-04",
+       "speaker": "amy",
+       "en": "How do you do?",
+       "zh": "您好！",
+       "audio": "L4-3-04.mp3",
+       "image": "L4-3-04.jpg"
+      },
+      {
+       "id": "L4-3-05",
+       "speaker": "amy",
+       "en": "Let me introduce myself.",
+       "zh": "我来介绍一下自己。",
+       "audio": "L4-3-05.mp3",
+       "image": "L4-3-05.jpg"
+      },
+      {
+       "id": "L4-3-06",
+       "speaker": "amy",
+       "en": "My name is Amelia.",
+       "zh": "我叫阿米莉亚。",
+       "audio": "L4-3-06.mp3",
+       "image": "L4-3-06.jpg"
+      },
+      {
+       "id": "L4-3-07",
+       "speaker": "amy",
+       "en": "Just call me Amy.",
+       "zh": "就叫我艾米吧。",
+       "audio": "L4-3-07.mp3",
+       "image": "L4-3-07.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L4-4",
+     "titleZh": "你姓什么",
+     "titleEn": "Family Name",
+     "lines": [
+      {
+       "id": "L4-4-01",
+       "speaker": "tom",
+       "en": "Who is the girl in pink?",
+       "zh": "穿粉色衣服的女孩是谁？",
+       "audio": "L4-4-01.mp3",
+       "image": "L4-4-01.jpg"
+      },
+      {
+       "id": "L4-4-02",
+       "speaker": "tom",
+       "en": "Could you introduce me to her?",
+       "zh": "你能把我介绍给她吗？",
+       "audio": "L4-4-02.mp3",
+       "image": "L4-4-02.jpg"
+      },
+      {
+       "id": "L4-4-03",
+       "speaker": "teacher",
+       "en": "What's your family name?",
+       "zh": "你姓什么？",
+       "audio": "L4-4-03.mp3",
+       "image": "L4-4-03.jpg"
+      },
+      {
+       "id": "L4-4-04",
+       "speaker": "tom",
+       "en": "My family name is Wang.",
+       "zh": "我姓王。",
+       "audio": "L4-4-04.mp3",
+       "image": "L4-4-04.jpg"
+      },
+      {
+       "id": "L4-4-05",
+       "speaker": "teacher",
+       "en": "How do you spell it?",
+       "zh": "怎么拼？",
+       "audio": "L4-4-05.mp3",
+       "icon": "write"
+      },
+      {
+       "id": "L4-4-06",
+       "speaker": "tom",
+       "en": "W-A-N-G.",
+       "zh": "W-A-N-G。",
+       "audio": "L4-4-06.mp3",
+       "image": "L4-4-06.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L4-5",
+     "titleZh": "借文具",
+     "titleEn": "Do You Have …?",
+     "lines": [
+      {
+       "id": "L4-5-01",
+       "speaker": "tom",
+       "en": "Do you have a crayon?",
+       "zh": "你有蜡笔吗？",
+       "audio": "L4-5-01.mp3",
+       "icon": "crayon"
+      },
+      {
+       "id": "L4-5-02",
+       "speaker": "amy",
+       "en": "Yes, I do.",
+       "zh": "是的，我有。",
+       "audio": "L4-5-02.mp3",
+       "code": "yes",
+       "codeIcon": "crayon"
+      },
+      {
+       "id": "L4-5-03",
+       "speaker": "tom",
+       "en": "Does your crayon box have pink?",
+       "zh": "你的蜡笔盒里有粉色吗？",
+       "audio": "L4-5-03.mp3",
+       "code": "crayons",
+       "codeParams": {
+        "glow": [
+         5
+        ]
+       }
+      },
+      {
+       "id": "L4-5-04",
+       "speaker": "tom",
+       "en": "Do you have glue? I need some.",
+       "zh": "你有胶水吗？我需要一点。",
+       "audio": "L4-5-04.mp3",
+       "icon": "glue"
+      },
+      {
+       "id": "L4-5-05",
+       "speaker": "amy",
+       "en": "I have some left.",
+       "zh": "我还剩一些。",
+       "audio": "L4-5-05.mp3",
+       "image": "L4-5-05.jpg"
+      },
+      {
+       "id": "L4-5-06",
+       "speaker": "tom",
+       "en": "Can I have some more?",
+       "zh": "我能再要一点吗？",
+       "audio": "L4-5-06.mp3",
+       "image": "L4-5-06.jpg"
+      },
+      {
+       "id": "L4-5-07",
+       "speaker": "amy",
+       "en": "Do you have my pencil?",
+       "zh": "你拿了我的铅笔吗？",
+       "audio": "L4-5-07.mp3",
+       "icon": "pencil"
+      },
+      {
+       "id": "L4-5-08",
+       "speaker": "tom",
+       "en": "Yes, I have your eraser, too.",
+       "zh": "是的，我还拿了你的橡皮。",
+       "audio": "L4-5-08.mp3",
+       "icon": "eraser"
       }
      ]
     }
