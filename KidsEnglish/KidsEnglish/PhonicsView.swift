@@ -583,7 +583,7 @@ public struct PhonicsIslandBanner: View {
             ZStack {
                 Circle()
                     .fill(
-                        LinearGradient(colors: [Func.accent, PhraseColors.gold], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        LinearGradient(colors: [Func.accent, Color(red: 1.0, green: 0.76, blue: 0.08)], startPoint: .topLeading, endPoint: .bottomTrailing)
                     )
                     .frame(width: 58, height: 58)
                 Image(systemName: "character.book.closed.fill")

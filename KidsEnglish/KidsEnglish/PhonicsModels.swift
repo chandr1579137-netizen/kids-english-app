@@ -37,7 +37,7 @@ extension PhonicsLetter {
         switch themeColorName {
         case "emerald": return Color(red: 0.16, green: 0.65, blue: 0.45)
         case "coral":   return Color(red: 0.95, green: 0.42, blue: 0.35)
-        case "gold":    return PhraseColors.gold
+        case "gold":    return Color(red: 1.0, green: 0.76, blue: 0.08)
         case "purple":  return Color(red: 0.58, green: 0.35, blue: 0.88)
         case "pink":    return Color(red: 0.92, green: 0.40, blue: 0.65)
         case "sky":     return Color(red: 0.25, green: 0.62, blue: 0.92)
@@ -149,7 +149,7 @@ public enum PhonicsEngine {
         targets = Array(targets.prefix(count))
 
         return targets.map { target in
-            var others = pool.filter { $0.id != target.id }.shuffled(using: &rng)
+            let others = pool.filter { $0.id != target.id }.shuffled(using: &rng)
             let distractors = Array(others.prefix(2))
             let options = ([target] + distractors).shuffled(using: &rng)
             return PhonicsQuizRound(target: target, options: options)
