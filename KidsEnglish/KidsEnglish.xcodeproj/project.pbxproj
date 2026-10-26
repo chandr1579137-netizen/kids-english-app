@@ -48,6 +48,8 @@
 		E1A5E0000000000000000035 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000036; };
 		E1A5E0000000000000000023 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000024; };
 		E1A5E0000000000000000025 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000026; };
+		E1A5E0000000000000000041 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000042; };
+		E1A5E0000000000000000051 = {isa = PBXBuildFile; fileRef = E1A5E0000000000000000052; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		E1A5E0000000000000000036 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhraseTimeCards.swift; sourceTree = "<group>"; };
 		E1A5E0000000000000000024 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabyView.swift; sourceTree = "<group>"; };
 		E1A5E0000000000000000026 = {isa = PBXFileReference; lastKnownFileType = text.json; path = "baby-path.json"; sourceTree = "<group>"; };
+		E1A5E0000000000000000042 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonicsModels.swift; sourceTree = "<group>"; };
+		E1A5E0000000000000000052 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonicsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,8 @@
 				E1A5E0000000000000000033,
 				E1A5E0000000000000000035,
 				E1A5E0000000000000000023,
+				E1A5E0000000000000000041,
+				E1A5E0000000000000000051,
 				2BA2E781B1DD863B23665DC3,
 				3D29CCBCC29B74C97A68D3B8,
 			);
@@ -194,6 +200,8 @@
 				E1A5E0000000000000000034,
 				E1A5E0000000000000000036,
 				E1A5E0000000000000000024,
+				E1A5E0000000000000000042,
+				E1A5E0000000000000000052,
 				BE87BC4EF31FE5F9536F7399,
 				06DDC59A3EAF81A85BF8D133,
 				4CE3262B4DC14E135606997D,
