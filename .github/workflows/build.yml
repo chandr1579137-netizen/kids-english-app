@@ -433,6 +433,8 @@ jobs:
           shoot 72g-baby-game-shadow-correct -uiBaby -uiBabyGame shadow -uiBabyDemo correct
           shoot 72h-baby-game-follow         -uiBaby -uiBabyGame follow
           shoot 72i-baby-game-follow-correct -uiBaby -uiBabyGame follow -uiBabyDemo correct
+          shoot 72j-baby-game-rhyme          -uiBaby -uiBabyGame rhyme
+          shoot 72k-baby-game-syllable       -uiBaby -uiBabyGame syllable
           shoot 73a-baby-review              -uiBaby -uiBabyKnown 8 -uiBabyStep 1
           shoot 73b-baby-review-day-bubbles  -uiBaby -uiBabyKnown 16 -uiBabyReviewDay
           shoot 73c-baby-sentence            -uiBaby -uiBabyStep 10

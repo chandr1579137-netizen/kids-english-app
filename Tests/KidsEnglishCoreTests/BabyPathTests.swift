@@ -333,6 +333,94 @@ final class BabyPathTests: XCTestCase {
         }
     }
 
+    /// 自然拼读 T5 前置语音意识小游戏：押韵配对与拍手数音节的出题规则与资源完整性
+    func testPhonicsPreAwarenessGames() throws {
+        let d = try load()
+        var rng = SeededGenerator(seed: 42)
+        let audioMap = try JSONDecoder().decode([String: String].self,
+            from: Data(contentsOf: resources.appendingPathComponent("word-audio-map.json")))
+        let phraseAudioDir = resources.appendingPathComponent("phrases/audio")
+        let overridesDir = root.appendingPathComponent("assets/word-icons-overrides")
+
+        // 1. 引导音频与音效文件物理存在
+        XCTAssertTrue(FileManager.default.fileExists(atPath: phraseAudioDir.appendingPathComponent("tom_do_they_rhyme.mp3").path),
+                      "缺押韵配对引导语音 tom_do_they_rhyme.mp3")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: phraseAudioDir.appendingPathComponent("tom_clap_with_me.mp3").path),
+                      "缺拍手数音节引导语音 tom_clap_with_me.mp3")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: phraseAudioDir.appendingPathComponent("drum_beat.mp3").path),
+                      "缺小鼓拍手音效 drum_beat.mp3")
+
+        // 2. 押韵配对词库：全部在 baby-path 中，且都有独立平涂图与音频
+        for pair in BabyPlan.rhymePairs {
+            XCTAssertTrue(d.allWords.contains(pair.0), "押韵词 \(pair.0) 不在 baby-path 中")
+            XCTAssertTrue(d.allWords.contains(pair.1), "押韵词 \(pair.1) 不在 baby-path 中")
+            XCTAssertNotNil(audioMap[pair.0], "\(pair.0) 缺发音")
+            XCTAssertNotNil(audioMap[pair.1], "\(pair.1) 缺发音")
+            XCTAssertTrue(FileManager.default.fileExists(atPath: overridesDir.appendingPathComponent("\(d.picture(for: pair.0)).jpg").path),
+                          "\(pair.0) 缺平涂图")
+            XCTAssertTrue(FileManager.default.fileExists(atPath: overridesDir.appendingPathComponent("\(d.picture(for: pair.1)).jpg").path),
+                          "\(pair.1) 缺平涂图")
+        }
+
+        for pair in BabyPlan.nonRhymePairs {
+            XCTAssertTrue(d.allWords.contains(pair.0), "不押韵词 \(pair.0) 不在 baby-path 中")
+            XCTAssertTrue(d.allWords.contains(pair.1), "不押韵词 \(pair.1) 不在 baby-path 中")
+        }
+
+        // 押韵配对出题：每轮 4 题，含押韵与不押韵
+        for _ in 0..<10 {
+            let rounds = BabyPlan.makeRhymeRounds(count: 4, using: &rng)
+            XCTAssertEqual(rounds.count, 4)
+            XCTAssertEqual(rounds.filter(\.rhymes).count, 2)
+            XCTAssertEqual(rounds.filter { !$0.rhymes }.count, 2)
+            for r in rounds {
+                XCTAssertNotEqual(r.word1, r.word2)
+            }
+        }
+
+        // 3. 拍手数音节词库：1、2、3 音节词全部存在且音节正确
+        for (syl, words) in BabyPlan.syllableWords {
+            XCTAssertTrue((1...3).contains(syl))
+            XCTAssertFalse(words.isEmpty)
+            for w in words {
+                XCTAssertTrue(d.allWords.contains(w), "音节词 \(w) 不在 baby-path 中")
+                XCTAssertNotNil(audioMap[w], "\(w) 缺发音")
+                XCTAssertTrue(FileManager.default.fileExists(atPath: overridesDir.appendingPathComponent("\(d.picture(for: w)).jpg").path),
+                              "\(w) 缺平涂图")
+            }
+        }
+
+        // 拍手数音节出题：每轮 4 题，覆盖 1、2、3 音节
+        for _ in 0..<10 {
+            let rounds = BabyPlan.makeSyllableRounds(count: 4, using: &rng)
+            XCTAssertEqual(rounds.count, 4)
+            let counts = Set(rounds.map(\.count))
+            XCTAssertTrue(counts.contains(1), "应包含 1 音节题")
+            XCTAssertTrue(counts.contains(2), "应包含 2 音节题")
+            XCTAssertTrue(counts.contains(3), "应包含 3 音节题")
+            for r in rounds {
+                XCTAssertTrue(BabyPlan.syllableWords[r.count]?.contains(r.word) == true)
+            }
+        }
+
+        // 4. gameSteps 转换与贴纸识别
+        let rhymeSteps = BabyPlan.gameSteps(kind: .rhymeMatch, newWords: ["cat"], reviews: [], pool: d.allWords, data: d, using: &rng)
+        XCTAssertEqual(rhymeSteps.count, 4)
+        for s in rhymeSteps {
+            guard case .rhymeGame(let r) = s else { XCTFail("非押韵步 \(s)"); return }
+            XCTAssertFalse(r.word1.isEmpty)
+        }
+        XCTAssertNotNil(BabyPlan.sticker(for: rhymeSteps))
+
+        let syllableSteps = BabyPlan.gameSteps(kind: .syllableClap, newWords: ["banana"], reviews: [], pool: d.allWords, data: d, using: &rng)
+        XCTAssertEqual(syllableSteps.count, 4)
+        for s in syllableSteps {
+            guard case .syllableGame(let r) = s else { XCTFail("非音节步 \(s)"); return }
+            XCTAssertTrue((1...3).contains(r.count))
+        }
+        XCTAssertNotNil(BabyPlan.sticker(for: syllableSteps))
+    }
+
     func testReplayIsGameOnlyFromKnownWords() throws {
         let d = try load()
         var rng = SeededGenerator(seed: 3)

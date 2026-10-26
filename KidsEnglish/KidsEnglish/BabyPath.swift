@@ -74,6 +74,19 @@ struct BabyRound: Equatable, Hashable {
     let options: [String]
 }
 
+/// 押韵配对（2 个词 + 是否押韵）
+struct BabyRhymeRound: Equatable, Hashable {
+    let word1: String
+    let word2: String
+    let rhymes: Bool
+}
+
+/// 拍手数音节（1 个词 + 音节数 1..3）
+struct BabySyllableRound: Equatable, Hashable {
+    let word: String
+    let count: Int
+}
+
 /// 每天一课的 6 个阶段（顶部 6 个圆点 + 阶段之间 Tom 过场语音）
 enum BabyStage: Int, CaseIterable, Hashable {
     case sing = 0      // 1. 唱一唱
@@ -134,6 +147,8 @@ enum BabyGameKind: String, CaseIterable, Codable, Hashable, Identifiable {
     case memoryFlip   = "memory"   // G1 翻牌记忆（6 张牌 = 3 对）
     case shadowDrag   = "shadow"   // G2 拖进影子（3 张图拖进上方剪影）
     case followMe     = "follow"   // G5 跟我做（动作和身体指令，每次 3 个）
+    case rhymeMatch   = "rhyme"    // 押韵配对（听两词判断是否押韵）
+    case syllableClap = "syllable" // 拍手数音节（听词数 1/2/3 音节）
     case feedAnimal   = "feed"     // 喂小动物（仅食物、水果包）
     case findInScene  = "scene"    // 听音找一找（仅带场景图的词）
 
@@ -145,7 +160,9 @@ enum BabyGameKind: String, CaseIterable, Codable, Hashable, Identifiable {
         case .memoryFlip: return "翻牌记忆"
         case .shadowDrag: return "拖进影子"
         case .followMe: return "跟我做"
-        case .feedAnimal: return "喂小动物"
+        case .rhymeMatch: return "押韵配对"
+        case .syllableClap: return "拍手数音节"
+        case .feedAnimal: return "喂小动物" 
         case .findInScene: return "找一找"
         }
     }
@@ -156,7 +173,9 @@ enum BabyGameKind: String, CaseIterable, Codable, Hashable, Identifiable {
         case .memoryFlip: return "square.grid.3x2.fill"
         case .shadowDrag: return "sparkles.rectangle.stack.fill"
         case .followMe: return "figure.dance"
-        case .feedAnimal: return "carrot.fill"
+        case .rhymeMatch: return "music.note.list"
+        case .syllableClap: return "hands.clap.fill"
+        case .feedAnimal: return "carrot.fill" 
         case .findInScene: return "magnifyingglass.circle.fill"
         }
     }
@@ -187,6 +206,10 @@ enum BabyStep: Equatable, Hashable {
     case shadowGame(BabyRound)
     /// 第 4 步 小游戏（G5 跟我做）：动作或身体指令词
     case followMe(String)
+    /// 第 4 步 小游戏（押韵配对）：听两个词判断是否同韵
+    case rhymeGame(BabyRhymeRound)
+    /// 第 4 步 小游戏（拍手数音节）：听词数 1/2/3 音节
+    case syllableGame(BabySyllableRound)
     /// 第 5 步 句子：先听 Tom 说 → 跟读 → 换今天的另一个词再说一遍
     case sentence(word: String, text: String)
     /// 第 6 步 自己说：看图独立说出（不先放音，说完或 6 秒后放示范音）
@@ -199,7 +222,7 @@ enum BabyStep: Equatable, Hashable {
         case .sing: return .sing
         case .review: return .review
         case .learn: return .learn
-        case .pickGame, .game, .memoryGame, .shadowGame, .followMe: return .game
+        case .pickGame, .game, .memoryGame, .shadowGame, .followMe, .rhymeGame, .syllableGame: return .game
         case .sentence: return .sentence
         case .sayIt: return .sayIt
         case .done: return nil
@@ -220,6 +243,44 @@ enum BabyPlan {
     static let memoryPairCount = 3
     /// 跟我做：每次 3 个指令
     static let followMeRounds = 3
+    /// 押韵配对与拍手数音节题数
+    static let rhymeRounds = 4
+    static let syllableRounds = 4
+
+    /// 押韵配对词对池（全部包含在平涂图与标准音频中）
+    static let rhymePairs: [(String, String)] = [
+        ("cat", "hat"),
+        ("dog", "frog"),
+        ("red", "bed"),
+        ("bear", "pear"),
+        ("sun", "run"),
+        ("car", "star"),
+        ("bee", "tree"),
+        ("ball", "doll"),
+        ("duck", "truck"),
+        ("rain", "train"),
+        ("goat", "boat"),
+        ("pen", "hen")
+    ]
+
+    /// 明显不押韵的词对池（韵尾迥异、语义直观）
+    static let nonRhymePairs: [(String, String)] = [
+        ("cat", "dog"),
+        ("sun", "fish"),
+        ("car", "bed"),
+        ("apple", "star"),
+        ("tree", "duck"),
+        ("boat", "bear"),
+        ("bee", "frog"),
+        ("rain", "hat")
+    ]
+
+    /// 拍手数音节词池（1、2、3 音节，发音清晰明快，100% 存在平涂图与音频）
+    static let syllableWords: [Int: [String]] = [
+        1: ["cat", "dog", "fish", "sun", "star"],
+        2: ["apple", "monkey", "rabbit", "water", "flower"],
+        3: ["banana", "elephant", "butterfly", "strawberry", "kangaroo"]
+    ]
     /// 句子环节：今天练 2 句（先听 Tom 说 → 跟读 → 换成今天的另一个词再说一遍）
     static let sentenceCount = 2
     /// 每学 4 天新课，第 5 天是复习日（周期 = 5）
@@ -294,6 +355,8 @@ enum BabyPlan {
             result.append(.followMe)
         }
         if !includeCoreOnly {
+            result.append(.rhymeMatch)
+            result.append(.syllableClap)
             let packIds = Set(words.compactMap { data.pack(containing: $0)?.id })
             if !packIds.isDisjoint(with: feedCompatiblePacks) {
                 result.append(.feedAnimal)
@@ -320,9 +383,9 @@ enum BabyPlan {
 
     /// 复习日泡泡自选：给孩子 3 个不重复的泡泡选想玩的游戏
     static func bubbleGames(for words: [String], data: BabyPathData) -> [BabyGameKind] {
-        var list = compatibleGames(for: words, data: data, includeCoreOnly: true)
+        var list = compatibleGames(for: words, data: data, includeCoreOnly: false)
         // 优先把好玩的新游戏排前面，凑齐 3 个泡泡
-        let priority: [BabyGameKind] = [.followMe, .memoryFlip, .shadowDrag, .listenChoice]
+        let priority: [BabyGameKind] = [.rhymeMatch, .syllableClap, .followMe, .memoryFlip, .shadowDrag, .listenChoice]
         list.sort { (priority.firstIndex(of: $0) ?? 99) < (priority.firstIndex(of: $1) ?? 99) }
         return Array(list.prefix(3))
     }
@@ -465,6 +528,46 @@ enum BabyPlan {
                                      count: followMeRounds, using: &rng)
     }
 
+    /// 押韵配对出题：通常出 4 题（2 题押韵 + 2 题不押韵），打乱顺序
+    static func makeRhymeRounds(count: Int = rhymeRounds,
+                                using rng: inout some RandomNumberGenerator) -> [BabyRhymeRound] {
+        let rhymingHalf = count / 2
+        let nonRhymingHalf = max(1, count - rhymingHalf)
+        let pickedRhymes = rhymePairs.shuffled(using: &rng).prefix(rhymingHalf).map {
+            BabyRhymeRound(word1: $0.0, word2: $0.1, rhymes: true)
+        }
+        let pickedNonRhymes = nonRhymePairs.shuffled(using: &rng).prefix(nonRhymingHalf).map {
+            BabyRhymeRound(word1: $0.0, word2: $0.1, rhymes: false)
+        }
+        let combined = Array(pickedRhymes) + Array(pickedNonRhymes)
+        return combined.shuffled(using: &rng)
+    }
+
+    /// 拍手数音节出题：从 1、2、3 音节词中挑选，确保覆盖不同音节数
+    static func makeSyllableRounds(count: Int = syllableRounds,
+                                   using rng: inout some RandomNumberGenerator) -> [BabySyllableRound] {
+        var rounds: [BabySyllableRound] = []
+        // 保证 1, 2, 3 音节各至少出 1 题
+        for syl in [1, 2, 3] {
+            if let w = syllableWords[syl]?.randomElement(using: &rng) {
+                rounds.append(BabySyllableRound(word: w, count: syl))
+            }
+        }
+        // 补充剩余题目至 count
+        var allFlattened: [(Int, String)] = []
+        for (syl, words) in syllableWords {
+            for w in words { allFlattened.append((syl, w)) }
+        }
+        var shuffled = allFlattened.shuffled(using: &rng)
+        while rounds.count < count, !shuffled.isEmpty {
+            let item = shuffled.removeFirst()
+            if !rounds.contains(where: { $0.word == item.1 }) {
+                rounds.append(BabySyllableRound(word: item.1, count: item.0))
+            }
+        }
+        return rounds.shuffled(using: &rng)
+    }
+
     /// 构造指定游戏种类的步骤列表
     static func gameSteps(kind: BabyGameKind, newWords: [String], reviews: [String], pool: [String],
                           data: BabyPathData, using rng: inout some RandomNumberGenerator) -> [BabyStep] {
@@ -480,6 +583,12 @@ enum BabyPlan {
         case .followMe:
             let cmds = makeFollowMeWords(targets: activeWords, reviews: reviews, pool: pool, using: &rng)
             return cmds.map { .followMe($0) }
+        case .rhymeMatch:
+            let rounds = makeRhymeRounds(using: &rng)
+            return rounds.map { .rhymeGame($0) }
+        case .syllableClap:
+            let rounds = makeSyllableRounds(using: &rng)
+            return rounds.map { .syllableGame($0) }
         case .listenChoice, .feedAnimal, .findInScene:
             return listenGameSteps(newWords: activeWords, reviews: reviews, pool: pool, data: data, using: &rng)
         }
@@ -585,6 +694,8 @@ enum BabyPlan {
         for s in steps { if case .shadowGame(let r) = s { return r.answer } }
         for s in steps { if case .memoryGame(let cards) = s, let first = cards.first { return first } }
         for s in steps { if case .followMe(let w) = s { return w } }
+        for s in steps { if case .rhymeGame(let r) = s { return r.word1 } }
+        for s in steps { if case .syllableGame(let r) = s { return r.word } }
         return nil
     }
 }
