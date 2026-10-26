@@ -347,7 +347,7 @@ enum BabyPlan {
     /// 根据今天的词判断哪些游戏搭得上
     static func compatibleGames(for words: [String], data: BabyPathData, includeCoreOnly: Bool = false) -> [BabyGameKind] {
         guard !words.isEmpty else { return [.listenChoice] }
-        var result: [BabyGameKind] = [.listenChoice, .memoryFlip, .rhymeMatch, .syllableClap]
+        var result: [BabyGameKind] = [.listenChoice, .memoryFlip]
         if words.contains(where: { isShadowCompatible($0, data: data) }) {
             result.append(.shadowDrag)
         }
@@ -355,6 +355,8 @@ enum BabyPlan {
             result.append(.followMe)
         }
         if !includeCoreOnly {
+            result.append(.rhymeMatch)
+            result.append(.syllableClap)
             let packIds = Set(words.compactMap { data.pack(containing: $0)?.id })
             if !packIds.isDisjoint(with: feedCompatiblePacks) {
                 result.append(.feedAnimal)
@@ -381,7 +383,7 @@ enum BabyPlan {
 
     /// 复习日泡泡自选：给孩子 3 个不重复的泡泡选想玩的游戏
     static func bubbleGames(for words: [String], data: BabyPathData) -> [BabyGameKind] {
-        var list = compatibleGames(for: words, data: data, includeCoreOnly: true)
+        var list = compatibleGames(for: words, data: data, includeCoreOnly: false)
         // 优先把好玩的新游戏排前面，凑齐 3 个泡泡
         let priority: [BabyGameKind] = [.rhymeMatch, .syllableClap, .followMe, .memoryFlip, .shadowDrag, .listenChoice]
         list.sort { (priority.firstIndex(of: $0) ?? 99) < (priority.firstIndex(of: $1) ?? 99) }
