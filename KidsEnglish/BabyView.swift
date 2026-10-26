@@ -1048,8 +1048,9 @@ final class BabySessionController {
     func tapSyllableDrum() {
         guard !frozen else { return }
         drumTaps = min(drumTaps + 1, 3)
-        let url = store.phraseFileURL("audio", "drum_beat.mp3")
-        drumPlayer.play(url: url)
+        if let url = store.phraseFileURL("audio", "drum_beat.mp3") {
+            drumPlayer.play(url: url)
+        }
     }
 
     func chooseSyllable(_ count: Int) {
@@ -1086,8 +1087,9 @@ final class BabySessionController {
                 return
             }
             drumTaps = i + 1
-            let url = store.phraseFileURL("audio", "drum_beat.mp3")
-            drumPlayer.play(url: url)
+            if let url = store.phraseFileURL("audio", "drum_beat.mp3") {
+                drumPlayer.play(url: url)
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.38) { beat(i: i + 1) }
         }
         beat(i: 0)
@@ -2200,7 +2202,6 @@ private struct BabyRhymeMatchView: View {
     var body: some View {
         GeometryReader { geo in
             let cardSide = min((geo.size.width - 56) / 2, geo.size.height * 0.38)
-            let solved = c.phase == .solved
             VStack(spacing: 14) {
                 Spacer(minLength: 0)
 
