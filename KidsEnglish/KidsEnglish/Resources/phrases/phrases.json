@@ -20,10 +20,22 @@
    "avatar": "farmer.jpg"
   },
   {
+   "id": "grandma",
+   "nameEn": "Grandma",
+   "nameZh": "奶奶",
+   "avatar": "grandma.jpg"
+  },
+  {
    "id": "mom",
    "nameEn": "Mother",
    "nameZh": "妈妈",
    "avatar": "mom.jpg"
+  },
+  {
+   "id": "staff",
+   "nameEn": "Staff",
+   "nameZh": "动物园阿姨",
+   "avatar": "staff.jpg"
   },
   {
    "id": "teacher",
@@ -1412,6 +1424,467 @@
        "zh": "是的，我还拿了你的橡皮。",
        "audio": "L4-5-08.mp3",
        "icon": "eraser"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "level": 5,
+   "titleZh": "家人·星期·月份",
+   "scenes": [
+    {
+     "id": "L5-1",
+     "titleZh": "你家有谁",
+     "titleEn": "My Family",
+     "lines": [
+      {
+       "id": "L5-1-01",
+       "speaker": "tom",
+       "en": "How is your mom?",
+       "zh": "你妈妈好吗？",
+       "audio": "L5-1-01.mp3",
+       "icon": "mother"
+      },
+      {
+       "id": "L5-1-02",
+       "speaker": "amy",
+       "en": "She is very well, thank you.",
+       "zh": "她很好，谢谢。",
+       "audio": "L5-1-02.mp3",
+       "icon": "smile"
+      },
+      {
+       "id": "L5-1-03",
+       "speaker": "amy",
+       "en": "Do you have any brothers or sisters?",
+       "zh": "你有兄弟姐妹吗？",
+       "audio": "L5-1-03.mp3",
+       "icon": "family"
+      },
+      {
+       "id": "L5-1-04",
+       "speaker": "tom",
+       "en": "Yes, I have a big brother.",
+       "zh": "有，我有一个哥哥。",
+       "audio": "L5-1-04.mp3",
+       "image": "L5-1-04.jpg"
+      },
+      {
+       "id": "L5-1-05",
+       "speaker": "tom",
+       "en": "Do you have any brothers?",
+       "zh": "你有兄弟吗？",
+       "audio": "L5-1-05.mp3",
+       "image": "L5-1-05.jpg"
+      },
+      {
+       "id": "L5-1-06",
+       "speaker": "amy",
+       "en": "No, I'm the only child.",
+       "zh": "没有，我是独生女。",
+       "audio": "L5-1-06.mp3",
+       "icon": "child"
+      }
+     ]
+    },
+    {
+     "id": "L5-2",
+     "titleZh": "去奶奶家",
+     "titleEn": "At Grandma's",
+     "lines": [
+      {
+       "id": "L5-2-01",
+       "speaker": "mom",
+       "en": "What a beautiful garden you have!",
+       "zh": "您的花园真漂亮！",
+       "audio": "L5-2-01.mp3",
+       "image": "L5-2-01.jpg"
+      },
+      {
+       "id": "L5-2-02",
+       "speaker": "tom",
+       "en": "How big is your house, Grandma?",
+       "zh": "奶奶，您的房子有多大？",
+       "audio": "L5-2-02.mp3",
+       "icon": "house"
+      },
+      {
+       "id": "L5-2-03",
+       "speaker": "grandma",
+       "en": "Come and see!",
+       "zh": "快进来看看！",
+       "audio": "L5-2-03.mp3",
+       "icon": "come"
+      },
+      {
+       "id": "L5-2-04",
+       "speaker": "tom",
+       "en": "Grandpa has a dog, doesn't he?",
+       "zh": "爷爷有一只狗，对吧？",
+       "audio": "L5-2-04.mp3",
+       "icon": "dog"
+      },
+      {
+       "id": "L5-2-05",
+       "speaker": "grandma",
+       "en": "No, he doesn't. He has a cat.",
+       "zh": "没有，他有一只猫。",
+       "audio": "L5-2-05.mp3",
+       "icon": "cat"
+      },
+      {
+       "id": "L5-2-06",
+       "speaker": "tom",
+       "en": "What's the name of the cat?",
+       "zh": "这只猫叫什么名字？",
+       "audio": "L5-2-06.mp3",
+       "icon": "kitten"
+      },
+      {
+       "id": "L5-2-07",
+       "speaker": "tom",
+       "en": "Do you have shampoo here?",
+       "zh": "这儿有洗发水吗？",
+       "audio": "L5-2-07.mp3",
+       "image": "L5-2-07.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L5-3",
+     "titleZh": "今天星期几",
+     "titleEn": "What Day Is It?",
+     "lines": [
+      {
+       "id": "L5-3-01",
+       "speaker": "tom",
+       "en": "What day is it today?",
+       "zh": "今天星期几？",
+       "audio": "L5-3-01.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "play",
+         "play"
+        ],
+        "blink": [
+         0
+        ]
+       }
+      },
+      {
+       "id": "L5-3-02",
+       "speaker": "mom",
+       "en": "It's Monday today.",
+       "zh": "今天星期一。",
+       "audio": "L5-3-02.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "play",
+         "play"
+        ],
+        "glow": [
+         0
+        ],
+        "star": [
+         0
+        ]
+       }
+      },
+      {
+       "id": "L5-3-03",
+       "speaker": "mom",
+       "en": "Time for school!",
+       "zh": "该上学啦！",
+       "audio": "L5-3-03.mp3",
+       "image": "L5-3-03.jpg"
+      },
+      {
+       "id": "L5-3-04",
+       "speaker": "tom",
+       "en": "What day is tomorrow?",
+       "zh": "明天星期几？",
+       "audio": "L5-3-04.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "play",
+         "play"
+        ],
+        "star": [
+         0
+        ],
+        "blink": [
+         1
+        ]
+       }
+      },
+      {
+       "id": "L5-3-05",
+       "speaker": "mom",
+       "en": "Tomorrow is Tuesday.",
+       "zh": "明天星期二。",
+       "audio": "L5-3-05.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "play",
+         "play"
+        ],
+        "glow": [
+         1
+        ]
+       }
+      },
+      {
+       "id": "L5-3-06",
+       "speaker": "tom",
+       "en": "I can't wait for Saturday!",
+       "zh": "我好想快点到星期六！",
+       "audio": "L5-3-06.mp3",
+       "code": "week",
+       "codeParams": {
+        "slots": [
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "bag",
+         "icon:kite",
+         "play"
+        ],
+        "glow": [
+         5
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "L5-4",
+     "titleZh": "几月份",
+     "titleEn": "What Month Is It?",
+     "lines": [
+      {
+       "id": "L5-4-01",
+       "speaker": "tom",
+       "en": "What month is it?",
+       "zh": "现在几月？",
+       "audio": "L5-4-01.mp3",
+       "code": "calendar",
+       "codeIcon": "snow",
+       "codeParams": {
+        "pulse": true
+       }
+      },
+      {
+       "id": "L5-4-02",
+       "speaker": "dad",
+       "en": "It's December.",
+       "zh": "现在是十二月。",
+       "audio": "L5-4-02.mp3",
+       "code": "months",
+       "codeParams": {
+        "slots": [
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "",
+         "icon:snow"
+        ],
+        "glow": [
+         11
+        ]
+       }
+      },
+      {
+       "id": "L5-4-03",
+       "speaker": "tom",
+       "en": "What season is it?",
+       "zh": "现在是什么季节？",
+       "audio": "L5-4-03.mp3",
+       "code": "quad",
+       "codeParams": {
+        "slots": [
+         "icon:flower",
+         "sun",
+         "icon:leaf",
+         "icon:snow"
+        ],
+        "cycle": true
+       }
+      },
+      {
+       "id": "L5-4-04",
+       "speaker": "dad",
+       "en": "It's winter.",
+       "zh": "是冬天。",
+       "audio": "L5-4-04.mp3",
+       "image": "L5-4-04.jpg"
+      },
+      {
+       "id": "L5-4-05",
+       "speaker": "tom",
+       "en": "It's so cold!",
+       "zh": "好冷呀！",
+       "audio": "L5-4-05.mp3",
+       "icon": "snow"
+      },
+      {
+       "id": "L5-4-06",
+       "speaker": "dad",
+       "en": "Let's make a snowman!",
+       "zh": "我们去堆雪人吧！",
+       "audio": "L5-4-06.mp3",
+       "image": "L5-4-06.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L5-5",
+     "titleZh": "天气怎么样",
+     "titleEn": "What's the Weather Like?",
+     "lines": [
+      {
+       "id": "L5-5-01",
+       "speaker": "tom",
+       "en": "What's the weather like?",
+       "zh": "天气怎么样？",
+       "audio": "L5-5-01.mp3",
+       "code": "quad",
+       "codeParams": {
+        "slots": [
+         "sun",
+         "icon:cloud",
+         "icon:rain",
+         "icon:wind"
+        ],
+        "cycle": true
+       }
+      },
+      {
+       "id": "L5-5-02",
+       "speaker": "mom",
+       "en": "It's sunny today.",
+       "zh": "今天是晴天。",
+       "audio": "L5-5-02.mp3",
+       "icon": "window"
+      },
+      {
+       "id": "L5-5-03",
+       "speaker": "tom",
+       "en": "Is it windy?",
+       "zh": "有风吗？",
+       "audio": "L5-5-03.mp3",
+       "icon": "wind"
+      },
+      {
+       "id": "L5-5-04",
+       "speaker": "mom",
+       "en": "Yes! Let's fly a kite.",
+       "zh": "有！我们去放风筝吧。",
+       "audio": "L5-5-04.mp3",
+       "icon": "kite"
+      },
+      {
+       "id": "L5-5-05",
+       "speaker": "tom",
+       "en": "Oh, it's cloudy now.",
+       "zh": "哎呀，现在变阴天了。",
+       "audio": "L5-5-05.mp3",
+       "icon": "cloud"
+      },
+      {
+       "id": "L5-5-06",
+       "speaker": "mom",
+       "en": "Take your umbrella.",
+       "zh": "带上你的雨伞。",
+       "audio": "L5-5-06.mp3",
+       "image": "L5-5-06.jpg"
+      }
+     ]
+    },
+    {
+     "id": "L5-6",
+     "titleZh": "买鞋子",
+     "titleEn": "Shoe Shop",
+     "lines": [
+      {
+       "id": "L5-6-01",
+       "speaker": "tom",
+       "en": "Can I try them on?",
+       "zh": "我可以试穿吗？",
+       "audio": "L5-6-01.mp3",
+       "image": "L5-6-01.jpg"
+      },
+      {
+       "id": "L5-6-02",
+       "speaker": "staff",
+       "en": "Sure. Here you are.",
+       "zh": "当然可以，给你。",
+       "audio": "L5-6-02.mp3",
+       "image": "L5-6-02.jpg"
+      },
+      {
+       "id": "L5-6-03",
+       "speaker": "tom",
+       "en": "They're too small.",
+       "zh": "太小了。",
+       "audio": "L5-6-03.mp3",
+       "icon": "small"
+      },
+      {
+       "id": "L5-6-04",
+       "speaker": "tom",
+       "en": "Do you have a bigger one?",
+       "zh": "有大一点的吗？",
+       "audio": "L5-6-04.mp3",
+       "image": "L5-6-04.jpg"
+      },
+      {
+       "id": "L5-6-05",
+       "speaker": "tom",
+       "en": "This one is just right!",
+       "zh": "这双正合适！",
+       "audio": "L5-6-05.mp3",
+       "image": "L5-6-05.jpg"
+      },
+      {
+       "id": "L5-6-06",
+       "speaker": "mom",
+       "en": "You look great!",
+       "zh": "你穿着真好看！",
+       "audio": "L5-6-06.mp3",
+       "icon": "pretty"
       }
      ]
     }
