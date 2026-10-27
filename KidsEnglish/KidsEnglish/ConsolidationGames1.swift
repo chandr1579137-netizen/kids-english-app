@@ -94,11 +94,18 @@ struct WordToImageGame: View {
                 .kidFont(17, .semibold, maxScale: 1.15)
                 .foregroundColor(.secondary)
 
-            HStack(spacing: 16) {
-                Text(questions[index].word)
-                    .kidFont(64, .bold, maxScale: 1.15)
-                    .foregroundColor(.primary)
-                SpeakerButton(size: 76) { playWord(questions[index]) }
+            VStack(spacing: 6) {
+                HStack(spacing: 16) {
+                    Text(questions[index].word)
+                        .kidFont(58, .bold, maxScale: 1.15)
+                        .foregroundColor(.primary)
+                    SpeakerButton(size: 76) { playWord(questions[index]) }
+                }
+                if let cn = questions[index].meaningCn, !cn.isEmpty {
+                    Text(cn)
+                        .kidFont(22, .bold, maxScale: 1.15)
+                        .foregroundColor(.secondary)
+                }
             }
 
             LazyVGrid(
@@ -110,18 +117,29 @@ struct WordToImageGame: View {
                     Button {
                         tapOption(i)
                     } label: {
-                        WordIconView(word: options[i].word, size: 130)
-                            .frame(maxWidth: .infinity)
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.white)
-                                    .shadow(radius: 3)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(borderColor(for: state), lineWidth: state == .none ? 2 : 6)
-                            )
+                        VStack(spacing: 6) {
+                            WordIconView(word: options[i].word, size: 105)
+                            if let cn = options[i].meaningCn, !cn.isEmpty {
+                                Text(cn)
+                                    .kidFont(16, .bold, maxScale: 1.15)
+                                    .foregroundColor(.primary)
+                                    .lineLimit(1)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
+                                    .background(Color(white: 0.94), in: Capsule())
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.white)
+                                .shadow(radius: 3)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(borderColor(for: state), lineWidth: state == .none ? 2 : 6)
+                        )
                     }
                     .buttonStyle(.plain)
                     .disabled(answered)
@@ -268,18 +286,29 @@ struct AudioToImageGame: View {
                     Button {
                         tapOption(i)
                     } label: {
-                        WordIconView(word: options[i].word, size: 130)
-                            .frame(maxWidth: .infinity)
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.white)
-                                    .shadow(radius: 3)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(borderColor(for: state), lineWidth: state == .none ? 2 : 6)
-                            )
+                        VStack(spacing: 6) {
+                            WordIconView(word: options[i].word, size: 105)
+                            if let cn = options[i].meaningCn, !cn.isEmpty {
+                                Text(cn)
+                                    .kidFont(16, .bold, maxScale: 1.15)
+                                    .foregroundColor(.primary)
+                                    .lineLimit(1)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
+                                    .background(Color(white: 0.94), in: Capsule())
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.white)
+                                .shadow(radius: 3)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(borderColor(for: state), lineWidth: state == .none ? 2 : 6)
+                        )
                     }
                     .buttonStyle(.plain)
                     .disabled(answered)
@@ -575,6 +604,8 @@ struct WordToAudioGame: View {
     @State private var options: [WordEntry] = []
     @State private var correctIndex: Int? = nil
     @State private var pickedState: [Int: AnswerState] = [:]
+    @State private var selectedIndex: Int? = nil
+    @State private var playingIndex: Int? = nil
     @State private var answered: Bool = false
     @State private var finished: Bool = false
     @State private var successTrigger: Int = 0
@@ -598,58 +629,96 @@ struct WordToAudioGame: View {
     }
 
     private var gameView: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 20) {
             Text("第 \(index + 1) / \(questions.count) 题  ·  得分 \(score)")
                 .kidFont(17, .semibold, maxScale: 1.15)
                 .foregroundColor(.secondary)
 
-            VStack(spacing: 8) {
+            VStack(spacing: 6) {
                 Text(questions[index].word)
-                    .kidFont(64, .bold, maxScale: 1.15)
-                Text("点喇叭听一听，选出正确的发音 🔊")
-                    .kidFont(22, maxScale: 1.15)
-                    .foregroundColor(.secondary)
+                    .kidFont(58, .bold, maxScale: 1.15)
+                if let cn = questions[index].meaningCn, !cn.isEmpty {
+                    Text(cn)
+                        .kidFont(22, .bold, maxScale: 1.15)
+                        .foregroundColor(.secondary)
+                }
+                Text("先点喇叭试听，再点【选这个】确认 🔊")
+                    .kidFont(15, .semibold, maxScale: 1.15)
+                    .foregroundColor(Color(red: 0.90, green: 0.45, blue: 0.05))
             }
 
-            VStack(spacing: 16) {
+            VStack(spacing: 14) {
                 ForEach(options.indices, id: \.self) { i in
                     let state = pickedState[i] ?? .none
-                    Button {
-                        tapOption(i)
-                    } label: {
-                        HStack(spacing: 16) {
-                            Image(systemName: "speaker.wave.2.fill")
-                                .kidFont(34, maxScale: 1.15)
-                                .foregroundColor(.white)
-                                .frame(width: 64, height: 64)
-                                .background(Circle().fill(state == .correct ? Color.green : Color.orange))
-                            Text("发音 \(i + 1)")
-                                .kidFont(26, .semibold, maxScale: 1.15)
-                            Spacer()
-                            if state == .correct {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .kidFont(34, maxScale: 1.15)
-                                    .foregroundColor(.green)
-                            } else if state == .wrong {
-                                Image(systemName: "xmark.circle.fill")
-                                    .kidFont(34, maxScale: 1.15)
-                                    .foregroundColor(.red)
+                    let isSelected = selectedIndex == i
+                    let isPlaying = playingIndex == i
+
+                    HStack(spacing: 14) {
+                        // 左侧试听喇叭按钮
+                        Button {
+                            listenOption(i)
+                        } label: {
+                            ZStack {
+                                Circle().fill(state == .correct ? Color.green : (isPlaying ? Color.blue : Color.orange))
+                                Image(systemName: isPlaying ? "waveform" : "speaker.wave.2.fill")
+                                    .kidFont(28, maxScale: 1.15)
+                                    .foregroundColor(.white)
                             }
+                            .frame(width: 58, height: 58)
                         }
-                        .padding(14)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.white)
-                                .shadow(radius: 3)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(borderColor(for: state), lineWidth: state == .none ? 2 : 6)
-                        )
+                        .buttonStyle(.plain)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("发音 \(i + 1)")
+                                .kidFont(22, .semibold, maxScale: 1.15)
+                            Text(isPlaying ? "正在播放…" : "点击试听")
+                                .kidFont(12, .medium)
+                                .foregroundColor(.secondary)
+                        }
+
+                        Spacer()
+
+                        // 右侧确认与状态区
+                        if state == .correct {
+                            Image(systemName: "checkmark.circle.fill")
+                                .kidFont(32, maxScale: 1.15)
+                                .foregroundColor(.green)
+                        } else if state == .wrong {
+                            Image(systemName: "xmark.circle.fill")
+                                .kidFont(32, maxScale: 1.15)
+                                .foregroundColor(.red)
+                        } else if !answered {
+                            Button {
+                                confirmAnswer(i)
+                            } label: {
+                                Text(isSelected ? "选这个 ✓" : "选择")
+                                    .kidFont(15, .bold)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 14)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        isSelected ? Color.green : Color.gray.opacity(0.4),
+                                        in: Capsule()
+                                    )
+                            }
+                            .buttonStyle(PressableStyle())
+                        }
                     }
-                    .buttonStyle(.plain)
-                    .disabled(answered)
-                    .opacity(answered && state == .none ? 0.6 : 1.0)
+                    .padding(12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 18)
+                            .fill(isSelected ? Color.orange.opacity(0.08) : Color.white)
+                            .shadow(radius: 2)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18)
+                            .stroke(borderColor(for: state == .none && isSelected ? .none : state),
+                                    lineWidth: state != .none ? 4 : (isSelected ? 2.5 : 1))
+                    )
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        listenOption(i)
+                    }
                 }
             }
             Spacer()
@@ -695,10 +764,23 @@ struct WordToAudioGame: View {
         answered = false
     }
 
-    private func tapOption(_ i: Int) {
-        guard !answered else { return }
-        // 点哪个喇叭，就播放哪个词的发音
+    /// 试听该选项，并高亮选中
+    private func listenOption(_ i: Int) {
+        selectedIndex = i
+        playingIndex = i
         playWord(options[i])
+        Task {
+            try? await Task.sleep(nanoseconds: 900_000_000)
+            await MainActor.run {
+                if playingIndex == i { playingIndex = nil }
+            }
+        }
+    }
+
+    /// 确认选择该选项并判定
+    private func confirmAnswer(_ i: Int) {
+        guard !answered else { return }
+        selectedIndex = i
         if i == correctIndex {
             pickedState[i] = .correct
             answered = true

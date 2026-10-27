@@ -39,7 +39,7 @@ protocol KidTabItem: CaseIterable, Identifiable, Hashable {
 }
 
 enum AppTab: Int, CaseIterable, Identifiable, KidTabItem {
-    case learn, cards, read, songs, profile
+    case learn, cards, read, phonics, profile
 
     var id: Int { rawValue }
 
@@ -48,7 +48,7 @@ enum AppTab: Int, CaseIterable, Identifiable, KidTabItem {
         case .learn: return "背单词"
         case .cards: return "单词卡"
         case .read: return "说一说"
-        case .songs: return "儿歌"
+        case .phonics: return "启蒙乐园"
         case .profile: return "我的"
         }
     }
@@ -58,7 +58,7 @@ enum AppTab: Int, CaseIterable, Identifiable, KidTabItem {
         case .learn: return "book"
         case .cards: return "rectangle.on.rectangle"
         case .read: return "bubble.left.and.bubble.right"
-        case .songs: return "music.note"
+        case .phonics: return "sparkles"
         case .profile: return "person"
         }
     }
@@ -68,7 +68,7 @@ enum AppTab: Int, CaseIterable, Identifiable, KidTabItem {
         case .learn: return "book.fill"
         case .cards: return "rectangle.on.rectangle.fill"
         case .read: return "bubble.left.and.bubble.right.fill"
-        case .songs: return "music.note"
+        case .phonics: return "sparkles"
         case .profile: return "person.fill"
         }
     }
@@ -214,8 +214,8 @@ struct ContentView: View {
             }
         case .read:
             PhrasesHomeView()
-        case .songs:
-            SongsView(asTabRoot: true)
+        case .phonics:
+            NavigationStack { BabyPortalView() }
         case .profile:
             // 截图覆盖：儿歌 / 家长验证 / 设置。三个页面各自的容器不同：
             // SongsView、ParentGateView 自带 NavigationStack，设置详情页没有。

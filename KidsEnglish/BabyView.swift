@@ -91,7 +91,7 @@ extension LaunchOptions {
 // MARK: 页签
 
 enum BabyTab: Int, CaseIterable, Identifiable, KidTabItem {
-    case today, pictures, talk, songs, parent
+    case today, pictures, talk, phonics, parent
 
     var id: Int { rawValue }
 
@@ -100,7 +100,7 @@ enum BabyTab: Int, CaseIterable, Identifiable, KidTabItem {
         case .today: return "今天"
         case .pictures: return "图画"
         case .talk: return "说一说"
-        case .songs: return "儿歌"
+        case .phonics: return "拼读"
         case .parent: return "家长"
         }
     }
@@ -110,7 +110,7 @@ enum BabyTab: Int, CaseIterable, Identifiable, KidTabItem {
         case .today: return "sun.max"
         case .pictures: return "square.grid.2x2"
         case .talk: return "bubble.left.and.bubble.right"
-        case .songs: return "music.note"
+        case .phonics: return "sparkles"
         case .parent: return "lock"
         }
     }
@@ -120,7 +120,7 @@ enum BabyTab: Int, CaseIterable, Identifiable, KidTabItem {
         case .today: return "sun.max.fill"
         case .pictures: return "square.grid.2x2.fill"
         case .talk: return "bubble.left.and.bubble.right.fill"
-        case .songs: return "music.note"
+        case .phonics: return "sparkles"
         case .parent: return "lock.fill"
         }
     }
@@ -141,7 +141,7 @@ struct BabyRootView: View {
                     case .today: BabyTodayView()
                     case .pictures: BabyPicturesView()
                     case .talk: PhrasesHomeView()
-                    case .songs: SongsView(asTabRoot: true)
+                    case .phonics: NavigationStack { PhonicsIslandView() }
                     case .parent:
                         // 截图用 `-uiProfile parent-dash` 跳过数学题，直接拍家长中心
                         if LaunchOptions.profilePage == "parent-dash" {

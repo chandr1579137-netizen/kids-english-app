@@ -5,18 +5,10 @@ import SwiftUI
 /// 这几个页面此前全是系统组件（`List` / `navigationTitle` / 系统按钮），
 /// 与主流程的自绘顶栏、白卡、糖果按钮不是一套语言，这里统一。
 struct ParentGateView: View {
-    @State private var unlocked = false
-
     var body: some View {
-        Group {
-            if unlocked {
-                ParentDashboardView()
-            } else {
-                ParentUnlockView(onUnlock: { unlocked = true })
-            }
-        }
-        .creamBackground()
-        .toolbar(.hidden, for: .navigationBar)
+        ParentDashboardView()
+            .creamBackground()
+            .toolbar(.hidden, for: .navigationBar)
     }
 }
 
