@@ -64,6 +64,15 @@ extension LaunchOptions {
     /// `-uiBabyIntro` 截图时停在步骤切换的 Tom 小过场画面
     static var babyIntro: Bool { ProcessInfo.processInfo.arguments.contains("-uiBabyIntro") }
 
+    /// `-uiPhonics` 截图时直接打开自然拼读探索岛
+    static var forcePhonics: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonics") }
+
+    /// `-uiPhonicsLetter <letter>` 打开特定字母详情
+    static var phonicsLetter: String? { value(for: "-uiPhonicsLetter") }
+
+    /// `-uiPhonicsQuiz` 打开自然拼读测验
+    static var phonicsQuiz: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonicsQuiz") }
+
     /// 现在是不是宝宝模式：截图默认走正常模式（原有截图不受影响），加 `-uiBaby` 才进宝宝模式
     static func isBaby(_ store: DataStore) -> Bool {
         isUIScreenshotRun ? forceBaby : store.babyMode
@@ -112,24 +121,28 @@ struct BabyRootView: View {
     @State private var tab: BabyTab = LaunchOptions.babyTab
 
     var body: some View {
-        VStack(spacing: 0) {
-            Group {
-                switch tab {
-                case .today: BabyTodayView()
-                case .pictures: BabyPicturesView()
-                case .talk: PhrasesHomeView()
-                case .songs: SongsView(asTabRoot: true)
-                case .parent:
-                    // 截图用 `-uiProfile parent-dash` 跳过数学题，直接拍家长中心
-                    if LaunchOptions.profilePage == "parent-dash" {
-                        NavigationStack { ParentDashboardView() }
-                    } else {
-                        NavigationStack { ParentGateView() }
+        if LaunchOptions.forcePhonics {
+            PhonicsIslandView()
+        } else {
+            VStack(spacing: 0) {
+                Group {
+                    switch tab {
+                    case .today: BabyTodayView()
+                    case .pictures: BabyPicturesView()
+                    case .talk: PhrasesHomeView()
+                    case .songs: SongsView(asTabRoot: true)
+                    case .parent:
+                        // 截图用 `-uiProfile parent-dash` 跳过数学题，直接拍家长中心
+                        if LaunchOptions.profilePage == "parent-dash" {
+                            NavigationStack { ParentDashboardView() }
+                        } else {
+                            NavigationStack { ParentGateView() }
+                        }
                     }
                 }
+                .frame(maxWidth: KidLayout.readableWidth)
+                KidTabBar(selection: $tab)
             }
-            .frame(maxWidth: KidLayout.readableWidth)
-            KidTabBar(selection: $tab)
         }
     }
 }
@@ -2674,7 +2687,13 @@ struct BabyPicturesView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 .padding(.top, 4)
-                .padding(.bottom, 12)
+                .padding(.bottom, 8)
+
+            NavigationLink { PhonicsIslandView() } label: {
+                PhonicsIslandBanner()
+            }
+            .buttonStyle(PressableStyle())
+
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
                 ForEach(data?.packs ?? []) { pack in
                     let unlocked = open.contains(pack)
