@@ -2859,6 +2859,22 @@ struct BabyPortalView: View {
             VStack(spacing: 20) {
                 header
 
+                // 核心卡片 0：Tom 的温馨小屋 (生活养成与贴纸沉浸点读)
+                NavigationLink {
+                    TomRoomView()
+                } label: {
+                    portalCard(
+                        title: "Tom 的温馨小屋",
+                        subtitle: "贴纸装扮房间 · 拟人沉浸点读",
+                        tag: "生活养成",
+                        color: Color(red: 0.96, green: 0.45, blue: 0.22),
+                        accentColor: Color(red: 1.0, green: 0.70, blue: 0.35),
+                        icon: "house.fill",
+                        emoji: "🏡"
+                    )
+                }
+                .buttonStyle(PressableStyle())
+
                 // 核心卡片 1：自然拼读探索岛
                 NavigationLink {
                     PhonicsIslandView()
@@ -3244,3 +3260,439 @@ struct StickerBookView: View {
         .disabled(!unlocked)
     }
 }
+
+// MARK: - Tom 的温馨小屋（Tom's Cozy Room，贴纸装扮与沉浸点读）
+
+struct TomRoomView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(DataStore.self) private var store
+    @State private var player = AudioPlayer()
+    @State private var showStickerBook = false
+    @State private var activeSlotForPicker: String? = nil
+    @State private var tappedWord: KidSticker? = nil
+    @State private var tomSpeech: String = "Hi friend! 欢迎来我的小屋~"
+    @State private var tomBounce = false
+    @State private var cloudDrift = false
+
+    // 四大装扮槽位定义
+    private let slots: [(id: String, name: String, icon: String, hint: String)] = [
+        ("wall", "墙面玩具", "airplane", "挂在墙上的奇趣玩具"),
+        ("desk", "书桌文具", "book.closed.fill", "书桌上的学习好伙伴"),
+        ("bowl", "水果盘", "leaf.fill", "桌上果盘里香甜的水果"),
+        ("carpet", "伴宠地毯", "pawprint.fill", "地毯上陪我玩耍的萌宠")
+    ]
+
+    var body: some View {
+        NavigationStack {
+            KidScrollView {
+                VStack(spacing: 16) {
+                    // 顶栏：返回 + 贴纸手帐本直达
+                    HStack {
+                        SubPageHeader(onBack: {
+                            player.stop()
+                            dismiss()
+                        })
+                        Spacer()
+                        Button {
+                            showStickerBook = true
+                        } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: "book.closed.fill")
+                                    .kidFont(15, .bold)
+                                Text("贴纸手帐本")
+                                    .kidFont(15, .heavy)
+                            }
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(
+                                LinearGradient(colors: [Color.orange, Color.red], startPoint: .topLeading, endPoint: .bottomTrailing),
+                                in: Capsule()
+                            )
+                            .elevationRaised()
+                        }
+                        .buttonStyle(PressableStyle())
+                        .padding(.trailing, 16)
+                    }
+
+                    // 沉浸房间主卡片
+                    roomSceneCard
+                        .padding(.horizontal, 16)
+
+                    // 贴纸点读放大双语卡（点击房间内贴纸时弹出）
+                    if let sticker = tappedWord {
+                        tappedStickerBanner(sticker)
+                            .padding(.horizontal, 16)
+                            .transition(.scale.combined(with: .opacity))
+                    }
+
+                    // 房间装扮点位清单（底部可直接点击更换）
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Text("🛋️ 房间装扮点位")
+                                .kidFont(18, .heavy)
+                                .foregroundStyle(Palette.ink)
+                            Spacer()
+                            Text("点击更换已收集贴纸")
+                                .kidFont(12, .semibold)
+                                .foregroundStyle(Palette.inkMuted)
+                        }
+                        .padding(.horizontal, 18)
+
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
+                            ForEach(slots, id: \.id) { slot in
+                                slotItemCard(slot: slot)
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                    }
+                }
+                .padding(.bottom, 24)
+            }
+            .creamBackground()
+            .toolbar(.hidden, for: .navigationBar)
+            .sheet(isPresented: $showStickerBook) {
+                StickerBookView()
+            }
+            .sheet(item: Binding(
+                get: { activeSlotForPicker.map { SlotPickerWrapper(id: $0) } },
+                set: { activeSlotForPicker = $0?.id }
+            )) { wrapper in
+                StickerPickerSheet(slotId: wrapper.id) { chosenSticker in
+                    store.decorateRoom(slot: wrapper.id, stickerId: chosenSticker.id)
+                    tappedWord = chosenSticker
+                    player.playWord(chosenSticker.word, url: store.bestAudioURL(forWord: chosenSticker.word))
+                    tomSpeech = "太棒啦！我喜欢新装扮 \(chosenSticker.emoji) !"
+                }
+            }
+            .onAppear {
+                withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
+                    tomBounce = true
+                }
+                withAnimation(.easeInOut(duration: 4.0).repeatForever(autoreverses: true)) {
+                    cloudDrift = true
+                }
+                playTomGreeting()
+            }
+            .onDisappear {
+                player.stop()
+            }
+        }
+    }
+
+    // MARK: - 房间场景主卡片
+    private var roomSceneCard: some View {
+        ZStack {
+            // 温暖房间背景
+            RoundedRectangle(cornerRadius: 26, style: .continuous)
+                .fill(
+                    LinearGradient(
+                        colors: [Color(red: 1.0, green: 0.98, blue: 0.92), Color(red: 0.98, green: 0.93, blue: 0.85)],
+                        startPoint: .top, endPoint: .bottom
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 26, style: .continuous)
+                        .strokeBorder(Color(red: 0.92, green: 0.84, blue: 0.72), lineWidth: 2)
+                )
+
+            VStack(spacing: 0) {
+                // 上半部分：窗户、阳光与墙壁玩具装扮位
+                HStack(alignment: .top) {
+                    // 大窗户与飘动的白云
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .fill(
+                                LinearGradient(colors: [Color(red: 0.65, green: 0.85, blue: 1.0), Color(red: 0.85, green: 0.95, blue: 1.0)],
+                                               startPoint: .top, endPoint: .bottom)
+                            )
+                            .frame(width: 100, height: 75)
+
+                        // 飘动白云
+                        Text("☁️")
+                            .kidFont(20)
+                            .offset(x: cloudDrift ? 15 : -15, y: -10)
+
+                        // 窗框
+                        Rectangle().fill(Color.white).frame(width: 2, height: 75)
+                        Rectangle().fill(Color.white).frame(width: 100, height: 2)
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(Color.white, lineWidth: 3))
+                    .shadow(color: .black.opacity(0.06), radius: 4)
+
+                    Spacer()
+
+                    // 墙面挂饰装扮位 (wall)
+                    slotBubble(slotId: "wall", defaultEmoji: "🚀", title: "墙面挂饰")
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+
+                Spacer(minLength: 12)
+
+                // 中间部分：书桌文具位 (desk) + 果盘位 (bowl)
+                HStack(alignment: .center) {
+                    // 果盘装扮位 (bowl)
+                    slotBubble(slotId: "bowl", defaultEmoji: "🍎", title: "美味果盘")
+
+                    Spacer()
+
+                    // 书桌装扮位 (desk)
+                    slotBubble(slotId: "desk", defaultEmoji: "📖", title: "书桌文具")
+                }
+                .padding(.horizontal, 24)
+
+                Spacer(minLength: 12)
+
+                // 下半部分：地毯伴宠位 (carpet) + 主角 Tom 与对话气泡
+                HStack(alignment: .bottom) {
+                    // 地毯伴宠位 (carpet)
+                    slotBubble(slotId: "carpet", defaultEmoji: "🐼", title: "伴宠地毯")
+
+                    Spacer()
+
+                    // 主角 Tom 与说话气泡
+                    VStack(alignment: .trailing, spacing: 4) {
+                        // 对话气泡
+                        Text(tomSpeech)
+                            .kidFont(12, .heavy)
+                            .foregroundStyle(Palette.ink)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(Color.white, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .shadow(color: .black.opacity(0.08), radius: 3, y: 1)
+
+                        // 点击 Tom 交互
+                        Button {
+                            playTomGreeting()
+                        } label: {
+                            VStack(spacing: 2) {
+                                Text("🐱")
+                                    .kidFont(52)
+                                    .offset(y: tomBounce ? -4 : 0)
+                                Text("Tom")
+                                    .kidFont(12, .heavy)
+                                    .foregroundStyle(Palette.ink)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 2)
+                                    .background(Color.orange.opacity(0.18), in: Capsule())
+                            }
+                        }
+                        .buttonStyle(PressableStyle())
+                        .accessibilityLabel("和 Tom 打招呼")
+                    }
+                }
+                .padding(.horizontal, 18)
+                .padding(.bottom, 16)
+            }
+        }
+        .frame(height: 310)
+        .elevationRaised()
+    }
+
+    // 房间场景内的装扮气泡按钮
+    private func slotBubble(slotId: String, defaultEmoji: String, title: String) -> some View {
+        let sticker = store.stickerForSlot(slotId)
+        let emoji = sticker?.emoji ?? defaultEmoji
+        let word = sticker?.word ?? ""
+
+        return Button {
+            if let sticker = sticker {
+                tappedWord = sticker
+                player.playWord(sticker.word, url: store.bestAudioURL(forWord: sticker.word))
+                tomSpeech = "I see the \(sticker.word)! \(sticker.zh)"
+            } else {
+                activeSlotForPicker = slotId
+            }
+        } label: {
+            VStack(spacing: 2) {
+                ZStack {
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 58, height: 58)
+                        .shadow(color: .black.opacity(0.08), radius: 4, y: 2)
+
+                    Text(emoji)
+                        .kidFont(32)
+
+                    Circle()
+                        .fill(Color.orange)
+                        .frame(width: 18, height: 18)
+                        .overlay(Image(systemName: "pencil").kidFont(10, .bold).foregroundStyle(.white))
+                        .offset(x: 20, y: -20)
+                }
+
+                if !word.isEmpty {
+                    Text(word)
+                        .kidFont(11, .heavy)
+                        .foregroundStyle(Palette.ink)
+                        .lineLimit(1)
+                }
+            }
+        }
+        .buttonStyle(PressableStyle())
+    }
+
+    // 点击贴纸后弹出的双语大胶囊
+    private func tappedStickerBanner(_ sticker: KidSticker) -> some View {
+        HStack(spacing: 12) {
+            Text(sticker.emoji)
+                .kidFont(36)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(sticker.word.uppercased())
+                    .kidFont(20, .heavy)
+                    .foregroundStyle(Palette.ink)
+                Text(sticker.zh)
+                    .kidFont(14, .bold)
+                    .foregroundStyle(Palette.inkMuted)
+            }
+
+            Spacer()
+
+            Button {
+                player.playWord(sticker.word, url: store.bestAudioURL(forWord: sticker.word))
+            } label: {
+                Image(systemName: "speaker.wave.3.fill")
+                    .kidFont(20, .bold)
+                    .foregroundStyle(.white)
+                    .frame(width: 44, height: 44)
+                    .background(Color.orange, in: Circle())
+            }
+            .buttonStyle(PressableStyle())
+        }
+        .padding(14)
+        .background(Color.white, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .elevationRaised()
+    }
+
+    // 底部装扮点位卡片（可点击更换）
+    private func slotItemCard(slot: (id: String, name: String, icon: String, hint: String)) -> some View {
+        let sticker = store.stickerForSlot(slot.id)
+        return Button {
+            activeSlotForPicker = slot.id
+        } label: {
+            HStack(spacing: 10) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(Color.orange.opacity(0.14))
+                        .frame(width: 42, height: 42)
+                    Text(sticker?.emoji ?? "❓")
+                        .kidFont(22)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(slot.name)
+                        .kidFont(14, .heavy)
+                        .foregroundStyle(Palette.ink)
+                    Text(sticker?.word ?? "点击去装扮")
+                        .kidFont(12, .semibold)
+                        .foregroundStyle(sticker != nil ? Func.positiveDeep : Palette.inkMuted)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .kidFont(12, .bold)
+                    .foregroundStyle(Palette.inkMuted)
+            }
+            .padding(10)
+            .background(Color.white, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .elevationGround()
+        }
+        .buttonStyle(PressableStyle())
+    }
+
+    private func playTomGreeting() {
+        let greetings = [
+            "Hi friend! 欢迎来我的温馨小屋~",
+            "点一点房间里的物品，跟我学英语吧！",
+            "坚持每天打卡，就能收集新贴纸装扮小屋哦！",
+            "I love my room! Let's learn together!"
+        ]
+        tomSpeech = greetings.randomElement() ?? greetings[0]
+        player.speak(tomSpeech)
+    }
+}
+
+// MARK: - 贴纸选择包装器与抽屉 Sheet
+struct SlotPickerWrapper: Identifiable {
+    let id: String
+}
+
+struct StickerPickerSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(DataStore.self) private var store
+    let slotId: String
+    let onChoose: (KidSticker) -> Void
+
+    private var unlockedStickersList: [KidSticker] {
+        DataStore.allStickers.filter { store.unlockedStickers.contains($0.id) }
+    }
+
+    var body: some View {
+        NavigationStack {
+            KidScrollView {
+                VStack(spacing: 16) {
+                    VStack(spacing: 4) {
+                        Text("选择新贴纸装扮房间 🎨")
+                            .kidFont(20, .heavy)
+                            .foregroundStyle(Palette.ink)
+                        Text("点击已收集的贴纸，立即摆放到房间")
+                            .kidFont(13, .semibold)
+                            .foregroundStyle(Palette.inkMuted)
+                    }
+                    .padding(.top, 12)
+
+                    if unlockedStickersList.isEmpty {
+                        VStack(spacing: 8) {
+                            Text("📦")
+                                .kidFont(40)
+                            Text("还没有收集到贴纸哦")
+                                .kidFont(16, .heavy)
+                                .foregroundStyle(Palette.ink)
+                            Text("每天打卡开启扭蛋盲盒，即可获得新贴纸~")
+                                .kidFont(13, .semibold)
+                                .foregroundStyle(Palette.inkMuted)
+                        }
+                        .padding(30)
+                    } else {
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+                            ForEach(unlockedStickersList, id: \.id) { sticker in
+                                Button {
+                                    onChoose(sticker)
+                                    dismiss()
+                                } label: {
+                                    VStack(spacing: 4) {
+                                        Text(sticker.emoji)
+                                            .kidFont(36)
+                                        Text(sticker.word)
+                                            .kidFont(13, .heavy)
+                                            .foregroundStyle(Palette.ink)
+                                            .lineLimit(1)
+                                        Text(sticker.zh)
+                                            .kidFont(11, .bold)
+                                            .foregroundStyle(Palette.inkMuted)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding(10)
+                                    .background(Color.white, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                                    .elevationGround()
+                                }
+                                .buttonStyle(PressableStyle())
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                    }
+                }
+                .padding(.bottom, 24)
+            }
+            .creamBackground()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("完成") { dismiss() }
+                        .kidFont(16, .heavy)
+                }
+            }
+        }
+    }
+}
+
