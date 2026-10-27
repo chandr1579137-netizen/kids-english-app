@@ -3,6 +3,7 @@ import SwiftUI
 /// 背单词 Tab：首页（今日计划 / 选词书 / 开始学习）→ 学习页（tab 内切换，保留底栏）
 struct LearnWordsView: View {
     @Environment(DataStore.self) private var store
+    @State private var showStickerBook = false
     @State private var player = AudioPlayer()
 
     /// 今日学习的卡片队列
@@ -154,6 +155,9 @@ struct LearnWordsView: View {
             .padding(.top, 12)
             .padding(.bottom, 12)
         }
+        .sheet(isPresented: $showStickerBook) {
+            StickerBookView()
+        }
     }
 
     // MARK: - 今日计划卡（公历实时打卡系统）
@@ -172,6 +176,22 @@ struct LearnWordsView: View {
                 .foregroundStyle(.white.opacity(0.95))
 
                 Spacer()
+
+                Button {
+                    showStickerBook = true
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: "book.closed.fill")
+                            .kidFont(11, .bold)
+                        Text("贴纸本")
+                            .kidFont(13, .bold)
+                    }
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 9)
+                    .padding(.vertical, 5)
+                    .background(Color.white.opacity(0.22), in: Capsule())
+                }
+                .buttonStyle(PressableStyle())
 
                 if store.isCheckedInToday {
                     HStack(spacing: 4) {
