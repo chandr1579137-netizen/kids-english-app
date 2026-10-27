@@ -66,8 +66,14 @@ subst K: "<会话目录>"        # 仓库在 K:\kids-english-app
 | `-uiStudy` `-uiStudyWord w` `-uiBook id` `-uiBooksScrolled` `-uiConsolidate` `-uiGame N` | 背单词流程、巩固游戏 |
 | `-uiScene` `-uiSceneFound` `-uiSceneDone` | 「听音找一找」游戏 |
 | `-uiFeedDrag` `-uiFeedYummy` `-uiFeedNo` `-uiFeedDone` | 「喂动物」游戏 |
+| `-uiPhonics` | 进入自然拼读探索岛 |
+| `-uiPhonicsLetter <letter>` | 直接打开特定字母详情页（如 `-uiPhonicsLetter s`） |
+| `-uiPhonicsQuiz` | 直接打开听音辨字母（3 选 1）测验 |
+| `-uiPhonicsGroup2` | 探索岛默认切换至第 2 组（Group 2: c, e, h, r, m, d） |
+| `-uiPhonicsTrain` | 直接打开滑音小火车（Sound Blending Train） |
+| `-uiPhonicsCargo` | 直接打开小火车装车厢拼词测验 |
 
-截图编号：60–63 是说一说 L1，64 是复习课，65 是 L2，66 是代码卡预览，70–78 是启蒙模式，80 是多孩子档案。iPad 也有截图步骤，但 D5 定了不用看；要去掉 iPad 那一步，先问产品经理。
+截图编号：60–63 是说一说 L1，64 是复习课，65 是 L2，66 是代码卡预览，70–78 是启蒙模式，79a–79f 是自然拼读（79a 探索岛、79b 字母卡详情、79c 听音挑战、79d 滑音小火车、79e 装车厢挑战、79f Group 2 字母音），80 是多孩子档案。iPad 也有截图步骤，但 D5 定了不用看；要去掉 iPad 那一步，先问产品经理。
 **没有 `-uiLesson`**：旧课文已经在 PR E 里全部下线了，用户原话是「旧课文：全部下线」。
 
 ## 3. 资源在哪
