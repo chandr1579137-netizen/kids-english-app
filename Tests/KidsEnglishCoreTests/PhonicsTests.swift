@@ -206,4 +206,56 @@ final class PhonicsTests: XCTestCase {
             }
         }
     }
+
+    // MARK: - 阶段 5：双组混合 CVC 拼读词与装车厢出题
+
+    func testPhase5CVCWordsIntegrity() throws {
+        let cvcList = PhonicsCatalog.allCVCWords
+        XCTAssertEqual(cvcList.count, 7, "共 7 个核心 CVC 词（sit, pan, pin, cat, hat, hen, red）")
+        XCTAssertEqual(cvcList.map(\.id), ["sit", "pan", "pin", "cat", "hat", "hen", "red"])
+
+        let valid12Letters = Set(["s", "a", "t", "i", "p", "n", "c", "e", "h", "r", "m", "d"])
+        for item in cvcList {
+            XCTAssertEqual(item.letters.count, 3, "\(item.word) 必须为 3 字母 CVC")
+            XCTAssertEqual(item.phonemes.count, 3)
+            XCTAssertFalse(item.meaningZh.isEmpty)
+            XCTAssertFalse(item.chantEn.isEmpty)
+            XCTAssertFalse(item.audio.isEmpty)
+            XCTAssertFalse(item.picture.isEmpty)
+            XCTAssertTrue(Set(item.letters).isSubset(of: valid12Letters), "\(item.word) 必须完全由 Group 1 与 Group 2 字母组成")
+            XCTAssertEqual(PhonicsCatalog.blendWord(for: item.id), item)
+        }
+    }
+
+    func testPhase5CVCPhysicalAssetsExist() throws {
+        let newWords = PhonicsCatalog.cvcGroup2
+
+        for item in newWords {
+            // 1. 平涂大图必须物理存在
+            let picInOverrides = FileManager.default.fileExists(atPath: overridesDir.appendingPathComponent("\(item.picture)").path)
+            let picInWordIcons = FileManager.default.fileExists(atPath: resources.appendingPathComponent("word-icons/\(item.picture)").path)
+            XCTAssertTrue(picInOverrides || picInWordIcons, "\(item.picture): CVC 专属手绘大图不存在")
+
+            // 2. 拼读顺口溜音频必须存在
+            let audioFile = phraseAudioDir.appendingPathComponent("\(item.audio).mp3")
+            XCTAssertTrue(FileManager.default.fileExists(atPath: audioFile.path), "\(item.audio).mp3 不存在")
+        }
+    }
+
+    func testPhase5CargoQuizWith12Letters() throws {
+        var rng = SeededGenerator(seed: 505)
+
+        for _ in 0..<10 {
+            let rounds = PhonicsEngine.makeCargoRounds(count: 4, using: &rng)
+            XCTAssertEqual(rounds.count, 4)
+
+            for round in rounds {
+                XCTAssertEqual(round.options.count, 3, "每题固定 3 选 1")
+                XCTAssertTrue(round.missingIndex >= 0 && round.missingIndex < 3)
+                XCTAssertEqual(round.correctLetter, round.targetWord.letters[round.missingIndex])
+                XCTAssertTrue(round.options.contains(round.correctLetter), "选项必须包含正确字母")
+                XCTAssertEqual(Set(round.options).count, 3, "3 个备选车厢字母不能重复")
+            }
+        }
+    }
 }

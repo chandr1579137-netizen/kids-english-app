@@ -694,7 +694,7 @@ public struct PhonicsBlendingTrainView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(DataStore.self) private var store
     @State private var audioPlayer = AudioPlayer()
-    @State private var selectedWord: PhonicsBlendWord = PhonicsCatalog.cvcGroup1[0]
+    @State private var selectedWord: PhonicsBlendWord = PhonicsCatalog.allCVCWords[0]
     @State private var activeCarIndex: Int? = nil
     @State private var isBlending = false
     @State private var showCargoQuiz = LaunchOptions.phonicsCargoQuiz
@@ -767,7 +767,7 @@ public struct PhonicsBlendingTrainView: View {
                     // 6 个 CVC 拼读词水平选择卡
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach(PhonicsCatalog.cvcGroup1) { w in
+                            ForEach(PhonicsCatalog.allCVCWords) { w in
                                 let isSelected = selectedWord.id == w.id
                                 Button {
                                     selectWord(w)

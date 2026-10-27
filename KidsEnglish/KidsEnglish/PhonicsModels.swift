@@ -275,8 +275,60 @@ public enum PhonicsCatalog {
         )
     ]
 
+    // MARK: 阶段 5：Group 2 与双组混合 CVC 拼读词（cat, hat, hen, red）
+    public static let cvcGroup2: [PhonicsBlendWord] = [
+        PhonicsBlendWord(
+            id: "cat",
+            word: "cat",
+            letters: ["c", "a", "t"],
+            phonemes: ["/k/", "/æ/", "/t/"],
+            meaningZh: "小猫",
+            chantEn: "Cat, cat, cute little cat!",
+            audio: "blend_word_cat",
+            picture: "cat.jpg",
+            themeColorName: "coral"
+        ),
+        PhonicsBlendWord(
+            id: "hat",
+            word: "hat",
+            letters: ["h", "a", "t"],
+            phonemes: ["/h/", "/æ/", "/t/"],
+            meaningZh: "帽子",
+            chantEn: "Hat, hat, put on your hat!",
+            audio: "blend_word_hat",
+            picture: "hat.jpg",
+            themeColorName: "sky"
+        ),
+        PhonicsBlendWord(
+            id: "hen",
+            word: "hen",
+            letters: ["h", "e", "n"],
+            phonemes: ["/h/", "/e/", "/n/"],
+            meaningZh: "母鸡",
+            chantEn: "Hen, hen, busy little hen!",
+            audio: "blend_word_hen",
+            picture: "hen.jpg",
+            themeColorName: "gold"
+        ),
+        PhonicsBlendWord(
+            id: "red",
+            word: "red",
+            letters: ["r", "e", "d"],
+            phonemes: ["/r/", "/e/", "/d/"],
+            meaningZh: "红色",
+            chantEn: "Red, red, bright shiny red!",
+            audio: "blend_word_red",
+            picture: "red.jpg",
+            themeColorName: "pink"
+        )
+    ]
+
+    public static var allCVCWords: [PhonicsBlendWord] {
+        cvcGroup1 + cvcGroup2
+    }
+
     public static func blendWord(for id: String) -> PhonicsBlendWord? {
-        cvcGroup1.first { $0.id.lowercased() == id.lowercased() }
+        allCVCWords.first { $0.id.lowercased() == id.lowercased() }
     }
 }
 
@@ -334,8 +386,8 @@ public enum PhonicsEngine {
 
     /// 生成小火车拼词题目：随机缺失 1 个字母，提供目标字母 + 2 个干扰字母（3 选 1）
     public static func makeCargoRounds(count: Int = defaultQuizRounds,
-                                       pool: [PhonicsBlendWord] = PhonicsCatalog.cvcGroup1,
-                                       letterPool: [String] = ["s", "a", "t", "i", "p", "n"],
+                                       pool: [PhonicsBlendWord] = PhonicsCatalog.allCVCWords,
+                                       letterPool: [String] = ["s", "a", "t", "i", "p", "n", "c", "e", "h", "r", "m", "d"],
                                        using rng: inout some RandomNumberGenerator) -> [PhonicsCargoRound] {
         guard !pool.isEmpty, letterPool.count >= 3 else { return [] }
         var words = pool.shuffled(using: &rng)
