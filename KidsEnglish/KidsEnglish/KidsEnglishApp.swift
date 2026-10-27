@@ -399,76 +399,106 @@ struct TimeUpOverlay: View {
 // 每日限时默认开着、进度能导出。点一次就记进 UserDefaults，不再出现。
 struct FirstRunGuide: View {
     @Environment(DataStore.self) private var store
-
-    private struct Item: Identifiable {
-        let id = UUID()
-        let emoji: String
-        let title: String
-        let detail: String
-    }
-
-    private var items: [Item] { LaunchOptions.isBaby(store) ? babyItems : normalItems }
-
-    private let babyItems: [Item] = [
-        Item(emoji: "🌱", title: "启蒙模式：不识字也能自己玩",
-             detail: "孩子点「今天」的大按钮：复习、学几个新词、听音选图，做完得一张贴纸"),
-        Item(emoji: "👨‍👩‍👧", title: "家长中心在「家长」页签",
-             detail: "进入前要答一道数学题；可改每天新词数、解锁全部词包，也能切回正常模式"),
-        Item(emoji: "⏰", title: "每日限时默认 20 分钟",
-             detail: "到时间会锁屏，需要家长在家长中心解锁或调整"),
-        Item(emoji: "💾", title: "进度可以导出备份",
-             detail: "换手机前在家长中心导出文本；恢复会覆盖当前进度"),
-    ]
-
-    private let normalItems: [Item] = [
-        Item(emoji: "📚", title: "每天 10 个新词",
-             detail: "首页「开始学习」按每日计划走；词由 15 个主题交错排，每天都有新主题"),
-        Item(emoji: "👨‍👩‍👧", title: "家长中心在「我的」页底部",
-             detail: "进入前要答一道数学题，可改每日限时、新词数、游戏难度"),
-        Item(emoji: "⏰", title: "每日限时默认 20 分钟",
-             detail: "到时间会锁屏，需要家长在家长中心解锁或调整"),
-        Item(emoji: "💾", title: "进度可以导出备份",
-             detail: "换手机前在家长中心导出文本；恢复会覆盖当前进度"),
-    ]
+    @State private var tomBounce = false
+    @State private var player = AudioPlayer()
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.5).ignoresSafeArea()
+            Color.black.opacity(0.55).ignoresSafeArea()
 
-            VStack(alignment: .leading, spacing: 16) {
-                Text("👋 欢迎使用英语小伙伴")
-                    .kidFont(22, .heavy)
-                    .foregroundStyle(Palette.ink)
-                    .fixedSize(horizontal: false, vertical: true)
+            VStack(spacing: 16) {
+                // Tom 萌趣大头跳动
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(colors: [Color.orange, Color(red: 1.0, green: 0.75, blue: 0.25)], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        )
+                        .frame(width: 86, height: 86)
+                        .shadow(color: .orange.opacity(0.35), radius: 8, y: 4)
 
-                VStack(alignment: .leading, spacing: 14) {
-                    ForEach(items) { item in
-                        HStack(alignment: .top, spacing: 10) {
-                            Text(item.emoji).kidFont(22, maxScale: 1.1)
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(item.title)
-                                    .kidFont(17, .bold)
-                                    .foregroundStyle(Palette.ink)
-                                Text(item.detail)
-                                    .kidFont(14, .medium)
-                                    .foregroundStyle(Palette.inkMuted)
-                                    .fixedSize(horizontal: false, vertical: true)
-                            }
-                        }
+                    Text("🐱")
+                        .kidFont(52)
+                        .offset(y: tomBounce ? -6 : 0)
+                }
+                .padding(.top, 4)
+
+                // 欢迎标题与对话气泡
+                VStack(spacing: 6) {
+                    Text("Hi! 我是小猫 Tom 🐱")
+                        .kidFont(24, .heavy)
+                        .foregroundStyle(Palette.ink)
+
+                    Text("“欢迎来到英语奇妙世界！每天和我一起开口说英语、抽盲盒贴纸装扮我的温馨小屋吧~”")
+                        .kidFont(14, .bold)
+                        .foregroundStyle(Palette.inkMuted)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 6)
+                }
+
+                // 三大少儿特色轻量徽章
+                VStack(spacing: 10) {
+                    featureRow(emoji: "🗣️", title: "中英双语口语", desc: "纯正美音 + 贴心女声翻译，不识字轻松懂")
+                    featureRow(emoji: "🎁", title: "打卡扭蛋盲盒", desc: "每天打卡开金光彩蛋，收集 30 张炫酷实体贴纸")
+                    featureRow(emoji: "🏡", title: "装扮 Tom 小屋", desc: "把收集到的贴纸贴进房间，快乐沉浸点读")
+                }
+                .padding(14)
+                .background(Color(red: 0.96, green: 0.97, blue: 0.99), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+
+                // 核心大 CTA 按钮
+                Button {
+                    player.speak("Hi friend! Let's start our adventure!")
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+                        store.markGuideSeen()
                     }
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "sparkles")
+                            .kidFont(18, .heavy)
+                        Text("开启英语大冒险 🚀")
+                            .kidFont(20, .heavy)
+                    }
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 56)
+                    .background(
+                        LinearGradient(colors: [Func.ctaGreen, Color(red: 0.20, green: 0.78, blue: 0.38)],
+                                       startPoint: .leading, endPoint: .trailing),
+                        in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    )
+                    .elevationRaised()
                 }
-
-                AppButton(title: "知道啦", icon: "checkmark") {
-                    store.markGuideSeen()
-                }
+                .buttonStyle(PressableStyle())
                 .padding(.top, 4)
             }
             .padding(22)
-            .frame(maxWidth: 360)
-            .background(Palette.surface,
-                        in: RoundedRectangle(cornerRadius: Radius.sheet, style: .continuous))
+            .frame(maxWidth: 340)
+            .background(Palette.surface, in: RoundedRectangle(cornerRadius: 28, style: .continuous))
             .elevationRaised()
-            .padding(24)
+            .padding(20)
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
+                tomBounce = true
+            }
+            player.speak("Hi friend! Welcome to English world!")
+        }
+    }
+
+    private func featureRow(emoji: String, title: String, desc: String) -> some View {
+        HStack(spacing: 10) {
+            Text(emoji)
+                .kidFont(24)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .kidFont(15, .heavy)
+                    .foregroundStyle(Palette.ink)
+                Text(desc)
+                    .kidFont(12, .medium)
+                    .foregroundStyle(Palette.inkMuted)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            Spacer(minLength: 0)
         }
     }
 }
