@@ -160,8 +160,82 @@ public enum PhonicsCatalog {
         )
     ]
 
+    // MARK: 阶段 4：Group 2 字母音（c, e, h, r, m, d）
+    public static let group2: [PhonicsLetter] = [
+        PhonicsLetter(
+            id: "c",
+            letter: "c",
+            phoneme: "/k/",
+            word: "cat",
+            wordZh: "小猫",
+            actionZh: "双手像小猫抓抓胡须",
+            chantEn: "Cat, cat, cute little cat!",
+            audio: "phonics_chant_c",
+            themeColorName: "coral"
+        ),
+        PhonicsLetter(
+            id: "e",
+            letter: "e",
+            phoneme: "/e/",
+            word: "egg",
+            wordZh: "鸡蛋",
+            actionZh: "双手做敲鸡蛋掰开动作",
+            chantEn: "Egg, egg, crack the egg!",
+            audio: "phonics_chant_e",
+            themeColorName: "gold"
+        ),
+        PhonicsLetter(
+            id: "h",
+            letter: "h",
+            phoneme: "/h/",
+            word: "hat",
+            wordZh: "遮阳帽",
+            actionZh: "手掌放在嘴前哈一口暖气",
+            chantEn: "Hat, hat, put on your hat!",
+            audio: "phonics_chant_h",
+            themeColorName: "sky"
+        ),
+        PhonicsLetter(
+            id: "r",
+            letter: "r",
+            phoneme: "/r/",
+            word: "rabbit",
+            wordZh: "小兔子",
+            actionZh: "双手模仿小狗抓扯玩具摇头发出rrrr",
+            chantEn: "Rabbit, rabbit, running rabbit!",
+            audio: "phonics_chant_r",
+            themeColorName: "pink"
+        ),
+        PhonicsLetter(
+            id: "m",
+            letter: "m",
+            phoneme: "/m/",
+            word: "monkey",
+            wordZh: "小猴子",
+            actionZh: "摸摸小肚子闭嘴发出Mmm美味声",
+            chantEn: "Monkey, monkey, merry little monkey!",
+            audio: "phonics_chant_m",
+            themeColorName: "emerald"
+        ),
+        PhonicsLetter(
+            id: "d",
+            letter: "d",
+            phoneme: "/d/",
+            word: "dog",
+            wordZh: "小狗",
+            actionZh: "双手拿小鼓槌在空中咚咚敲架子鼓",
+            chantEn: "Dog, dog, dancing happy dog!",
+            audio: "phonics_chant_d",
+            themeColorName: "purple"
+        )
+    ]
+
+    public static var allLetters: [PhonicsLetter] {
+        group1 + group2
+    }
+
     public static func letter(for id: String) -> PhonicsLetter? {
-        group1.first { $0.id.lowercased() == id.lowercased() }
+        allLetters.first { $0.id.lowercased() == id.lowercased() }
     }
 
     // MARK: 阶段 3：Group 1 CVC 拼读词

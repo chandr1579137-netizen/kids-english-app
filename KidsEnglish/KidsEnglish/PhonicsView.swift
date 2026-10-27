@@ -10,8 +10,13 @@ public struct PhonicsIslandView: View {
     @State private var showQuiz: Bool = LaunchOptions.phonicsQuiz
     @State private var playingLetterId: String? = nil
     @State private var bounce = false
+    @State private var selectedGroup: Int = LaunchOptions.phonicsGroup2 ? 2 : 1
 
     public init() {}
+
+    private var currentGroupLetters: [PhonicsLetter] {
+        selectedGroup == 2 ? PhonicsCatalog.group2 : PhonicsCatalog.group1
+    }
 
     public var body: some View {
         NavigationStack {
@@ -73,9 +78,12 @@ public struct PhonicsIslandView: View {
                     .buttonStyle(PressableStyle())
                     .padding(.horizontal, 16)
 
+                    // 分组选择器：第 1 组 (s a t i p n) 与 第 2 组 (c e h r m d)
+                    groupSelector
+
                     // 6 个字母卡片网格（2 列 × 3 行）
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
-                        ForEach(PhonicsCatalog.group1) { item in
+                        ForEach(currentGroupLetters) { item in
                             letterTile(item)
                         }
                     }
@@ -89,11 +97,11 @@ public struct PhonicsIslandView: View {
                 PhonicsLetterDetailView(letter: letter, onNext: { nextLetter(after: letter) })
             }
             .sheet(isPresented: $showQuiz) {
-                PhonicsQuizView()
+                PhonicsQuizView(pool: currentGroupLetters)
             }
             .onAppear {
                 guard !LaunchOptions.isUIScreenshotRun else { return }
-                playWelcomeAudio()
+                playGroupWelcomeAudio(selectedGroup)
                 withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
                     bounce = true
                 }
@@ -221,16 +229,62 @@ public struct PhonicsIslandView: View {
         }
     }
 
-    private func playWelcomeAudio() {
-        if let url = store.phraseFileURL("audio", "tom_phonics_island.mp3") {
+    private var groupSelector: some View {
+        HStack(spacing: 8) {
+            groupButton(group: 1, title: "第 1 组", letters: "s a t i p n")
+            groupButton(group: 2, title: "第 2 组", letters: "c e h r m d")
+        }
+        .padding(4)
+        .background(Palette.surface, in: Capsule())
+        .overlay {
+            Capsule().strokeBorder(Palette.hairline, lineWidth: 1.5)
+        }
+        .padding(.horizontal, 16)
+    }
+
+    private func groupButton(group: Int, title: String, letters: String) -> some View {
+        let isSelected = selectedGroup == group
+        return Button {
+            guard selectedGroup != group else { return }
+            audioPlayer.stop()
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                selectedGroup = group
+            }
+            if !LaunchOptions.isUIScreenshotRun {
+                playGroupWelcomeAudio(group)
+            }
+        } label: {
+            HStack(spacing: 6) {
+                Text(title)
+                    .kidFont(15, .heavy)
+                    .foregroundStyle(isSelected ? .white : Palette.ink)
+                Text(letters)
+                    .kidFont(13, .bold)
+                    .foregroundStyle(isSelected ? .white.opacity(0.9) : Palette.inkMuted)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .background(
+                isSelected ? Func.accent : Color.clear,
+                in: Capsule()
+            )
+        }
+        .buttonStyle(PressableStyle())
+        .accessibilityLabel("\(title), 包含字母 \(letters)")
+    }
+
+    private func playGroupWelcomeAudio(_ group: Int) {
+        let soundName = group == 2 ? "tom_phonics_group2.mp3" : "tom_phonics_island.mp3"
+        if let url = store.phraseFileURL("audio", soundName) {
             audioPlayer.play(url: url)
         }
     }
 
     private func nextLetter(after current: PhonicsLetter) {
-        guard let idx = PhonicsCatalog.group1.firstIndex(of: current) else { return }
-        let nextIdx = (idx + 1) % PhonicsCatalog.group1.count
-        selectedLetter = PhonicsCatalog.group1[nextIdx]
+        let pool = PhonicsCatalog.group2.contains(current) ? PhonicsCatalog.group2 : PhonicsCatalog.group1
+        guard let idx = pool.firstIndex(of: current) else { return }
+        let nextIdx = (idx + 1) % pool.count
+        selectedLetter = pool[nextIdx]
     }
 }
 
@@ -413,6 +467,8 @@ public struct PhonicsLetterDetailView: View {
 public struct PhonicsQuizView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(DataStore.self) private var store
+    let pool: [PhonicsLetter]
+
     @State private var audioPlayer = AudioPlayer()
     @State private var rounds: [PhonicsQuizRound] = []
     @State private var currentIdx = 0
@@ -421,7 +477,9 @@ public struct PhonicsQuizView: View {
     @State private var selectedLetterId: String? = nil
     @State private var isDone = false
 
-    public init() {}
+    public init(pool: [PhonicsLetter] = PhonicsCatalog.group1) {
+        self.pool = pool
+    }
 
     private var currentRound: PhonicsQuizRound? {
         guard currentIdx < rounds.count else { return nil }
@@ -582,7 +640,7 @@ public struct PhonicsQuizView: View {
 
     private func startQuiz() {
         var rng = SeededGenerator(seed: 77)
-        rounds = PhonicsEngine.makeQuizRounds(count: 4, using: &rng)
+        rounds = PhonicsEngine.makeQuizRounds(count: 4, pool: pool, using: &rng)
         currentIdx = 0
         solved = false
         selectedLetterId = nil

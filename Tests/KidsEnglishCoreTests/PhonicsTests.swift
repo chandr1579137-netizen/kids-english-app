@@ -145,4 +145,65 @@ final class PhonicsTests: XCTestCase {
             }
         }
     }
+
+    // MARK: - 阶段 4：Group 2 字母音目录与数据完整性
+
+    func testGroup2CatalogIntegrity() throws {
+        let group2 = PhonicsCatalog.group2
+        XCTAssertEqual(group2.count, 6)
+        XCTAssertEqual(group2.map(\.letter), ["c", "e", "h", "r", "m", "d"])
+
+        for letter in group2 {
+            XCTAssertFalse(letter.id.isEmpty)
+            XCTAssertFalse(letter.phoneme.isEmpty)
+            XCTAssertFalse(letter.word.isEmpty)
+            XCTAssertFalse(letter.wordZh.isEmpty)
+            XCTAssertFalse(letter.actionZh.isEmpty)
+            XCTAssertFalse(letter.chantEn.isEmpty)
+            XCTAssertFalse(letter.audio.isEmpty)
+            XCTAssertEqual(PhonicsCatalog.letter(for: letter.id), letter)
+            XCTAssertEqual(PhonicsCatalog.letter(for: letter.id.uppercased()), letter, "支持大小写不敏感查找")
+        }
+
+        XCTAssertEqual(PhonicsCatalog.allLetters.count, 12)
+        XCTAssertNil(PhonicsCatalog.letter(for: "z"))
+    }
+
+    // MARK: - 阶段 4：Group 2 物理资源存在性（平涂大图与顺口溜音频）
+
+    func testGroup2PhysicalAssetsExist() throws {
+        let group2 = PhonicsCatalog.group2
+
+        for item in group2 {
+            // 1. 平涂大图必须物理存在（overrides 或 word-icons 目录）
+            let picInOverrides = FileManager.default.fileExists(atPath: overridesDir.appendingPathComponent("\(item.word).jpg").path)
+            let picInWordIcons = FileManager.default.fileExists(atPath: resources.appendingPathComponent("word-icons/\(item.word).jpg").path)
+            XCTAssertTrue(picInOverrides || picInWordIcons, "\(item.word): Group 2 平涂大图不存在")
+
+            // 2. 顺口溜音频必须物理存在
+            let audioFile = phraseAudioDir.appendingPathComponent("\(item.audio).mp3")
+            XCTAssertTrue(FileManager.default.fileExists(atPath: audioFile.path), "\(item.audio).mp3: Group 2 顺口溜发音文件不存在")
+        }
+
+        // 3. Tom 引导音物理存在
+        let group2Intro = phraseAudioDir.appendingPathComponent("tom_phonics_group2.mp3")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: group2Intro.path), "tom_phonics_group2.mp3 不存在")
+    }
+
+    // MARK: - 阶段 4：Group 2 听音测验出题
+
+    func testGroup2QuizRoundGeneration() throws {
+        var rng = SeededGenerator(seed: 303)
+
+        for _ in 0..<10 {
+            let rounds = PhonicsEngine.makeQuizRounds(count: 4, pool: PhonicsCatalog.group2, using: &rng)
+            XCTAssertEqual(rounds.count, 4)
+
+            for round in rounds {
+                XCTAssertEqual(round.options.count, 3, "每题固定 3 选 1")
+                XCTAssertTrue(round.options.contains(round.target), "选项必须包含目标音")
+                XCTAssertEqual(Set(round.options.map(\.id)).count, 3, "同一题 3 个选项不能重复")
+            }
+        }
+    }
 }

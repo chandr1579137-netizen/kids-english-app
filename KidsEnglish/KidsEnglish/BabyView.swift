@@ -79,6 +79,9 @@ extension LaunchOptions {
     /// `-uiPhonicsCargo` 打开装车厢拼词挑战
     static var phonicsCargoQuiz: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonicsCargo") }
 
+    /// `-uiPhonicsGroup2` 截图或测试时默认切换至第 2 组字母音
+    static var phonicsGroup2: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonicsGroup2") }
+
     /// 现在是不是宝宝模式：截图默认走正常模式（原有截图不受影响），加 `-uiBaby` 才进宝宝模式
     static func isBaby(_ store: DataStore) -> Bool {
         isUIScreenshotRun ? forceBaby : store.babyMode
