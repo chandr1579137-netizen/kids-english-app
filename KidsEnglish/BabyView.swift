@@ -3269,7 +3269,7 @@ struct TomRoomView: View {
     @State private var player = AudioPlayer()
     @State private var showStickerBook = false
     @State private var activeSlotForPicker: String? = nil
-    @State private var tappedWord: KidSticker? = nil
+    @State private var tappedWord: DataStore.KidSticker? = nil
     @State private var tomSpeech: String = "Hi friend! 欢迎来我的小屋~"
     @State private var tomBounce = false
     @State private var cloudDrift = false
@@ -3534,7 +3534,7 @@ struct TomRoomView: View {
     }
 
     // 点击贴纸后弹出的双语大胶囊
-    private func tappedStickerBanner(_ sticker: KidSticker) -> some View {
+    private func tappedStickerBanner(_ sticker: DataStore.KidSticker) -> some View {
         HStack(spacing: 12) {
             Text(sticker.emoji)
                 .kidFont(36)
@@ -3622,9 +3622,9 @@ struct StickerPickerSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(DataStore.self) private var store
     let slotId: String
-    let onChoose: (KidSticker) -> Void
+    let onChoose: (DataStore.KidSticker) -> Void
 
-    private var unlockedStickersList: [KidSticker] {
+    private var unlockedStickersList: [DataStore.KidSticker] {
         DataStore.allStickers.filter { store.unlockedStickers.contains($0.id) }
     }
 
