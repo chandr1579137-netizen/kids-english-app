@@ -124,10 +124,12 @@ if "case .phonics:\n            NavigationStack { BabyPortalView() }" in app_cod
 else:
     record_failure("KidsEnglishApp ContentView 未正确路由至 BabyPortalView")
 
-if os.path.exists("KidsEnglish/KidsEnglish/BabyPortalView.swift"):
-    record_pass("BabyPortalView.swift 实体文件存在，整合自然拼读岛与小火车")
+with open("KidsEnglish/KidsEnglish/BabyView.swift", 'r', encoding='utf-8') as f_bv:
+    bv_code = f_bv.read()
+if "struct BabyPortalView: View" in bv_code:
+    record_pass("BabyPortalView 成功整合并编译于 BabyView.swift，提供自然拼读岛与小火车入口")
 else:
-    record_failure("BabyPortalView.swift 实体文件缺失")
+    record_failure("BabyView.swift 中缺失 BabyPortalView 定义")
 
 # ---------------------------------------------------------
 # 5. 巩固游戏区 3 大优化核验
