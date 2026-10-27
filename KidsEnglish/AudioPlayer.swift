@@ -121,9 +121,9 @@ class AudioPlayer {
         isPlaying = true
     }
 
-    /// 优先播预生成音频；缺文件时退回系统朗读，保证每个词都点得出声
+    /// 优先播物理存在的预生成音频；文件不存在或极端离线时无缝自动退回系统原生合成发音（支持中英双语智能分流），杜绝哑音
     func playWord(_ word: String, url: URL?, rate: Float = 1.0) {
-        if let url {
+        if let url, FileManager.default.fileExists(atPath: url.path) {
             play(url: url, rate: rate)
         } else {
             speak(word, rate: rate)
@@ -134,7 +134,8 @@ class AudioPlayer {
         stop()
         AudioSession.configurePlayback()
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        let isChinese = text.unicodeScalars.contains { $0.value >= 0x4E00 && $0.value <= 0x9FFF }
+        utterance.voice = AVSpeechSynthesisVoice(language: isChinese ? "zh-CN" : "en-US")
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate * rate
         speech.speak(utterance)
         duration = 0
