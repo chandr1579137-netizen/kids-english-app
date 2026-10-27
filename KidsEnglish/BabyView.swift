@@ -73,6 +73,12 @@ extension LaunchOptions {
     /// `-uiPhonicsQuiz` 打开自然拼读测验
     static var phonicsQuiz: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonicsQuiz") }
 
+    /// `-uiPhonicsTrain` 截图时直接打开滑音小火车
+    static var forcePhonicsTrain: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonicsTrain") }
+
+    /// `-uiPhonicsCargo` 打开装车厢拼词挑战
+    static var phonicsCargoQuiz: Bool { ProcessInfo.processInfo.arguments.contains("-uiPhonicsCargo") }
+
     /// 现在是不是宝宝模式：截图默认走正常模式（原有截图不受影响），加 `-uiBaby` 才进宝宝模式
     static func isBaby(_ store: DataStore) -> Bool {
         isUIScreenshotRun ? forceBaby : store.babyMode
@@ -121,7 +127,9 @@ struct BabyRootView: View {
     @State private var tab: BabyTab = LaunchOptions.babyTab
 
     var body: some View {
-        if LaunchOptions.forcePhonics {
+        if LaunchOptions.forcePhonicsTrain {
+            PhonicsBlendingTrainView()
+        } else if LaunchOptions.forcePhonics {
             PhonicsIslandView()
         } else {
             VStack(spacing: 0) {
