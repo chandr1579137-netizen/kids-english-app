@@ -42,6 +42,16 @@ class DataStore {
     var unlockedStickers: Set<String> = []
     /// 当前打卡触发的扭蛋奖励（用于全屏开盲盒弹层）
     var currentGashaponSticker: KidSticker? = nil
+    /// Tom 的温馨小屋：房间装扮点位布局（slotId -> stickerId）
+    var roomDecorations: [String: String] = [:]
+
+    // 默认装扮预设（初次进入即有温馨生机）
+    static let defaultRoomDecorations: [String: String] = [
+        "bowl": "apple",      // 桌上果盘放苹果
+        "carpet": "panda",    // 地毯坐着萌宠熊猫
+        "wall": "rocket",     // 墙面挂着太空火箭
+        "desk": "book"        // 书桌摆着英语绘本
+    ]
     /// 口语课已完成的场景（id 如 L1-1）。
     /// 旧课文已删除；completedLessons / quizBest 仍从存储读出、随备份导出导入，只是界面不再显示（老数据不丢）。
     var completedPhraseScenes: Set<String> = []
@@ -479,6 +489,7 @@ class DataStore {
         studyDates = defaults.stringArray(forKey: k("studyDates")) ?? []
         checkInDates = defaults.stringArray(forKey: k("checkInDates")) ?? []
         unlockedStickers = Set(defaults.stringArray(forKey: k("unlockedStickers")) ?? ["apple", "panda", "rocket"])
+        roomDecorations = (defaults.dictionary(forKey: k("roomDecorations")) as? [String: String]) ?? Self.defaultRoomDecorations
         completedPhraseScenes = Set(defaults.stringArray(forKey: k("completedPhraseScenes")) ?? [])
         phraseUnlockAll = defaults.bool(forKey: k("phraseUnlockAll"))
         phraseShowChinese = defaults.bool(forKey: k("phraseShowChinese"))
@@ -530,6 +541,7 @@ class DataStore {
         defaults.set(studyDates, forKey: k("studyDates"))
         defaults.set(checkInDates, forKey: k("checkInDates"))
         defaults.set(Array(unlockedStickers), forKey: k("unlockedStickers"))
+        defaults.set(roomDecorations, forKey: k("roomDecorations"))
         defaults.set(Array(completedPhraseScenes), forKey: k("completedPhraseScenes"))
         defaults.set(phraseUnlockAll, forKey: k("phraseUnlockAll"))
         defaults.set(phraseShowChinese, forKey: k("phraseShowChinese"))
@@ -654,6 +666,22 @@ class DataStore {
         }
         markStudyDay()
         saveProgress()
+    }
+
+    /// Tom 的温馨小屋：放置或移除贴纸
+    func decorateRoom(slot: String, stickerId: String?) {
+        if let stickerId = stickerId {
+            roomDecorations[slot] = stickerId
+        } else {
+            roomDecorations.removeValue(forKey: slot)
+        }
+        defaults.set(roomDecorations, forKey: k("roomDecorations"))
+    }
+
+    /// 查询某装扮点位当前对应的贴纸
+    func stickerForSlot(_ slot: String) -> KidSticker? {
+        guard let id = roomDecorations[slot] else { return nil }
+        return Self.allStickers.first { $0.id == id }
     }
 
     private func allowanceSeconds() -> Double {
