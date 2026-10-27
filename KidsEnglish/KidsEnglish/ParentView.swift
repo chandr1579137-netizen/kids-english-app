@@ -659,7 +659,7 @@ struct ParentDailyHonorCard: View {
     @State private var player = AudioPlayer()
 
     private var sampleOrRealRecordingWord: String {
-        store.learnedWords.last ?? "apple"
+        store.learnedWords.first ?? "apple"
     }
 
     var body: some View {
@@ -712,7 +712,7 @@ struct ParentDailyHonorCard: View {
                     color: Color(red: 0.90, green: 0.45, blue: 0.10),
                     bg: Color(red: 1.0, green: 0.95, blue: 0.88),
                     title: "收集贴纸",
-                    value: "\(store.unlockedStickerIds.count) 张"
+                    value: "\(store.unlockedStickers.count) 张"
                 )
             }
 
