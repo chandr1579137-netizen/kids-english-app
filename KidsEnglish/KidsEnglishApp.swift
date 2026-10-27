@@ -172,6 +172,11 @@ struct ContentView: View {
                 TimeUpOverlay()
             }
 
+            if let sticker = store.currentGashaponSticker {
+                GashaponRewardOverlay(sticker: sticker)
+                    .transition(.opacity)
+            }
+
             // 多孩子：2 个以上孩子时，打开 App / 离开超过 10 分钟回来，先问「谁来学？」
             if store.whoIsLearningVisible {
                 WhoIsLearningView()
@@ -299,29 +304,90 @@ struct KidTabBar<Tab: KidTabItem>: View {
 
 struct TimeUpOverlay: View {
     @Environment(DataStore.self) private var store
-    @State private var showParentUnlock = false
+    @State private var sleepBreath = false
 
     var body: some View {
         ZStack {
-            Color.black.opacity(0.6).ignoresSafeArea()
+            // 深邃宁静的星空背景
+            LinearGradient(
+                colors: [Color(red: 0.08, green: 0.10, blue: 0.22), Color(red: 0.04, green: 0.05, blue: 0.12)],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+
             VStack(spacing: 20) {
-                Text("🌙").kidFont(80)
-                Text("今天学得够多啦！")
-                    .kidFont(28, .bold)
-                    .foregroundStyle(Palette.ink)
-                Text("休息一下，保护眼睛，明天再来玩吧")
-                    .foregroundStyle(Palette.inkMuted)
-                AppButton(title: "家长解锁", tier: .secondary) {
-                    showParentUnlock = true
+                Spacer()
+
+                // Tom 揉眼睛打哈欠的拟人化睡姿
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.10))
+                        .frame(width: 150, height: 150)
+                        .scaleEffect(sleepBreath ? 1.08 : 0.94)
+
+                    Circle()
+                        .strokeBorder(Color.yellow.opacity(0.35), lineWidth: 4)
+                        .frame(width: 160, height: 160)
+                        .scaleEffect(sleepBreath ? 1.12 : 0.98)
+
+                    VStack(spacing: 4) {
+                        Text("😴")
+                            .kidFont(64)
+                            .offset(y: sleepBreath ? -4 : 2)
+                        Text("🌙 ✨")
+                            .kidFont(20)
+                    }
                 }
+
+                VStack(spacing: 8) {
+                    Text("Tom 困困啦，要休息眼睛啦")
+                        .kidFont(24, .heavy)
+                        .foregroundStyle(.white)
+
+                    Text("“Yawn... Tom is sleepy!”")
+                        .kidFont(18, .bold)
+                        .foregroundStyle(Color.yellow.opacity(0.95))
+
+                    Text("眼睛看屏幕久了会酸酸的哦\n快闭上眼睛，或者看看窗外的小绿树吧~")
+                        .kidFont(15, .medium)
+                        .foregroundStyle(Color.white.opacity(0.85))
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+                }
+                .padding(.horizontal, 24)
+
+                // 护眼小息胶囊
+                HStack(spacing: 8) {
+                    Image(systemName: "leaf.fill")
+                        .foregroundStyle(Color.green)
+                    Text("护眼小息 10 分钟 🍃")
+                        .kidFont(15, .bold)
+                        .foregroundStyle(.white)
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color.white.opacity(0.15), in: Capsule())
+
+                Spacer()
+
+                // 家长一键应急解锁（彻底免算术门槛）
+                Button {
+                    store.resetTimeUp()
+                } label: {
+                    Text("家长应急解锁")
+                        .kidFont(14, .medium)
+                        .foregroundStyle(Color.white.opacity(0.55))
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                }
+                .padding(.bottom, 16)
             }
-            .padding(40)
-            .background(Palette.surface, in: RoundedRectangle(cornerRadius: Radius.sheet))
-            .elevationRaised()
-            .padding()
         }
-        .sheet(isPresented: $showParentUnlock) {
-            ParentUnlockView(onUnlock: { store.resetTimeUp() })
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.8).repeatForever(autoreverses: true)) {
+                sleepBreath = true
+            }
         }
     }
 }

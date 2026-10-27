@@ -2985,3 +2985,262 @@ struct BabyPortalView: View {
         .shadow(color: color.opacity(0.3), radius: 8, x: 0, y: 4)
     }
 }
+
+// MARK: - 扭蛋开箱弹层与贴纸手帐本系统 (P1)
+
+/// 每日打卡扭蛋开箱弹层
+struct GashaponRewardOverlay: View {
+    @Environment(DataStore.self) private var store
+    let sticker: DataStore.KidSticker
+
+    @State private var shakeEgg = false
+    @State private var eggOpened = false
+    @State private var popGlow = false
+
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.72)
+                .ignoresSafeArea()
+
+            VStack(spacing: 24) {
+                Spacer()
+
+                if !eggOpened {
+                    // 阶段 1：神秘彩蛋晃动，等待开启
+                    VStack(spacing: 16) {
+                        Text("🥚")
+                            .kidFont(110)
+                            .rotationEffect(.degrees(shakeEgg ? 16 : -16))
+                            .scaleEffect(shakeEgg ? 1.08 : 0.95)
+                            .shadow(color: .yellow.opacity(0.5), radius: 16)
+                            .onTapGesture {
+                                openEgg()
+                            }
+
+                        VStack(spacing: 6) {
+                            Text("✨ 叮咚！今日打卡成功 ✨")
+                                .kidFont(24, .heavy)
+                                .foregroundStyle(.white)
+                            Text("轻点神秘扭蛋，看看孵出哪张贴纸~")
+                                .kidFont(16, .bold)
+                                .foregroundStyle(Color.yellow.opacity(0.95))
+                        }
+
+                        Button {
+                            openEgg()
+                        } label: {
+                            Text("打开扭蛋 🎁")
+                                .kidFont(18, .heavy)
+                                .foregroundStyle(Color(red: 0.88, green: 0.38, blue: 0.05))
+                                .padding(.horizontal, 28)
+                                .padding(.vertical, 12)
+                                .background(Color.white, in: Capsule())
+                                .shadow(radius: 6)
+                        }
+                        .buttonStyle(PressableStyle())
+                        .padding(.top, 8)
+                    }
+                } else {
+                    // 阶段 2：扭蛋爆开，展示精美贴纸
+                    VStack(spacing: 18) {
+                        Text("🎉 今日专属贴纸！")
+                            .kidFont(26, .heavy)
+                            .foregroundStyle(Color.yellow)
+
+                        ZStack {
+                            Circle()
+                                .fill(Color.white.opacity(0.2))
+                                .frame(width: 170, height: 170)
+                                .scaleEffect(popGlow ? 1.15 : 0.9)
+
+                            Circle()
+                                .strokeBorder(Color.yellow, lineWidth: 4)
+                                .frame(width: 180, height: 180)
+
+                            VStack(spacing: 8) {
+                                Text(sticker.emoji)
+                                    .kidFont(72)
+                                    .scaleEffect(popGlow ? 1.1 : 0.95)
+
+                                HStack(spacing: 6) {
+                                    Text(sticker.word.capitalized)
+                                        .kidFont(20, .heavy)
+                                        .foregroundStyle(.white)
+                                    Text("(\(sticker.zh))")
+                                        .kidFont(16, .bold)
+                                        .foregroundStyle(Color.yellow)
+                                }
+                            }
+                        }
+
+                        Button {
+                            withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) {
+                                store.currentGashaponSticker = nil
+                            }
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "book.closed.fill")
+                                Text("放入我的贴纸手帐本 📖")
+                            }
+                            .kidFont(18, .heavy)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 14)
+                            .background(Func.positiveDeep, in: Capsule())
+                            .shadow(radius: 6)
+                        }
+                        .buttonStyle(PressableStyle())
+                        .padding(.top, 10)
+                    }
+                    .transition(.scale.combined(with: .opacity))
+                }
+
+                Spacer()
+            }
+            .padding()
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.25).repeatForever(autoreverses: true)) {
+                shakeEgg = true
+            }
+        }
+    }
+
+    private func openEgg() {
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.65)) {
+            eggOpened = true
+            popGlow = true
+        }
+    }
+}
+
+/// 贴纸手帐本视图
+struct StickerBookView: View {
+    @Environment(DataStore.self) private var store
+    @Environment(\.dismiss) private var dismiss
+    @State private var selectedTab: String = "fruits"
+    @State private var tappedStickerId: String? = nil
+
+    private var currentList: [DataStore.KidSticker] {
+        DataStore.allStickers.filter { $0.category == selectedTab }
+    }
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 16) {
+                // 顶部手帐本统计卡
+                HStack(spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("贴纸手帐本 📖")
+                            .kidFont(24, .heavy)
+                            .foregroundStyle(Palette.ink)
+                        Text("已收集 \(store.unlockedStickers.count) / \(DataStore.allStickers.count) 张 · 连续打卡 \(store.checkInStreakDays) 天 🔥")
+                            .kidFont(13, .bold)
+                            .foregroundStyle(Palette.inkMuted)
+                    }
+                    Spacer()
+                    ZStack {
+                        Circle()
+                            .fill(PhraseColors.gold.opacity(0.2))
+                            .frame(width: 56, height: 56)
+                        Text("🌟")
+                            .kidFont(30)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 12)
+
+                // 主题分栏切换
+                HStack(spacing: 10) {
+                    tabButton("fruits", title: "美味果蔬 🍎")
+                    tabButton("animals", title: "萌宠动物 🐼")
+                    tabButton("life", title: "奇趣生活 🚀")
+                }
+                .padding(.horizontal, 20)
+
+                // 贴纸网格展示
+                KidScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
+                        ForEach(currentList) { sticker in
+                            let unlocked = store.unlockedStickers.contains(sticker.id)
+                            stickerSlot(sticker, unlocked: unlocked)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
+                }
+            }
+            .creamBackground()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("完成") { dismiss() }
+                        .kidFont(16, .bold)
+                }
+            }
+        }
+    }
+
+    private func tabButton(_ tag: String, title: String) -> some View {
+        let isSelected = selectedTab == tag
+        return Button {
+            withAnimation(.spring(response: 0.25, dampingFraction: 0.7)) {
+                selectedTab = tag
+            }
+        } label: {
+            Text(title)
+                .kidFont(13, .bold)
+                .foregroundStyle(isSelected ? .white : Palette.ink)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 7)
+                .background(isSelected ? Func.accent : Color.white, in: Capsule())
+                .shadow(color: .black.opacity(0.06), radius: 2, y: 1)
+        }
+        .buttonStyle(PressableStyle())
+    }
+
+    private func stickerSlot(_ sticker: DataStore.KidSticker, unlocked: Bool) -> some View {
+        let isTapped = tappedStickerId == sticker.id
+        return Button {
+            guard unlocked else { return }
+            tappedStickerId = sticker.id
+            Task {
+                try? await Task.sleep(nanoseconds: 350_000_000)
+                await MainActor.run {
+                    if tappedStickerId == sticker.id { tappedStickerId = nil }
+                }
+            }
+        } label: {
+            VStack(spacing: 6) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .fill(unlocked ? Color.white : Color.black.opacity(0.04))
+                    if !unlocked {
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .strokeBorder(Color.gray.opacity(0.35), style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
+                    }
+
+                    if unlocked {
+                        Text(sticker.emoji)
+                            .kidFont(42)
+                            .scaleEffect(isTapped ? 1.25 : 1.0)
+                    } else {
+                        Text("❓")
+                            .kidFont(24)
+                            .opacity(0.35)
+                    }
+                }
+                .frame(height: 84)
+
+                Text(unlocked ? sticker.word : "未解锁")
+                    .kidFont(13, .bold)
+                    .foregroundStyle(unlocked ? Palette.ink : Palette.inkSubtle)
+                    .lineLimit(1)
+            }
+            .padding(8)
+            .background(unlocked ? Color.white : Color.clear, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .shadow(color: unlocked ? Color.black.opacity(0.06) : Color.clear, radius: 4, y: 2)
+        }
+        .buttonStyle(PressableStyle())
+        .disabled(!unlocked)
+    }
+}

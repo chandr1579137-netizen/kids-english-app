@@ -38,6 +38,10 @@ class DataStore {
     var studyDates: [String] = []
     /// 真实打卡日期记录（按当前孩子持久化，格式 yyyy-MM-dd）
     var checkInDates: [String] = []
+    /// 实体贴纸收集本：已解锁的贴纸 ID 集合
+    var unlockedStickers: Set<String> = []
+    /// 当前打卡触发的扭蛋奖励（用于全屏开盲盒弹层）
+    var currentGashaponSticker: KidSticker? = nil
     /// 口语课已完成的场景（id 如 L1-1）。
     /// 旧课文已删除；completedLessons / quizBest 仍从存储读出、随备份导出导入，只是界面不再显示（老数据不丢）。
     var completedPhraseScenes: Set<String> = []
@@ -474,6 +478,7 @@ class DataStore {
         gameAnswered = defaults.integer(forKey: k("gameAnswered"))
         studyDates = defaults.stringArray(forKey: k("studyDates")) ?? []
         checkInDates = defaults.stringArray(forKey: k("checkInDates")) ?? []
+        unlockedStickers = Set(defaults.stringArray(forKey: k("unlockedStickers")) ?? ["apple", "panda", "rocket"])
         completedPhraseScenes = Set(defaults.stringArray(forKey: k("completedPhraseScenes")) ?? [])
         phraseUnlockAll = defaults.bool(forKey: k("phraseUnlockAll"))
         phraseShowChinese = defaults.bool(forKey: k("phraseShowChinese"))
@@ -524,6 +529,7 @@ class DataStore {
         defaults.set(gameAnswered, forKey: k("gameAnswered"))
         defaults.set(studyDates, forKey: k("studyDates"))
         defaults.set(checkInDates, forKey: k("checkInDates"))
+        defaults.set(Array(unlockedStickers), forKey: k("unlockedStickers"))
         defaults.set(Array(completedPhraseScenes), forKey: k("completedPhraseScenes"))
         defaults.set(phraseUnlockAll, forKey: k("phraseUnlockAll"))
         defaults.set(phraseShowChinese, forKey: k("phraseShowChinese"))
@@ -585,12 +591,66 @@ class DataStore {
         return max(1, Streak.count(studyDates: dates, today: Date()))
     }
 
-    /// 真实打卡动作
+    // MARK: - 实体贴纸与扭蛋模型
+
+    struct KidSticker: Identifiable, Hashable {
+        let id: String
+        let word: String
+        let zh: String
+        let emoji: String
+        let category: String
+    }
+
+    static let allStickers: [KidSticker] = [
+        // 美味水果
+        KidSticker(id: "apple", word: "apple", zh: "苹果", emoji: "🍎", category: "fruits"),
+        KidSticker(id: "banana", word: "banana", zh: "香蕉", emoji: "🍌", category: "fruits"),
+        KidSticker(id: "watermelon", word: "watermelon", zh: "西瓜", emoji: "🍉", category: "fruits"),
+        KidSticker(id: "strawberry", word: "strawberry", zh: "草莓", emoji: "🍓", category: "fruits"),
+        KidSticker(id: "peach", word: "peach", zh: "桃子", emoji: "🍑", category: "fruits"),
+        KidSticker(id: "orange", word: "orange", zh: "橙子", emoji: "🍊", category: "fruits"),
+        KidSticker(id: "grape", word: "grape", zh: "葡萄", emoji: "🍇", category: "fruits"),
+        KidSticker(id: "cherry", word: "cherry", zh: "樱桃", emoji: "🍒", category: "fruits"),
+        KidSticker(id: "pear", word: "pear", zh: "雪梨", emoji: "🍐", category: "fruits"),
+        KidSticker(id: "pineapple", word: "pineapple", zh: "菠萝", emoji: "🍍", category: "fruits"),
+        // 萌宠动物
+        KidSticker(id: "panda", word: "panda", zh: "熊猫", emoji: "🐼", category: "animals"),
+        KidSticker(id: "cat", word: "cat", zh: "猫咪", emoji: "🐱", category: "animals"),
+        KidSticker(id: "dog", word: "dog", zh: "小狗", emoji: "🐶", category: "animals"),
+        KidSticker(id: "rabbit", word: "rabbit", zh: "兔子", emoji: "🐰", category: "animals"),
+        KidSticker(id: "monkey", word: "monkey", zh: "猴子", emoji: "🐵", category: "animals"),
+        KidSticker(id: "lion", word: "lion", zh: "狮子", emoji: "🦁", category: "animals"),
+        KidSticker(id: "elephant", word: "elephant", zh: "大象", emoji: "🐘", category: "animals"),
+        KidSticker(id: "penguin", word: "penguin", zh: "企鹅", emoji: "🐧", category: "animals"),
+        KidSticker(id: "koala", word: "koala", zh: "考拉", emoji: "🐨", category: "animals"),
+        KidSticker(id: "sheep", word: "sheep", zh: "绵羊", emoji: "🐑", category: "animals"),
+        // 奇趣生活
+        KidSticker(id: "rocket", word: "rocket", zh: "火箭", emoji: "🚀", category: "life"),
+        KidSticker(id: "star", word: "star", zh: "星星", emoji: "⭐", category: "life"),
+        KidSticker(id: "rainbow", word: "rainbow", zh: "彩虹", emoji: "🌈", category: "life"),
+        KidSticker(id: "flower", word: "flower", zh: "花朵", emoji: "🌸", category: "life"),
+        KidSticker(id: "balloon", word: "balloon", zh: "气球", emoji: "🎈", category: "life"),
+        KidSticker(id: "car", word: "car", zh: "汽车", emoji: "🚗", category: "life"),
+        KidSticker(id: "book", word: "book", zh: "书本", emoji: "📖", category: "life"),
+        KidSticker(id: "train", word: "train", zh: "火车", emoji: "🚂", category: "life"),
+        KidSticker(id: "cake", word: "cake", zh: "蛋糕", emoji: "🎂", category: "life"),
+        KidSticker(id: "cookie", word: "cookie", zh: "饼干", emoji: "🍪", category: "life")
+    ]
+
+    /// 真实打卡动作：记录打卡 + 抽取扭蛋实体贴纸
     func checkInToday() {
         let key = dayString()
         if !checkInDates.contains(key) {
             checkInDates.append(key)
             defaults.set(checkInDates, forKey: k("checkInDates"))
+
+            // 扭蛋奖励：从未收集池中抽一张贴纸，全部收集后从全量池中抽
+            let uncollected = Self.allStickers.filter { !unlockedStickers.contains($0.id) }
+            let reward = uncollected.randomElement() ?? Self.allStickers.randomElement()!
+            unlockedStickers.insert(reward.id)
+            defaults.set(Array(unlockedStickers), forKey: k("unlockedStickers"))
+            babyStickers[key] = reward.word
+            currentGashaponSticker = reward
         }
         markStudyDay()
         saveProgress()
