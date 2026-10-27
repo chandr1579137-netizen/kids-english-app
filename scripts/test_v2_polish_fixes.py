@@ -43,7 +43,7 @@ if "var todayCalendarString: String" in ds_code and "M月d日 EEEE" in ds_code:
 else:
     record_failure("DataStore 缺少 todayCalendarString 实现")
 
-if "func checkInToday() -> Bool" in ds_code:
+if "func checkInToday()" in ds_code:
     record_pass("DataStore 提供了真实打卡方法 checkInToday()")
 else:
     record_failure("DataStore 缺少 checkInToday() 实现")

@@ -585,19 +585,15 @@ class DataStore {
         return max(1, Streak.count(studyDates: dates, today: Date()))
     }
 
-    /// 真实打卡动作：返回是否为首次今日打卡
-    @discardableResult
-    func checkInToday() -> Bool {
+    /// 真实打卡动作
+    func checkInToday() {
         let key = dayString()
-        var updated = false
         if !checkInDates.contains(key) {
             checkInDates.append(key)
             defaults.set(checkInDates, forKey: k("checkInDates"))
-            updated = true
         }
         markStudyDay()
         saveProgress()
-        return updated
     }
 
     private func allowanceSeconds() -> Double {
