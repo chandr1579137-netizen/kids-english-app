@@ -132,17 +132,38 @@ struct ThemeWordsView: View {
                     .foregroundStyle(Func.accentDeep)   // 16pt 属小字，需 ≥4.5:1
             }
             Spacer()
-            Button {
-                player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word))
-            } label: {
-                Image(systemName: "speaker.wave.2.fill")
-                    .kidFont(24, .semibold)
-                    .foregroundStyle(Palette.inkOnColor)
-                    .frame(width: 54, height: 54)
-                    .background(Func.accent, in: Circle())
-                    .candyEdge(27)
+            // 双语发音：慢速 0.75x 绿色小乌龟 + 正常 1.0x 大喇叭
+            HStack(spacing: 8) {
+                Button {
+                    player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word), rate: 0.75)
+                } label: {
+                    VStack(spacing: 1) {
+                        Image(systemName: "tortoise.fill")
+                            .kidFont(17, .bold)
+                        Text("慢速")
+                            .kidFont(10, .heavy)
+                    }
+                    .foregroundStyle(Color(red: 0.15, green: 0.55, blue: 0.25))
+                    .frame(width: 44, height: 44)
+                    .background(Color(red: 0.88, green: 0.96, blue: 0.88), in: Circle())
+                    .overlay(Circle().strokeBorder(Color(red: 0.35, green: 0.75, blue: 0.45), lineWidth: 1.5))
+                }
+                .buttonStyle(PressableStyle())
+                .accessibilityLabel("小乌龟慢速发音")
+
+                Button {
+                    player.playWord(entry.word, url: store.bestAudioURL(forWord: entry.word))
+                } label: {
+                    Image(systemName: "speaker.wave.2.fill")
+                        .kidFont(22, .semibold)
+                        .foregroundStyle(Palette.inkOnColor)
+                        .frame(width: 48, height: 48)
+                        .background(Func.accent, in: Circle())
+                        .candyEdge(24)
+                }
+                .buttonStyle(PressableStyle())
+                .accessibilityLabel("正常发音")
             }
-            .buttonStyle(PressableStyle())
         }
         .padding(12)
         .whiteCard()

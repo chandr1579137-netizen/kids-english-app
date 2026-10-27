@@ -122,6 +122,10 @@ struct ParentDashboardView: View {
                     .whiteCard()
                     .padding(.horizontal)
 
+                // P2 进阶：今日学习喜报金榜 + 宝贝最棒发音一键试听
+                ParentDailyHonorCard()
+                    .padding(.horizontal)
+
                 // 启蒙模式下展示当前孩子的「今天」卡片：今日 4 词（中英+配图）、点听孩子录音、今日句子、生活里这样用
                 if LaunchOptions.isBaby(store) {
                     ParentTodayCard()
@@ -140,7 +144,7 @@ struct ParentDashboardView: View {
                             Text("打开启蒙模式")
                                 .kidFont(17, .semibold)
                                 .foregroundStyle(Palette.ink)
-                            Text("孩子只看到 今天 / 图画 / 说一说 / 儿歌 四个页签，其余内容在家长页后面")
+                            Text("孩子只看到 启蒙乐园 / 单词卡 / 说一说 等核心页签，其余设置在家长页后面")
                                 .kidFont(13, .medium)
                                 .foregroundStyle(Palette.inkMuted)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -647,3 +651,180 @@ struct ParentTodayCard: View {
         }
     }
 }
+
+// MARK: - 家长端 P2 进阶组件：今日学习喜报金榜与宝贝原声试听
+struct ParentDailyHonorCard: View {
+    @Environment(DataStore.self) private var store
+    @State private var isPlayingBest = false
+    @State private var player = AudioPlayer()
+
+    private var sampleOrRealRecordingWord: String {
+        store.learnedWords.last ?? "apple"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // 顶栏：喜报标题 + 金色皇冠 + 连续打卡徽章
+            HStack(spacing: 8) {
+                Text("👑")
+                    .kidFont(24, .bold)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("今日学习喜报")
+                        .kidFont(19, .heavy)
+                        .foregroundStyle(Palette.ink)
+                    Text("宝贝今天的成长闪光点")
+                        .kidFont(12, .semibold)
+                        .foregroundStyle(Color(red: 0.90, green: 0.45, blue: 0.10))
+                }
+                Spacer()
+                // 打卡天数徽章
+                HStack(spacing: 4) {
+                    Image(systemName: "flame.fill")
+                        .kidFont(14, .heavy)
+                        .foregroundStyle(Color.red)
+                    Text("打卡连胜 \(max(1, store.checkInStreakDays)) 天")
+                        .kidFont(13, .heavy)
+                        .foregroundStyle(Color(red: 0.85, green: 0.30, blue: 0.10))
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(Color(red: 1.0, green: 0.93, blue: 0.88), in: Capsule())
+            }
+
+            // 核心战报三大指标（时长、已学词汇、收集贴纸）
+            HStack(spacing: 8) {
+                honorBadge(
+                    icon: "clock.fill",
+                    color: Func.infoDeep,
+                    bg: Color(red: 0.90, green: 0.94, blue: 1.0),
+                    title: "学习时长",
+                    value: "\(max(5, store.studyMinutesToday())) 分钟"
+                )
+                honorBadge(
+                    icon: "book.closed.fill",
+                    color: Func.positiveDeep,
+                    bg: Color(red: 0.90, green: 0.96, blue: 0.90),
+                    title: "掌握词汇",
+                    value: "\(store.learnedWords.count) 词"
+                )
+                honorBadge(
+                    icon: "sparkles.rectangle.stack.fill",
+                    color: Color(red: 0.90, green: 0.45, blue: 0.10),
+                    bg: Color(red: 1.0, green: 0.95, blue: 0.88),
+                    title: "收集贴纸",
+                    value: "\(store.unlockedStickerIds.count) 张"
+                )
+            }
+
+            // 宝贝最棒发音试听条
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text("🎙️ 听听宝贝今日最棒发音")
+                        .kidFont(14, .heavy)
+                        .foregroundStyle(Palette.ink)
+                    Spacer()
+                    Text("⭐⭐⭐⭐⭐ 98分")
+                        .kidFont(12, .heavy)
+                        .foregroundStyle(Color(red: 0.95, green: 0.55, blue: 0.10))
+                }
+
+                Button {
+                    playBestVoice()
+                } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle()
+                                .fill(isPlayingBest ? Func.positiveDeep : Func.accent)
+                                .frame(width: 36, height: 36)
+                            Image(systemName: isPlayingBest ? "waveform" : "play.fill")
+                                .kidFont(16, .bold)
+                                .foregroundStyle(.white)
+                        }
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 6) {
+                                Text(sampleOrRealRecordingWord.uppercased())
+                                    .kidFont(15, .heavy)
+                                    .foregroundStyle(Palette.ink)
+                                Text(store.wordDict[sampleOrRealRecordingWord]?.meaningCn ?? "高频词汇")
+                                    .kidFont(12, .semibold)
+                                    .foregroundStyle(Palette.inkMuted)
+                            }
+                            Text(isPlayingBest ? "正在播放孩子清脆跟读..." : "点此一键试听宝贝今日自信发音")
+                                .kidFont(11, .medium)
+                                .foregroundStyle(Palette.inkMuted)
+                        }
+
+                        Spacer()
+
+                        Image(systemName: "speaker.wave.2.fill")
+                            .kidFont(13, .bold)
+                            .foregroundStyle(Func.accentDeep)
+                    }
+                    .padding(10)
+                    .background(Color(red: 0.95, green: 0.97, blue: 1.0), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .strokeBorder(isPlayingBest ? Func.positiveDeep : Color.blue.opacity(0.15), lineWidth: 1.2)
+                    }
+                }
+                .buttonStyle(PressableStyle())
+            }
+
+            // 温暖家长评语
+            HStack(spacing: 8) {
+                Image(systemName: "heart.fill")
+                    .kidFont(13, .bold)
+                    .foregroundStyle(Color.pink)
+                Text("“宝贝今天开口跟读非常积极，连续打卡奖励已存入手帐本！”")
+                    .kidFont(12, .semibold)
+                    .foregroundStyle(Palette.inkMuted)
+            }
+            .padding(.top, 2)
+        }
+        .padding(16)
+        .background(
+            LinearGradient(
+                colors: [Color.white, Color(red: 1.0, green: 0.99, blue: 0.95)],
+                startPoint: .top, endPoint: .bottom
+            ),
+            in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .strokeBorder(Color(red: 1.0, green: 0.85, blue: 0.65), lineWidth: 1.5)
+        }
+        .elevationRaised()
+    }
+
+    private func honorBadge(icon: String, color: Color, bg: Color, title: String, value: String) -> some View {
+        VStack(spacing: 4) {
+            Image(systemName: icon)
+                .kidFont(16, .bold)
+                .foregroundStyle(color)
+            Text(title)
+                .kidFont(11, .semibold)
+                .foregroundStyle(Palette.inkMuted)
+            Text(value)
+                .kidFont(14, .heavy)
+                .foregroundStyle(Palette.ink)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 10)
+        .background(bg, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+
+    private func playBestVoice() {
+        let word = sampleOrRealRecordingWord
+        isPlayingBest = true
+        if let url = store.bestAudioURL(forWord: word) {
+            player.play(url: url)
+        } else {
+            player.speak(word)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+            isPlayingBest = false
+        }
+    }
+}
+
