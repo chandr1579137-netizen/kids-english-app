@@ -702,6 +702,13 @@ public struct PhonicsBlendingTrainView: View {
     @State private var showWordResult = false
     @State private var trainBounce = false
 
+    // MARK: - P2: 指尖拖曳推小车手势状态与体感连读
+    @State private var dragOffset: CGFloat = 0
+    @State private var isDragging: Bool = false
+    @State private var triggeredLetterIndices: Set<Int> = []
+    @State private var showRainbowSmoke: Bool = false
+    @State private var pushPromptPulse: Bool = false
+
     public init() {}
 
     public var body: some View {
@@ -798,28 +805,40 @@ public struct PhonicsBlendingTrainView: View {
                     trainPlatformView
                         .padding(.horizontal, 16)
 
-                    // 开动小火车（Blend!）大按钮
-                    Button {
-                        startTrainBlending()
-                    } label: {
-                        HStack(spacing: 10) {
-                            Image(systemName: isBlending ? "waveform" : "play.circle.fill")
-                                .kidFont(28, .bold)
-                            Text(isBlending ? "正在拼读中..." : "开动小火车（Blend!）")
-                                .kidFont(20, .heavy)
+                    // 操作控制栏：支持手指直接推，也可以一键自动发车
+                    VStack(spacing: 10) {
+                        Button {
+                            startTrainBlending()
+                        } label: {
+                            HStack(spacing: 10) {
+                                Image(systemName: isBlending ? "waveform" : "play.circle.fill")
+                                    .kidFont(26, .bold)
+                                Text(isBlending ? "正在自动拼读中..." : "🤖 自动发车演示（Blend!）")
+                                    .kidFont(20, .heavy)
+                            }
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 58)
+                            .background(
+                                LinearGradient(colors: [Func.accent, Color(red: 0.95, green: 0.55, blue: 0.15)],
+                                               startPoint: .leading, endPoint: .trailing),
+                                in: RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            )
+                            .elevationRaised()
                         }
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 60)
-                        .background(
-                            LinearGradient(colors: [Func.accent, Color(red: 0.95, green: 0.55, blue: 0.15)],
-                                           startPoint: .leading, endPoint: .trailing),
-                            in: RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        )
-                        .elevationRaised()
+                        .buttonStyle(PressableStyle())
+                        .disabled(isBlending || isDragging)
+
+                        // 手指推车温馨引导
+                        HStack(spacing: 6) {
+                            Image(systemName: "sparkles")
+                                .kidFont(14, .bold)
+                                .foregroundStyle(Color.orange)
+                            Text("5岁宝宝专属：按住车头往右推，慢推拖长音，推到底到站！")
+                                .kidFont(13, .semibold)
+                                .foregroundStyle(Palette.inkMuted)
+                        }
                     }
-                    .buttonStyle(PressableStyle())
-                    .disabled(isBlending)
                     .padding(.horizontal, 16)
 
                     // 拼读单词结果卡片（到站弹出）
@@ -841,6 +860,9 @@ public struct PhonicsBlendingTrainView: View {
                 withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
                     trainBounce = true
                 }
+                withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                    pushPromptPulse = true
+                }
             }
             .onDisappear {
                 audioPlayer.stop()
@@ -848,22 +870,83 @@ public struct PhonicsBlendingTrainView: View {
         }
     }
 
-    // MARK: 小火车轨道平台与车厢
+    // MARK: 小火车轨道平台与车厢 (支持指尖拖曳推车)
     private var trainPlatformView: some View {
-        VStack(spacing: 0) {
-            // 火车车头 + 3 节字母车厢
-            HStack(alignment: .bottom, spacing: 6) {
-                // 车头
-                trainEngineView
-
-                // 3 节车厢
-                ForEach(0..<selectedWord.letters.count, id: \.self) { idx in
-                    let letter = selectedWord.letters[idx]
-                    let phoneme = selectedWord.phonemes[idx]
-                    let isActive = activeCarIndex == idx
-
-                    trainCar(letter: letter, phoneme: phoneme, index: idx, isActive: isActive)
+        VStack(spacing: 8) {
+            // 指尖推车指示条
+            HStack(spacing: 6) {
+                Image(systemName: "hand.point.right.fill")
+                    .kidFont(16, .heavy)
+                    .foregroundStyle(Color.orange)
+                    .offset(x: pushPromptPulse ? 5 : 0)
+                Text(isDragging ? "用力推到终点站拼出单词！" : "按住车头 👉 往前推推小火车~")
+                    .kidFont(15, .heavy)
+                    .foregroundStyle(isDragging ? Func.positiveDeep : Palette.ink)
+                Spacer()
+                if dragOffset > 0 {
+                    Text("推进 \(Int((dragOffset / 140.0) * 100))%")
+                        .kidFont(13, .heavy)
+                        .foregroundStyle(Color.orange)
                 }
+            }
+            .padding(.horizontal, 4)
+
+            // 轨道与火车组合
+            ZStack(alignment: .leading) {
+                // 终点站台指示
+                HStack {
+                    Spacer()
+                    VStack(spacing: 2) {
+                        Image(systemName: "flag.checkered.2.crossed")
+                            .kidFont(22, .heavy)
+                            .foregroundStyle(Color.red)
+                        Text("终点站")
+                            .kidFont(11, .heavy)
+                            .foregroundStyle(Palette.inkMuted)
+                    }
+                    .padding(.trailing, 6)
+                    .padding(.bottom, 12)
+                }
+
+                // 火车车头 + 3 节字母车厢（手指按住整体向前滑）
+                HStack(alignment: .bottom, spacing: 6) {
+                    // 车头（带发光手势抓手与彩虹烟雾）
+                    trainEngineView
+                        .gesture(
+                            DragGesture(minimumDistance: 2)
+                                .onChanged { value in
+                                    guard !isBlending else { return }
+                                    isDragging = true
+                                    let newOffset = max(0, min(value.translation.width, 140))
+                                    dragOffset = newOffset
+                                    checkPushMilestones(offset: newOffset)
+                                }
+                                .onEnded { _ in
+                                    guard !isBlending else { return }
+                                    isDragging = false
+                                    if dragOffset >= 120 {
+                                        finishPushArrival()
+                                    } else {
+                                        withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) {
+                                            dragOffset = 0
+                                            activeCarIndex = nil
+                                            triggeredLetterIndices.removeAll()
+                                        }
+                                    }
+                                }
+                        )
+
+                    // 3 节车厢
+                    ForEach(0..<selectedWord.letters.count, id: \.self) { idx in
+                        let letter = selectedWord.letters[idx]
+                        let phoneme = selectedWord.phonemes[idx]
+                        let isActive = activeCarIndex == idx
+
+                        trainCar(letter: letter, phoneme: phoneme, index: idx, isActive: isActive)
+                    }
+                }
+                .offset(x: dragOffset)
+                .animation(isDragging ? .interactiveSpring() : .spring(response: 0.35, dampingFraction: 0.6), value: dragOffset)
             }
             .padding(.horizontal, 8)
             .padding(.bottom, 6)
@@ -879,14 +962,21 @@ public struct PhonicsBlendingTrainView: View {
     // 火车头
     private var trainEngineView: some View {
         VStack(spacing: 2) {
-            // 烟囱冒烟
+            // 烟囱冒烟 / 终点彩虹烟雾
             HStack {
                 Spacer()
-                Circle()
-                    .fill(Color.gray.opacity(0.35))
-                    .frame(width: isBlending ? 14 : 10, height: isBlending ? 14 : 10)
-                    .offset(y: isBlending ? -8 : 0)
-                    .animation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true), value: isBlending)
+                if showRainbowSmoke {
+                    Text("🌈✨")
+                        .kidFont(18, .bold)
+                        .offset(y: -10)
+                        .transition(.scale.combined(with: .opacity))
+                } else {
+                    Circle()
+                        .fill(Color.gray.opacity(0.35))
+                        .frame(width: (isBlending || isDragging) ? 14 : 10, height: (isBlending || isDragging) ? 14 : 10)
+                        .offset(y: (isBlending || isDragging) ? -8 : 0)
+                        .animation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true), value: isBlending || isDragging)
+                }
                 Spacer()
             }
             .frame(height: 16)
@@ -900,12 +990,19 @@ public struct PhonicsBlendingTrainView: View {
                     )
                     .frame(width: 58, height: 68)
 
-                VStack(spacing: 4) {
-                    Image(systemName: "lightbulb.fill")
-                        .kidFont(16, .bold)
+                VStack(spacing: 3) {
+                    Image(systemName: "hand.tap.fill")
+                        .kidFont(13, .bold)
                         .foregroundStyle(Color.yellow)
                     Text("🚂")
-                        .kidFont(22, .bold)
+                        .kidFont(20, .bold)
+                }
+            }
+            .overlay {
+                if !isDragging && dragOffset == 0 {
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .strokeBorder(Color.yellow.opacity(pushPromptPulse ? 0.9 : 0.2), lineWidth: 2)
+                        .scaleEffect(pushPromptPulse ? 1.04 : 1.0)
                 }
             }
 
@@ -1023,6 +1120,52 @@ public struct PhonicsBlendingTrainView: View {
         selectedWord = w
         activeCarIndex = nil
         showWordResult = false
+        dragOffset = 0
+        triggeredLetterIndices.removeAll()
+        showRainbowSmoke = false
+    }
+
+    private func checkPushMilestones(offset: CGFloat) {
+        let progress = offset / 140.0
+        if progress >= 0.20 && !triggeredLetterIndices.contains(0) {
+            triggeredLetterIndices.insert(0)
+            activeCarIndex = 0
+            playCarSound(letter: selectedWord.letters[0], index: 0)
+        }
+        if progress >= 0.50 && !triggeredLetterIndices.contains(1) {
+            triggeredLetterIndices.insert(1)
+            activeCarIndex = 1
+            if selectedWord.letters.count > 1 {
+                playCarSound(letter: selectedWord.letters[1], index: 1)
+            }
+        }
+        if progress >= 0.80 && !triggeredLetterIndices.contains(2) {
+            triggeredLetterIndices.insert(2)
+            activeCarIndex = 2
+            if selectedWord.letters.count > 2 {
+                playCarSound(letter: selectedWord.letters[2], index: 2)
+            }
+        }
+    }
+
+    private func finishPushArrival() {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            dragOffset = 140
+            activeCarIndex = nil
+            showRainbowSmoke = true
+        }
+        showWordResult = true
+        praiseTick += 1
+        playWordChant()
+
+        // 2秒后重置位置，方便孩子再次拖动体验
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+            withAnimation(.easeInOut(duration: 0.5)) {
+                dragOffset = 0
+                showRainbowSmoke = false
+                triggeredLetterIndices.removeAll()
+            }
+        }
     }
 
     private func playIntro() {

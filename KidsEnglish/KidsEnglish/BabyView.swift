@@ -2780,7 +2780,7 @@ struct BabyPackView: View {
                             .background(Func.accentPill, in: Circle())
                     }
                     .buttonStyle(PressableStyle())
-                    .accessibilityLabel("听儿歌")
+                    .accessibilityLabel("磨耳朵音乐")
                     .padding(.trailing)
                 }
             }
