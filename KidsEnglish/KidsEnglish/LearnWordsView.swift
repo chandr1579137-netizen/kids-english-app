@@ -156,34 +156,76 @@ struct LearnWordsView: View {
         }
     }
 
-    // MARK: - 今日计划卡
+    // MARK: - 今日计划卡（公历实时打卡系统）
 
     private var planCard: some View {
-        // 参考图：满饱和橙渐变 + 白字 + 右侧火箭插图（无底板）
-        HStack(alignment: .center, spacing: 2) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("今日计划")
-                    .kidFont(18, .semibold)
-                    .foregroundStyle(.white.opacity(0.96))
-                Text("Day \(dayNumber)")
-                    .kidFont(40, .heavy)
+        // 满饱和橙渐变 + 真实公历日期 + 实时打卡按钮 + 连续打卡天数 + 右侧火箭
+        VStack(spacing: 8) {
+            // 顶行：真实公历日期 + 打卡状态胶囊按钮
+            HStack(alignment: .center) {
+                HStack(spacing: 6) {
+                    Image(systemName: "calendar")
+                        .kidFont(14, .bold)
+                    Text(store.todayCalendarString)
+                        .kidFont(15, .bold)
+                }
+                .foregroundStyle(.white.opacity(0.95))
+
+                Spacer()
+
+                if store.isCheckedInToday {
+                    HStack(spacing: 4) {
+                        Image(systemName: "checkmark.seal.fill")
+                            .kidFont(13, .bold)
+                        Text("已打卡")
+                            .kidFont(13, .bold)
+                    }
                     .foregroundStyle(.white)
-                Text("新学 \(todayWords.count) 个词")
-                    .kidFont(20, .bold)
-                    .foregroundStyle(.white)
-                Text("已学 \(store.homeLearnedCount) / \(store.homeWords.count)")
-                    .kidFont(16, .semibold)
-                    .foregroundStyle(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .background(Color.white.opacity(0.28), in: Capsule())
+                } else {
+                    Button {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) {
+                            store.checkInToday()
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "star.fill")
+                                .kidFont(12, .heavy)
+                            Text("今日打卡")
+                                .kidFont(13, .heavy)
+                        }
+                        .foregroundStyle(Color(red: 0.90, green: 0.40, blue: 0.05))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(Color.white, in: Capsule())
+                        .shadow(color: .black.opacity(0.16), radius: 3, y: 1)
+                    }
+                    .buttonStyle(PressableStyle())
+                }
             }
-            Spacer(minLength: 0)
-            uiIcon(AppTheme.planRocketIcon)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
+
+            // 中间主体：标题与连续打卡天数 + 火箭
+            HStack(alignment: .center, spacing: 4) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("连续打卡 \(store.checkInStreakDays) 天 🔥")
+                        .kidFont(28, .heavy)
+                        .foregroundStyle(.white)
+                    Text("今日新学 \(todayWords.count) 词 · 累计 \(store.homeLearnedCount)/\(store.homeWords.count)")
+                        .kidFont(15, .bold)
+                        .foregroundStyle(.white.opacity(0.95))
+                }
+                Spacer(minLength: 0)
+                uiIcon(AppTheme.planRocketIcon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 80, height: 80)
+            }
         }
-        .padding(.horizontal, 22)
-        .padding(.vertical, 12)
-        .frame(maxWidth: .infinity, minHeight: 160)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 14)
+        .frame(maxWidth: .infinity, minHeight: 145)
         .background(AppTheme.planGradient, in: RoundedRectangle(cornerRadius: Radius.sheet))
         .elevationRaised()
     }
@@ -611,6 +653,7 @@ struct LearnWordsView: View {
             playBest()
         } else {
             finished = true
+            store.checkInToday()
         }
     }
 

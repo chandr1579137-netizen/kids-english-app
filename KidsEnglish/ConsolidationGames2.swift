@@ -1100,6 +1100,34 @@ struct FeedAnimalGame: View {
     private static let orange = Color(red: 0.98, green: 0.52, blue: 0.08)
     private static var args: [String] { ProcessInfo.processInfo.arguments }
 
+    private static let zhMap: [String: String] = [
+        "banana": "香蕉", "vegetable": "蔬菜", "fish": "小鱼", "meat": "肉肉",
+        "cheese": "奶酪", "honey": "蜂蜜", "apple": "苹果", "milk": "牛奶",
+        "watermelon": "西瓜", "tomato": "西红柿", "bread": "面包", "rice": "米饭",
+        "egg": "鸡蛋", "grape": "葡萄", "cake": "蛋糕", "peach": "桃子",
+        "pear": "雪梨", "strawberry": "草莓", "cookie": "饼干", "orange": "橙子",
+        "noodles": "面条", "cherry": "樱桃", "pizza": "披萨",
+        "monkey": "小猴子", "rabbit": "小兔子", "cat": "小猫咪", "dog": "小狗狗",
+        "mouse": "小老鼠", "bee": "小蜜蜂", "bear": "小熊", "horse": "小马",
+        "kitten": "小猫咪", "panda": "大熊猫", "pig": "小猪", "duck": "小鸭子",
+        "chicken": "小鸡", "puppy": "小狗崽", "fox": "小狐狸", "koala": "考拉",
+        "penguin": "小企鹅", "cow": "奶牛", "sheep": "小羊", "squirrel": "小松鼠",
+        "elephant": "大象", "frog": "小青蛙", "bird": "小鸟", "lion": "狮子"
+    ]
+
+    private func lineZh(for text: String, round: FeedRound) -> String {
+        if text == catalog?.noThanks {
+            return "“我不吃这个，谢谢你！”"
+        } else if text == round.pair.yummy {
+            let foodZh = Self.zhMap[round.pair.food] ?? round.pair.food
+            return "“\(foodZh)真好吃！谢谢！”"
+        } else {
+            let animalZh = Self.zhMap[round.pair.animal] ?? round.pair.animal
+            let foodZh = Self.zhMap[round.pair.food] ?? round.pair.food
+            return "“\(animalZh)想吃\(foodZh)！”"
+        }
+    }
+
     private var round: FeedRound? { rounds[safe: index] }
 
     var body: some View {
@@ -1209,12 +1237,18 @@ struct FeedAnimalGame: View {
             : (reply == catalog?.noThanks ? Color(red: 0.62, green: 0.38, blue: 0.16)
                                           : Color(red: 0.12, green: 0.52, blue: 0.20))
         return HStack(spacing: 10) {
-            Text("“\(text)”")
-                .kidFont(28, .heavy, maxScale: 1.15)
-                .foregroundStyle(color)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-                .contentTransition(.opacity)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("“\(text)”")
+                    .kidFont(24, .heavy, maxScale: 1.15)
+                    .foregroundStyle(color)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .contentTransition(.opacity)
+                Text(lineZh(for: text, round: round))
+                    .kidFont(14, .bold, maxScale: 1.15)
+                    .foregroundStyle(color.opacity(0.85))
+                    .lineLimit(1)
+            }
             Spacer(minLength: 0)
             Button(action: playWant) {
                 Image(systemName: "speaker.wave.2.fill")
@@ -1260,12 +1294,20 @@ struct FeedAnimalGame: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .strokeBorder(Color(red: 0.80, green: 0.75, blue: 0.68),
                               style: lifted ? StrokeStyle(lineWidth: 3, dash: [8, 6]) : StrokeStyle(lineWidth: 1.5))
-            foodView(food)
-                .frame(width: 84, height: 84)
-                .scaleEffect(gone ? 0.2 : (lifted ? 1.15 : 1))
-                .opacity(gone ? 0 : 1)
-                .shadow(color: .black.opacity(lifted ? 0.22 : 0), radius: 8, y: 6)
-                .offset(lifted ? dragOffset : .zero)
+            VStack(spacing: 2) {
+                foodView(food)
+                    .frame(width: 70, height: 70)
+                    .scaleEffect(gone ? 0.2 : (lifted ? 1.15 : 1))
+                    .opacity(gone ? 0 : 1)
+                    .shadow(color: .black.opacity(lifted ? 0.22 : 0), radius: 8, y: 6)
+                if let cn = Self.zhMap[food] {
+                    Text(cn)
+                        .kidFont(12, .bold)
+                        .foregroundColor(Color(red: 0.45, green: 0.35, blue: 0.25))
+                        .lineLimit(1)
+                }
+            }
+            .offset(lifted ? dragOffset : .zero)
         }
         .frame(width: 104, height: 104)
         .frame(maxWidth: .infinity)

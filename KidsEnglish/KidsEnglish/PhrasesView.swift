@@ -273,6 +273,26 @@ final class PhraseLessonController {
     // MARK: 资源
 
     private func lineURL(_ line: PhraseLine) -> URL? { store.phraseFileURL("audio", line.audio) }
+    private func lineZhURL(_ line: PhraseLine) -> URL? { store.phraseFileURL("audio", "zh_\(line.audio)") }
+
+    /// 双语播放：先播放英文原句录音 -> 停顿 0.35s -> 播放中文翻译语音 -> 完成回调
+    private func playBilingual(line: PhraseLine, rate: Float = 1.0, onEnd: (() -> Void)? = nil) {
+        let my = token
+        audio.play(lineURL(line), rate: rate, lineId: line.id) { [weak self] in
+            guard let self, self.token == my else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                guard self.token == my else { return }
+                if let zhURL = self.lineZhURL(line) {
+                    self.audio.play(zhURL, rate: 1.0) {
+                        guard self.token == my else { return }
+                        onEnd?()
+                    }
+                } else {
+                    onEnd?()
+                }
+            }
+        }
+    }
     private func promptURL(_ name: String) -> URL? { store.phraseFileURL("audio", "\(name).mp3") }
 
     // MARK: 进入一步
@@ -295,7 +315,7 @@ final class PhraseLessonController {
             phase = .modeling
             // 前两张卡加一句「轮到你」的旁白，教会孩子「听完要说」；之后只靠话筒跳动提示
             let teach = i < 2
-            audio.play(lineURL(scene.lines[i]), lineId: scene.lines[i].id) { [weak self] in
+            playBilingual(line: scene.lines[i]) { [weak self] in
                 guard let self, self.token == my else { return }
                 if teach {
                     self.audio.play(self.promptURL("prompt_say")) { [weak self] in
@@ -426,7 +446,7 @@ final class PhraseLessonController {
         let my = token
         let wasPraised = phase == .praised
         phase = .answer
-        audio.play(lineURL(line), lineId: line.id) { [weak self] in
+        playBilingual(line: line) { [weak self] in
             guard let self, self.token == my, wasPraised else { return }
             self.phase = .praised
         }
@@ -443,7 +463,7 @@ final class PhraseLessonController {
         let my = token
         let before = phase
         phase = .modeling
-        audio.play(lineURL(line), rate: rate, lineId: line.id) { [weak self] in
+        playBilingual(line: line, rate: rate) { [weak self] in
             guard let self, self.token == my else { return }
             self.phase = before == .modeling || before == .recording || before == .idle ? .inviting : before
         }
@@ -612,7 +632,7 @@ struct PhrasesHomeView: View {
 struct PhraseSceneTile: View {
     let scene: PhraseScene
     /// 孩子屏幕默认不显示中文；家长中心打开「卡片下显示中文」才显示场景中文名
-    var showChinese = false
+    var showChinese = true
     let done: Bool
     let isNext: Bool
     let locked: Bool
@@ -757,7 +777,7 @@ private struct PhraseLessonBody: View {
     let c: PhraseLessonController
     let onClose: () -> Void
 
-    private var showChinese: Bool { store.phraseShowChinese || LaunchOptions.phraseChinese }
+    private var showChinese: Bool { true }
 
     var body: some View {
         VStack(spacing: 8) {

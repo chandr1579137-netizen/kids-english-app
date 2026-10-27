@@ -36,6 +36,8 @@ class DataStore {
     var gameCorrect: Int = 0
     var gameAnswered: Int = 0
     var studyDates: [String] = []
+    /// 真实打卡日期记录（按当前孩子持久化，格式 yyyy-MM-dd）
+    var checkInDates: [String] = []
     /// 口语课已完成的场景（id 如 L1-1）。
     /// 旧课文已删除；completedLessons / quizBest 仍从存储读出、随备份导出导入，只是界面不再显示（老数据不丢）。
     var completedPhraseScenes: Set<String> = []
@@ -471,6 +473,7 @@ class DataStore {
         gameCorrect = defaults.integer(forKey: k("gameCorrect"))
         gameAnswered = defaults.integer(forKey: k("gameAnswered"))
         studyDates = defaults.stringArray(forKey: k("studyDates")) ?? []
+        checkInDates = defaults.stringArray(forKey: k("checkInDates")) ?? []
         completedPhraseScenes = Set(defaults.stringArray(forKey: k("completedPhraseScenes")) ?? [])
         phraseUnlockAll = defaults.bool(forKey: k("phraseUnlockAll"))
         phraseShowChinese = defaults.bool(forKey: k("phraseShowChinese"))
@@ -520,6 +523,7 @@ class DataStore {
         defaults.set(gameCorrect, forKey: k("gameCorrect"))
         defaults.set(gameAnswered, forKey: k("gameAnswered"))
         defaults.set(studyDates, forKey: k("studyDates"))
+        defaults.set(checkInDates, forKey: k("checkInDates"))
         defaults.set(Array(completedPhraseScenes), forKey: k("completedPhraseScenes"))
         defaults.set(phraseUnlockAll, forKey: k("phraseUnlockAll"))
         defaults.set(phraseShowChinese, forKey: k("phraseShowChinese"))
@@ -559,6 +563,42 @@ class DataStore {
 
     /// 连续学习天数；规则与单测见 ProgressKit.swift 的 Streak。
     var streakDays: Int { Streak.count(studyDates: studyDates, today: Date()) }
+
+    // MARK: - 真实日历与每日打卡
+
+    /// 今日公历中文文本，例如 "10月27日 星期二"
+    var todayCalendarString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_CN")
+        formatter.dateFormat = "M月d日 EEEE"
+        return formatter.string(from: Date())
+    }
+
+    /// 今天是否已打卡
+    var isCheckedInToday: Bool {
+        checkInDates.contains(dayString())
+    }
+
+    /// 连续打卡天数
+    var checkInStreakDays: Int {
+        let dates = checkInDates.isEmpty ? studyDates : checkInDates
+        return max(1, Streak.count(studyDates: dates, today: Date()))
+    }
+
+    /// 真实打卡动作：返回是否为首次今日打卡
+    @discardableResult
+    func checkInToday() -> Bool {
+        let key = dayString()
+        var updated = false
+        if !checkInDates.contains(key) {
+            checkInDates.append(key)
+            defaults.set(checkInDates, forKey: k("checkInDates"))
+            updated = true
+        }
+        markStudyDay()
+        saveProgress()
+        return updated
+    }
 
     private func allowanceSeconds() -> Double {
         StudyTime.allowance(limitMinutes: timeLimitMinutes, bonusSeconds: bonusSecondsToday)
